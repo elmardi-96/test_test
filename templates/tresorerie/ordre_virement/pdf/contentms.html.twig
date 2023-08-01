@@ -1,0 +1,74 @@
+           
+            <table class="table1" style="width: 81% ;margin-left:auto;margin-right:auto; padding:30px 0 100px;" align="center" cellspacing="0" > 
+
+
+                <thead>
+                    <tr style="background-color: #f2f2f2; color:black; font-size: 10px; width:100%;text-align:center ">
+                        <th style="width:40%;padding: 5px;margin:10px;">BÉNÉFICIAIRE</th>
+                        <th style="width:40%;padding: 5px">CIN</th>
+                        <th style="width:25%;padding: 5px">MONTANT</th>
+
+
+
+                    </tr>
+                </thead>
+
+                <tr>
+                    <td style="padding-bottom: 5px"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                    
+                    {# {% if content == 'oui' %} #}
+                        
+                            {# {% for item in 0..20 %} #}
+                                    
+                                    {% for uaTechniqueDet in uaTechniqueCab.uaTechniqueDets %}
+                                        {% set array = uaTechniqueDet.article|split('/') %}
+                                        {% set rib = array[1]|trim %}
+                                        {# {% if item.montant < 0 %}
+                                        
+                                            <tr style="color:black; font-size: 10px; width:100%; text-align:center; ">
+                                                <td style="width:40%;padding: 3px;font-size: 10px;text-align:left">{{item.nom}}</td>
+                                                <td style="width:46%;padding: 3px;font-size: 10px;text-align:center">{{ item.rib  [:3] }} {{ item.rib  [3:3] }} {{ item.rib  [6:3] }} {{ item.rib  [9:3] }} {{ item.rib  [12:3] }} {{ item.rib  [15:3] }} {{ item.rib  [18:3] }} {{ item.rib  [21:3] }}</td>
+                                                <td style="width:25%;padding: 3px;font-size: 10px;text-align:right">{{item.montant|trim('-')|number_format(2, ',', ' ')
+                                                }}</td>
+                                            </tr>
+                                        {% endif %} #}
+                                        {# {% if item.montant != 0 %} #}
+                                        
+                                            <tr style="color:black; font-size: 10px; width:100%; text-align:center;">
+                                                <td style="width:40%;padding: 3px;font-size: 10px;text-align:left">{{array[0]|trim}}</td>
+                                                <td style="width:46%;padding: 3px;font-size: 10px;text-align:center">{{ rib [:3] }} {{ rib  [3:3] }} {{ rib  [6:3] }} {{ rib  [9:3] }} {{ rib  [12:3] }} {{ rib  [15:3] }} {{ rib [18:3] }} {{ rib  [21:3] }}</td>
+                                                <td style="width:25%;padding: 3px;font-size: 10px;text-align:right">{{uaTechniqueDet.prixUntaire|number_format(2, ',', ' ')
+                                                }}</td>
+                                            </tr>
+                                        {# {% endif %} #}
+                                        
+
+                                 
+
+
+                                    {% endfor %} 
+                                    
+                                    
+                            {# {% endfor %}  #}
+
+                       
+
+                    {# {% endif %} #}
+
+                   
+
+            </table>
+
+            <br><br>
+            <div style="font-size: 12px;margin-top:-100px;padding-right:15px;padding-left : 15px; padding:6px; width: 130px;background-color: #f2f2f2;position:relative;right:2.5%;text-align: right; left:71.5%">
+               {{somme |number_format(2, ',', ' ') }}      
+                
+            </div>
+
+
+
+
+

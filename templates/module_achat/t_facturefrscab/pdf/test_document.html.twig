@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="fr">
+		<title>ORDRE DE VIREMENT</title>
+	</head>
+
+	<style>
+              
+        .div_logo{
+        	height: 65px;
+        	margin-bottom: 30px;
+        }
+         .logo{
+         	float: right;
+         } 
+         .table{
+         	width: 100%;         }
+         .container{
+         	width: 100%;
+         	text-transform: uppercase;
+         }
+         .box{
+         	border: 1.5px solid black;
+         	border-radius: 10px;
+         }
+         .box1{
+         	width: 90%;
+         	margin: 0 auto;
+         	padding-bottom: 20px;
+
+         }
+         .box .text{
+         	margin-bottom: 7px;
+         }
+         .head_div{
+         	margin-top: -12px;
+         	background-color: white;
+         	width: 50%;
+         	align-items: center;
+         	margin-left : auto;
+         	margin-right : auto;
+         	/*margin-bottom: 10px;*/
+         	padding-bottom: 12px;
+         	font-size: 10px;
+         }
+
+         .table2{
+
+         	margin-top: 60px;
+         }
+         .box2 {
+                 
+         }
+
+         .box2, .box3{
+
+         	height: 110px;
+         	font-size: 13px;
+         	padding-left: 10px;
+         	width: 96%;
+         }
+
+         .table3, .table5{
+         	margin-top: 20px;
+         }
+
+         .box4,.box5{
+         	font-size: 13px;
+         	padding-left: 10px;
+         	width: 96%;
+
+
+
+         }
+         .box6{
+         	/*width: 99.9%;*/
+         	height: 40px;
+         }
+
+         .table4{
+                 margin-top:30px;
+         }
+
+         .box7, .box8 , .box9{
+
+         	font-size: 11px;
+         	padding-left: 10px;
+         	height:90px;
+         	
+
+         }
+         .box10{
+
+         	font-size: 13px;
+         	padding-left: 10px;
+
+         }
+
+        .footer {
+
+			/*border-top: 2px solid #555555;*/
+			margin-top: 10px;
+			font-size: 11px;
+			text-align: center;
+			position: fixed;
+			bottom: 3px;
+			left: 0;
+			right: 0;
+			color : #747477;
+		}
+
+         /*---general ---*/
+
+         .font-bold{
+         	font-weight: bold;
+         }
+         .text-center{
+         	text-align: center;
+         }
+         .text-left{
+         	text-align: left;
+
+         }
+
+	
+
+	</style>
+
+	<body>
+            {# ------------- HEADER ---------------------- #}
+
+            <div class="container">
+
+            	    <!-- ------------ first section ------------- -->
+
+		            <div class="div_logo">  
+		                 <img src="{{ asset(image)[1:]  }}" width = "65" height="100%" class="logo" alt="logo" /> 
+		            </div>
+
+
+            	    <table class="table table1">
+		                <tr>
+
+			                <td style="width: 50%;  ">
+
+			                	<div class="box box1">  
+			                	     <div class="text-center head_div"> Client donneur d'ordre </div>
+			                	     <div class="text-center text font-bold"> {{TrTransactionOne.operation.pCompte.designation}}</div>
+			                	     <div class="text-center text"> compte n</div>
+			                	     <div class="text-center text font-bold"> 
+									 	{{ TrTransactionOne.operation.pCompte.rib  [:3] }} {{ TrTransactionOne.operation.pCompte.rib  [3:3] }} {{ TrTransactionOne.operation.pCompte.rib  [6:3] }} {{ TrTransactionOne.operation.pCompte.rib  [9:3] }} {{ TrTransactionOne.operation.pCompte.rib  [12:3] }} {{ TrTransactionOne.operation.pCompte.rib  [15:3] }} {{ TrTransactionOne.operation.pCompte.rib  [18:3] }} {{ TrTransactionOne.operation.pCompte.rib  [21:3] }}
+									</div>
+			                    </div>
+			                    
+			                </td>
+
+			                <td style="width: 50%; ">
+			                	
+			                	<div class="font-bold" style="width: 90%; margin: 0 auto;"> ORDRE DE VIREMENT <br>  SUR L'ETRANGE EN DEVISES </div>
+								<br>
+			                	{{barcode|raw}}
+									<p>REF : <span>{{ TrTransactionOne.codeBq}}</span>	</p>
+			                  
+			                </td>
+
+		                </tr>
+		            </table>
+
+
+            	    <!-- ------------ first section ------------- -->
+
+
+            	    <!-- ------------ second section ------------- -->
+
+
+
+            	    <table class="table table2">
+		                <tr  >
+
+			                <td style="width: 40%; ">
+
+			                	<div class="box box2">  
+			                		<div class="test">
+				                	     <div class="text-center head_div"> Beneficiare </div>
+										 
+										 {% if uaTechniq %}
+										 {{ uaTechniq.article|split('/')[0] }}
+										 {% else %}
+				                	     <div class="text-center text font-bold"> {{TrTransactionOne.fournisseur.nom}}</div>
+										  {% endif %}
+				                	     <div class="text-left text"> objet : {{TrTransactionOne.autreInformation}} </div>
+										 {% if uaTechniq %}
+				                	     <div class="text-left text"> adresse : {{uaTechniq.adresse}} </div>
+										 {% endif %}
+			                	    <div>
+			                    </div>
+			                    
+			                </td>
+
+			                <td style="width: 60%;  ">
+			                	
+			                	<div class="box box3 ">  
+			                	     <div class="text-center head_div font-bold"> Montant du transfert </div>
+			                	     <div class="text-left text"><span class ="font-bold"> Devise de transfert :</span> {{facture.devise.code}} </div>
+			                	     <div class="text-left text"><span class ="font-bold">  montant devise :</span> {{somme|number_format(2, ',', ' ')}} </div>
+			                	     <div class="text-left text"><span class ="font-bold">  montant devise :</span>  {{text}} </div>
+			                	     {# <div class="text-left text"> cent cinquante et un euro , 00 cts </div> #}
+			                    </div>
+
+			                  
+			                </td>
+
+		                </tr>
+
+
+            	         <!-- ------------ third section ------------- -->
+                         
+
+
+		              
+            	    <!-- ------------ third section ------------- -->
+
+
+
+
+
+		            </table>
+
+
+
+            	    <!-- ------------ second section ------------- -->
+
+
+            	    <!-- ------------ third section ------------- -->
+
+
+
+            	    <table class="table table3">
+
+            	    	  <tr>
+
+			                <td style="width: 50%;">
+
+			                	<div class="box box4">  
+				                	     <div class="text-center head_div"> son compte auprés de </div>
+				                	    {% if uaTechniq %}
+										 <div class="text-left text "><span class ="font-bold"> Banque :</span> {{uaTechniq.banque}} </div>
+				                	     <div class="text-left text"> <span class ="font-bold"> iban : </span>{{uaTechniq.iban}}  </div>
+				                	     <div class="text-left text"> <span class ="font-bold"> swift :</span>  {{uaTechniq.swift}}  </div>
+										{% else %}
+										 <div class="text-left text "><span class ="font-bold"> Banque :</span> {{TrTransactionOne.fournisseur.banque}} </div>
+				                	     <div class="text-left text"> <span class ="font-bold"> iban : </span>{{TrTransactionOne.fournisseur.iban}}  </div>
+				                	     <div class="text-left text"> <span class ="font-bold"> swift :</span>  {{TrTransactionOne.fournisseur.swift}}  </div>
+										{% endif %}
+			                    </div>
+			                    
+			                </td>
+
+			                <td style="width: 50%;">
+			                	
+			                	<div class="box box5 ">  
+			                	     <div class="text-center head_div"> Objet de paiement </div>
+			                	     <div class="text-left text"><image style="width:10px" src="images/parametrage/dossiers/nochecked.png"/> reglement remise n : ................... </div>
+			                	     <div class="text-left text"><image style="width:10px" src="images/parametrage/dossiers/nochecked.png"/>  reglement facture n : {{refDocAssos|join(' ')}} </div>
+			                	     <div class="text-left text"><image style="width:10px" src="images/parametrage/dossiers/nochecked.png"/>  autres (2) :  </div>
+			                    </div>
+
+			                  
+			                </td>
+
+		                </tr>
+
+		                
+		            </table>
+
+
+
+            	    <!-- ------------ third section ------------- -->
+
+
+            	    <!-- ------------ fourth section ------------- -->
+
+
+            	    <table class="table table4">
+
+            	    	<tr>
+
+			                <td style="width: 100%; margin-bottom: 20px;">
+
+			                	<div class="box box6">  
+				                	     <div class="text-center head_div"> Observation le (cas echeant) </div>
+			                    </div>
+			                    
+			                </td>
+
+		                </tr>
+		                
+		            </table>
+
+
+            	    <!-- ------------ fourth section ------------- -->
+
+
+            	    <!-- ------------ fifth section ------------- -->
+
+
+            	    <table class="table table5">
+
+
+            	        <tr>
+
+            	        	 <!-- --- cours - frais - retenu a la source ---- -->
+
+			                <td style="width: 33%;">
+
+			                	<div class="box box7">  
+				                	     <div class="text-center head_div"> cours </div>
+				                	     <div class="text-left text "> devis : </div>
+				                	     <div class="text-left text">  cours : </div>
+				                	     <div class="text-left text"> Date valeur de negociation : </div>
+			                    </div>
+			                    
+			                </td>
+
+			                <td style="width: 27%;">
+
+			                	<div class="box box8">  
+				                	     <div class="text-center head_div"> frais </div>
+				                	     <div class="text-left text "> a la charge du : </div>
+				                	     <div class="text-left text"><image style="width:10px" src="images/parametrage/dossiers/checked.png"/>  donneur d'ordre </div>
+				                	     <div class="text-left text"><image style="width:10px" src="images/parametrage/dossiers/nochecked.png"/> beneficiaire </div>
+			                    </div>
+			                    
+			                </td>
+
+			                 <td style="width: 40%; ">
+
+			                	<div class="box box9">  
+				                	     <div class="text-center head_div">  retenu a la source </div>
+				                	     <div class="text-left text "> a verser par attijariwafa bank a charge du : </div>
+				                	     <div class="text-left text"><image style="width:10px" src="images/parametrage/dossiers/checked.png"/>  donneur d'ordre </div>
+				                	     <div class="text-left text"><image style="width:10px" src="images/parametrage/dossiers/nochecked.png"/> Benifiaire  </div>
+			                    </div>
+			                    
+			                </td>
+
+
+		                </tr>
+
+		            </table>
+
+
+            	    <!-- ------------ fifth section ------------- -->
+
+
+            	     <!-- ------------ sixth section ------------- -->
+
+
+            	    <table class="table table4">
+
+            	    	<tr>
+
+			                <td style="width: 100%; margin-bottom: 20px;">
+
+			                	<div class="box box10">  
+				                	     <div class="text-center head_div"> Observation le (cas echeant) </div>
+				                	     <div class="text-left text "> Nature contrat commercial : prestation du service :  </div>
+				                	     <div class="text-left text "> pays d'origine marchandise :  </div>
+				                	     <div class="text-left text "> code nature office d'échange :  </div>
+				                	     <div class="text-left text "> engagement/certificat d'importation/autorisation office des changes n° :  </div>
+			                    </div>
+			                    
+			                </td>
+
+		                </tr>
+		                
+		            </table>
+
+
+            	    <!-- ------------ sixth section ------------- -->
+
+
+            	    <!-- ------------ fait le ------------- -->
+            	    <div  style="margin-top: 60px; margin-left: 60px;" > le <span class="font-bold" style=""> {{date('now')|date('d/m/Y')}}  </span></div>
+            	    <!-- ------------ fait le ------------- -->
+
+            </div>
+            
+            <!-- ------- footer ----------- -->
+
+
+            <div class="footer">
+            	   B.P 633 AV ALLAL EL FASSI MADINAT AL IRFANE HAY RIAD - RABAT 10 000 - MAROC <BR>
+            	   TEL 212 5 23 45 67 89 FAX 212 5 23 45 67 89.
+            </div>
+
+            
+
+              
+	</body>
+
+</html>

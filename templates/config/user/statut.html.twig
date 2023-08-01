@@ -1,0 +1,104 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i> Informations sur la demande .</small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Username :</strong> {{ user.username }}
+                            </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>nom  :</strong> {{ user.nom }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>prénom  :</strong> {{ user.prenom }}
+                            </td>
+
+                        </tr>
+                        {# <tr>
+                            <td>
+                                <strong>password :</strong>  {{user.plainPassword}}
+                            </td>
+
+                        </tr> #}
+                    </tbody>
+                </table>
+
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h3>Expression de Besoin Statut </h3>
+                        {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_statut'}}) }}
+                        <div class="form-group">
+                            {{ form_label(form.isActive ,'Statut :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                            {{ form_widget(form.isActive,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                        </div>
+                        {# <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        {{ form_label(form.plainPassword.first ,'Mot de passe :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        {{ form_widget(form.plainPassword.first,{'attr':{'class':'form-control form-control-sm'}}) }}
+                                    
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        {{ form_label(form.plainPassword.second ,'Confirmation de Mot de passe :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        {{ form_widget(form.plainPassword.second,{'attr':{'class':'form-control form-control-sm'}}) }}
+                                    
+                                    </div> #}
+                     <br/>
+                        {% if user is defined %}
+                            <input type="hidden" name="_id" value="{{ user.id }}" />
+                        {% endif %}
+                        <button class="btn btn-primary btn-block btn-xs">{{ button_label|default('Enregistrer') }}</button>
+                        
+                        {{ form_end(form,{'render_rest': false}) }}
+
+
+
+
+
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+{% set current_path = app.request.get('_route') %}
+
+
+
+
+
+<ul class="nav nav-tabs">
+
+    {% for operation1 in operations|sort((a, b) => a.ordr <=> b.ordr)%}
+	
+        {% if operation1.horizontale  %}
+		{% if operation1.route is not null  %}
+		{% if operation1.parent =='divisionGroupe' %}
+		
+			<li>
+               
+               
+				<a class="nav-link {% if  operation1.route   in current_path  %} active {%endif%}" href="{{ path(operation1.route , {id:UnivDivisionGroupe.id}) }}">
+					<i class="fa {{ operation1.icon }}"></i>
+					{{ operation1.titre|capitalize }} </a>
+            </li>
+            
+			{% endif %}
+            {% endif %}
+		{% endif %}
+	{% endfor %}
+
+</ul>

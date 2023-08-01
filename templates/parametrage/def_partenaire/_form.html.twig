@@ -1,0 +1,437 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+	<div class="col-lg-6">
+		<h2 class="fo">Parametrage Partenaire
+			<span>(def_partenaire)</span>
+		</h2>
+	</div>
+
+
+	<div class="col-lg-6">
+		<div class="title-action">
+			<button class="btn btn-primary btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}</button>
+			{% if  def_partenaire.id > 0 %}
+				<a href="#" class="btn btn-xs btn-danger btn-outline" id="_delete">
+					<i class="fa fa-trash"></i>
+					Supprimer</a>
+				<div id="test" data-etablissement-id="{{ def_partenaire.id|json_encode }}"></div>
+
+			{% endif  %}
+		</div>
+	</div>
+
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+
+		{{ wo_render_breadcrumbs() }}
+	</div>
+</div>
+
+
+<br/><br/>
+
+
+<div class="row pt-20 scroll_content">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+							<div class="panel-heading">
+								<div class="panel-options">
+									<ul class="nav nav-tabs">
+										<li>
+											<a class="nav-link active" href="#tab-1" data-toggle="tab">informations
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+
+											<div class="row">
+
+
+												<div class="col-md-6 b-r">
+
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.nom ,'Nom', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.nom,{'attr':{'class':'form-control form-control-sm','placeholder': 'Nom'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.nom) }}
+															</span>
+														</div>
+
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.prenom ,'Prenom', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.prenom,{'attr':{'class':'form-control form-control-sm','placeholder': 'Prenom'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.prenom) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.type ,'Type', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.type,{'attr':{'class':'form-control form-control-sm','placeholder': 'Type'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.type) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.adresse ,'Adresse', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.adresse,{'attr':{'class':'form-control form-control-sm','placeholder': 'Adresse'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.adresse) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.pays ,'Pays', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.pays,{'attr':{'class':'form-control form-control-sm','placeholder': 'Pays'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.pays) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.ville ,'Ville', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.ville,{'attr':{'class':'form-control form-control-sm','placeholder': 'Ville'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.ville) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.societe ,'Societe', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.societe,{'attr':{'class':'form-control form-control-sm','placeholder': 'Societe'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.societe) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.banque ,'Banque', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.banque,{'attr':{'class':'form-control form-control-sm','placeholder': 'Banque'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.banque) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.tel1 ,'Tel 1', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.tel1,{'attr':{'class':'form-control form-control-sm','placeholder': 'Tel 1'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.tel1) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.tel2 ,'Tel 2', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.tel2,{'attr':{'class':'form-control form-control-sm','placeholder': 'Tel 2'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.tel2) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.tel3 ,'Tel 3', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.tel3,{'attr':{'class':'form-control form-control-sm','placeholder': 'Tel 3'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.tel3) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.fax1 ,'Fax 1', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.fax1,{'attr':{'class':'form-control form-control-sm','placeholder': 'Fax 1'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.fax1) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.fax2 ,'Fax 2', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.fax2,{'attr':{'class':'form-control form-control-sm','placeholder': 'Fax 2'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.fax2) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.mail1 ,'Email', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.mail1,{'attr':{'class':'form-control form-control-sm','placeholder': 'Email'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.mail1) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.mail2 ,'Email 2', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.mail2,{'attr':{'class':'form-control form-control-sm','placeholder': 'Email 2'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.mail2) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.rib ,'RIB', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.rib,{'attr':{'class':'form-control form-control-sm','placeholder': 'RIB'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.rib) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.active) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+
+												</div>
+												{% if def_partenaire.id > 0 %}
+													<div class="col-md-6 br">
+
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Id</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.id }}
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Nom</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.nom }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Prenom</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.prenom }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Type</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.type ? def_partenaire.type.designation  }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Adresse</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.adresse }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Pays</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.pays }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Ville</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.ville }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Societe</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.societe }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Banque</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.banque }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Tel 1</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.tel1 }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Tel 2</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.tel2 }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Tel 3</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.tel3 }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Fax</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.fax1 }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Fax 2</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.fax2 }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Email</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.mail1 }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Email 2</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.mail2 }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">RIB</label>
+															<div class="col-sm-9 col-form-label">
+																{{ def_partenaire.rib }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Active</label>
+															<div class="col-sm-9 col-form-label">
+																{% if def_partenaire.active == true %}
+																	Active
+																{% else %}
+																	Desactive
+																{% endif %}
+															</div>
+														</div>
+													</div>
+												{% endif %}
+
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	{{form_widget(form._token)}}
+	{{ form_end(form,{'render_rest': false}) }}
+

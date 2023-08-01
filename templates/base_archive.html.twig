@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+         <title>
+        {% block title %}U3S-EPR | Stock {% endblock %}
+        </title>
+        
+        <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+        <link rel="shortcut icon" href="{{asset('/img/icon.png')}}" />
+
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+
+    </head>
+    <body class="fixed-nav fixed-nav-basic full-height-layout {% if app.user.theme is defined  %} {{app.user.theme}} {%endif%}">
+        <div ng-app="ngJsTreeDemo">
+		    <div ng-controller="treeCtrl as vm">
+
+                        {% block sidebar %} 
+                            {% include './module_archive/archive/inc/sidebar_archive.html.twig' %}
+                        {% endblock %}
+                    
+                        {% block header %} 
+                            {% include './module_archive/archive/inc/header.html.twig' %}
+                        {% endblock %}
+
+
+
+                        {% block body %} 
+
+                        {% endblock %} 
+
+                {% block footer %} 
+                    {% include './inc/footer.html.twig' %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>  
+{% block javascripts %}
+	{{ encore_entry_script_tags('app') }}
+	<script src="{{ asset('js/components/module_archive/bower_components/jquery-3.1.1.min.js') }}"></script>
+	<script src="{{ asset('js/components/module_archive/bower_components/angular/angular.min.js') }}"></script>
+	<script src="{{ asset('js/components/module_archive/bower_components/angular-animate/angular-animate.min.js') }}"></script>
+	<script src="{{ asset('js/components/module_archive/bower_components/angular-busy/dist/angular-busy.js') }}"></script>
+	<script src="{{ asset('js/components/module_archive/bower_components/jstree/dist/jstree.js') }}"></script>
+	<script src="{{ asset('js/components/module_archive/bower_components/AngularJS-Toaster/toaster.js') }}"></script>
+	<script src="{{ asset('js/components/module_archive/bower_components/dist/ngJsTree.js') }}"></script>
+	<script src="{{ asset('js/components/module_archive/bower_components/app/app.js') }}"></script>
+	<script src="{{ asset('js/components/module_archive/bower_components/app/treeCtrl.js') }}"></script>
+	<script src="{{ asset('js/components/module_archive/archive/archive.js') }}"></script>
+{% endblock %}
+</body>
+</html>

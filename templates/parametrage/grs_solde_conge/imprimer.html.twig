@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    </head>
+<body>
+{% block body %}
+		<h2><center>Pdf </center></h2>
+        <br><br>
+<section class="p_partenaire">
+<table class="table table-striped">
+<tr>
+                <th>Id</th>
+                <th>CodePartenaire</th>
+                <th>Type</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>société</th>
+                <th>Tel</th>
+                <th>Fax</th>
+
+
+</tr>
+<tr>
+                <td>{{ p_partenaire.id }}</td>
+                <td>{{ p_partenaire.codePartenaire }}</td>
+                <td>{{ p_partenaire.type }}</td>
+                <td>{{ p_partenaire.nom }}</td>
+                <td>{{ p_partenaire.prenom }}</td>
+                <td>{{ p_partenaire.societe }}</td>
+                
+                <td>{{ p_partenaire.tel1 }}</td>
+                <td>{{ p_partenaire.fax1 }}</td>
+
+</tr>
+
+</table>
+
+
+
+
+{% endblock %}
+    </body>
+</html>

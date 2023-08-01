@@ -1,0 +1,38 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+
+
+{% block body %}
+    
+    <div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+
+<div class="new">
+    <div class="form-validation-msg" style="display:none">
+        {# message flash #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div data-toastr="{{ label }}" class="toastr-msg">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {# form global errors  #}
+        <div class="form-errors"></div>
+    </div>
+    
+ {% include './config/inc/navigation.html.twig' %}
+
+    
+        {{ include('./config/user/_form.html.twig') }}
+        
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('user') }}
+{% endblock %}

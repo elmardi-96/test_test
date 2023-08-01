@@ -1,0 +1,107 @@
+<page_footer style="font-family: 'Courier New';font-size: 10px;">
+
+	<table class="table-footer" style="position:relative;top: 65px;font-family: 'Courier New';width: 65% ;margin-left:auto;margin-right:auto;padding-top:20px" align="center" cellspacing="0">
+
+		<tr style="background-color: #d5dce4; font-size: 10px;  ">
+			<th style="width: 50%; padding: 7px;text-align: center;font-size: 10px; ">DEPARTEMENT BANQUE ET REGIES </th>
+            <th style="width: 50%;padding: 7px;text-align: center; font-size: 10px;">SERVICE COMPTABILITE </th>
+			<th style="width: 50%;padding: 7px;text-align: center; font-size: 10px;">ACCORD GOUV.FCZ </th>
+			
+
+		</tr>
+
+		<tr>
+			<td style=" font-size: 11px; width:15%;height:100px; background-color:#f2f2f2" class="sig">
+                {% if signature1 != "" %}
+                    {% if signature1.signature is null %}
+                            <p style="padding-top:5px !important; padding-bottom:0px !important">{{signature1.user.nom}} {{signature1.user.prenom}}</p>
+                                <div style="margin-top:-80px !important">
+                                <span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; ">{{signature1.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+                                </div>
+                    {% else %}
+                        <img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature1.signature}}" alt="sig">
+                    {% endif %}
+                {% else %}
+                        <p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+                        <div style="margin-top:-80px !important">
+                            <span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+                        </div>
+                {% endif %}
+            </td>
+			<td style=" font-size: 11px; width:15%; height:100px; background-color:#f2f2f2" class="sig">
+				{% if signature2 != "" %}
+                    {% if signature2.signature is null %}
+                        <p style="padding-top:5px !important; padding-bottom:0px !important">{{signature2.user.nom}} {{signature2.user.prenom}}</p>
+                        <div style="margin-top:-80px !important">
+                        <span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; ">{{signature2.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+                        </div>
+                    {% else %}
+                        <img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature2.signature}}" alt="sig">
+                    {% endif %}
+                {% else %}
+                    <p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+                    <div style="margin-top:-80px !important">
+                        <span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+                    </div>
+                {% endif %}
+			</td>
+            <td style=" font-size: 11px; width:15%; height:100px; background-color:#f2f2f2" class="sig">
+				{% if signature4 != "" %}
+                    {% if signature4.signature is null %}
+                        <p style="padding-top:5px !important; padding-bottom:0px !important">{{signature4.user.nom}} {{signature4.user.prenom}}</p>
+                        <div style="margin-top:-80px !important">
+                        <span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; ">{{signature4.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+                        </div>
+                    {% else %}
+                        <img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature4.signature}}" alt="sig">
+                    {% endif %}
+                {% else %}
+                    <p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+                    <div style="margin-top:-80px !important">
+                        <span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+                    </div>
+                {% endif %}
+			</td>
+
+		</tr>
+
+
+	</table>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+					<div style="padding-right:15px;padding-left : 15px;width: 100px;position:relative;right:2.5%;text-align: right; left:69%;margin-top:-20px" >
+						{% if signature3 != "" %}
+								{% if signature3.signature is null %}
+									<p style=" padding-bottom:0px !important">{{signature3.user.nom}} {{signature3.user.prenom}}</p>
+										<div style="margin-top:-90px !important">
+										<span style="font-family:'Signaturex' !important;font-size:15px;text-transform: capitalize; ">{{signature3.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+										</div>
+										{% else %}
+										<img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature3.signature}}" alt="sig">
+									{% endif %}
+								{% else %}
+										<p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+										<div style="margin-top:-80px !important">
+											<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+										</div>
+						{% endif %}
+					</div>
+	
+
+	<br>
+	<br>
+	<div style=" position: absolute;bottom:8px;left: 5%;width:90%;padding:5px;text-align: center;font-size: 10px;">
+		<p>
+			B.P 6533 AV ALLAL EL FASSI MADINAT AL IRFANE HAY RIAD – RABAT 10 000 – MAROC
+			<br><br>
+			TEL 212 5 37 68 68 68 FAX 212 5 37 68 68 48
+
+		</p>
+
+
+	</div>
+</page_footer>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<title>
+			{% block title %}U3S-EPR | UGOUV
+			{% endblock %}
+		</title>
+		<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'/>
+		<link rel="shortcut icon" href="{{asset('/img/icon.png')}}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+
+	</head>
+	<body class="upper fixed-nav fixed-nav-basic font-new  {% if app.user.theme is defined  %} {{app.user.theme}} {%endif%} {% if app.user.menuPosition is defined and app.user.menuPosition ==1  %} top-menu-no-side-barre {%endif%}">
+
+			{% block sidebar %}
+			{% if app.user.menuPosition is defined and app.user.menuPosition !=1  %}
+				{% include './ugouv/inc/sidebar.html.twig' %}
+
+				{% endif %}
+			{% endblock %}
+
+
+			{% block header %}
+				{% include './ugouv/inc/header.html.twig' %}
+			{% endblock %}
+
+
+			{% block body %}
+			
+				<div class="modal fade right" id="customPopUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+					<div class="modal-dialog modal-full-height modal-right {{sizeModel is defined ? sizeModel}}" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h3 class="modal-title" id="exampleModalPreviewLabel">{{titleModel is defined ? titleModel}}</h3>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							<div class="modal-body bo">
+								<div class="text-center spr" style="display: none;">
+									<div class="spinner-border" role="status">
+										<span class="sr-only">Loading...</span>
+									</div>
+								</div>
+								<div class="bod" style="">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			{% endblock %}
+
+
+			{% block footer %}
+				{% include './inc/footer.html.twig' %}
+			{% endblock %}
+		</div>
+	</body>
+</html></div>{% block javascripts %}
+
+{{ encore_entry_script_tags('app') }}{% endblock %}</body></html>

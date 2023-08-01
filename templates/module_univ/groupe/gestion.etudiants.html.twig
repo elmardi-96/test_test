@@ -1,0 +1,143 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Etudiant ,Gestion des étudiants | Univ
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-4">
+			<h2 class="fo">Univ , Gestion des étudiants
+			</h2>
+		</div>
+		<div class="col-lg-8">
+			<div
+				class="title-action">
+				{#% include './module_univ/cours/inc/workflow.html.twig' %#}
+
+				<button class="btn btn-white btn-xs btn-lg my-button " id="dividion_groupe_etudiants" data-style="expand-left" type="submit">
+					<i class="fa fa-search"></i>
+					Chercher</button>
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+		{#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+																																																		#}
+
+	</div>
+	<br/><br/>
+	<div class="row pt-20">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div class="ibox-content">
+
+					{#{% include './module_achat/facturefrs/inc/workflow_breadcumb.html.twig' %}#}
+					{#% include './module_univ/cours/inc/workflow_breadcumb.html.twig' %#}
+						<div class="row m-t-sm"> <div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										{% include './module_univ/groupe/inc/navigation.html.twig' %}
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="panel-body">
+
+										<div class="tab-content">
+											<div class="tab-pane active show" id="tab-1">
+												<div class="row">
+													<div class="col-md-6 b-r">
+														<h3 class="m-t-none m-b">Informations
+														</h3>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+															<div class="col-sm-8">
+																<select class="form-control  form-control-sm select2 form-control etablissement">
+																	{{ etablissement|raw }}
+																</select>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Formation</label>
+															<div class="col-sm-8">
+																<select class="form-control  form-control-sm select2 form-control formation">
+																	<option>choix formation...</option>
+																</select>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Promotion</label>
+															<div class="col-sm-8">
+																<select class="select2 form-control promotion form-control  form-control-sm">
+																	<option>choix promotion...</option>
+																</select>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+
+													</div>
+													<div class="col-md-6">
+														<h3 class="m-t-none m-b">La liste groupe détail
+														</h3>
+														<div class="hr-line-dashed"></div>
+														<table class="table table-striped fichier-liste-style">
+															<thead>
+																<tr>
+
+																	<th width="20%">Id</th>
+                                                                    <th width="15%">Code</th>
+																	<th width="15%">Désignation</th>
+																	<th width="15%">Abréviation</th>
+
+																</tr>
+															</thead>
+															<tbody>
+																{% for detail in UnivDivisionGroupe.divisionGroupeDetails %}
+																	<tr>
+
+																		<td>{{detail.id }}</td>
+																		<td>{{detail.code}}</td>
+																		<td>{{detail.designation}}</td>
+																		<td>{{detail.abreviation}}</td>
+
+																	</tr>
+																{% endfor %}
+
+															</tbody>
+
+														</table>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="widget-main-html"></div>
+
+
+	{% if UnivDivisionGroupe is defined %}
+		<input type="hidden" name="_id" id="id" value="{{ UnivDivisionGroupe.id }}"/>
+	{% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_groupe') }}
+{% endblock %}

@@ -1,0 +1,301 @@
+{% extends 'base_Extraction.html.twig' %}
+
+
+{% block title %}Extraction
+{% endblock %}
+
+{% block sidebar %}
+<div id="wrapper">
+    <!-- Sidebar -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul
+                class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <ul class="sidebar-app-url ">
+                            <li>
+                                <a style="cursor:default">
+                                    <img class="img-side-ugouv" src="{{asset('/img/logo-blackwhite.png')}}" /><span>U3S-ERP</span></a>
+                                <p>
+                                    UGOUV SOLUTION 
+                                </p>
+                                <div>
+                                    <input id="search_keywords2" type="text" class="form-control search_keywords2 input-search" placeholder="Rechercher ...">
+                                    <i class="fa fa-search input-search-i"></i>
+                                </div>
+                            </li>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+                               
+                               
+            </ul>
+        </div>
+    </nav>
+    <!-- End Sidebar -->
+
+{% endblock %}
+{% block body %}
+
+    <style>
+        .card-body {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        }
+        .card-body i {
+            margin-right: 40px;
+            font-size: 50px;
+            color: #233645;
+            }
+	
+    </style>
+	<div class="container-xl mt-5">
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+
+        <div class="row">
+            <div class="col-4">
+            <a class="card " data-toggle="modal" data-target="#extraction_achat">
+                <div class="card-body">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <h5 class="card-title" style="font-size: 20px;text-align: center;color: #233645;">Extraction ACHAT</h5>
+                </div>
+            </a>
+            </div>
+            <div class="col-4">
+            <a class="card " data-toggle="modal" data-target="#extraction_achat_details">
+                <div class="card-body">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <h5 class="card-title" style="font-size: 20px;text-align: center;color: #233645;">Extraction ACHAT Avec Détails</h5>
+                </div>
+            </a>
+            </div>
+            <div class="col-4">
+                <a class="card " data-toggle="modal" data-target="#extraction_vente">
+                    <div class="card-body">
+                        <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                    <h5 class="card-title" style="font-size: 20px;text-align: center;color: #233645;">Extraction Vente</h5>
+                    </div>
+                </a>
+            </div>
+        
+      {% endif %}
+            
+        </div>
+        <br>
+     
+        <div class="row">
+        <div class="col-4">
+                <a class="card " href="{{ path('lextraction_demand') }}">
+                    <div class="card-body">
+                        <i class="fa fa-cubes" aria-hidden="true"></i>
+                    <h5 class="card-title" style="font-size: 20px;text-align: center;color: #233645;">Extraction Stock</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="col-4">
+                <a class="card " data-toggle="modal" data-target="#extraction_bq">
+                    <div class="card-body">
+                        <i class="fa fa-university" aria-hidden="true"></i>
+                    <h5 class="card-title" style="font-size: 20px;text-align: center;color: #233645;"> Détails techniques</h5>
+                    </div>
+                </a>
+            </div>
+            
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+
+             <div class="col-4">
+                <a class="card " href="{{ path('lextraction_not_signature') }}">
+                    <div class="card-body">
+                        <i class="fa fa-paperclip" aria-hidden="true"></i>
+
+                    <h5 class="card-title" style="font-size: 20px;text-align: center;color: #233645;">Extraction signature</h5>
+                    </div>
+                </a>
+            </div>
+            
+            {% endif %}
+        </div>
+    </div>
+ 
+            
+            
+            
+            
+            
+
+            <div class="modal fade" id="extraction_achat" aria-labelledby="extraction_achat_label" aria-hidden="true">
+                <div class="modal-dialog">
+                <form action="{{ path('ExtractionAchat') }}" method="post">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="extraction_achat_label">Extraction ACHAT</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="year">Select a year:</label>
+                        <select id="year" name="year[]" class="sel2 custom-select" multiple >
+                        <option value="{{ 'now' | date('Y') }}" selected>{{ 'now' | date('Y') }}</option>
+                        {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-body">
+                        <label for="dossier">Select a dossier:</label>
+                        <select id="dossier" name="dossier" class="sel2 custom-select">
+                        <option selected>Choose dossier...</option>
+                        {% for dossier in dossiers %}
+                        <option value="{{ dossier.id }}">{{ dossier.titre }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        {# <input type="checkbox" id="tout_achat" name="ToutAchat" value="ToutAchat" style="transform: scale(1.1); margin-right: 5px;"> #}
+                        {# <label for="tout_achat" style="font-size: 20px;">Tout Dossier</label> #}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">telecharger</button>
+                    </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+            <div class="modal fade" id="extraction_achat_details" aria-labelledby="extraction_achat_label_details" aria-hidden="true">
+                <div class="modal-dialog">
+                <form action="{{ path('extraction_achat_details') }}" method="post">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="extraction_achat_label_details">Extraction ACHAT details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="year">Select a year:</label>
+                        <select id="years" name="year[]" class="sel2 custom-select" multiple >
+                        <option value="{{ 'now' | date('Y') }}" selected>{{ 'now' | date('Y') }}</option>
+                        {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-body">
+                        <label for="dossier">Select a dossier:</label>
+                        <select id="dossiers" name="dossier" class="sel2 custom-select">
+                        <option selected>Choose dossier...</option>
+                        {% for dossier in dossiers %}
+                        <option value="{{ dossier.id }}">{{ dossier.titre }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        {# <input type="checkbox" id="tout_achat" name="ToutAchat" value="ToutAchat" style="transform: scale(1.1); margin-right: 5px;"> #}
+                        {# <label for="tout_achat" style="font-size: 20px;">Tout Dossier</label> #}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">telecharger</button>
+                    </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+
+            
+            
+            {# //////////////////////// #}
+        
+            <div class="modal fade" id="extraction_vente" aria-labelledby="extraction_vente_label" aria-hidden="true">
+                <div class="modal-dialog">
+                <form action="{{ path('ExtractionVente') }}" method="post">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="extraction_vente_label">Extraction Vente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="year_vente">Select a year:</label>
+                        <select id="year_vente" name="year[]" class="sel2 custom-select" multiple>
+                        <option value="{{ 'now' | date('Y') }}" selected>{{ 'now' | date('Y') }}</option>
+                        {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-body">
+                        <label for="dossier_vente">Select a dossier:</label>
+                        <select id="dossier_vente" name="dossier" class="sel2 custom-select">
+                        <option selected>Choose dossier...</option>
+                        {% for dossier in dossiers %}
+                        <option value="{{ dossier.id }}">{{ dossier.titre }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        {# <input type="checkbox" id="tout_vente" name="ToutAchat" value="ToutAchat" style="transform: scale(1.1); margin-right: 5px;"> #}
+                        {# <label for="tout_vente" style="font-size: 20px;">Tout Dossier</label> #}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">telecharger</button>
+                    </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+            {# ////////////////////////   BQ#}
+        
+            <div class="modal fade" id="extraction_bq" aria-labelledby="extraction_bq_label" aria-hidden="true">
+                <div class="modal-dialog">
+         <form method="POST" action="{{path('Extraction_details_export_export')}}" enctype="multipart/form-data" >
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="extraction_bq_label">Extraction details technique</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    
+                        <div class="ibox ">
+                                    <div class="ibox-content">
+                                        
+                                        <div >
+                                            <form method="POST" action="{{path('Extraction_details_export_export')}}" enctype="multipart/form-data" >
+                                            <input type="file" name="file" id="produit_xlsx" required/>
+                                            <br><br><br>
+                                            <label for="#fiche">veuillez entrer le code dans la fiche avant de cliquer sur télécharger</label>
+                                        <br>
+                                        <div>
+                                          <a type="button" class="btn btn-primary" id="fiche" href="{{ path('Extraction_fiche') }}">FICHE</a>
+                                          </div>
+                                          <br>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">telecharger</button>
+                                        </div>
+                                    </div>
+                                </div>       
+                                
+                             
+                    </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+   
+
+{% endblock %}

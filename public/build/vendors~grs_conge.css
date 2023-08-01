@@ -1,0 +1,1444 @@
+@charset "UTF-8";
+.fc {
+  direction: ltr;
+  text-align: left;
+}
+
+.fc-rtl {
+  text-align: right;
+}
+
+body .fc {
+  /* extra precedence to overcome jqui */
+  font-size: 1em;
+}
+
+/* Colors
+--------------------------------------------------------------------------------------------------*/
+.fc-highlight {
+  /* when user is selecting cells */
+  background: #bce8f1;
+  opacity: 0.3;
+}
+
+.fc-bgevent {
+  /* default look for background events */
+  background: #8fdf82;
+  opacity: 0.3;
+}
+
+.fc-nonbusiness {
+  /* default look for non-business-hours areas */
+  /* will inherit .fc-bgevent's styles */
+  background: #d7d7d7;
+}
+
+/* Popover
+--------------------------------------------------------------------------------------------------*/
+.fc-popover {
+  position: absolute;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.fc-popover .fc-header {
+  /* TODO: be more consistent with fc-head/fc-body */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 4px;
+}
+
+.fc-rtl .fc-popover .fc-header {
+  flex-direction: row-reverse;
+}
+
+.fc-popover .fc-header .fc-title {
+  margin: 0 2px;
+}
+
+.fc-popover .fc-header .fc-close {
+  cursor: pointer;
+  opacity: 0.65;
+  font-size: 1.1em;
+}
+
+/* Misc Reusable Components
+--------------------------------------------------------------------------------------------------*/
+.fc-divider {
+  border-style: solid;
+  border-width: 1px;
+}
+
+hr.fc-divider {
+  height: 0;
+  margin: 0;
+  padding: 0 0 2px;
+  /* height is unreliable across browsers, so use padding */
+  border-width: 1px 0;
+}
+
+.fc-bg,
+.fc-bgevent-skeleton,
+.fc-highlight-skeleton,
+.fc-mirror-skeleton {
+  /* these element should always cling to top-left/right corners */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.fc-bg {
+  bottom: 0;
+  /* strech bg to bottom edge */
+}
+
+.fc-bg table {
+  height: 100%;
+  /* strech bg to bottom edge */
+}
+
+/* Tables
+--------------------------------------------------------------------------------------------------*/
+.fc table {
+  width: 100%;
+  box-sizing: border-box;
+  /* fix scrollbar issue in firefox */
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1em;
+  /* normalize cross-browser */
+}
+
+.fc th {
+  text-align: center;
+}
+
+.fc th,
+.fc td {
+  border-style: solid;
+  border-width: 1px;
+  padding: 0;
+  vertical-align: top;
+}
+
+.fc td.fc-today {
+  border-style: double;
+  /* overcome neighboring borders */
+}
+
+/* Internal Nav Links
+--------------------------------------------------------------------------------------------------*/
+a[data-goto] {
+  cursor: pointer;
+}
+
+a[data-goto]:hover {
+  text-decoration: underline;
+}
+
+/* Fake Table Rows
+--------------------------------------------------------------------------------------------------*/
+.fc .fc-row {
+  /* extra precedence to overcome themes forcing a 1px border */
+  /* no visible border by default. but make available if need be (scrollbar width compensation) */
+  border-style: solid;
+  border-width: 0;
+}
+
+.fc-row table {
+  /* don't put left/right border on anything within a fake row.
+     the outer tbody will worry about this */
+  border-left: 0 hidden transparent;
+  border-right: 0 hidden transparent;
+  /* no bottom borders on rows */
+  border-bottom: 0 hidden transparent;
+}
+
+.fc-row:first-child table {
+  border-top: 0 hidden transparent;
+  /* no top border on first row */
+}
+
+/* Day Row (used within the header and the DayGrid)
+--------------------------------------------------------------------------------------------------*/
+.fc-row {
+  position: relative;
+}
+
+.fc-row .fc-bg {
+  z-index: 1;
+}
+
+/* highlighting cells & background event skeleton */
+.fc-row .fc-bgevent-skeleton,
+.fc-row .fc-highlight-skeleton {
+  bottom: 0;
+  /* stretch skeleton to bottom of row */
+}
+
+.fc-row .fc-bgevent-skeleton table,
+.fc-row .fc-highlight-skeleton table {
+  height: 100%;
+  /* stretch skeleton to bottom of row */
+}
+
+.fc-row .fc-highlight-skeleton td,
+.fc-row .fc-bgevent-skeleton td {
+  border-color: transparent;
+}
+
+.fc-row .fc-bgevent-skeleton {
+  z-index: 2;
+}
+
+.fc-row .fc-highlight-skeleton {
+  z-index: 3;
+}
+
+/*
+row content (which contains day/week numbers and events) as well as "mirror" (which contains
+temporary rendered events).
+*/
+.fc-row .fc-content-skeleton {
+  position: relative;
+  z-index: 4;
+  padding-bottom: 2px;
+  /* matches the space above the events */
+}
+
+.fc-row .fc-mirror-skeleton {
+  z-index: 5;
+}
+
+.fc .fc-row .fc-content-skeleton table,
+.fc .fc-row .fc-content-skeleton td,
+.fc .fc-row .fc-mirror-skeleton td {
+  /* see-through to the background below */
+  /* extra precedence to prevent theme-provided backgrounds */
+  background: none;
+  /* in case <td>s are globally styled */
+  border-color: transparent;
+}
+
+.fc-row .fc-content-skeleton td,
+.fc-row .fc-mirror-skeleton td {
+  /* don't put a border between events and/or the day number */
+  border-bottom: 0;
+}
+
+.fc-row .fc-content-skeleton tbody td,
+.fc-row .fc-mirror-skeleton tbody td {
+  /* don't put a border between event cells */
+  border-top: 0;
+}
+
+/* Scrolling Container
+--------------------------------------------------------------------------------------------------*/
+.fc-scroller {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* TODO: move to timegrid/daygrid */
+.fc-scroller > .fc-day-grid,
+.fc-scroller > .fc-time-grid {
+  position: relative;
+  /* re-scope all positions */
+  width: 100%;
+  /* hack to force re-sizing this inner element when scrollbars appear/disappear */
+}
+
+/* Global Event Styles
+--------------------------------------------------------------------------------------------------*/
+.fc-event {
+  position: relative;
+  /* for resize handle and other inner positioning */
+  display: block;
+  /* make the <a> tag block */
+  font-size: 0.85em;
+  line-height: 1.4;
+  border-radius: 3px;
+  border: 1px solid #3788d8;
+}
+
+.fc-event,
+.fc-event-dot {
+  background-color: #3788d8;
+  /* default BACKGROUND color */
+}
+
+.fc-event,
+.fc-event:hover {
+  color: #fff;
+  /* default TEXT color */
+  text-decoration: none;
+  /* if <a> has an href */
+}
+
+.fc-event[href],
+.fc-event.fc-draggable {
+  cursor: pointer;
+  /* give events with links and draggable events a hand mouse pointer */
+}
+
+.fc-not-allowed,
+.fc-not-allowed .fc-event {
+  /* to override an event's custom cursor */
+  cursor: not-allowed;
+}
+
+.fc-event .fc-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* resizer (cursor AND touch devices) */
+.fc-event .fc-resizer {
+  position: absolute;
+  z-index: 4;
+}
+
+/* resizer (touch devices) */
+.fc-event .fc-resizer {
+  display: none;
+}
+
+.fc-event.fc-allow-mouse-resize .fc-resizer,
+.fc-event.fc-selected .fc-resizer {
+  /* only show when hovering or selected (with touch) */
+  display: block;
+}
+
+/* hit area */
+.fc-event.fc-selected .fc-resizer:before {
+  /* 40x40 touch area */
+  content: "";
+  position: absolute;
+  z-index: 9999;
+  /* user of this util can scope within a lower z-index */
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  margin-top: -20px;
+}
+
+/* Event Selection (only for touch devices)
+--------------------------------------------------------------------------------------------------*/
+.fc-event.fc-selected {
+  z-index: 9999 !important;
+  /* overcomes inline z-index */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.fc-event.fc-selected:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  /* same z-index as fc-bg, behind text */
+  /* overcome the borders */
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  /* darkening effect */
+  background: #000;
+  opacity: 0.25;
+}
+
+/* Event Dragging
+--------------------------------------------------------------------------------------------------*/
+.fc-event.fc-dragging.fc-selected {
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+}
+
+.fc-event.fc-dragging:not(.fc-selected) {
+  opacity: 0.75;
+}
+
+/* Horizontal Events
+--------------------------------------------------------------------------------------------------*/
+/* bigger touch area when selected */
+.fc-h-event.fc-selected:before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  /* below resizers */
+  top: -10px;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+}
+
+/* events that are continuing to/from another week. kill rounded corners and butt up against edge */
+.fc-ltr .fc-h-event.fc-not-start,
+.fc-rtl .fc-h-event.fc-not-end {
+  margin-left: 0;
+  border-left-width: 0;
+  padding-left: 1px;
+  /* replace the border with padding */
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.fc-ltr .fc-h-event.fc-not-end,
+.fc-rtl .fc-h-event.fc-not-start {
+  margin-right: 0;
+  border-right-width: 0;
+  padding-right: 1px;
+  /* replace the border with padding */
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* resizer (cursor AND touch devices) */
+/* left resizer  */
+.fc-ltr .fc-h-event .fc-start-resizer,
+.fc-rtl .fc-h-event .fc-end-resizer {
+  cursor: w-resize;
+  left: -1px;
+  /* overcome border */
+}
+
+/* right resizer */
+.fc-ltr .fc-h-event .fc-end-resizer,
+.fc-rtl .fc-h-event .fc-start-resizer {
+  cursor: e-resize;
+  right: -1px;
+  /* overcome border */
+}
+
+/* resizer (mouse devices) */
+.fc-h-event.fc-allow-mouse-resize .fc-resizer {
+  width: 7px;
+  top: -1px;
+  /* overcome top border */
+  bottom: -1px;
+  /* overcome bottom border */
+}
+
+/* resizer (touch devices) */
+.fc-h-event.fc-selected .fc-resizer {
+  /* 8x8 little dot */
+  border-radius: 4px;
+  border-width: 1px;
+  width: 6px;
+  height: 6px;
+  border-style: solid;
+  border-color: inherit;
+  background: #fff;
+  /* vertically center */
+  top: 50%;
+  margin-top: -4px;
+}
+
+/* left resizer  */
+.fc-ltr .fc-h-event.fc-selected .fc-start-resizer,
+.fc-rtl .fc-h-event.fc-selected .fc-end-resizer {
+  margin-left: -4px;
+  /* centers the 8x8 dot on the left edge */
+}
+
+/* right resizer */
+.fc-ltr .fc-h-event.fc-selected .fc-end-resizer,
+.fc-rtl .fc-h-event.fc-selected .fc-start-resizer {
+  margin-right: -4px;
+  /* centers the 8x8 dot on the right edge */
+}
+
+/* DayGrid events
+----------------------------------------------------------------------------------------------------
+We use the full "fc-day-grid-event" class instead of using descendants because the event won't
+be a descendant of the grid when it is being dragged.
+*/
+.fc-day-grid-event {
+  margin: 1px 2px 0;
+  /* spacing between events and edges */
+  padding: 0 1px;
+}
+
+tr:first-child > td > .fc-day-grid-event {
+  margin-top: 2px;
+  /* a little bit more space before the first event */
+}
+
+.fc-mirror-skeleton tr:first-child > td > .fc-day-grid-event {
+  margin-top: 0;
+  /* except for mirror skeleton */
+}
+
+.fc-day-grid-event .fc-content {
+  /* force events to be one-line tall */
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.fc-day-grid-event .fc-time {
+  font-weight: bold;
+}
+
+/* resizer (cursor devices) */
+/* left resizer  */
+.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer,
+.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer {
+  margin-left: -2px;
+  /* to the day cell's edge */
+}
+
+/* right resizer */
+.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer,
+.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer {
+  margin-right: -2px;
+  /* to the day cell's edge */
+}
+
+/* Event Limiting
+--------------------------------------------------------------------------------------------------*/
+/* "more" link that represents hidden events */
+a.fc-more {
+  margin: 1px 3px;
+  font-size: 0.85em;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a.fc-more:hover {
+  text-decoration: underline;
+}
+
+.fc-limited {
+  /* rows and cells that are hidden because of a "more" link */
+  display: none;
+}
+
+/* popover that appears when "more" link is clicked */
+.fc-day-grid .fc-row {
+  z-index: 1;
+  /* make the "more" popover one higher than this */
+}
+
+.fc-more-popover {
+  z-index: 2;
+  width: 220px;
+}
+
+.fc-more-popover .fc-event-container {
+  padding: 10px;
+}
+
+/* Now Indicator
+--------------------------------------------------------------------------------------------------*/
+.fc-now-indicator {
+  position: absolute;
+  border: 0 solid red;
+}
+
+/* Utilities
+--------------------------------------------------------------------------------------------------*/
+.fc-unselectable {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/*
+TODO: more distinction between this file and common.css
+*/
+/* Colors
+--------------------------------------------------------------------------------------------------*/
+.fc-unthemed th,
+.fc-unthemed td,
+.fc-unthemed thead,
+.fc-unthemed tbody,
+.fc-unthemed .fc-divider,
+.fc-unthemed .fc-row,
+.fc-unthemed .fc-content,
+.fc-unthemed .fc-popover,
+.fc-unthemed .fc-list-view,
+.fc-unthemed .fc-list-heading td {
+  border-color: #ddd;
+}
+
+.fc-unthemed .fc-popover {
+  background-color: #fff;
+}
+
+.fc-unthemed .fc-divider,
+.fc-unthemed .fc-popover .fc-header,
+.fc-unthemed .fc-list-heading td {
+  background: #eee;
+}
+
+.fc-unthemed td.fc-today {
+  background: #fcf8e3;
+}
+
+.fc-unthemed .fc-disabled-day {
+  background: #d7d7d7;
+  opacity: 0.3;
+}
+
+/* Icons
+--------------------------------------------------------------------------------------------------
+from https://feathericons.com/ and built with IcoMoon
+*/
+@font-face {
+  font-family: "fcicons";
+  src: url("data:application/x-font-ttf;charset=utf-8;base64,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") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+.fc-icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "fcicons" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fc-icon-chevron-left:before {
+  content: "";
+}
+
+.fc-icon-chevron-right:before {
+  content: "";
+}
+
+.fc-icon-chevrons-left:before {
+  content: "";
+}
+
+.fc-icon-chevrons-right:before {
+  content: "";
+}
+
+.fc-icon-minus-square:before {
+  content: "";
+}
+
+.fc-icon-plus-square:before {
+  content: "";
+}
+
+.fc-icon-x:before {
+  content: "";
+}
+
+.fc-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  text-align: center;
+}
+
+/* Buttons
+--------------------------------------------------------------------------------------------------
+Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
+*/
+/* reset */
+.fc-button {
+  border-radius: 0;
+  overflow: visible;
+  text-transform: none;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.fc-button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+.fc-button {
+  -webkit-appearance: button;
+}
+
+.fc-button:not(:disabled) {
+  cursor: pointer;
+}
+
+.fc-button::-moz-focus-inner {
+  padding: 0;
+  border-style: none;
+}
+
+/* theme */
+.fc-button {
+  display: inline-block;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.4em 0.65em;
+  font-size: 1em;
+  line-height: 1.5;
+  border-radius: 0.25em;
+}
+
+.fc-button:hover {
+  color: #212529;
+  text-decoration: none;
+}
+
+.fc-button:focus {
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+}
+
+.fc-button:disabled {
+  opacity: 0.65;
+}
+
+/* "primary" coloring */
+.fc-button-primary {
+  color: #fff;
+  background-color: #2C3E50;
+  border-color: #2C3E50;
+}
+
+.fc-button-primary:hover {
+  color: #fff;
+  background-color: #1e2b37;
+  border-color: #1a252f;
+}
+
+.fc-button-primary:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
+}
+
+.fc-button-primary:disabled {
+  color: #fff;
+  background-color: #2C3E50;
+  border-color: #2C3E50;
+}
+
+.fc-button-primary:not(:disabled):active,
+.fc-button-primary:not(:disabled).fc-button-active {
+  color: #fff;
+  background-color: #1a252f;
+  border-color: #151e27;
+}
+
+.fc-button-primary:not(:disabled):active:focus,
+.fc-button-primary:not(:disabled).fc-button-active:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
+}
+
+/* icons within buttons */
+.fc-button .fc-icon {
+  vertical-align: middle;
+  font-size: 1.5em;
+}
+
+/* Buttons Groups
+--------------------------------------------------------------------------------------------------*/
+.fc-button-group {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.fc-button-group > .fc-button {
+  position: relative;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.fc-button-group > .fc-button:hover {
+  z-index: 1;
+}
+
+.fc-button-group > .fc-button:focus,
+.fc-button-group > .fc-button:active,
+.fc-button-group > .fc-button.fc-button-active {
+  z-index: 1;
+}
+
+.fc-button-group > .fc-button:not(:first-child) {
+  margin-left: -1px;
+}
+
+.fc-button-group > .fc-button:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.fc-button-group > .fc-button:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Popover
+--------------------------------------------------------------------------------------------------*/
+.fc-unthemed .fc-popover {
+  border-width: 1px;
+  border-style: solid;
+}
+
+/* List View
+--------------------------------------------------------------------------------------------------*/
+.fc-unthemed .fc-list-item:hover td {
+  background-color: #f5f5f5;
+}
+
+/* Toolbar
+--------------------------------------------------------------------------------------------------*/
+.fc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fc-toolbar.fc-header-toolbar {
+  margin-bottom: 1.5em;
+}
+
+.fc-toolbar.fc-footer-toolbar {
+  margin-top: 1.5em;
+}
+
+/* inner content */
+.fc-toolbar > * > :not(:first-child) {
+  margin-left: 0.75em;
+}
+
+.fc-toolbar h2 {
+  font-size: 1.75em;
+  margin: 0;
+}
+
+/* View Structure
+--------------------------------------------------------------------------------------------------*/
+.fc-view-container {
+  position: relative;
+}
+
+/* undo twitter bootstrap's box-sizing rules. normalizes positioning techniques */
+/* don't do this for the toolbar because we'll want bootstrap to style those buttons as some pt */
+.fc-view-container *,
+.fc-view-container *:before,
+.fc-view-container *:after {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.fc-view,
+.fc-view > table {
+  /* so dragged elements can be above the view's main element */
+  position: relative;
+  z-index: 1;
+}
+
+@media print {
+  .fc {
+    max-width: 100% !important;
+  }
+
+  /* Global Event Restyling
+  --------------------------------------------------------------------------------------------------*/
+  .fc-event {
+    background: #fff !important;
+    color: #000 !important;
+    page-break-inside: avoid;
+  }
+
+  .fc-event .fc-resizer {
+    display: none;
+  }
+
+  /* Table & Day-Row Restyling
+  --------------------------------------------------------------------------------------------------*/
+  .fc th,
+.fc td,
+.fc hr,
+.fc thead,
+.fc tbody,
+.fc-row {
+    border-color: #ccc !important;
+    background: #fff !important;
+  }
+
+  /* kill the overlaid, absolutely-positioned components */
+  /* common... */
+  .fc-bg,
+.fc-bgevent-skeleton,
+.fc-highlight-skeleton,
+.fc-mirror-skeleton,
+.fc-bgevent-container,
+.fc-business-container,
+.fc-highlight-container,
+.fc-mirror-container {
+    display: none;
+  }
+
+  /* don't force a min-height on rows (for DayGrid) */
+  .fc tbody .fc-row {
+    height: auto !important;
+    /* undo height that JS set in distributeHeight */
+    min-height: 0 !important;
+    /* undo the min-height from each view's specific stylesheet */
+  }
+
+  .fc tbody .fc-row .fc-content-skeleton {
+    position: static;
+    /* undo .fc-rigid */
+    padding-bottom: 0 !important;
+    /* use a more border-friendly method for this... */
+  }
+
+  .fc tbody .fc-row .fc-content-skeleton tbody tr:last-child td {
+    /* only works in newer browsers */
+    padding-bottom: 1em;
+    /* ...gives space within the skeleton. also ensures min height in a way */
+  }
+
+  .fc tbody .fc-row .fc-content-skeleton table {
+    /* provides a min-height for the row, but only effective for IE, which exaggerates this value,
+       making it look more like 3em. for other browers, it will already be this tall */
+    height: 1em;
+  }
+
+  /* Undo month-view event limiting. Display all events and hide the "more" links
+  --------------------------------------------------------------------------------------------------*/
+  .fc-more-cell,
+.fc-more {
+    display: none !important;
+  }
+
+  .fc tr.fc-limited {
+    display: table-row !important;
+  }
+
+  .fc td.fc-limited {
+    display: table-cell !important;
+  }
+
+  .fc-popover {
+    display: none;
+    /* never display the "more.." popover in print mode */
+  }
+
+  /* TimeGrid Restyling
+  --------------------------------------------------------------------------------------------------*/
+  /* undo the min-height 100% trick used to fill the container's height */
+  .fc-time-grid {
+    min-height: 0 !important;
+  }
+
+  /* don't display the side axis at all ("all-day" and time cells) */
+  .fc-timeGrid-view .fc-axis {
+    display: none;
+  }
+
+  /* don't display the horizontal lines */
+  .fc-slats,
+.fc-time-grid hr {
+    /* this hr is used when height is underused and needs to be filled */
+    display: none !important;
+    /* important overrides inline declaration */
+  }
+
+  /* let the container that holds the events be naturally positioned and create real height */
+  .fc-time-grid .fc-content-skeleton {
+    position: static;
+  }
+
+  /* in case there are no events, we still want some height */
+  .fc-time-grid .fc-content-skeleton table {
+    height: 4em;
+  }
+
+  /* kill the horizontal spacing made by the event container. event margins will be done below */
+  .fc-time-grid .fc-event-container {
+    margin: 0 !important;
+  }
+
+  /* TimeGrid *Event* Restyling
+  --------------------------------------------------------------------------------------------------*/
+  /* naturally position events, vertically stacking them */
+  .fc-time-grid .fc-event {
+    position: static !important;
+    margin: 3px 2px !important;
+  }
+
+  /* for events that continue to a future day, give the bottom border back */
+  .fc-time-grid .fc-event.fc-not-end {
+    border-bottom-width: 1px !important;
+  }
+
+  /* indicate the event continues via "..." text */
+  .fc-time-grid .fc-event.fc-not-end:after {
+    content: "...";
+  }
+
+  /* for events that are continuations from previous days, give the top border back */
+  .fc-time-grid .fc-event.fc-not-start {
+    border-top-width: 1px !important;
+  }
+
+  /* indicate the event is a continuation via "..." text */
+  .fc-time-grid .fc-event.fc-not-start:before {
+    content: "...";
+  }
+
+  /* time */
+  /* undo a previous declaration and let the time text span to a second line */
+  .fc-time-grid .fc-event .fc-time {
+    white-space: normal !important;
+  }
+
+  /* hide the the time that is normally displayed... */
+  .fc-time-grid .fc-event .fc-time span {
+    display: none;
+  }
+
+  /* ...replace it with a more verbose version (includes AM/PM) stored in an html attribute */
+  .fc-time-grid .fc-event .fc-time:after {
+    content: attr(data-full);
+  }
+
+  /* Vertical Scroller & Containers
+  --------------------------------------------------------------------------------------------------*/
+  /* kill the scrollbars and allow natural height */
+  .fc-scroller,
+.fc-day-grid-container,
+.fc-time-grid-container {
+    /* */
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  /* kill the horizontal border/padding used to compensate for scrollbars */
+  .fc-row {
+    border: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Button Controls
+  --------------------------------------------------------------------------------------------------*/
+  .fc-button-group,
+.fc button {
+    display: none;
+    /* don't display any button-related controls */
+  }
+}
+
+/* DayGridView
+--------------------------------------------------------------------------------------------------*/
+/* day row structure */
+.fc-dayGridWeek-view .fc-content-skeleton,
+.fc-dayGridDay-view .fc-content-skeleton {
+  /* there may be week numbers in these views, so no padding-top */
+  padding-bottom: 1em;
+  /* ensure a space at bottom of cell for user selecting/clicking */
+}
+
+.fc-dayGrid-view .fc-body .fc-row {
+  min-height: 4em;
+  /* ensure that all rows are at least this tall */
+}
+
+/* a "rigid" row will take up a constant amount of height because content-skeleton is absolute */
+.fc-row.fc-rigid {
+  overflow: hidden;
+}
+
+.fc-row.fc-rigid .fc-content-skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* week and day number styling */
+.fc-day-top.fc-other-month {
+  opacity: 0.3;
+}
+
+.fc-dayGrid-view .fc-week-number,
+.fc-dayGrid-view .fc-day-number {
+  padding: 2px;
+}
+
+.fc-dayGrid-view th.fc-week-number,
+.fc-dayGrid-view th.fc-day-number {
+  padding: 0 2px;
+  /* column headers can't have as much v space */
+}
+
+.fc-ltr .fc-dayGrid-view .fc-day-top .fc-day-number {
+  float: right;
+}
+
+.fc-rtl .fc-dayGrid-view .fc-day-top .fc-day-number {
+  float: left;
+}
+
+.fc-ltr .fc-dayGrid-view .fc-day-top .fc-week-number {
+  float: left;
+  border-radius: 0 0 3px 0;
+}
+
+.fc-rtl .fc-dayGrid-view .fc-day-top .fc-week-number {
+  float: right;
+  border-radius: 0 0 0 3px;
+}
+
+.fc-dayGrid-view .fc-day-top .fc-week-number {
+  min-width: 1.5em;
+  text-align: center;
+  background-color: #f2f2f2;
+  color: #808080;
+}
+
+/* when week/day number have own column */
+.fc-dayGrid-view td.fc-week-number {
+  text-align: center;
+}
+
+.fc-dayGrid-view td.fc-week-number > * {
+  /* work around the way we do column resizing and ensure a minimum width */
+  display: inline-block;
+  min-width: 1.25em;
+}
+
+@charset "UTF-8";
+/* TimeGridView all-day area
+--------------------------------------------------------------------------------------------------*/
+.fc-timeGrid-view .fc-day-grid {
+  position: relative;
+  z-index: 2;
+  /* so the "more.." popover will be over the time grid */
+}
+
+.fc-timeGrid-view .fc-day-grid .fc-row {
+  min-height: 3em;
+  /* all-day section will never get shorter than this */
+}
+
+.fc-timeGrid-view .fc-day-grid .fc-row .fc-content-skeleton {
+  padding-bottom: 1em;
+  /* give space underneath events for clicking/selecting days */
+}
+
+/* TimeGrid axis running down the side (for both the all-day area and the slot area)
+--------------------------------------------------------------------------------------------------*/
+.fc .fc-axis {
+  /* .fc to overcome default cell styles */
+  vertical-align: middle;
+  padding: 0 4px;
+  white-space: nowrap;
+}
+
+.fc-ltr .fc-axis {
+  text-align: right;
+}
+
+.fc-rtl .fc-axis {
+  text-align: left;
+}
+
+/* TimeGrid Structure
+--------------------------------------------------------------------------------------------------*/
+.fc-time-grid-container,
+.fc-time-grid {
+  /* so slats/bg/content/etc positions get scoped within here */
+  position: relative;
+  z-index: 1;
+}
+
+.fc-time-grid {
+  min-height: 100%;
+  /* so if height setting is 'auto', .fc-bg stretches to fill height */
+}
+
+.fc-time-grid table {
+  /* don't put outer borders on slats/bg/content/etc */
+  border: 0 hidden transparent;
+}
+
+.fc-time-grid > .fc-bg {
+  z-index: 1;
+}
+
+.fc-time-grid .fc-slats,
+.fc-time-grid > hr {
+  /* the <hr> TimeGridView injects when grid is shorter than scroller */
+  position: relative;
+  z-index: 2;
+}
+
+.fc-time-grid .fc-content-col {
+  position: relative;
+  /* because now-indicator lives directly inside */
+}
+
+.fc-time-grid .fc-content-skeleton {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* divs within a cell within the fc-content-skeleton */
+.fc-time-grid .fc-business-container {
+  position: relative;
+  z-index: 1;
+}
+
+.fc-time-grid .fc-bgevent-container {
+  position: relative;
+  z-index: 2;
+}
+
+.fc-time-grid .fc-highlight-container {
+  position: relative;
+  z-index: 3;
+}
+
+.fc-time-grid .fc-event-container {
+  position: relative;
+  z-index: 4;
+}
+
+.fc-time-grid .fc-now-indicator-line {
+  z-index: 5;
+}
+
+.fc-time-grid .fc-mirror-container {
+  /* also is fc-event-container */
+  position: relative;
+  z-index: 6;
+}
+
+/* TimeGrid Slats (lines that run horizontally)
+--------------------------------------------------------------------------------------------------*/
+.fc-time-grid .fc-slats td {
+  height: 1.5em;
+  border-bottom: 0;
+  /* each cell is responsible for its top border */
+}
+
+.fc-time-grid .fc-slats .fc-minor td {
+  border-top-style: dotted;
+}
+
+/* TimeGrid Highlighting Slots
+--------------------------------------------------------------------------------------------------*/
+.fc-time-grid .fc-highlight-container {
+  /* a div within a cell within the fc-highlight-skeleton */
+  position: relative;
+  /* scopes the left/right of the fc-highlight to be in the column */
+}
+
+.fc-time-grid .fc-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* top and bottom will be in by JS */
+}
+
+/* TimeGrid Event Containment
+--------------------------------------------------------------------------------------------------*/
+.fc-ltr .fc-time-grid .fc-event-container {
+  /* space on the sides of events for LTR (default) */
+  margin: 0 2.5% 0 2px;
+}
+
+.fc-rtl .fc-time-grid .fc-event-container {
+  /* space on the sides of events for RTL */
+  margin: 0 2px 0 2.5%;
+}
+
+.fc-time-grid .fc-event,
+.fc-time-grid .fc-bgevent {
+  position: absolute;
+  z-index: 1;
+  /* scope inner z-index's */
+}
+
+.fc-time-grid .fc-bgevent {
+  /* background events always span full width */
+  left: 0;
+  right: 0;
+}
+
+/* TimeGrid Event Styling
+----------------------------------------------------------------------------------------------------
+We use the full "fc-time-grid-event" class instead of using descendants because the event won't
+be a descendant of the grid when it is being dragged.
+*/
+.fc-time-grid-event {
+  margin-bottom: 1px;
+}
+
+.fc-time-grid-event-inset {
+  -webkit-box-shadow: 0px 0px 0px 1px #fff;
+  box-shadow: 0px 0px 0px 1px #fff;
+}
+
+.fc-time-grid-event.fc-not-start {
+  /* events that are continuing from another day */
+  /* replace space made by the top border with padding */
+  border-top-width: 0;
+  padding-top: 1px;
+  /* remove top rounded corners */
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.fc-time-grid-event.fc-not-end {
+  /* replace space made by the top border with padding */
+  border-bottom-width: 0;
+  padding-bottom: 1px;
+  /* remove bottom rounded corners */
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.fc-time-grid-event .fc-content {
+  overflow: hidden;
+  max-height: 100%;
+}
+
+.fc-time-grid-event .fc-time,
+.fc-time-grid-event .fc-title {
+  padding: 0 1px;
+}
+
+.fc-time-grid-event .fc-time {
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+/* short mode, where time and title are on the same line */
+.fc-time-grid-event.fc-short .fc-content {
+  /* don't wrap to second line (now that contents will be inline) */
+  white-space: nowrap;
+}
+
+.fc-time-grid-event.fc-short .fc-time,
+.fc-time-grid-event.fc-short .fc-title {
+  /* put the time and title on the same line */
+  display: inline-block;
+  vertical-align: top;
+}
+
+.fc-time-grid-event.fc-short .fc-time span {
+  display: none;
+  /* don't display the full time text... */
+}
+
+.fc-time-grid-event.fc-short .fc-time:before {
+  content: attr(data-start);
+  /* ...instead, display only the start time */
+}
+
+.fc-time-grid-event.fc-short .fc-time:after {
+  content: " - ";
+  /* seperate with a dash, wrapped in nbsp's */
+}
+
+.fc-time-grid-event.fc-short .fc-title {
+  font-size: 0.85em;
+  /* make the title text the same size as the time */
+  padding: 0;
+  /* undo padding from above */
+}
+
+/* resizer (cursor device) */
+.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  overflow: hidden;
+  line-height: 8px;
+  font-size: 11px;
+  font-family: monospace;
+  text-align: center;
+  cursor: s-resize;
+}
+
+.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer:after {
+  content: "=";
+}
+
+/* resizer (touch device) */
+.fc-time-grid-event.fc-selected .fc-resizer {
+  /* 10x10 dot */
+  border-radius: 5px;
+  border-width: 1px;
+  width: 8px;
+  height: 8px;
+  border-style: solid;
+  border-color: inherit;
+  background: #fff;
+  /* horizontally center */
+  left: 50%;
+  margin-left: -5px;
+  /* center on the bottom edge */
+  bottom: -5px;
+}
+
+/* Now Indicator
+--------------------------------------------------------------------------------------------------*/
+.fc-time-grid .fc-now-indicator-line {
+  border-top-width: 1px;
+  left: 0;
+  right: 0;
+}
+
+/* arrow on axis */
+.fc-time-grid .fc-now-indicator-arrow {
+  margin-top: -5px;
+  /* vertically center on top coordinate */
+}
+
+.fc-ltr .fc-time-grid .fc-now-indicator-arrow {
+  left: 0;
+  /* triangle pointing right... */
+  border-width: 5px 0 5px 6px;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.fc-rtl .fc-time-grid .fc-now-indicator-arrow {
+  right: 0;
+  /* triangle pointing left... */
+  border-width: 5px 6px 5px 0;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,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QUE0QztFQUM1QyxxQkFBcUI7RUFDckIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsYUFBYTtFQUNiLHdDQUF3QztBQUMxQzs7QUFFQTtFQUNFLHlCQUF5QjtFQUN6Qiw0Q0FBNEM7QUFDOUM7O0FBRUE7RUFDRSxjQUFjO0VBQ2QsNENBQTRDO0FBQzlDOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtEQUFrRDtFQUNsRCxVQUFVO0VBQ1YsNEJBQTRCO0FBQzlCOztBQUVBLDRCQUE0QjtBQUM1QjtFQUNFLE9BQU87RUFDUCxRQUFRO0VBQ1IsU0FBUztFQUNULFdBQVc7RUFDWCxnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLGVBQWU7RUFDZixzQkFBc0I7RUFDdEIsa0JBQWtCO0VBQ2xCLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQSwyQkFBMkI7QUFDM0I7RUFDRSxjQUFjO0VBQ2Qsa0JBQWtCO0VBQ2xCLGlCQUFpQjtFQUNqQixVQUFVO0VBQ1YsV0FBVztFQUNYLG1CQUFtQjtFQUNuQixxQkFBcUI7RUFDckIsZ0JBQWdCO0VBQ2hCLHdCQUF3QjtFQUN4QixTQUFTO0VBQ1QsaUJBQWlCO0VBQ2pCLDhCQUE4QjtFQUM5QixZQUFZO0FBQ2Q7O0FBRUE7bUdBQ21HO0FBQ25HO0VBQ0UscUJBQXFCO0VBQ3JCLE9BQU87RUFDUCxRQUFRO0FBQ1Y7O0FBRUEsa0JBQWtCO0FBQ2xCO0VBQ0UsZ0JBQWdCO0VBQ2hCLHdDQUF3QztBQUMxQzs7QUFFQTtFQUNFLE9BQU87RUFDUCwrQkFBK0I7RUFDL0IsMkJBQTJCO0VBQzNCLDZCQUE2QjtFQUM3QixnQ0FBZ0M7QUFDbEM7O0FBRUE7RUFDRSxRQUFRO0VBQ1IsOEJBQThCO0VBQzlCLDJCQUEyQjtFQUMzQiw2QkFBNkI7RUFDN0IsZ0NBQWdDO0FBQ2xDIiwiZmlsZSI6InZlbmRvcnN+Z3JzX2NvbmdlLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIkBjaGFyc2V0IFwiVVRGLThcIjtcbi8qIFRpbWVHcmlkVmlldyBhbGwtZGF5IGFyZWFcbi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKi9cbi5mYy10aW1lR3JpZC12aWV3IC5mYy1kYXktZ3JpZCB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgei1pbmRleDogMjtcbiAgLyogc28gdGhlIFwibW9yZS4uXCIgcG9wb3ZlciB3aWxsIGJlIG92ZXIgdGhlIHRpbWUgZ3JpZCAqL1xufVxuXG4uZmMtdGltZUdyaWQtdmlldyAuZmMtZGF5LWdyaWQgLmZjLXJvdyB7XG4gIG1pbi1oZWlnaHQ6IDNlbTtcbiAgLyogYWxsLWRheSBzZWN0aW9uIHdpbGwgbmV2ZXIgZ2V0IHNob3J0ZXIgdGhhbiB0aGlzICovXG59XG5cbi5mYy10aW1lR3JpZC12aWV3IC5mYy1kYXktZ3JpZCAuZmMtcm93IC5mYy1jb250ZW50LXNrZWxldG9uIHtcbiAgcGFkZGluZy1ib3R0b206IDFlbTtcbiAgLyogZ2l2ZSBzcGFjZSB1bmRlcm5lYXRoIGV2ZW50cyBmb3IgY2xpY2tpbmcvc2VsZWN0aW5nIGRheXMgKi9cbn1cblxuLyogVGltZUdyaWQgYXhpcyBydW5uaW5nIGRvd24gdGhlIHNpZGUgKGZvciBib3RoIHRoZSBhbGwtZGF5IGFyZWEgYW5kIHRoZSBzbG90IGFyZWEpXG4tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSovXG4uZmMgLmZjLWF4aXMge1xuICAvKiAuZmMgdG8gb3ZlcmNvbWUgZGVmYXVsdCBjZWxsIHN0eWxlcyAqL1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICBwYWRkaW5nOiAwIDRweDtcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbn1cblxuLmZjLWx0ciAuZmMtYXhpcyB7XG4gIHRleHQtYWxpZ246IHJpZ2h0O1xufVxuXG4uZmMtcnRsIC5mYy1heGlzIHtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbn1cblxuLyogVGltZUdyaWQgU3RydWN0dXJlXG4tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSovXG4uZmMtdGltZS1ncmlkLWNvbnRhaW5lcixcbi5mYy10aW1lLWdyaWQge1xuICAvKiBzbyBzbGF0cy9iZy9jb250ZW50L2V0YyBwb3NpdGlvbnMgZ2V0IHNjb3BlZCB3aXRoaW4gaGVyZSAqL1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHotaW5kZXg6IDE7XG59XG5cbi5mYy10aW1lLWdyaWQge1xuICBtaW4taGVpZ2h0OiAxMDAlO1xuICAvKiBzbyBpZiBoZWlnaHQgc2V0dGluZyBpcyAnYXV0bycsIC5mYy1iZyBzdHJldGNoZXMgdG8gZmlsbCBoZWlnaHQgKi9cbn1cblxuLmZjLXRpbWUtZ3JpZCB0YWJsZSB7XG4gIC8qIGRvbid0IHB1dCBvdXRlciBib3JkZXJzIG9uIHNsYXRzL2JnL2NvbnRlbnQvZXRjICovXG4gIGJvcmRlcjogMCBoaWRkZW4gdHJhbnNwYXJlbnQ7XG59XG5cbi5mYy10aW1lLWdyaWQgPiAuZmMtYmcge1xuICB6LWluZGV4OiAxO1xufVxuXG4uZmMtdGltZS1ncmlkIC5mYy1zbGF0cyxcbi5mYy10aW1lLWdyaWQgPiBociB7XG4gIC8qIHRoZSA8aHI+IFRpbWVHcmlkVmlldyBpbmplY3RzIHdoZW4gZ3JpZCBpcyBzaG9ydGVyIHRoYW4gc2Nyb2xsZXIgKi9cbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICB6LWluZGV4OiAyO1xufVxuXG4uZmMtdGltZS1ncmlkIC5mYy1jb250ZW50LWNvbCB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgLyogYmVjYXVzZSBub3ctaW5kaWNhdG9yIGxpdmVzIGRpcmVjdGx5IGluc2lkZSAqL1xufVxuXG4uZmMtdGltZS1ncmlkIC5mYy1jb250ZW50LXNrZWxldG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB6LWluZGV4OiAzO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG4gIHJpZ2h0OiAwO1xufVxuXG4vKiBkaXZzIHdpdGhpbiBhIGNlbGwgd2l0aGluIHRoZSBmYy1jb250ZW50LXNrZWxldG9uICovXG4uZmMtdGltZS1ncmlkIC5mYy1idXNpbmVzcy1jb250YWluZXIge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHotaW5kZXg6IDE7XG59XG5cbi5mYy10aW1lLWdyaWQgLmZjLWJnZXZlbnQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICB6LWluZGV4OiAyO1xufVxuXG4uZmMtdGltZS1ncmlkIC5mYy1oaWdobGlnaHQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICB6LWluZGV4OiAzO1xufVxuXG4uZmMtdGltZS1ncmlkIC5mYy1ldmVudC1jb250YWluZXIge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHotaW5kZXg6IDQ7XG59XG5cbi5mYy10aW1lLWdyaWQgLmZjLW5vdy1pbmRpY2F0b3ItbGluZSB7XG4gIHotaW5kZXg6IDU7XG59XG5cbi5mYy10aW1lLWdyaWQgLmZjLW1pcnJvci1jb250YWluZXIge1xuICAvKiBhbHNvIGlzIGZjLWV2ZW50LWNvbnRhaW5lciAqL1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHotaW5kZXg6IDY7XG59XG5cbi8qIFRpbWVHcmlkIFNsYXRzIChsaW5lcyB0aGF0IHJ1biBob3Jpem9udGFsbHkpXG4tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSovXG4uZmMtdGltZS1ncmlkIC5mYy1zbGF0cyB0ZCB7XG4gIGhlaWdodDogMS41ZW07XG4gIGJvcmRlci1ib3R0b206IDA7XG4gIC8qIGVhY2ggY2VsbCBpcyByZXNwb25zaWJsZSBmb3IgaXRzIHRvcCBib3JkZXIgKi9cbn1cblxuLmZjLXRpbWUtZ3JpZCAuZmMtc2xhdHMgLmZjLW1pbm9yIHRkIHtcbiAgYm9yZGVyLXRvcC1zdHlsZTogZG90dGVkO1xufVxuXG4vKiBUaW1lR3JpZCBIaWdobGlnaHRpbmcgU2xvdHNcbi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKi9cbi5mYy10aW1lLWdyaWQgLmZjLWhpZ2hsaWdodC1jb250YWluZXIge1xuICAvKiBhIGRpdiB3aXRoaW4gYSBjZWxsIHdpdGhpbiB0aGUgZmMtaGlnaGxpZ2h0LXNrZWxldG9uICovXG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgLyogc2NvcGVzIHRoZSBsZWZ0L3JpZ2h0IG9mIHRoZSBmYy1oaWdobGlnaHQgdG8gYmUgaW4gdGhlIGNvbHVtbiAqL1xufVxuXG4uZmMtdGltZS1ncmlkIC5mYy1oaWdobGlnaHQge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGxlZnQ6IDA7XG4gIHJpZ2h0OiAwO1xuICAvKiB0b3AgYW5kIGJvdHRvbSB3aWxsIGJlIGluIGJ5IEpTICovXG59XG5cbi8qIFRpbWVHcmlkIEV2ZW50IENvbnRhaW5tZW50XG4tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSovXG4uZmMtbHRyIC5mYy10aW1lLWdyaWQgLmZjLWV2ZW50LWNvbnRhaW5lciB7XG4gIC8qIHNwYWNlIG9uIHRoZSBzaWRlcyBvZiBldmVudHMgZm9yIExUUiAoZGVmYXVsdCkgKi9cbiAgbWFyZ2luOiAwIDIuNSUgMCAycHg7XG59XG5cbi5mYy1ydGwgLmZjLXRpbWUtZ3JpZCAuZmMtZXZlbnQtY29udGFpbmVyIHtcbiAgLyogc3BhY2Ugb24gdGhlIHNpZGVzIG9mIGV2ZW50cyBmb3IgUlRMICovXG4gIG1hcmdpbjogMCAycHggMCAyLjUlO1xufVxuXG4uZmMtdGltZS1ncmlkIC5mYy1ldmVudCxcbi5mYy10aW1lLWdyaWQgLmZjLWJnZXZlbnQge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHotaW5kZXg6IDE7XG4gIC8qIHNjb3BlIGlubmVyIHotaW5kZXgncyAqL1xufVxuXG4uZmMtdGltZS1ncmlkIC5mYy1iZ2V2ZW50IHtcbiAgLyogYmFja2dyb3VuZCBldmVudHMgYWx3YXlzIHNwYW4gZnVsbCB3aWR0aCAqL1xuICBsZWZ0OiAwO1xuICByaWdodDogMDtcbn1cblxuLyogVGltZUdyaWQgRXZlbnQgU3R5bGluZ1xuLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuV2UgdXNlIHRoZSBmdWxsIFwiZmMtdGltZS1ncmlkLWV2ZW50XCIgY2xhc3MgaW5zdGVhZCBvZiB1c2luZyBkZXNjZW5kYW50cyBiZWNhdXNlIHRoZSBldmVudCB3b24ndFxuYmUgYSBkZXNjZW5kYW50IG9mIHRoZSBncmlkIHdoZW4gaXQgaXMgYmVpbmcgZHJhZ2dlZC5cbiovXG4uZmMtdGltZS1ncmlkLWV2ZW50IHtcbiAgbWFyZ2luLWJvdHRvbTogMXB4O1xufVxuXG4uZmMtdGltZS1ncmlkLWV2ZW50LWluc2V0IHtcbiAgLXdlYmtpdC1ib3gtc2hhZG93OiAwcHggMHB4IDBweCAxcHggI2ZmZjtcbiAgYm94LXNoYWRvdzogMHB4IDBweCAwcHggMXB4ICNmZmY7XG59XG5cbi5mYy10aW1lLWdyaWQtZXZlbnQuZmMtbm90LXN0YXJ0IHtcbiAgLyogZXZlbnRzIHRoYXQgYXJlIGNvbnRpbnVpbmcgZnJvbSBhbm90aGVyIGRheSAqL1xuICAvKiByZXBsYWNlIHNwYWNlIG1hZGUgYnkgdGhlIHRvcCBib3JkZXIgd2l0aCBwYWRkaW5nICovXG4gIGJvcmRlci10b3Atd2lkdGg6IDA7XG4gIHBhZGRpbmctdG9wOiAxcHg7XG4gIC8qIHJlbW92ZSB0b3Agcm91bmRlZCBjb3JuZXJzICovXG4gIGJvcmRlci10b3AtbGVmdC1yYWRpdXM6IDA7XG4gIGJvcmRlci10b3AtcmlnaHQtcmFkaXVzOiAwO1xufVxuXG4uZmMtdGltZS1ncmlkLWV2ZW50LmZjLW5vdC1lbmQge1xuICAvKiByZXBsYWNlIHNwYWNlIG1hZGUgYnkgdGhlIHRvcCBib3JkZXIgd2l0aCBwYWRkaW5nICovXG4gIGJvcmRlci1ib3R0b20td2lkdGg6IDA7XG4gIHBhZGRpbmctYm90dG9tOiAxcHg7XG4gIC8qIHJlbW92ZSBib3R0b20gcm91bmRlZCBjb3JuZXJzICovXG4gIGJvcmRlci1ib3R0b20tbGVmdC1yYWRpdXM6IDA7XG4gIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAwO1xufVxuXG4uZmMtdGltZS1ncmlkLWV2ZW50IC5mYy1jb250ZW50IHtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgbWF4LWhlaWdodDogMTAwJTtcbn1cblxuLmZjLXRpbWUtZ3JpZC1ldmVudCAuZmMtdGltZSxcbi5mYy10aW1lLWdyaWQtZXZlbnQgLmZjLXRpdGxlIHtcbiAgcGFkZGluZzogMCAxcHg7XG59XG5cbi5mYy10aW1lLWdyaWQtZXZlbnQgLmZjLXRpbWUge1xuICBmb250LXNpemU6IDAuODVlbTtcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbn1cblxuLyogc2hvcnQgbW9kZSwgd2hlcmUgdGltZSBhbmQgdGl0bGUgYXJlIG9uIHRoZSBzYW1lIGxpbmUgKi9cbi5mYy10aW1lLWdyaWQtZXZlbnQuZmMtc2hvcnQgLmZjLWNvbnRlbnQge1xuICAvKiBkb24ndCB3cmFwIHRvIHNlY29uZCBsaW5lIChub3cgdGhhdCBjb250ZW50cyB3aWxsIGJlIGlubGluZSkgKi9cbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbn1cblxuLmZjLXRpbWUtZ3JpZC1ldmVudC5mYy1zaG9ydCAuZmMtdGltZSxcbi5mYy10aW1lLWdyaWQtZXZlbnQuZmMtc2hvcnQgLmZjLXRpdGxlIHtcbiAgLyogcHV0IHRoZSB0aW1lIGFuZCB0aXRsZSBvbiB0aGUgc2FtZSBsaW5lICovXG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgdmVydGljYWwtYWxpZ246IHRvcDtcbn1cblxuLmZjLXRpbWUtZ3JpZC1ldmVudC5mYy1zaG9ydCAuZmMtdGltZSBzcGFuIHtcbiAgZGlzcGxheTogbm9uZTtcbiAgLyogZG9uJ3QgZGlzcGxheSB0aGUgZnVsbCB0aW1lIHRleHQuLi4gKi9cbn1cblxuLmZjLXRpbWUtZ3JpZC1ldmVudC5mYy1zaG9ydCAuZmMtdGltZTpiZWZvcmUge1xuICBjb250ZW50OiBhdHRyKGRhdGEtc3RhcnQpO1xuICAvKiAuLi5pbnN0ZWFkLCBkaXNwbGF5IG9ubHkgdGhlIHN0YXJ0IHRpbWUgKi9cbn1cblxuLmZjLXRpbWUtZ3JpZC1ldmVudC5mYy1zaG9ydCAuZmMtdGltZTphZnRlciB7XG4gIGNvbnRlbnQ6IFwiwqAtwqBcIjtcbiAgLyogc2VwZXJhdGUgd2l0aCBhIGRhc2gsIHdyYXBwZWQgaW4gbmJzcCdzICovXG59XG5cbi5mYy10aW1lLWdyaWQtZXZlbnQuZmMtc2hvcnQgLmZjLXRpdGxlIHtcbiAgZm9udC1zaXplOiAwLjg1ZW07XG4gIC8qIG1ha2UgdGhlIHRpdGxlIHRleHQgdGhlIHNhbWUgc2l6ZSBhcyB0aGUgdGltZSAqL1xuICBwYWRkaW5nOiAwO1xuICAvKiB1bmRvIHBhZGRpbmcgZnJvbSBhYm92ZSAqL1xufVxuXG4vKiByZXNpemVyIChjdXJzb3IgZGV2aWNlKSAqL1xuLmZjLXRpbWUtZ3JpZC1ldmVudC5mYy1hbGxvdy1tb3VzZS1yZXNpemUgLmZjLXJlc2l6ZXIge1xuICBsZWZ0OiAwO1xuICByaWdodDogMDtcbiAgYm90dG9tOiAwO1xuICBoZWlnaHQ6IDhweDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgbGluZS1oZWlnaHQ6IDhweDtcbiAgZm9udC1zaXplOiAxMXB4O1xuICBmb250LWZhbWlseTogbW9ub3NwYWNlO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIGN1cnNvcjogcy1yZXNpemU7XG59XG5cbi5mYy10aW1lLWdyaWQtZXZlbnQuZmMtYWxsb3ctbW91c2UtcmVzaXplIC5mYy1yZXNpemVyOmFmdGVyIHtcbiAgY29udGVudDogXCI9XCI7XG59XG5cbi8qIHJlc2l6ZXIgKHRvdWNoIGRldmljZSkgKi9cbi5mYy10aW1lLWdyaWQtZXZlbnQuZmMtc2VsZWN0ZWQgLmZjLXJlc2l6ZXIge1xuICAvKiAxMHgxMCBkb3QgKi9cbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBib3JkZXItd2lkdGg6IDFweDtcbiAgd2lkdGg6IDhweDtcbiAgaGVpZ2h0OiA4cHg7XG4gIGJvcmRlci1zdHlsZTogc29saWQ7XG4gIGJvcmRlci1jb2xvcjogaW5oZXJpdDtcbiAgYmFja2dyb3VuZDogI2ZmZjtcbiAgLyogaG9yaXpvbnRhbGx5IGNlbnRlciAqL1xuICBsZWZ0OiA1MCU7XG4gIG1hcmdpbi1sZWZ0OiAtNXB4O1xuICAvKiBjZW50ZXIgb24gdGhlIGJvdHRvbSBlZGdlICovXG4gIGJvdHRvbTogLTVweDtcbn1cblxuLyogTm93IEluZGljYXRvclxuLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qL1xuLmZjLXRpbWUtZ3JpZCAuZmMtbm93LWluZGljYXRvci1saW5lIHtcbiAgYm9yZGVyLXRvcC13aWR0aDogMXB4O1xuICBsZWZ0OiAwO1xuICByaWdodDogMDtcbn1cblxuLyogYXJyb3cgb24gYXhpcyAqL1xuLmZjLXRpbWUtZ3JpZCAuZmMtbm93LWluZGljYXRvci1hcnJvdyB7XG4gIG1hcmdpbi10b3A6IC01cHg7XG4gIC8qIHZlcnRpY2FsbHkgY2VudGVyIG9uIHRvcCBjb29yZGluYXRlICovXG59XG5cbi5mYy1sdHIgLmZjLXRpbWUtZ3JpZCAuZmMtbm93LWluZGljYXRvci1hcnJvdyB7XG4gIGxlZnQ6IDA7XG4gIC8qIHRyaWFuZ2xlIHBvaW50aW5nIHJpZ2h0Li4uICovXG4gIGJvcmRlci13aWR0aDogNXB4IDAgNXB4IDZweDtcbiAgYm9yZGVyLXRvcC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gIGJvcmRlci1ib3R0b20tY29sb3I6IHRyYW5zcGFyZW50O1xufVxuXG4uZmMtcnRsIC5mYy10aW1lLWdyaWQgLmZjLW5vdy1pbmRpY2F0b3ItYXJyb3cge1xuICByaWdodDogMDtcbiAgLyogdHJpYW5nbGUgcG9pbnRpbmcgbGVmdC4uLiAqL1xuICBib3JkZXItd2lkdGg6IDVweCA2cHggNXB4IDA7XG4gIGJvcmRlci10b3AtY29sb3I6IHRyYW5zcGFyZW50O1xuICBib3JkZXItYm90dG9tLWNvbG9yOiB0cmFuc3BhcmVudDtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0=*/

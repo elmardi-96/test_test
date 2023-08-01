@@ -1,0 +1,286 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Utilisateurs-groupes
+{% endblock %}
+
+{% block body %}
+
+
+	<div id="right-sidebar" class="actions animated"></div>
+
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+		<div class="col-lg-6">
+			<h2 class="fo">Configuration Groupe
+				<span>(groupe)</span>
+			</h2>
+		</div>
+
+
+		<div class="col-lg-6">
+			<div class="title-action"></div>
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+
+			{{ wo_render_breadcrumbs() }}
+		</div>
+	</div>
+
+
+	<br/><br/>
+
+
+	<div class="row pt-20 scroll_content">
+		<div class="col-lg-12 ">
+			<div class="ibox">
+
+				<div class="ibox-content">
+
+					<div class="message-success"></div>
+
+
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										{% include './config/us_groupe/inc/navigation.html.twig' %}
+									</div>
+								</div>
+
+								<div class="panel-body etu">
+									<div class="col-md-12">
+										<div class="tab-content">
+											<div class="tab-pane active" id="tab-1">
+
+
+												<div class="row">
+													<div class="col-md-3 b-r">
+														<h3 class="m-t-none m-b">Opérations  du groupe ,
+															<small>{{ us_groupe.designation }}</small>
+														</h3>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div id='external-events'>
+															<div class="using_json2 m-l-15"></div>
+														</div>
+													</div>
+													<div class="col-md-9">
+														<h3 class="m-t-none m-b">INFORMATIONS</h3>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{us_groupe.id}}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Designation</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{us_groupe.designation}}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Abréviation</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{us_groupe.abreviation}}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Description</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{us_groupe.description}}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Active</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{us_groupe.active == 1 ? 'oui':'non'}}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<br/>
+														<h3 class="m-left po">liste utilisateur</h3>
+														<table class="t-m table table-striped table-bordered fil table-hover w-m dataTable" id="grid2">
+
+															<thead>
+																<tr>
+
+
+																	<th>Img
+																	</th>
+																	<th>Nom</th>
+																	<th>Prénom</th>
+																	<th>Email
+																	</th>
+																	<th class="client-status text-center" width="5%">Active/désactivé</th>
+																	<th class="client-status text-right" width="5%">supprimer</th>
+
+																</tr>
+															</thead>
+															<tbody>
+
+
+																{% for key , user in  us_groupe.users  %}
+																	<tr>
+																		{% set url = asset('images/user/profil/profil.png') %}
+																		{% if app.user.imageName is not null  %}
+																			{% set url = asset('images/user/profil/' ~ app.user.imageName)  %}
+																		{% endif %}
+
+																		<td class="client-avatar"><img alt="image" src="{{url}}">
+																		</td>
+																		<td>
+																			<a href="#contact-1" class="client-link">{{ user.nom }}</a>
+																		</td>
+																		<td>
+																			{{ user.prenom }}</td>
+																		<td>
+																			<i class="fa fa-envelope"></i>
+																			{{ user.email }}</td>
+																		<td class="text-center">
+
+																			{% if user.isActive==1 %}
+																				<i title="compte active" class="text-primary2  fa fa-unlock"></i>
+																			{% else %}
+																				<i title="compte désactivé" class="text-danger fa fa-unlock-alt"></i>
+
+																			{% endif %}
+
+
+																		</td>
+																		<td class="text-right">
+																			<a class="_user_groupe_delete" id="{{user.id}}">
+																				<i title="supprimer cet utilisateur de ce groupe " class=" text-danger fa fa-trash"></i>
+																			</td>
+																		</td>
+																	</tr>
+																{% endfor %}
+
+
+															</tbody>
+														</table>
+
+
+													</div>
+
+												</div>
+
+
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	{#
+		<div class="row etu">
+			<div class="col-lg-12">
+				<div class="ibox">
+					<div
+						class="ibox-title m-min"><!--<h5>La liste des Articles</h5>-->
+					</div>
+					<div class="ibox-content">
+						<div class="table-responsive">
+							<div class="row">
+	
+	
+								<div class="col-md-12 fil">
+									<h3 class="m-left">liste pré-inscriptions</h3>
+									<table class="t-m table table-striped table-bordered table-hover w-m dataTable" id="grid2">
+	
+										<thead>
+											<tr>
+	
+	
+												<th>Img
+												</th>
+												<th>Nom</th>
+												<th>Prénom</th>
+												<th>Email
+												</th>
+												<th class="client-status text-center">Active/désactivé</th>
+												<th class="client-status text-right">supprimer</th>
+	
+											</tr>
+										</thead>
+										<tbody>
+	
+	
+											{% for key , user in  us_groupe.users  %}
+												<tr>
+													{% set url = asset('images/user/profil/profil.png') %}
+													{% if app.user.imageName is not null  %}
+														{% set url = asset('images/user/profil/' ~ app.user.imageName)  %}
+													{% endif %}
+	
+													<td class="client-avatar"><img alt="image" src="{{url}}">
+													</td>
+													<td>
+														<a href="#contact-1" class="client-link">{{ user.nom }}</a>
+													</td>
+													<td>
+														{{ user.prenom }}</td>
+													<td>
+														<i class="fa fa-envelope"></i>
+														{{ user.email }}</td>
+													<td class="text-center">
+	
+														{% if user.isActive==1 %}
+															<i title="compte active" class="text-primary2  fa fa-unlock"></i>
+														{% else %}
+															<i title="compte désactivé" class="text-danger fa fa-unlock-alt"></i>
+	
+														{% endif %}
+	
+	
+													</td>
+													<td class="text-right">
+														<a class="_user_groupe_delete" id="{{user.id}}">
+															<i title="supprimer cet utilisateur de ce groupe " class=" text-danger fa fa-trash"></i>
+														</td>
+													</td>
+												</tr>
+											{% endfor %}
+	
+	
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		#}
+	{% if us_groupe is defined  %}
+
+		<input type="hidden" id="_id" data-token="{{ csrf_token('permission' ~ us_groupe.id) }}" value="{{us_groupe.id}}"/>
+
+	{% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('us_groupe') }}
+{% endblock %}

@@ -1,0 +1,90 @@
+
+<style>
+	@page {
+			margin: 100px 20px 210px !important;
+			padding: 0 !important;
+		}
+	    .header {
+			position: fixed;
+			left: 0;
+			right: 0;
+		}
+		body {
+			font-family: 'Courier';
+			font-size: 14px;
+		}
+        table {
+        width: 100%;
+        }
+        td{
+        height: 70px;
+        }
+
+        table, th, th {
+            height:30px;
+        }
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+            text-align: center;
+
+        }
+        h1{
+        text-align: center;
+        }
+        .logo {
+                max-width: 250px;
+                max-height: 100px;
+                text-align: right;
+        }
+
+</style>
+
+{# ============ Start Logo ====================== #}
+ <div class="header" style="width: 95%; text-align: right;" >
+          <img class="logo" src="./images/parametrage/dossiers/5.png" width="99px" height="99px" alt="logo">	
+        </div>
+       
+{# ============ End Logo ====================== #}
+        <br><br><br><br>
+<main>
+{% for art in arrArticles %}
+    
+
+
+<h1> {{ art["article"].code|upper}}</h1>
+<br><br><br>
+<table>
+  <tr>
+    <th width="10%" >{{ 'id'|upper  }} </th>
+    <th >{{ 'article'|upper   }}</th>
+    <th width="30%">{{ 'CodeBAr'|upper   }}</th>
+  </tr>
+  <tr>
+    <td>{{ art["article"].id }}</td> 
+    <td style="font-weight: bold;">&nbsp;{{ art["article"].titre|upper  }}</td>
+    <td style="padding:0 0 0 12%"> {{ art["barcode"]|raw }}</td>
+    {# <td style="padding:0 0 0 12%"> {{ '' }}</td> #}
+  </tr>
+
+</table>
+<br>
+<br>
+
+<table>
+  <tr>
+    <th width="30%">DATE</th>
+    <th width="15%">{{ 'quantite'|upper }}</th>
+    <th width="15%">{{ 'unite'|upper}}</th>
+    <th width="40%">USER</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>{{ art["unite"]}}</td>
+    <td > </td>
+  </tr>
+</table>
+{% endfor %}
+<br><br><br><br>
+</main>

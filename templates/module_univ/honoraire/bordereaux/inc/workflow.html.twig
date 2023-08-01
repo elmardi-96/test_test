@@ -1,0 +1,34 @@
+
+
+{% if bordereaux is defined and bordereaux is not empty and bordereaux.id is not empty  %}
+
+<div class ="wrf-positions" >
+{% for transition in workflow_transitions(bordereaux) %}
+    {#{{ dump(workflow_marked_places(commande)) }}#}
+    {% set url = "" %}
+    {% if workflow_metadata(bordereaux, 'function', transition) %}
+        {%  set  url= path(workflow_metadata(bordereaux, 'function', transition), {id: bordereaux.id}) %}
+    {% endif %} 
+  
+        
+        
+   <a class="{{ workflow_metadata(bordereaux, 'function', transition) }} btn-wrf btn btn-xs {{ workflow_metadata(bordereaux, 'class', transition) }}  btn-outline"
+       data-id="{{ bordereaux.id }}"
+       data-title = "{{ workflow_metadata(bordereaux, 'title', transition) }}"
+       data-transition ="{{ transition.name }}"
+       >
+       <i class="fa {{ workflow_metadata(bordereaux, 'icon', transition) }}"></i>
+       &nbsp;{{ workflow_metadata(bordereaux, 'title', transition) }}
+   </a>
+   
+{% endfor %}
+
+
+
+<div id="test" data-bordereaux-id="{{ bordereaux.id|json_encode }}"></div>
+
+</div>
+{% endif %}
+
+
+{{ wo_render_breadcrumbs() }}

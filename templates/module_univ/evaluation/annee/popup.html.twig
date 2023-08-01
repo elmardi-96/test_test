@@ -1,0 +1,398 @@
+<div class="actions modal fade right" id="ModalDocumentDynamique2" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+    <div class="modal-dialog modal-full-height modal-right modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalPreviewLabel">INFORMATIONS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bo-0">
+                <div class="text-center spr">
+                    <br/>
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <div class="bod">
+                    <div class="sidebar-container">
+
+                        {#<div class="ibox-tools">
+                                <a class="close-link close-me" href="">
+                                        <i class="fa fa-times"></i>
+                                </a>
+                        </div>#}
+
+                        <div class="tab-content">
+
+
+                            <div id="tab-1" class="tab-pane active">
+
+                                {#<div class="sidebar-title">
+                                        <h3>
+                                                <i class="fa fa-info-circle"></i>
+                                                INFORMATIONS
+                                        </h3>
+                                        <small>
+                                                Informations sur la promotion  .</small>
+                                </div>#}
+
+                                <div class="right-sidebar-content">
+
+
+                                    <table class="table small m-b-xs">
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                    <div class="ibox">
+                                        <div class="ibox-content">
+                                            <div style="overflow-x:auto; ">
+                                                <table class="table table-bordered info-table" style="text-align:center;">
+                                                    <tbody>
+                                                        <tr>
+
+                                                            <td class="color-annee" style="width: 10%;">Année </td>
+                                                            <td colspan="144" {% if type =="annee" and active == promotion.id %} class="info-active" {% endif %}>
+                                                                <a class="cd_op" href="{{ path('module_univ_evaluation_moyenne_annee_fun',{'id':promotion.id})}}">{{ promotion.promotion.designation }}
+                                                                    ({{ promotion.annee ? promotion.annee.designation }})
+                                                                    </br>
+
+                                                                </a>
+                                                                {% for k,value in promotion.positionActuel %}
+
+                                                                    <b> {{ k }}</b>
+
+
+                                                                {% endfor %}
+
+
+                                                                <button type="button" class="btn btn-default popover-style"  data-toggle="popover" data-placement="top" data-content="
+                                                                        Promotion : {{promotion.promotion ? promotion.promotion.designation }} <br/>
+                                                                        Description : {{promotion.description}}  <br/> 
+                                                                        Créer par : {{promotion.userCreated  ? promotion.userCreated.nom   }} {{promotion.userCreated  ? promotion.userCreated.prenom   }} <br/>
+                                                                        Créer le  : {{promotion.created  ? promotion.created|date('d/m/Y H:i:s') : ''   }}
+                                                                        ">
+                                                                    <i class="fa fa-plus-circle popover-style-i"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="color-semestre" style="width: 10%;">Semestre</td>
+                                                            {% set count = 0 %}
+                                                            {% for key , eps in promotion.controleSemestres %}
+                                                                {% if eps.controleModules |length == 0 %}
+                                                                    {% set count = count + 1 %}
+                                                                {% endif %}
+                                                                {% for key1 , esm in eps.controleModules %}
+                                                                    {% if esm.controleElements |length == 0 %}
+                                                                        {% set count = count + 1 %}
+                                                                    {% else %}
+                                                                        {% for  emed in esm.controleElements %}
+                                                                            {% if emed.univExControleEpreuves |length == 0 %}
+                                                                                {% set count = count + 1 %}
+                                                                            {% else %}
+                                                                                {% for eepd in emed.univExControleEpreuves %}
+
+                                                                                    {% if eepd.epreuves|length > 1 %}
+                                                                                        {% set count = count + eepd.epreuves|length %}
+                                                                                    {% else %}
+                                                                                        {% set count = count + 1 %}
+                                                                                    {% endif %}
+                                                                                {% endfor %}
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                    {% endif %}
+
+                                                                {% endfor %}
+                                                                <td colspan="{{count}}" {% if type=="semestre" and active == eps.id %} class="info-active" {% endif %}>
+                                                                    <a class="cd_op" href="{{ path('module_univ_evaluation_moyenne_semestre_fun',{'id':eps.id})}}">{{eps.semestre  ? eps.semestre.designation}}
+                                                                        </br>
+
+                                                                    </a>
+                                                                    {% for k,value in eps.positionActuel %}
+
+                                                                        <b> {{ k }}</b>
+                                                                    {% endfor %}
+
+                                                                    <button type="button" class="btn btn-default popover-style"  data-toggle="popover" data-placement="top" data-content="
+                                                                            Semestre : {{eps.semestre ? eps.semestre.designation }} <br/>
+
+                                                                            Coefficient : {{eps.coefficient}}  <br/> 
+                                                                            Coefficient-Assiduité : {{eps.coefficientAss}}  <br/> 
+                                                                            Description : {{eps.description}}  <br/> 
+                                                                            Créer par : {{eps.userCreated  ? eps.userCreated.nom   }} {{eps.userCreated  ? eps.userCreated.prenom   }} <br/>
+                                                                            Créer le  : {{eps.created  ? eps.created|date('d/m/Y H:i:s') : ''   }}
+                                                                            ">
+                                                                        <i class="fa fa-plus-circle popover-style-i"></i>
+                                                                    </button>
+
+
+                                                                </td>
+
+
+
+                                                            {% endfor %}
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="color-module" style="width: 10%;">Module</td>
+                                                            {% for key , eps in promotion.controleSemestres %}
+                                                                {% if eps.controleModules |length == 0 %}
+                                                                    <td colspan="0"></td>
+                                                                {% else %}
+                                                                    {% for key1 , esm in eps.controleModules %}
+                                                                        {% set count = 0 %}
+                                                                        {% set title =""%}
+                                                                        {% set class_css =""%}
+                                                                        {% for k , v in esm.positionActuel %}
+
+                                                                            {% set title = k %}
+
+
+                                                                        {% endfor %}
+
+                                                                        {% for  emed in esm.controleElements %}
+                                                                            {% if emed.univExControleEpreuves |length == 0 %}
+                                                                                {% set count = count + esm.controleElements|length %}
+                                                                            {% endif %}
+
+                                                                            {% for eepd in emed.univExControleEpreuves %}
+                                                                                {% if eepd.epreuves|length > 1 %}
+                                                                                    {% set count = count + eepd.epreuves|length %}
+                                                                                {% else %}
+                                                                                    {% set count = count + 1 %}
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                        {% endfor %}
+
+                                                                        <td colspan="{{count}}" {% if type =="module" and active == esm.id %} class="info-active" {% endif %}>
+                                                                            <a class="cd_op" href="{{ path('module_univ_evaluation_moyenne_module_fun',{'id':esm.id})}}">{{esm.module ? esm.module.designation}}
+                                                                                </br>
+
+                                                                            </a>
+                                                                            <b>{{ title }}</b>
+
+                                                                            <button type="button" class="btn btn-default popover-style"  data-toggle="popover" data-placement="top" data-content="
+                                                                                    Module : {{esm.module ? esm.module.designation }} <br/>
+                                                                                    Type : {{esm.type }}  <br/> 
+                                                                                    Coefficient : {{esm.coefficient}}  <br/> 
+                                                                                    Description : {{esm.description}}  <br/> 
+                                                                                    Créer par : {{esm.userCreated  ? esm.userCreated.nom   }} {{esm.userCreated  ? esm.userCreated.prenom   }} <br/>
+                                                                                    Créer le  : {{esm.created  ? esm.created|date('d/m/Y H:i:s') : ''   }}
+                                                                                    ">
+                                                                                <i class="fa fa-plus-circle popover-style-i"></i>
+                                                                            </button>
+
+
+                                                                        </td>
+
+
+                                                                    {% endfor %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 10%;" class="color-element">Elèment</td>
+                                                            {% for key , eps in promotion.controleSemestres %}
+                                                                {% if eps.controleModules |length == 0 %}
+                                                                    <td colspan="0"></td>
+                                                                {% else %}
+                                                                    {% for key , esm in eps.controleModules %}
+                                                                        {% if esm.controleElements |length == 0 %}
+                                                                            <td colspan="0"></td>
+                                                                        {% else %}
+
+                                                                            {% for key , eme in esm.controleElements %}
+                                                                                {% set count = 0 %}
+                                                                                {% for eepd in eme.univExControleEpreuves %}
+                                                                                    {% if eepd.epreuves|length > 1 %}
+                                                                                        {% set count = count + eepd.epreuves|length %}
+                                                                                    {% else %}
+                                                                                        {% set count = count + 1 %}
+                                                                                    {% endif %}
+
+
+                                                                                {% endfor %}
+                                                                                <td colspan="{{count}}" {% if type =="element" and active == eme.id %} class="info-active" {% endif %}>
+                                                                                    <a class="cd_op" href="{{ path('module_univ_evaluation_moyenne_element_fun',{'id':eme.id})}}">{{eme.element ? eme.element.designation }}
+                                                                                        </br>
+
+                                                                                    </a>
+                                                                                    {% for k,value in eme.positionActuel %}
+
+                                                                                        <b> {{ k }}</i></b>
+                                                                                    {% endfor %}
+
+                                                                                    <button type="button" class="btn btn-default popover-style"  data-toggle="popover" data-placement="top" data-content="
+                                                                                            Elément : {{eme.element ? eme.element.designation }} <br/>
+                                                                                            Type : {{eme.typeElement ? eme.typeElement.abreviation}} ({{eme.typeElement ? eme.typeElement.code}})  <br/> 
+                                                                                            Coefficient : {{eme.coefficient}}  <br/> 
+                                                                                            Coefficient Epreuves : (
+
+                                                                                            {% for key ,  coef in eme.coefficientEpreuve %}
+                                                                                                {% if key =='NAT000000001' %}
+                                                                                                    CC :  {{coef}} ,
+                                                                                                {% endif %}
+                                                                                                {% if key =='NAT000000002' %}
+                                                                                                    TP :  {{coef}} ,
+                                                                                                {% endif %}
+
+                                                                                                {% if key =='NAT000000003' %}
+                                                                                                    EF :  {{coef}} 
+                                                                                                {% endif %}
+
+                                                                                            {% endfor %}
+                                                                                            )
+                                                                                            <br/> 
+                                                                                            Description : {{eme.description}}  <br/> 
+                                                                                            Créer par : {{eme.userCreated  ? eme.userCreated.nom   }} {{eme.userCreated  ? eme.userCreated.prenom   }} <br/>
+                                                                                            Créer le  : {{eme.created  ? eme.created|date('d/m/Y H:i:s') : ''   }}
+                                                                                            ">
+                                                                                        <i class="fa fa-plus-circle popover-style-i"></i>
+                                                                                    </button>
+
+
+
+                                                                                </td>
+
+
+                                                                            {% endfor %}
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 10%;" class="color-epreuve">Nature Epreuve</td>
+                                                            {% for key , eps in promotion.controleSemestres %}
+                                                                {% if eps.controleModules |length == 0 %}
+                                                                    <td colspan="0"></td>
+                                                                {% else %}
+                                                                    {% for key , esm in eps.controleModules %}
+                                                                        {% if esm.controleElements |length == 0 %}
+                                                                            <td colspan="0"></td>
+                                                                        {% else %}
+                                                                            {% for key , eme in esm.controleElements %}
+                                                                                {% if eme.univExControleEpreuves |length == 0 %}
+                                                                                    <td colspan="0"></td>
+                                                                                {% else %}
+                                                                                    {% for key , eep in eme.univExControleEpreuves %}
+
+                                                                                        <td colspan="{{eep.epreuves|length}}" {% if type =="epreuve" and active == eep.id %} class="info-active" {% endif %}>
+                                                                                            <a class="cd_op" href="{{ path('module_univ_evaluation_moyenne_epreuve_fun',{'id':eep.id})}}"> Moyenne {#{{eep.natureEpreuve ? eep.natureEpreuve.designation }}#} ({{eep.natureEpreuve ? eep.natureEpreuve.abreviation }})
+                                                                                                </br>
+
+                                                                                            </a>
+                                                                                            {% for k,value in eep.positionActuel %}
+
+                                                                                                <b>{{ k }}</i></b>
+                                                                                            {% endfor %}
+
+
+                                                                                            <button type="button" class="btn btn-default popover-style"  data-toggle="popover" data-placement="top" data-content="
+                                                                                                    Nature Epreuve : {{eep.natureEpreuve ? eep.natureEpreuve.designation }} ({{eep.natureEpreuve ? eep.natureEpreuve.abreviation }}) <br/>
+                                                                                                    Description : {{eep.description}}  <br/> 
+                                                                                                    Créer par : {{eep.userCreated  ? eep.userCreated.nom   }} {{eep.userCreated  ? eep.userCreated.prenom   }} <br/>
+                                                                                                    Créer le  : {{eep.created  ? eep.created|date('d/m/Y H:i:s') : ''   }}
+                                                                                                    ">
+                                                                                                <i class="fa fa-plus-circle popover-style-i"></i>
+                                                                                            </button>
+
+
+
+
+                                                                                        </td>
+
+
+                                                                                    {% endfor %}
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </tr>
+
+
+
+                                                        <tr>
+                                                            <td style="width: 10%;" class="color-epreuve">Epreuve</td>
+                                                            {% for key , eps in promotion.controleSemestres %}
+                                                                {% if eps.controleModules |length == 0 %}
+                                                                    <td colspan="0"></td>
+                                                                {% else %}
+                                                                    {% for key , esm in eps.controleModules %}
+                                                                        {% if esm.controleElements |length == 0 %}
+                                                                            <td colspan="0"></td>
+                                                                        {% else %}
+                                                                            {% for key , eme in esm.controleElements %}
+                                                                                {% if eme.univExControleEpreuves |length == 0 %}
+                                                                                    <td colspan="0"></td>
+                                                                                {% else %}
+                                                                                    {% for key , eep in eme.univExControleEpreuves %}
+                                                                                        {% if eep.epreuves | length == 0 %}
+                                                                                            <td colspan="0"></td>
+                                                                                        {% else %}
+                                                                                            {% for key , eepv in eep.epreuves %}
+                                                                                                <td  {% if type =="epv" and active == eepv.id %} class="info-active" {% endif %}>
+                                                                                                    <a class="cd_op" href="{{ path('module_univ_evaluation_epreuves_show',{'id':eepv.id})}}">  {{ eepv.natureEpreuve.abreviation  }}: {{eepv.dateEpreuve  ? eepv.dateEpreuve|date('d/m/Y') : ''  }}
+
+                                                                                                        </br>
+                                                                                                    </a> 
+
+
+                                                                                                    {% for k,value in eepv.positionActuel %}
+
+                                                                                                        <b>{{ k }}</b>
+                                                                                                    {% endfor %}
+
+
+                                                                                                    <button type="button" class="btn btn-default popover-style"  data-toggle="popover" data-placement="top" data-content="
+                                                                                                            Epreuve : {{ eepv.natureEpreuve.designation  }} ({{ eepv.natureEpreuve.abreviation  }}) <br/>
+                                                                                                            Date : {{eepv.dateEpreuve  ? eepv.dateEpreuve|date('d/m/Y H:i:s') : ''  }}<br/>
+                                                                                                            Coefficient : {{eepv.coefficient   }}  <br/>
+                                                                                                            Nature : {{eepv.nature   }}  <br/>
+                                                                                                            Enseignant : {{eepv.enseignant  ? eepv.enseignant.nom   }} {{eepv.enseignant  ? eepv.enseignant.prenom   }}  {{eepv.enseignant.grade  ? eepv.enseignant.grade.designation   }} <br/>
+                                                                                                            Groupe : {{eepv.groupe  ? eepv.groupe.abreviation   }}<br/>
+                                                                                                            Description : {{eepv.observation}}  <br/> 
+                                                                                                            Créer par : {{eepv.userCreated  ? eepv.userCreated.nom   }} {{eepv.userCreated  ? eepv.userCreated.prenom   }} <br/>
+                                                                                                            Créer le  : {{eepv.created  ? eepv.created|date('d/m/Y H:i:s') : ''   }}
+                                                                                                            ">
+                                                                                                        <i class="fa fa-plus-circle popover-style-i"></i>
+                                                                                                    </button>
+
+
+
+
+                                                                                                </td>
+
+                                                                                            {% endfor %}
+                                                                                        {% endif %}
+                                                                                    {% endfor %}
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

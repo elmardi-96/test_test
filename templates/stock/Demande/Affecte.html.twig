@@ -1,0 +1,232 @@
+
+
+{% extends 'base_ugouv.html.twig' %}
+{% set current_path = app.request.get('_route') %}
+{% block title %}Demande transfert stock | Stock{% endblock %}
+{% block body %}
+  {# <form id="stock_transfer"> #}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+
+    <div class="new">
+      
+			<div class="row wrapper white-bg page-heading fixed-top-navigation-button">
+				
+				
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-6">
+							<h4>Demande Stock</h4>						
+						</div>
+					</div>
+				</div>
+				<div class="border-b">
+				</div>
+				<div class="col-lg-12">
+					 <div class="col-lg-12">
+						<ol
+						id="wo-breadcrumbs"
+						class="breadcrumb"
+						itemscope=""
+						itemtype="http://schema.org/BreadcrumbList"
+						>
+						<li
+							itemprop="itemListElement"
+							itemscope=""
+							itemtype="http://schema.org/ListItem"
+						>
+							<span itemprop="name">Applications</span
+							><meta itemprop="position" content="1" /><span class="separator">/</span>
+						</li>
+						<li
+							itemprop="itemListElement"
+							itemscope=""
+							itemtype="http://schema.org/ListItem"
+						>
+							<span itemprop="name">module gestion de stock</span
+							><meta itemprop="position" content="2" /><span class="separator">/</span>
+						</li>
+						<li
+							itemprop="itemListElement"
+							itemscope=""
+							itemtype="http://schema.org/ListItem"
+						>
+							<span itemprop="name">Demande</span
+							><meta itemprop="position" content="3" /><span class="separator">/</span>
+						</li>
+						
+						</ol>
+					</div>
+  
+				</div>
+				
+			</div>
+			<br />
+			<div
+				class="wrapper wrapper-content animated fadeInRight"
+				style="padding-left: 0; padding-right: 0"
+			>
+				<div class="row" style="font-size: 9.5px !important">
+				<div class="col-lg-12 no-pad-right no-pad-left">
+					<div class="ibox" style="margin-top: 10px">
+					<div class="ibox-content" style="margin-bottom: 0px">
+						<div class="message-success"></div>
+						<h4 class="m-t-none m-b">informations generales</h4>
+
+						<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+							<div class="col-md-12" style="padding-top: 0%">
+								<div class="panel-body">
+								<div class="tab-content">
+									<div class="tab-pane active show" id="tab1-1">
+									<div class="row">
+										<div class="col-md-6 b-r">
+										<br>
+										<div class="form-group row">
+											<label class="ml-4" >Ref Demande :<span  class="ml-3 dmcabid" id="{{dmcabid}}">{{dmcode}}</span></label>
+										
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										
+                                        <br>
+										<div class=" ">
+										  <div class="form-group row">
+										  	<label class="col-sm-4">Unite Destinataire</label>
+										  	<div class="col-sm-6">
+											{# //ddl_unite #}
+										  		<select name="Site_Rc" class="form-control  form-control-sm sel2" id='antenne' disabled="disabled">
+										  			{# <option value="">CHOIX UNITE</option> #}
+															<option value="{{antenes.id}}"  selected="true" disabled="disabled">{{ antenes.designation|capitalize }}</option>
+													   {# {% for antene in  antenes  %}
+															<option value="{{antene.id}}">{{ antene.designation|capitalize }}</option>
+                                   	   				   {% endfor %} #}
+										  			
+										  		</select>
+										  	</div>													
+										  </div>
+										</div>
+
+										<div class="form-group row">
+										<div class="col-sm-8"></div>
+										</div>
+									</div>
+									</div>
+								</div>
+
+								<div class="tab-pane" id="tab-2">
+									<div class="form-group row">
+									<div class="col-sm-8"></div>
+									</div>
+								</div>
+								</div>
+							</div>
+							</div>
+						</div>
+						</div>
+					</div>
+					</div>
+				</div>
+				</div>
+			</div>
+
+			<div class="ibox">
+				<div class="ibox-content">
+				<h5 style="margin-bottom: 0">Details</h5>
+				<br />
+				<div id="tab-1" class="tab-pane active">
+					<div class="full-height-scroll">
+					<div class="table-responsive">
+						 <table class="table   tb display  table-bordered table-hover dataTables-example cmd" id="gridAF1" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" name="select-all" class="select-all" /></th>
+                                    <th>Article</th>
+                                    <th>Quantité</th>
+                                    <th>Prix</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="Affectation">
+							{% for dmdet in dmdets %}
+								<tr class="art{{ dmdet.id }}">
+									<td><input type='checkbox' id="{{ dmdet.id }}" name='articledm' class='articledm'></td>
+									<td class='art' data-id='{{ dmdet.uarticle.id }}'>{{ dmdet.uarticle.titre }}</td>
+									<td class='qte' data-id='{{ dmdet.qte }}'>{{ dmdet.qte }}</td>
+									<td class='prix' data-id='{{ dmdet.prix }}'>{{ dmdet.prix }}</td>
+								</tr>
+							{% endfor %}
+								
+							</tbody>
+
+                           
+                        </table>
+					</div>
+
+                    
+
+					</div>
+				</div>
+				</div>
+			</div>
+			<br>
+			<button id="Affecter_Demand" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left" style="float:right;" type="submit">
+	            <i class="fa fa-share"></i> Affecter
+            </button>
+			<br>
+			<br>
+			<br>
+			<div class="ibox">
+				<div class="ibox-content">
+				<h5 style="margin-bottom: 0">Details</h5>
+				<br />
+				<div id="tab-1" class="tab-pane active">
+					<div class="full-height-scroll">
+					<div class="table-responsive">
+						 <table class="table   tb display table-bordered table-hover dataTables-example cmd" id="gridAF2" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>Article</th>
+                                    <th>Quantité</th>
+                                    <th>Prix</th>
+                                    <th>Magasin</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="Affectation">
+								{# <tr>
+									<td>BUREAU X BENCH 3 PERSONNES</td>
+									<td>5</td>
+									<td>200</td>
+									<td>ANTENNE ANNEX2</td>
+								</tr> #}
+							</tbody>
+                        </table>
+					</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		
+    </div>
+</div>
+</div>
+
+<div class="mail-body text-right tooltip-demo buttons_foot">
+	<button id="save_new_demand" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left" type="submit">
+			<i class="fa fa-save"></i>
+			Enregistrer
+	</button>
+</div>
+
+{# </form> #}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('demande') }}
+	
+{% endblock %}

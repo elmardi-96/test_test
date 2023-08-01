@@ -1,0 +1,337 @@
+{% extends 'base_achat_ugouv.html.twig' %}
+
+{% block title %}Devis | Vente
+{% endblock %}
+
+{% block body %}
+
+    <div class="row justify-content-md-center">
+        <div class="col-lg-11 ">
+            <div class=" wrapper border-bottom white-bg page-heading" style="padding-bottom: 5px">
+                <div class="col-sm-4">
+                    <h2>Navigation</h2>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Vente</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <strong>Dashboard</strong>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row justify-content-md-center">
+        <div class="col-md-12 col-mourad-12">
+            <div class="col-lg-3 col-mourad-3">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <span class="label label-success float-right">Mensuel</span>
+                        <h5>Devis Client</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">40 886,200</h1>
+                        <div class="stat-percent font-bold text-success">98%
+                            <i class="fa fa-bolt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-mourad-3">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <span class="label label-info float-right">Annual</span>
+                        <h5>Commandes</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">275,800</h1>
+                        <div class="stat-percent font-bold text-info">20%
+                            <i class="fa fa-level-up"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-mourad-3">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <span class="label label-primary float-right">Aujourd'hui</span>
+                        <h5>Facture Fournisseur </h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">106,120</h1>
+                        <div class="stat-percent font-bold text-navy">44%
+                            <i class="fa fa-level-up"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-mourad-3">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <span class="label label-danger float-right">Negative Valeur</span>
+                        <h5>Facture Annuler</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">80,600</h1>
+                        <div class="stat-percent font-bold text-danger">38%
+                            <i class="fa fa-level-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-11">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Dashboard<small>
+                            Chart.</small>
+                    </h5>
+
+                    <div class="ibox-tools">
+                        <button aria-label="Bar Chart" class="btn btn-secondary fa fa-bar-chart-o o_graph_button active top-8" data-mode="bar" title="" data-original-title="Graphique en Barres"></button>
+                        <button aria-label="Line Chart" class="btn btn-secondary fa fa-area-chart o_graph_button top-8" data-mode="line" title="" data-original-title="Courbe"></button>
+                        <button aria-label="Pie Chart" class="btn btn-secondary fa fa-pie-chart o_graph_button top-8" data-mode="pie" title="" data-original-title="Diagramme"></button>
+                        <button data-toggle="dropdown" class="btn btn-primary font-10 dropdown-toggle top-8" aria-expanded="false">MESURES</button>
+                        <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; top: 33px; left: 0px; will-change: top, left;">
+                            <li>
+                                <a class="dropdown-item" href="#" type="ttc">Montant HT</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" type="unitaire">Prix Unitaire</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <canvas id="barChart"></canvas>
+                            <small>
+                                <strong>Analysis of sales:</strong>
+                                The value has been changed over time, and last month reached a level over $50,000.
+                            </small>
+                        </div>
+                        <div class="col-lg-3">
+                            <ul class="stat-list">
+                                <li>
+                                    <h2 class="no-margins nbrF"></h2>
+                                    <small>Nombre Factures Fournisseurs</small>
+                                    <div class="stat-percent">5%
+                                        <i class="fa fa-level-up text-navy"></i>
+                                    </div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 5%; " class="progress-bar"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="no-margins nbrByMonth"></h2>
+                                    <small>Nombre Factures Fournisseurs de ce Mois</small>
+                                    <div class="stat-percent">5%
+                                        <i class="fa fa-bolt text-navy"></i>
+                                    </div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 5%; " class="progress-bar"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="no-margins prixF"></h2>
+                                    <small>Prix Totale</small>
+                                    <div class="stat-percent">10%
+                                        <i class="fa fa-level-down text-navy"></i>
+                                    </div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 10%;" class="progress-bar"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="no-margins prixByMonth"></h2>
+                                    <small>Prix Totale de ce Mois</small>
+                                    <div class="stat-percent">10%
+                                        <i class="fa fa-bolt text-navy"></i>
+                                    </div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 10%;" class="progress-bar"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="no-margins prixF"></h2>
+                                    <small>Prix Totale Impaye</small>
+                                    <div class="stat-percent">10%
+                                        <i class="fa fa-bolt text-navy"></i>
+                                    </div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 10%;" class="progress-bar"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+                                            <div class="col-md-6 flex-center-46">
+                                                <div class="ibox">
+                                                    <div class="ibox-title">
+                                                        <h5>Dashboard<small> Chart.</small></h5>
+                                        
+                                                        <div class="ibox-tools">
+                                                            <a class="collapse-link">
+                                                                <i class="fa fa-chevron-up"></i>
+                                                            </a>
+                                        
+                                        
+                                                        </div>
+                                        
+                                        
+                                                    </div>
+                                                    <div class="ibox-content">
+                                        
+                                                        <div>
+                                                            <canvas id="lineChart"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 flex-center-46">
+                                                <div class="ibox">
+                                                    <div class="ibox-title">
+                                                        <h5>Dashboard<small> Chart.</small></h5>
+                                        
+                                                        <div class="ibox-tools">
+                                                            <a class="collapse-link">
+                                                                <i class="fa fa-chevron-up"></i>
+                                                            </a>
+                                        
+                                        
+                                                        </div>
+                                        
+                                        
+                                                    </div>
+                                                    <div class="ibox-content">
+                                        
+                                                        <div>
+                                                            <canvas id="polarChart"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 flex-center-46">
+                                                <div class="ibox">
+                                                    <div class="ibox-title">
+                                                        <h5>Dashboard<small> Chart.</small></h5>
+                                        
+                                                        <div class="ibox-tools">
+                                                            <a class="collapse-link">
+                                                                <i class="fa fa-chevron-up"></i>
+                                                            </a>
+                                        
+                                        
+                                                        </div>
+                                        
+                                        
+                                                    </div>
+                                                    <div class="ibox-content">
+                                        
+                                                        <div>
+                                                            <canvas id="doughnutChart"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-11">
+                                                <div class="ibox">
+                                                    <div class="ibox-title">
+                                                        <h5>Dashboard<small> Chart.</small></h5>
+                                        
+                                                        <div class="ibox-tools">
+                                                            <a class="collapse-link">
+                                                                <i class="fa fa-chevron-up"></i>
+                                                            </a>
+                                        
+                                        
+                                                        </div>
+                                        
+                                        
+                                                    </div>
+                                                    <div class="ibox-content">
+                                        
+                                                        <div>
+                                                            <canvas id="radarChart"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            -->
+        <!--
+                    
+                                            <div class="col-md-3">
+                                            <h2>Welcome Amelia</h2>
+                                            <small>You have 42 messages and 6 notifications.</small>
+                                            <ul class="list-group clear-list m-t">
+                                                <li class="list-group-item fist-item">
+                                                    <span class="float-right">
+                                                        09:00 pm
+                                                    </span>
+                                                    <span class="label label-success">1</span>
+                                                    Please contact me
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="float-right">
+                                                        10:16 am
+                                                    </span>
+                                                    <span class="label label-info">2</span>
+                                                    Sign a contract
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="float-right">
+                                                        08:22 pm
+                                                    </span>
+                                                    <span class="label label-primary">3</span>
+                                                    Open new shop
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="float-right">
+                                                        11:06 pm
+                                                    </span>
+                                                    <span class="label label-default">4</span>
+                                                    Call back to Sylvia
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="float-right">
+                                                        12:00 am
+                                                    </span>
+                                                    <span class="label label-primary">5</span>
+                                                    Write a letter to Sandra
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="float-right">
+                                                        12:00 am
+                                                    </span>
+                                                    <span class="label label-primary">5</span>
+                                                    Write a letter to Sandra
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="float-right">
+                                                        12:00 am
+                                                    </span>
+                                                    <span class="label label-primary">5</span>
+                                                    Write a letter to Sandra
+                                                </li>
+                                            </ul>
+                                        </div>
+                    
+                    
+                    
+                    -->
+    </div>
+
+
+{% endblock %}

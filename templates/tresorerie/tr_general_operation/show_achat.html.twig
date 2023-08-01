@@ -1,0 +1,506 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Informations | General operation
+{% endblock %}
+
+
+{% block body %}
+
+
+	{{ parent() }}
+	<div class="modal right fade " id="ModalDocumentDynamique" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+		<div class="modal-dialog modal-full-height modal-right modal-aa" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalPreviewLabel">Generer reglement</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body bo">
+					<div class="text-center spr" style="display: none;">
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod" style=""></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{# ------------ modal impression -------------- #}
+
+{# 	<div class="modal fade right" id="ModalDocumentDynamiqueImpression" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalPreviewLabel">Impression</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body bo">
+					<div class="text-center spr_impression" style="display: none;">
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod_impression" style=""></div>
+				</div>
+			</div>
+		</div>
+	</div> #}
+
+
+	<div id="right-sidebar" class="actions animated"></div>
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-12">
+			{{ include('./tresorerie/tr_general_operation/inc/workflow_breadcumbAchat.html.twig',{'page_actuel': 'show'}) }}
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+	</div>
+	<br/>
+	<br/>
+
+
+	{# {{ dump(operations) }}#}
+	<div class="wrapper wrapper-content  animated fadeInRight p-r-l-0">
+		<div class="row">
+			<div class="col-10 no-pad-right no-pad-left">
+				<div class="ibox">
+					<div class="ibox-content p-b-0">
+						<h4>informations generales
+
+
+							{#<i class="fa fa-circle wf-color wf-color-creer"></i>
+																												                                 <i class="fa fa-circle wf-color wf-color-valider"></i>
+																												                                 <i class="fa fa-circle wf-color wf-color-commander"></i>
+																												                              --------------#}
+
+
+						</h4>
+						<div class="row m-t-sm">
+							<div class="col-lg-12">
+								<div class="panel blank-panel">
+
+
+									<div class="col-md-12 p-t-0">
+										<div class="panel-body">
+
+											<div class="tab-content">
+												<div class="tab-pane active show" id="tab1-1">
+
+													<div class="row">
+
+
+														<div class="hr-line-dashed paddi"></div>
+														<div class="col-md-6 b-r">
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 ">Facture fournisseur
+																</label>
+
+																<div class="col-sm-8">
+
+																	<p class="form-control-static">
+																		{{operationn.factureFournisseur ? operationn.factureFournisseur.refDocAsso}}
+																	</p>
+																</div>
+															</div>
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 ">ref Facture
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">
+																		{{operationn.factureFournisseur ? operationn.factureFournisseur.code}}
+																	</p>
+																</div>
+															</div>
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 ">
+																	fournisseur
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">
+																		{{operationn.fournisseur ? operationn.fournisseur.societe}}
+																	</p>
+																</div>
+															</div>
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 ">Compte
+																</label>
+
+																<div class="col-sm-4">
+																	<p class="form-control-static">
+																		{{operationn.compte ? operationn.compte.designation}}
+																	</p>
+																</div>
+															</div>
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 ">Designation
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">
+
+																		{{ operationn.designation }}
+																	</p>
+																</div>
+															</div>
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 ">Ref DocAsso
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">
+																		{{operationn.refDocAsso}}
+																	</p>
+																</div>
+															</div>
+
+
+														</div>
+
+
+														<div class="hr-line-dashed paddi"></div>
+
+														<div class="col-md-6">
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 ">Date
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">
+
+																		{{ operationn.date|date("d/m/Y") }}
+																	</p>
+																</div>
+															</div>
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 ">Date DocAsso
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">
+
+																		{{ operationn.dateDocAsso|date("d/m/Y") }}
+																	</p>
+																</div>
+															</div>
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 ">Piece
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">
+																		{{operationn.piece ? operationn.piece.code}}
+																	</p>
+																</div>
+															</div>
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 ">Mode paiement
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">
+																		{{operationn.modepaiement ? operationn.modepaiement.designation}}
+																	</p>
+																</div>
+															</div>
+															{% if operationn.modepaiement ? operationn.modepaiement.designation == 'Cheque' %}
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 ">num Cheque
+																	</label>
+
+																	<div class="col-sm-8">
+																		<p class="form-control-static">
+																			{{operationn.numCheque }}
+																		</p>
+																	</div>
+																</div>
+
+
+															{% endif %}
+															{% if operationn.modepaiement ? operationn.modepaiement.designation == 'Cheque' %}
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 ">Date Echeance
+																	</label>
+
+																	<div class="col-sm-8">
+																		<p class="form-control-static">
+
+																			{{ operationn.dateEcheance|date("d/m/Y") }}
+																		</p>
+																	</div>
+																</div>
+
+
+															{% endif %}
+
+
+														</div>
+
+														{# {% if operationn is defined %}
+															<input type="hidden" name="_id" id="_id" value="{{ operationn.id }}"/>
+														{% endif %} #}
+
+														<div class="col-md-6">
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 ">Autre Information
+																</label>
+
+																<div class="col-sm-8">
+
+																	<p class="form-control-static">
+																		{{ operationn.autreInformation }}
+																	</p>
+																</div>
+															</div>
+
+															<br>
+
+														</div>
+
+
+													</div>
+
+												</div>
+
+
+											</div>
+
+										</div>
+
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="ibox">
+					<div class="ibox-content">
+						<h4 class="m-b-0">Règlements</h4>
+						<div id="tab-1" class="tab-pane active">
+							<div class="full-height-scroll">
+								<div class="table-responsive">
+
+									<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show2">
+										<thead>
+											<tr>
+
+												<th>#</th>
+												<th>Code</th>
+												<th>Date</th>
+												<th>SRC ReG</th>
+												<th>Mode.p</th>
+												{#<th>Banque</th>#}
+												<th>Ref</th>
+												<th>Date echeance</th>
+												<th>N° Fac frs
+												</th>
+												<th>Date Fac frs
+												</th>
+												<th>Description</th>
+												<th>Montant</th>
+												{#<th>Devise</th>#}
+												{#<th>Imprimer</th>#}
+
+
+											</tr>
+										</thead>
+
+										<tbody>
+											{% set totale = 0 %}
+											{% set c = 0 %}
+
+
+											{% for t_reglementfr1 in operationn.transactions %}
+												{% set c = c + 1 %}
+												{% set totale =  totale + t_reglementfr1.montant %}
+												<tr>
+													<td>{{c}}</td>
+
+													<td>
+														{#<a class="active-link" href="{{ path("tr_operation_show" , {id:operationn.id} ) }}">#}
+														{{ t_reglementfr1.code }}
+														{#</a>#}
+													</td>
+													<td>{{ t_reglementfr1.date ? t_reglementfr1.date|date('d/m/Y') : '' }}</td>
+
+													<td>{{t_reglementfr1.compte ? t_reglementfr1.compte.designation }}</td>
+
+													<td>{{t_reglementfr1.modepaiement ? t_reglementfr1.modepaiement.designation }}</td>
+													{#<td>{operationn.banque ? operationn.banque.designation }</td>#}
+													{#<td>{{t_reglementfr1.devise ? t_reglementfr1.devise.designation }}</td>#}
+													<td>{{t_reglementfr1.numcheque}}</td>
+													<td>{{t_reglementfr1.dateecheance ? t_reglementfr1.dateecheance|date("d/m/Y") }}</td>
+
+
+													<td>
+														{{t_reglementfr1.refdocasso}}
+													</td>
+
+													<td>
+
+														{{ t_reglementfr1.datedocasso ? t_reglementfr1.datedocasso|date('d/m/Y') : '' }}
+													</td>
+													<td>
+														{{t_reglementfr1.designation}}
+													</td>
+
+													<td>{{ t_reglementfr1.montant|number_format(2) }}
+													</td>
+													{#<td>{ operationn.devise ? operationn.devise.designation }</td>#}
+
+													{#<td>
+																																																					                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <a target="_blank" href="{{ path('t_reglementfrscab_document_pdf',{id:t_reglementfr1.id})}}" class="btn btn-xs btn-white btn-outline">
+																																																					                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="fa fa-print"></i>&nbsp; Imprimer</a>
+																																																					                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </td>#}
+
+
+												</tr>
+											{% endfor %}
+										</tbody>
+
+
+									</table>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-2 no-pad-left pdr-5">
+				<div class="ibox">
+
+
+					<div class="ibox-content prix_bloc">
+						<div class="ibox-heading">
+							<h3>MONTANT FACTURE
+								<div class="stat-percent">{{operationn.montant|number_format(2, ',', ' ') }}
+									DH
+								</div>
+							</h3>
+						</div>
+
+
+						<hr/>
+						<div class="ibox-heading">
+							<h3>montant reglee
+								<div class="stat-percent">
+									{{ totale|number_format(2, ',', ' ') }}
+									DH
+								</div>
+							</h3>
+						</div>
+						<hr/>
+
+						<div class="ibox-heading">
+							<h1>
+								reste a regle
+								<div class="stat-percent">{{  (operationn.montant - totale)|number_format(2) }}
+									DH</div>
+							</h1>
+						</div>
+						<hr/>
+
+
+					</div>
+				</div>
+				
+
+                {# ------------ ibox impression -------------- #}
+
+
+				{# <div class="ibox selected">
+					<div class="ibox-title ibox-title2">
+						<h5>INFORMATIONS</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="tab-content">
+							<div id="contact-1" class="tab-pane active">
+								<div class="client-detail">
+									<div class="full-height-scroll">
+
+										<ul class="list-group clear-list">
+											<li class="list-group-item fist-item">
+												<div class="panel-default">
+													<div class="div-panel-header">
+														<h5 class="panel-title p-title-style">
+															<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+																<i class="fa fa-file-pdf-o"></i>
+																Impressions associé</a>
+														</h5>
+													</div>
+													<div id="collapseOne" class="panel-collapse in collapse">
+														<div class="panel-body">
+															<ul class="folder-list m-b-md" style="padding: 0px 10px;">
+																<li>
+																	<a class="imp_operation" data-id="{{operationn.id}}">
+																		<i class="fa fa-file-pdf-o"></i>
+																		operation -
+																		{{operationn.code}}
+																	</a>
+																</li>
+
+
+															</ul>
+														</div>
+													</div>
+												</div>
+											</li>
+
+										</ul>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div> #}
+
+			</div>
+		</div>
+
+	</div>
+
+	
+
+	{{ include('./tresorerie/tr_general_operation/inc/workflow.html.twig',{'page_actuel': 'show'}) }}
+
+	<br><br>
+
+
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('general_operation') }}
+{% endblock %}

@@ -1,0 +1,95 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form _semestres'}}) }}
+<div class="sidebar-container">
+
+
+	<div class="tab-content bod">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					Année active :
+					<span class="annee">{{annee.designation}}</span>
+				</h3>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<div class="ibox">
+					<div class="ibox-content">
+						<div class="">
+							<div class="form-group row">
+								{{ form_label(form.semestre ,'Semestre', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.semestre,{'attr':{'class':'form-control  form-control-sm sel2','placeholder':'Semestre'}}) }}
+
+									<div class="form-error {% if form_errors(form.semestre)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.semestre) }}
+									</div>
+								</div>
+
+							</div>
+							<div class="hr-line-dashed paddi"></div>
+							<div class="form-group row ">
+								{{ form_label(form.coefficient ,'Coefficient', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.coefficient,{'attr':{'class':'form-control  form-control-sm','placeholder':'Coefficient'}}) }}
+
+									<div class="form-error {% if form_errors(form.coefficient)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.coefficient) }}
+									</div>
+								</div>
+
+                            </div>
+							<div class="hr-line-dashed paddi"></div>
+							<div class="form-group row ">
+								{{ form_label(form.coefficientAss ,'CoefficientAss', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.coefficientAss,{'attr':{'class':'form-control  form-control-sm','placeholder':'CoefficientAss'}}) }}
+
+									<div class="form-error {% if form_errors(form.coefficientAss)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.coefficientAss) }}
+									</div>
+								</div>
+
+                            </div>
+							<div class="hr-line-dashed paddi"></div>
+							<div class="form-group row ">
+								{{ form_label(form.description ,'Description', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.description,{'attr':{'class':'form-control  form-control-sm','placeholder':'Description'}}) }}
+
+									<div class="form-error {% if form_errors(form.description)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.description) }}
+									</div>
+								</div>
+
+                            </div>
+                            <br/>
+							<button class="btn btn-white btn-xs btn-lg my-button btn-block waves-effect waves-light" data-style="expand-left" type="submit">
+								<i class="fa fa-save"></i>
+								Enregistrer</button>
+							<button class="btn btn-white btn-xs btn-lg my-button1 btn-block waves-effect waves-light" data-style="expand-left" type="submit">
+								<i class="fa fa-save"></i>
+								Enregistrer et ajouter module</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-center spr" style="display:none;">
+		<div class="spinner-border" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+
+
+</div>
+
+{{form_widget(form._token)}}
+{{ form_end(form,{'render_rest': false}) }}
+{#{dump(form)}#}

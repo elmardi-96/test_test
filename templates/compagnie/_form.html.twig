@@ -1,0 +1,253 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+<div
+    class="form-validation-msg" style="display:none">
+    {# message flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div data-toastr="{{ label }}" class="toastr-msg">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {# form global errors  #}
+    <div class="form-errors">{{form_errors(form)}}</div>
+</div>
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+    <div class="col-lg-4">
+        <h2 class="fo">
+            Société / Entreprise
+        </h2>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="title-action">
+            <button class="btn btn-white btn-xs btn-lg my-button " data-style="expand-left" type="submit">
+                <i class="fa fa-save"></i>
+                {{ button_label|default('Enregistrer') }}</button>
+
+        </div>
+    </div>
+
+    <div class="border-b"></div>
+    <div class="col-lg-12">
+        {{ wo_render_breadcrumbs() }}
+    </div>
+
+</div>
+<br/><br/>
+
+<div class="row pt-20">
+    <div class="col-lg-12 ">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Société / Entreprise</h5>
+
+                <div class="ibox-tools">
+                    {% if compagnie.image is not empty %}
+                        <img class="prof" src="/images/compagnie/{{compagnie.image}}"/>
+                    {% else %}
+                        <img class="prof" src="/images/compagnie/profil.png"/>
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+            <div class="ibox-content">
+
+                <div class="message-success"></div>
+
+
+                <div class="row m-t-sm">
+                    <div class="col-lg-12">
+                        <div class="panel blank-panel">
+                            <div class="panel-heading">
+                                <div class="panel-options"></div>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="col-md-12">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active">
+
+
+                                            <div class="row">
+                                                <div class="col-md-6 b-r">
+
+                                                    <h3 class="m-t-none m-b">Informations
+                                                    </h3>
+
+
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.nom ,'Nom :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-8">
+                                                            {{ form_widget(form.nom,{'attr':{'class':'form-control  form-control-sm','placeholder':'Nom'}}) }}
+
+                                                            <div class="form-error {% if form_errors(form.nom)|length > 0 %}error-class-tab{% endif %}">
+                                                                {{ form_errors(form.nom) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.description ,'Description :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-8">
+                                                            {{ form_widget(form.description,{'attr':{'class':'form-control  form-control-sm','placeholder':'Description'}}) }}
+
+                                                            <div class="form-error {% if form_errors(form.description)|length > 0 %}error-class-tab{% endif %}">
+                                                                {{ form_errors(form.description) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 required ">Logo(*) :</label>
+                                                        <div class="col-sm-8 custom-file">
+                                                            {{ form_widget(form.imageFile.file, { 'attr': {'class': 'custom-file-input'} }) }}
+                                                            <label for="logo" class="custom-file-label">image ...</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.capital ,'Capital :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-8">
+                                                            {{ form_widget(form.capital,{'attr':{'class':'form-control  form-control-sm','placeholder':'Capital'}}) }}
+
+                                                            <div class="form-error {% if form_errors(form.capital)|length > 0 %}error-class-tab{% endif %}">
+                                                                {{ form_errors(form.capital) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.adresse ,'Adresse :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-8">
+                                                            {{ form_widget(form.adresse,{'attr':{'class':'form-control  form-control-sm','placeholder':'Adresse'}}) }}
+
+                                                            <div class="form-error {% if form_errors(form.adresse)|length > 0 %}error-class-tab{% endif %}">
+                                                                {{ form_errors(form.adresse) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+
+                                                </div>
+
+
+                                                <div class="col-md-6">
+
+                                                    <h3 class="m-t-none m-b"><br></h3>
+
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.tel1 ,'Téléphone 1 :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-8">
+                                                            {{ form_widget(form.tel1,{'attr':{'class':'form-control  form-control-sm','placeholder':'Téléphone 1'}}) }}
+
+                                                            <div class="form-error {% if form_errors(form.tel1)|length > 0 %}error-class-tab{% endif %}">
+                                                                {{ form_errors(form.tel1) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.tel2 ,'Téléphone 2 :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-8">
+                                                            {{ form_widget(form.tel2,{'attr':{'class':'form-control  form-control-sm','placeholder':'Tel 2'}}) }}
+
+                                                            <div class="form-error {% if form_errors(form.tel2)|length > 0 %}error-class-tab{% endif %}">
+                                                                {{ form_errors(form.tel2) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.fax ,'Fax :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-8">
+                                                            {{ form_widget(form.fax,{'attr':{'class':'form-control  form-control-sm','placeholder':'Fax'}}) }}
+
+                                                            <div class="form-error {% if form_errors(form.fax)|length > 0 %}error-class-tab{% endif %}">
+                                                                {{ form_errors(form.fax) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.email1 ,'Mail 1 :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-8">
+                                                            {{ form_widget(form.email1,{'attr':{'class':'form-control  form-control-sm','placeholder':'Mail 1'}}) }}
+
+                                                            <div class="form-error {% if form_errors(form.email1)|length > 0 %}error-class-tab{% endif %}">
+                                                                {{ form_errors(form.email1) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.email2 ,'Mail 2 :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-8">
+                                                            {{ form_widget(form.email2,{'attr':{'class':'form-control  form-control-sm','placeholder':'Mail 2'}}) }}
+
+                                                            <div class="form-error {% if form_errors(form.email2)|length > 0 %}error-class-tab{% endif %}">
+                                                                {{ form_errors(form.email2) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.dateCreation ,'Date de Création :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-3">
+                                                            {{ form_widget(form.dateCreation,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date de Création'}}) }}
+
+                                                            <div class="form-error {% if form_errors(form.dateCreation)|length > 0 %}error-class-tab{% endif %}">
+                                                                {{ form_errors(form.dateCreation) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.nombreEmploye ,"Nombre d'employé :", {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-3">
+                                                            {{ form_widget(form.nombreEmploye,{'attr':{'class':'form-control  form-control-sm','placeholder':"Nombre d'employé :"}}) }}
+
+                                                            <div class="form-error {% if form_errors(form.nombreEmploye)|length > 0 %}error-class-tab{% endif %}">
+                                                                {{ form_errors(form.nombreEmploye) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{{form_widget(form._token)}}
+{{ form_end(form,{'render_rest': false}) }}

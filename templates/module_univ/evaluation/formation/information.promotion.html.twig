@@ -1,0 +1,441 @@
+<div class="ibox">
+	<div class="ibox-content border-top-res">
+		<div class="">
+			<div>
+
+				<div class="row">
+					<div class="alert alert-primary inform" role="alert">
+						<i class="fa fa-info-circle"></i>
+						Vous pouvez accéder à la page semestre par lien ceci (
+						<a class="cd_op" href="{{path("module_univ_semestre_show",{id:promotion.id})}}">{{promotion.description}}</a>
+						) !
+					</div>
+				</div>
+
+				<div class="col-lg-12 animated fadeInRight">
+					<div class="mail-box-header">
+
+						<h2>
+							Description :
+							{{promotion.description}}
+						</h2>
+						<div class="mail-tools tooltip-demo m-t-md">
+							<h5>
+								<span class="float-right font-normal">Date création :
+									{{promotion.created|date("Y/m/d")}}</span>
+								{#<span class="font-normal">Coéfficient:
+								</span>
+								{{semestre.coefficient}#}
+							</h5>
+						</div>
+					</div>
+					<div class="mail-box">
+
+
+						<div class="mail-body">
+							<div class="row">
+								<div class="col-md-6 b-r">
+									<h3 class="m-t-none m-b">INFORMATIONS</h3>
+									<div class="hr-line-dashed hr-line-dashed-co"></div>
+									<div class="form-group row ph">
+										<label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+										<div class="col-sm-8">
+											<p class="form-control-static">{{promotion.id}}</p>
+										</div>
+									</div>
+									<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+									<div class="form-group row ph">
+										<label class="col-sm-4 required font-weight-bold font-weight-bold">Description
+										</label>
+
+										<div class="col-sm-8">
+											<p class="form-control-static">{{promotion.description}}</p>
+										</div>
+
+									</div>
+
+									{#
+									<div class="hr-line-dashed hr-line-dashed-co"></div>
+									<div class="form-group row ph">
+										<label class="col-sm-4 required font-weight-bold font-weight-bold">Position actuel</label>
+
+										<div class="col-sm-8">
+											<p class="form-control-static">
+												{% if semestre.positionActuel is defined and semestre.positionActuel is not empty %}
+													{% for key, pos in semestre.positionActuel %}
+														{{key}}
+													{% endfor %}
+													{% else %}Créer
+												{% endif %}
+											</p>
+										</div>
+
+									</div>
+									#}
+
+
+								</div>
+								<div class="col-md-6">
+
+									<h3 class="m-t-none m-b">INFORMATIONS FORMATION</h3>
+									<div class="hr-line-dashed hr-line-dashed-co"></div>
+									<div class="form-group row ph">
+										<label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+
+										<div class="col-sm-8">
+
+											<p class="form-control-static">{{promotion.promotion.formation.etablissement.designation}}</p>
+
+										</div>
+
+									</div>
+									<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+									<div class="form-group row ph">
+										<label class="col-sm-4 required font-weight-bold font-weight-bold">Formation</label>
+
+										<div class="col-sm-8">
+											<p class="form-control-static">{{promotion.promotion.formation.designation}}</p>
+										</div>
+
+									</div>
+									<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+									<div class="form-group row ph">
+										<label class="col-sm-4 required font-weight-bold font-weight-bold">Promotion</label>
+
+										<div class="col-sm-8">
+											<p class="form-control-static">{{promotion.promotion.designation}}</p>
+										</div>
+
+									</div>
+									{#<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+									<div class="form-group row ph">
+										<label class="col-sm-4 required font-weight-bold font-weight-bold">Semestre</label>
+
+										<div class="col-sm-8">
+											<p class="form-control-static">{{semestre.semestre.designation}}</p>
+										</div>
+
+									</div>#}
+									{#<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+									<div class="form-group row ph">
+										<label class="col-sm-4 required font-weight-bold font-weight-bold">Module</label>
+
+										<div class="col-sm-8">
+											<p class="form-control-static">{{element.element.module.designation}}</p>
+										</div>
+
+									</div>
+									<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+									<div class="form-group row ph">
+										<label class="col-sm-4 required font-weight-bold font-weight-bold">Element</label>
+
+										<div class="col-sm-8">
+											<p class="form-control-static">{{element.element.designation}}</p>
+										</div>
+
+									</div>#}
+
+									<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+									<div class="form-group row ph">
+										<label class="col-sm-4 required font-weight-bold font-weight-bold">Année</label>
+
+										<div class="col-sm-8">
+											<p class="form-control-static">{{promotion.annee.designation}}</p>
+										</div>
+
+									</div>
+
+
+								</div>
+								<div class="col-md-6">
+									<h3 class="m-t-none m-b"><br>
+									</h3>
+
+								</div>
+							</div>
+						</div>
+						<div class="mail-attachment">
+							<p>
+								<span>
+									<i class="fa fa-paperclip"></i>
+									{{promotion.controleSemestres|length}}
+									-
+																	Semestres .
+								</span>
+							</p>
+
+							<div class="attachment">
+								{% for eps in promotion.controleSemestres %}
+									<div class="file-box">
+										<div class="file">
+											<a href="{{path('module_univ_epreuve_config_index')}}">
+												<span class="corner"></span>
+
+												<div class="icon">
+													<i class="fa fa-file"></i>
+												</div>
+												<div class="file-name">
+													<h4>{{eps.description}}</h4>
+
+													<br>
+													<small>
+														<i class="fa fa-clock-o"></i>
+														Date Semestre:
+														{{eps.created|date("Y/m/d")}}</small>
+													<br/>
+													<small>
+														<i class="fa fa-street-view"></i>
+														Status:
+														{% if eps.positionActuel is defined and eps.positionActuel is not empty %}
+															{% for key, pos in eps.positionActuel %}
+																{{key}}
+															{% endfor %}
+															{% else %}Créer
+														{% endif %}
+													</small>
+												</div>
+											</a>
+										</div>
+
+									</div>
+								{% endfor %}
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						<div class="mail-body text-right tooltip-demo">
+							<a href="{{path("module_univ_semestre_show",{id:promotion.id})}}" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Print email">
+								<i class="fa fa-calculator"></i>
+								Calculer moyenne
+							</a>
+						</div>
+
+						<div class="clearfix"></div>
+
+
+					</div>
+				</div>
+
+
+			</div>
+			{#<div class="col-lg-12 animated fadeInRight">
+								<div class="mail-box-header">
+			
+									<h2>
+										Type :
+										{{epreuve.natureEpreuve.designation}}
+									</h2>
+									<div class="mail-tools tooltip-demo m-t-md">
+										<h5>
+											<span class="float-right font-normal">Date création :
+												{{epreuve.created|date("Y/m/d")}}</span>
+											<span class="font-normal">Type:
+											</span>
+											{{epreuve.type}}
+										</h5>
+									</div>
+								</div>
+								<div class="mail-box">
+			
+			
+									<div class="mail-body">
+										<div class="row">
+											<div class="col-md-6 b-r">
+												<h3 class="m-t-none m-b">INFORMATIONS</h3>
+												<div class="hr-line-dashed hr-line-dashed-co"></div>
+												<div class="form-group row ph">
+													<label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+													<div class="col-sm-8">
+														<p class="form-control-static">{{epreuve.id}}</p>
+													</div>
+												</div>
+												<div class="hr-line-dashed hr-line-dashed-co"></div>
+			
+												<div class="form-group row ph">
+													<label class="col-sm-4 required font-weight-bold font-weight-bold">Description
+													</label>
+			
+													<div class="col-sm-8">
+														<p class="form-control-static">{{epreuve.Description}}</p>
+													</div>
+			
+												</div>
+			
+												<div class="hr-line-dashed hr-line-dashed-co"></div>
+			
+												<div class="form-group row ph">
+													<label class="col-sm-4 required font-weight-bold font-weight-bold">Narure d'épreuve
+													</label>
+			
+													<div class="col-sm-8">
+														<p class="form-control-static">
+															{{epreuve.natureEpreuve.designation}}
+														</p>
+													</div>
+			
+												</div>
+			
+												<div class="hr-line-dashed hr-line-dashed-co"></div>
+												<div class="form-group row ph">
+													<label class="col-sm-4 required font-weight-bold font-weight-bold">Position actuel</label>
+			
+													<div class="col-sm-8">
+														<p class="form-control-static">{% if epreuve.positionActuel is defined and epreuve.positionActuel is not empty %}{% for key, pos in epreuve.positionActuel %}{{key}}{% endfor %}{% else %}Créer{% endif %}</p>
+													</div>
+			
+												</div>
+			
+			
+			
+											</div>
+											<div class="col-md-6">
+			
+												<h3 class="m-t-none m-b">INFORMATIONS FORMATION</h3>
+												<div class="hr-line-dashed hr-line-dashed-co"></div>
+												<div class="form-group row ph">
+													<label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+			
+													<div class="col-sm-8">
+			
+														<p class="form-control-static">{{epreuve.controleElement.element.module.semestre.promotion.formation.etablissement.designation}}</p>
+			
+													</div>
+			
+												</div>
+												<div class="hr-line-dashed hr-line-dashed-co"></div>
+			
+												<div class="form-group row ph">
+													<label class="col-sm-4 required font-weight-bold font-weight-bold">Formation</label>
+			
+													<div class="col-sm-8">
+														<p class="form-control-static">{{epreuve.controleElement.element.module.semestre.promotion.formation.designation}}</p>
+													</div>
+			
+												</div>
+												<div class="hr-line-dashed hr-line-dashed-co"></div>
+			
+												<div class="form-group row ph">
+													<label class="col-sm-4 required font-weight-bold font-weight-bold">Promotion</label>
+			
+													<div class="col-sm-8">
+														<p class="form-control-static">{{epreuve.controleElement.element.module.semestre.promotion.designation}}</p>
+													</div>
+			
+												</div>
+												<div class="hr-line-dashed hr-line-dashed-co"></div>
+			
+												<div class="form-group row ph">
+													<label class="col-sm-4 required font-weight-bold font-weight-bold">Semestre</label>
+			
+													<div class="col-sm-8">
+														<p class="form-control-static">{{epreuve.controleElement.element.module.semestre.designation}}</p>
+													</div>
+			
+												</div>
+												<div class="hr-line-dashed hr-line-dashed-co"></div>
+			
+												<div class="form-group row ph">
+													<label class="col-sm-4 required font-weight-bold font-weight-bold">Module</label>
+			
+													<div class="col-sm-8">
+														<p class="form-control-static">{{epreuve.controleElement.element.module.designation}}</p>
+													</div>
+			
+												</div>
+												<div class="hr-line-dashed hr-line-dashed-co"></div>
+			
+												<div class="form-group row ph">
+													<label class="col-sm-4 required font-weight-bold font-weight-bold">Element</label>
+			
+													<div class="col-sm-8">
+														<p class="form-control-static">{{epreuve.controleElement.element.designation}}</p>
+													</div>
+			
+												</div>
+			
+												<div class="hr-line-dashed hr-line-dashed-co"></div>
+			
+												<div class="form-group row ph">
+													<label class="col-sm-4 required font-weight-bold font-weight-bold">Année</label>
+			
+													<div class="col-sm-8">
+														<p class="form-control-static">{{epreuve.controleElement.controleModule.controleSemestre.controlePromotion.annee.designation}}</p>
+													</div>
+			
+												</div>
+			
+			
+											</div>
+											<div class="col-md-6">
+												<h3 class="m-t-none m-b"><br>
+												</h3>
+			
+											</div>
+										</div>
+									</div>
+									<div class="mail-attachment">
+										<p>
+											<span>
+												<i class="fa fa-paperclip"></i>
+												{{epreuve.epreuves|length}}
+												-
+												{{epreuve.natureEpreuve.designation}}
+											</span>
+										</p>
+			
+										<div class="attachment">
+											{% for eps in epreuve.epreuves %}
+												<div class="file-box">
+													<div class="file">
+														<a href="{{path('module_univ_evaluation_epreuves_show',{id:eps.id})}}">
+															<span class="corner"></span>
+			
+															<div class="icon">
+																<i class="fa fa-file"></i>
+															</div>
+															<div class="file-name">
+																<h4>{{eps.code}}</h4>
+																{{eps.designation}}
+																<br>
+																<small>
+																	<i class="fa fa-clock-o"></i>
+																	Date Epreuve:
+																	{{eps.dateEpreuve|date("Y/m/d")}}</small>
+																	<br/>
+																<small>
+																<i class="fa fa-street-view"></i>
+																	Status:
+																	{% if eps.positionActuel is defined and eps.positionActuel is not empty %}{% for key, pos in eps.positionActuel %}{{key}}{% endfor %}{% else %}Créer{% endif %}
+																</small>
+															</div>
+														</a>
+													</div>
+			
+												</div>
+											{% endfor %}
+											<div class="clearfix"></div>
+										</div>
+									</div>
+									<div class="mail-body text-right tooltip-demo">
+										<a href="{{path('module_univ_evaluation_moyenne_epreuve_fun',{id:epreuve.id})}}" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Print email">
+											<i class="fa fa-calculator"></i>
+											Calculer moyenne 
+										</a>
+									</div>
+			
+									<div class="clearfix"></div>
+			
+			
+								</div>
+							</div>#}
+
+
+		</div>
+	</div>
+</div></div>

@@ -1,0 +1,188 @@
+<div class="ibox">
+	<div class="ibox-content  border-padding-none">
+
+		<div class="">
+			<div>
+				<div class="col-lg-12 animated fadeInRight border-padding-none">
+					<div class="card-ribbon card-ribbon-semestre evaluation-semestre">
+						<span>
+							<div class="style-position">SEMESTRE</div>
+						</span>
+					</div>
+					<title class="title-text" data-color="#660233">Semestre</title>
+					<div class="mail-box-header header-mail-show">
+
+						<h2 class="header-show header-title">
+							Semestre :
+							{{semestre.description}}
+							<span class="float-right font-normal">
+								<a href="{{path("module_univ_evaluation_moyenne_semestre_fun",{id:semestre.id})}}" class="href-btn-show btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Print email">
+									<i class="fa fa-calculator"></i>
+									Calculer moyenne
+								</a>
+								
+							</span>
+						</h2>
+						<div class="mail-tools tooltip-demo m-t-md">
+							<h5 class="padding-0-show">
+								<div class="row">
+									<div class="col-md-12 padding-show">
+										<h3 class="m-t-none margin-bottom">INFORMATIONS <button class="promotion btn btn-white btn-sm href-btn-show link-style"  ><i class="fa fa-info"></i> Informations</button></h3>
+										<div class="hr-line-dashed hr-line-dashed-co"></div>
+										<div class="form-group row ph">
+											<label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+											<div class="col-sm-8">
+												<p class="form-control-static">{{semestre.id}}</p>
+											</div>
+										</div>
+										<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+										<div class="form-group row ph">
+											<label class="col-sm-4 required font-weight-bold font-weight-bold">Description
+											</label>
+
+											<div class="col-sm-8">
+												<p class="form-control-static">{{semestre.description}}</p>
+											</div>
+
+										</div>
+
+
+										<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+										<div class="form-group row ph">
+											<label class="col-sm-4 required font-weight-bold font-weight-bold">Créer par
+											</label>
+
+											<div class="col-sm-8">
+												<p class="form-control-static">{{semestre.userCreated.username}}</p>
+											</div>
+
+										</div>
+										<div class="hr-line-dashed hr-line-dashed-co"></div>
+										<div class="form-group row ph">
+											<label class="col-sm-4 required font-weight-bold font-weight-bold">Position actuel</label>
+
+											<div class="col-sm-8">
+												<p class="form-control-static">
+													{% if semestre.positionActuel is defined and semestre.positionActuel is not empty %}
+														{% for key, pos in semestre.positionActuel %}
+															{{key}}
+														{% endfor %}
+														{% else %}Créer
+													{% endif %}
+												</p>
+											</div>
+
+										</div>
+
+
+									</div>
+								</div>
+							</h5>
+						</div>
+					</div>
+					<div class="mail-box">
+
+
+						<div class="mail-attachment padding-attachement">
+
+
+							<h3 class="m-t-none margin-bottom">MODULES</h3>
+
+							<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+							<div class="panel-group" id="accordion">
+								{% for key , eps in semestre.controleModules %}
+									<div class="panel panel-default">
+
+
+										<div class="panel-heading heading-show">
+											<h4 class="panel-title">
+												<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{key}}">
+													{{ eps.description }}
+													(<a href="{{path('module_univ_evaluation_moyenne_module_fun',{'id':eps.id})}}" class="link-show">{{eps.description}}</a>)
+													<span style="float:right">
+														Date :
+														{{ eps.created|date("d/m/Y") }}
+														|
+																												Postion :
+														{% for key,value in eps.positionActuel %}
+															{{ key }}
+														{% endfor %}
+													</span>
+												</a>
+
+											</h4>
+										</div>
+										<div id="collapse{{key}}" class="panel-collapse collapse in">
+											<div class="panel-body body-show">
+
+												<div class="row">
+													<div class="col-md-6 b-r">
+														<ul class="list-group clear-list" style="font-size: 9px;">
+
+															<li class="list-group-item fist-item">
+																<span class="float-right">
+																	{{eps.coefficient}}
+																</span>
+																<i class="fa fa-circle circle-o"></i>
+																Coéfficient
+															</li>
+															<li class="list-group-item">
+																<span class="float-right">
+																	{{eps.created|date("d/m/Y")}}
+																</span>
+																<i class="fa fa-circle circle-o"></i>
+																Créer par
+															</li>
+														</ul>
+													</div>
+													<div class="col-md-6">
+														<ul class="list-group clear-list" style="font-size: 9px;">
+
+															<li class="list-group-item fist-item">
+																<span class="float-right">
+																	{{eps.description}}
+																</span>
+																<i class="fa fa-circle circle-o"></i>
+																Description
+															</li>
+															<li class="list-group-item ">
+																<span class="float-right">
+																	{% for key,value in eps.positionActuel %}
+																		{{ key }}
+																	{% endfor %}
+																</span>
+																<i class="fa fa-circle circle-o"></i>
+																Statut
+															</li>
+														</ul>
+
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+
+									</div>
+								{% endfor %}
+							</div>
+
+						</div>
+
+
+						<div class="clearfix"></div>
+
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+
+{{ render(controller('App\\Controller\\moduleUniv\\evaluation\\EvaluationAnneeController:ChoixPromotion',{ 'id': semestre.controlePromotion ,'type':'semestre','active':semestre.id}))}}

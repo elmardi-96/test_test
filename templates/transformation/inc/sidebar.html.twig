@@ -1,0 +1,120 @@
+<div id="wrapper">
+    <!-- Sidebar -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                {% include './inc/sidebar_header.html.twig' %}
+
+                
+                {% if app.session.get('modules')[app.session.get('moduleCourantTransformation').prefix]['dossiers'][app.session.get('dossierCourantTransformation').prefix]['sousModules']   is defined  %}
+                    {% for key , sousModule in app.session.get('modules')[app.session.get('moduleCourantTransformation').prefix]['dossiers'][app.session.get('dossierCourantTransformation').prefix]['sousModules'] %}
+                       {% set active = '' %}
+                       {% if sousModule.activeLink in app.request.getPathInfo %}
+                           {% set active  = 'active' %}
+                        {%endif%}
+                        <li class="{{active}}">
+                            <a href="{% if sousModule.route is not null  %} {{ path(sousModule.route) }} {%  endif %}"><i class="fa {{sousModule.icon}}"></i> <span class="nav-label">{{ sousModule.titre|capitalize }}</span>  </a>
+                            {% if sousModule.operations is defined  %}
+                                <ul class="nav nav-second-level collapse">
+                                    {%  for key , operation in sousModule.operations  %}
+                                        {% if operation.verticale %}
+                                        <li>
+                                            <a href="{% if operation.route is not null  %} {{ path(operation.route) }} {%  endif %}"><i class="fa {{operation.icon}}"></i> <span class="nav-label">{{ operation.titre|capitalize }}</span></a>
+                                        </li>
+                                        {% endif %}
+                                    {% endfor %}   
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                {% endif %}
+
+{#
+                <li>
+                    <a href="{{path('t_achatdemandeinternecab_dashboard')}}"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Tableau de bord</span>  </a>
+                </li>
+                <li class="active">
+                    <a href="index.html"><i class="fa fa-handshake-o"></i> <span class="nav-label">Pré-commande</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+
+                        <li><a href="{{path('t_achatdemandeinternecab_new')}}"><i class="fa fa-plus"></i> <span class="nav-label">Nouveau</span></a></li>
+                          
+                        <li class="active">
+                            <a href="{{path('t_achatdemandeinternecab_index')}}"><i class="fa fa-list"></i> <span class="nav-label">Liste</span>  <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+
+                                <li>
+                                    <a href="{{path('t_achatdemandeinternecab_index')}}"> Tous</a>
+                                </li>
+                                <li>
+                                    <a href="{{path('t_achatdemandeinternecab_index')~"?st=1"}}">Crées </a>
+                                </li>
+                                <li>
+                                    <a href="{{path('t_achatdemandeinternecab_index')~"?st=2"}}">En cours </a>
+                                </li>
+                                <li>
+                                    <a href="{{path('t_achatdemandeinternecab_index')~"?st=3"}}">Traité</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{path('t_achatdemandeinternecab_index')~"?st=4"}}">Annulés</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{path('t_achatdemandeinternecab_index')~"?st=22"}}">STF-Stock</a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+
+
+
+                <li>
+                    <a href="index.html"><i class="fa fa-handshake-o"></i> <span class="nav-label">BC fournisseur</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('t_achatdemandeinternecab_new')}}">Nouveau Bon commande</a></li>
+                        <li><a href="{{path('t_achatdemandeinternecab_index')}}">Liste Bon commandes</a></li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="index.html"><i class="fa fa-handshake-o"></i> <span class="nav-label">Réception BC fournisseur</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="">Liste Réception BC</a></li>
+                          
+                    </ul>
+                </li>
+
+
+                <li >
+                    <a href="index.html"><i class="fa fa-handshake-o"></i> <span class="nav-label">Facture fournisseur</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="">Liste Factures</a></li>
+                    </ul>
+                </li>
+
+                <li >
+                    <a href="index.html"><i class="fa fa-handshake-o"></i> <span class="nav-label">Réglements fournisseur</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="">Liste Réglements</a></li>
+                    </ul>
+                </li>
+#}
+
+
+
+            </ul>
+        </div>
+    </nav>
+
+
+    {#  <li><a href="{{ path('t_commandefrscab_index') }}">Bon commande fournisseur</a></li>#}
+
+    <!-- End Sidebar -->

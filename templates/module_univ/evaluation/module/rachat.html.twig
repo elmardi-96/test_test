@@ -1,0 +1,123 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Rachat Module | Evaluation | UNIV
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('univ_element_moyenne') }}
+{% endblock %}
+
+
+{% block body %}
+
+
+  
+    <div id="right-sidebar" class="actions animated"></div>
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+       <div class="col-lg-6">
+			{% include './module_univ/evaluation/module/inc/workflow_breadcumb.html.twig' %}
+		</div>
+		<div class="col-lg-6">
+			<div class="title-action">
+                {#<button class="btn btn-white btn-xs btn-lg my-button promotion">
+					<i class="fa fa-info"></i>
+					Information</button>#}
+			</div>
+		</div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {% include './module_univ/evaluation/module/inc/workflow.html.twig' %}
+        </div>
+    </div>
+
+    <div class="row pt-add-200">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content" style="padding-top: 4px ;">
+                    <div class="card-ribbon card-ribbon-module">
+                        <span>
+                            <div class="style-position">MODULE</div>
+                        </span>
+                    </div>
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12 padding-style">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {% include './module_univ/evaluation/module/inc/navigation.html.twig' %}
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12 scroll_content">
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+
+                                            {% if workflow_has_marked_place(module, 'apresrachat') %}
+                                                <div class="tab-pane active show" id="tab-1">
+                                                    <table class="table  display table-bordered table-hover dataTables-example tabl" data-id="{{module.id}}" id="table_element_notes">
+                                                        <thead>
+
+                                                            <tr>
+                                                                <th>Id</th>
+                                                                <th>Code inscription</th>
+                                                                <th>Nom</th>
+                                                                <th>Prénom</th>
+                                                                <th>Note</th>
+                                                                <th>Note rachat</th>
+                                                            </tr>
+
+
+                                                        </thead>
+
+
+                                                    </table>
+
+
+                                                </div>
+                                            {% else  %}
+
+
+                                                <div class="forum-item animated bounce">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <div class="forum-icon">
+                                                                <i class="fa fa-warning"></i>
+                                                            </div>
+                                                            <a class="forum-item-title">Important</a>
+                                                            <div class="forum-sub-title">
+                                                                Pour effectuer cette opération , l'élément doit être dans la phase rachat.
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            {% endif %}
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{ render(controller('App\\Controller\\moduleUniv\\evaluation\\EvaluationAnneeController:ChoixPromotion',{ 'id': module.controleSemestre.controlePromotion ,'type':'module','active':module.id}))}}
+    <!-- Modal -->
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {#{ parent() }#}
+    {{ encore_entry_script_tags('univ_module_moyenne') }}
+{% endblock %}

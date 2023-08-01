@@ -1,0 +1,316 @@
+{#{{ dump(app.session.get('modules')) }}#}
+
+{#{% if '/univ/' in app.request.getPathInfo %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <li class="nav-item">
+            <a class="nav-link " href="{{ path('parametrage_admin_univ') }}">
+                <i class="fa fa-cogs"></i>
+                Parametrage Univ
+            </a>
+        </li>
+    {% endif %}
+{% endif %}
+{% if '/admin/univ' in app.request.getPathInfo %}
+    <li class="nav-item">
+        <a class="nav-link " href="{{ path('module_univ_index') }}">
+            <img alt="image" class="rounded-circle img-univ" src="/img/modules/univ.png">
+            Univ
+        </a>
+    </li>
+{% endif %}
+{% if is_granted('ROLE_ADMIN') %}
+    {% if '/admin/param' in app.request.getPathInfo %}
+
+        {% for k , module in app.session.get('modules') %}
+            {% if app.session.get('moduleParametrage').id == module.id %}
+
+                {% if (app.session.get('moduleParametrage') is not null )    %}
+
+
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ path(module.routeParam ,{'module_id':module.id ,'dossier_id':app.session.get('dossierParametrage').id } ) }}">
+
+                            <img alt="image" class="rounded-circle img-univ" src="/img/modules/{{module.image}}">
+                            {{module.abreviation }}
+                        </a>
+                    </li>
+
+
+                {% endif %}
+
+
+            {% endif %}
+        {% endfor %}
+
+    {% endif %}
+
+
+    {% if ('/ugouv/vente' in app.request.getPathInfo or '/ugouv/achat/' in app.request.getPathInfo) and ( '/vente/module/' not in app.request.getPathInfo and '/achat/module/' not in app.request.getPathInfo ) %}
+        <li class="nav-item">
+            {% for k , module in app.session.get('modules') %}
+                {% if k=='_ugouv_achat' and '/ugouv/achat/' in app.request.getPathInfo  %}
+                    <a class="nav-link " href="{{ path('parametrage_by_module', {'id':module.id , 'dos':app.session.get('dossierCourantUgouvAchat').id}) }}">
+                        <i class="fa fa-cogs"></i>
+                        Parametrage
+                    </a>
+                {% elseif k=='_ugouv_vente' and  '/ugouv/vente' in app.request.getPathInfo  %}
+                    <a class="nav-link " href="{{ path('parametrage_by_module',{ 'id':module.id , 'dos':app.session.get('dossierCourantUgouvVente').id}) }}">
+                        <i class="fa fa-cogs"></i>
+                        Parametrage
+                    </a>
+                {% endif %}
+            {% endfor %}
+
+        </li>
+    {% endif %}
+
+    {% if '/grs/' in app.request.getPathInfo and '/dossiers' not in app.request.getPathInfo  %}
+        <li class="nav-item">
+            {% for k , module in app.session.get('modules') %}
+                {% if k=='_grs' and '/grs/' in app.request.getPathInfo  %}
+                    {% if app.session.get('dossierCourantGrs')%}
+                        <a class="nav-link " href="{{ path('parametrage_by_module', {'id':module.id , 'dos':app.session.get('dossierCourantGrs').id}) }}">
+                            <i class="fa fa-cogs"></i>
+                            Parametrage
+                        </a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+        </li>
+    {% endif %}
+    {% if '/tresorerie/' in app.request.getPathInfo and '/dossiers' not in app.request.getPathInfo  %}
+        <li class="nav-item">
+            {% for k , module in app.session.get('modules') %}
+                {% if k=='_tresorerie' and '/tresorerie/' in app.request.getPathInfo  %}
+                    {% if app.session.get('dossierCourantTresorerie')%}
+                        <a class="nav-link " href="{{ path('parametrage_by_module', {'id':module.id , 'dos':app.session.get('dossierCourantTresorerie').id}) }}">
+                            <i class="fa fa-cogs"></i>
+                            Parametrage
+                        </a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+        </li>
+    {% endif %}
+    {% if '/stock/' in app.request.getPathInfo and '/dossiers' not in app.request.getPathInfo  %}
+        <li class="nav-item">
+            {% for k , module in app.session.get('modules') %}
+                {% if k=='_stock' and '/stock/' in app.request.getPathInfo  %}
+                    {% if app.session.get('dossierCourantStock')%}
+                        <a class="nav-link " href="{{ path('parametrage_by_module', {'id':module.id , 'dos':app.session.get('dossierCourantStock').id}) }}">
+                            <i class="fa fa-cogs"></i>
+                            Parametrage
+                        </a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+        </li>
+    {% endif %}
+{% endif %}#}
+
+{#<div class="form-group">
+    <label class="col-sm-2 control-label">Normal</label>
+    <div class="col-sm-10">
+        <select class="">
+            {% for key , dossier in app.session.get('dossiers') %}
+                <option value="{{ dossier.id }}">{{ dossier.abreviation|upper }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>#}
+
+{#<select class="">
+    {% for key , dossier in app.session.get('dossiers') %}
+        <option value="{{ dossier.id }}">{{ dossier.abreviation|upper }}</option>
+    {% endfor %}
+</select>#}
+{#{{ dump(app.session.get('dossierCourant') ) }}#}
+
+{% if app.session.get('dossierCourant') is defined  and  app.session.get('dossierCourant') is not null   %}
+
+{% if app.session.get('dossiers')[app.session.get('dossierCourant').prefix].modules  is defined  %}
+{% for key , module in  app.session.get('dossiers')[app.session.get('dossierCourant').prefix].modules|sort((a, b) => a.ord <=> b.ord) %}
+    {% if module.prefix =='_module_parametrage_ugouv' %}
+
+    {# <li class="nav-item">
+        <a class="nav-link " href="{{path('module_parametrage_ugouv_index')}}">
+            <i class="fa fa-cogs"></i>
+            parametrage 
+        </a>
+    </li> #}
+
+{% endif %}
+
+{% endfor %}
+    {% endif %}
+    {% endif %}
+
+{#% if app.session.get('dossierCourant') is defined  and  app.session.get('dossierCourant') is not null   %}
+<li class="dropdown">
+
+    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle " data-toggle="dropdown">
+        <i class="fa fa-folder"></i>
+        {{ app.session.get('dossierCourant').abreviation|upper  }}</a>
+    <ul role="menu" class="dropdown-menu scroll4">
+        {% for key , dossier in app.session.get('dossiers') %}
+            {% set url ="" %}
+            <li>
+                <a href="#" class="setDossierCourant" data-id = "{{ dossier.id }}">{{ dossier.abreviation|upper }}</a>
+            </li>
+        {% endfor %}
+        <li class="dropdown-divider"></li>
+        <li>
+            <a href="{{ path('app') }}">Dossiers</a>
+        </li>
+    </ul>
+</li>
+{% endif %#}
+
+
+<li class="nav-item">
+    <a class="nav-link " href="{{asset('app')}}">
+        <i class="fa fa-folder"></i>
+        {% if app.session.get('dossierCourant') %}
+            {{app.session.get('dossierCourant').description }}
+        {% else %}
+            Dossiers
+        {% endif %}
+    </a>
+</li>
+
+{#{% if is_granted('ROLE_ADMIN') %}
+
+{% if '/app' in app.request.getPathInfo or '/u3sclient'  in app.request.getPathInfo  %}
+    <li class="nav-item">
+        <a class="nav-link " href="{{ path('erp_client') }}">
+            <i class="fa fa-clipboard"></i>
+            Demandes Client
+        </a>
+    </li>
+    {% endif %}   
+{% endif %}#}
+
+
+
+{% if is_granted('ROLE_ADMIN') %}
+    <li class="nav-item">
+        <a class="nav-link " href="{{asset('config')}}">
+            <i class="fa fa-wrench"></i>
+            conf
+        </a>
+    </li>
+    
+{% endif %}
+
+
+
+ 
+
+
+
+<li class="dropdown">
+    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+        <img alt="image " class="rounded-circle img-logo" src="/images/user/profil/profil.png">
+    </a>
+    <ul class="dropdown-menu dropdown-alerts pos-re">
+        <li>
+            <div class="pointer" data-aura-rendered-by="117:1576;a" data-proxy-id="aura-pos-lib-8" id="117:1576;a" style="position: absolute;left: 205.005px;top: -10.0101px;"></div>
+            <a href="mailbox.html" class="dropdown-item">
+                <div>
+                    <img alt="image " class="rounded-circle pro" src="/images/user/profil/profil.png">
+                    <p class="pap">{{ app.user.nom }}
+                        {{ app.user.prenom }}</p>
+                </div>
+            </a>
+        </li>
+        <li class="">
+            <h3 class="density-section-header" data-aura-rendered-by="77:1377;a">Informations du compte</h3>
+        </li>
+        <li class="profil-link">
+            <div class="">
+                <a href="{{path('user_profil_index')}}" class="pos-left color-green-theme">
+                    <strong>
+                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                        Mon Profil</strong>
+                </a>
+            </div>
+        </li>
+
+        {# <li class="">
+            <h3 class="density-section-header" data-aura-rendered-by="77:1377;a">Choix Theme</h3>
+        </li>
+        <li>
+            <div class="">
+                <table style="text-align: center; width:100%">
+                    <tr class="color-change">
+                        <td style=" width:5%"></td>
+                        {# <td style=" width:15%">
+                            <a href="#" name="theme" class="normal box">
+                                <i class="fa fa-circle text-navy" style="color: #585656 !important;"></i>
+                            </a>
+                        </td> 
+                        <td style=" width:15%">
+                            <a href="#" name="theme" class="bleu box">
+                                <i class="fa fa-circle text-navy"></i>
+                            </a>
+                        </td>
+                        <td style=" width:15%">
+                            <a href="#" name="theme" class="marron box">
+                                <i class="fa fa-circle text-navy"></i>
+                            </a>
+                        </td>
+                        <td style=" width:15%">
+                            <a href="#" name="theme" class="vert box">
+                                <i class="fa fa-circle text-navy"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </li>
+        <li class="">
+            <h3 class="density-section-header" data-aura-rendered-by="77:1377;a">Activer side barre</h3>
+        </li>
+        <li>
+            <div class="setings-item">
+                {#<span class="span">
+                    Verticale
+                </span>
+                <div class="switch">
+                    <div class="onoffswitch">
+                        <input type="checkbox" checked="" name="collapsemenu" class="onoffswitch-checkbox" id="example6">
+                        <label class="onoffswitch-label" for="example6">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+
+
+                <form id="menu_position">
+                    <input type="radio" name="my_menu_position" {% if app.user.menuPosition==1 %} checked="" {% endif %} value="1"> Horizontale
+                    <input type="radio" name="my_menu_position" {% if app.user.menuPosition==0 or app.user.menuPosition is null %} checked="" {% endif %} value="0"> Verticale
+
+                </form>
+
+
+            </div>
+        </li> #}
+        <li class="">
+            <h3 class="density-section-header" data-aura-rendered-by="77:1377;a">Deconnexion</h3>
+        </li>
+        <li>
+            <div class="">
+                <a href="{{path('logout')}}" class="pos-left color-green-theme">
+                    <strong>
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        Deconnexion</strong>
+                </a>
+            </div>
+        </li>
+
+    </ul>
+</li>

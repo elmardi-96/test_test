@@ -1,0 +1,38 @@
+
+{% if UnivPlEmptime is defined and UnivPlEmptime is not empty and UnivPlEmptime.id is not empty  %}
+
+<div class ="wrf-positions" >
+{% for transition in workflow_transitions(UnivPlEmptime) %}
+    {#{{ dump(workflow_marked_places(commande)) }}#}
+    {% set url = "" %}
+    {% if workflow_metadata(UnivPlEmptime, 'function', transition) %}
+        {%  set  url= path(workflow_metadata(UnivPlEmptime, 'function', transition), {id: UnivPlEmptime.id}) %}
+    {% endif %} 
+  
+        
+        
+   <a class="{{ workflow_metadata(UnivPlEmptime, 'function', transition) }} btn-wrf btn btn-xs {{ workflow_metadata(UnivPlEmptime, 'class', transition) }}  btn-outline"
+       data-id="{{ UnivPlEmptime.id }}"
+       data-title = "{{ workflow_metadata(UnivPlEmptime, 'title', transition) }}"
+       data-transition ="{{ transition.name }}"
+       >
+       <i class="fa {{ workflow_metadata(UnivPlEmptime, 'icon', transition) }}"></i>
+       &nbsp;{{ workflow_metadata(UnivPlEmptime, 'title', transition) }}
+   </a>
+   
+{% endfor %}
+
+
+
+
+{% if workflow_has_marked_place(UnivPlEmptime, "creer") or  workflow_has_marked_place(UnivPlEmptime, "encours")  %}
+<a href="#" class=" btn-wrf btn btn-xs btn-white  btn-outline waves-effect waves-light _delete_planning" id="{{UnivPlEmptime.id}}" >
+    <i class="fa fa-trash"></i> Supprimer</a>
+{% endif %}
+
+    
+</a>
+</div>
+{% endif %}
+
+{{ wo_render_breadcrumbs() }}

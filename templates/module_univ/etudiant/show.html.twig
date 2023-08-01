@@ -1,0 +1,875 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Consulter | Etudiant | UNIV
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+			<div class="col-lg-6">
+				<div class="btn-group btn-breadcrumb btn-breadcrumb2">
+					<a href="#" class="btn btn-default">
+						<b>Etudiant
+						</b>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="title-action" style="margin-top: 5px; margin-bottom:5px;">
+					{% for key ,  operation in operations  %}
+						{% if operation.prefix == '_delete' %}
+							<a class='btn btn-white btn-xs {{operation.classCs}}' id='{{operation.prefix}}' data-id="{{etudiant.id}}" data-token="{{ csrf_token('delete' ~ etudiant.id) }}">
+								<i class="fa {{ operation.icon }}"></i>
+								{{ operation.titre|capitalize }}</a>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+				{{ wo_render_breadcrumbs() }}
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './module_univ/etudiant/inc/workflow.html.twig' %}
+		</div>
+	</div>
+
+	<br/><br/>
+	<div class="row pt-20 etu">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div
+					class="ibox-content">
+
+					{#{% include './module_achat/facturefrs/inc/workflow_breadcumb.html.twig' %}#}
+
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										{% include './module_univ/etudiant/inc/navigation.autre1.html.twig' %}
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="panel-body">
+
+										<div class="tab-content">
+											<div class="tab-pane active show" id="tab-1">
+												<div class="row">
+													<div class="col-md-12 b-r padding-0">
+
+
+														<div class="ibox scroll_content">
+
+
+															<div class="ibox-content inspinia-timeline">
+
+																<div class="timeline-item">
+
+																	<div class="row ">
+
+																		<div class="col-12 content no-top-border ">
+																			<p class="m-b-xs">
+																				<strong>
+																					INFORMATIONS SUR LE CANDIDAT</strong>
+																			</p>
+																			<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+
+																			<div class="row">
+																				<div class="col-md-6 b-r">
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Id</label>
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.id }}</p>
+																						</div>
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Code</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.code }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Nom :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.nom }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Titre</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.titre }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Lieu de naissance :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.lieuNaissance }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Situation Familiale :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.stFamille ? etudiant.stFamille.designation }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Nationalite :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.nationalite }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Passeport :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.passeport }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Téléphone 1 :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.tel1 }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Téléphone 3 :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.tel3 }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Mail 2 :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.mail2 }}</p>
+																						</div>
+
+																					</div>
+																				</div>
+																				<div class="col-md-6">
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Prénom :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.prenom }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Date de Naissance :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.dateNaissance | date("m/d/Y") }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Sexe :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.sexe }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Situation Familiale Parents:</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.stFamilleParent ? etudiant.stFamilleParent.designation}}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">C.I.N :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.cin }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Ville :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.ville }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Téléphone 2 :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.tel2 }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Mail 1 :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.mail1 }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Ville :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.ville }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Adresse :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.adresse }}</p>
+																						</div>
+
+																					</div>
+																					<br/>
+
+
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+
+																<div class="">
+																	<div class="row ">
+
+																		<div class="col-12 content">
+																			<br/>
+																			<p class="m-b-xs">
+																				<strong>INFORMATIONS  PARENTS</strong>
+																			</p>
+																			<div class="hr-line-dashed hr-line-dashed-co"></div>
+																			<div class="row">
+																				<div class="col-md-6 b-r">
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Nom père :</label>
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.nomP }}</p>
+																						</div>
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Prénom père :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.prenomP }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Nationalité père :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.nationaliteP }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Profession père :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.professionP }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Employé père :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.employeP }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Catégorie père :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.categorieP }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Téléphone père :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.telP }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Mail père :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.mailP }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Salaire père :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.salaireP }}</p>
+																						</div>
+
+																					</div>
+																				</div>
+																				<div class="col-md-6">
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Nom mère :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.nomM }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Prénom mère :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.prenomM }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Nationalité mère :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.nationaliteM }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Profession mère:</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.professionM }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Employé mère :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.employeM }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Catégorie mère :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.categorieM }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Téléphone mère :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.telM }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Mail mère :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.mailM }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Salaire mère :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.salaireM }}</p>
+																						</div>
+
+																					</div>
+
+																					<br/>
+
+
+																				</div>
+																			</div>
+
+
+																		</div>
+																	</div>
+																</div>
+
+
+																<div class="">
+																	<div class="row">
+																		<div class="col-12 content">
+																			<p class="m-b-xs">
+																				<strong>
+																					INFORMATIONS ACADÉMIQUE
+																				</strong>
+																			</p>
+																			<div class="hr-line-dashed hr-line-dashed-co"></div>
+																			<div class="row">
+																				<div class="col-md-6 b-r">
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">C.N.E :</label>
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.cne }}</p>
+																						</div>
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">filière :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.filiere ? etudiant.filiere.designation }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Année Bac :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.anneeBac }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Concours :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.concoursMedbup }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Frais Préinscription :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.fraisPreinscription }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Observation :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.obs }}</p>
+																						</div>
+
+																					</div>
+																				</div>
+																				<div class="col-md-6">
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Académie :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.academie ? etudiant.academie.designation }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Type de Bac :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.typeBac ? etudiant.typeBac.designation }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Moyenne Bac :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.moyenneBac }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Catégorie Préinscription:</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.categoriePreinscription }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Choix Langue :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.langueConcours ? etudiant.langueConcours.designation }}</p>
+																						</div>
+
+																					</div>
+																					<br/>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="">
+																	<div class="row">
+
+																		<div class="col-12 content">
+																			<br/>
+																			<p class="m-b-xs">
+																				<strong>DIVERS</strong>
+																			</p>
+																			<div class="hr-line-dashed hr-line-dashed-co"></div>
+																			<div class="row">
+																				<div class="col-md-6 b-r">
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Nature demande :</label>
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.natureDemande ? etudiant.natureDemande.designation }}</p>
+																						</div>
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Bourse :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.bourse }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Logement :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.logement }}</p>
+																						</div>
+
+																					</div>
+																					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Parking :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.parking }}</p>
+																						</div>
+
+																					</div>
+																				</div>
+																				<div class="col-md-6">
+
+																					<div class="form-group row ph">
+																						<label class="col-sm-6 required font-weight-bold font-weight-bold">Nombre des frères :</label>
+
+																						<div class="col-sm-6">
+																							<p class="form-control-static">{{ etudiant.nombreEnfants }}</p>
+																						</div>
+
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+
+															</div>
+														</div>
+
+
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+	<div class="row etu">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div
+					class="ibox-title m-min"><!--<h5>La liste des Articles</h5>-->
+				</div>
+				<div class="ibox-content">
+					<div class="table-responsive">
+						<div class="row">
+
+
+							<div class="col-md-6">
+								<br/>
+								<h3 class="m-left">
+									liste pré-inscriptions
+								</h3>
+								<table class="t-m table table-striped table-bordered table-hover w-m dataTable datatable-default" id="datatable-show3">
+
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Code</th>
+											<th>Etablissement</th>
+											<th>Formation</th>
+											{#<th>Crée par</th>
+																																																																																																																																															                                                <th>date création</th>#}
+
+
+										</tr>
+									</thead>
+									<tbody>
+										{% for preinsciption in etudiant.preinscriptions %}
+											<tr>
+												<td>{{preinsciption.id}}</td>
+												<td>
+													<a href="{{path('module_univ_preinscription_show', {'id' : preinsciption.id})}}" class='cd_op'>{{preinsciption.code}}</a>
+												</td>
+												<td>{{preinsciption.formation ? preinsciption.formation.etablissement ? preinsciption.formation.etablissement.designation}}</td>
+												<td>{{preinsciption.formation ? preinsciption.formation.designation}}</td>
+												{# <td>{{preinsciption.UserCreated ? preinsciption.UserCreated.nom}}</td>
+																																																																																																																																																												                                                 <td>{{preinsciption.Created|date("m/d/Y")}}</td>#}
+											</tr>
+										{% endfor %}
+
+									</tbody>
+
+								</table>
+
+							</div>
+
+							<div class="col-md-6">
+								<br/>
+								<h3 class="m-left">liste relevés de note</h3>
+								<table class="t-m table table-striped table-bordered table-hover w-m dataTable datatable-default" id="datatable-show3">
+									<thead>
+										<tr>
+											<th style="width: 5%">#</th>
+											{#<th>Code</th>
+																																																																																																																																															                                            <th>Nom</th>
+																																																																																																																																															                                            <th>Prénom</th>#}
+											<th>Matière</th>
+											<th style="width: 5%">Note</th>
+											{#       <th>date création</th>#}
+										</tr>
+									</thead>
+									<tbody>
+										{% for key , releve in etudiant.releves %}
+											<tr>
+												<td>{{key + 1}}</td>
+												<td>{{releve.matiere ? releve.matiere.designation : ""}}</td>
+												<td>{{releve.note|number_format(2)}}</td>
+
+											</tr>
+										{% endfor %}
+
+									</tbody>
+
+								</table>
+							</div>
+
+
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row etu">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div
+					class="ibox-title m-min"><!--<h5>La liste des Articles</h5>-->
+				</div>
+				<div class="ibox-content">
+					<div class="table-responsive">
+						<div class="row">
+							<div class="col-md-6">
+								<br/>
+								<h3 class="m-left">liste suivis</h3>
+								<table class="t-m table table-striped table-bordered table-hover w-m dataTable datatable-default" id="datatable-show3">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Désignation</th>
+											<th>Observation</th>
+											<th>Status</th>
+
+
+										</tr>
+									</thead>
+									<tbody>
+										{% for key , suivi in etudiant.suivis %}
+											<tr>
+												<td>{{key + 1}}</td>
+												<td>{{suivi.designation}}</td>
+												<td>{{suivi.observation}}</td>
+												<td>{{suivi.statut ? suivi.statut.designation : ""}}</td>
+
+
+											</tr>
+										{% endfor %}
+
+									</tbody>
+
+								</table>
+							</div>
+
+
+							<div class="col-md-6">
+								<br/>
+								<h3 class="m-left">liste appels</h3>
+								<table class="t-m table table-striped table-bordered table-hover w-m dataTable datatable-default" id="datatable-show3">
+									<thead>
+										<tr>
+											<th style="width: 5%">#</th>
+											<th>Désignation</th>
+											<th style="width: 25%">date appel</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										{% for key , appel in etudiant.appels %}
+											<tr>
+												<td>{{key +1 }}</td>
+												<td>{{appel.designation}}</td>
+												<td>{{appel.date ? appel.date|date("m/d/Y"):'-'}}</td>
+
+											</tr>
+										{% endfor %}
+
+									</tbody>
+
+								</table>
+							</div>
+
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal -->
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_etudiant') }}
+{% endblock %}

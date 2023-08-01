@@ -1,0 +1,122 @@
+1- Gestion des préfix 
+------------------------------------------------
+pour le module Achat de ugouv 
+------------------------------------------------
+prefix                   _ugouv_achat
+
+-----------------------------------------------
+sous module                    prefix 
+-----------------------------------------------  
+tableau de bord                _tb
+expression besoin              _ex_be
+bon commande fournisseur       _bc_fr 
+réception bc fournisseur       _br_fr
+factures fournisseur           _fa_fr
+réglement frs                  _re_fr
+factures fournisseur annuler   _fa_fr_an
+------------------------------------------------
+
+
+
+
+
+
+
+
+------------------------------------------------
+pour le module Vente de ugouv 
+------------------------------------------------ 
+prefix                   _vente
+
+-----------------------------------------------
+sous module                    prefix 
+-----------------------------------------------  
+tableau bord                   _tb_cl
+devis client                   _de_cl
+livraison client               _lv_cl 
+factures client                _fa_cl
+réglement factures             _re_cl
+factures annuler               _fa_cl_an
+------------------------------------------------
+
+
+
+
+------------------------------------------------
+pour le module Stock 
+------------------------------------------------ 
+prefix                   _stock
+
+-----------------------------------------------
+sous module              prefix 
+-----------------------------------------------  
+produits                 _stock_pr
+dépôt                    _stock_de
+
+------------------------------------------------
+
+
+
+
+
+
+/////////////////////////////////////////////////////module achat version standard /////////////////////////////////////////////////////////////
+------------------------------------------------
+pour le module Achat standard version
+------------------------------------------------
+prefix                   _achat
+
+-----------------------------------------------
+sous module                    prefix 
+-----------------------------------------------  
+tableau de bord                _tb
+bon commande fournisseur       _bc_fr 
+réception bc fournisseur       _br_fr
+factures fournisseur           _fa_fr
+réglement fournisseur          _re_fr
+------------------------------------------------
+
+-----------------------------------------------
+statut sous module              sous module                     Archivé         Annulé        Crée       En cours      validé      Généré   
+-----------------------------------------------  
+bon commande fournisseur       sous module(_bc_fr)               arch           an             cr           en           val         gnr
+réception bc fournisseur       sous module(_br_fr)               arch           an             cr           en           val         gnr
+factures fournisseur           sous module(_fa_fr)               arch           an             cr           en           val         gnr
+réglement fournisseur          sous module(_re_fr)                x              x              x            x           val          x
+------------------------------------------------
+////////////////////////////////////////////////////////fin module achat version standard ////////////////////////////////////////////////////////////////
+
+
+prefix des opérations (en globalité il y'a des opération encommun )
+--------------------------------------------------------------------
+opération             prefix                         icon 
+--------------------------------------------------------------------
+liste                 _index                 fa-list
+Ajouter               _new                   fa-plus
+Modifier              _edit                  fa-pencil
+supprimer             _delete                fa-trash
+consulter             _show                  fa-eye
+archiver              _archiver              fa-archive
+statut                _statut                fa-check
+imprimer              _imprimer              fa-print
+générer               _generer               fa-level-down  
+
+
+
+ 
+
+
+
+
+
+importer            _importer            fa-download
+exporter            _exporter            fa-upload
+demande paiement    _demande             fa-credit-card
+condition           _condition           fa-file-text  
+avance              _avance               fa-money  
+commande            _commande             fa-columns
+charge              _charge               fa-file-text-o
+
+
+
+

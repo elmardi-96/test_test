@@ -1,0 +1,104 @@
+{% extends 'base_config.html.twig' %}
+{% block body %}
+    <div class="form-validation-msg" style="display:none">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div data-toastr="{{ label }}" class="toastr-msg">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+        <div class="col-lg-6">
+            <h2 class="fo">Parametrage PartenaireTy <span>(def_partenaire_ty)</span></h2>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="title-action">
+                <div class="title-action">
+                    <a href="{{path('def_partenaire_ty_new')}}" class="btn btn-white btn-xs" id="new_action"><i class="fa fa-pencil"></i> Ajouter </a>
+                </div>   
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+    </div>
+    <br/><br/>
+
+
+    
+
+      <div class="row border-bottom white-bg dashboard-header mt-20">
+        
+            <div class="col-lg-12">
+
+                <div class="ibox ">
+                    {#  <div class="ibox-title">
+ 
+ 
+ 
+                         <h5>Marche </h5>
+ 
+                     </div> #}
+                    <div class="ibox-content"> 
+                        <div class="table-responsive">
+
+                            <table class="table cmd tb  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%" >
+                                <!-- <table class="table display"  id='grid'  style="font-size: 10px;"  width="100%">--> 
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>ID</th>
+                                        <th>Abreviation</th>
+                                        <th>Designation </th>
+                                        <th>Active</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="commande"></tbody>
+
+                                <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>ID</th>
+                                        <th>Abreviation</th>
+                                        <th>Designation </th>
+                                        <th>Active</th>
+                                    </tr>
+                                </tfoot>
+
+
+                            </table>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('def_partenaire_ty') }}
+
+
+{% endblock %}

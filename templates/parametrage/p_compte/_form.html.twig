@@ -1,0 +1,233 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+    <div class="col-lg-6">
+        <h2 class="fo">Parametrage Compte <span>(p_compte)</span></h2>
+    </div>
+
+
+    <div class="col-lg-6">
+        <div class="title-action">
+            <button class="btn btn-primary btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+                <i class="fa fa-save"></i>
+                {{ button_label|default('Enregistrer') }}</button>
+                {% if  p_compte.id > 0 %}
+                <a href="#" class="btn btn-xs btn-danger btn-outline" id="_delete"><i class="fa fa-trash"></i> Supprimer</a>
+                <div id="test" data-etablissement-id="{{ p_compte.id|json_encode }}"></div>
+
+            {% endif  %}
+        </div>
+    </div>
+
+    <div class="border-b"></div>
+    <div class="col-lg-12">
+
+        {{ wo_render_breadcrumbs() }}
+    </div>
+</div>
+
+
+<br/><br/>
+
+
+<div class="row pt-20">
+    <div class="col-lg-12 ">
+        <div class="ibox">
+
+            <div class="ibox-content">
+
+                <div class="message-success"></div>
+
+
+                <div class="row m-t-sm">
+                    <div class="col-lg-12">
+                        <div class="panel blank-panel">
+                            <div class="panel-heading">
+                                <div class="panel-options">
+                                    <ul class="nav nav-tabs">
+                                        <li>
+                                            <a class="nav-link active" href="#tab-1" data-toggle="tab">informations
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="col-md-12">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab-1">
+
+
+                                            <div class="row">
+
+
+                                                <div class="col-md-6 b-r">
+
+
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.type ,'Type', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+                                                        <div class="col-sm-9">
+                                                            {{ form_widget(form.type,{'attr':{'class':'form-control form-control-sm','placeholder': 'Type'}}) }}
+                                                            <span class="form-error-message">
+                                                                {{ form_errors(form.type) }}
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.dossier ,'Dossier', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+                                                        <div class="col-sm-9">
+                                                            {{ form_widget(form.dossier,{'attr':{'class':'form-control form-control-sm','placeholder': 'Dossier'}}) }}
+                                                            <span class="form-error-message">
+                                                                {{ form_errors(form.dossier) }}
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.compteMasse ,'Compte Masse', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+                                                        <div class="col-sm-9">
+                                                            {{ form_widget(form.compteMasse,{'attr':{'class':'form-control form-control-sm','placeholder': 'Compte Masse'}}) }}
+                                                            <span class="form-error-message">
+                                                                {{ form_errors(form.compteMasse) }}
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.compteRubrique ,'Compte Rubrique', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+                                                        <div class="col-sm-9">
+                                                            {{ form_widget(form.compteRubrique,{'attr':{'class':'form-control form-control-sm','placeholder': 'Compte Rubrique'}}) }}
+                                                            <span class="form-error-message">
+                                                                {{ form_errors(form.compteRubrique) }}
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.comptePoste ,'Compte Poste', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+                                                        <div class="col-sm-9">
+                                                            {{ form_widget(form.comptePoste,{'attr':{'class':'form-control form-control-sm','placeholder': 'Compte Poste'}}) }}
+                                                            <span class="form-error-message">
+                                                                {{ form_errors(form.comptePoste) }}
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+                                                    <div class="form-group row">
+                                                        {{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+                                                        <div class="col-sm-9">
+                                                            {{ form_widget(form.active) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+                                                </div>
+                                                {% if p_compte.id > 0 %}
+                                                    <div class="col-md-6 br">
+
+
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Id</label>
+                                                            <div class="col-sm-9 col-form-label">
+                                                                {{ p_compte.id }}
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="hr-line-dashed"></div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Type</label>
+                                                            <div class="col-sm-9 col-form-label">
+                                                                {{ p_compte.type }}
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="hr-line-dashed"></div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Dossier</label>
+                                                            <div class="col-sm-9 col-form-label">
+                                                                {{ p_compte.dossier ? p_compte.dossier.nomDossier }}
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="hr-line-dashed"></div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Compte Masse</label>
+                                                            <div class="col-sm-9 col-form-label">
+                                                                {{ p_compte.compteMasse ? p_compte.compteMasse.designation }}
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="hr-line-dashed"></div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Compte Rubrique</label>
+                                                            <div class="col-sm-9 col-form-label">
+                                                                {{ p_compte.compteRubrique ? p_compte.compteRubrique.designation }}
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="hr-line-dashed"></div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Compte Poste</label>
+                                                            <div class="col-sm-9 col-form-label">
+                                                                {{ p_compte.comptePoste ? p_compte.comptePoste.designation }}
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="hr-line-dashed"></div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Active</label>
+                                                            <div class="col-sm-9 col-form-label">
+                                                                {% if p_compte.active == true %}
+                                                                    Active
+                                                                {% else %}
+                                                                    Desactive
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+
+                                            </div>
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {{form_widget(form._token)}}
+    {{ form_end(form,{'render_rest': false}) }}

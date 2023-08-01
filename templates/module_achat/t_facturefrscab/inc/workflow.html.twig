@@ -1,0 +1,50 @@
+{#{{ dump(operations) }}#}
+
+<div class="mail-body text-right tooltip-demo buttons_foot">
+
+	{% if facture is defined and facture is not empty and facture.id is not empty and operations['_workflow'] is  defined  %}
+
+
+		{% for transition in workflow_transitions(facture) %}
+
+			{% set url = "" %}
+			{% if workflow_metadata(facture, 'function', transition) %}
+				{%  set  url= path(workflow_metadata(facture, 'function', transition), {id: facture.id}) %}
+			{% endif %}
+
+
+			<a class="{{ workflow_metadata(facture, 'function', transition) }} btn btn-sm btn-white {{ workflow_metadata(facture, 'class', transition) }} btn-outline" data-id="{{ facture.id }}" data-title="{{ workflow_metadata(facture, 'title', transition) }}" data-transition="{{ transition.name }}">
+				<i class="fa {{ workflow_metadata(facture, 'icon', transition) }}"></i>
+				&nbsp;{{ workflow_metadata(facture, 'title', transition) }}
+			</a>
+
+		{% endfor %}
+
+
+		{% if workflow_has_marked_place(facture, "creer")  %}
+
+
+			
+
+
+		{% endif %}
+
+
+		<div id="test" data-facture-id="{{ facture.id|json_encode }}"></div>
+
+
+	{% endif %}
+
+
+</div>
+
+{#
+{{ wo_render_breadcrumbs() }}
+#}
+
+
+{#   <div class="mail-body text-right tooltip-demo buttons_foot">
+        <a href="mailbox.html" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send" aria-describedby="tooltip439841"><i class="fa fa-reply"></i> Send</a>
+        <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+        <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+    </div>#}

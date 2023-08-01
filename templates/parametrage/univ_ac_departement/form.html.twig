@@ -1,0 +1,149 @@
+<div class="sidebar-container new">
+
+	<div class="ibox-tools"></div>
+
+	<div class="tab-content ">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+				</h3>
+				<small>
+					{% if  univ_ac_departement.id > 0 %}
+						Modifier
+					{% else %}
+						Ajouter
+					{% endif %}
+				</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<table class="table small m-b-xs">
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="ibox ">
+					<div class="ibox-content">
+
+
+						{% if  univ_ac_departement.id > 0 %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_edit'}}) }}
+						{% else %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+						{% endif  %}
+
+
+						<div class="row">
+
+
+							<div class="col-md-12 b-r">
+
+								{% if  univ_ac_departement.id > 0 %}
+									<div id="test" data-departement-id="{{ univ_ac_departement.id|json_encode }}"></div>
+
+								{% endif  %}
+								<div class="form-group row">
+									{{ form_label(form.etablissement ,'etablissement', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.etablissement,{'attr':{'class':'form-control form-control-sm select2','placeholder': 'etablissement'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.etablissement) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.designation ,'Designation (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.designation,{'attr':{'class':'form-control form-control-sm','placeholder': 'Designation (*)'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.designation) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.abreviation ,'Abreviation (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.abreviation,{'attr':{'class':'form-control form-control-sm','placeholder': 'Abreviation (*)'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.abreviation) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+
+								<div class="form-group row">
+									{{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.active) }}
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								{% if  univ_ac_departement.id > 0 %}
+									<div class="form-group row">
+										<div class="col-sm-6">
+											<button class="btn btn-primary btn-block btn-xs  button-edit-departement">
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Modifier') }}</button>
+
+										</div>
+										<div class="col-sm-6">
+											{% for operation in operations|filter(operation => operation.prefix == '_delete') %}
+
+												<a {% if operation.route is not null %} data-id="{{univ_ac_departement.id}}" data-token="{{ csrf_token('delete' ~ univ_ac_departement.id) }}" href="#{# {{ path(operation.route) }} #}" {% endif %} id="{{operation.prefix}}" class="btn btn-block btn-xs btn-danger _delete{{operation.classCs}}">
+													<i class="fa {{ operation.icon }}" style="color: white !important;"></i>
+													{{ operation.titre|capitalize }}</a>
+
+											{% endfor %}
+										</div>
+
+
+									</div>
+								{% else %}
+									<div class="form-group row">
+
+										<div class="col-sm-5">
+											<button class="btn btn-primary btn-block btn-xs  button-save-departement">
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Enregistrer') }}</button>
+
+										</div>
+										<div class="col-sm-7">
+											<button class="btn btn-primary btn-block btn-xs  button-save-add-departement">
+												<i class="fa fa-save"></i>
+												&nbsp;Enregistrer et Ajouter</button>
+
+										</div>
+									</div>
+								{% endif  %}
+
+
+							</div>
+
+						</div>
+
+						{{form_widget(form._token)}}
+						{{ form_end(form,{'render_rest': false}) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

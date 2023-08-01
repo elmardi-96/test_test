@@ -1,0 +1,84 @@
+{#{{ dump(app.session.get('modules')) }}#}
+
+<li class="dropdown">
+
+    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle " data-toggle="dropdown">
+        <i class="fa fa-list"></i>
+        Applications</a>
+    <ul role="menu" class="dropdown-menu">
+        {% for key , module in app.session.get('modules') %}
+            {% if (module.route is not null)    %}
+                {% set url ="" %}
+                {% if module.routeWithParam == 1   %}
+                
+                    {% set url = path(module.route , {'id':module.id}) %}
+                {% else %}
+                    {% set url = path(module.route) %}
+                {% endif %}
+                <li>
+                    <a href="{{ url }}">{{ module.titre|capitalize }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        <li class="dropdown-divider"></li>
+        <li>
+            <a href="{{ path('app') }}">Applications</a>
+        </li>
+
+
+    </ul>
+</li>
+
+{% if is_granted('ROLE_ADMIN') %}
+    <li class="nav-item">
+        <a class="nav-link " href="{{asset('config')}}">
+            <i class="fa fa-wrench"></i>
+            Configurations
+        </a>
+    </li>
+
+
+
+{% endif %}
+
+<li class="dropdown">
+    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+        <img alt="image " class="rounded-circle img-logo" src="/images/user/profil/profil.png">
+    </a>
+    <ul class="dropdown-menu dropdown-alerts pos-re">
+        <li>
+            <div class="pointer" data-aura-rendered-by="117:1576;a" data-proxy-id="aura-pos-lib-8" id="117:1576;a" style="position: absolute;left: 267.005px;top: -10.0101px;"></div>
+            <a href="mailbox.html" class="dropdown-item">
+                <div>
+                    <img alt="image " class="rounded-circle pro" src="/images/user/profil/profil.png">
+                    <p class="pap">{{ app.user.nom }}
+                        {{ app.user.prenom }}</p>
+                </div>
+            </a>
+        </li>
+        <li class="">
+            <h3 class="density-section-header" data-aura-rendered-by="77:1377;a">Informations du compte</h3>
+        </li>
+        <li>
+            <div class="">
+                <a href="{{path('user_profil_index')}}" class="pos-left" style="color: rgb(0, 109, 204) !important;">
+                    <strong>
+                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                        Mon Profil</strong>
+                </a>
+            </div>
+        </li>
+        <li class="">
+            <h3 class="density-section-header" data-aura-rendered-by="77:1377;a">Deconnexion</h3>
+        </li>
+        <li>
+            <div class="">
+                <a href="{{path('logout')}}" class="pos-left" style="color: rgb(0, 109, 204) !important;">
+                    <strong>
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        Deconnexion</strong>
+                </a>
+            </div>
+        </li>
+    </ul>
+</li>

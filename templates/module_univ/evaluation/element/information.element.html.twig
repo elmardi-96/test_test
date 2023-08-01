@@ -1,0 +1,233 @@
+<div class="ibox">
+	<div class="ibox-content  border-padding-none">
+
+		<div class="">
+			<div>
+				<div
+					class="col-lg-12 animated fadeInRight border-padding-none">
+					<!--<h1 class="module">module</h1>-->
+					<title class="title-text" data-color="#8497b0">élément</title>
+					<!--<header class="w3-display-container w3-content w3-wide" style="/* max-width:1500px; */letter-spacing: 4px;/* margin-left: auto; */margin-right: auto;position: relative;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;font-size: 5px;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);width: 100%;border-bottom: 1px solid #ffffff;background: #ce7a7a;" id="home">
+						<span class="w3-image" src="" alt="Architecture" width="1500" height="800" style="
+										    vertical-align: middle;
+										    max-width: 100%;
+										    height: auto;
+										    height: 100px;
+										    background: #ce7a7a;
+										"></span>
+						<div class="w3-display-middle w3-margin-top w3-center" style="
+												    position: absolute;
+												    top: 50%;
+												    left: 50%;
+												    transform: translate(-50%,-50%);
+												    -ms-transform: translate(-50%,-50%);
+												    text-align: center!important;
+												    margin-top: -4px!important;
+												">
+							<h1 class="w3-xxlarge w3-text-white" style="
+														    font-size: 25px!important;
+														    color: #fff!important;
+														    padding-top: 14px;
+														">
+								<span class="w3-padding w3-black w3-opacity-min" style="
+																    opacity: 0.9;
+																    padding: 8px 16px!important;
+																    color: #fff!important;
+																    background-color: #283c4c!important;
+																">
+									<b>Élément</b>
+								</span>
+							</h1>
+						</div>
+					</header>-->
+					<div class="card-ribbon card-ribbon-element evaluation-element">
+						<span>
+							<div class="style-position">élément</div>
+						</span>
+					</div>
+					<div class="mail-box-header header-mail-show">
+
+						<h2 class="header-show header-title">
+							élément :
+							{{element.description}}
+							<span class="float-right font-normal">
+								<a href="{{path("module_univ_evaluation_moyenne_element_fun",{id:element.id})}}" class="href-btn-show btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Print email">
+									<i class="fa fa-calculator"></i>
+									Calculer moyenne
+								</a>
+								
+							</span>
+						</h2>
+						<div class="mail-tools tooltip-demo m-t-md">
+							<h5 class="padding-0-show">
+								<div class="row">
+									<div class="col-md-12 padding-show">
+										<h3 class="m-t-none margin-bottom">INFORMATIONS <button class="promotion btn btn-white btn-sm href-btn-show link-style"  ><i class="fa fa-info"></i> Informations</button></h3>
+										<div class="hr-line-dashed hr-line-dashed-co"></div>
+										<div class="form-group row ph">
+											<label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+											<div class="col-sm-8">
+												<p class="form-control-static">{{element.id}}</p>
+											</div>
+										</div>
+										<div class="hr-line-dashed hr-line-dashed-co"></div>
+										<div class="form-group row ph">
+											<label class="col-sm-4 required font-weight-bold font-weight-bold">Coéfficient
+											</label>
+
+											<div class="col-sm-8">
+												<p class="form-control-static">{{element.coefficient}}</p>
+											</div>
+
+										</div>
+										<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+										<div class="form-group row ph">
+											<label class="col-sm-4 required font-weight-bold font-weight-bold">Créer par
+											</label>
+
+											<div class="col-sm-8">
+												<p class="form-control-static">{{element.userCreated.username}}</p>
+											</div>
+
+										</div>
+										<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+										<div class="form-group row ph">
+											<label class="col-sm-4 required font-weight-bold font-weight-bold">Description
+											</label>
+
+											<div class="col-sm-8">
+												<p class="form-control-static">{{element.description}}</p>
+											</div>
+
+										</div>
+
+
+										<div class="hr-line-dashed hr-line-dashed-co"></div>
+										<div class="form-group row ph">
+											<label class="col-sm-4 required font-weight-bold font-weight-bold">Position actuel</label>
+
+											<div class="col-sm-8">
+												<p class="form-control-static">
+													{% if element.positionActuel is defined and element.positionActuel is not empty %}
+														{% for key, pos in element.positionActuel %}
+															{{key}}
+														{% endfor %}
+														{% else %}Créer
+													{% endif %}
+												</p>
+											</div>
+
+										</div>
+
+
+									</div>
+								</div>
+							</h5>
+						</div>
+					</div>
+					<div class="mail-box">
+
+
+						<div class="mail-attachment padding-attachement">
+
+
+							<h3 class="m-t-none margin-bottom">NATURE EPREUVES</h3>
+
+							<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+							<div class="panel-group" id="accordion">
+								{% for key , eps in element.univExControleEpreuves %}
+									<div class="panel panel-default">
+
+
+										<div class="panel-heading heading-show">
+											<h4 class="panel-title">
+												<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{key}}">
+													{{ eps.natureEpreuve.designation }}
+													(<a href="{{path('module_univ_evaluation_moyenne_epreuve_fun',{id:eps.id})}}" class="link-show">{{eps.description}}</a>)
+													<span style="float:right">
+														Date :
+														{{ eps.created|date("d/m/Y") }}
+														|
+																																																								Postion :
+														{% for key,value in eps.positionActuel %}
+															{{ key }}
+														{% endfor %}
+													</span>
+												</a>
+
+											</h4>
+										</div>
+										<div id="collapse{{key}}" class="panel-collapse collapse in">
+											<div class="panel-body body-show">
+
+												<div class="row">
+													<div class="col-md-6 b-r">
+														<ul class="list-group clear-list" style="font-size: 9px;">
+
+															<li class="list-group-item fist-item">
+																<span class="float-right">
+																	{{eps.nature}}
+																</span>
+																<i class="fa fa-circle circle-o"></i>
+																Nature
+															</li>
+															<li class="list-group-item">
+																<span class="float-right">
+																	{{eps.type}}
+																</span>
+																<i class="fa fa-circle circle-o"></i>
+																Type
+															</li>
+														</ul>
+													</div>
+													<div class="col-md-6">
+														<ul class="list-group clear-list" style="font-size: 9px;">
+
+															<li class="list-group-item fist-item">
+																<span class="float-right">
+																	{{eps.description}}
+																</span>
+																<i class="fa fa-circle circle-o"></i>
+																Description
+															</li>
+															<li class="list-group-item ">
+																<span class="float-right">
+																	{% for key,value in eps.positionActuel %}
+																		{{ key }}
+																	{% endfor %}
+																</span>
+																<i class="fa fa-circle circle-o"></i>
+																Statut
+															</li>
+														</ul>
+
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+
+									</div>
+								{% endfor %}
+							</div>
+
+						</div>
+
+
+						<div class="clearfix"></div>
+
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+
+{{ render(controller('App\\Controller\\moduleUniv\\evaluation\\EvaluationAnneeController:ChoixPromotion',{ 'id': element.controleModule.controleSemestre.controlePromotion ,'type':'element','active':element.id}))}}

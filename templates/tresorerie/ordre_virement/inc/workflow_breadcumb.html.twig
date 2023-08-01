@@ -1,0 +1,62 @@
+<div class="row">
+	<div class="col-6">
+
+        <h4>ORDRES DES VIREMENTS ET CHÈQUES</h4>
+		{#% if  transaction is defined and transaction is not empty and transaction.id is not empty %}
+				            {% set count = 0 %}
+				            {% set count2 = 0 %}
+				            {% for key , place  in { "creer":"Creee" ,  "valider":"Validee"}  %}
+				                {% if count >= 0 %}
+				
+				                    <a href="#" class="btn btn-default
+				                       {% if workflow_has_marked_place(transaction, key)  %}
+				                           btn-breadcrumb2-active
+				                       {% endif %}
+				                       {% if count2 == 0  %}{{ workflow_metadata(transaction, 'class_css', key)}}{% else %} hide-btn-workflow {% endif %}
+				                       ">{{ place }}
+				                    </a>
+				                    {% set count = count + 1%}
+				                    {% if workflow_has_marked_place(transaction, key)  %}
+				                        {% set count2 = count2 + 1 %}
+				                    {% endif %}
+				                    
+				                    
+				                    
+				                {% endif %}
+				
+				            {% endfor %}
+				        {% endif %#}
+	</div>
+	<div class="col-6">
+			<div class="dropdown dropdown-inline text-end">
+				<a href="javascript:;" class="" data-toggle="dropdown">
+					<span class="svg-icon svg-icon-md">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewbox="0 0 24 24" version="1.1" class="svg-top svg-color">
+							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<rect x="0" y="0" width="24" height="24"/>
+								<circle fill="#000000" cx="12" cy="5" r="2"/>
+								<circle fill="#000000" cx="12" cy="12" r="2"/>
+								<circle fill="#000000" cx="12" cy="19" r="2"/>
+							</g>
+						</svg>
+					</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+					<ul class="dropdown-menu show drp-list" x-placement="bottom-start">
+					
+						<li>
+							<a href="#" style="float: left;" type="button" class="dropdown-item" data-toggle="modal" data-target="#check">
+								<i class="fa fa-edit"></i> Personnaliser le paiement
+							</a>
+						</li>
+						<li>
+							<a href="#" style="float: left;" type="button" class="dropdown-item" data-toggle="modal" data-target="#acquise">
+								<i class="fa fa-edit"></i> Accusé
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+	</div>
+</div>

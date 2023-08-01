@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="col-12">
+		<div class="dropdown dropdown-inline text-end">
+			<a href="javascript:;" class="" data-toggle="dropdown">
+				<span class="svg-icon svg-icon-md">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewbox="0 0 24 24" version="1.1" class="svg-top svg-color">
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<rect x="0" y="0" width="24" height="24"/>
+							<circle fill="#000000" cx="12" cy="5" r="2"/>
+							<circle fill="#000000" cx="12" cy="12" r="2"/>
+							<circle fill="#000000" cx="12" cy="19" r="2"/>
+						</g>
+					</svg>
+				</span>
+			</a>
+			<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+				<ul class="dropdown-menu show drp-list" x-placement="bottom-start">
+					<li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">CHOISIR :</li>
+					{% for key ,  operation in operations %}
+						{% if operation.isIndex == 1 and  operation.prefix== '_new'%}
+							<li>
+								<a {% if operation.route is not null %} {% endif %} id="{{operation.prefix}}" class="btn btn-demo add{{operation.classCs}}">
+									<i class="fa {{ operation.icon }}"></i>&nbsp;&nbsp;
+									{{ operation.titre|capitalize }}</a>
+							</li>
+
+						{% endif %}
+					{% endfor %}
+					<li>
+						<a class="btn btn-demo" href="{{ path('solde_banq')}}" target="_blank">
+							<i class="fa fa-money"></i>&nbsp;&nbsp;{{ 'solde'|capitalize }}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

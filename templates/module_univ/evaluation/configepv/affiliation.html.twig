@@ -1,0 +1,285 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Affiliation | Epreuves | UNIV
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+	{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'_groupe'}}) }}
+	<div class="row wrapper white-bg page-heading fixed-top-navigation-button">
+		<div class="col-lg-6">
+			{% include './module_univ/evaluation/configepv/inc/workflow_breadcumb.html.twig' %}
+		</div>
+		<div class="col-lg-6">
+			<div class="title-action">
+				{% if workflow_has_marked_place(epreuve, 'affilier') %}
+					<button class="btn btn-white btn-xs btn-lg my-button " data-style="expand-left" type="submit">
+						<i class="fa fa-save"></i>
+						{{ button_label|default('Enregistrer') }}</button>
+				{% endif %}
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './module_univ/evaluation/configepv/inc/workflow.html.twig' %}
+		</div>
+
+	</div>
+	<br/><br/>
+	<div class="row pt-20">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div class="ibox-content" style="padding-top: 4px ;">
+
+
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel padding-style">
+								<div class="panel-heading">
+									<div class="panel-options">
+
+										{% include './module_univ/evaluation/configepv/inc/navigation.html.twig' %}
+									</div>
+								</div>
+								<div class="col-md-12 scroll_content">
+									<div class="panel-body">
+										<div class="tab-content">
+											<div class="tab-pane active show affi" id="tab-1">
+												{% if workflow_has_marked_place(epreuve, 'affilier') %}
+													<div
+														class="row">
+														{#<div class="col-md-3 b-r">
+																																																																																																		                                                            <h3 class="m-t-none m-b">Information Groupe</h3>
+																																																																																																		                                                            <div class="hr-line-dashed hr-line-dashed-co"></div>
+																																																																																																		                                                            <div class="form-group row ">
+																																																																																																		                                                                {{ form_label(form.groupe ,'Groupe :', {'label_attr':{'class':'vertical col-sm-4'}}) }}
+																																																																																																		                                                                <div class="col-sm-6">
+																																																																																																		                                                                    {{ form_widget(form.groupe,{'attr':{'class':'sel2 form-control  form-control-sm','placeholder':'Désignation'}}) }}
+																																																																																																		
+																																																																																																		                                                                    <div class="form-error {% if form_errors(form.groupe)|length > 0 %}error-class-tab{% endif %}">
+																																																																																																		                                                                        {{ form_errors(form.groupe) }}
+																																																																																																		                                                                    </div>
+																																																																																																		                                                                </div>
+																																																																																																		                                                            </div>
+																																																																																																		                                                            <div class="hr-line-dashed hr-line-dashed-co"></div>
+																																																																																																		                                                            <div class="form-group row ph">
+																																																																																																		                                                                <label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+																																																																																																		
+																																																																																																		                                                                <div class="col-sm-8">
+																																																																																																		
+																																																																																																		                                                                    <p class="form-control-static">{{epreuve.controleEpreuve.controleElement.element.module.semestre.promotion.formation.etablissement ? epreuve.controleEpreuve.controleElement.element.module.semestre.promotion.formation.etablissement.designation : "" }}</p>
+																																																																																																		
+																																																																																																		                                                                </div>
+																																																																																																		
+																																																																																																		                                                            </div>
+																																																																																																		                                                            <div class="hr-line-dashed hr-line-dashed-co"></div>
+																																																																																																		
+																																																																																																		                                                            <div class="form-group row ph">
+																																																																																																		                                                                <label class="col-sm-4 required font-weight-bold font-weight-bold">Formation</label>
+																																																																																																		
+																																																																																																		                                                                <div class="col-sm-8">
+																																																																																																		                                                                    <p class="form-control-static">{{epreuve.controleEpreuve.controleElement.element.module.semestre.promotion.formation ? epreuve.controleEpreuve.controleElement.element.module.semestre.promotion.formation.designation : "" }}</p>
+																																																																																																		                                                                </div>
+																																																																																																		
+																																																																																																		                                                            </div>
+																																																																																																		                                                            <div class="hr-line-dashed hr-line-dashed-co"></div>
+																																																																																																		
+																																																																																																		                                                            <div class="form-group row ph">
+																																																																																																		                                                                <label class="col-sm-4 required font-weight-bold font-weight-bold">Promotion</label>
+																																																																																																		
+																																																																																																		                                                                <div class="col-sm-8">
+																																																																																																		                                                                    <p class="form-control-static">{{epreuve.controleEpreuve.controleElement.element.module.semestre.promotion ? epreuve.controleEpreuve.controleElement.element.module.semestre.promotion.designation : "" }}</p>
+																																																																																																		                                                                </div>
+																																																																																																		
+																																																																																																		                                                            </div>
+																																																																																																		                                                            <div class="hr-line-dashed hr-line-dashed-co"></div>
+																																																																																																		
+																																																																																																		                                                            <div class="form-group row ph">
+																																																																																																		                                                                <label class="col-sm-4 required font-weight-bold font-weight-bold">Module</label>
+																																																																																																		
+																																																																																																		                                                                <div class="col-sm-8">
+																																																																																																		                                                                    <p class="form-control-static">{{epreuve.controleEpreuve.controleElement.element.module ? epreuve.controleEpreuve.controleElement.element.module.designation : "" }}</p>
+																																																																																																		                                                                </div>
+																																																																																																		
+																																																																																																		                                                            </div>
+																																																																																																		                                                            <div class="hr-line-dashed hr-line-dashed-co"></div>
+																																																																																																		
+																																																																																																		                                                            <div class="form-group row ph">
+																																																																																																		                                                                <label class="col-sm-4 required font-weight-bold font-weight-bold">Elément</label>
+																																																																																																		
+																																																																																																		                                                                <div class="col-sm-8">
+																																																																																																		                                                                    <p class="form-control-static">{{epreuve.controleEpreuve.controleElement.element ? epreuve.controleEpreuve.controleElement.element.designation : "" }}</p>
+																																																																																																		                                                                </div>
+																																																																																																		
+																																																																																																		                                                            </div>
+																																																																																																		                                                            <div class="hr-line-dashed hr-line-dashed-co"></div>
+																																																																																																		
+																																																																																																		                                                            <div class="form-group row ph">
+																																																																																																		                                                                <label class="col-sm-4 required font-weight-bold font-weight-bold">Année</label>
+																																																																																																		
+																																																																																																		                                                                <div class="col-sm-8">
+																																																																																																		                                                                    <p class="form-control-static">{{epreuve.controleEpreuve.controleElement.controleModule.controleSemestre.controlePromotion.annee ? epreuve.controleEpreuve.controleElement.controleModule.controleSemestre.controlePromotion.annee.designation : ""}}</p>
+																																																																																																		                                                                </div>
+																																																																																																		
+																																																																																																		                                                            </div>
+																																																																																																		
+																																																																																																		
+																																																																																																		                                                        </div>#}
+														<div class="col-md-12">
+
+															<h3 class="m-t-none m-b">Liste des étudiants</h3>
+															<div class="hr-line-dashed hr-line-dashed-co"></div>
+															<div class="row">
+																<div class="col-12">
+																	<div class="form-group row ">
+                                                                    
+																		{{ form_label(form.groupe ,'Groupe :', {'label_attr':{'class':'vertical col-sm-2'}}) }}
+																		<div class="col-sm-2">
+																			{{ form_widget(form.groupe,{'attr':{'class':'sel2 form-control  form-control-sm','placeholder':'Désignation'}}) }}
+
+																			<div class="form-error {% if form_errors(form.groupe)|length > 0 %}error-class-tab{% endif %}">
+																				{{ form_errors(form.groupe) }}
+																			</div>
+																		</div>
+
+																	</div>
+																	<div class="form-group row ">
+                                                                    
+																		<label class="vertical col-sm-2 required _multiple_actions" style="display:none;">Action :
+																		</label>
+																		<div class="col-sm-2">
+																			<select class="form-control _multiple_actions" style="display:none;">
+																				<option value="">Action</option>
+
+																				<option value="_supprimer_etudiant">
+																					Supprimer
+																				</option>
+																			</select>
+																		</div>
+																		<div class="col-2 list_actions_b" style="position: fixed;"></div>
+																	</div>
+																</div>
+
+															</div>
+                                                            <div class="hr-line-dashed hr-line-dashed-co"></div>
+														
+															<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show-4">
+																<thead>
+																	<tr>
+																		<th style="width:5%">#</th>
+																		<th style="width:10%">Code</th>
+																		<th style="width:35%">Nom
+																		</th>
+																		<th style="width:20%">Prénom</th>
+																		{#<th style="width:5%">Cin
+																																																																																																																														                                                                            </th>
+																																																																																																																														                                                                            <th style="width:5%">Ville
+																																																																																																																														                                                                            </th>
+																																																																																																																														                                                                            <th style="width:5%">Téléphone</th>#}
+																		{#<th style="width:5%">Supprimer</th>#}
+																	</tr>
+																</thead>
+																<tbody>
+
+																	{% for etu  in  etudiant %}
+																		<tr>
+																			<td>
+																				<input type="checkbox" class="action" name="_action" data-id="{{etu.id}}" data-token="{{ csrf_token('delete' ~ etu.id) }}" value="{{etu.id}}"/>
+																			</td>
+																			<td>{{etu.inscription.code}}</td>
+																			<td>
+																				{{ etu.inscription.admission.preinscription.etudiant.nom }}
+																			</td>
+																			<td>
+																				{{ etu.inscription.admission.preinscription.etudiant.prenom }}
+																			</td>
+																			{#<td>
+																																																																																																																																					                                                                                    {{ etu.inscription.admission.preinscription.etudiant.cin }}
+																																																																																																																																					                                                                            </td>
+																																																																																																																																					                                                                            <td>
+																																																																																																																																					                                                                                    {{ etu.inscription.admission.preinscription.etudiant.ville }}
+																																																																																																																																					                                                                            </td>
+																																																																																																																																					                                                                            <td>
+																																																																																																																																					                                                                                    {{etu.inscription.admission.preinscription.etudiant.tel1}}
+																																																																																																																																					                                                                            </td>#}
+																			{#<td>
+																																																																																																																																					                                                                                                                                                                                                        <a id="_delete" data-id="{{etu.id}}" data-token="{{ csrf_token('delete' ~ etu.id) }}" class="btn btn-white btn-xs">
+																																																																																																																																					                                                                                                                                                                                                        <i class="fa fa-trash"></i>
+																																																																																																																																					                                                                                                                                                                                                        </a>
+																																																																																																																																					                                                                                                                                                                                                        </td>#}
+																		</tr>
+																	{% endfor %}
+																	{# {% endif %} #}
+																</tbody>
+																<tfoot>
+																	<tr>
+																		<th style="width:5%"><input type="checkbox" class="scolumn_0"></th>
+																		<th style="width:10%">Code</th>
+																		<th style="width:35%">Nom
+																		</th>
+																		<th style="width:20%">Prénom</th>
+																		{#<th style="width:5%">Cin
+																																																																																																																														                                                                            </th>
+																																																																																																																														                                                                            <th style="width:5%">Ville
+																																																																																																																														                                                                            </th>
+																																																																																																																														                                                                            <th style="width:5%">Téléphone</th>#}
+																		{#<th style="width:5%">Supprimer</th>#}
+																	</tr>
+																</tfoot>
+															</table>
+
+
+														</div>
+														<div class="col-md-6">
+															<h3 class="m-t-none m-b"><br>
+															</h3>
+
+														</div>
+													</div>
+												{% else %}
+													<div class="forum-item animated bounce">
+														<div class="row">
+															<div class="col-md-9">
+																<div class="forum-icon">
+																	<i class="fa fa-warning"></i>
+																</div>
+																<a class="forum-item-title">Important</a>
+																<div class="forum-sub-title">
+																	Vous ne pouvez pas Affilié une évaluation avant l'étape Affilié ,
+																	<br/>veuillez consulter ce lien pour plus d'informations sur cette évaluation
+																	<a href="{{ path('module_univ_evaluation_epreuves_show' , {id:epreuve.id})}}">{{ epreuve.code }}</a>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												{% endif %}
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% if epreuve is defined %}
+		<input type="hidden" name="_id" value="{{ epreuve.id }}"/>
+	{% endif %}
+	{{form_widget(form._token)}}
+	{{ form_end(form,{'render_rest': false}) }}
+
+
+	<!-- Modal -->
+
+	{{ render(controller('App\\Controller\\moduleUniv\\evaluation\\EvaluationAnneeController:ChoixPromotion',{ 'id': epreuve.ControleEpreuve.controleElement.controleModule.controleSemestre.controlePromotion ,'type':'epv','active':epreuve.id}))}}
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_epreuve') }}
+{% endblock %}

@@ -1,0 +1,41 @@
+{% set ma_class =   class|default('detail_form') %}
+
+
+
+{{ form_start(form_det ,{'attr':{'novalidate': 'novalidate'  , 'class': ma_class~' form-inline '}}) }} 
+<table style="width: 100%" class="m-add t-m table table-striped table-bordered table-hover dataTables-example det_for">
+    <tr>
+        <td style="width: 5%">
+
+        </td>
+        <td style="width: 60%">
+
+            {{ form_widget(form_det.frais,{ 'attr':{ 'placeholder':'Article','class':'style-detail-form form-control form-control-sm sel2 data.article frais',  'autofocus':'autofocus'}}) }} 
+
+        </td>
+        <td >
+
+            {{ form_widget(form_det.montant,{'attr':{'class':'style-detail-form form-control form-control-sm montant' ,'placeholder':'0.0'}}) }} 
+
+        </td>
+        <td>
+       
+         
+
+
+
+            <button style="padding: 7px " class="btn btn-white btn-xs my-button2"  type="submit">{{ button_label|default('Modifier') }}</button>
+        </td>
+
+
+    </tr>
+</table>
+{{ form_end(form_det,{'render_rest': false}) }}
+
+
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+<header>
+	<table class="table-header" style="background:#4d4b4b;height:125px;">
+		<tr>
+			<th>
+				<img src="{{ asset(image)[1:] }}" class="logo-pdmf" alt="Logo">
+			</th>
+			<th class="th3">
+				<div style=" ">
+					<div style=" margin: 10px;color: #1d1944;background:white;padding:10px;line-height: 12px;font-size: 9px;font-family: 'courierbold';text-transform:none;">
+
+						FACTURE N° :
+						{{cab.code}}<br/>
+						DATE_FACTURE :
+						{{ cab.created ? cab.created|date("d/m/Y") : "now"|date("d/m/Y")  }}<br/>
+						<br/>
+						ID_CLIENT :
+						{{ cab.client ? cab.client.code : null  }}
+						<br/>
+						INTITULE_CLIENT :
+						{{ cab.client ? cab.client.societe : null  }}
+						<br/>
+						ADRESSE_CLIENT :
+						{{ cab.client ? cab.client.adresse : null  }}
+					</div>
+				</div>
+			</th>
+		</tr>
+
+	</table>
+	<div style="height:100px;width:100%;display:block;"></div><br/>
+
+</header>
+<footer>
+	<div class="footer">
+
+		<p style="text-align:center;">
+			{% if cab.dossier  %}
+				{{ cab.dossier.titre }}<br/>
+
+				{% if  cab.dossier.rc %}
+					<label>RC :</label>
+					{{ cab.dossier.rc }}
+					|
+				{% endif %}
+				{% if  cab.dossier.ice %}
+					<label>ICE :</label>
+					{{ cab.dossier.ice }}
+					|
+				{% endif %}
+				{% if  cab.dossier.iff %}
+					<label>IF :</label>
+					{{ cab.dossier.iff }}
+					|
+				{% endif %}
+				{% if  cab.dossier.cnss %}
+					<label>CNSS :</label>
+					{{ cab.dossier.cnss }}
+					|
+				{% endif %}
+				{% if  cab.dossier.patente %}
+					<label>PATENTE :</label>
+					{{ cab.dossier.patente }}
+					|
+				{% endif %}
+				Adresse : N° 18, LotIchrak Center Hay Hassani Casablanca Fax 05.22.65.58.90 | Fixe 05.22.65.58.90 | Gsm 06.62.34.62.05 | Mail contact@u3s.ma
+			{% endif %}
+		</p>
+	</div>
+</footer>

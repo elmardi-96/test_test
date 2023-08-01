@@ -1,0 +1,30 @@
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+{% if UnivPlEmptime is defined  and UnivPlEmptime.id > 0 %}
+	{% include './module_univ/cours/inc/workflow_breadcumb.html.twig' %}
+{% endif %}
+
+
+
+<ul class="nav nav-tabs">
+	<li>
+		<a class="nav-link {% if "module_univ_cours_show"  in current_path  %} active {%endif%}" href="{{ path('module_univ_cours_show' , {id:UnivPlEmptime.id})}}">
+			<i class="fa fa-info-circle"></i>
+			Informations
+		</a>
+	</li>
+	<li>
+		<a class="nav-link {% if "module_univ_cours_edit"  in current_path or  "module_univ_cours_enseignant"  in current_path %} active {%endif%}" href="{{ path('module_univ_cours_edit' , {id:UnivPlEmptime.id})}}">
+			<i class="fa fa-pencil"></i>
+			Modifier (cours)
+		</a>
+	</li>
+	{#<li> <a class="nav-link {% if "module_univ_cours_enseignant"  in current_path  %} active {%endif%}" href="{{ path('module_univ_cours_enseignant' , {id:UnivPlEmptime.id})}}" >Enseignants </a></li>#}
+	<li>
+		<a class="nav-link {% if "module_univ_cours_docs_impression"  in current_path  %} active {%endif%}" href="{{ path('module_univ_cours_docs_impression' , {id:UnivPlEmptime.id})}}">
+			<i class="fa fa-file-text"></i>
+			Docs/impression
+		</a>
+	</li>
+	{# <li> <a class="nav-link {% if "module_univ_cours_affecter"  in current_path  %} active {%endif%}" href="{{ path('module_univ_cours_affecter' , {id:UnivPlEmptime.id})}}" >Affecter </a></li>#}
+</ul>

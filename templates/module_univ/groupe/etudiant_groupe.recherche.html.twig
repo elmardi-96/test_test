@@ -1,0 +1,109 @@
+
+{%if message==1%}
+    <div class="alert alert-block alert-success">
+        <button type='button' class='close'><i class='ace-icon fa fa-times'></i></button><p><i class='ace-icon fa fa-check'></i>enregistrement a été effectué avec succès.</p>
+    </div>
+{%else%}
+    <div class="alert alert-block alert-warning">
+        <button type='button' class='close'><i class='ace-icon fa fa-times'></i></button><p><i class='ace-icon fa fa-check'></i>résultat de recherche</p>
+    </div>
+{%endif%}
+<div class="panel-group" id="accordion">
+    {%for Groupe in DivisionGroupe %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{Groupe.idGroupe}}">
+                        {{Groupe.idGroupeDesignation}}</a>
+                </h4>
+            </div>
+            <div id="collapse{{Groupe.idGroupe}}" class="panel-collapse collapse">
+                <div class="panel-body">
+                    {%for Detail in DivisionGroupeDetail %}
+                        {%if Groupe.idGroupe == Detail.idGroupe %}
+
+
+
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true" style="">
+                                <div class="panel-body" style="padding-bottom: 0;padding-top: 0;">
+                                    <div class="panel-group">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#collapse{{Groupe.idGroupe}}{{Detail.idGroupeDetail}}" class="collapsed" aria-expanded="false">{{Detail.idGroupeDetailDesignation}}</a><br>
+                                                </h4>
+                                            </div>
+                                            <div id="collapse{{Groupe.idGroupe}}{{Detail.idGroupeDetail}}" class="panel-collapse collapse" style="padding: 5px; height: 10px;" aria-expanded="false">
+
+                                                <table id="" class="display  table  table-bordered table-hover" style="font-size:10px;width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:30% ; background: transparent">code Inscripion</th>
+                                                            <th style="width:30% ; background: transparent">code admission</th>
+                                                            <th style="width:30% ">Nom</th>
+                                                            <th style="width:40% ">Prénom</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        {%for Etudiant in EtudiantGroupe %}
+                                                            {# {{Etudiant.divisionGroupeDetail}}#}
+                                                            {%if Detail.detail == Etudiant.divisionGroupeDetail %}
+
+                                                                <tr> 
+                                                                    <td>{{Etudiant.inscription.code}}</td>
+                                                                    <td>{{Etudiant.inscription.admission.code}}</td>
+                                                                    <td>{{Etudiant.inscription.admission.preinscription.etudiant.nom}}</td>
+                                                                    <td>{{Etudiant.inscription.admission.preinscription.etudiant.prenom}}</td>
+                                                                </tr>
+                                                            {%endif%}
+
+                                                        {%endfor%}
+
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        {%endif%}
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    {%endfor%}
+</div>
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+        $('table.display').DataTable({
+            "iDisplayLength": 10,
+            "lengthMenu": [[10, 15, 25, 50, 100, 200, 20000000], [10, 15, 25, 50, 100, 200, "All"]],
+            "order": [[0, "asc"]],
+            "columnDefs": [
+                {"orderable": false, "targets": 1}
+            ],
+            "language": {
+                "url": "{{asset('assets/js/jquery.dataTablesFrench.json') }}",
+                "processing": true
+            },
+
+        });
+    });
+</script>
+
+
+
+
+
+
+

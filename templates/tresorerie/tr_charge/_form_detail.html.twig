@@ -1,0 +1,63 @@
+{% set ma_class =   class|default('detail_form') %}
+
+
+{{ form_start(form_det ,{'attr':{'novalidate': 'novalidate'  ,"autocomplete":"off", 'class': ma_class~' form-inline '}}) }}
+<table style="width: 100%" class="m-add t-m table table-striped table-bordered table-hover dataTables-example det_for">
+	<tr>
+		<td style="width: 3%"></td>
+		<td
+			style="width: 33%" class='ellast'>
+
+			{#{ form_widget(form_det.article,{ 'attr':{ 'placeholder':'Article','class':'style-detail-form form-control form-control-sm sel2 data.article article',  'autofocus':'autofocus'}}) }#}
+			{{ form_widget(form_det.compte,{'attr':{'class':'sel2 style-detail-form form-control form-control-sm compte  ' ,'placeholder':'Compte'}}) }}
+			<!--<i class="fa fa-search rs" id=""></i>-->
+			<i id="modalActivate" type="button" class="modalActivate fa fa-search rs2" data-toggle="modal" data-target="#exampleModalPreview"></i>
+
+
+		</td>
+		{#<td style="width: 20%">
+		
+		            {{ form_widget(form_det.observation,{'attr':{'class':'style-detail-form form-control form-control-sm' ,'placeholder':'Observation'}}) }} 
+		
+		        </td>#}
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.unite,{'attr':{'class':'sel2 style-detail-form form-control form-control-sm select2_unite' ,'placeholder':'Unite'}}) }}
+
+		</td>
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.quantite,{'attr':{ 'class':'style-detail-form form-control form-control-sm data.quantite' , 'placeholder':'Qnt'}}) }}
+
+		</td>
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.prixunitaire,{'attr':{'class':'style-detail-form form-control form-control-sm prixunitaire data.prixunitaire' ,'placeholder':'P.U'}}) }}
+
+		</td>
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.tva,{'attr':{'class':'style-detail-form form-control form-control-sm tva' ,'placeholder':'TVA'}}) }}
+
+		</td>
+
+		<td style="width: 7%">-</td>
+		<td style="width: 10%">-</td>
+
+		<td>
+			{% if tr_chargedet is defined %}
+				<input type="hidden" name="_id" value="{{ tr_chargedet.id }}"/>
+			{% endif %}
+
+			{% if charge is defined %}
+				<input type="hidden" name="_id_cab" value="{{ charge.id }}"/>
+			{% endif %}
+
+
+			<button style="padding: 7px " class="btn btn-white btn-xs my-button2" type="submit">{{ button_label|default('Modifier') }}</button>
+		</td>
+
+
+	</tr>
+</table>
+{{ form_end(form_det,{'render_rest': false}) }}

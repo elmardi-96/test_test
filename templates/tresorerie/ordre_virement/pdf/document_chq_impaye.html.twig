@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="fr">
+<title>DEMANDE </title>
+
+	</head>
+	<style>
+
+{# @page { size: 360pt 360pt; } #}
+
+		@page {
+			margin: 220px 20px 210px 20px !important;
+			padding: 0px 0px 0px 0px !important;
+		}
+
+		body {
+			font-family: 'Courier';
+			font-size: 9px;                
+			font-weight: 100;
+
+		}
+
+         .header {
+        position: fixed;
+        top: -220px;
+        left: 0px;
+        right: 0px;
+        }
+   
+
+		.logo {
+			max-width: 250px;
+			max-height: 100px;
+			text-align: right;
+		}
+	
+		.footer {
+			/*border-top: 2px solid #555555;*/
+			margin-top: 10px;
+			font-size: 9px;
+			text-align: center;
+			position: fixed;
+			bottom: 150px;
+            left: 0px;
+            right: 0px;
+
+
+		}
+	
+		*,body {
+            font-family: Courier, sans-serif;
+           text-transform: uppercase ;
+
+		}
+
+
+		main {
+			margin-top: 0;
+		}
+        .page_break {page-break-inside: auto;}
+        .sig img{
+            max-width: 200px;
+                    max-height: 50px;
+                    margin-left: 50px;
+        }
+        @font-face {
+		font-family:'Signaturex' ;
+		src:url("./font/SignaturexDemoRegular.ttf") ;
+		}
+
+main {
+    margin-top:0px;
+}
+	</style>
+
+
+
+	<body>
+
+<div class="header">
+
+{{ include ('tresorerie/ordre_virement/pdf/header_cheque_impaye.html.twig') }}   
+
+
+      
+</div>
+{# {% if TrTransactionOne.executer == 1 %}
+    <div class="content" style=" position: absolute; opacity: 0.2; font-size: 155px; transform: rotate(-55deg); text-align:center; align-items: center; padding: 30mm -40mm;">
+        <b>DEJA REGLE</b>
+    </div>
+{% endif %} #}
+<div class="footer">
+
+    {{ include ('tresorerie/ordre_virement/pdf/footer_enc.html.twig') }} 
+
+
+</div>
+
+<body>
+
+
+
+    <div style="padding-right : 15px; font-size:12px; margin-left:60px; margin-right:60px;margin-top:15px">
+    <div style=" margin-bottom:30px;">
+
+
+            <p style="padding-right:15px; 
+                            text-transform: uppercase; 
+                            line-height:2.2;
+                            text-align: center;">
+                <b>DEPARTEMENT BANQUE ET REGIES <br>FONDATION CHEIKH ZAID RABAT</b>
+                </p>
+
+   </div>
+
+
+
+
+
+    <p style="margin-left: 15px;"> <b>OBJET :</b> CHEQUE IMPAYE / {{ TrTransactionOne.designation}}</p>
+    <br />
+    <br/>
+    <br/>
+
+    <p style="margin-left: 15px;"> <b><span style="margin-right: 86px;">SITE </span>:</b> {{TrTransactionOne.dossier.description}}
+    </p>
+
+    <p style="margin-left: 15px;"> <b><span style="margin-right: 73px;">COMPTE </span>:</b> 
+    {{TrTransactionOne.operation.compteDestinataire.description}}
+    </p>
+    
+    <p style="margin-left: 15px;"> <b>MODE DE PAIEMENT :</b> {{TrTransactionOne.modepaiement.designation}}
+    
+    </p>
+    {# <p style="margin-left: 15px;"> <b><span style="margin-right: 22px;">NUMERO CHEQUE</span> :</b> {{TrTransactionOne.numCheque}}
+    
+    </p> #}
+    <p style="margin-left: 15px;"> <b><span style="margin-right: 80px;">MOTIF </span>:</b> {{TrTransactionOne.motifAnnuler}} </p>
+    {# <p style="margin-left: 15px;"> <b><span style="margin-right: 87px;">DATE </span>:
+    </p> #}
+
+   
+
+{# {% if TrTransactionOne.operation.factureClient.avoir = 1 %}
+     {{ include ('tresorerie/ordre_virement/pdf/content_dec.html.twig')}}  
+     {
+{# {% endif %} #}
+<table class="table1" style="width: 81% ;margin-left:auto;margin-right:auto; padding-top:20px;padding-bottom:-20px;page-break-inside:avoid" align="center" cellspacing="0">
+
+  
+        <tr style="background-color: #f2f2f2; color:black; font-size: 10px; width:100%;text-align:center ">
+            <th style="width:40%;padding: 5px;margin:10px;">CLIENT</th>
+            <th style="width:40%;padding: 5px">NUMERO CHEQUE</th>
+            <th style="width:25%;padding: 5px">MONTANT</th>
+        </tr>
+   
+        <tr>
+            <td style="padding-bottom: 5px"></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+		
+			{% for item in TrTransactions | slice(0, 30) %}
+				{% if item.montant != 0 %}
+
+					<tr style="color:black; font-size: 10px; width:100%; text-align:center; ">
+
+						<td style="width:40%;padding: 3px;font-size: 10px;text-align:left">
+							{% if TrTransactionOne.operation.pPiece.id ==  32 and  item.designation  %}
+								{{item.designation}}
+							{% else %}
+								{{item.nom}}
+							{% endif %}
+						</td>
+						<td style="width:46%;padding: 3px;font-size: 10px;text-align:center">   
+                            
+                                {{TrTransactionOne.numCheque}}
+                           
+                            </td>
+						<td style="width:25%;padding: 3px;font-size: 10px;text-align:right">
+                            {{item.montant|trim('-')|number_format(2, ',', ' ')}}
+						</td>
+					</tr>
+				{% endif %}
+			{% endfor %}
+	
+	
+		
+</table>
+<br><br><br><br>
+<div style="padding-right:15px;padding-left : 15px; padding:6px; width: 130px;background-color: #f2f2f2;position:relative;right:2.5%;text-align: right; left:71.5%">
+    {{somme|number_format(2, ',', ' ') }}
+    </div>
+
+
+
+
+
+</body>
+
+{%  if TrTransactions | length > 3 and TrTransactionOne.operation.pPiece.id not in [28, 30] %}
+    {# {%  set content = 'oui' %} #}
+    <div class='page2' style="page-break-before: always;">
+    {{ include ('tresorerie/ordre_virement/pdf/content.html.twig')  }}   
+    {# ,{'content' :content} #}
+    </div>
+{# {%  else %}
+{%  set content = 'non' %}
+#}
+{%  endif %}
+
+
+
+
+

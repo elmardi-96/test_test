@@ -1,0 +1,470 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Paramètrage index
+{% endblock %}
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+        <div class="col-lg-6">
+            <h2 class="fo">Paramètrage<span>(univ)</span>
+            </h2>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+    </div>
+    <br/><br/>
+
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+        <div class="col-lg-12">
+
+            <div class="panel-heading">
+                <div class="panel-options"></ul>#}
+                    {% include './parametrage/inc/navigation.html.twig' %}
+                </div>
+            </div>
+            <div class="ibox ">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table display table-striped table-bordered table-hover" id="grid-parametres" style="width: 100%">
+                            <thead>
+                                <tr>
+
+                                    <th></th>
+                                    <th>Paramétrage</th>
+                                    <th>Table</th>
+                                    <th>Description</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% set i = 0 %}
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_ac_etablissement_index')}}">Etablissement</a>
+                                    </td>
+                                    <td>univ_ac_etablissement</td>
+                                    <td>Table de paramétrage établissement  </td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_ac_formation_index')}}">Formation</a>
+                                    </td>
+                                    <td>univ_ac_formation</td>
+                                    <td>Table de paramétrage formation</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_ac_promotion_index')}}">Promotion</a>
+                                    </td>
+                                    <td>univ_ac_promotion</td>
+                                    <td>Table de paramétrage promotion</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_ac_semestre_index')}}">Semestre</a>
+                                    </td>
+                                    <td>univ_ac_semestre</td>
+                                    <td>Table de paramétrage semestre</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_ac_module_index')}}">Module</a>
+                                    </td>
+                                    <td>univ_ac_module</td>
+                                    <td>Table de paramétrage module</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_ac_element_index')}}">Element</a>
+                                    </td>
+                                    <td>univ_ac_element</td>
+                                    <td>Table de paramétrage element</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_x_modalite_index')}}">Modalite</a>
+                                    </td>
+                                    <td>univ_x_modalite</td>
+                                    <td>Table de paramétrage modalite</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_x_filiere_index')}}">Filiere</a>
+                                    </td>
+                                    <td>univ_x_filiere</td>
+                                    <td>Table de paramétrage filiere</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_x_type_bac_index')}}">Type de bac</a>
+                                    </td>
+                                    <td>univ_x_type_bac</td>
+                                    <td>Table de paramétrage type de bac</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_nature_demande_index')}}">Nature de demande</a>
+                                    </td>
+                                    <td>univ_nature_demande</td>
+                                    <td>Table de paramétrage nature de demande</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_ac_departement_index')}}">Departement</a>
+                                    </td>
+                                    <td>univ_ac_departement</td>
+                                    <td>Table de paramétrage departement</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_ac_annee_index')}}">Année</a>
+                                    </td>
+                                    <td>univ_ac_annee</td>
+                                    <td>Table de paramétrage année</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_x_academie_index')}}">Académie</a>
+                                    </td>
+                                    <td>univ_x_academie</td>
+                                    <td>Table de paramétrage académie</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_x_langue_index')}}">Langue</a>
+                                    </td>
+                                    <td>univ_x_langue</td>
+                                    <td>Table de paramétrage langue</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_matiere_index')}}">Matiere</a>
+                                    </td>
+                                    <td>univ_p_matiere</td>
+                                    <td>Table de paramétrage matiere</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_couleur_index')}}">Couleur</a>
+                                    </td>
+                                    <td>univ_p_couleur</td>
+                                    <td>Table de paramétrage couleur</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_batiment_index')}}">Batiment</a>
+                                    </td>
+                                    <td>univ_p_batiment</td>
+                                    <td>Table de paramétrage batiment</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_direction_index')}}">Direction</a>
+                                    </td>
+                                    <td>univ_p_direction</td>
+                                    <td>Table de paramétrage direction</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_document_index')}}">Document</a>
+                                    </td>
+                                    <td>univ_p_document</td>
+                                    <td>Table de paramétrage document</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_enseignant_index')}}">Enseignant</a>
+                                    </td>
+                                    <td>univ_p_enseignant</td>
+                                    <td>Table de paramétrage enseignant</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_enseignant_grille_index')}}">Enseignant Grille</a>
+                                    </td>
+                                    <td>univ_p_enseignant_grille</td>
+                                    <td>Table de paramétrage enseignant grille</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_estatut_index')}}">Statut</a>
+                                    </td>
+                                    <td>univ_p_estatut</td>
+                                    <td>Table de paramétrage statut</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_etage_index')}}">Etage</a>
+                                    </td>
+                                    <td>univ_p_etage</td>
+                                    <td>Table de paramétrage etage</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_frais_index')}}">Frais</a>
+                                    </td>
+                                    <td>univ_p_frai</td>
+                                    <td>Table de paramétrage frais</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_frais_categorie_index')}}">Frais Categorie</a>
+                                    </td>
+                                    <td>univ_p_frais_categorie</td>
+                                    <td>Table de paramétrage frais categorie</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_grade_index')}}">Grade</a>
+                                    </td>
+                                    <td>univ_p_grade</td>
+                                    <td>Table de paramétrage grade</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_mesure_alerte_index')}}">Mesure Alerte</a>
+                                    </td>
+                                    <td>univ_p_mesure_alerte</td>
+                                    <td>Table de paramétrage mesure alerte</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_nature_alerte_index')}}">Nature Alerte</a>
+                                    </td>
+                                    <td>univ_p_nature_alerte</td>
+                                    <td>Table de paramétrage nature alerte</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_organisme_index')}}">Organisme</a>
+                                    </td>
+                                    <td>univ_p_organisme</td>
+                                    <td>Table de paramétrage organisme</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_salle_index')}}">Salle</a>
+                                    </td>
+                                    <td>univ_p_salle</td>
+                                    <td>Table de paramétrage salle</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_signataire_index')}}">Signataire</a>
+                                    </td>
+                                    <td>univ_p_signataire</td>
+                                    <td>Table de paramétrage signataire</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_d_service_index')}}">Service</a>
+                                    </td>
+                                    <td>univ_d_service</td>
+                                    <td>Table de paramétrage service</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_pr_nature_epreuve_index')}}">Nature epreuve</a>
+                                    </td>
+                                    <td>univ_pr_nature_epreuve</td>
+                                    <td>Table de paramétrage nature epreuve</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_charge_facture_index')}}">Charge Facture</a>
+                                    </td>
+                                    <td>univ_p_charge_facture</td>
+                                    <td>Table de paramétrage charge facture</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_delai_paiement_index')}}">Delai paiement</a>
+                                    </td>
+                                    <td>univ_p_delai_paiement</td>
+                                    <td>Table de paramétrage delai paiement</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_diplome_index')}}">Diplome</a>
+                                    </td>
+                                    <td>univ_p_diplome</td>
+                                    <td>Table de paramétrage diplome</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_document_attribution_index')}}">Document attribution</a>
+                                    </td>
+                                    <td>univ_p_document_attribution</td>
+                                    <td>Table de paramétrage document attribution</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_situation_index')}}">Situation</a>
+                                    </td>
+                                    <td>univ_p_situation</td>
+                                    <td>Table de paramétrage Situation</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_statut_index')}}">Statut</a>
+                                    </td>
+                                    <td>univ_p_statut</td>
+                                    <td>Table de paramétrage Statut</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_statut_epreuve_index')}}">Statut epreuve</a>
+                                    </td>
+                                    <td>univ_p_statut_epreuve</td>
+                                    <td>Table de paramétrage statut epreuve</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_type_element_index')}}">Type element</a>
+                                    </td>
+                                    <td>univ_p_type_element</td>
+                                    <td>Table de paramétrage type element</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_p_ville_index')}}">Ville</a>
+                                    </td>
+                                    <td>univ_p_ville</td>
+                                    <td>Table de paramétrage ville</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_x_banque_index')}}">Banque</a>
+                                    </td>
+                                    <td>univ_x_banque</td>
+                                    <td>Table de paramétrage banque</td>
+                                </tr>
+                                <tr>
+                                    <td>{% set i = i + 1 %}
+                                        {{ i }}</td>
+                                    <td>
+                                        <a class="cd_op" href="{{path('univ_x_serie_bac_index')}}">Serie bac</a>
+                                    </td>
+                                    <td>univ_x_serie_bac</td>
+                                    <td>Table de paramétrage serie bac</td>
+                                </tr>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+
+                                    <th></th>
+                                    <th>Table
+                                    </th>
+                                    <th>Description
+                                    </th>
+                                    <th>Lien</th>
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></div>{#    <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js') }}"></script>
+                    <script src="{{ asset('https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js') }}"></script>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#grid').DataTable();
+                        });
+                    </script>#}{% endblock %}{% block javascripts %}{{ parent() }}{{ encore_entry_script_tags('config') }}{% endblock %}

@@ -1,0 +1,87 @@
+<div id="vertical-timeline" class="vertical-container dark-timeline">
+
+    {% if demande.id is defined  %}
+        <div class="vertical-timeline-block">
+            <div class="vertical-timeline-icon {% if active_demande is defined %} blue-bg {%else%} gray-bg {% endif%}">
+                <i class="fa fa-clipboard"></i>
+            </div>
+            <a href="{{ path('t_achatdemandeinternecab_show' , {id:demande.id})}}">
+                <div class="vertical-timeline-content">
+                    <p>{{ demande.code }}
+                    </p>
+                    <span class="vertical-date small text-muted">
+                        <i class="fa fa-clock-o" title="la date de création"></i>
+                        {{ demande.created ? demande.created|date('d/m/Y H:i:s')}}
+
+                    </span>
+                </div>
+            </a>
+
+        </div>
+    {% endif %}                  
+
+
+
+    {% if commande.id is defined  %}
+        <div class="vertical-timeline-block">
+            <div class="vertical-timeline-icon {% if active_commande is defined %} blue-bg {%else%} gray-bg {% endif%}">
+                <i class="fa fa fa-list-alt"></i>
+            </div>
+
+            <a href="{{ path('t_commandefrscab_show' , {id:commande.id})}}">
+                <div class="vertical-timeline-content">
+                    <p>{{ commande.code }}
+                    </p>
+                    <span class="vertical-date small text-muted">
+                        <i class="fa fa-clock-o" title="la date de création"></i>
+                        {{ commande.created ? commande.created|date('d/m/Y H:i:s')}}
+
+                    </span>
+                </div>
+            </a>
+        </div>
+
+
+        {%  for key, reception in commande.livraisons %}
+
+
+            <div class="vertical-timeline-block">
+                <div class="vertical-timeline-icon {% if active_reception is defined  and active_reception is defined and  active_reception_id == reception.id %} blue-bg {%else%} gray-bg {% endif%}">
+                    <i class="fa fa-check-square-o"></i>
+                </div>
+                <a href="{{ path('ua_t_livraisonfrscab_show' , {id:reception.id})}}">
+
+                    <div class="vertical-timeline-content">
+                        <p>{{ reception.code }}
+                        </p>
+                        <span class="vertical-date small text-muted">
+                            <i class="fa fa-clock-o" title="la date de création"></i>
+                            {{ reception.created ? reception.created|date('d/m/Y H:i:s')}}
+
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+
+            {% if reception.facture is not empty %}
+                <div class="vertical-timeline-block">
+                    <div class="vertical-timeline-icon {% if active_facture is defined %} blue-bg {%else%} gray-bg {% endif%}">
+                        <i class="fa fa-file-text-o"></i>
+                    </div>
+                    <a href="{{ path('ua_t_facturefrscab_consulte' , {id:reception.facture.id})}}">
+                        <div class="vertical-timeline-content">
+                            <p>{{ reception.facture.code }}
+                            </p>
+                            <span class="vertical-date small text-muted">
+                                <i class="fa fa-clock-o" title="la date de création"></i>
+                                {{ reception.facture.created ? reception.facture.created|date('d/m/Y H:i:s')}}
+
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>

@@ -1,0 +1,96 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i>  </small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+
+
+                {#<div class="ibox">
+                    <div class="ibox-content">
+
+                        <h3>Pré-inscription Statut </h3>
+                        <form novalidate="novalidate" name="form_retenue" class="form_retenue" >
+
+                            <div class="form-group">
+
+                                <label class:'col-sm-4' >Pré-inscription Retenue (*) :</label>
+                                <select class="form-control " name="statut" >
+
+                                    {% for statut in statuts %}
+                                        <option value="{{statut.id}}">{{ statut.designation }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+
+                                {% for pre in preinscriptions %}
+
+                                    <input type="hidden"  class="_preinscriptions" name="_preinscriptions[]" value="{{pre}}">
+                                {% endfor %}
+                            </div>
+
+                            <br/>
+
+                            <button type="submit" class="btn btn-white btn-block btn-xs my-button"><i class="fa fa-save"></i> Enregistrer</button>
+                        </form>
+
+
+
+
+
+                    </div>
+                </div>#}
+
+
+                <div class="ibox">
+                    <div class="ibox-content">
+                     
+                            <h3>Affectation des salles  </h3>
+                            {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_ac_affecter_salle'}}) }}
+                            <div class="form-group">
+                                {{ form_label(form.salle ,'Statut :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                {{ form_widget(form.salle,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                            </div>
+                            <br/>
+                            
+                             {{ form_widget(form.ids,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                          
+                            <button class="btn btn-white btn-block btn-xs my-button2"><i class="fa fa-save"></i> {{ button_label|default('Enregistrer') }}</button>
+                            
+                              
+                            {{ form_end(form) }}
+                            {#{{ form_end(form,{'render_rest': false}) }}#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

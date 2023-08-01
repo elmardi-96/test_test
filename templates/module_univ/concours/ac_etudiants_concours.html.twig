@@ -1,0 +1,195 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Salle & convocation | Concours | UNIV
+{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+    {{ render(controller('App\\Controller\\moduleUniv\\concours\\UnivConcoursController:infosConcours',{ 'id': concours.id})) }}
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Univ , Concours
+            </h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+
+
+                <form id="generer_num_convocation">
+                    <input type="hidden" value="{{ concours.id }}" class="concours_id"/>
+                    <button class="btn btn-white btn-xs btn-lg my-button-num-convocation" data-style="expand-left" type="submit">
+                        <i class="fa fa-barcode"></i>
+                        Générer Numéros Convocations</button>
+                </form>
+
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+    </div>
+    <br/><br/>
+    <div class="row pt-20">
+
+        <div class="col-md-12 paddin">
+            <div class="ibox">
+
+                <div class="ibox-content">
+                    <div class="panel blank-panel">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                                {% include './module_univ/concours/inc/ac_navigation.html.twig' %}
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                
+                                <div class="tab-content">
+                                    
+                                        <div class="tab-pane active" id="tab-1">
+                                        <div class="row">
+
+                                            <div class="col-3">
+                                                <select class="form-control _multiple_actions" style="display: none">
+                                                    <option value="">Action</option>
+                                                    {#<option value="_ac_mentionner_admissible">Mentionner admissible</option>#}
+                                                    <option value="_ac_affecter_salle">Affecter salle</option>
+                                                </select>
+                                            </div>
+
+
+                                            <div class="col-md-12">
+                                                <h5 class="m-left">SALLE & CONVOCATION CONCOURS</h5>
+                                                <table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable ac_grid_condidats_note_classement">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Choix</th>
+                                                            <th>Conv</th>
+                                                            <th>Code.Etu</th>
+                                                            <th>Nom</th>
+                                                            <th>Prénom</th>
+                                                            <th>Form(s)</th>
+                                                            <th>Nat.dem</th>
+                                                            <th>T.Bac</th>
+                                                            <th>Moy.Bac</th>
+                                                            <th>Admiss</th>
+                                                            <th>Salle</th>
+                                                            <th>Num.Conv</th>
+
+                                                            
+
+
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Choix</th>
+                                                            <th>Conv</th>
+                                                            <th>Code.Etu</th>
+                                                            <th>Nom</th>
+                                                            <th>Prénom</th>
+                                                            <th>Form(s)</th>
+                                                            <th>Nat.dem</th>
+                                                            <th>T.Bac</th>
+                                                            <th>Moy.Bac</th>
+                                                            <th>Admiss</th>
+                                                            <th>Salle</th>
+                                                            <th>Num.Conv</th>
+
+                                                            
+
+
+                                                        </tr>
+                                                    </tfoot>
+
+
+                                                    <tbody>
+
+                                                        {% for key , prConcour in prConcours %}
+
+                                                            <tr>
+
+                                                                <td style="text-align:center;">
+                                                                    <input type="checkbox" class="action" name="_action" value="{{ prConcour.id }}">
+
+                                                                </td>
+
+                                                                <td>
+                                                                    <a target="blank" href="{{ path('univ_ac_convocation_pdf',{'id':prConcour.id}) }}" title='Imprimer la convocation' class="_imprimer_convocation" data-id="{{ prConcour.id }}">
+                                                                        <span class="fa fa-file-pdf-o"></span>
+                                                                    </a>
+                                                                </td>
+
+                                                                <td>{{ prConcour.etudiant.code }}</td>
+                                                                <td>{{ prConcour.etudiant.nom }}</td>
+                                                                <td>{{ prConcour.etudiant.prenom }}</td>
+                                                                <td>
+                                                                    {% for key ,preinscription  in prConcour.etudiant.preinscriptions %}
+                                                                        {{preinscription.formation.abreviation}}
+                                                                    {% endfor %}
+                                                                </td>
+                                                                <td>{{ prConcour.etudiant.natureDemande.designation }}</td>
+                                                                <td>{{ prConcour.etudiant.typeBac.designation }}
+                                                                </td>
+                                                                <td>{{ prConcour.etudiant.moyenneBac }}
+                                                                </td>
+                                                                <td>{{ prConcour.valider? 'oui':'non' }}</td>
+                                                                <td>{{ prConcour.salle ?  prConcour.salle.designation :'-'}}
+                                                                </td>
+                                                                <td>{{ prConcour.numConvocation ? prConcour.numConvocation : '-'}}
+                                                                </td>
+
+                                                                
+
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+
+                                                </table>
+                                                <!--<span class="float-right">
+                                                                                                                                                                                                        <b>Total :
+                                                                                                                                                                                                        {"{total}#}</b>
+                                                                                                                                                                                                        </span>-->
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    {#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+    {% if concours is defined %}
+        <input type="hidden" name="_id" value="{{ concours.id }}" id="_id"/>
+    {% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('univ_concours') }}
+{% endblock %}

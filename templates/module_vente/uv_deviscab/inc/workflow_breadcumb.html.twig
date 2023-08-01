@@ -1,0 +1,110 @@
+<div class="row">
+	<div class="col-6">
+
+		<h4>
+			Devis client</h4>
+	</a>
+	{% if  devis is defined and devis is not empty and devis.id is not empty %}
+		{% set count = 0 %}
+		{% set count2 = 0 %}
+		{#{% for key , place  in { "creer":"Cree" ,  "valider":"Valide", "commander":"commande"}  %}
+				                {% if count >= 0 %}
+				
+				                    <a href="#" class="btn btn-default
+				                       {% if workflow_has_marked_place(demande, key)  %}
+				                           btn-breadcrumb2-active
+				                       {% endif %}
+				                       {% if count2 == 0  %}{{ workflow_metadata(demande, 'class_css', key)}}{% else %} hide-btn-workflow {% endif %}
+				                       ">{{ place }}
+				                    </a>
+				                    {% set count = count + 1%}
+				                    {% if workflow_has_marked_place(demande, key)  %}
+				                        {% set count2 = count2 + 1 %}
+				                    {% endif %}
+				                    
+				                    
+				                    
+				                {% endif %}
+				
+				            {% endfor %}#}
+	{% endif %}
+</div>
+<div class="col-6">
+	{% if devis is defined and devis is not empty and devis.id is not empty%}
+
+		{% if workflow_has_marked_place(devis, "creer")  %}
+
+
+			<div class="dropdown dropdown-inline text-end">
+				<a href="javascript:;" class="" data-toggle="dropdown">
+					<span class="svg-icon svg-icon-md">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewbox="0 0 24 24" version="1.1" class="svg-top svg-color">
+							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<rect x="0" y="0" width="24" height="24"/>
+								<circle fill="#000000" cx="12" cy="5" r="2"/>
+								<circle fill="#000000" cx="12" cy="12" r="2"/>
+								<circle fill="#000000" cx="12" cy="19" r="2"/>
+							</g>
+						</svg>
+					</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+					<ul class="dropdown-menu show drp-list" x-placement="bottom-start">
+
+
+					    {% for key ,  operation in operations  %}
+                   {# {%  if  operation.prefix == '_delete' %}
+                        <li>
+                            <a id="{{operation.prefix}}" data-id="{{devis.id}}" data-token="{{ csrf_token('delete' ~ devis.id) }}" class='btn btn-sm btn-danger btn-outline  {{operation.classCs}}'>
+                                <i class="fa {{ operation.icon }}"></i>
+                                {{ operation.titre|capitalize }}</a>
+                        </li>
+                    {% endif %}
+					 #}
+
+                    {%  if  operation.prefix == '_desactiver' or  operation.prefix == '_duppliquer'  or operation.prefix == '_charges' %}
+                        <li>
+                            <a id="{{operation.prefix}}" data-id="{{devis.id}}" class='btn btn-sm btn-white btn-outline  {{operation.classCs}}'>
+                                <i class="fa {{ operation.icon }}"></i>
+                                {{ operation.titre|capitalize }}</a>
+                        </li>
+                    {% endif %}
+
+
+                    {% if page_actuel is defined   and page_actuel == "edit" %}
+                        {% if  operation.prefix == '_edit' %}
+                            <li>
+                                <a href="{{ path('uv_deviscab_show' , {id:devis.id})}}" class='btn btn-sm btn-white btn-outline'>
+                                    <i class="fa {{ operations['_show'].icon }}"></i>
+                                    {{ operations['_show'].titre|capitalize }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if page_actuel is defined and  page_actuel =='show' %}
+
+                        {% if  operation.prefix == '_edit' %}
+                            <li>
+                                <a href="{{ path('uv_deviscab_edit' , {id:devis.id})}}" class='btn btn-sm btn-white btn-outline'>
+                                    <i class="fa {{ operation.icon }}"></i>
+                                    {{ operation.titre|capitalize }}</a>
+                            </li>
+                        {% endif %}
+
+                    {% endif %}
+
+
+                {% endfor %}
+					</ul>
+				</div>
+			</div>
+
+
+		{% endif %}
+
+
+	    <div id="test" data-devis-id="{{ devis.id|json_encode }}"></div>
+
+
+	{% endif %}
+</div></div>

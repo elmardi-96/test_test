@@ -1,0 +1,275 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+
+{% block body %}
+
+
+	<div class="actions modal fade right" id="ModalDocumentDynamique" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog modal-full-height modal-right modal-sm" style="max-width:400 px;" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="text-center spr">
+						<br/>
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div
+		class="new">
+		{# {% include './config/inc/navigation.html.twig' %}
+												
+												
+												 
+												       {{ include('./config/us_groupe/_form.html.twig') }} #}
+
+
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+			<div class="col-lg-6">
+				<h2 class="fo">Parametrage Niveau Articles
+				</h2>
+			</div>
+
+
+			{# <div class="col-lg-6">
+
+				<div class="title-action">
+					<div class="title-action " style="margin-top: 5px; margin-bottom:5px;">
+						<a href="#" class="btn btn-white btn-xs add" id="new_action">
+							<i class="fa fa-pencil"></i>
+							Ajouter
+						</a>
+					</div>
+				</div>
+			</div> #}
+
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+				{{ wo_render_breadcrumbs() }}
+			</div>
+
+
+		</div>
+		<br/><br/><br/><br/>
+
+
+		<div class="row pt-6 pt-add-20">
+			<div class="col-md-12">
+				<div class="panel-container">
+					<div class="panel-left">
+						<div class="ibox">
+							<div class="ibox-content full-height-scroll ">
+								<div class="row ">
+									<div class="col-md-12">
+										<div class="tab-content">
+
+											<h3 class="m-t-none m-b-5">Informations
+											</h3>
+											<div class="hr-line-dashed"></div>
+											<div id='external-events'>
+												<div id="using_json"></div>
+
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="splitter" style="z-index: inherit;"></div>
+					{# <div class="panel-right">
+						<div class="ibox spr2" style="display:none;">
+							<div class="ibox-content border-top-res">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="text-center spr2" style="display:none;">
+											<div class="spinner-border" role="status">
+												<span class="sr-only">Loading...</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class=" cont">
+							<div class="ibox">
+								<div class="ibox-content border-top-res" style="height:86vh;">
+
+									<div class="middle-box text-center animated fadeInRightBig middle-box-show">
+										<i class="fa fa-info fa-4x color-theme"></i>
+										<h3 class="font-bold ">Informations</h3>
+										<div class="error-desc">
+											Pour pouvoir acceder à la liste des informations pour calculer les notes merci de selectionner d'apres le tree qui est à votre gauche l'information que vous souhaitez manipuler .
+
+										</div>
+									</div>
+									<h1 style="font-size: 112px;font-weight: 700;letter-spacing: 30px;text-align: center;margin-top: 115px;color: #98989826;padding-left: 10px;">EVALUATION</h1>
+								</div>
+							</div>
+
+							<div class="row none">
+								<div class="col-md-3">
+									<div class="payment-card">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="product-imitation2">CC</div>
+											</div>
+											<div class="col-md-8 h-b-r">
+												<h2>
+													Designation
+												</h2>
+												<p>
+													Observation Observation Observation Observation
+
+												</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-6">
+												<small>
+													<strong>date epreuve:</strong>
+													10/16
+												</small>
+											</div>
+											<div class="col-sm-6 text-right">
+												<small>
+													<strong>Status:</strong>
+													Valide
+												</small>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="payment-card">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="product-imitation2">CC</div>
+											</div>
+											<div class="col-md-8 h-b-r">
+												<h2>
+													Designation
+												</h2>
+												<p>
+													Observation Observation Observation Observation
+
+												</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-6">
+												<small>
+													<strong>date epreuve:</strong>
+													10/16
+												</small>
+											</div>
+											<div class="col-sm-6 text-right">
+												<small>
+													<strong>Status:</strong>
+													Valide
+												</small>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="payment-card">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="product-imitation2">CC</div>
+											</div>
+											<div class="col-md-8 h-b-r">
+												<h2>
+													Designation
+												</h2>
+												<p>
+													Observation Observation Observation Observation
+
+												</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-6">
+												<small>
+													<strong>date epreuve:</strong>
+													10/16
+												</small>
+											</div>
+											<div class="col-sm-6 text-right">
+												<small>
+													<strong>Status:</strong>
+													Valide
+												</small>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="payment-card">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="product-imitation2">CC</div>
+											</div>
+											<div class="col-md-8 h-b-r">
+												<h2>
+													Designation
+												</h2>
+												<p>
+													Observation Observation Observation Observation
+
+												</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-6">
+												<small>
+													<strong>date epreuve:</strong>
+													10/16
+												</small>
+											</div>
+											<div class="col-sm-6 text-right">
+												<small>
+													<strong>Status:</strong>
+													Valide
+												</small>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+
+					</div> #}
+				</div>
+			</div>
+		</div>
+
+
+	{% endblock %}
+
+
+	{% block javascripts %}
+		{{ parent() }}
+		{{ encore_entry_script_tags('p_article_niveau1') }}
+	{% endblock %}
+

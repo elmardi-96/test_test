@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="euc-kr">
+		<title>document acompte</title>
+	</head>
+	<style>
+		@page {
+			margin: 5px 20px !important;
+			/*padding: 0px 0px 0px 0px !important;*/
+		}
+		body {
+			font-family: 'Courier New';
+			font-size: 13px;
+		}
+		.logo {
+			max-width: 250px;
+			max-height: 100px;
+		}
+
+		.table-header {
+			width: 100%;
+			text-transform: uppercase;
+
+
+		}
+
+		.table-sub-title {
+			font-size: 12px;
+			border: 1px solid #555555;
+			margin-bottom: 5px;
+		}
+
+		.table-header label {
+			font-size: 12px;
+			font-weight: 200;
+		}
+
+		.th1 {
+			width: 250px;
+			height: 100px;
+		}
+		.th2 {
+			width: 100px;
+			height: 100px;
+		}
+
+		h3 {
+			padding: 15px 0;
+			text-align: center;
+			background: #e7e6e6;
+			text-transform: uppercase;
+			font-size: 14px;
+		}
+
+		h4 {
+			padding: 15px 0;
+			text-align: center;
+			border: 1px solid #555555;
+		}
+
+
+		.table-content thead tr th {
+			text-align: center;
+		}
+
+		.table-content {
+			width: 100%;
+			font-size: 10px;
+			border: 1px solid black;
+			border-collapse: collapse;
+
+		}
+
+		.table-content tr {
+			border-left: 1px solid #000;
+			border-right: 1px solid #000;
+		}
+
+
+		.table-content td {
+			padding: 4px;
+			border-left: 1px solid #000;
+			border-right: 1px solid #000;
+
+		}
+		.table-content thead {
+			background: #555555;
+			color: #fff;
+
+		}
+
+		.table-content thead th {
+			font-size: 11px;
+			padding: 4px 2px
+		}
+
+
+		.table-content tbody tr td:nth-child(n + 3) {
+			text-align: left;
+		}
+		.table-content thead tr th:nth-child(n + 3) {
+			text-align: center;
+		}
+		.table-ttc {
+			font-size: 11.5px;
+			width: 40%;
+			float: right;
+			font-weight: bold;
+
+		}
+
+		.table-ttc tr td {
+			border: 1px solid #555555;
+			padding: 1px 3px;
+		}
+
+		.table-ttc tr td:nth-child(2) {
+			text-align: right;
+		}
+
+
+		.footer {
+			border-top: 2px solid #555555;
+			margin-top: 10px;
+			font-size: 9px;
+			text-align: center;
+			position: fixed;
+			bottom: 60px;
+		}
+		.footer label {
+
+			padding-left: 10px;
+
+		}
+	</style>
+	<body>
+		<table class="table-header">
+			<tr>
+				<th>
+					<img src="{{ asset(image)[1:] }}" class="logo" alt="Logo">
+				</th>
+				<th class="th2"><br></th>
+				<th class="th3">
+					<div style="margin-left: 5px; border: 0.5px solid black;">
+						<div style=" margin: 10px;">
+
+							RAISON SOCIAL :
+							<label>{{ cab.commande.fournisseur  ? cab.commande.fournisseur.societe  }}</label><br>
+							ADRESSE :
+							<label>{{ cab.commande.fournisseur  ? cab.commande.fournisseur.adresse  }}</label><br>
+							TEL :
+							<label>{{ cab.commande.fournisseur  ? cab.commande.fournisseur.tel1 ~ ' / '~  cab.commande.fournisseur.tel2 }}</label><br>
+						</div>
+					</div>
+				</th>
+
+			</tr>
+
+		</table>
+		<br>
+
+
+		<h3>ACOMPTE BON COMMANDE N°
+			{{ cab.code }}</h3>
+
+
+		<p style="float: right">
+			DATE :
+			{{ cab.date ? cab.date|date("d/m/Y")  }}</p>
+		<br>
+		<table class="table-sub-title">
+			<tr>
+				<td style="border-bottom: 1px solid #555 ; font-weight: bold;text-align:center ;letter-spacing: 3px;" colspan="4">
+					INFORMATIONS OPERATION
+				</td>
+
+
+			</tr>
+			<tr>
+				<td>
+					REF DEVIS FRS :</td>
+				<td>{{ cab.commande.refdocasso }}</td>
+
+				<td>
+					DATE LIV PREVUE :</td>
+				<td>{{ cab.commande.datelivprv ? cab.commande.datelivprv|date("d/m/Y")  }}</td>
+
+			</tr>
+
+
+			<tr>
+				<td>
+					ADRESSE LIV :</td>
+				<td>----</td>
+			</tr>
+
+		</table>
+
+
+		{# <h4>{{ cab.description }} </h4>#}
+
+
+		<table class="table-content">
+			<thead>
+				<tr>
+					<th style="width: 5px">#</th>
+					<th style="width: 50px">Description</th>
+					<th style="width: 30px">Mode.p</th>
+					<th style="width: 40px">Banque</th>
+					<th style="width: 60px">Devise</th>
+					<th style="width: 60px">Réf</th>
+					<th style="width: 60px">Date échéance</th>
+
+
+				</tr>
+			</thead>
+			<tbody>
+
+
+				<tr>
+					<td>1</td>
+					<td>{{cab.description}}</td>				
+					<td>{{cab.modepaiement ? cab.modepaiement.designation }}</td>
+					<td>{{cab.banque ? cab.banque.designation }}</td>
+					<td>{{cab.devise ? cab.devise.designation }}</td>
+					<td>{{cab.numcheque}}</td>
+					<td>{{cab.dateecheance ? cab.dateecheance|date("d/m/Y") }}</td>
+
+				</tr>
+
+
+				<tr>
+					<td style="color: #fff">.</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+                    <td></td>
+                    <td></td>
+				</tr>
+
+
+			</tbody>
+		</table><br>
+
+
+		<table class="table-ttc">
+			<tr>
+				<td>Pourc %</td>
+				<td>{{cab.pourcentage~'%'}}</td>
+			</tr>
+			<tr>
+				<td>Montant</td>
+                <td>{{ cab.montant|number_format(2) }}</td>
+			</tr>
+
+		</table>
+	</body>
+
+	<footer>
+		<div class="footer">
+
+			<p>
+				{% if cab.commande.dossier  %}
+					{{ cab.commande.dossier.titre }}
+
+					{% if  cab.commande.dossier.rc %}
+						<label>RC :</label>
+						{{ cab.commande.dossier.rc }}
+					{% endif %}
+					{% if  cab.commande.dossier.ice %}
+						<label>ICE :</label>
+						{{ cab.commande.dossier.ice }}
+					{% endif %}
+					{% if  cab.commande.dossier.iff %}
+						<label>IF :</label>
+						{{ cab.commande.dossier.iff }}
+					{% endif %}
+					{% if  cab.commande.dossier.cnss %}
+						<label>CNSS :</label>
+						{{ cab.commande.dossier.cnss }}
+					{% endif %}
+					{% if  cab.commande.dossier.patente %}
+						<label>PATENTE :</label>
+						{{ cab.commande.dossier.patente }}
+					{% endif %}
+				{% endif %}
+			</p>
+		</div>
+	</footer>
+
+</html>

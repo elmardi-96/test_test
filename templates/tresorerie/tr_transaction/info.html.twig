@@ -1,0 +1,319 @@
+<div class="sidebar-container new">
+
+	<div class="ibox-tools"></div>
+
+	<div class="tab-content ">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+
+				</h3>
+				<small>
+
+					Transaction
+				</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<table class="table small m-b-xs">
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="ibox ">
+					<div class="ibox-content">
+
+
+						<div class="row">
+
+							<div class="col-md-12">
+								<h5 class="m-left" style="text-transform: uppercase;">
+									Transaction</h5>
+
+							</div>
+
+							<div class="col-md-12 b-r">
+
+
+								
+
+
+									<div class="row">
+										<div class="hr-line-dashed paddi"></div>
+										<div class="col-md-6 b-r">
+
+
+											<div class="form-group row">
+
+												<label class="col-sm-4 required ">date  </label>
+
+												<div class="col-sm-4">
+													{{transaction.date|date('Y-m-d')}}
+
+												</div>
+											</div>
+											<div class="hr-line-dashed"></div>
+
+
+											<div class="form-group row">
+												<label class="col-sm-4 required">Source Reglement   </label>
+												<div class="col-sm-4">
+													{{transaction.compte ?  transaction.compte.designation}}
+
+												</div>
+											</div>
+
+
+											<div class="hr-line-dashed"></div>
+
+
+											<div class="form-group row">
+												<label class="col-sm-4 required">piece   </label>
+												<div class="col-sm-4">
+													{{transaction.piece ?  transaction.piece.code}}
+
+												</div>
+											</div>
+
+											<div class="hr-line-dashed"></div>
+
+											<div class="form-group row">
+												<label class="col-sm-4 required">Fournisseur   </label>
+												<div class="col-sm-4">
+													{{transaction.fournisseur ?  transaction.fournisseur.societe}}
+
+												</div>
+											</div>
+
+
+											<div class="hr-line-dashed"></div>
+
+
+											<div class="form-group row">
+												<label class="col-sm-4 required">Montant   </label>
+												<div class="col-sm-4">
+													{{transaction.montant ?  transaction.montant|number_format(2, '.', ',')}}
+
+												</div>
+											</div>
+
+
+											<div class="hr-line-dashed"></div>
+											<div class="form-group row">
+												<label class="col-sm-4 required">designation   </label>
+												<div class="col-sm-8">
+													{{transaction.designation }}
+
+												</div>
+											</div>
+
+
+										</div>
+
+
+										<div class="hr-line-dashed paddi"></div>
+										<div class="col-md-6">
+
+											<div class="form-group row">
+												<label class="col-sm-4 required">mode paiement </label>
+												<div class="col-sm-4">
+													{{transaction.modepaiement ?  transaction.modepaiement.designation}}
+
+												</div>
+											</div>
+
+											{% if transaction.modepaiement.designation =='Cheque'%}
+
+
+												<div class="hr-line-dashed"></div>
+												<div class="form-group row">
+													<label class="col-sm-4 required">date Echeance  </label>
+													<div class="col-sm-4">
+														{{transaction.dateecheance ?  transaction.dateecheance|date('Y-m-d')}}
+
+													</div>
+												</div>
+
+
+												<div class="hr-line-dashed"></div>
+												<div class="form-group row">
+													<label class="col-sm-4 required">NUM CHEQUE 
+													</label>
+													<div class="col-sm-4">
+														{{transaction.numcheque}}
+
+													</div>
+												</div>
+
+											{% endif %}
+
+											<div class="hr-line-dashed"></div>
+											<div class="form-group row">
+												<label class="col-sm-4 required">date DocAsso   </label>
+												<div class="col-sm-4">
+													{{transaction.dateDocAsso ?  transaction.dateDocAsso|date('Y-m-d')}}
+
+												</div>
+											</div>
+
+
+											<div class="hr-line-dashed"></div>
+
+											<div class="form-group row">
+												<label class="col-sm-4 required">ref DocAsso 
+												</label>
+												<div class="col-sm-4">
+													{{transaction.refDocAsso}}
+
+												</div>
+											</div>
+											<div class="hr-line-dashed"></div>
+											<div class="form-group row">
+												<label class="col-sm-4 required">Active    
+												</label>
+												<div class="col-sm-4">
+													{% if transaction.active == true %}
+														OUI
+													{% else %}
+														NON
+													{% endif %}
+
+
+												</div>
+											</div>
+											<div class="hr-line-dashed"></div>
+											<div class="form-group row">
+												<label class="col-sm-4 required">Valide 
+												</label>
+												<div class="col-sm-4">
+													{% if transaction.IsValider == true %}
+														OUI
+													{% else %}
+														NON
+													{% endif %}
+
+
+												</div>
+											</div>
+
+
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="hr-line-dashed"></div>
+
+											<div class="form-group row">
+												<label class="col-sm-12 required">autre Information 
+												</label>
+												:</label>
+											<div class="col-sm-12">
+												{{transaction.autreInformation}}
+
+											</div>
+										</div>
+
+										<br>
+
+									</div>
+
+
+								</div>
+
+
+						
+
+						
+							
+
+								
+
+
+								{% if transaction.operations|length > 0 %}
+									<div class="ibox-title m-min"></div>
+									<br>
+									<h5 class="m-left" style="text-transform: uppercase;">
+										Operations </h5>
+									<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show3">
+										<thead>
+											<tr>
+
+												<th>#</th>
+												<th>Code</th>
+												<th>Date</th>
+												<th>Ref Doc Asso</th>
+												<th>Date Doc Asso</th>
+												{#<th>Banque</th>#}
+												<th>Montant</th>
+
+
+											</tr>
+
+
+										</thead>
+										<body>
+											{% set totale1 = 0 %}
+											{% for operation in transaction.operations %}
+												
+													{% set totale1 =  totale1 + operation.montant %}
+													<tr>
+														<th>{{operation.id}}</th>
+														<th>{{operation.code}}</th>
+														<th>{{ operation.date|date("d/m/Y") }}</th>
+
+
+														<th>{{operation.refDocAsso}}</th>
+														<th>{{ operation.dateDocAsso|date("d/m/Y") }}</th>
+														{#<th>Banque</th>#}
+														<th>{{ operation.montant|number_format(2) }}</th>
+													</tr>
+													
+												{% endfor %}
+
+											</body>
+											<tfoot>
+												<tr>
+													<th colspan="11" style="text-align:right">
+														<table class="table-subtotal">
+															<tr>
+																<td>Total :
+																</td>
+																<td>{{totale1|number_format(2)}}</td>
+															</tr>
+
+														</table>
+													</th>
+
+												</tr>
+											</tfoot>
+										</body>
+									</table>
+
+								{% endif %}
+							
+
+
+						</div>
+
+
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div></div></div>

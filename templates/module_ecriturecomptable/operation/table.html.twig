@@ -1,0 +1,166 @@
+<p>{% if data|length > 0 and data[0].categorie is defined  %} {{data[0].categorie}} {% endif %}</p>
+
+<h4>Cabs: </h4>
+
+<table class="table-striped table-bordered" id="grid_index" style="width: 100%">
+
+    <thead>
+        
+        <tr class="text-center">
+            <th>Code</th>
+            <th>Abrev</th>
+            <th>Piece</th>
+            <th>Source</th>
+            <th>Observation</th>
+            <th>date doc asso</th>
+            <th>date creation </th>
+            <th>Montant HT</th>
+            <th>Reference</th>
+            <th>Utilisateur</th>
+            <th>Site description</th>
+            
+            <th>Fournisseur / Client</th>
+            <th>Tiers reference</th>
+        </tr>
+        
+
+
+    </thead>
+    <tbody>
+    {% for operation in data %}
+        <tr>
+            <td>{{operation.p_piece_code}}</td>
+            <td>{{operation.p_piece_abreviation}}</td>
+            <td>{{operation.code}}</td>
+            <td>{{operation.source is defined ? operation.source : ""}}</td>
+            {% if operation.observation_operation|length > 10 %}
+                <td>{{operation.observation_operation|slice(0, 10) }}<span style="position: absolute; font-weight:bold; cursor:pointer" class="hint--right" aria-label="{{operation.observation_operation}}"> &nbsp;...</span></td>
+            {% else %}
+                <td>{{operation.observation_operation}}</td>
+            {% endif %}
+            <td>{{operation.date_operation}}</td>
+            <td>{{operation.user_date is defined ? operation.user_date : ""}}</td>
+            <td class="text-right">{{operation.montantHt|number_format(2, ',', ' ')}}</td>
+            {% if operation.ref_doc_asso|length > 10 %}
+                <td>{{operation.ref_doc_asso|slice(0, 10) }}<span style="position: absolute; font-weight:bold; cursor:pointer;" class="hint--top hint--large hint--bounce" aria-label="{{operation.ref_doc_asso}}"> &nbsp;...</span></td>
+            {% else %}
+                <td>{{operation.ref_doc_asso}}</td>
+            {% endif %}
+            <td>{{operation.user_name}}</td>
+            {% if operation.cce_0|length > 10 %}
+                <td>{{operation.cce_0|slice(0, 10) }}<span style="position: absolute; font-weight:bold; cursor:pointer" class="hint--right" aria-label="{{operation.cce_0}}"> &nbsp;...</span></td>
+            {% else %}
+                <td>{{operation.cce_0}}</td>
+            {% endif %}
+            <td>{{operation.nom is defined ? operation.nom : ""}}</td>
+            <td>{{operation.tiers_ref is defined ? operation.tiers_ref : ""}}</td>
+        
+        </tr>
+        {% endfor %}
+
+    </tbody>
+
+                        
+</table> 
+<br>
+
+
+<h4>Details: </h4>
+<table class="table-striped table-bordered " id="grid_details" style="width: 100%">
+
+    <thead>
+        
+        <tr>
+            <th width="5%">Code</th>
+            <th width="5%">Abre</th>
+            <th>Piece</th>
+            <th>Freref</th>
+            <th>Designation</th>
+            <th>libelle ec cp</th>
+            <th>pc</th>
+            <th>nom</th>
+            <th>lettrage adonix</th>
+            <th>Montant</th>
+            <th>sens</th>
+           
+        </tr>
+        
+
+
+    </thead>
+    <tbody>
+    {% set debit = 0 %}
+    {% set credit = 0 %}
+    {% for operation in data %}
+        {% for detail in operation.details %}
+        <tr>
+            <td>{{operation.p_piece_code}}</td>
+            <td>{{operation.p_piece_abreviation}}</td>
+            <td>{{operation.code}}</td>
+            <td>{{detail.fre_ref is defined ? detail.fre_ref : ""}}</td>
+            <td>
+                {% if detail.observation is defined %}
+                    {# {{detail.observation is defined ? detail.observation : ""}} #}
+                    {% if detail.observation|length > 30 %}
+                        {{detail.observation|slice(0, 30) }}<span style="position: absolute; font-weight:bold; cursor:pointer" class="hint--top" aria-label="{{detail.observation}}"> &nbsp;...</span>
+                    {% else %}
+                        {{detail.observation}}
+                    {% endif %}
+                {% endif %}
+            </td>
+            {% if detail.cp_fcz|length > 30 %}
+                <td>{{detail.cp_fcz|slice(0, 30) }}<span style="position: absolute; font-weight:bold; cursor:pointer" class="hint--top" aria-label="{{detail.cp_fcz}}"> &nbsp;...</span></td>
+            {% else %}
+                <td>{{detail.cp_fcz}}</td>
+            {% endif %}
+            <td>{{detail.planComptable}}</td>
+            {% if detail.nom is defined %}
+                {% if detail.nom|length > 30 %}
+                    <td>{{detail.nom|slice(0, 30) }}<span style="position: absolute; font-weight:bold; cursor:pointer" class="hint--left" aria-label="{{detail.nom}}"> &nbsp;...</span></td>
+                {% else %}
+                    <td>{{detail.nom}}</td>
+                {% endif %}
+            {% else %}
+                <td></td>
+            {% endif %}
+            <td>{{detail.lettrage_adonix is defined ? detail.lettrage_adonix : ""}}</td>
+            <td class="text-right">{{detail.montant|number_format(2, ',', ' ')}}</td>
+            <td class="text-right">{{detail.sens}}</td>
+            {% if detail.sens < 0 %} 
+                {% set debit = debit + detail.montant %}
+            {% else %}
+                {% set credit = credit + detail.montant %}
+            {% endif %}
+        </tr>
+        {% endfor %}
+    {% endfor %}
+
+    </tbody>
+
+                        
+</table> 
+
+<br>
+
+<div class="d-flex justify-content-between">
+    <div  class="">
+        <h4>Confirmation: </h4>
+
+        <div >
+            <input type="checkbox" class="validation"> Tiers <br>
+            <input type="checkbox" class="validation"> Montant <br>
+            <input type="checkbox" class="validation"> Date <br>
+        </div>
+    </div>
+    <div  class="">
+        <h4>Balance: </h4>
+
+        <div >
+            <label>Débit :</label> <input class="text-right" style="font-size:9.5px" value="{{debit|number_format(2, ',', ' ')}}" disabled> <br>
+            <label>Credit:</label><input class="text-right" style="font-size:9.5px" value="{{credit|number_format(2, ',', ' ')}}" disabled><br>
+            <label>Ecart :</label><input class="text-right" style="font-size:9.5px" value="{{(debit - credit)|number_format(2, ',', ' ')}}" disabled>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,449 @@
+{% set current_path = app.request.get('_route') %}
+<div class="sidebar-container new">
+
+	<div class="ibox-tools"></div>
+
+	<div class="tab-content ">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+				</h3>
+				<small>
+					{% if  p_compte_banque.id > 0 %}
+						Modifier
+					{% else %}
+						Ajouter
+					{% endif %}
+				</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<table class="table small m-b-xs">
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="ibox ">
+					<div class="ibox-content">
+
+
+						{% if  p_compte_banque.id > 0 %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_edit'}}) }}
+						{% else %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+						{% endif  %}
+
+
+						<div class="row">
+
+
+							<div class="col-md-12 b-r">
+
+								{% if  p_compte_banque.id > 0 %}
+									<div id="test" data-banque-id="{{ p_compte_banque.id|json_encode }}"></div>
+
+								{% endif  %}
+
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.designation ,'Designation (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.designation,{'attr':{'class':'form-control  form-control-sm','placeholder':'Designation (*)'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.designation) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.abreviation ,'Abreviation (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.abreviation,{'attr':{'class':'form-control  form-control-sm','placeholder':'Abreviation (*)'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.abreviation) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.dossier ,'Dossier (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.dossier,{'attr':{'class':'form-control select2 form-control-sm'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.dossier) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.description ,'Description', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.description,{'attr':{'class':'form-control  form-control-sm','placeholder':'Description'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.description) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									{% if "p_compte_banque_edit"  in current_path  %}
+										<div class="col-md-6">
+											<div class="form-group row">
+												{{ form_label(form.numCompte ,'Numero de compte', {'label_attr':{'class':'col-sm-12'}}) }}
+												<div class="col-sm-12">
+													{{ form_widget(form.numCompte,{'attr':{'class':'form-control  form-control-sm','placeholder':'Numero de compte'}}) }}
+
+													<span class="form-error-message">
+														{{ form_errors(form.numCompte) }}
+													</span>
+												</div>
+
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group row">
+												{{ form_label(form.codeIban ,'Code Iban', {'label_attr':{'class':'col-sm-12'}}) }}
+												<div class="col-sm-12">
+													{{ form_widget(form.codeIban,{'attr':{'class':'form-control  form-control-sm','placeholder':'Code Iban'}}) }}
+
+													<span class="form-error-message">
+														{{ form_errors(form.codeIban) }}
+													</span>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="hr-line-dashed paddi"></div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group row">
+												{{ form_label(form.codeBicSwift ,'Code bic swift', {'label_attr':{'class':'col-sm-12'}}) }}
+												<div class="col-sm-12">
+													{{ form_widget(form.codeBicSwift,{'attr':{'class':'form-control  form-control-sm','placeholder':'Code bic swift'}}) }}
+
+													<span class="form-error-message">
+														{{ form_errors(form.codeBicSwift) }}
+													</span>
+												</div>
+
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group row">
+												{{ form_label(form.codeComptable ,'Code comptable', {'label_attr':{'class':'col-sm-12'}}) }}
+												<div class="col-sm-12">
+													{{ form_widget(form.codeComptable,{'attr':{'class':'form-control  form-control-sm','placeholder':'Code comptable'}}) }}
+
+													<span class="form-error-message">
+														{{ form_errors(form.codeComptable) }}
+													</span>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="hr-line-dashed paddi"></div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group row">
+												{{ form_label(form.proprietaire ,'Proprietaire', {'label_attr':{'class':'col-sm-12'}}) }}
+												<div class="col-sm-12">
+													{{ form_widget(form.proprietaire,{'attr':{'class':'form-control  form-control-sm','placeholder':'Proprietaire'}}) }}
+
+													<span class="form-error-message">
+														{{ form_errors(form.proprietaire) }}
+													</span>
+												</div>
+
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group row">
+												{{ form_label(form.adressAgence ,'Adresse agence', {'label_attr':{'class':'col-sm-12'}}) }}
+												<div class="col-sm-12">
+													{{ form_widget(form.adressAgence,{'attr':{'class':'form-control  form-control-sm','placeholder':'Adresse agence'}}) }}
+
+													<span class="form-error-message">
+														{{ form_errors(form.adressAgence) }}
+													</span>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="hr-line-dashed paddi"></div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group row">
+												{{ form_label(form.rib ,'RIB', {'label_attr':{'class':'col-sm-12'}}) }}
+												<div class="col-sm-12">
+													{{ form_widget(form.rib,{'attr':{'class':'form-control  form-control-sm','placeholder':'RIB'}}) }}
+
+													<span class="form-error-message">
+														{{ form_errors(form.rib) }}
+													</span>
+												</div>
+
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group row">
+												{{ form_label(form.dateCompte ,'Date compte', {'label_attr':{'class':'col-sm-12'}}) }}
+												<div class="col-sm-12">
+													{{ form_widget(form.dateCompte,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date compte'}}) }}
+
+													<span class="form-error-message">
+														{{ form_errors(form.dateCompte) }}
+													</span>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="hr-line-dashed paddi"></div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group row">
+												{{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-12'}}) }}
+												<div class="col-sm-12">
+													{{ form_widget(form.active) }}
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="hr-line-dashed paddi"></div>
+								{% else %}
+
+
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.soldeInitial ,'Solde initial', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.soldeInitial,{'attr':{'class':'form-control  form-control-sm','placeholder':'Solde initial'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.soldeInitial) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.numCompte ,'Numero de compte', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.numCompte,{'attr':{'class':'form-control  form-control-sm','placeholder':'Numero de compte'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.numCompte) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.codeIban ,'Code Iban', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.codeIban,{'attr':{'class':'form-control  form-control-sm','placeholder':'Code Iban'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.codeIban) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.codeBicSwift ,'Code bic swift', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.codeBicSwift,{'attr':{'class':'form-control  form-control-sm','placeholder':'Code bic swift'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.codeBicSwift) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.codeComptable ,'Code comptable', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.codeComptable,{'attr':{'class':'form-control  form-control-sm','placeholder':'Code comptable'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.codeComptable) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.proprietaire ,'Proprietaire', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.proprietaire,{'attr':{'class':'form-control  form-control-sm','placeholder':'Proprietaire'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.proprietaire) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.adressAgence ,'Adresse agence', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.adressAgence,{'attr':{'class':'form-control  form-control-sm','placeholder':'Adresse agence'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.adressAgence) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.rib ,'RIB', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.rib,{'attr':{'class':'form-control  form-control-sm','placeholder':'RIB'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.rib) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.dateCompte ,'Date compte', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.dateCompte,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date compte'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.dateCompte) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.active) }}
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+
+							{% endif %}
+
+							{% if  p_compte_banque.id > 0 %}
+								<div class="form-group row">
+									<div class="col-sm-3">
+										<button class="btn btn-primary btn-block btn-xs  button-edit-banque">
+											<i class="fa fa-save"></i>
+											&nbsp;{{ button_label|default('Modifier') }}</button>
+
+									</div>
+									<div class="col-sm-3">
+										{% for operation in operations|filter(operation => operation.prefix == '_delete') %}
+												
+													<a {% if operation.route is not null %} data-id="{{p_compte_banque.id}}" data-token="{{ csrf_token('delete' ~ p_compte_banque.id) }}" href="#{# {{ path(operation.route) }} #}" {% endif %} id="{{operation.prefix}}" class="btn btn-block btn-xs btn-danger _delete{{operation.classCs}}">
+														<i class="fa {{ operation.icon }}"style="color: white !important;"></i>
+														{{ operation.titre|capitalize }}</a>
+												
+											{% endfor %}
+										{# <a href="#" data-id="{{p_compte_banque.id}}" data-token="{{ csrf_token('delete' ~ p_compte_banque.id) }}" class="btn btn-block btn-xs btn-danger _delete " id="_delete">
+											<i class="fa fa-trash" style="color: white !important;"></i>
+											Supprimer</a> #}
+									</div>
+
+
+								</div>
+							{% else %}
+								<div class="form-group row">
+
+									<div class="col-sm-3">
+										<button class="btn btn-primary btn-block btn-xs  button-save-banque">
+											<i class="fa fa-save"></i>
+											&nbsp;{{ button_label|default('Enregistrer') }}</button>
+
+									</div>
+									<div class="col-sm-3">
+										<button class="btn btn-primary btn-block btn-xs  button-save-add-banque">
+											<i class="fa fa-save"></i>
+											&nbsp;Enregistrer et Ajouter</button>
+
+									</div>
+								</div>
+							{% endif  %}
+
+
+						</div>
+
+					</div>
+
+					{{form_widget(form._token)}}
+					{{ form_end(form,{'render_rest': false}) }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div>
+

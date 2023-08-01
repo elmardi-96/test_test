@@ -1,0 +1,382 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' ,"autocomplete":"off", 'class':'form'}}) }}
+
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+	<div class="col-lg-6">{% include './erp/inc/workflow_breadcumb.html.twig' %}
+	</div>
+
+	<div class="col-lg-6">
+		<div class="title-action">
+			{% if existe.id is defined  %}
+
+				{%else%}
+				<button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+					<i class="fa fa-save"></i>
+					{{ button_label|default('Enregistrer') }}
+				</button>
+
+				{%endif%}
+			</div>
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">{% include './erp/inc/workflow.html.twig' %}
+		</div>
+	</div>
+
+
+	<br/><br/>
+	<div class="row pt-20">
+		<div class="col-lg-12 ">
+			<div class="ibox">
+				<div class="ibox-content">
+
+					<div class="message-success"></div>
+
+
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										{% include './erp//inc/navigation.html.twig' %}
+									</div>
+								</div>
+
+								<div class="panel-body">
+									<div class="col-md-12">
+										<div class="tab-content">
+											<div class="tab-pane active" id="tab-1">
+
+												{% if existe.id is defined   %}
+
+
+													<div class="forum-item animated bounce">
+														<div class="row">
+															<div class="col-md-9">
+																<div class="forum-icon">
+																	<i class="fa fa-warning"></i>
+																</div>
+																<a class="forum-item-title">Important</a>
+																<div class="forum-sub-title">
+																	Cette demande a déjà un devis,
+																	<br/>
+																	{{ existe.code }}
+																</div>
+															</div>
+
+														</div>
+													</div>
+
+												{% else  %}
+
+
+												
+
+													<div class="row">
+														<div class="col-md-12">
+															<h3 class="m-t-none m-b">Informations Devis
+															</h3>
+                                                            
+														</div>
+													</div>
+
+													<div class="row">
+
+														<div
+															class="col-md-6 b-r">
+
+
+															{#
+															                                                                                                                <div class="form-group row">
+															                                                                                                                    {{ form_label(form.dossier ,'Dossier :', {'label_attr':{'class':'col-sm-4'}}) }}
+															                                                                                                                    <div class="col-sm-4 input-group">
+															                                                                                                                        {{ form_widget(form.dossier,{'attr':{'class':'affaire form-control form-control-sm'}}) }}
+															                                                                                                                    </div>
+															                                                        
+															                                                        
+															                                                                                                                </div>
+															                                                                                                                    #}
+
+															<div class="hr-line-dashed"></div>
+
+
+															<div class="form-group row">
+																{{ form_label(form.dateDevis ,'Date Devis :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-4 input-group">
+																	{{ form_widget(form.dateDevis,{'attr':{'class':'affaire form-control form-control-sm'}}) }}
+																</div>
+
+
+															</div>
+
+
+															<div class="hr-line-dashed"></div>
+
+
+															<div class="form-group row">
+																{{ form_label(form.dossier ,'Dossier  :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-4">
+																	{{ form_widget(form.dossier,{'attr':{'class':'form-control form-control-sm  sel2'}}) }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+
+
+															<div class="form-group row">
+																{{ form_label(form.type ,'Type  :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-4">
+																	{{ form_widget(form.type,{'attr':{'class':'form-control form-control-sm type_commande sel2'}}) }}
+																</div>
+															</div>
+
+
+															<div class="bloc_projet bloc_choix" {% if devis.type %} {% if devis.type.code == 'PRJ' %} style="display: block" {% endif %} {% endif %}>
+																<div class="hr-line-dashed "></div>
+
+																<div class="form-group row ">
+																	{{ form_label(form.projet ,'Projet :', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.projet,{'attr':{'class':' projet sel2 form-control form-control-sm '}}) }}
+																	</div>
+																</div>
+																<div class="hr-line-dashed "></div>
+																<div class="form-group row ">
+																	{{ form_label(form.sousprojet,'Sous projet :', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.sousprojet,{'attr':{'class':' sousprojet sel2 form-control form-control-sm '}}) }}
+																	</div>
+																</div>
+
+
+																{#<div class="form-group row bloc_choix">
+																                                                                                                                                                                                                        {{ form_label(form.refMarche ,'Référence Marché  :', {'label_attr':{'class':'col-sm-4'}}) }}
+																                                                                                                                                                                                                        <div class="col-sm-3">
+																                                                                                                                                                                                                        {{ form_widget(form.refMarche,{'attr':{'class':'form-control form-control-sm','placeholder':'Référence Marché'}}) }}
+																                                                                                                                                                                                                        </div>
+																                                                                                                                                                                                                        </div>#}
+															</div>
+
+															<div class="bloc_marche bloc_choix" {% if devis.type %} {% if devis.type.code == 'MR' %} style="display: block" {% endif %} {% endif %}>
+																<div class="hr-line-dashed"></div>
+
+																<div class="form-group row">
+																	{{ form_label(form.marche ,'Marché  :', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.marche,{'attr':{'class':'form-control form-control-sm marches sel2'}}) }}
+																	</div>
+																</div>
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.marchesous ,'Sous Marché  :', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.marchesous,{'attr':{'class':'sousmarche form-control form-control-sm sel2'}}) }}
+																	</div>
+																</div>
+
+
+																{#<div class="form-group row bloc_choix">
+																                                                                                                                                                                                                        {{ form_label(form.refMarche ,'Référence Marché  :', {'label_attr':{'class':'col-sm-4'}}) }}
+																                                                                                                                                                                                                        <div class="col-sm-3">
+																                                                                                                                                                                                                        {{ form_widget(form.refMarche,{'attr':{'class':'form-control form-control-sm','placeholder':'Référence Marché'}}) }}
+																                                                                                                                                                                                                        </div>
+																                                                                                                                                                                                                        </div>#}
+															</div>
+															<div class="bloc_reference_devis_client bloc_choix" {% if devis.type%} {% if devis.type.code == 'CMD' %} style="display: block" {% endif %} {% endif %}>
+
+																<div class="hr-line-dashed"></div>
+
+																<div class="form-group row">
+																	{{ form_label(form.devisClient ,'Référence devis client  :', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-4">
+																		{{ form_widget(form.devisClient,{'attr':{'class':'form-control form-control-sm sel2'}}) }}
+																	</div>
+																</div>
+
+
+															</div>
+															<div class="hr-line-dashed"></div>
+
+
+															<div class="form-group row">
+																{{ form_label(form.client ,'Client (*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.client,{'attr':{'class':'sel2 form-control form-control-sm'}}) }}
+																	<span class="form-error-message">
+																		{{ form_errors(form.client) }}
+																	</span>
+																</div>
+															</div>
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.description ,'Description devis (*):', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.description,{'attr':{'class':'form-control form-control-sm ' ,'placeholder':'Description'}}) }}
+																</div>
+															</div>
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.devise ,'Devise :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-4 input-group">
+																	{{ form_widget(form.devise,{'attr':{'class':'sel2 form-control form-control-sm'}}) }}
+																</div>
+															</div>
+
+
+															{#	<div class="form-group row">
+															                                                                                                                                {{ form_label(form.mtRemise ,'REMISE %  :', {'label_attr':{'class':'col-sm-4'}}) }}
+															                                                                                                                                <div class="col-sm-2 input-group">
+															                                                                                                                                        {{ form_widget(form.mtRemise,{'attr':{'class':'affaire form-control form-control-sm' ,'placeholder':'REMISE'}}) }}
+															                                                                                                                                </div>
+															                                                        
+															                                                        
+															                                                                                                                        </div> #}
+
+
+														</div>
+
+
+														<div class="col-md-6">
+
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.refCommande ,'Réf Commande :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-4 input-group">
+																	{{ form_widget(form.refCommande,{'attr':{'class':'form-control form-control-sm','placeholder':'Référence commande'}}) }}
+																</div>
+															</div>
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.dateCommande ,'Date Commande :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-4 input-group">
+																	{{ form_widget(form.dateCommande,{'attr':{'class':'form-control ' }}) }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.budget ,'Budget :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-2 input-group">
+																	{{ form_widget(form.budget,{'attr':{'class':'form-control ' ,'placeholder':'Budget' }}) }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.depenser ,'Depenser :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-2 input-group">
+																	{{ form_widget(form.depenser,{'attr':{'class':'form-control ' ,'placeholder':'DEPENSE' }}) }}
+																</div>
+															</div>
+
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.observation ,'DESCRIPTION DÉTAIL :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8 input-group">
+																	{{ form_widget(form.observation,{'attr':{'class':'affaire form-control ' , 'placeholder':'DESCRIPTION DÉTAIL'}}) }}
+																</div>
+
+
+															</div>
+
+
+															{#}
+															
+															
+															
+															
+															                                                        <div class="hr-line-dashed"></div>
+															
+															                                                        <div class="form-group row">
+															                                                            {{ form_label(form.compteMasse ,'Compte Masse :', {'label_attr':{'class':'col-sm-4'}}) }}
+															                                                            <div class="col-sm-8">
+															                                                                {{ form_widget(form.compteMasse,{'attr':{'class':'sel2 compteMasse form-control form-control-sm'}}) }}
+															                                                            </div>
+															                                                        </div>
+															
+															                                                        <div class="hr-line-dashed"></div>
+															
+															
+															                                                        <div class="form-group row">
+															                                                            {{ form_label(form.compteRubrique ,'Compte Rubrique :', {'label_attr':{'class':'col-sm-4'}}) }}
+															                                                            <div class="col-sm-8">
+															                                                                {{ form_widget(form.compteRubrique,{'attr':{'class':'sel2 compteRubrique form-control form-control-sm'}}) }}
+															                                                            </div>
+															                                                        </div>
+															
+															                                                        <div class="hr-line-dashed"></div>
+															
+															                                                        <div class="form-group row">
+															                                                            {{ form_label(form.comptePoste ,'Compte Poste :', {'label_attr':{'class':'col-sm-4'}}) }}
+															                                                            <div class="col-sm-8">
+															                                                                {{ form_widget(form.comptePoste,{'attr':{'class':'sel2 comptePoste form-control form-control-sm'}}) }}
+															                                                            </div>
+															                                                        </div>
+															
+															                                                        <div class="hr-line-dashed"></div>
+															
+															
+															                                                        <div class="form-group row">
+															                                                            {{ form_label(form.compte ,'Compte  :', {'label_attr':{'class':'col-sm-4'}}) }}
+															                                                            <div class="col-sm-8">
+															                                                                {{ form_widget(form.compte,{'attr':{'class':'sel2 compte form-control form-control-sm'}}) }}
+															                                                            </div>
+															                                                        </div>
+															
+															                                                        #}
+														</div>
+
+
+													</div>
+
+												{% endif %}
+											</div>
+											<!-- <div class="tab-pane" id="tab-2">
+											                                                                                                                                                                                                        
+											                                                                                                                                                                                                        <div class="hr-line-dashed"></div>
+											                                                                                                                                                                                                        
+											                                                                                                                                                                                                        <!<div class="form-group row">
+											                                        {#{ form_label(form.autreInformation ,'Autre Informations  :', {'label_attr':{'class':'col-sm-3'}}) }}
+											                                        <div class="col-sm-8">
+											                                            {{ form_widget(form.autreInformation,{'attr':{'class':'form-check-inline form-control form-control-sm'}}) }#}
+											                                        </div>
+											                                    </div>
+											    
+											                                    <div class="hr-line-dashed"></div>
+											    
+											                                </div>-->
+
+
+											{#<div class="hr-line-dashed"></div>#}
+
+											{% if demande is defined %}
+												<input type="hidden" name="_id" value="{{ demande.id }}"/>
+											{% endif %}
+
+											{{ form_widget(form.detail) }}
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+
+	{{ form_end(form,{'render_rest': false}) }}

@@ -1,0 +1,40 @@
+{#{{ dump(operations) }}#}
+
+<div class="mail-body text-right tooltip-demo buttons_foot">
+    {% if livraison is defined and livraison is not empty and livraison.id is not empty and operations['_workflow'] is  defined and   page_actuel =='show'  %}
+
+
+        {% for transition in workflow_transitions(livraison) %}
+
+            {% set url = "" %}
+            {% if workflow_metadata(livraison, 'function', transition) %}
+                {%  set  url= path(workflow_metadata(livraison, 'function', transition), {id: livraison.id}) %}
+            {% endif %}
+
+
+
+            <a class="{{ workflow_metadata(livraison, 'function', transition) }} btn btn-sm btn-white {{ workflow_metadata(livraison, 'class', transition) }} btn-outline" data-id="{{ livraison.id }}" data-title="{{ workflow_metadata(livraison, 'title', transition) }}" data-transition="{{ transition.name }}">
+                <i class="fa {{ workflow_metadata(livraison, 'icon', transition) }}"></i>
+                &nbsp;{{ workflow_metadata(livraison, 'title', transition) }}
+            </a>
+
+        {% endfor %}
+
+{% endif %}
+   
+
+<div id="test" data-livraison-id="{{ livraison.id|json_encode }}"></div>
+
+
+</div>
+
+{#
+{{ wo_render_breadcrumbs() }}
+#}
+
+
+{#   <div class="mail-body text-right tooltip-demo buttons_foot">
+        <a href="mailbox.html" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send" aria-describedby="tooltip439841"><i class="fa fa-reply"></i> Send</a>
+        <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+        <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+    </div>#}

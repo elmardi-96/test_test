@@ -1,0 +1,179 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Utilisateurs-groupes
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div
+		class="new">
+		{# {% include './config/inc/navigation.html.twig' %}
+						
+						
+						 
+						       {{ include('./config/us_groupe/_form.html.twig') }} #}
+
+
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+			<div class="col-lg-6">
+				<h2 class="fo">Configuration Groupe
+					<span>(groupe)</span>
+				</h2>
+			</div>
+
+
+			<div class="col-lg-6">
+				<div class="title-action">
+
+					<button class="btn btn-white btn-xs my-button" id="new_groupe">
+						<i class="fa fa-pencil"></i>
+						Enregistrer
+					</button>
+
+
+				</div>
+			</div>
+
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+
+				{{ wo_render_breadcrumbs() }}
+			</div>
+		</div>
+
+
+		<br/><br/>
+
+
+		<div class="row pt-20 scroll_content">
+			<div class="col-lg-12 ">
+				<div class="ibox">
+
+					<div class="ibox-content">
+
+						<div class="message-success"></div>
+
+
+						<div class="row m-t-sm">
+							<div class="col-lg-12">
+								<div class="panel blank-panel">
+									<div class="panel-heading">
+										<div class="panel-options">
+											{% include './config/us_groupe/inc/navigation.html.twig' %}
+										</div>
+									</div>
+
+									<div class="col-md-12 scroll_content">
+										<div class="panel-body">
+											<div class="tab-content">
+												<div class="tab-pane active show" id="tab-1">
+													<div class="row">
+														<div class="col-md-3 b-r">
+															<div class="tab-content">
+																<div class="tab-pane active" id="tab-1">
+
+
+																	<div class="row">
+
+																			<div class="col-md-12">
+																				<label>Choix Dossier</label>
+																				<select class="usgroupeselect2 sel2 form-control form-control-sm">
+																					<option value="">Choix dossier</option>
+																					{% for d in dossiers %}
+																					<option value="{{d.id}}">{{d.abreviation}}</option>
+																					{% endfor %}
+																				</select>
+																			</div>
+																
+
+																		<div id='external-events'>
+																			<div class="using_json m-l-15"></div>
+																		</div>
+																		<br>
+																		<div class="col-md-12 message2">
+																			<div class="alert alert-primary" role="alert">
+																				<h4 class="alert-heading">Message !</h4>
+																				<p>Veuilez séléctionner un dossier pour afficher la liste des permissions .</p>
+																				
+																			</div>
+																		</div>
+																		
+
+
+																	</div>
+
+
+																</div>
+															</div>
+														</div>
+														<div class="col-md-9">
+															<table class="t-m table table-striped table-bordered table-hover w-m dataTable" id="grid2">
+
+																<thead>
+																	<tr>
+																		<th>Module</th>
+																		<th>Sous module</th>
+																		<th>Dossier</th>
+																		<th>operation</th>
+																		<th>Active module</th>
+																		<th>Active sous module</th>
+																	</tr>
+																</thead>
+																<tbody>
+
+
+																	{% for key , per in  permission  %}
+																		<tr>
+																			<td>{{ per.module.titre }}</td>
+																			<td>{{ per.sousmodule.titre }}</td>
+																			<td>{{ per.dossier.abreviation }}</td>
+																			<td>{{ per.operation.titre }}</td>
+																			<td>{{ per.activemodule == 1 ? "oui" : "non" }}</td>
+																			<td>{{ per.activesousmodule == 1 ? "oui" : "non" }}</td>
+																		</tr>
+																		
+																	{% endfor %}
+
+
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+			{% if us_groupe is defined  %}
+
+				<input type="hidden" id="_id" data-token="{{ csrf_token('permission' ~ us_groupe.id) }}" value="{{us_groupe.id}}"/>
+
+			{% endif %}
+
+
+		</div>
+
+
+	{% endblock %}
+
+
+	{% block javascripts %}
+		{{ parent() }}
+		{{ encore_entry_script_tags('us_groupe') }}
+	{% endblock %}

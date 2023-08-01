@@ -1,0 +1,746 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+<div
+	class="form-validation-msg" style="display:none">
+	{# message flash #}
+	{% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div data-toastr="{{ label }}" class="toastr-msg">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
+	{# form global errors  #}
+	<div class="form-errors">{{form_errors(form)}}</div>
+</div>
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+	<div class="col-lg-6">
+		{% include './module_ressource_humaine/grs_employe/inc/workflow_breadcumb.html.twig' %}
+	</div>
+	<div class="col-lg-6">
+		<div class="title-action">
+			<button class="btn btn-white btn-xs btn-lg my-button " data-style="expand-left" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}</button>
+
+		</div>
+	</div>
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+		{% include './module_ressource_humaine/grs_employe/inc/workflow.html.twig' %}
+	</div>
+</div>
+<br/><br/>
+
+
+<div class="row pt-20">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+							<div class="panel-heading">
+								<div class="panel-options">
+								
+									{% if grs_employe is defined %}
+										{% include './module_ressource_humaine/grs_employe/inc/navigation.html.twig' %}
+									{% else %}
+										<ul class="nav nav-tabs">
+											<li>
+												<a class="nav-link active" href="#tab-1" data-toggle="tab">
+													<i class="fa fa-info-circle"></i>
+													Employe
+												</a>
+											</li>
+										</ul>
+									{% endif %}
+
+								</div>
+							</div>
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+
+										<div class="tab-pane active" id="tab-1">
+											<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+												<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+													<i class="fa fa-drivers-license-o"></i>
+													Informations sur l'employé</a>
+												<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+													<i class="fa fa-laptop"></i>
+													Informations Poste/Contract</a>
+												<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+													<i class="fa fa-institution"></i>
+													informations Banque</a>
+												<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+													<i class="fa fa-money"></i>
+													informations Paiement</a>
+												<a class="nav-link" id="v-pills-contact-tab" data-toggle="pill" href="#v-pills-contact" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+													<i class="fa fa-ambulance"></i>
+													Contact d'urgence</a>
+											</div>
+											<div class="tab-content" id="v-pills-tabContent">
+												<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+													<div class="row m-2">
+														<div class="col-md-6 b-r">
+
+
+															<div class="form-group row">
+																{{ form_label(form.nom ,'Nom(*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.nom,{'attr':{'class':'form-control  form-control-sm','placeholder':'Nom'}}) }}
+
+																	<div class="form-error{% if form_errors(form.nom)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.nom) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.prenom ,'Prénom(*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.prenom,{'attr':{'class':'form-control  form-control-sm','placeholder':'Prénom'}}) }}
+
+																	<div class="form-error {% if form_errors(form.prenom)|length > 0 %} error-class-tab{% endif %}">
+																		{{ form_errors(form.prenom) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.email ,'Email (*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.email,{'attr':{'class':'form-control  form-control-sm','placeholder':'Email'}}) }}
+
+																	<div class="form-error {% if form_errors(form.email)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.email) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.sexe ,'Sexe :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.sexe) }}
+
+																	<div class="form-error {% if form_errors(form.sexe)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.sexe) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.cin ,'C.I.N(*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.cin,{'attr':{'class':'form-control  form-control-sm','placeholder':'C.I.N'}}) }}
+
+																	<div class="form-error {% if form_errors(form.cin)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.cin) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.cnss ,'C.N.S.S (*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.cnss,{'attr':{'class':'form-control  form-control-sm','placeholder':'C.N.S.S'}}) }}
+
+																	<div class="form-error {% if form_errors(form.cnss)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.cnss) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.statut ,'Statut :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.statut,{'attr':{'class':'form-control  form-control-sm','placeholder':'Statut'}}) }}
+
+																	<div class="form-error {% if form_errors(form.statut)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.statut) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.familiale ,'Situation Familiale :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.familiale,{'attr':{'class':'form-control  form-control-sm','placeholder':'Situation Familiale'}}) }}
+
+																	<div class="form-error {% if form_errors(form.familiale)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.familiale) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.enfants ,'Enfants :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.enfants,{'attr':{'class':'form-control  form-control-sm','placeholder':'Enfants'}}) }}
+
+																	<div class="form-error {% if form_errors(form.enfants)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.enfants) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.user ,'Créé compte :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.user,{'attr':{'class':'user'}}) }}
+
+																	<div class="form-error {% if form_errors(form.user)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.user) }}
+																	</div>
+																</div>
+															</div>
+
+															<div class="hr-line-dashed"></div>
+															<div id="optionOneDiv"  style="display: none" >
+
+
+																<div class="form-group row">
+																	{{ form_label(form.username ,'Username :', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.username,{'attr':{'class':'form-control  form-control-sm','placeholder':'Username'}}) }}
+
+																		<div class="form-error {% if form_errors(form.username)|length > 0 %}error-class-tab{% endif %}">
+																			{{ form_errors(form.username) }}
+																		</div>
+																	</div>
+																</div>
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.plainPassword.first ,'Mot de passe :', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.plainPassword.first,{'attr':{'class':'form-control  form-control-sm','placeholder':'Mot de passe'}}) }}
+
+																		<div class="form-error {% if form_errors(form.plainPassword.first)|length > 0 %}error-class-tab{% endif %}">
+																			{{ form_errors(form.plainPassword.first) }}
+																		</div>
+																	</div>
+																</div>
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.plainPassword.second ,'Confirmation du mot de passe :', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.plainPassword.second,{'attr':{'class':'form-control  form-control-sm','placeholder':'Confirmation du mot de passe'}}) }}
+
+																		<div class="form-error {% if form_errors(form.plainPassword.second)|length > 0 %}error-class-tab{% endif %}">
+																			{{ form_errors(form.plainPassword.second) }}
+																		</div>
+																	</div>
+																</div>
+																<div class="hr-line-dashed"></div>
+
+
+															</div>
+
+
+														</div>
+
+
+														<div class="col-md-6">
+
+
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.telePersonnel1 ,'Téléphone 1 :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.telePersonnel1,{'attr':{'class':'form-control  form-control-sm','placeholder':'Téléphone 1'}}) }}
+
+																	<div class="form-error {% if form_errors(form.telePersonnel1)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.telePersonnel1) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.telePersonnel2 ,'Téléphone 2 :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.telePersonnel2,{'attr':{'class':'form-control  form-control-sm','placeholder':'Téléphone 2'}}) }}
+
+																	<div class="form-error {% if form_errors(form.telePersonnel2)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.telePersonnel2) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.teleEntreprise ,'Tel entreprise :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.teleEntreprise,{'attr':{'class':'form-control  form-control-sm','placeholder':'Tel entreprise'}}) }}
+
+																	<div class="form-error {% if form_errors(form.teleEntreprise)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.teleEntreprise) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.adresse ,'Adresse :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.adresse,{'attr':{'class':'form-control  form-control-sm','placeholder':'Adresse'}}) }}
+
+																	<div class="form-error {% if form_errors(form.adresse)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.adresse) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.ville ,'Ville :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.ville,{'attr':{'class':'form-control  form-control-sm','placeholder':'Ville'}}) }}
+
+																	<div class="form-error {% if form_errors(form.ville)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.ville) }}
+																	</div>
+																</div>
+															</div>
+														{#	<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.pays ,'Pays :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.pays,{'attr':{'class':'form-control  form-control-sm','placeholder':'Pays'}}) }}
+
+																	<div class="form-error {% if form_errors(form.pays)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.pays) }}
+																	</div>
+																</div>
+															</div>#}
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.dateNaissance ,'Date de naissance :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.dateNaissance,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date de naissance'}}) }}
+
+																	<div class="form-error {% if form_errors(form.dateNaissance)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.dateNaissance) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.photo ,'Photo :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.photo) }}
+
+																	<div class="form-error {% if form_errors(form.photo)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.photo) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.active ,'Active :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.active) }}
+
+																	<div class="form-error {% if form_errors(form.active)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.active) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+														</div>
+
+
+													</div>
+												</div>
+												<div class="tab-pane fade" id="v-pills-contact" role="tabpanel" aria-labelledby="v-pills-contact-tab">
+													<div class="row m-2">
+														<div class="col-md-6 b-r">
+															<div class="form-group row">
+																{{ form_label(form.nomUrgence ,'Nom urgence :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.nomUrgence,{'attr':{'class':'form-control  form-control-sm','placeholder':'Nom urgence'}}) }}
+
+																	<div class="form-error {% if form_errors(form.nomUrgence)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.nomUrgence) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.teleUrgence ,'tele urgence :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.teleUrgence,{'attr':{'class':'form-control  form-control-sm','placeholder':'tele urgence'}}) }}
+
+																	<div class="form-error {% if form_errors(form.teleUrgence)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.teleUrgence) }}
+																	</div>
+																</div>
+															</div>
+														
+														</div>
+
+
+														<div class="col-md-6"></div>
+
+
+													</div>
+												</div>
+												<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+													<div class="row m-2">
+														<div class="col-md-6 b-r">
+
+
+															<div class="form-group row">
+																{{ form_label(form.departement ,'Département :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.departement,{'attr':{'class':'form-control  form-control-sm','placeholder':'Département'}}) }}
+
+																	<div class="form-error {% if form_errors(form.departement)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.departement) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.fonction ,'Fonction :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.fonction,{'attr':{'class':'form-control  form-control-sm','placeholder':'Fonction'}}) }}
+
+																	<div class="form-error {% if form_errors(form.fonction)|length > 0 %} error-class-tab{% endif %}">
+																		{{ form_errors(form.fonction) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.typeContrat ,'Type de contrat :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.typeContrat,{'attr':{'class':'form-control  form-control-sm','placeholder':'Type de contrat'}}) }}
+
+																	<div class="form-error {% if form_errors(form.typeContrat)|length > 0 %}error-class-tab{% endif %}">
+																		{{ form_errors(form.typeContrat) }}
+																	</div>
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.dateEntre ,'Date d\'entré :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                <div class="col-sm-8">
+                                                                    {{ form_widget(form.dateEntre,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date d\'entré'}}) }}
+
+																<div class="form-error {% if form_errors(form.dateEntre)|length > 0 %}error-class-tab{% endif %}">
+																	{{ form_errors(form.dateEntre) }}
+																</div>
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.dateSortie ,'Date de sortir  :', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-8">
+																{{ form_widget(form.dateSortie,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date de sortir '}}) }}
+
+																<div class="form-error {% if form_errors(form.dateSortie)|length > 0 %}error-class-tab{% endif %}">
+																	{{ form_errors(form.dateSortie) }}
+																</div>
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+													</div>
+													<div class="col-md-6">
+
+
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															{{ form_label(form.public ,'Public :', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-8">
+																{{ form_widget(form.public,{'attr':{'class':'form-control  form-control-sm','placeholder':'Public'}}) }}
+
+																<div class="form-error {% if form_errors(form.public)|length > 0 %}error-class-tab{% endif %}">
+																	{{ form_errors(form.public) }}
+																</div>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															{{ form_label(form.salaireBase ,'Salaire de base :', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-8">
+																{{ form_widget(form.salaireBase,{'attr':{'class':'form-control  form-control-sm','placeholder':'Salaire de base'}}) }}
+
+																<div class="form-error  {% if form_errors(form.salaireBase)|length > 0 %}error-class-tab{% endif %}">
+																	{{ form_errors(form.salaireBase) }}
+																</div>
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+
+														<div class="form-group row">
+															{{ form_label(form.coutHeure ,'Cout d\'heure :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                <div class="col-sm-8">
+                                                                    {{ form_widget(form.coutHeure,{'attr':{'class':'form-control  form-control-sm','placeholder':'Cout d\'heure'}}) }}
+
+															<div class="form-error {% if form_errors(form.coutHeure)|length > 0 %}error-class-tab{% endif %}">
+																{{ form_errors(form.coutHeure) }}
+															</div>
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.responsable ,'Responsable :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.responsable,{'attr':{'class':'form-control  form-control-sm','placeholder':'responsable'}}) }}
+
+															<div class="form-error {% if form_errors(form.responsable)|length > 0 %}error-class-tab{% endif %}">
+																{{ form_errors(form.responsable) }}
+															</div>
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+											<div class="row m-2">
+												<div class="col-md-6 b-r">
+
+
+													<div class="form-group row">
+														{{ form_label(form.banque ,'Banque :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.banque,{'attr':{'class':'form-control  form-control-sm','placeholder':'Banque'}}) }}
+
+															<div class="form-error {% if form_errors(form.banque)|length > 0 %}error-class-tab{% endif %}">
+																{{ form_errors(form.banque) }}
+															</div>
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.rib ,'RIB :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.rib,{'attr':{'class':'form-control  form-control-sm','placeholder':'RIB'}}) }}
+
+															<div class="form-error {% if form_errors(form.rib)|length > 0 %} error-class-tab{% endif %}">
+																{{ form_errors(form.rib) }}
+															</div>
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+												</div>
+												<div class="col-md-6">
+
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.numCompte ,'Num de compte :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.numCompte,{'attr':{'class':'form-control  form-control-sm','placeholder':'Num de compte'}}) }}
+
+															<div class="form-error {% if form_errors(form.numCompte)|length > 0 %}error-class-tab{% endif %}">
+																{{ form_errors(form.numCompte) }}
+															</div>
+														</div>
+													</div>
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.adresseBanque ,'Adresse du banque :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.adresseBanque,{'attr':{'class':'form-control  form-control-sm','placeholder':'Adresse du banque'}}) }}
+
+															<div class="form-error {% if form_errors(form.adresseBanque)|length > 0 %}error-class-tab{% endif %}">
+																{{ form_errors(form.adresseBanque) }}
+															</div>
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+												</div>
+											</div>
+
+
+										</div>
+										<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+											<div class="row m-2">
+												<div class="col-md-6 b-r">
+
+
+													<div class="form-group row">
+														{{ form_label(form.dateDebutPai ,'Date Début :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.dateDebutPai,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date Début'}}) }}
+
+															<div class="form-error {% if form_errors(form.dateDebutPai)|length > 0 %}error-class-tab{% endif %}">
+																{{ form_errors(form.dateDebutPai) }}
+															</div>
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.dateFinPai ,'Date Fin :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.dateFinPai,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date Fin'}}) }}
+
+															<div class="form-error {% if form_errors(form.dateFinPai)|length > 0 %} error-class-tab{% endif %}">
+																{{ form_errors(form.dateFinPai) }}
+															</div>
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.DateEmbauche ,'Date d\'embauche :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.DateEmbauche,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date d\'embauche'}}) }}
+														<div class="form-error {% if form_errors(form.DateEmbauche)|length > 0 %}error-class-tab{% endif %}">
+															{{ form_errors(form.DateEmbauche) }}
+														</div>
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+												<div class="form-group row">
+													{{ form_label(form.salaireBasePai ,'Salaire de base :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-8">
+														{{ form_widget(form.salaireBasePai,{'attr':{'class':'form-control  form-control-sm','placeholder':'Salaire de base'}}) }}
+
+														<div class="form-error {% if form_errors(form.salaireBasePai)|length > 0 %}error-class-tab{% endif %}">
+															{{ form_errors(form.salaireBasePai) }}
+														</div>
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+												<div class="form-group row">
+													{{ form_label(form.deductionRetenue ,'Déductions & retenues  :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-8">
+														{{ form_widget(form.deductionRetenue,{'attr':{'class':'form-control  form-control-sm','placeholder':'Déductions & retenues'}}) }}
+
+														<div class="form-error {% if form_errors(form.deductionRetenue)|length > 0 %}error-class-tab{% endif %}">
+															{{ form_errors(form.deductionRetenue) }}
+														</div>
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+												<div class="form-group row">
+													{{ form_label(form.stFamilialePai ,'Situation familiale :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-8">
+														{{ form_widget(form.stFamilialePai,{'attr':{'class':'form-control  form-control-sm','placeholder':'Situation familiale'}}) }}
+
+														<div class="form-error {% if form_errors(form.stFamilialePai)|length > 0 %}error-class-tab{% endif %}">
+															{{ form_errors(form.stFamilialePai) }}
+														</div>
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+												<div class="form-group row">
+													{{ form_label(form.enfantCharge ,'Enfants à charge :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-8">
+														{{ form_widget(form.enfantCharge,{'attr':{'class':'form-control  form-control-sm','placeholder':'Enfants à charge'}}) }}
+
+														<div class="form-error {% if form_errors(form.enfantCharge)|length > 0 %}error-class-tab{% endif %}">
+															{{ form_errors(form.enfantCharge) }}
+														</div>
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+											</div>
+											<div class="col-md-6">
+
+
+												<div class="hr-line-dashed"></div>
+
+												<div class="form-group row">
+													{{ form_label(form.tauxCimr ,'Taux CIMR :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-8">
+														{{ form_widget(form.tauxCimr,{'attr':{'class':'form-control  form-control-sm','placeholder':'Taux CIMR'}}) }}
+
+														<div class="form-error {% if form_errors(form.tauxCimr)|length > 0 %}error-class-tab{% endif %}">
+															{{ form_errors(form.tauxCimr) }}
+														</div>
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+												<div class="form-group row">
+													{{ form_label(form.TauxAssuranceMaladie ,'Taux Assurance maladie :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-8">
+														{{ form_widget(form.TauxAssuranceMaladie,{'attr':{'class':'form-control  form-control-sm','placeholder':'Taux Assurance maladie'}}) }}
+
+														<div class="form-error {% if form_errors(form.TauxAssuranceMaladie)|length > 0 %}error-class-tab{% endif %}">
+															{{ form_errors(form.TauxAssuranceMaladie) }}
+														</div>
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+												<div class="form-group row">
+													{{ form_label(form.InteretCreditLogement ,'Intérêts crédit logement :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-8">
+														{{ form_widget(form.InteretCreditLogement,{'attr':{'class':'form-control  form-control-sm','placeholder':'Confirmation du mot de passe'}}) }}
+
+														<div class="form-error {% if form_errors(form.InteretCreditLogement)|length > 0 %}error-class-tab{% endif %}">
+															{{ form_errors(form.InteretCreditLogement) }}
+														</div>
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+
+												<div class="form-group row">
+													{{ form_label(form.retenuePret ,'Retenue prêt :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-8">
+														{{ form_widget(form.retenuePret,{'attr':{'class':'form-control  form-control-sm','placeholder':'Retenue prêt'}}) }}
+
+														<div class="form-error {% if form_errors(form.retenuePret)|length > 0 %}error-class-tab{% endif %}">
+															{{ form_errors(form.retenuePret) }}
+														</div>
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+
+												<div class="form-group row">
+													{{ form_label(form.Prime ,'Primes  :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-8">
+														{{ form_widget(form.Prime,{'attr':{'class':'form-control  form-control-sm','placeholder':'Primes'}}) }}
+
+														<div class="form-error {% if form_errors(form.Prime)|length > 0 %}error-class-tab{% endif %}">
+															{{ form_errors(form.Prime) }}
+														</div>
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+
+												{% if grs_employe is defined %}
+												<input type="hidden" name="_id" value="{{ grs_employe.id }}"/>
+											{% endif %}
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>{{form_widget(form._token)}}{{ form_end(form,{'render_rest': false}) }}
+

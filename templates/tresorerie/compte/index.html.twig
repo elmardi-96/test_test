@@ -1,0 +1,177 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+
+
+{% block title %}Alimentation index | Tresorerie
+{% endblock %}
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-6">
+            {% include './tresorerie/compte/inc/workflow_breadcumb.html.twig' %}
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="title-action">
+
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+            APPLICATIONS >
+        </div>
+
+    </div>
+    
+    
+    {# <div class="mt-5"> </div>
+    
+    <button class="test mt-5"> test</button> #}
+    
+    
+    {# ------------ #}
+    
+    {# <div class="ibox pt-5">
+
+			<div class="ibox-title ibox-title2">
+				<h5>Comptes </h5>
+			</div>
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+											<div class="row">
+
+											    <div class="col-sm-5">
+                                                
+                                                  {% for d in dossier.PCompteBanques %}
+                                                           
+                                                        {% if d.Type.id == 5  %}
+                                                        
+                                                            <div class="form-group row">
+                                                                <label  class="col-sm-4">Physique</label>
+                                                                <div class="col-sm-7">
+                                                                    <input type="text" value="{{d.MontantFinal}}" class="text-right form-control form-control compte_conso" disabled >
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        {% endif %}
+                                                        
+                                                        {% if d.Type.id == 4  %}
+
+                                                            <div class="form-group row">
+                                                                <label  class="col-sm-4">Virtuel </label>
+                                                                <div class="col-sm-7">
+                                                                    <input type="text" value="{{d.MontantFinal}}" class="text-right form-control form-control compte_placement" disabled >
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        {% endif %}
+                                                        
+                                                    
+                                                     {% endfor %}
+                                                     
+                                                     
+                                                     {% for d in dossier.CompteBanqueCaisses %}
+                                                     
+                                                        <div class="form-group row">
+                                                            <label  class="col-sm-4">Caisse</label>
+                                                            <div class="col-sm-7">
+                                                                <input type="text" value="{{d.MontantFinal}}" class="text-right form-control form-control Manotant_valorise"  disabled>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                      {% endfor %}
+                                                    
+                                                        
+
+												</div>
+
+										    </div>
+
+									</div>
+
+
+								</div>
+
+
+								{% if alimentation is defined %}
+									<input type="hidden" name="_id" id="_id" value="{{ alimentation.id }}"/>
+								{% endif %}
+
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+        
+        
+   #}
+    {# ------------ #}
+    
+    {#------------- new  Table ----------------#}
+    {# <div class="mt-3"> </div> #}
+    
+     
+       <div class="row border-bottom white-bg dashboard-header mt-20">
+        <div class="col-lg-12 ">
+            <div class="ibox pt-5">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <div class="row">
+                            <div class="col-2 list_actions_bloc" style="position: fixed ; display: none;">
+                            </div>
+                        </div>
+                        <table class="table  display table-striped table-bordered table-hover" id="tt_compte_table" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Dossie</th>
+                                    <th>Num Compte</th>
+                                    <th>Compte</th>
+                                    <th>Type Compte</th>
+                                    <th>Montant Final</th>
+                                  
+                                </tr>
+                            </thead>
+                        </table> 
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    {#------------- end  Table ----------------#}
+    
+    
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('compte') }}
+{% endblock %}

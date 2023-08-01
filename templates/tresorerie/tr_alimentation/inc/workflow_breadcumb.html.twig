@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="btn-group btn-breadcrumb btn-breadcrumb2">
+        <a href="#" class="btn btn-default">
+           <b>Depôt/Retrait</b>
+        </a>
+        {% if  tr_alimentation is defined and tr_alimentation is not empty and tr_alimentation.id is not empty %}
+            {% set count = 0 %}
+            {% set count2 = 0 %}
+            {% for key , place  in { "creer":"Cree" ,  "valider":"Validee"}  %}
+                {% if count >= 0 %}
+
+                    <a href="#" class="btn btn-default
+                       {% if workflow_has_marked_place(tr_alimentation, key)  %}
+                           btn-breadcrumb2-active
+                       {% endif %}
+                       {% if count2 == 0  %}{{ workflow_metadata(tr_alimentation, 'class_css', key)}}{% else %} hide-btn-workflow {% endif %}
+                       ">{{ place }}
+                    </a>
+                    {% set count = count + 1%}
+                    {% if workflow_has_marked_place(tr_alimentation, key)  %}
+                        {% set count2 = count2 + 1 %}
+                    {% endif %}
+                    
+                    
+                    
+                {% endif %}
+
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

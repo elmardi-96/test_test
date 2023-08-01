@@ -1,0 +1,49 @@
+{% set current_path = app.request.get('_route') %}
+{#<ul class="nav nav-tabs">                                                                                          
+
+    <li> <a class="nav-link {% if "module_univ_concours_p_concourscab_edit"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_p_concourscab_edit' , {id:concours.id})}}" >  Modification </a></li>
+
+    {% if concours.avecConcours == true %}
+        <li> <a class="nav-link {% if "module_univ_concours_p_concourscab_matieres"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_p_concourscab_matieres' , {id:concours.id})}}" >  Matiéres </a></li>
+        {% endif %}  
+
+    <li> <a class="nav-link {% if "module_univ_concours_p_concourscab_formation"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_p_concourscab_formation' , {id:concours.id})}}" >  Formation </a></li>
+    <li> <a class="nav-link {% if "module_univ_concours_p_concourscab_grill"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_p_concourscab_grill' , {id:concours.id})}}" >  Grille </a></li>
+    <li> <a class="nav-link {% if "module_univ_concours_p_concourscab_classement"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_p_concourscab_classement' , {id:concours.id})}}" >  Classement </a></li>
+
+
+
+</ul>#}
+
+
+
+<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <a class="nav-link {% if "module_univ_concours_p_concourscab_edit"  in current_path  %} active {%endif%}"  href="{{ path('module_univ_concours_p_concourscab_edit' , {id:concours.id})}}">
+        <i class="fa fa-pencil"></i>
+        Concours
+    </a>
+
+
+    <a class="nav-link {% if "module_univ_concours_p_concourscab_formation"  in current_path  %} active {%endif%}"  href="{{ path('module_univ_concours_p_concourscab_formation' , {id:concours.id})}}">
+        <i class="fa fa-pencil"></i>
+        Formation
+    </a>
+
+    <a class="nav-link {% if "module_univ_concours_p_concourscab_grill"  in current_path  %} active {%endif%}"  href="{{ path('module_univ_concours_p_concourscab_grill' , {id:concours.id})}}">
+        <i class="fa fa-pencil"></i>
+        Grille
+    </a>
+
+    {% if concours.avecConcours == true %}
+        <a class="nav-link {% if "module_univ_concours_p_concourscab_matieres"  in current_path  %} active {%endif%}"  href="{{ path('module_univ_concours_p_concourscab_matieres' , {id:concours.id})}}">
+            <i class="fa fa-pencil"></i>
+            Matières
+        </a>
+
+        <a class="nav-link {% if "module_univ_concours_p_concourscab_classement"  in current_path  %} active {%endif%}"  href="{{ path('module_univ_concours_p_concourscab_classement' , {id:concours.id})}}">
+            <i class="fa fa-pencil"></i>
+            Classement
+        </a>
+
+    {% endif %}
+</div>

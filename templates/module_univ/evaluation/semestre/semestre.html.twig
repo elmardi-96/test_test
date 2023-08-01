@@ -1,0 +1,203 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Moyenne semestre | Evaluation | UNIV
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('univ_semestre_moyenne') }}
+{% endblock %}
+
+
+{% block body %}
+
+
+
+    <div id="right-sidebar" class="actions animated"></div>
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-6">
+            {% include './module_univ/evaluation/semestre/inc/workflow_breadcumb.html.twig' %}
+        </div>
+        <div class="col-lg-6">
+            <div class="title-action">
+                {% if  canSubmit == semestre.controlemodules|length  and  semestre.controlemodules|length > 0 %}
+                    <button class="btn btn-white btn-xs btn-lg _save_semestre my-button" data-etudiants='{{ etudiants|json_encode }}' data-id="{{semestre.id}}">
+                        <i class="fa fa-save"></i>
+                        Enregistrer
+                    </button>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {% include './module_univ/evaluation/semestre/inc/workflow.html.twig' %}
+        </div>
+    </div>
+
+    <div id="right-sidebar" class="actions animated"></div>
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-6">
+            {% include './module_univ/evaluation/semestre/inc/workflow_breadcumb.html.twig' %}
+        </div>
+        <div class="col-lg-6">
+            <div class="title-action">                                                                                                                                                                              
+                {% if  canSubmit == semestre.controlemodules|length  and  semestre.controlemodules|length > 0  and not workflow_has_marked_place(semestre, 'creer') and not workflow_has_marked_place(semestre, 'cloturer') %}
+                    <button class="btn btn-white btn-xs btn-lg _save_semestre my-button" data-etudiants='{{ etudiants|json_encode }}' data-id="{{semestre.id}}"> <i class="fa fa-save"></i>
+                        Enregistrer
+                    </button>
+                {% endif %}
+                {#<button class="btn btn-white btn-xs btn-lg my-button promotion">
+					<i class="fa fa-info"></i>
+					Information</button>#}
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {% include './module_univ/evaluation/semestre/inc/workflow.html.twig' %}
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content" style="padding-top: 4px ;">
+                    <div class="card-ribbon card-ribbon-semestre">
+                        <span>
+                            <div class="style-position">SEMESTRE</div>
+                        </span>
+                    </div>
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12 padding-style">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {% include './module_univ/evaluation/semestre/inc/navigation.html.twig' %}
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12 scroll_content">
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show affi" id="tab-1">
+                                                <div class="table-responsive">  
+                                                    {% if  canSubmit != semestre.controleModules|length  %}
+                                                        <div class="row">
+                                                            <div class="alert alert-warning inform" role="alert">
+
+                                                                {% for err in errors_messages %}
+                                                                    {{ err|raw }}
+                                                                {% endfor %}
+
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+
+                                                    {% if  workflow_has_marked_place(semestre, 'creer') %}
+                                                        <div class="row">
+                                                            <div class="alert alert-warning inform" role="alert">
+
+                                                                NB : Pour Enregister les informations d'un module , veuillez passer a la position (Avant rachat ou bien Aprés rachat)
+
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+
+
+                                                    {% if workflow_has_marked_place(semestre, 'cloturer') %}
+
+
+                                                        <div class="forum-item animated bounce">
+                                                            <div class="row">
+                                                                <div class="col-md-9">
+                                                                    <div class="forum-icon">
+                                                                        <i class="fa fa-warning"></i>
+                                                                    </div>
+                                                                    <a class="forum-item-title">Important</a>
+                                                                    <div class="forum-sub-title">
+                                                                        Vous ne pouvez pas modifier ou bien enregistrer les notes d'une semestre aprés l'étape clôturer ,
+                                                                        <br/>veuillez consulter 
+                                                                        <a href="{{ path('module_univ_semestre_show' , {id:semestre.id})}}"> ce lien pour plus sur l'élément ({{ semestre.semestre.designation }})</a>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    {% else  %}
+
+                                                        <table class="table  display table-bordered table-hover dataTables-example table-evaluation" id="datatable-show-semestre" data-controle-semestre ="{{ semestre.id }}" data-moycalculer="1">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th rowspan="2">#</th>
+                                                                    <th rowspan="2">CODE</th>
+                                                                    <th rowspan="2">NOM</th>
+                                                                    <th rowspan="2">PRENOM</th>
+
+                                                                    {% for controleModule in semestre.controleModules  %}
+
+
+                                                                        {% if controleModule.positionActuel['cloturer'] is defined %}
+                                                                            <th rowspan="2">{{ controleModule.module.designation }}</th>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+
+
+                                                                    <th rowspan="2">NOTE RACHAT</th>
+
+                                                                    <th rowspan="2">S.S2</th>
+                                                                    <th rowspan="2">S.Def</th>
+                                                                    <th rowspan="2">S.Aff</th>
+                                                                    <th rowspan="2">Cat</th>
+                                                                    <th colspan="2" width="3%">MOYENNE
+                                                                        <br/>
+                                                                        ENREGISTRE</th>
+                                                                    <th colspan="2"  width="3%">MOYENNE
+                                                                        <br/>
+                                                                        CALCULER
+                                                                    </th>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <th>MOYENNE</th>
+                                                                    <th>MOYENNE.SEC</th>
+                                                                    <th>MOYENNE</th>
+                                                                    <th>MOYENNE.SEC</th>
+                                                                </tr>
+
+
+                                                            </thead>
+
+
+                                                        </table>
+                                                    {% endif %}
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ {{ render(controller('App\\Controller\\moduleUniv\\evaluation\\EvaluationAnneeController:ChoixPromotion',{ 'id': semestre.controlePromotion ,'type':'semestre','active':semestre.id}))}}
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {#{ parent() }#}
+    {{ encore_entry_script_tags('univ_semestre_moyenne') }}
+{% endblock %}

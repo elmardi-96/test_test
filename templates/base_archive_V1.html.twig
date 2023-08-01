@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+         <title>
+        {% block title %}U3S-EPR | Stock {% endblock %}
+        </title>
+        
+        <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+        <link rel="shortcut icon" href="{{asset('/img/icon.png')}}" />
+
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+
+    </head>
+    <body class="fixed-nav fixed-nav-basic full-height-layout {% if app.user.theme is defined  %} {{app.user.theme}} {%endif%}">
+        <div ng-app="ngJsTreeDemo">
+		    <div ng-controller="treeCtrl as vm">
+
+                        {% block sidebar %} 
+                            {% include './module_archive_V1/archive/inc/sidebar_archive.html.twig' %}
+                        {% endblock %}
+                    
+                        {% block header %} 
+                            {% include './module_archive_V1/archive/inc/header.html.twig' %}
+                        {% endblock %}
+
+
+
+                        {% block body %} 
+
+                        {% endblock %} 
+
+                {% block footer %} 
+                    {% include './inc/footer.html.twig' %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>  
+{% block javascripts %}
+    {{ encore_entry_script_tags('archiveV1') }}
+   {# {{ encore_entry_script_tags('appTree') }}#}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% extends 'base_config.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('us_groupe') }}
+{% endblock %}
+
+
+
+
+{% block title %}Utilisateurs-groupes{% endblock %}
+
+{% block body %}
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+
+    <br/> <br/>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-md-9">
+
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Utilisateurs & groupes  , Groupe </h5>
+
+                    </div>
+                    <div class="ibox-content" style="padding-top: 0px"> 
+
+
+
+
+                        <div class="wrapper wrapper-content">
+                            <div class="row">
+                                {% for key , module in modules %}
+                                    <div class="col-md-4 box-app">
+                                        <div class="feed-element" style="background: #fbfbfbcc">
+                                            <a href="#" class="float-left">
+                                                <img alt="image" class="rounded-circle" src="{{ asset('/img/modules/' ~ module.image)}}">
+                                            </a>
+                                            <div class="media-body ">
+
+                                                <strong>{{ module.titre|capitalize }}</strong> <small>({{ module.type|capitalize }})</small>. <br>
+                                                <p class="text-muted">{{ module.description|capitalize }}</p>
+                                                <div class="actions">
+                                                    <a href="{{ path('us_groupe_dossiers',{'id':groupe_id ,'module_id':module.id }) }}" class="btn btn-xs btn-white float-left"><i class="fa fa-folder-o"></i>  Dossiers </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                {{ render(controller('App\\Controller\\UsGroupeController:tree',{ 'groupe_id': groupe_id ,'dossier_id':null ,'module_id':null})) }}
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('us_groupe') }}
+{% endblock %}

@@ -1,0 +1,332 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Consulter Element | Evaluation | UNIV
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('univ_element_moyenne') }}
+{% endblock %}
+
+
+{% block body %}
+
+
+    <div id="right-sidebar" class="actions animated"></div>
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-6">
+            {% include './module_univ/evaluation/element/inc/workflow_breadcumb.html.twig' %}
+        </div>
+        <div class="col-lg-6">
+			<div class="title-action">
+				{#<button class="btn btn-white btn-xs btn-lg my-button promotion">
+					<i class="fa fa-info"></i>
+					Information</button>#}
+			</div>
+		</div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {% include './module_univ/evaluation/element/inc/workflow.html.twig' %}
+        </div>
+    </div>
+    {#<header class="row w3-display-container w3-content w3-wide w3-display-flex-element"  id="home">
+            <img class="w3-image" src="" alt="Architecture" width="1500" height="800">
+            <div class="w3-display-middle w3-margin-top w3-center" >
+                <h1 class="w3-xxlarge w3-text-white" >
+                    <span class="w3-padding w3-black w3-opacity-min" >
+                        <b>Élément</b>
+                    </span>
+                </h1>
+            </div>
+        </header>#}
+    <div class="row pt-add-200">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content" style="padding-top: 4px ;">
+                    <div class="card-ribbon card-ribbon-element">
+                        <span>
+                            <div class="style-position">Élément</div>
+                        </span>
+                    </div>
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12 padding-style">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {% include './module_univ/evaluation/element/inc/navigation.html.twig' %}
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12 scroll_content">
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+                                                <div class="row">
+                                                    <div class="col-md-6 b-r">
+                                                        <h3 class="m-t-none m-b">INFORMATIONS</h3>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static">{{element.id}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Designation
+                                                            </label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static">{{element.description}}</p>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Coéfficient
+                                                            </label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static">
+                                                                    {{element.coefficient}}
+                                                                </p>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="col-md-6">
+
+                                                        <h3 class="m-t-none m-b">INFORMATIONS FORMATION</h3>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+
+                                                            <div class="col-sm-8">
+
+                                                                <p class="form-control-static">{{element.element.module.semestre.promotion.formation.etablissement.designation}}</p>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Formation</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static">{{element.element.module.semestre.promotion.formation.designation}}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Promotion</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static">{{element.element.module.semestre.promotion.designation}}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="m-t-none m-b"><br>
+                                                        </h3>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row specpanel">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Listes Etudiants
+                    </h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            {% set m_cc = null  %}
+                            {% set m_tp= null  %}
+                            {% set m_ef = null  %}
+                            {% for  key , coefEpreuve in element.coefficientEpreuve %}
+                                {% if key == 'NAT000000001'  %}
+                                    {% set m_cc = coefEpreuve  %}
+                                {% endif %}
+
+                                {% if key == 'NAT000000002'  %}
+                                    {% set m_tp= coefEpreuve  %}
+                                {% endif %}
+
+
+                                {% if key == 'NAT000000003'  %}
+                                    {% set m_ef = coefEpreuve  %}
+                                {% endif %}
+
+                            {% endfor  %}
+                            <table class="table  display table-bordered table-hover dataTables-example table-evaluation" id="datatable-show-4" data-id="{{element.id}}" data-moycalculer="0">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2">#</th>
+                                        <th rowspan="2">CODE</th>
+                                        <th rowspan="2">NOM</th>
+                                        <th rowspan="2">PRENOM</th>
+                                        <th colspan="3">MOY.CC (Coef :{{ m_cc }})
+                                        </th>
+                                        <th colspan="3">MOY.TP (Coef :{{ m_tp }})</th>
+                                        <th colspan="3">MOY.EF (Coef :{{ m_ef }})</th>
+                                        <th rowspan="2">MOY.INI</th>
+                                        <th rowspan="2">MOY.RAT</th>
+                                        <th rowspan="2">NOTE RACHAT</th>
+                                        <th rowspan="2">S.S1</th>
+                                        <th rowspan="2">S.S2</th>
+                                        <th rowspan="2">S.RACHAT</th>
+                                        <th rowspan="2">S.Def</th>
+                                        <th rowspan="2">S.Aff</th>
+                                        <th rowspan="2" width="3%">MOYENNE
+                                            <br/>
+                                            ENREGISTRE</th>
+
+                                    </tr>
+                                    <tr>
+                                        <th>M.CC(db)</th>
+                                        <th>M.CCR(db)</th>
+                                        <th>M.CC</th>
+                                        <th>M.TP(db)</th>
+                                        <th>M.TPR(db)</th>
+                                        <th>M.TP</th>
+                                        <th>M.EF(db)</th>
+                                        <th>M.EFR(db)</th>
+                                        <th class="tlast">M.EF</th>
+                                    </tr>
+
+
+                                </thead>
+
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row specpanel">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Liste Nature Epreuve
+                    </h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    {% for key , epr in element.univExControleEpreuves %}
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{key}}">
+                                                    {{ epr.natureEpreuve.designation }}
+                                                    ({{ epr.natureEpreuve.abreviation }})
+                                                    <span style="float:right">
+                                                        Date :
+                                                        {{ epr.created|date("Y/m/d") }}
+                                                    </span>
+                                                </a>
+
+                                            </h4>
+                                        </div>
+                                        <div id="collapse{{key}}" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <p style="padding-left: 15px;margin: 0;">{{ epr.description }}</p>
+                                            </div>
+                                            <div class="panel-footer" style="display: flow-root;">
+                                                <span style="float:left">Status :
+                                                    {% for key,value in epr.positionActuel %}
+                                                        {{ key }}
+                                                    {% endfor %}
+                                                </span>
+                                                <span style="float:right">
+                                                    Nombre épreuves :
+                                                    {{ epr.epreuves | length }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {#% for epr in element.univExControleEpreuves %}
+                                                                                                                                                    <div class="col-lg-3">
+                                                                                                                                                        <div class="panel panel-default">
+                                                                                                                                                            <div class="panel-heading panel-headingg">
+                                                                                                                                                                {{ epr.natureEpreuve.designation }}
+                                                                                                                                                                ({{ epr.natureEpreuve.abreviation }})
+                                                                                                                                                                <a href="{{path('module_univ_evaluation_moyenne_epreuve_fun',{id:epr.id})}}" style="cursor:pointer;float:right;padding-top: 3px;">
+                                                                                                                                                                    <i class="fa fa-info-circle" style="cursor:pointer;padding-top: 3px;"></i>
+                                                                                                                                                                    {{epr.natureEpreuve.code}}</a>
+                                                                                                                                                            </div>
+                                                                                                                                                            <div class="panel-body">
+                                                                                                                                                                <p style="padding-left: 15px;margin: 0;">{{ epr.description }}</p>
+                                                                                                                                                            </div>
+                                                                                                                                                            <div class="panel-footer" style="display: flow-root;">
+                                                                                                                                                                <span style="float:left">Status :
+                                                                                                                                                                    {% for key,value in epr.positionActuel %}
+                                                                                                                                                                        {{ key }}
+                                                                                                                                                                    {% endfor %}
+                                                                                                                                                                </span>
+                                                                                                                                                                <span style="float:right">
+                                                                                                                                                                    Nombre épreuves :
+                                                                                                                                                                    {{ epr.epreuves | length }}
+                                                                                                                                                                </span>
+                                                                                                                                                            </div>
+                                                                                                                        
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                {% endfor %#}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    {{ render(controller('App\\Controller\\moduleUniv\\evaluation\\EvaluationElementController:showhistorique',{ 'element': element }))}}
+    {{ render(controller('App\\Controller\\moduleUniv\\evaluation\\EvaluationAnneeController:ChoixPromotion',{ 'id': element.controleModule.controleSemestre.controlePromotion ,'type':'element','active':element.id}))}}
+{% endblock %}
+
+
+{% block javascripts %}
+    {#{ parent() }#}
+    {{ encore_entry_script_tags('univ_element_moyenne') }}
+{% endblock %}

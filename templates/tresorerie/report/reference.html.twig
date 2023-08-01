@@ -1,0 +1,200 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Report , consulter Report | Achat
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-4">
+			<h2 class="fo">Achat , Documents
+			</h2>
+		</div>
+		<div class="col-lg-8">
+			<div
+				class="title-action">{#% include './module_achat/facturefrs/inc/workflow.html.twig' %#}
+
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+		{#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+																																																														#}
+
+	</div>
+	<br/><br/><br/>
+	<div class="row">
+		<div class="col-lg-12">
+
+			<div class="ibox">
+				<div class="ibox-title">
+					<h5>Paramètre de Rechercher</h5>
+				</div>
+				<div class="ibox-content">
+
+					<div class="row">
+						<div class="col-md-2">
+							<p class="msty">
+								Dossier
+							</p>
+
+							<select id="form_dossier" name="form[dossier]" class="select2_demo_4 form-control ">
+								<option></option>
+								{% if app.session.get('modules')[modules.prefix]['dossiers'] is defined  %}
+									{% for key , d in app.session.get('modules')[modules.prefix]['dossiers']  %}
+										<option value="{{d.id}}">{{d.abreviation}}</option>
+									{% endfor %}
+								{% endif %}
+							</select>
+						</div>
+
+						<div class="col-md-2">
+							<p class="msty">
+								Type
+							</p>
+
+							<select id="form_type" name="form[type]" class="select2_demo_5 form-control ">
+								<option></option>
+								<option value="projet">Projet</option>
+								<option value="marche">Marche</option>
+
+							</select>
+						</div>
+
+						<div class="col-md-2 projet">
+							<p class="msty">
+								Projet
+							</p>
+
+							<select id="form_projet" name="form[projet]" class="select2_demo_3 form-control">
+								<option>Choix projet</option>
+								{% if projet is defined  %}
+									{% for key , p in projet  %}
+										<option value="{{p.id}}">{{p.abreviation}}</option>
+									{% endfor %}
+								{% endif %}
+							</select>
+						</div>
+
+						<div class="col-md-2 projet">
+							<p class="msty">
+								Sous Projet
+							</p>
+
+							<select id="form_sous_projet" name="form[sousProjet]" class="select2_demo_6 form-control">
+								<option></option>
+
+							</select>
+						</div>
+
+						{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , "autocomplete":"off", 'class':'form frme'}}) }}
+						<div class="col-md-2 marche">
+							<p class="msty">
+								Marche
+							</p>
+
+							{{ form_widget(form.marche,{'attr':{'class':'form-control form-control-sm marches sel2'}}) }}
+						</div>
+
+						<div class="col-md-2 souMarche">
+							<p class="msty">
+								Sous Marche
+							</p>
+
+							{{ form_widget(form.marchesous,{'attr':{'class':'form-control form-control-sm sousmarche sel2'}}) }}
+						</div>
+						{{ form_end(form,{'render_rest': false}) }}
+
+
+						<div class="col-md-3">
+							<br>
+							<button type="button" class="btn btn-outline btn-primary mbr search2 waves-effect waves-light">
+								<i class="fa fa-search"></i>
+							</button>
+							<button type="button" class="btn btn-outline btn-primary mbr rsearch2 waves-effect waves-light">
+								<i class="fa fa-refresh"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-lg-12">
+
+			<div class="ibox">
+
+				<div class="ibox-content">
+
+					<div class="row">
+						<div class="col-md-12">
+							<br/>
+							<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show2">
+								<thead>
+									<tr>
+										<th style="width:5%">#</th>
+										<th style="width:5%">Ref exp</th>
+										<th style="width:5%">Fournisseur</th>
+										<th style="width:5%">Date exp</th>
+										<th style="width:10%">Ref cmd
+										</th>
+										<th style="width:10%">Date cmd
+										</th>
+										<th style="width:15%">Code Reception
+										</th>
+										<th style="width:15%">Code fact</th>
+										<th style="width:5%">Code reg</th>
+										<th style="width:15%">Avoir</th>
+										<th style="width:5%">Acompte</th>
+										<th style="width:5%">Dossier</th>
+										<th style="width:5%">Projet</th>
+										<th style="width:5%">Sous Projet</th>
+										<th style="width:5%">Marche</th>
+										<th style="width:5%">Sous Marche</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th style="width:5%">#</th>
+										<th style="width:5%">Ref exp</th>
+										<th style="width:5%">Fournisseur</th>
+										<th style="width:5%">Date exp</th>
+										<th style="width:5%">Ref cmd
+										</th>
+										<th style="width:5%">Date cmd
+										</th>
+										<th style="width:5%">Code Reception
+										</th>
+										<th style="width:5%">Code fact</th>
+										<th style="width:5%">Code reg</th>
+										<th style="width:5%">Avoir</th>
+										<th style="width:5%">Acompte</th>
+										<th style="width:5%">Dossier</th>
+										<th style="width:5%">Projet</th>
+										<th style="width:5%">Sous Projet</th>
+										<th style="width:5%">Marche</th>
+										<th style="width:5%">Sous Marche</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<br/>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('reporting') }}
+{% endblock %}

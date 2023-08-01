@@ -1,0 +1,20 @@
+{% set current_path = app.request.get('_route') %}
+<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+	<a class="nav-link {% if "module_univ_admission_preadmission_avecConcours"  in current_path  %} active {% endif %}" href="{{ path('module_univ_admission_preadmission_avecConcours')}}">
+		<i class="fa fa-check"></i>
+		Admissible
+	</a>
+	
+
+
+	<a class="nav-link {% if "module_univ_admission_preadmission_ac_nonAdmissible"  in current_path  %} active {% endif %}" href="{{ path('module_univ_admission_preadmission_ac_nonAdmissible')}}">
+		<i class="fa fa-close"></i>
+		Nom Admissible
+	</a>
+
+
+</div>
+
+
+
+

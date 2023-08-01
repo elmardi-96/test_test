@@ -1,0 +1,459 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    #csrf_protection: true
+    #http_method_override: true
+
+    # Enables session support. Note that the session will ONLY be started if you read or write from it.
+    # Remove or comment this section to explicitly disable session support.
+    session:
+        handler_id: ~
+        cookie_secure: auto
+        cookie_samesite: lax
+    
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/session'  
+
+    #esi: true
+    #fragments: true
+    php_errors:
+        log: true
+    templating :
+        engines: ['twig']
+
+
+
+
+    
+
+        
+
+#        pull_request:
+#            type: 'state_machine'
+#            marking_store:
+#                 type: 'method'
+#                 property: 'currentPlace'
+#            supports:
+#                - App\Entity\BlogPost
+#            initial_marking: start
+#            places:
+#                - start
+#                - coding
+#                - test
+#                - review
+#                - merged
+#                - closed
+#            transitions:
+#                submit:
+#                    from: start
+#                    to: test
+#                update:
+#                    from: [coding, test, review]
+#                    to: test
+#                wait_for_review:
+#                    from: test
+#                    to: review
+#                request_change:
+#                    from: review
+#                    to: coding
+#                accept:
+#                    from: review
+#                    to: merged
+#                reject:
+#                    from: review
+#                    to: closed
+#                reopen:
+#                    from: closed
+#                    to: review
+#
+#
+#        p_c :
+#            type: 'workflow' # or 'state_machine'
+#            audit_trail:
+#                enabled: true
+#            marking_store:
+#                type: 'method'
+#                property: 'currentPlace'
+#            supports:
+#                - App\Entity\BlogPost
+#            initial_marking: Nouvelle Demande 
+#            
+#            places:
+#
+#                Nouvelle Demande : ~
+#                cloner: ~
+#                reouvririr: ~
+#                supprimer: ~
+#                
+#                valider:
+#                    metadata:
+#                        bg_color: Orange
+#                modifier: ~
+#                envoyer: ~
+#                cloturer: 
+#                    metadata : 
+#                        bg_color : limegreen 
+#                classe_facture: ~
+#                creer_commande : ~
+#                creer_facture: ~
+#            transitions:
+#                
+#                a_supprimer :
+#                    from: Nouvelle Demande
+#                    to:   supprimer 
+#                    metadata:
+#                        arrow_color: darkslategray3
+#                        bg_color: blue
+#                a_cloner :
+#                    from: Nouvelle Demande
+#                    to:   cloner  
+#                    metadata:
+#                        arrow_color: darkslategray3
+#                        #color: Orange
+#                a_validate :
+#                    from: Nouvelle Demande
+#                    to:   valider   
+#                    metadata:
+#                        arrow_color: darkslategray3 
+#
+#                ap_valider_supprimer :
+#                    from: valider
+#                    to:   supprimer  
+#                    metadata:
+#                        arrow_color: Orange      
+#                ap_valider_cloner :
+#                    from: valider
+#                    to:   cloner
+#                    metadata:
+#                        arrow_color: Orange   
+#                
+#                ap_valider_envoyer :
+#                    from: valider
+#                    to:   envoyer   
+#                    metadata:
+#                        arrow_color: Orange   
+#                ap_valider_cloturer :
+#                    from: valider
+#                    to:   cloturer    
+#                    metadata:
+#                        arrow_color: Orange  
+#                        label: Ajouter une  note aprés le cloture de demande  
+#                
+#                ap_valider_modifier :
+#                    from: valider
+#                    to:   modifier
+#                    metadata:
+#                        arrow_color: Orange   
+#                ap_valider_modifier_c :
+#                    from: modifier
+#                    to:   valider
+#                    metadata :
+#                        arrow_color : red 
+#
+#                ap_cloturer_env :
+#                    from : cloturer
+#                    to :   envoyer
+#                    metadata :
+#                        arrow_color : limegreen
+#                ap_cloturer_clsfa :
+#                    from : cloturer
+#                    to :   classe_facture  
+#                    metadata :
+#                        arrow_color : limegreen
+#                ap_cloturer_cr_fac :
+#                    from : cloturer
+#                    to :   creer_facture  
+#                    metadata :
+#                        arrow_color : limegreen          
+#                ap_cloturer_cr_comm :
+#                    from : cloturer
+#                    to :   creer_commande  
+#                    metadata :
+#                        arrow_color : limegreen
+#
+#                ap_cloturer_reo :
+#                    from : cloturer
+#                    to :   reouvririr 
+#                    metadata :
+#                        arrow_color : limegreen
+#                   
+#
+#                ap_cloturer_supp :
+#                    from : cloturer
+#                    to :   supprimer  
+#                    metadata :
+#                        arrow_color : limegreen
+#
+#                ap_cloturer_cl :
+#                    from : cloturer
+#                    to :   cloner    
+#                    metadata :
+#                        arrow_color : limegreen      
+#                ap_cloturer_reo_val :
+#                    from : reouvririr
+#                    to :   valider  
+#                    metadata :
+#                        arrow_color : red 
+#
+#
+#
+#        
+#
+#
+#
+#
+#        commande :
+#            type: 'state_machine' # or 'state_machine'
+#            audit_trail:
+#                enabled: true
+#            marking_store:
+#                type: 'method'
+#                property: 'currentPlace'
+#            supports:
+#                - App\Entity\BlogPost
+#            initial_marking: Nouvelle Commande 
+#            
+#            places:
+#
+#                Nouvelle Commande : ~
+#                cloner: ~
+#                supprimer: ~
+#                valider:
+#                    metadata:
+#                        bg_color: Orange
+#                modifier: ~
+#                envoyer: ~
+#                classe_facture: ~
+#                classe_livre : ~
+#                creer_facture: ~
+#                annuler: ~
+#            transitions:
+#                
+#                a_supprimer :
+#                    from: Nouvelle Commande
+#                    to:   supprimer 
+#                    metadata:
+#                        arrow_color: darkslategray3
+#                        bg_color: blue
+#                        label : supprimer un commande client 
+#                a_cloner :
+#                    from: Nouvelle Commande
+#                    to:   cloner  
+#                    metadata:
+#                        arrow_color: darkslategray3
+#                        label : cloner commande
+#                a_validate :
+#                    from: Nouvelle Commande
+#                    to:   valider   
+#                    metadata:
+#                        arrow_color: darkslategray3 
+#                        label : valider commande
+#
+#                update : 
+#                    from : modifier
+#                    to :  Nouvelle Commande 
+#                    metadata : 
+#                        arrow_color : red 
+#                        label : commande a modifier
+#                ap_valider_envoyer :
+#                    from: valider
+#                    to:   envoyer   
+#                    metadata:
+#                        arrow_color: Orange  
+#
+#                ap_valider_modifier :
+#                    from: valider
+#                    to:   modifier
+#                    metadata:
+#                        arrow_color: Orange     
+#
+#
+#                ap_valider_class_livre :
+#                    from: valider
+#                    to:   classe_livre    
+#                    metadata:
+#                        arrow_color: Orange  
+#                        label: classé livré               
+#                
+#                ap_valider_class_facture :
+#                    from: valider
+#                    to:   classe_facture    
+#                    metadata:
+#                        arrow_color: Orange  
+#                        label: classé facturé 
+#
+#                ap_valider_creer_facture:
+#                    from: valider
+#                    to:   creer_facture   
+#                    metadata:
+#                        arrow_color: Orange  
+#                        label: créer une facture          
+#
+#                ap_valider_supprimer :
+#                    from: valider
+#                    to:   supprimer  
+#                    metadata:
+#                        arrow_color: Orange 
+#                        label : supprimer 
+#
+#
+#                
+#                
+#                ap_valider_annuler :
+#                    from: valider
+#                    to:   annuler
+#                    metadata:
+#                        arrow_color: Orange  
+#                        label : annuler  
+#                
+#
+#                
+#
+#
+#
+#        facture :
+#            type: 'state_machine' # or 'state_machine'
+#            audit_trail:
+#                enabled: true
+#            marking_store:
+#                type: 'method'
+#                property: 'currentPlace'
+#            supports:
+#                - App\Entity\BlogPost
+#            initial_marking: Nouvelle Facture 
+#            
+#            places:
+#
+#                Nouvelle Facture : ~
+#                cloner: ~
+#                supprimer: ~
+#                valider:
+#                    metadata:
+#                        bg_color: Orange
+#                modifier: ~
+#                envoyer: ~
+#                classe_paye: ~
+#                creer_facture_avoir: ~
+#                reglement : 
+#                    metadata : 
+#                        bg_color : olivedrab
+#                saisir_reglement: ~        
+#            transitions:
+#                
+#                a_supprimer :
+#                    from: Nouvelle Facture
+#                    to:   supprimer 
+#                    metadata:
+#                        arrow_color: darkslategray3
+#                        bg_color: blue
+#                        label : supprimer facture 
+#                a_cloner :
+#                    from: Nouvelle Facture
+#                    to:   cloner  
+#                    metadata:
+#                        arrow_color: darkslategray3
+#                        label : cloner facture 
+#                a_validate :
+#                    from: Nouvelle Facture
+#                    to:   valider   
+#                    metadata:
+#                        arrow_color: darkslategray3 
+#                        label : valider facture 
+#
+#                update : 
+#                    from : modifier
+#                    to :  Nouvelle Facture 
+#                    metadata : 
+#                        arrow_color : red 
+#                        label : facture  a modifier
+#
+#
+#
+#                ap_valider_envoyer :
+#                    from: valider
+#                    to:   envoyer   
+#                    metadata:
+#                        arrow_color: Orange  
+#
+#                ap_valider_modifier :
+#                    from: valider
+#                    to:   modifier
+#                    metadata:
+#                        arrow_color: Orange     
+#
+#
+#                            
+#                
+#                ap_valider_class_paye :
+#                    from: valider
+#                    to:   classe_paye    
+#                    metadata:
+#                        arrow_color: Orange  
+#                        label: classé payé 
+#
+#                ap_valider_creer_facture:
+#                    from: valider
+#                    to:   creer_facture_avoir   
+#                    metadata:
+#                        arrow_color: Orange  
+#                        label: créer une facture avoir        
+#
+#                ap_valider_supprimer :
+#                    from: valider
+#                    to:   supprimer  
+#                    metadata:
+#                        arrow_color: Orange 
+#                        label : supprimer 
+#                
+#
+#                ap_valider_cloner :
+#                    from: valider
+#                    to:   cloner  
+#                    metadata:
+#                        arrow_color: Orange 
+#                        label : cloner 
+#
+#                
+#                
+#                ap_valider_annuler :
+#                    from: valider
+#                    to:   reglement
+#                    metadata:
+#                        arrow_color: Orange  
+#                        label : saisir une réglement   
+#
+#
+#
+#                ap_reglement_envoyer :
+#                    from: reglement 
+#                    to:   envoyer
+#                    metadata:
+#                        arrow_color: olivedrab  
+#                        label : envoyer un mail      
+#
+#                ap_reglement_saisir :
+#                    from: reglement 
+#                    to:   saisir_reglement
+#                    metadata:
+#                        arrow_color: olivedrab  
+#                        label : saisir réglement           
+#
+#                ap_reglement_classe_paye :
+#                    from: reglement 
+#                    to:   classe_paye
+#                    metadata:
+#                        arrow_color: olivedrab  
+#                        label : classé payé          
+#
+#                ap_reglement_cloner :
+#                    from: reglement 
+#                    to:   cloner
+#                    metadata:
+#                        arrow_color: olivedrab  
+#                        label : cloner         
+#
+#                ap_reglement_facture_avoir :
+#                    from: reglement 
+#                    to:   creer_facture_avoir
+#                    metadata:
+#                        arrow_color: olivedrab  
+#                        label : cloner        

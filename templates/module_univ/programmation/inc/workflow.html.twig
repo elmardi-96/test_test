@@ -1,0 +1,122 @@
+{# places active pour cet workflow #}
+{#{{ dump(workflow_marked_places(commande)) }}
+
+
+
+{{ dump(workflow_transitions(commande)) }}#}
+
+
+
+{#{{ dump(workflow_transitions(commande)) }}#}
+
+
+{#{% for place in workflow_marked_places(commande) %}
+    <li>
+        {{ place }}:
+        <code>{{ workflow_metadata(commande, 'function', place) ?: 'Unlimited'}}</code>
+    </li>
+{% endfor %}#}
+{#<div class="btn-group">
+                                <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                            </div> #}
+
+
+{#"valider","annuler" , "encours" ,"generer" , "archiver"#}
+
+
+
+{% for transition in workflow_transitions(UnivPlEmptime) %}
+    {#{{ dump(workflow_marked_places(commande)) }}#}
+    {% set url = "" %}
+    {% if workflow_metadata(UnivPlEmptime, 'function', transition) %}
+        {%  set  url= path(workflow_metadata(UnivPlEmptime, 'function', transition), {id: UnivPlEmptime.id}) %}
+    {% endif %} 
+    <form style="display: inline-block" {#action="{{ url }}"#} id="{{ workflow_metadata(UnivPlEmptime, 'function', transition) }}" {#method="post"#}>
+        <input type="hidden" name="_id" value="{{ UnivPlEmptime.id }}"/>
+        <input type="hidden" name="statut" value="{{ workflow_metadata(UnivPlEmptime, 'statut', transition) }}"/>
+        <input type="hidden" name="sous_module" value="{{ workflow_metadata(UnivPlEmptime, 'sousModule', transition) }}"/>
+        <input type="hidden" name="title" value="{{ workflow_metadata(UnivPlEmptime, 'title', transition) }}"/>
+        <input type="hidden" name="transition" value="{{ transition.name }}"/>
+        <button class="btn btn-xs {{ workflow_metadata(UnivPlEmptime, 'class', transition) }}  btn-outline" type="submit"  type="submit"><i class="fa {{ workflow_metadata(UnivPlEmptime, 'icon', transition) }}"></i>{#&nbsp;{{ transition.name }}|#} {{ workflow_metadata(UnivPlEmptime, 'title', transition) }}</button>
+    </form>
+
+
+
+{% else %}
+    
+{% endfor %}
+
+
+
+
+{% if workflow_has_marked_place(UnivPlEmptime, "creer") or  workflow_has_marked_place(UnivPlEmptime, "encours") %}
+    <a href="{{path('module_univ_cours_edit', {'id' : UnivPlEmptime.id})}}" class="btn btn-white btn-xs btn-lg"><i class="fa fa-pencil"></i> Modifier</a>
+{% endif %}
+
+
+{% if workflow_has_marked_place(UnivPlEmptime, "creer") or  workflow_has_marked_place(UnivPlEmptime, "encours")  %}
+    <a href="#" class="btn btn-white btn-xs btn-lg _delete_planning" id="{{UnivPlEmptime.id}}"><i class="fa fa-trash"></i> Supprimer</a>
+{% endif %}
+
+
+{#
+{% if workflow_has_marked_place(commande, "creer") %}
+    <form style="display: inline-block" action="{{ path("module_achat_commandefrs_apply_transition", {id: commande.id}) }}" method="post">
+        <a class="btn btn-xs btn-white btn-outline" href="{{ path('module_achat_commandefrs_edit',{id:commande.id})}}"><i class="fa fa-pencil"></i>&nbsp;Modifier</a>
+        <button class="btn btn-xs btn-success   btn-outline" type="submit" name="transition" value="apres_creer_valider" type="submit"><i class="fa fa-check""></i>&nbsp;Valider</button>
+        <button class="btn btn-xs btn-warning  btn-outline" name="transition" value="pres_creer_encours" type="submit"><i class="fa fa-refresh"></i>&nbsp;En cours</button>
+
+        <button class="btn btn-xs btn-white    btn-outline" name="transition" value="apres_creer_annuler" type="submit"><i class="fa fa-ban"></i>&nbsp;Annuler</button>
+        <button class="btn btn-xs btn-white  btn-outline"   name="transition" value="apres_creer_archiver" type="submit"><i class="fa fa-archive"></i>&nbsp;Archiver</button>
+        <button class="btn btn-xs btn-danger btn-outline" type="submit"><i class="fa fa-trash"></i>&nbsp;Supprimer</button>
+    </form>
+{% endif %}
+
+{% if workflow_has_marked_place(commande, "encours") %}
+    <form style="display: inline-block" action="{{ path("module_achat_commandefrs_apply_transition", {id: commande.id}) }}" method="post">
+        <a class="btn btn-xs btn-white btn-outline" href="{{ path('module_achat_commandefrs_edit',{id:commande.id})}}"><i class="fa fa-pencil"></i>&nbsp;Modifier</a>
+        <button class="btn btn-xs btn-success   btn-outline" type="submit" name="transition" value="apres_encours_valider" type="submit"><i class="fa fa-check""></i>&nbsp;Valider</button>
+        <button class="btn btn-xs btn-warning  btn-outline" name="transition" value="pres_encours_créer" type="submit"><i class="fa fa-refresh"></i>&nbsp;Créer</button>
+
+        <button class="btn btn-xs btn-white    btn-outline" name="transition" value="apres_encours_annuler" type="submit"><i class="fa fa-ban"></i>&nbsp;Annuler</button>
+        <button class="btn btn-xs btn-white  btn-outline"   name="transition" value="apres_encours_archiver" type="submit"><i class="fa fa-archive"></i>&nbsp;Archiver</button>
+        <button class="btn btn-xs btn-danger btn-outline" type="submit"><i class="fa fa-trash"></i>&nbsp;Supprimer</button>
+    </form>
+{% endif %}
+
+
+
+
+{% if workflow_has_marked_place(commande, "annuler") %}
+    <form style="display: inline-block" action="{{ path("module_achat_commandefrs_apply_transition", {id: commande.id}) }}" method="post">
+        <button class="btn btn-xs btn-creer btn-outline" type="submit" name="transition" value="apres_annuler_creer"><i class="fa fa-plus"></i>&nbsp;Créer</button>
+        <button class="btn btn-xs btn-white  btn-outline" type="submit" name="transition" value="apres_annuler_archiver" ><i class="fa fa-archive"></i>&nbsp;Archiver</button>
+    </form>
+{% endif %}
+
+
+{% if workflow_has_marked_place(commande, "archiver") %}
+    <form style="display: inline-block" action="{{ path("module_achat_commandefrs_apply_transition", {id: commande.id}) }}" method="post">
+        <button class="btn btn-xs btn-white  btn-outline" type="submit" name="transition" value="apres_archiver_desarchiver" ><i class="fa fa-archive"></i>&nbsp;Désarchiver</button>
+    </form>
+{% endif %}
+
+
+
+{% if workflow_has_marked_place(commande, "valider") %}
+    <form style="display: inline-block" action="{{ path("module_achat_commandefrs_apply_transition", {id: commande.id}) }}" method="post">
+        <button class="btn btn-xs btn-primary btn-outline" type="submit" name="transition" value="apres_valider_generer" ><i class="fa fa-level-down"></i>&nbsp;Génerer bon de réception</button>
+    </form>
+{% endif %}
+
+{% if workflow_has_marked_place(commande, "generer") %}
+
+
+{% endif %}#}
+
+

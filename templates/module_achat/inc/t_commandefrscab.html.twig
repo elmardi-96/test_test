@@ -1,0 +1,833 @@
+<div class="row historique">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>
+                    <i class="fa fa-info-circle"></i>
+                    Historique Informations</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    {% if  commande != null and commande.referenceBci and position != 'demande' %}
+                        <div class="col-lg-6">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-handshake-o"></i>
+                                    Pré-commande
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link-historique">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+                                <div class="over hidden">
+                                    <div class="panel-body historique-panel-body hidden">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h5 class="m-t-none m-b">Informations Pré-commande
+                                                </h5>
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold">Code :</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static">
+                                                            <a href="{{ path('t_achatdemandeinternecab_show',{'id':commande.referenceBci.id}) }}">{{ commande.referenceBci.code }}</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold">Fournisseur :</label>
+
+                                                    <div class="col-sm-7">
+                                                        <p class="form-control-static">{{ commande.referenceBci.fournisseur ? commande.referenceBci.fournisseur.societe }}</p>
+                                                    </div>
+                                                </div>
+
+                                                {% set ht = 0 %}
+                                                {% set totalTva = 0 %}
+                                                {% set totalRemise = 0 %}
+                                                {% set totalTtc = 0 %}
+                                                <table class="t-m table table-striped table-bordered table-hover datatable-show-historique-autre">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Référence</th>
+                                                            <th>Article</th>
+                                                            <th>Qnt</th>
+                                                            <th>PU</th>
+                                                            <th>TVA</th>
+                                                            <th>Remise</th>
+                                                            <th>TTC</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        {% for detail  in  commande.referenceBci.details %}
+                                                            <tr>
+                                                                <td>
+                                                                    <small>{{ loop.index }}</small>
+                                                                </td>
+                                                                <td>{{detail.article.code}}</td>
+                                                                <td>
+                                                                    {{ detail.article.titre }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ detail.quantite |number_format(2, '.', ',') }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ detail.prixunitaire |number_format(2, '.', ',') }}
+                                                                </td>
+                                                                <td class="text-navy">
+                                                                    {{ detail.tva |number_format(2, '.', ',') }}
+                                                                    %
+                                                                </td>
+                                                                <td class="text-navy">
+                                                                    {{ detail.remise |number_format(2, '.', ',') }}
+                                                                    %
+                                                                </td>
+                                                                <td>{{detail.getPrixTtc() |number_format(2, '.', ',')}}</td>
+                                                            </tr>
+                                                            {% set ht = ht + detail.getPrixHt() %}
+                                                            {% set totalTva = totalTva + detail.getPrixTva() %}
+                                                            {% set totalRemise = totalRemise + detail.getPrixTtc() %}
+                                                            {% set totalTtc = totalTtc + detail.getTotalPrixTtc() %}
+                                                        {% endfor %}
+
+                                                    </tbody>
+
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th colspan="8" style="text-align:right">
+                                                                <table class="table-subtotal">
+                                                                    <tr>
+                                                                        <td>Total HT
+                                                                        </td>
+                                                                        <td>{{ht}}
+                                                                            {{ commande.devise ? commande.devise.designation : null  }}</td>
+                                                                    </tr>
+                                                                    <tr class="subtotal-top-border">
+                                                                        <td>TVA
+                                                                        </td>
+                                                                        <td>{{totalTva}}
+                                                                            {{ commande.devise ? commande.devise.designation : null  }}</td>
+                                                                    </tr>
+                                                                    {% if totalRemise is not empty %}
+                                                                        <tr class="subtotal-top-border">
+                                                                            <td>Remise
+                                                                            </td>
+                                                                            <td>{{totalRemise}}
+                                                                                {{ commande.devise ? commande.devise.designation : null  }}</td>
+                                                                        </tr>
+                                                                    {% endif %}
+
+                                                                    <tr class="subtotal-top-border">
+                                                                        <td>Total TTC
+                                                                        </td>
+                                                                        <td>{{totalTtc}}
+                                                                            {{ commande.devise ? commande.devise.designation : null  }}</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </th>
+
+                                                        </tr>
+                                                    </tfoot>
+
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endif %}
+
+
+                    {% if commande is defined and position != 'commande' %}
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading {% if commande is empty %} disable-click {% endif %}">
+                                    <i class="fa fa-list-alt"></i>
+                                    Bon commande fournisseur
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link-historique">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+                                <div class="over hidden">
+                                    {% if commande is not empty %}
+                                        <div class="panel-body historique-panel-body hidden">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h5 class="m-t-none m-b">Informations bon commande
+                                                    </h5>
+                                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                    <div class="form-group row ph">
+                                                        <label class="col-sm-4 required font-weight-bold">Code :</label>
+
+                                                        <div class="col-sm-8">
+                                                            <p class="form-control-static">
+                                                                {% if commande.id is defined %}
+                                                                    <a href="{{ path('t_commandefrscab_show',{'id':commande.id}) }}">{{ commande.code }}</a>
+                                                                {% endif %}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    {% if commande.referenceBci  %}
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold">Référence BCI :</label>
+
+                                                            <div class="col-sm-8">
+
+                                                                <p class="form-control-static">
+                                                                    <a href="{{ path('t_achatdemandeinternecab_show',{'id':commande.referenceBci.id}) }}">{{  commande.referenceBci.code }}</a>
+                                                                </p>
+                                                            </div>
+
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                    <div class="form-group row ph">
+                                                        <label class="col-sm-4 required font-weight-bold">Date Cmd :</label>
+                                                        <div class="col-sm-8">
+                                                            <p class="form-control-static">{{ commande.datecommande|date("d/m/Y") }}</p>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                    <div class="form-group row ph">
+                                                        <label class="col-sm-4 required font-weight-bold">Fournisseur :</label>
+
+                                                        <div class="col-sm-8">
+                                                            <p class="form-control-static">{{ commande.fournisseur ? commande.fournisseur.societe }}</p>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                    <div class="form-group row ph">
+                                                        <label class="col-sm-4 required font-weight-bold">
+                                                            Lvr Prév  :</label>
+                                                        <div class="col-sm-8">
+                                                            <p class="form-control-static">{{ commande.datelivprv|date("d/m/Y") }}</p>
+                                                        </div>
+                                                    </div>
+
+                                                    {% if commande.referenceBci is not empty %}
+                                                        {% set ht = 0 %}
+                                                        {% set totalTva = 0 %}
+                                                        {% set totalRemise = 0 %}
+                                                        {% set totalTtc = 0 %}
+                                                        <table class="t-m table table-striped table-bordered table-hover dataTables-example dataTable datatable-show-historique-autre">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Référence</th>
+                                                                    <th>Article</th>
+                                                                    <th>Qnt</th>
+                                                                    <th>PU</th>
+                                                                    <th>TVA</th>
+                                                                    <th>Remise</th>
+                                                                    <th>TTC</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                                {% for detail  in  commande.referenceBci.details %}
+                                                                    <tr>
+                                                                        <td>
+                                                                            <small>{{ loop.index }}</small>
+                                                                        </td>
+                                                                        <td>{{detail.article.code}}</td>
+                                                                        <td>
+                                                                            {{ detail.article.titre }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ detail.quantite |number_format(2, '.', ',') }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ detail.prixunitaire |number_format(2, '.', ',') }}
+                                                                        </td>
+                                                                        <td class="text-navy">
+                                                                            {{ detail.tva |number_format(2, '.', ',') }}
+                                                                            %
+                                                                        </td>
+                                                                        <td class="text-navy">
+                                                                            {{ detail.remise |number_format(2, '.', ',') }}
+                                                                            %
+                                                                        </td>
+                                                                        <td>{{detail.getPrixTtc() |number_format(2, '.', ',')}}</td>
+                                                                    </tr>
+                                                              {#      {% set ht = ht + detail.getPrixHt() %}
+                                                                    {% set totalTva = totalTva + detail.getPrixTva() %}
+                                                                    {% set totalRemise = totalRemise + detail.getPrixTtc() %}
+                                                                    {% set totalTtc = totalTtc + detail.getTotalPrixTtc() %}#}
+                                                                {% endfor %}
+
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <th colspan="8" style="text-align:right">
+                                                                        <table class="table-subtotal">
+                                                                            <tr>
+                                                                                <td>Total HT
+                                                                                </td>
+                                                                                <td>{{ht}}
+                                                                                    {{ commande.devise ? commande.devise.designation : null  }}</td>
+                                                                            </tr>
+                                                                            <tr class="subtotal-top-border">
+                                                                                <td>TVA
+                                                                                </td>
+                                                                                <td>{{totalTva}}
+                                                                                    {{ commande.devise ? commande.devise.designation : null  }}</td>
+                                                                            </tr>
+                                                                            {% if totalRemise is not empty %}
+                                                                                <tr class="subtotal-top-border">
+                                                                                    <td>Remise
+                                                                                    </td>
+                                                                                    <td>{{commande.getArrayTotalArticleByCommande()['prixRemise']}}</td>
+                                                                                </tr>
+                                                                            {% endif %}
+
+                                                                            <tr class="subtotal-top-border">
+                                                                                <td>Total TTC
+                                                                                </td>
+                                                                                <td>{{commande.getArrayTotalArticleByCommande()['totalTtc']}}</td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </th>
+
+                                                                </tr>
+                                                            </tfoot>
+
+                                                        </table>
+                                                    {% endif %}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading {% if commande.livraisons is not defined    %} disable-click {% endif %}">
+                                <i class="fa fa-list"></i>
+                                Réception bc fournisseur
+                                <div class="ibox-tools">
+                                    <a class="collapse-link-historique">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+
+                                </div>
+
+                            </div>
+                            <div class="">
+                                {% if commande.livraisons is defined and commande.livraisons is not empty %}
+
+                                    <div class="panel-body historique-panel-body hidden">
+                                        <div class="row">
+                                            {% for livraisonShow in commande.livraisons %}
+                                                <div class="col-md-12 m-b-head-2">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading {% if livraison is defined and livraisonShow.id == livraison.id %}  color-tab {% endif %} ">
+                                                            <i class="fa fa-check"></i>
+                                                            Réception
+                                                            {{ loop.index }}
+                                                            <div class="ibox-tools">
+                                                                <a class="collapse-link-historique">
+                                                                    <i class="fa fa-chevron-up fa-chevron-down"></i>
+                                                                </a>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="over">
+                                                            <div class="panel-body historique-panel-body">
+                                                                <div
+                                                                    class="col-md-12">
+                                                                    {#<h5 class="m-t-none m-b">
+                                                                                                                                                                                                        Réception :
+                                                                                                                                                                                                        {{ loop.index }}
+                                                                                                                                                                                                        </h5>#}
+
+
+                                                                    <div class="form-group row ph">
+                                                                        <label class="col-sm-4 required font-weight-bold">CODE :</label>
+
+                                                                        <div class="col-sm-8">
+                                                                            <p class="form-control-static">
+                                                                                <a href="{{ path('ua_t_livraisonfrscab_show',{'id':livraisonShow.id}) }}">{{ livraisonShow.code }}</a>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                    <div class="form-group row ph">
+                                                                        <label class="col-sm-4 required font-weight-bold">DATE RCP :</label>
+                                                                        <div class="col-sm-8">
+                                                                            <p class="form-control-static">{{ livraisonShow.dateDocAsso ? livraisonShow.dateDocAsso|date("d/m/Y")  }}</p>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                    <div class="form-group row ph">
+                                                                        <label class="col-sm-4 required">
+                                                                            RÉFÉRENCE  :</label>
+
+                                                                        <div class="col-sm-8">
+                                                                            {{livraisonShow.refDocAsso }}
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                    <div class="form-group row ph">
+
+                                                                        <label class="col-sm-4 required">
+                                                                            Fournisseur :</label>
+                                                                        <div class="col-sm-8">
+                                                                            {{ livraisonShow.fournisseur ? livraisonShow.fournisseur.nom}}
+                                                                        </div>
+                                                                    </div>
+
+                                                                    {% set ht = 0 %}
+                                                                    {% set totalTva = 0 %}
+                                                                    {% set totalRemise = 0 %}
+                                                                    {% set totalTtc = 0 %}
+                                                                    <table class="t-m table table-striped table-bordered table-hover dataTables-example dataTable datatable-show-historique-autre">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>Référence</th>
+                                                                                <th>Article</th>
+                                                                                <th>Qnt</th>
+                                                                                <th>PU</th>
+                                                                                <th>TVA</th>
+                                                                                <th>Remise</th>
+                                                                                <th>TTC</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                            {% for detail  in  livraisonShow.details %}
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <small>{{ loop.index }}</small>
+                                                                                    </td>
+                                                                                    <td>{{detail.article.code}}</td>
+                                                                                    <td>
+                                                                                        {{ detail.article.titre }}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        {{ detail.quantite |number_format(2, '.', ',') }}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        {{ detail.prixunitaire |number_format(2, '.', ',') }}
+                                                                                    </td>
+                                                                                    <td class="text-navy">
+                                                                                        {{ detail.tva |number_format(2, '.', ',') }}
+                                                                                        %
+                                                                                    </td>
+                                                                                    <td class="text-navy">
+                                                                                        {{ detail.remise |number_format(2, '.', ',') }}
+                                                                                        %
+                                                                                    </td>
+                                                                                    <td>{{detail.getPrixTtc() |number_format(2, '.', ',')}}</td>
+                                                                                </tr>
+                                                                     {#           {% set ht = ht + detail.getPrixHt() %}
+                                                                                {% set totalTva = totalTva + detail.getPrixTva() %}
+                                                                                {% set totalRemise = totalRemise + detail.getPrixTtc() %}
+                                                                                {% set totalTtc = totalTtc + detail.getTotalPrixTtc() %}#}
+                                                                            {% endfor %}
+
+                                                                        </tbody>
+                                                                        <tfoot>
+                                                                            <tr>
+                                                                                <th colspan="8" style="text-align:right">
+                                                                                    <table class="table-subtotal">
+                                                                                        <tr>
+                                                                                            <td>Total HT
+                                                                                            </td>
+                                                                                            <td>{{ht}}
+                                                                                                {{ livraisonShow.devise ? livraisonShow.devise.designation : null  }}</td>
+                                                                                        </tr>
+                                                                                        <tr class="subtotal-top-border">
+                                                                                            <td>TVA
+                                                                                            </td>
+                                                                                            <td>{{totalTva}}
+                                                                                                {{ livraisonShow.devise ? livraisonShow.devise.designation : null  }}</td>
+                                                                                        </tr>
+                                                                                        {% if totalRemise is not empty %}
+                                                                                            <tr class="subtotal-top-border">
+                                                                                                <td>Remise
+                                                                                                </td>
+                                                                                                <td>{{livraisonShow.getArrayTotalArticleByLivraison()['prixRemise']}}
+                                                                                                    {#{ livraisonShow.devise ? livraisonShow.devise.designation : null  }#}</td>
+                                                                                            </tr>
+                                                                                        {% endif %}
+
+                                                                                        <tr class="subtotal-top-border">
+                                                                                            <td>Total TTC
+                                                                                            </td>
+                                                                                            <td>{{livraisonShow.getArrayTotalArticleByLivraison()['totalTtc']}}</td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </th>
+
+                                                                            </tr>
+                                                                        </tfoot>
+
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            {% endfor %}
+
+
+                                        </div>
+
+                                    </div>
+
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% set factures_array = [] %}
+                    {% set co = 0 %}
+
+                    {% if commande.livraisons is defined and commande.livraisons is not empty %}
+                        {% for livraison1 in  commande.livraisons %}
+
+                            {%  if livraison1.facture is defined %}
+                                {%  if  livraison1.facture not in  factures_array %}
+                                    {% if livraison1.facture.tReglementfrs is defined and livraison1.facture.tReglementfrs is not empty %}
+                                        {% set co = co + livraison1.facture.tReglementfrs|length %}
+                                    {% endif  %}
+                                    {% if livraison1.getFacture() is not empty %}
+                                        {#{dump(livraison1.getFacture())}#}
+                                        {% set factures_array = factures_array|merge([livraison1.getFacture()]) %}
+                                    {% endif %}
+                                {% endif  %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading {% if factures_array is empty %} disable-click {% endif %}">
+                                <i class="fa fa-file-text-o"></i>
+                                Factures fournisseur
+                                <div class="ibox-tools">
+                                    <a class="collapse-link-historique">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+
+                                </div>
+
+                            </div>
+                            <div class="">
+                                {% if factures_array is not empty %}
+
+                                    <div class="panel-body historique-panel-body hidden">
+                                        <div class="row">
+                                            {% for facture1 in factures_array  %}
+                                                <div class="col-md-12 m-b-head-2">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading {% if commande is empty %} disable-click {% endif %} {% if facture.id is defined and t_reglementfrs.id is not defined and facture.id == facture1.id  %} {{facture1.id}} {{facture.id}}  color-tab {% endif %}">
+                                                            <i class="fa fa-check"></i>
+                                                            Facture :
+                                                            {{ loop.index }}
+                                                            <div class="ibox-tools">
+                                                                <a class="collapse-link-historique">
+                                                                    <i class="fa fa-chevron-up"></i>
+                                                                </a>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="over">
+                                                            <div class="col-md-12">
+
+                                                                <br/>
+                                                                <div class="form-group row ph">
+                                                                    <label class="col-sm-5 required font-weight-bold">Code :</label>
+
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static">
+                                                                            <a href="{{path('ua_t_facturefrscab_consulte',{'id':facture1.id})}}">{{ facture1.code }}</a>
+                                                                        </p>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                <div class="form-group row ph">
+                                                                    <label class="col-sm-5 required font-weight-bold">DATE FACTURE :</label>
+
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static">{{ facture1.datefacture|date("d/m/Y") }}</p>
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                <div class="form-group row ph">
+                                                                    <label class="col-sm-5 required font-weight-bold">
+                                                                        Mt Facture  :
+                                                                    </label>
+
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static">
+                                                                            {{ facture1.montant|number_format(2) }}</p>
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                <div class="form-group row ph">
+                                                                    <label class="col-sm-5 required font-weight-bold">
+                                                                        Réception(s) :
+                                                                    </label>
+
+                                                                    <div class="col-sm-7">
+                                                                        {% for reception in facture1.livraisons %}
+                                                                            <p style="margin:0" class="form-control-static">
+                                                                                <a href="{{ path('ua_t_livraisonfrscab_show',{'id':reception.id}) }}">{{ reception.code }}</a>
+                                                                            </p>
+                                                                        {% endfor %}
+                                                                    </div>
+
+                                                                </div>
+                                                                {% if facture1.tReglementfrs|length > 0  %}
+
+
+                                                                    <table class="t-m table table-striped table-bordered table-hover datatable-show-historique-reglement">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>Code</th>
+                                                                                <th>Date Réglement</th>
+                                                                                <th>Mode paiement</th>
+                                                                                <th>Montant Réglement</th>
+
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+
+                                                                            {% for reglement  in  facture1.tReglementfrs %}
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <small>{{ loop.index }}</small>
+                                                                                    </td>
+                                                                                    <td>{{reglement.code}}</td>
+                                                                                    <td>
+                                                                                        {{reglement.datereglement|date("d/m/Y")}}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        {{reglement.modepaiement ? reglement.modepaiement.designation}}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        {{ reglement.mtreglement|number_format(2, '.', ',') }}
+                                                                                    </td>
+                                                                                </tr>
+                                                                            {% endfor %}
+
+                                                                        </tbody>
+
+                                                                    </table>
+
+
+                                                                {% endif %}
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading {% if co == 0 %} disable-click {% endif %}">
+                                <i class="fa fa-credit-card"></i>
+                                Réglement fournisseur
+                                <div class="ibox-tools">
+                                    <a class="collapse-link-historique">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+
+                                </div>
+
+                            </div>
+                            <div class="">
+                                {% if co != 0 %}
+                                    {% for facture2 in factures_array  %}
+                                        {% for reglement1  in  facture2.tReglementfrs %}
+                                            <div class="panel-body historique-panel-body hidden">
+                                                <div class="row">
+                                                    <div class="col-md-12 m-b-head-2">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading {% if t_reglementfrs is defined and reglement1.id == t_reglementfrs.id %}  color-tab {% endif %} ">
+                                                                <i class="fa fa-check"></i>
+                                                                Réglement
+                                                                {{ loop.index }}
+                                                                <div class="ibox-tools">
+                                                                    <a class="collapse-link-historique">
+                                                                        <i class="fa fa-chevron-up fa-chevron-down"></i>
+                                                                    </a>
+
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="over">
+                                                                <div class="panel-body historique-panel-body">
+
+
+                                                                    <div class="col-md-12">
+
+
+                                                                        <div class="form-group row ph">
+                                                                            <label class="col-sm-5 required font-weight-bold">Code :</label>
+
+                                                                            <div class="col-sm-7">
+                                                                                <p class="form-control-static">
+                                                                                    <a href="{{path('ua_t_reglement_show',{'id':reglement1.id})}}">{{ reglement1.code }}</a>
+                                                                                </p>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                        <div class="form-group row ph">
+                                                                            <label class="col-sm-5 required font-weight-bold">Date Réglement :</label>
+
+                                                                            <div class="col-sm-7">
+                                                                                <p class="form-control-static">{{ reglement1.datereglement|date("d/m/Y") }}</p>
+                                                                            </div>
+
+                                                                        </div>
+
+
+                                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                        <div class="form-group row ph">
+                                                                            <label class="col-sm-5 required font-weight-bold">
+                                                                                Mode de Paiement  :
+                                                                            </label>
+
+                                                                            <div class="col-sm-7">
+                                                                                <p class="form-control-static">
+                                                                                    {{reglement1.modepaiement ? reglement1.modepaiement.designation }}</p>
+                                                                            </div>
+
+                                                                        </div>
+
+
+                                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                        <div class="form-group row ph">
+                                                                            <label class="col-sm-5 required font-weight-bold">
+                                                                                Banque :
+                                                                            </label>
+
+                                                                            <div class="col-sm-7">
+
+                                                                                <p style="margin:0" class="form-control-static">
+                                                                                    {{reglement1.banque ? reglement1.banque.designation }}
+                                                                                </p>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                        <div class="form-group row ph">
+                                                                            <label class="col-sm-5 required font-weight-bold">
+                                                                                Montant Facture :
+                                                                            </label>
+
+                                                                            <div class="col-sm-7">
+
+                                                                                <p style="margin:0" class="form-control-static">
+                                                                                    {{reglement1.factureFournisseur.montant|number_format(2)}}
+                                                                                    {{ reglement1.devise ? reglement1.devise.designation : null  }}
+                                                                                </p>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                        <div class="form-group row ph">
+                                                                            <label class="col-sm-5 required font-weight-bold">
+                                                                                Montant Réglement :
+                                                                            </label>
+
+                                                                            <div class="col-sm-7">
+
+                                                                                <p style="margin:0" class="form-control-static">
+                                                                                    {{reglement1.mtreglement  |number_format(2)}}
+                                                                                    {{ reglement1.devise ? reglement1.devise.designation : null  }}
+                                                                                </p>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,45 @@
+name: GCP
+on:
+  push:
+    branches:
+      - main
+env:
+  TAG: 1.0.1
+  DEPLOYMENT: ${{ github.event.repository.name }}
+  GKE_CLUSTER: fcz-apps-gke-cluster
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: (GCR)Login 
+        uses: google-github-actions/setup-gcloud@master
+        
+      - name: (GCR)Login
+        uses: RafikFarhad/push-to-gcr-github-action@v4
+        with:
+          gcloud_service_key: ${{ secrets.GCP_SERVICE_KEY }}
+          registry: eu.gcr.io
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          image_name: ${{ env.DEPLOYMENT }}
+          image_tag: latest,${{ env.TAG }}
+          dockerfile: Dockerfilegcp
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.GCP_SERVICE_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          
+      - run: |-
+          gcloud container clusters get-credentials "${{ env.GKE_CLUSTER }}" --zone "${{ secrets.GCP_REGION }}"
+      - name: Deploy
+        run: |-
+          cd cicd/ ; chmod +x gcp.sh ; ./gcp.sh ${{ env.DEPLOYMENT }} ${{ env.TAG }} | kubectl apply -f -

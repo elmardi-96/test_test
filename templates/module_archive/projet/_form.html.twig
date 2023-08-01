@@ -1,0 +1,210 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+    <div class="col-lg-4">
+        <h2 class="fo">Ajouter Projet</h2>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="title-action">
+            <button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left"  type="submit"> <i class="fa fa-save"></i> {{ button_label|default('Enregistrer') }}</button>
+            {#<button class="my-button" data-style="expand-right"><span class="ladda-label">Submit</span></button>#}
+            {#<button class="ladda-button my-button btn btn-primary"  data-style="expand-left">Submit</button>#}
+
+        </div>
+    </div>
+
+    <div class="border-b"></div>
+    <div class="col-lg-12">
+        {{ wo_render_breadcrumbs() }}
+    </div>
+
+</div>
+<br/><br/><br/>
+
+<div class="row pt-20">
+    <div class="col-lg-12 ">
+        <div class="ibox">
+
+            <div class="ibox-content">
+
+                <div class="message-success"></div>
+
+
+                <div class="row m-t-sm">
+                    <div class="col-lg-12">
+                        <div class="panel blank-panel">
+                            <div class="panel-heading">
+                                <div class="panel-options">
+                                    <ul class="nav nav-tabs">
+                                        <li>
+                                            <a class="nav-link active" href="#tab-1" data-toggle="tab">informations de base
+                                            </a>
+                                        </li>
+                                        <!--<li>
+                                            <a class="nav-link" href="#tab-2" data-toggle="tab">informations supplémentaires</a>
+                                        </li>-->
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab-1">
+
+
+                                        <div class="row">
+                                            <div class="col-md-6 b-r">
+
+                                                <h3 class="m-t-none m-b">Informations
+                                                </h3>
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row">
+                                                    {{ form_label(form.intitule ,'Intitule :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                    <div class="col-sm-3 input-group">
+                                                        {{ form_widget(form.intitule,{'attr':{'class':'affaire form-control form-control-sm','placeholder':'Intitule'}}) }}
+
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row">
+                                                    {{ form_label(form.designation ,'Designation :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                    <div class="col-sm-3 input-group">
+                                                        {{ form_widget(form.designation,{'attr':{'class':'form-control form-control-sm','placeholder':'Designation'}}) }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row">
+                                                    {{ form_label(form.abreviation ,'Abreviation :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                    <div class="col-sm-3">
+                                                        {{ form_widget(form.abreviation,{'attr':{'class':'form-control form-control-sm','placeholder':'Abreviation'}}) }}
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row">
+                                                    {{ form_label(form.description ,'Description :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                    <div class="col-sm-8">
+                                                        {{ form_widget(form.description,{'attr':{'class':'form-control form-control-sm t_achatdemandeinternecab_description' ,'placeholder':'Description'}}) }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row">
+                                                    {{ form_label(form.descriptionDetail ,'Description Detail :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                    <div class="col-sm-8">
+                                                        {{ form_widget(form.descriptionDetail,{'attr':{'class':'form-control form-control-sm','placeholder':'Description Detail'}}) }}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="col-md-6">
+
+                                                <h3 class="m-t-none m-b">Informations Projet</h3>
+
+                                                <div class="hr-line-dashed"></div>
+
+
+                                                <!--<div class="form-group row">
+                                                    {#{ form_label(form.imageFile ,'Logo :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                    <div class="col-sm-3">
+                                                        {{ form_widget(form.imageFile,{'attr':{'class':'form-control form-control-sm','placeholder':'Logo '}}) }#}
+                                                    </div>
+                                                </div>-->
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 required ">charger votre Fichier(*) :</label> 
+                                                        <div class="col-sm-5 custom-file">
+                                                            {{ form_widget(form.imageFile.file, { 'attr': {'class': 'custom-file-input'} }) }}
+                                                            <label for="logo" class="custom-file-label">fichier ,document , image ...</label>
+                                                        </div>
+                                                    </div>   
+
+
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row">
+                                                    {{ form_label(form.dateDebut ,'Date Debut  :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                    <div class="col-sm-3">
+                                                        {{ form_widget(form.dateDebut,{'attr':{'class':'form-control form-control-sm','placeholder':'Date Debut'}}) }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row ">
+                                                    {{ form_label(form.dateFin ,'Date Fin  :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                    <div class="col-sm-3">
+                                                        {{ form_widget(form.dateFin,{'attr':{'class':'form-control form-control-sm','placeholder':'Date Fin'}}) }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row">
+                                                    {{ form_label(form.estimationFinanciere ,'Estimation Financière  :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                    <div class="col-sm-3">
+                                                        {{ form_widget(form.estimationFinanciere,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Estimation Financière'}}) }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+
+                                                <!--<div class="form-group row">
+                                                    {#{ form_label(form.notificationUsersList ,'Notification Utilisateur  :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                    <div class="col-sm-3">
+                                                        {{ form_widget(form.notificationUsersList,{'attr':{'class':'form-control form-control-sm','placeholder':'Notification Utilisateur'}}) }#}
+                                                    </div>
+                                                </div>-->
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+                                    <!--<div class="tab-pane" id="tab-2">
+
+                                        <div class="hr-line-dashed"></div>
+
+                                        <div class="form-group row">
+                                            {#{ form_label(form.autreInformation ,'Autre Informations  :', {'label_attr':{'class':'col-sm-3'}}) }}
+                                            <div class="col-sm-8">
+                                                {{ form_widget(form.autreInformation,{'attr':{'class':'form-check-inline form-control form-control-sm'}}) }#}
+                                            </div>
+                                        </div>
+
+                                    </div>-->
+
+
+                                    <div class="hr-line-dashed"></div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{{ form_end(form,{'render_rest': false}) }}

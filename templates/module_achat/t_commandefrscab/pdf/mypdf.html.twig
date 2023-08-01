@@ -1,0 +1,654 @@
+{% set t = 3 %}
+{% set margin_left = "" %}
+{% set margin_right = "" %}
+{% set margin_top = "" %}
+{% set margin_bottom = "" %}
+{% set position_logo = "" %}
+{% set ajouter_info_pied_page = false %}
+{% for para in parametre %}
+    {% if para.abriviation == "marge_L" %}
+        {% set margin_left = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "marge_R" %}
+        {% set margin_right = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "marge_T" %}
+        {% set margin_top = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "marge_B" %}
+        {% set margin_bottom = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "position_logo" %}
+        {% set position_logo = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "ajouter_info_pied_page" %}
+        {% if para.valeur == "checked" %}
+            {% set ajouter_info_pied_page = true %}
+        {% endif %}
+    {% endif %}
+
+{% endfor %}
+<style type="text/Css">
+    body{
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    .titre-reb{
+        width: 100%;
+        background: #1f4f7a;
+        font-size: 9px ;
+        padding:3px 10px;
+        color: #f1f1f1;
+        font-weight: bold;
+
+    }
+
+    .slh tr td {
+        border-bottom: 1px solid #292929;
+    }
+    .p1{
+        font-size: 10px;
+    }
+    .table1{
+        width: 100%;
+    }
+    .table2{
+       width: 100% ;
+       text-align: center;
+       border: 0.5px solid #292929;
+       border-bottom: none;
+    }
+    
+    .table4{
+        width: 100% ;
+        background: #FFFFFF; 
+        text-align: center
+    }
+    .table5{
+        width: 100%;
+        border: 1px solid #292929
+    }
+    .table6{
+        width: 100%; 
+        text-align: left; 
+        font-size: 12px
+    }
+    .table7{
+        width: 100%;
+        text-align: left; 
+        font-size: 9px
+    }
+    .table8{
+        width: 100%; 
+        text-align: left; 
+        font-size: 12px
+    }
+    .tr2{
+        background-color: #292929; 
+        color:white; 
+        font-size: 9px;
+    }
+    .divfooter{
+        position: relative;
+        left: 5%;
+        width:90%;
+        border-top:1px solid #000;
+        padding:5px;
+        text-align: center;
+        font-size: 11px;
+    }
+    .td1{
+        width: 35%; 
+        text-align: left;
+    }
+    .td2{
+        width: 65%; 
+        text-align: right;
+    }
+    .td3{
+        width: 30% ;
+    }
+    .td4{
+        border-bottom:  solid 1px #292929 ;
+        width: 100%
+    }
+    .td5{
+        width: 100% ; 
+        font-size: 11px ;
+        font-weight: bold
+    }
+    .td6{
+        width: 40% ;
+        font-size: 16px;
+        font-weight: bold ; 
+        border-right: 1px;
+        border-left: 1px;
+    }
+    .td8{
+        border-bottom:  solid 1px #292929 ;
+        width: 100%
+    }
+    .td9{
+        width: 100% ; 
+        font-size: 11px ;
+        font-weight: bold
+    }
+    .td10{
+        width: 100% ; 
+        height: 10px;
+    }
+    .td11{
+        width: 100% ;
+        background: #292929; 
+        color: #fff ;
+        height: 17px
+    }
+    .td12{
+        padding: 10px 4px 1px 4px  ;
+        font-weight: bold;
+        font-size: 13px
+    }
+    .td13{
+        padding: 5px 4px 10px 4px ; 
+        font-weight: bold;
+        font-size: 11px
+    }
+    .td14{
+        width: 50% ;
+    }
+    .td15{
+        width: 35% ;
+        border: 1px solid #292929
+    }
+    .td16{
+        width: 100%
+    }
+    .td17{
+        width: 65%;
+        border: 1px solid #292929
+    }
+    .td18{
+        width: 10% ;
+    }
+    .td19{
+        width: 20% ;
+    }
+    .td20{
+        width: 35% ;
+    }
+    .td21{
+        width: 65%;
+    }
+    .td22{
+        width: 5%;
+        padding: 3px;
+        font-size: 10px;
+        text-align: left;
+    }
+    .td23{
+        width: 60%;
+        padding: 3px;
+        font-size: 10px;
+        text-align: left;
+    }
+    .td24{
+        width: 5%;
+        padding: 3px;
+        font-size: 10px;
+        text-align: center;
+    }
+    .td25{
+        width: 12%;
+        padding: 3px;
+        font-size: 10px;
+        text-align: right;
+    }
+    .td26{
+        width: 13%;
+        padding: 3px;
+        font-size: 10px;
+        text-align: right;
+    }
+    .tr1{
+        width:100%;
+    }
+    .th1{
+        width: 5%;
+        padding: 3px
+    }
+    .th2{
+        width: 60%;
+        padding: 3px
+    }
+    .th3{
+        width: 5%;
+        padding: 3px;
+        text-align: center
+    }
+    .th4{
+        width: 12%;
+        padding: 3px;
+        text-align: center;
+    }
+    .th5{
+        width: 13%;
+        padding: 3px;
+        text-align: center;
+    }
+    h5{
+        padding: 10px 4px  ; font-weight: bold;font-size: 13px
+    }
+    img{
+        margin-right: 20px;
+    }
+    .div1{
+        line-height: 20px;
+    }
+    .span1{
+        font-size: 12px ;
+        text-transform: uppercase ; 
+        font-weight: bold;
+    }
+    span{
+        font-size: 10px
+    }
+    .th1{
+        width: 100% ;
+        font-size: 11px ;
+        font-weight: 200
+    }
+    .th2{
+        width: 100% ; 
+        font-size: 11px ;
+        font-weight: 200
+    }
+    .logo{
+        width:250px;height:100px;
+    }
+    .border-left{
+        border-left:1px solid black;
+    
+    }
+    .border-right{
+        border-right:1px solid black;
+    }
+        footer {
+                position: fixed; 
+                bottom: -60px; 
+                left: 0px; 
+                right: 0px;
+                height: 100px; 
+
+                
+            }
+</style>
+
+
+<header>
+    <table class="table1" align="center" cellspacing="0">
+        <tbody>
+
+
+
+
+            <tr>
+                <td class="td1">
+                    <div class="div1">
+                        <span class="span1">CENTRE DE BIOEQUIVALENCE</span><br/>
+
+                        <span>Av. Allal El Fassi Madinat Al Irfane Hay Riad 10000 Rabat</span><br/>
+                        <span>Tel :0537368368</span><br/>
+                        <span>Fax :0537368368</span><br/>
+                    </div>
+                </td>
+                <td class="td2">
+                    <img src="{{ asset('img/Logo_UIASS.png')[1:] }}" class="logo" alt="Logo">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</header>
+<br/><br/><br/>
+
+<table class="table2">
+    <tr>
+        <td class="td3">
+            <table class="table1 border-right">
+                <tr>
+                    <th class="th1" >DATE COMMANDE</th>
+                </tr>
+                <tr>
+                    <td class="td4" ></td>
+                </tr>
+                <tr>
+                    <td class="td5" >{{ua_t_commandefrscab.datecommande|date("d/m/Y")}}</td>
+                </tr>
+            </table>
+        </td>
+        <td class="td6" >BON DE COMMANDE  </td>
+        <td class="td3">
+            <table class="table4 border-left">
+                <tr>
+                    <th class="th2">N°BON DE COMMANDE  </th>
+                </tr>
+                <tr>
+                    <td class="td8"></td>
+                </tr>
+                <tr>
+                    <td class="td9">{{ua_t_commandefrscab.code}}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<table class="table5">
+    <tr>
+        <td class="td10"></td>
+    </tr>
+</table>
+
+<br/>
+
+<table cellspacing="0" class="table6">
+    <tr>
+        <td class="td11"></td> 
+    </tr>
+    <tr>
+        <td class="td12">ETABLISSEMENT : CENTRE DE BIOEQUIVALENCE</td> 
+    </tr>
+    <tr>
+        <td class="td13" >POUR LE COMPTE DE : {{ua_t_commandefrscab.observation}}</td> 
+    </tr>
+</table>
+
+<table style="width: 100%; text-align: left; font-size: 9px">
+    <tr style="width: 100%"> 
+        <td style="width: 50% ;">
+            <table style="width: 100% ;">
+                <tr>
+                    <td style="width: 35% ;border: 0.5px solid #292929">
+                        <table style="width: 100% ; ">
+                            <tr><td style="width: 100%">Référence Demande Achat :</td></tr>
+                        </table>
+                    </td>
+                    <td style="width: 35%;border: 0.5px solid #292929">
+                        <table style="width: 100% ;">
+                            <tr><td style="width: 100%">{{ua_t_commandefrscab.referenceBci ? ua_t_commandefrscab.referenceBci.description}}</td></tr>
+                        </table>
+                    </td>
+                    <td style="width: 35% ;border: 0.5px solid #292929">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%">Date Livraison Prévue : </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <td style="width: 35%;border: 0.5px solid #292929">
+                        <table style="width: 100% ;">
+                            <tr>
+                                <td style="width: 100%">{{ua_t_commandefrscab.datelivprv|date('Y/m/d')}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 35% ;border: 0.5px solid #292929">
+                        <table style="width: 100% ; ">
+                            <tr><td style="width: 100%">Référence Devis Fournisseur :</td></tr>
+                        </table>
+                    </td>
+                    <td style="width: 35%;border: 0.5px solid #292929">
+                        <table style="width: 100% ;">
+                            <tr><td style="width: 100%">{{ua_t_commandefrscab.refdocasso}}</td></tr>
+                        </table>
+                    </td>
+                    <td style="width: 35% ;border: 0.5px solid #292929">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%">Date Référence Fournisseur : </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <td style="width: 35%;border: 0.5px solid #292929">
+                        <table style="width: 100% ;">
+                            <tr>
+                                <td style="width: 100%">{{ua_t_commandefrscab.datedocasso}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 35% ;border: 0.5px solid #292929">
+                        <table style="width: 100% ; ">
+                            <tr><td style="width: 100%">Compte :</td></tr>
+                        </table>
+                    </td>
+                    <td style="width: 35%;border: 0.5px solid #292929">
+                        <table style="width: 100% ;">
+                            <tr><td style="width: 100%">{{ua_t_commandefrscab.comptePoste ? ua_t_commandefrscab.comptePoste.designation}}</td></tr>
+                        </table>
+                    </td>
+                    <td style="width: 35%">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 35%">
+                        <table style="width: 100% ;">
+                            <tr>
+                                <td style="width: 100%"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>   
+</table>
+<table cellspacing="0" style="width: 100%; text-align: left; font-size: 12px">
+    <tr>
+        <td style="width: 100% ;background: #292929; color: #fff ;height: 17px"></td> 
+    </tr>
+    <tr>
+        <td style="padding: 10px 4px  ; font-weight: bold;font-size: 13px">Informations Fournisseur</td> 
+    </tr>
+</table>
+<table style="width: 100%; text-align: left; font-size: 9px">
+    <tr style="width: 100%"> 
+        <td style="width: 50% ;">
+            <table style="width: 100% ;">
+                <tr>
+                    <td style="width: 35% ;border: 0.5px solid #292929">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%">Nom :</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 65%;border: 0.5px solid #292929">
+                        <table style="width: 100% ;">
+                            <tr>
+                                <td style="width: 100%">{{ua_t_commandefrscab.fournisseur.nom}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 35% ;border: 0.5px solid #292929">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%">Adresse  :</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 65%;border: 0.5px solid #292929">
+                        <table style="width: 100% ;">
+                            <tr>
+                                <td style="width: 100%">{{ua_t_commandefrscab.fournisseur.adresse}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 35% ;border: 0.5px solid #292929">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%">Ville/Pays  :</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 65%;border: 0.5px solid #292929">
+                        <table style="width: 100% ;">
+                            <tr>
+                                <td style="width: 100%">{{ua_t_commandefrscab.fournisseur.ville}} / {{ua_t_commandefrscab.fournisseur.pays}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 35% ;border: 0.5px solid #292929">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%">Télé :</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 65%;border: 0.5px solid #292929">
+                        <table style="width: 100% ;">
+                            <tr>
+                                <td style="width: 100%">{{ua_t_commandefrscab.fournisseur.tel1}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 35% ;border: 0.5px solid #292929">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%">Mail :</td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <td style="width: 65%;border: 0.5px solid #292929">
+                        <table style="width: 100% ;">
+                            <tr>
+                                <td style="width: 100%">{{ua_t_commandefrscab.fournisseur.mail1}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>   
+</table>
+
+<table cellspacing="0" style="width: 100%; text-align: left; font-size: 12px">
+    <tr>
+        <td><h5 style="padding: 6px 4px  ; font-weight: bold;font-size: 13px">Objet : {{ua_t_commandefrscab.observation}}</h5></td> 
+    </tr>    
+</table>
+{% set c = 0 %}
+		{% for key , detail in cab.details   %}
+
+			{% set c = c + detail.remise %}
+
+		{% endfor %}
+<table class="" style="width: 100% ;" cellspacing="0">
+    <tr style="background-color: #292929; color:white; font-size: 9px;">
+        <th style="width: 5%;padding: 3px">ORD</th>
+        <th style="width: 60%;padding: 3px">DESIGNATION</th>
+        <th style="width: 5%;padding: 3px;text-align: center;">QNT</th> 
+        <th style="width: 5%;padding: 3px">UNITE</th>
+        <th style="width: 5%;padding: 3px;text-align: center;">TVA</th>
+        {% if c != 0 %}
+        <th style="width: 5%;padding: 3px;text-align: center;">REMISE</th>
+        {% endif %}
+        <th style="width: 10%;padding: 3px;text-align: center;">PRIX H.T</th>
+        <th style="width: 10%;padding: 3px;text-align: center;">TTC</th>    
+    </tr>
+    
+    {% for ua_t_commandefrsdet in ua_t_commandefrsdets %}
+     <tr>
+            <td style="width: 5%;padding: 3px;font-size: 10px;text-align: left;">{{ loop.index }}</td>
+            <td style="width: 60%;padding: 3px;font-size: 10px;text-align: left;">{{ua_t_commandefrsdet.article.titre}}</td>
+            <td style="width: 5%;padding: 3px;font-size: 10px;text-align:center;">{{ua_t_commandefrsdet.quantite}}</td>
+            <td style="width: 5%;padding: 3px;font-size: 10px;text-align: center;">
+              
+            </td>
+            <td style="width: 5%;padding: 3px;font-size: 10px;text-align: center;">{{ua_t_commandefrsdet.tva}}</td>
+            {% if c != 0 %}<td style="width: 5%;padding: 3px;font-size: 10px;text-align: center;">{{ ua_t_commandefrsdet.remise ? ua_t_commandefrsdet.remise ~ " %" : "-" }}</td>{% endif %}
+            <td style="width: 10%;padding: 3px;font-size: 10px;text-align: right;">{{ua_t_commandefrsdet.prixunitaire}}</td>
+            <td style="width: 10%;padding: 3px;font-size: 10px;text-align: right;">{{ua_t_commandefrsdet.prixttc}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br/><br/>
+<table cellspacing="0" style="width: 100%;">
+    <tr>
+        <td style="width: 55% ">
+        </td>
+
+        <td style="width: 45% ">
+            <table style="width: 100% ; background: #FFFFFF;font-size: 10px;" cellspacing="0">
+                <tr style="margin: 5px; ">
+                    <td style="background-color:rgb(170, 170, 170);padding: 5px;">TOTAL HT</td>
+                    <td style="width: 0.3% ;"></td>
+                    <td style="width:20%;border: 0.5px solid #292929;margin-bottom: 15px !important;text-align:right">{% set PrixHt = 0 %} {{ PrixHt }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color:rgb(170, 170, 170);padding: 5px;">REMISE : </td>
+                    <td style="width: 0.3% ;"></td>
+                    <td style="width:20%;border: 0.5px solid #292929;margin-bottom: 15px !important;text-align:right">{{ua_t_commandefrscab.mtremise}}</td>
+                </tr>
+                <tr>
+                    <td style="background-color:rgb(170, 170, 170);padding: 5px;">NET HT :</td>
+                    <td style="width: 0.3% ;"></td>
+                    <td style="width:20%;border: 0.5px solid #292929;margin-bottom: 15px !important;text-align:right">{% set PrixHt = PrixHt - ua_t_commandefrscab.mtremise %}{{ PrixHt }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color:rgb(170, 170, 170);padding: 5px;">TVA : </td>
+                    <td style="width: 0.3% ;"></td>
+                    <td style="width:20%;border: 0.5px solid #292929;margin-bottom: 15px !important;text-align:right">{{ua_t_commandefrscab.donttva}}</td>
+                </tr>
+                <tr>
+                    <td style="background-color:rgb(170, 170, 170);padding: 5px;">TOTAL TTC : </td>
+                    <td style="width: 0.3% ;"></td>
+                    <td style="width:20%;border: 0.5px solid #292929;margin-bottom: 15px !important;text-align:right">{% set PrixTotNet = 0 %}{{ PrixTotNet }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color:rgb(170, 170, 170);color:rgb(69, 69, 69);font-weight : bold; width: 30%;padding: 5px;">NET A PAYER  ({{ua_t_commandefrscab.devise ? ua_t_commandefrscab.devise.designation}}) : </td>
+                    <td style="width: 0.3% ;"></td>
+                    <td style="width:20%;border: 0.5px solid #292929;margin-bottom: 15px !important;font-weight : bold;text-align:right">{% set PrixTotNet = PrixHt + ua_t_commandefrscab.donttva %}{{ PrixTotNet }}</td>
+                </tr>
+            </table>
+        </td>
+        <td style="width: 5%"></td>
+    </tr>
+</table>
+<br/><br/>
+
+
+
+
+
+<p class="p1"></p>
+
+<footer>
+{% if ajouter_info_pied_page == true %}
+        <footer>
+        <div class="divfooter">
+        <p>
+        Av. Allal El Fassi Madinat Al Irfane Hay Riad 10000 Rabat
+</p>
+        </div>
+        </footer>
+        {% endif %}
+    
+    
+</footer>

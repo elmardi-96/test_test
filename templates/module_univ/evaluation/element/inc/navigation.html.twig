@@ -1,0 +1,67 @@
+{% set current_path = app.request.get('_route') %}
+
+{#% if epreuve is defined  and epreuve.id > 0 %}
+    {% include './module_univ/evaluation/configepv/inc/workflow_breadcumb.html.twig' %}
+{% endif %#}
+
+{#% if epreuve is defined %}
+
+
+
+<ul class="nav nav-tabs">
+
+    {% for operation1 in operations|sort((a, b) => a.ordr <=> b.ordr)%}
+	
+        {% if operation1.horizontale  %}
+		{% if operation1.route is not null  %}
+		{% if operation1.parent =='_evaluation' %}
+		
+			<li>
+               
+               
+				<a class="nav-link {% if  operation1.route   in current_path  %} active {%endif%}" href="{{ path(operation1.route , {id:epreuve.id}) }}">
+					<i class="fa {{ operation1.icon }}"></i>
+					{{ operation1.titre|capitalize }}</a>
+            </li>
+            
+			{% endif %}
+            {% endif %}
+		{% endif %}
+	{% endfor %}
+
+</ul>
+
+{% else %#}
+	<ul class="nav nav-tabs"> 
+	{% for operation1 in operations|sort((a, b) => a.ordr <=> b.ordr)%}
+		{#{dump(operation1)}#}
+		{% if operation1.horizontale  %}
+			{% if operation1.route is not null  %}
+				{% if operation1.parent =='_evaluation_element' %}
+				{% set titre = operation1.titre|split('(') %}
+				{#{dump(titre)}#}
+
+
+					<li>
+
+
+						<a class="nav-link {% if  operation1.route   in current_path  %} active {%endif%}" href="{{ path(operation1.route , {id:element.id}) }}">
+							<i class="fa {{ operation1.icon }}"></i>
+							{{ titre[0]|capitalize }}</a>
+					</li>
+
+				{% endif %}
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+
+</ul>
+
+<button class="link-promotion promotion">
+
+
+		<a class="nav-link" >
+			<i class="fa fa-info-circle"></i>
+			Informations</a>
+	</button>
+{#% endif %#}

@@ -1,0 +1,76 @@
+
+
+{% set current_path = app.request.get('_route') %}
+<div id="page-wrapper" class="gray-bg {% if " module_compte_index"  in current_path  %}  {%endif%} ">
+    <div class="row">
+        <nav class="navbar navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                    <i class="fa fa-bars"></i>
+                </a>
+
+                <ul class="navbar-top-links navbar-top-dossier">
+                    <li class="nav-item">
+                        
+						{#<a class="nav-link" href="{{ path('_tresorerie_dossiers_by_module',{'id':app.session.get('moduleCourantTresorerie').id}) }}">
+                          
+                            <i class="fa fa-folder"></i>
+                            {% if (app.session.get('modules')[app.session.get('moduleCourantTresorerie').prefix]['dossiers'][app.session.get('dossierCourantTresorerie').prefix]  is defined) %}
+                                {%   set dossier = app.session.get('modules')[app.session.get('moduleCourantTresorerie').prefix]['dossiers'][app.session.get('dossierCourantTresorerie').prefix]  %}
+                                {{ dossier.titre }}
+                                ({{ app.session.get('modules')[app.session.get('moduleCourantTresorerie').prefix]['abreviation'] }})
+                            {% endif %}
+                        </a>#}
+                        {%   set dossier = app.session.get('modules')[app.session.get('moduleCourantTresorerie').prefix]['dossiers'][app.session.get('dossierCourantTresorerie').prefix] %}
+						{#{ dump(app.request.attributes) }#}
+							<div class="btn-group"> <button data-toggle="dropdown" class="btn btn-default btn-xs  drop-down-class" aria-expanded="false">
+								<i class="fa fa-folder"></i>
+								{{ dossier.titre }}
+								({{ (dossier.abreviation) }})
+								{#<i class="fa fa-chevron-down rotate"></i>#}
+							</button>
+							<ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; top: 24px; left: 0px; will-change: top, left;">
+								{% for dos in app.session.get('modules')[app.session.get('moduleCourantTresorerie').prefix]['dossiers'] %}
+									{% if dossier.id != dos.id  %}
+										<li>
+											<a class="dropdown-item " style="font-size: 11px;color: #616161 !important;text-transform: uppercase;" href="{{ path('change_dossier_courant',{'nameModule':'moduleCourantTresorerie','module_id':app.session.get('moduleCourantTresorerie').id,'nameDossier':'dossierCourantTresorerie','dossier_id':dos.id},true) }}">
+												<i class="fa fa-folder"></i>
+												{{ dos.titre }}
+												({{ (dos.abreviation) }})</a>
+										</li>
+									{% endif %}
+								{% endfor %}
+
+								<li class="dropdown-divider"></li>
+								<li>
+									<a class="dropdown-item" style="font-size: 11px;color: #616161 !important;text-transform: uppercase;" href="{{ path('_tresorerie_dossiers_by_module',{'id':app.session.get('moduleCourantTresorerie').id}) }}">
+										<i class="fa fa-folder"></i>
+										Tout les dossiers</a>
+								</li>
+							</ul>
+                    </li>
+                </ul>
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+
+                {% include './inc/header_app_config_logout.html.twig' %}
+
+
+            </ul>
+
+
+        </nav>
+        {#<div class="row">
+                        <nav class="navbar navbar-fixed-top" role="navigation">
+                            <div class="navbar-header">
+                                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href=""><i class="fa fa-bars"></i></a>
+                                <div class="single-mdl">
+                                    <img src="{{asset('img/modules/'~app.session.get('modules')['_univ']['image'])}}" class="rounded-circle circle-border m-b-md" alt="module conge image"> <a href="{{ path('module_univ_index') }}"><h2> {{ app.session.get('modules')['_univ']['titre']|upper }} </h2></a>
+                                </div>
+                            </div>
+                            <ul class="nav navbar-top-links navbar-right">
+                               {% include './inc/header_app_config_logout.html.twig' %}
+                            </ul>
+                        </nav>#}
+    </div>
+

@@ -1,0 +1,60 @@
+{% if  u_article is defined   %}
+
+	<div class="wrf-positions">
+		{#% for transition in workflow_transitions(u_category) %}
+		    {#{{ dump(workflow_marked_places(commande)) }}# }
+		    {% set url = "" %}
+		    {% if workflow_metadata(u_category, 'function', transition) %}
+		        {%  set  url= path(workflow_metadata(demande, 'function', transition), {id: u_category.id}) %}
+		    {% endif %} 
+		    {#<form style="display: inline-block"  id="{{ workflow_metadata(demande, 'function', transition) }}">
+		        <input type="hidden" name="_id" value="{{ demande.id }}"/>
+		        <input type="hidden" name="statut" value="{{ workflow_metadata(demande, 'statut', transition) }}"/>
+		        <input type="hidden" name="sous_module" value="{{ workflow_metadata(demande, 'sousModule', transition) }}"/>
+		        <input type="hidden" name="title" value="{{ workflow_metadata(demande, 'title', transition) }}"/>
+		        <input type="hidden" name="transition" value="{{ transition.name }}"/>
+		        <button class="btn-wrf btn btn-xs {{ workflow_metadata(demande, 'class', transition) }}  btn-outline" type="submit"  type="submit"><i class="fa {{ workflow_metadata(demande, 'icon', transition) }}"></i>{{ workflow_metadata(demande, 'title', transition) }}</button>
+		    </form>
+		        # }
+		        
+		        
+		   <a class="{{ workflow_metadata(u_category, 'function', transition) }} btn-wrf btn btn-xs {{ workflow_metadata(u_category, 'class', transition) }}  btn-outline"
+		       data-id="{{ u_category.id }}"
+		       data-title = "{{ workflow_metadata(u_category, 'title', transition) }}"
+		       data-transition ="{{ transition.name }}"
+		       >
+		       <i class="fa {{ workflow_metadata(u_category, 'icon', transition) }}"></i>
+		       &nbsp;{{ workflow_metadata(u_category, 'title', transition) }}
+		   </a>
+		   
+		{% endfor %#}
+
+
+		{#% if workflow_has_marked_place(u_category, "creer") or  workflow_has_marked_place(u_category, "encours") or workflow_has_marked_place(u_category, "archiver") or  workflow_has_marked_place(u_category, "annuler") %#}
+
+			{% for key ,  operation in operations  %}
+            
+				{% if  operation.prefix == '_delete_produit' %}
+					<a id="{{operation.prefix}}" data-id="{{u_article.id}}" data-token="{{ csrf_token('delete' ~ u_article.id) }}" class='btn-wrf btn btn-xs btn-danger btn-outline  {{operation.classCs}}'> <i class="fa {{ operation.icon }}"></i>
+					{{ operation.titre|capitalize }}</a>
+
+			{% elseif  operation.prefix == '_imprimer_produit' %}
+				<a id="{{operation.prefix}}" data-id="{{u_article.id}}" class='btn-wrf btn btn-xs btn-white btn-outline  {{operation.classCs}}'>
+					<i class="fa {{ operation.icon }}"></i>
+					{{ operation.titre|capitalize }}</a>
+
+			{% elseif  operation.prefix == '_archiver_produit' %}
+				<a id="{{operation.prefix}}" data-id="{{u_article.id}}" class='btn-wrf btn btn-xs btn-white btn-outline  {{operation.classCs}}'>
+					<i class="fa {{ operation.icon }}"></i>
+					{{ operation.titre|capitalize }}</a>
+			{% endif %}
+		{% endfor %}
+		{#% endif %#}
+		<div id="test" data-demande-id="{{ u_article.id|json_encode }}"></div>
+	</div>
+
+
+{% endif %}
+
+
+{{ wo_render_breadcrumbs() }}

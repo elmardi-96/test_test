@@ -1,0 +1,73 @@
+<div id="wrapper">
+
+    {#{{ dump(app.request.getPathInfo) }}#}
+    <!-- Sidebar -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul
+                class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <ul class="sidebar-app-url ">
+                            <li>
+                                <a href="index.html">
+                                    <img class="img-side-ugouv" src="{{asset('/img/logo-blackwhite.png')}}" /><span>U3S-ERP</span></a>
+                                <p>
+
+                                    {#{ app.session.get('dossierCourant').abreviation|upper }#}
+                                    ERP SOULITION
+                                </p>
+                                <div>
+                                    <input id="search_keywords2" type="text" class="form-control search_keywords2 input-search" placeholder="Rechercher ...">
+                                    <i class="fa fa-search input-search-i"></i>
+                                </div>
+                            </li>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            
+
+                            <li class="active colp" >
+                                <a  href="{{ path('erp_client') }}">
+                                    <i class="fa fa-line-chart"></i>
+                                    <span class="nav-label">Client Demandes</span>
+                                    <i class="fa arrow"></i>
+                                </a>
+                               
+
+
+
+
+                                    <ul class="nav nav-second-level collapse active">
+                                    
+
+                                            <li class=" active  colp">
+                                                <a  href="{{ path('erp_client') }}" >
+                                                    <i class="fa fa-clipboard"></i>
+                                                    <span class="nav-label">Demandes client</span>
+                                                    <i class="fa arrow"></i>
+                                                </a>
+                                               
+                                                    <ul class="nav nav-third-level">
+                                                      
+                                                                <li class=" active colp">
+                                                                    <a  href="{{ path('erp_client') }}" >
+                                                                        <i class="fa fa-list"></i>
+                                                                        <span class="nav-label">Liste</span>
+                                                                    </a>
+                                                                </li>
+                                                          
+                                                    </ul>
+                                               
+                                            </li>
+
+                                       
+                                    </ul>
+                               
+                            </li>
+                      
+            </ul>
+        </div>
+    </nav>
+    <!-- End Sidebar -->

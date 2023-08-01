@@ -1,0 +1,6 @@
+{% set current_path = app.request.get('_route') %}
+<ul class="nav nav-tabs">
+    <li> <a class="nav-link {% if "module_univ_etudiant_show"  in current_path  %} active {%endif%}" href="{{ path('module_univ_etudiant_show' , {id:etudiant.id})}}" ><i class="fa fa-info-circle"></i> Information</a></li>
+
+
+</ul>

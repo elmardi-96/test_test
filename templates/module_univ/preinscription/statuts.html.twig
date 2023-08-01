@@ -1,0 +1,72 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i>  </small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+               
+
+                <div class="ibox">
+                    <div class="ibox-content">
+
+                        <h3>Pré-inscription Statut </h3>
+                       
+                            {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_retenue'}}) }}
+                        <div class="form-group">
+
+
+
+                            <div class="form-group">
+                                {{ form_label(form.statutDeliberation ,'Pré-inscription Retenue (*) :', {'label_attr':{'class':'col-sm-12'}}) }} 
+                                {{ form_widget(form.statutDeliberation,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                            </div>
+                            <br/>
+                            
+                             {{ form_widget(form.ids,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                            
+                            
+                        </div>
+                        
+                       
+                     
+                      
+                        <button type="submit" class="btn btn-white btn-block btn-xs my-button"><i class="fa fa-save"></i> Enregistrer</button>
+                        {{ form_end(form) }}
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

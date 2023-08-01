@@ -1,0 +1,359 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Liste  | Facture fournisseur | Ugouv achat
+{% endblock %}
+
+
+{% block body %}
+    {#<div id="right-sidebar" class="actions animated"></div>#}
+
+     <div class="actions modal fade right" id="ModalAcompteDynamique" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+        <div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalPreviewLabel">DOCUMENT</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bo-0">
+                    <div class="text-center spr">
+                        <br/>
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="bod">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="actions modal fade right" id="ModalDocumentDynamiqueValider" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+
+        <div class="modal-dialog modal-full-height modal-right modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalPreviewLabel1">  Bordereaux
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bo-0">
+                    <div class="text-center spr_valider">
+                        <br/>
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bod_valider" style="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+ 
+    <div class="actions modal fade right" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel">DOCUMENT</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="text-center spr">
+						<br/>
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+    <div class="actions modal fade right" id="MyModalRefModifier" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel">Modifier</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+	
+					<div class="bod">
+                        <form class="save_modify">
+													
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="client">Document ref associe </label>
+                                    <input class="form-control" id="document_ref" name="document_ref" type="string" >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="montant">Date document </label>
+                                    <input class="form-control" id="date_document" name="date_document" type="date">
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="encaissement">Date facture </label>
+                                    <input class="form-control" id="date_valider" name="date_valider" type="date">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-2">
+                                <label class="col-sm-12 required">
+                                    <button class="save_new btn-register btn btn-white btn-block my-button  upper btn-xs my-button2" data-style="expand-left" type="submit">
+                                        <i class="fa fa-save "></i>
+                                        ENREGISTRER
+                                    </button>
+                                </label>
+                        
+                            
+                        
+                            </div>
+                        </form>
+                    </div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+        <div class="col-lg-12">
+			{% include './module_achat/t_facturefrscab/inc/workflow_barTop.html.twig' %}
+		</div>
+
+
+        <div class="col-lg-6">
+            <div class="title-action">
+                <div
+                    class="title-action">
+                    {% for key ,  operation in operations  %}
+                    {% if operation.horizontale and  operation.isIndex == 1 %}
+                        <a {% if operation.route is not null  %}  href="#" {%  endif %}  id="{{operation.prefix}}" class="btn btn-white btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+                    {% endif %}
+                    {% endfor %}
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-b"></div>
+            <div class="col-lg-12">
+
+                {{ wo_render_breadcrumbs() }}
+            </div>
+        </div>
+        {# ========================================================================================== #}
+                {# ===================================  START =============================================== #}
+                
+                {# ==================   Start Modal ===================== #}
+                <div class="actions modal fade right" style="z-index: 99998 !important;" id="ajouterBRD" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+                    <div class="modal-dialog modal-full-height modal-right modal-md" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalPreviewLabel1"> Transaction Valider
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body bo-0">
+                                {# <div class="text-center spr_valider">
+                                    <br/>
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div> #}
+                                
+                                <div class="bod_valider" style=""><div class="sidebar-container">
+
+                                    <div class="ibox-tools">
+                                        <a class="close-link close-me" href="">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="tab-content">
+
+
+                                        <div id="tab-1" class="tab-pane active">
+
+                                            <div class="sidebar-title">
+                                                <h3>
+                                                    <i class="fa fa-info-circle"></i>
+                                                    INFORMATIONS
+                                                </h3>
+                                                <small>
+                                                VALIDER.</small>
+                                            </div>
+                                            
+                                            <div class="right-sidebar-content">
+
+
+                                                <div class="ibox">
+                                                    <div class="ibox-content">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-12">
+                                                                        <label for="code">Code </label>
+                                                                        <input class="form-control" id="code_tr" name="code_tr" type="text" >
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <form name="form" method="post" novalidate="novalidate" id="myform" class="form transaction_valider2">
+                                                                    <div class="form-group">
+                                                                        <label class="row col-sm-12 required" for="form_observation_bq">Observation </label>
+
+                                                                        <input type="text" id="form_observation_bq" name="form[observation_bq]" required="required" class="form-control form-control-sm col-sm-12">
+                                                                    </div>
+
+                                                                <br><br>
+                                                                </form>					
+
+                                                                <table class="table table-bordered">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">ID</th>
+                                                                            <th scope="col">Piece</th>
+                                                                            <th scope="col">CODE</th>
+                                                                            <th scope="col">Partenaire</th>
+                                                                            <th scope="col">Montant</th>
+                                                                            <th scope="col"></th>
+                                                            
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody class="transactionbody">
+                                                                        
+                                                                    </tbody>
+                                                                </table>
+
+                                                                <button type="submit" form="myform" class="btn btn-white btn-block btn-xs my-button2 mt-4 w-50">
+                                                                <i class="fa fa-save"></i>
+                                                                &nbsp;Enregistrer</button>
+                                                                
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                    {# ==================   End Modal ===================== #}
+            {# ===================================  END =============================================== #}
+            {# ========================================================================================== #}
+        <br/>
+        <br/>
+        <div class="row border-bottom white-bg dashboard-header mt-20">
+            <div class="col-lg-12">
+
+                <div class="ibox ">
+                    <div class="ibox-content" style="padding-top: 0px">
+                        <div class="table-responsive" style="overflow-x:scroll">
+                            <div class="row">
+                                <div class="col-2 list_actions_bloc" style="position: absolute; top:0;left:0; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+                                    
+
+                                        <select class="select2_demo _3 form-control list_actions sel2">
+                                            <option>Action</option>
+                                            {% for key , operation in operations  %}
+                                                {% if operation.multiple %}
+                                                    <option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+
+                                </div>
+
+
+                            </div>
+                            <table
+                                class="table tb cmd  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%">
+                                <!-- <table class="table display"  id='grid'  style="font-size: 10px;"  width="100%">-->
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Code</th>
+                                        <th>date</th>
+                                        <th>Reference</th>
+                                        <th>description</th>
+                                        <th>Fournisseur</th>
+                                        <th>Mt.ac</th>
+                                        <th>Mt.remise</th>
+                                        <th>Mt.recep</th>
+                                        <th>Mt.fac</th>
+                                        <th>Mt.reg</th>
+                                        <th>Nbr.Reg</th>
+                                        <th>Parvenue</th>
+                                                                            <th>signature</th>
+
+                                        <th>Statut</th>
+                                        <th>Opr</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="commande"></tbody>
+
+                                {# <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Code</th>
+                                        <th>date</th>
+                                        <th>Reference</th>
+                                        <th>description</th>
+                                        <th>Fournisseur</th>
+                                        <th>Mt.fac</th>
+                                        <th>Mt.ac</th>
+                                        <th>Mt.remise</th>
+                                        <th>Mt.recep</th>
+                                        <th>Mt.gene</th>
+                                        <th>Nbr.Reg</th>
+                                        <th>Parvenue</th>
+                                        <th>Statut</th>
+                                        <th>Opr</th>
+                                    </tr>
+                                </tfoot> #}
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% endblock %}
+            {% block javascripts %}
+                {{ parent() }}
+                {{ encore_entry_script_tags('tfacturefrscab') }}
+            {% endblock %}

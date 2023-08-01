@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+    <head><meta charset="euc-kr">
+        <title>Paie</title>
+    </head>
+    <style>
+    @page {
+            margin: 5px 20px !important;
+            /*padding: 0px 0px 0px 0px !important;*/
+        }
+        body{
+            font-family: 'Courier New';
+            font-size: 13px;
+        }
+        .logo{
+            max-width:250px;
+            max-height:100px;
+        }
+
+        .table-header{
+            width:100% ; 
+            text-transform: uppercase; 
+
+
+        }
+        
+        .table-sub-title {
+            font-size: 12px ;
+            border: 1px solid #555555 ; 
+            margin-bottom: 5px ; 
+        }
+
+        .table-header label {
+            font-size: 12px;
+            font-weight: 200;
+        }
+
+        .th1{
+            width:250px;height:100px;
+        }
+        .th2{
+            width:100px;height:100px;
+        }
+
+        h3{   
+            padding: 15px 0px ; 
+            text-align: center;
+            background:#e7e6e6;
+            text-transform: uppercase; 
+            font-size: 14px;
+        }
+
+        h4{   
+            padding: 15px 0px ; 
+            text-align: center;
+            border: 1px solid  #555555 ; 
+        }
+
+
+
+
+        .table-content{
+            width:100%; 
+            font-size: 10px;
+            border:1px solid black;
+            border-collapse: collapse;
+
+        }
+
+        .table-content tr {
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+        }
+
+        .table-content thead tr th{
+            text-align: center;
+        }
+
+        .table-content  td{
+            padding: 4px ;
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+
+        }
+        .table-content thead{
+            background: #555555;
+            color: #fff;
+
+        }
+
+        .table-content thead th{
+            font-size: 11px;
+            padding: 4px 2px
+        }
+
+
+        .table-content tbody tr td:nth-child(6) {
+            text-align: right; 
+        }
+      
+        .table-ttc {
+            font-size: 11.5px;
+            width: 40%; float: right;
+            font-weight: bold ; 
+
+        }
+
+        .table-ttc tr td  {
+            border: 1px solid #555555 ; 
+            padding: 1px 3px ; 
+        }
+
+        .table-ttc tr td:nth-child(2) {
+            text-align: right; 
+        }
+
+
+
+        .footer {
+            border-top: 2px solid #555555;
+            margin-top:10px;
+            font-size: 9px ;
+            text-align: center; 
+            position: fixed; 
+            bottom: 0 ;
+        }
+        .footer label{
+
+            padding-left: 10px;
+
+        }
+
+
+
+    </style>
+    <body>
+        <table class="table-header">
+            <tr>
+                <th> 
+                    <img src="{{ asset(image)[1:] }}" class="logo" alt="Logo"> 
+                </th>
+                <th class="th2"><br></th>
+                <th class="th3"> 
+                   
+                  
+                 
+                    SOCIETE : <label>{{ paie.dossier  ? paie.dossier.description  }}</label><br>
+                    DATE : <label>{{ "now"|date("m/d/Y") }}</label><br>
+                     
+                </th>
+            </tr>
+
+        </table>
+        <br>
+
+
+
+        <h3>DETAIL DE PAIEMENT N° {{ paie.code }}</h3>
+
+
+
+ 
+        <table class="table-sub-title">
+            <tr >
+                <td style="border-bottom: 1px solid #555 ; font-weight: bold"  colspan="2"> INFORMATIONS DE PAIEMENT </td>
+                
+            
+            </tr>
+            <tr>
+                <td> Description :</td>
+                <td>{{ paie.description }} </td>
+            </tr>
+            <tr>
+                <td> Annee :</td>
+                <td>{{ paie.annee }}</td>
+
+            </tr>
+
+         
+
+            <tr>
+                <td> Mois :</td>
+                <td>{{ paie.getChoices }}</td>
+            </tr>
+
+         
+
+            
+
+
+            
+
+        </table>
+
+
+
+
+
+
+
+        <table class="table-content">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">ORD</th>
+                    <th style="width: 25%;">NOM ET PRENOM</th>
+                   
+                    <th style="width: 20%;">DESCRIPTION</th>
+                    <th style="width: 15%;">D.DEBUT</th>
+                    <th style="width: 15%;">D.FIN</th>
+                    <th style="width: 20%;">SALAIRE</th>
+                </tr>
+            </thead>
+            <tbody>
+              
+                {% set tottva = 0 %}
+              
+
+
+                {% for key , detail in paie.details   %}
+                    {% set  key = key + 1  %}
+                    
+                  
+                    {% set tottva = tottva + detail.montant  %}
+                  
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ detail.employe.nom ~ detail.employe.prenom }}</td>
+                       
+                        <td>{{ detail.description }}</td>
+                        <td>{{ detail.dateDebut|date("m/d/Y") }}</td>
+                        <td>{{ detail.dateFin|date("m/d/Y")}}</td>
+                        <td>{{ detail.montant|number_format(2) }}</td>
+                      
+                    </tr>
+
+                    {% if paie.details|length == key and paie.details|length <= 22 %}
+                        {% for i in paie.details|length .. 22 %}
+                            <tr>
+                                <td  style="color: #fff">.</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+
+            </tbody>
+        </table><br>
+
+
+
+
+
+        <table class="table-ttc">
+            <tr>
+                <td>TOTAL</td>
+                <td>{{tottva|number_format(2, '.', ',')}}</td>
+            </tr>
+         
+          
+        </table>
+    </body>
+
+    <footer>
+        <div class="footer">
+
+            <p>
+                {% if paie.dossier  %}
+                    {{ paie.dossier.titre }}
+
+                    {% if  paie.dossier.rc %} <label>RC :</label>{{ paie.dossier.rc }} {% endif %}
+                    {% if  paie.dossier.ice %}<label>ICE :</label>{{ paie.dossier.ice }} {% endif %}
+                    {% if  paie.dossier.iff %}<label>IF :</label>{{ paie.dossier.iff }} {% endif %}
+                    {% if  paie.dossier.cnss %}<label>CNSS :</label>{{ paie.dossier.cnss }} {% endif %}
+                    {% if  paie.dossier.patente %} <label>PATENTE :</label>{{ paie.dossier.patente }} {% endif %}
+                {% endif %}
+            </p>
+        </div>
+    </footer>
+
+</html>

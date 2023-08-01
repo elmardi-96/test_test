@@ -1,0 +1,316 @@
+{% extends 'base_univ.html.twig' %}
+
+
+{% block title %}Reglement | Facturation | UNIV
+{% endblock %}
+
+
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="new">
+		{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+			<div class="col-lg-4">
+				<h2 class="fo">Univ  , Réglement</h2>
+
+
+			</div>
+
+			<div class="col-lg-8">
+				<div class="title-action">
+					<button class="btn btn-white  btn-xs btn-lg my-button2" type="submit">
+						<i class="fa fa-save"></i>
+						{{ button_label|default('Enregistrer') }}</button>
+
+				</div>
+			</div>
+			<div class="border-b"></div>
+
+			<div class="col-lg-12">
+
+				{{ wo_render_breadcrumbs() }}
+			</div>
+
+
+		</div>
+		<br/><br/>
+		<div class="row pt-20">
+			<div class="col-lg-12 ">
+				<div class="ibox">
+					<div class="ibox-content">
+
+						<div class="message-success"></div>
+
+
+						<div class="row m-t-sm">
+							<div class="col-lg-12">
+								<div class="panel blank-panel">
+									<div class="panel-heading">
+										<div class="panel-options">
+											{% include './module_univ/facturation/inc/navigation.html.twig' %}
+
+											{#<ul class="nav nav-tabs">
+											                                                    <li>
+											                                                            <a class="nav-link active" href="#tab-1" data-toggle="tab">informations de base
+											                                                            </a>
+											                                                    </li>
+											
+											                                            </ul>#}
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="panel-body">
+
+											<div class="tab-content">
+												<div class="tab-pane active" id="tab-1">
+
+
+													<div class="row">
+														<div class="col-md-12">
+
+															<h3 class="m-t-none m-b">Informations
+															</h3>
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 required">
+																	Code Opération :</label>
+
+																<div class="col-sm-8">
+																	{{operation ? operation.code}}
+																</div>
+															</div>
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 required">
+																	Montant Opération  :</label>
+
+																<div class="col-sm-8">
+																	{{ mttc|number_format(2) }}
+																</div>
+															</div>
+
+															<div id="test" data-operation-id="{{ operation.id|json_encode }}"></div>
+
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.dateReglement ,'date réglement (*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.dateReglement,{'attr':{'class':'form-control'}  }) }}
+
+
+																</div>
+
+															</div>
+
+
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.montant ,'Montant(*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-1">
+																	{{ form_widget(form.montant,{'attr':{'class':'form-control form-control-sm ','placeholder':'Montant paiement','value':mttc - mtreg}  }) }}
+																</div>
+
+															</div>
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.remise ,'Remise(*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-1">
+																	{{ form_widget(form.remise,{'attr':{'class':'form-control form-control-sm ','value':0.0}  }) }}
+																</div>
+
+															</div>
+
+
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.modalite ,'Paiement(*)  :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.modalite,{'attr':{'class':'form-control form-control-sm paiement'}}) }}
+																</div>
+
+															</div>
+
+															<div class="bloc_cheque" style="display: none">
+																<div class="hr-line-dashed"></div>
+
+																<div class="form-group row">
+																	{{ form_label(form.dateEcheance ,'date Echéance (*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-3">
+																		{{ form_widget(form.dateEcheance,{'attr':{'class':'form-control'}  }) }}
+
+
+																	</div>
+
+																</div>
+
+																<div class="bloc_banque" style="display: none">
+																	<div class="hr-line-dashed"></div>
+																	<div class="form-group row">
+																		{{ form_label(form.reference ,'Référence (*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																		<div class="col-sm-3">
+																			{{ form_widget(form.reference,{'attr':{'class':'form-control','placeholder':'Référence de chèque'}  }) }}
+
+
+																		</div>
+
+																	</div>
+
+																</div>
+															</div>
+
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.banque ,'banque (*):', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.banque,{'attr':{'class':'form-control form-control-sm'}}) }}
+																</div>
+
+															</div>
+
+
+															{{ form_end(form) }}
+
+
+														</div>
+
+
+													</div>
+
+
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<br><br>
+		<div class="row justify-content-md-center">
+			<div class="col-lg-12 ">
+				<div class="ibox ">
+					<div class="ibox-title m-min"></div>
+					<div class="ibox-content">
+
+
+						<div class="table-responsive">
+							<div class="col-md-12 m-mar-t">
+								<h5 class="m-left" style="text-transform: uppercase;">Informations d'opération</h5>
+
+
+								<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show2">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Code</th>
+											<th>Frais:</th>
+											<th>Montant :</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										{% set totale = 0 %}
+										{% set c = 0 %}
+										{% for det in  operation.operationsdet %}
+											{% set c = c + 1 %}
+											{% set totale =  totale + det.montant %}
+											<tr class="edit-new-article">
+												<td>{{c}}</td>
+												<td>{{det.code   }}</td>
+												<td>{{ det.frais ? det.frais.designation }}</td>
+												<td>{{ det.montant|number_format(2) }}</td>
+											</tr>
+
+										{% endfor %}
+									</tbody>
+									<tfoot>
+										<tr>
+											<th colspan="4" style="text-align:right">Total:
+												{{totale}}</th>
+
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col-lg-12 ">
+				<div class="ibox ">
+					<div class="ibox-title m-min"></div>
+					<div class="ibox-content">
+
+
+						<div class="table-responsive">
+							<div class="col-md-12 m-mar-t">
+								<h5 class="m-left" style="text-transform: uppercase;">HISTORIQUE DES Réglements</h5>
+								<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show2">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Banque</th>
+											<th>Date Reglement	 :</th>
+											<th>Montant réglement :</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										{% set totale = 0 %}
+										{% set c = 0 %}
+										{% for reglement in reglements %}
+											{% set c = c + 1 %}
+											{% set totale =  totale + reglement.montant %}
+											<tr class="edit-new-article">
+												<td>{{c}}</td>
+												<td>{{reglement.banque ? reglement.banque.abreviation : ''  }}</td>
+												<td>{{ reglement.dateReglement ? reglement.dateReglement|date('Y-m-d') : '' }}</td>
+												<td>{{ reglement.montant|number_format(2) }}</td>
+											</tr>
+
+										{% endfor %}
+									</tbody>
+									<tfoot>
+										<tr>
+											<th colspan="4" style="text-align:right">Total:
+												{{totale}}</th>
+
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<br><br>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_facturation') }}
+{% endblock %}

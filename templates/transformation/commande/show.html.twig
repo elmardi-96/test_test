@@ -1,0 +1,232 @@
+{% extends 'base_transformation.html.twig' %}
+
+{% block title %}Transformation , Commande
+{% endblock %}
+
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Transformation , Commande
+            </h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+             
+
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+    <br/><br/>
+
+
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                   
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        
+                                        {% include './transformation/commande/inc/navigation.html.twig' %}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12" style=" padding-top: 0%;">
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab1-1">
+
+                                                <div class="row">
+
+                                                    <div class="col-md-12 b-r">
+                                                        <h3 class="m-t-none m-b">Informations Commande
+                                                        </h3>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static">{{ commande.id }}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Code</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static">{{ commande.code }}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold">Description :</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static">{{ commande.designation }}</p>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold">Référence</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static">{{ commande.reference }}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold">Date Commande  :</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static">{{ commande.datecommande|date('Y-m-d') }}</p>
+                                                            </div>
+
+                                                        </div>
+
+                                     
+                                 
+                                   
+
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold">Type</label>
+                                                            {% if commande.type == 1 %}
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">Marché</p>
+                                                                </div>
+                                                            {% elseif commande.type == 0 %}
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">Commande</p>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                    
+                                                     
+                                                   
+
+                                                    </div>
+                                           
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title m-min">
+                    <!--<h5>La liste des Articles</h5>-->
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <div class="col-md-12 m-mar-t">
+                            <h5 class="m-left">La liste des articles</h5>
+                            <table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show">
+                                <thead>
+                                    <tr>
+                                        <th style="width:5%">#</th>
+                                        <th style="width:10%">Réference</th>
+                                        <th style="width:35%">Article
+                                        </th>
+                                        <th style="width:20%">Observation</th>
+                                        <th style="width:5%">Qnt
+                                        </th>
+                                        <th style="width:5%">PU
+                                        </th>
+                                        <th style="width:5%">TVA</th>
+                                        <th style="width:5%">TTC</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for detail  in  commande.details %}
+                                        <tr>
+                                            <td>
+                                                {{ loop.index }}
+                                            </td>
+                                            <td>{{detail.article.code}}</td>
+                                            <td>
+                                                {{ detail.article.titre }}
+                                            </td>
+                                            <td>
+                                                {{ detail.observation }}
+                                            </td>
+                                            <td>
+                                                {{ detail.quantite }}
+                                            </td>
+                                            <td>
+                                                {{ detail.prixunitaire |number_format(2, '.', ',') }}
+                                            </td>
+                                            <td>
+                                                {% if detail.tva %}
+                                                    {{ detail.tva }} %
+                                                {% else %}
+                                                    -
+                                                {% endif %}
+                                            </td>
+                                            <td>{{detail.prixttc |number_format(2, '.', ',')}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {# {% endif %} #}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="5" style="text-align:right">Total:</th>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!--<span class="float-right">
+                                                                                                                        <b>Total :
+                                                                                                                                {"{total}#}</b>
+                                                                                                                </span>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <br><br>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('commande_transformation') }}
+{% endblock %}

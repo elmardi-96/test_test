@@ -1,0 +1,301 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form _operation'}}) }}
+<div class="sidebar-container">
+
+
+    <div class="tab-content bod">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3>
+                    <i class="fa fa-info-circle"></i>
+                    Informations : 
+                    <span class="annee">{#{annee.designation}#}</span>
+                </h3>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.titre ,'Titre(*) :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.titre,{'attr':{'class':'form-control  form-control-sm','placeholder':'Titre'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.titre)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.titre) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.abreviation ,'Abréviation :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.abreviation,{'attr':{'class':'form-control  form-control-sm','placeholder':'Abréviation'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.abreviation)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.abreviation) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        {{ form_label(form.description ,'Description :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.description,{'attr':{'class':'form-control  form-control-sm','placeholder':'Description'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.description)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.description) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.icon ,'Icon (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.icon,{'attr':{'class':'form-control  form-control-sm','placeholder':'Icon'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.icon)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.icon) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.prefix ,'Prefix(*) :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.prefix,{'attr':{'class':'form-control  form-control-sm','placeholder':'Prefix'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.prefix)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.prefix) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.idCs ,'Id css', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.idCs,{'attr':{'class':'form-control  form-control-sm','placeholder':'Id css'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.idCs)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.idCs) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.classCs ,'Class css', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.classCs,{'attr':{'class':'form-control  form-control-sm','placeholder':'Class css'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.classCs)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.classCs) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+
+
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        {{ form_label(form.route ,'Route', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.route,{'attr':{'class':'form-control  form-control-sm','placeholder':'Route'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.route)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.route) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        {{ form_label(form.routeWithParam ,'Route avec Paramètre ', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.routeWithParam,{'attr':{'class':'form-control  form-control-sm','placeholder':'Route avec Paramètre '}}) }}
+
+                                            <div class="form-error {% if form_errors(form.routeWithParam)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.routeWithParam) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        {{ form_label(form.routeInfo ,'Route Info ', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.routeInfo,{'attr':{'class':'form-control  form-control-sm','placeholder':'Route Info'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.routeInfo)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.routeInfo) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        {{ form_label(form.horizontale ,'Horizontale :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.horizontale,{'attr':{'class':'form-control  form-control-sm','placeholder':'Horizontale'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.horizontale)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.horizontale) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        {{ form_label(form.verticale ,'Verticale :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.verticale,{'attr':{'class':'form-control  form-control-sm','placeholder':'Verticale '}}) }}
+
+                                            <div class="form-error {% if form_errors(form.verticale)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.verticale) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        {{ form_label(form.multiple ,'Multiple :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.multiple,{'attr':{'class':'form-control  form-control-sm','placeholder':'Multiple '}}) }}
+
+                                            <div class="form-error {% if form_errors(form.multiple)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.multiple) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.parent ,'Parent ', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.parent,{'attr':{'class':'form-control  form-control-sm','placeholder':'Parent '}}) }}
+
+                                            <div class="form-error {% if form_errors(form.parent)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.parent) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.active ,'Active(*) :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.active,{'attr':{'class':'form-control  form-control-sm', 'style':'border:0px', 'placeholder':'Active'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.active)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.active) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+                                <div class="col-md-3">
+
+                                    <button class="btn btn-white btn-xs btn-lg my-button btn-block waves-effect waves-light" data-style="expand-left" type="submit">
+                                        <i class="fa fa-save"></i>
+                                        Enregistrer</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center spr" style="display:none;">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+
+</div>
+
+{{form_widget(form._token)}}
+{{ form_end(form,{'render_rest': false}) }}
+{#{dump(form)}#}

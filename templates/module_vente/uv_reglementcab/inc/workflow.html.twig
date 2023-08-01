@@ -1,0 +1,22 @@
+<div class="wrf-positions">
+
+	{% if t_reglementfrs is defined and t_reglementfrs is not empty  and t_reglementfrs.id is not empty %}
+		{% for key ,  operation in operations  %}
+			{% if  operation.prefix == '_imprimer' %}
+				<a id="{{operation.prefix}}" class='btn btn-xs btn-white btn-outline btn-wrf {{operation.classCs}}'>
+					<i class="fa {{ operation.icon }}"></i>
+					{{ operation.titre|capitalize }}</a>
+			{% endif %}
+
+			{% if  operation.prefix == '_delete_reglement'  %}
+				<a id="{{operation.prefix}}" data-id="{{t_reglementfrs.id}}" data-token="{{ csrf_token('delete' ~ t_reglementfrs.id) }}" class='btn-wrf btn btn-xs btn-danger btn-outline {{operation.classCs}}'>
+					<i class="fa {{ operation.icon }}"></i>
+					{{ operation.titre|capitalize }}</a>
+			{% endif %}
+		{% endfor %}
+
+
+	{% endif %}
+
+</div>
+{{ wo_render_breadcrumbs() }}

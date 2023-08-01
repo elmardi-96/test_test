@@ -1,0 +1,15 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Depot modifier | Stock{% endblock %}
+
+{% block body %}
+    <div class="edit">
+        {{ include('./parametrage/udepot/_form.html.twig' ,{'button_label': 'Modifier'}) }}
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('udepot') }}
+{% endblock %}

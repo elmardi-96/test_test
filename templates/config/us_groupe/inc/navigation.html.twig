@@ -1,0 +1,33 @@
+
+
+{% set current_path = app.request.get('_route') %}
+<ul class="nav nav-tabs">
+		<li>
+			<a class="nav-link {% if "us_groupe_modules_show"  in current_path  %} active {%endif%}" href="{{ path('us_groupe_modules_show',{id:us_groupe.id})}}">
+				<i class="fa fa-info-circle"></i>
+				Informations
+			</a>
+        </li>
+		
+        <li>
+			<a class="nav-link {% if "us_groupe_edit"  in current_path  %} active {%endif%}" href="{{ path('us_groupe_edit',{id:us_groupe.id})}}">
+				<i class="fa fa-pencil"></i>
+				Modifier
+			</a>
+		</li>
+		
+		<li>
+			<a class="nav-link {% if "us_groupe_permission_modules_list"  in current_path  %} active {%endif%}" href="{{ path('us_groupe_permission_modules_list',{group:us_groupe.id})}}">
+				<i class="fa fa-ban"></i>
+				Permissions
+			</a>
+		</li>
+		<li>
+			<a class="nav-link {% if "us_groupe_utilisateurs"  in current_path  %} active {%endif%}" href="{{ path('us_groupe_utilisateurs',{groupe_id:us_groupe.id})}}">
+				<i class="fa fa-user-plus"></i>
+				Utilisateurs
+			</a>
+		</li>
+
+		
+	</ul>

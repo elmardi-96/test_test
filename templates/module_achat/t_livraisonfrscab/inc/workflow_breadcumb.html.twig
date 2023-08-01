@@ -1,0 +1,84 @@
+<div class="row">
+	<div class="col-6">
+
+        <h4>Reception bc fournisseur</h4>
+		
+		{% if  livraison is defined and livraison is not empty  and livraison.id is not empty %}
+
+			{% set count = 0 %}
+			{% set count2 = 0 %}
+			{#% for key , place  in {  "creer":"Cree"  , "valider":"Valide",'generer':"Generee" }  %}
+									                {% if count >= 0 %}
+									
+									                     <a href="#" class="btn btn-default
+									                       {% if workflow_has_marked_place(livraison, key)  %}
+									                           btn-breadcrumb2-active
+									                       {% endif %}
+									                       {% if count2 == 0  %}{{ workflow_metadata(livraison, 'class_css', key)}}{% else %} hide-btn-workflow {% endif %}
+									                       ">{{ place }}
+									                    </a>
+									                    {% set count = count + 1%}
+									                    {% if workflow_has_marked_place(livraison, key)  %}
+									                        {% set count2 = count2 + 1 %}
+									                    {% endif %}
+									                {% endif %}
+									                </button>
+									            {% endfor %#}
+		{% endif %}
+	</div>
+	
+	<div class="col-6">
+		{% if livraison is defined and workflow_has_marked_place(livraison, "creer")  %}
+
+
+			<div class="dropdown dropdown-inline text-end">
+				<a href="javascript:;" class="" data-toggle="dropdown">
+					<span class="svg-icon svg-icon-md">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewbox="0 0 24 24" version="1.1" class="svg-top svg-color">
+							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<rect x="0" y="0" width="24" height="24"/>
+								<circle fill="#000000" cx="12" cy="5" r="2"/>
+								<circle fill="#000000" cx="12" cy="12" r="2"/>
+								<circle fill="#000000" cx="12" cy="19" r="2"/>
+							</g>
+						</svg>
+					</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+					<ul class="dropdown-menu show drp-list" x-placement="bottom-start">
+
+
+						{% for key ,  operation in operations  %}
+							{%  if  operation.prefix == '_delete_livraison' %}
+								<li>
+									<a id="{{operation.prefix}}" data-id="{{livraison.id}}" data-token="{{ csrf_token('delete' ~ livraison.id) }}" class='dropdown-item btn-danger btn-outline  {{operation.classCs}}'>
+										<i class="fa {{ operation.icon }}"></i>
+										{{ operation.titre|capitalize }}</a>
+								</li>
+							{% endif %}
+
+							{%  if  operation.prefix == '_desactiver_livraison' or  operation.prefix == '_duppliquer' %}
+								<li>
+									<a id="{{operation.prefix}}" data-id="{{livraison.id}}" class='dropdown-item btn-white btn-outline  {{operation.classCs}}'>
+										<i class="fa {{ operation.icon }}"></i>
+										{{ operation.titre|capitalize }}</a>
+								</li>
+							{% endif %}
+							{%  if  operation.prefix == '_annuler' and  livraison.positionActuel != 'generer' %}
+								<li>
+									<a id="{{operation.prefix}}" data-id="{{livraison.id}}" class='dropdown-item btn-white btn-outline  {{operation.classCs}}'>
+										<i class="fa {{ operation.icon }}"></i>
+										{{ operation.titre|capitalize }}</a>
+								</li>
+							{% endif %}
+
+
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+		{% endif %}
+	</div>
+
+</div>

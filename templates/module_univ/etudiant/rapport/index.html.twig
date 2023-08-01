@@ -1,0 +1,37 @@
+{% extends 'base_univ.html.twig' %}
+
+{% block title %}Rapport | Etudiant | UNIV{% endblock %}
+
+
+
+
+{% block body %}
+
+        <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Etudiant , Rapport</h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+    </div>
+
+    
+
+      <div class="new">
+        
+          <br/><br/>
+      </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+      {{ encore_entry_script_tags('univ_etudiant') }}
+{% endblock %}

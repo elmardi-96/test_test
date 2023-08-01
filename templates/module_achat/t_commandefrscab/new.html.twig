@@ -1,0 +1,30 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Ajouter | Commande fournisseur  | Ugouv achat
+{% endblock %}
+
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="new">
+
+
+
+        {{ include('./module_achat/t_commandefrscab/_form.html.twig') }}
+
+
+    </div>
+
+    {{ include('./module_achat/t_commandefrscab/inc/workflow.html.twig',{'page_actuel': 'new'}) }}
+
+<div class="errors_details" errors="{{ errors_detail ? errors_detail|json_encode|e('html_attr') }}" name="{{nameDetail ? nameDetail}}">
+ 
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('tcommandefrscab') }}
+{% endblock %}

@@ -1,0 +1,19 @@
+<table style="width: 100%" class="m-add t-m table table-striped table-bordered table-hover dataTables-example detail_marche">
+		
+{% for detail in marche.pMarcheDets %}
+
+		    <tr id="{{detail.id}}">
+                        <td style="width: 3%">#</td>
+                        <td style="width: 7%;text-align:start">{{detail.id}}</td>
+                        <td style="width: 22%;text-align:start">{{detail.article.titre}}</td>
+                        <td style="width: 17%;text-align:center">{{ detail.qtReste}}</td>
+                        <td style="width: 17%;text-align:center">
+                              <div class="form-group">
+								  <input type="text" value="0" class="form-control det_Qt "  data-parent="{{detail.id}}" id="qt_da">
+						 </td>
+                        <td style="width: 17%;text-align:center">{{detail.prixUnitaire}}</td>
+                        <td style="width: 17%;text-align:center">{{detail.tva}} %</td>
+		    </tr>
+
+{% endfor  %}
+</table>

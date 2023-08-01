@@ -1,0 +1,173 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Condition Facture
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div class="new">
+		{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form2'}}) }}
+		<div id="right-sidebar" class="actions animated"></div>
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+			<div class="col-lg-6">
+				{% include './module_vente/uv_facturecab/inc/workflow_breadcumb.html.twig' %}
+				{#{ wo_render_breadcrumbs() }#}
+			</div>
+
+
+			<div class="col-lg-6">
+				<div
+					class="title-action">
+					{#% for key ,  operation in operations  %}
+											                        {% if operation.horizontale %}
+											                            <a {% if operation.route is not null  %}  href="{{ path(operation.route) }}" {%  endif %}  id="{{operation.prefix}}" class="btn btn-white btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+											                        {% endif %}
+											                    {% endfor %#}
+
+
+					<button class="btn btn-white  btn-xs btn-lg my-button" type="submit">
+						<i class="fa fa-save"></i>
+						{{ button_label|default('Enregistrer') }}</button>
+				</div>
+			</div>
+
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+				{% include './module_vente/uv_facturecab/inc/workflow.html.twig' %}
+			</div>
+
+		</div>
+		<br><br><br>
+
+
+		<br/>
+		<div class="row justify-content-md-center">
+			<div class="col-lg-12 ">
+				<div class="ibox">
+
+					<div class="ibox-content">
+
+						<div class="message-success"></div>
+
+
+						<div class="row m-t-sm">
+							<div class="col-lg-12">
+								<div class="panel blank-panel">
+									<div class="panel-heading">
+										<div class="panel-options">
+											{% include './module_vente/uv_facturecab/inc/navigation.html.twig' %}
+
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="panel-body">
+
+											<div class="tab-content">
+												<div class="tab-pane active" id="tab-1">
+
+
+													<div class="row">
+														<div class="col-md-6 b-r">
+
+															<h3 class="m-t-none m-b">INFORMATIONS CONDITION
+															</h3>
+
+
+															<div id="test" data-facture-id="{{ facture.id|json_encode }}"></div>
+
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.conditionpaie ,'Condition :', {'label_attr':{'class':'col-sm-2'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.conditionpaie,{'attr':{'class':'form-control'}}) }}
+																</div>
+
+															</div>
+
+
+															{{ form_end(form) }}
+
+
+														</div>
+
+														<div class="col-md-6">
+															<h3 class="m-t-none m-b">LISTE CONDITIONS
+															</h3>
+															<div class="table-responsive">
+																<table class="table-detail t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable">
+																	<thead>
+																		<tr>
+
+																			<th>#</th>
+
+
+																			<th>Condition Facture  :
+																			</th>
+
+																			<th>Supprimer</th>
+
+
+																		</tr>
+																	</thead>
+
+																	<tbody>
+
+																		{% set c = 0 %}
+																		{% for condition in conditions %}
+																			{% set c = c + 1 %}
+
+																			<tr class="edit-new-article">
+																				<td>{{c}}</td>
+
+
+																				<td>{{condition.conditionpaie}}</td>
+																				<td>
+																					<a class="delete_element" id="del" data='{{condition.id}}'>
+																						<i class="fa fa-trash text-navy"></i>
+																					</a>
+																				</td>
+
+																			</tr>
+																		{% else %}
+																			<tr>
+																				<td colspan="20" style="text-align: center;">no records found</td>
+																			</tr>
+																		{% endfor %}
+																	</tbody>
+																	<tfoot></tfoot>
+																</table>
+
+															</div>
+														</div>
+
+
+													</div>
+
+
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('Vtfacturefrscab') }}
+{% endblock %}

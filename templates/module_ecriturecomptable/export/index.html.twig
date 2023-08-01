@@ -1,0 +1,145 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+
+
+{% block title %}index | export{% endblock %}
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-6">
+            {% include './module_ecriturecomptable/operation/inc/workflow_breadcumb.html.twig' %}
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="title-action">
+
+            {# <div class="dropdown dropdown-inline right mt-1 mr-3" > 
+                <a class=""style ="color:#676A6C; font-size:15px; "  href="javascript:;" class="" data-toggle="dropdown" > 	
+                  <i class="fa fa-ellipsis-v text-black " style="" > </i>	
+                </a> 
+                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right " x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-111px, 26px, 0px);"> 	
+                    <ul class="dropdown-menu show drp-list" x-placement="bottom-start"> 
+                        <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">Choisir operation :</li>
+                    
+                       
+                    </ul>
+                </div> 	
+            </div> #}
+
+
+
+
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+            <div class="col-lg-12">
+                {{ wo_render_breadcrumbs() }}
+                {# test #}
+            </div>
+
+        </div>
+
+
+    <br/>
+    <br/>
+
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+        <div class="col-lg-12">
+        <div class="ibox mt-2">
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div
+							class="panel blank-panel">
+
+
+							<div class="panel-body">
+								<div>
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+										<div class="row">
+
+                                                <div class="col-sm-3">
+
+                                                     
+                                                    
+                                                </div>
+                                                 <div class="col-sm-4">
+
+                                                    
+
+                                                </div>
+
+
+                                                
+
+											
+                                                
+
+										</div> 
+										
+
+
+									</div>
+
+
+								</div>
+
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+        <div class="ibox ">
+            <div class="ibox-content">
+                
+                <div >
+                    <form method="POST" action="{{path('ecriture_comptable_compta_export_export')}}" enctype="multipart/form-data" target="_blank">
+                    <input type="file" name="file" id="produit_xlsx" />
+                    <button type="submit">Générer</button>
+                    </form>
+                    <br><br><br>
+                    <input type="text" name="text" id="codes" />
+                    <button class="insert">Insert</button>
+                    <p class="text-danger notify"></p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<br>
+<div class="mail-body text-right buttons_foot">
+	
+       
+
+		
+
+</div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('ecriturecomptable_export') }}
+{% endblock %}

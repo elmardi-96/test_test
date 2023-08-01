@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<title>Transformation & Affectation</title>
+		<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'/>
+		<link rel="shortcut icon" href="{{asset('/img/icon.png')}}"/>
+
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+
+	</head>
+	<body class=" fixed-nav fixed-nav-basic {% if app.user.theme is defined  %} {{app.user.theme}} {%endif%}">
+
+		{% block sidebar %}
+			{% include './transformation/inc/sidebar.html.twig' %}
+		{% endblock %}
+
+
+		{% block header %}
+			{% include './transformation/inc/header.html.twig' %}
+		{% endblock %}
+
+
+		{% block body %}
+
+			<div class="wrapper wrapper-content wrapper-content-list">
+
+
+				{% set values = ['#1c84c6', '#23c6c8', '#1ab394', '#e88f08', '#e019da']%}
+				{% for key1 , dossiers in app.session.get('modules')['_transformation_affectation']['dossiers'] %}
+					{% if dossiers.id == dossier.id %}
+						<div class="row m-2">
+							{% for key , module in dossiers.sousModules %}
+								<div class="col-lg-3 my-dashboard-style">
+									<div class="ibox">
+										<div class="ibox-title">
+											<span class="label  float-right" style="{#color : #fff ; background: {{random(values)}}#}">
+												<i class="fa {{ module.icon}}"></i>
+											</span>
+											<h5>{{ module.titre|capitalize}}</h5>
+
+										</div>
+										<div class="ibox-content">
+											<h1 class="no-margins" style="font-size: 20px">
+												<i style="font-size: 25px" class="fa {{ module.icon}}"></i>
+												{{ module.titre|capitalize}}
+											</h1>
+											<div class="hr-line-dashed"></div>
+
+
+											<div class="file-manager">
+												{% if module.operations   is defined  %}
+													{%  for key , operation in module.operations  %}
+														{% if  operation.verticale %}
+															<a href="{% if operation.route is not null %} {{ path(operation.route) }} {% endif %}" class="file-control">
+																<i class="fa {{operation.icon}}"></i>
+																{{ operation.titre|capitalize }}</a>
+														{% endif %}
+													{% endfor %}
+												{% endif  %}
+											</div>
+
+
+											<div class="hr-line-dashed"></div>
+											<small>{{ module.description}}</small>
+
+
+										</div>
+									</div>
+								</div>
+
+
+							{% endfor %}
+						</div>
+					{% endif %}
+				{% endfor %}
+				{# <div class="row m-2">
+								                     {% for key , module in app.session.get('modules')['_univ']['dossiers']['_default_univ']['sousModules'] %}
+								                         <div class="col-lg-2 col-mourad-3 my-dashboard-style">
+								                             <div class="ibox ">
+								                                 <div class="ibox-title">
+								                                     <h5>
+								                                         {{ module.titre}}</h5>
+								                                 </div>
+								                                 <div class="ibox-content">
+								                                     <p class="no-margins _expression_besoin_prixtotal">{{ module.description}}</p>
+								                                     <div class="actions row col-actions">
+								                                         {% if module.operations['_index'] is defined %}
+								 
+								                                             <a href="{{ path(module.operations['_index'].route)}}" class="btn btn-xs btn-white float-left">
+								                                                 <i class="fa fa-list"></i>
+								                                                 Liste
+								                                             </a>
+								                                         {% endif %}
+								                                         {% if module.operations['_new'] is defined %}
+								                                             <a class="btn btn-xs btn-outline btn-primary float-right" href="{{ path(module.operations['_new'].route)}}">
+								                                                 <i class="fa fa-plus"></i>
+								                                                 Ajouter</a>
+								                                             {% endif %}
+								 
+								                                     </div>
+								 
+								 
+								                                 </div>
+								                             </div>
+								                         </div>
+								                     {% endfor %}
+								                 </div>#}
+
+			</div>
+
+		{% endblock %}
+
+
+		{% block footer %}
+			{% include './inc/footer.html.twig' %}
+		{% endblock %}
+	</body>
+</html></div></div>{% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}</body></html>

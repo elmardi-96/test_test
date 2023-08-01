@@ -1,0 +1,30 @@
+{% extends 'base_projet.html.twig' %}
+
+{% block title %}Nouveau Projet{% endblock %}
+
+
+
+
+{% block body %}
+    
+    <div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+
+<div class="new">
+
+
+    
+        {{ include('./module_archive/projet/_form.html.twig') }}
+        
+        
+    
+        <br/><br/>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('projet') }}
+{% endblock %}

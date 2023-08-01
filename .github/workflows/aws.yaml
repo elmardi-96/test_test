@@ -1,0 +1,73 @@
+name: AWS
+on:
+  push:
+    branches:
+      - main
+env:
+  TAG: 1.0.2
+  DEPLOYMENT: ${{ github.event.repository.name }}
+  AWS_CLUSTER: fcz-apps-eks
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - uses: sonarsource/sonarqube-scan-action@master
+
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          
+      # If you wish to fail your job when the Quality Gate is red, uncomment the
+      # following lines. This would typically be used to fail a deployment.
+      # - uses: sonarsource/sonarqube-quality-gate-action@master
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
+      - name: Configuration
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: (ECR) Login
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+        
+      - name: (ECR) Push
+        run: |
+          docker build -t ${{ steps.login-ecr.outputs.registry }}/${{ env.DEPLOYMENT }}:${{ env.TAG }} .
+          docker push ${{ steps.login-ecr.outputs.registry }}/${{ env.DEPLOYMENT }}:${{ env.TAG }}         
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: (ECR) Login
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: (EKS) Deploy
+        uses: cancue/eks-action@v0.0.2
+        env:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          cluster_name: ${{ env.AWS_CLUSTER }}
+        with:
+          args: |
+            cd cicd/ ; chmod +x aws.sh ; ./aws.sh ${{ env.DEPLOYMENT }} ${{ env.TAG }} | kubectl apply -f -
+            #kubectl rollout status deploy ${{ env.DEPLOYMENT }}

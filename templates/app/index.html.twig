@@ -1,0 +1,188 @@
+{% extends 'base_empty.html.twig' %}
+
+
+{% block title %}U3S-EPR | Apps
+{% endblock %}
+
+
+{% block body %}
+
+<div class="" style="left: -82px;
+
+    position: fixed;
+    {# z-index: 1; #}
+    display: inline-block;
+    transform: rotate(-90deg);
+    -webkit-transform-origin-y: bottom;
+    font-size: 92px;
+    color: #c5c5c5;
+    -moz-transform-origin: bottom;
+    top: 220px;
+    left: 10px;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-weight: 700;"> Dossiers </div>
+    {% if app.user.isActive == false %}
+
+        {% set url = asset('images/user/profil/profil.png') %}
+        {% if app.user.imageName is not null  %}
+            {% set url = asset('images/user/profil/' ~ app.user.imageName)  %}
+        {% endif %}
+
+        <div class="lock-word animated fadeInDown">
+            <span class="first-word">COMPTE</span>
+            <span style=" text-transform: uppercase;">désactivé</span>
+        </div>
+        <div class="middle-box text-center lockscreen animated fadeInDown">
+            <div>
+                <div class="m-b-md">
+                    <img alt="image" class="rounded-circle circle-border" src="{{ url}}">
+                </div>
+                <h3>{{ app.user.nom }}
+                    {{ app.user.prenom }}</h3>
+                <p>Votre compte a été désactivé , veuillez contacter l'administrateur du système .</p>
+
+            </div>
+        </div>
+
+
+    {% else %}
+
+
+      
+
+       
+        {% if app.session.get('organisations')%}
+
+
+
+
+
+            {% if app.session.get('organisations') is defined  %}
+                <div class="row" style="margin:0 auto; width:70%">
+                 <div class=" col-lg-12">
+                <h1>choix site</h1>
+                </div>
+
+                    {% for key , organisation in app.session.get('organisations')|sort((a, b) => a.ordr <=> b.ordr)  %}
+
+                        {% if organisation.dossiers is defined %}
+
+                            <div class="col-lg-12">
+                                <div class="ibox ">
+                                    <div class="ibox-title collapse-link2 collapsed-dossier color-pan" >
+                                        <h5>{{organisation.designation}} </h5>
+                                        <div class="ibox-tools">
+                                            <a class="">
+                                                <i class="fa fa-plus" style ="font-size:16px;color:#676a6c !important"></i>
+                                            </a>
+
+                                        </div>
+                                    </div>
+
+                                    {#{{ dump(organisation.dossiers) }}#}
+                                    <div class="ibox-content no-padding" style="display: none;">
+                                        {% if organisation.dossiers is defined %}
+                                            <ul class="list-group">
+                                                {% for key1 , d in organisation.dossiers|sort((a, b) => a.ordr <=> b.ordr) %}
+                                                    <li class="list-group-item" style="padding:0px; border-top:none !important">
+
+                                                        <div class="ibox" style="border-bottom:0px !important">
+                                                            <div class="ibox-title  collapse-link2 collapsed-dossier wf-color-dossier" style="border:none !important ; ">
+
+
+                                                                <a href="{#{{ path('app',{'id':d.id}) }}#}" class="box-app float-left  " data-id="{{d.id}}" style=" color:#000000 !important;">
+                                                                    <h5 ><strong class="str ">{{d.titre}}
+                                                                            ({{ d.abreviation }}) 
+
+                                                                        </strong>
+                                                                    </h5>
+                                                                </a>
+
+                                                                {% if  d.sousdossiers is defined %}
+                                                                    <div class="ibox-tools ">
+                                                                        <a class="" >
+                                                                            <i class="fa fa-plus" style="color:#676a6c !important"></i>
+                                                                        </a>
+                                                                    </div>
+
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="ibox-content no-padding" style="display: none;">
+                                                                <ul class="list-group" >
+
+
+                                                                    {% if  d.sousdossiers is defined %}
+                                                                        {% for key2 , sousdossier in d.sousdossiers|sort((a, b) => a.ordr <=> b.ordr) %}	
+                                                                            <li class="list-group-item" style="border-top:none">
+                                                                                <a href="{{ path('app',{'id':sousdossier.id}) }}" class="box-app float-left  col-black" data-id="{{sousdossier.id}}" style="color:black" onMouseOver="this.style.color='#7d7d7d'" onMouseOut="this.style.color='#000000'">
+                                                                                    <span class="str">- {{sousdossier.titre}}
+                                                                                        ({{ sousdossier.abreviation }})
+
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+                                                                        {% endfor %}
+                                                                    {% endif %}	
+                                                                </ul>
+                                                            </div>
+
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}  </div> 
+                {% endif %}
+
+
+
+
+
+        {% else %}
+
+
+            <div class="row justify-content-md-center">
+                <div class="col-4 ">
+                    <div class="widget-head-color-box navy-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h2 class="font-bold no-margins">
+                                {{ app.user.nom }}
+                                {{ app.user.prenom }}
+                            </h2>
+                            <small>{{ app.user.username }}</small>
+                        </div>
+
+                        {% set url = asset('images/user/profil/profil.png') %}
+                        {% if app.user.imageName is not null  %}
+                            {% set url = asset('images/user/profil/' ~ app.user.imageName)  %}
+                        {% endif %}
+
+
+                        <img style="width: 96px;height: 96px" src="{{ url }}" class="rounded-circle circle-border m-b-md profil-img" alt="profile">
+
+                        <div>
+                            <span>Bienvenue sur
+                                <b>U3S-ERP</b>
+                            </span>
+
+                        </div>
+                    </div>
+                    <div class="widget-text-box">
+                        <h4 class="media-heading">Bonjour
+                            {{ app.user.username }}
+                        </h4>
+                        <p>vous n'avez pas encore accès à aucune module , veuillez contacter l'administrateur du système</p>
+
+                    </div>
+                </div>
+
+            </div>
+        {% endif %}
+    </div>{% endif %}{% endblock %}

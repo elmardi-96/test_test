@@ -1,0 +1,28 @@
+<div class="wrf-positions">
+	{% for transition in workflow_transitions(module) %}
+		{#{{ dump(workflow_marked_places(commande)) }}#}
+		{% set url = "" %}
+		{% if workflow_metadata(module, 'function', transition) %}
+			{%  set  url= path(workflow_metadata(module, 'function', transition), {id: module.id}) %}
+		{% endif %}
+
+
+		{% for operation1 in operations|sort((a, b) => a.ordr <=> b.ordr)%}
+			{#{dump(operation1)}#}
+
+			{% if operation1.parent =='_evaluation_module' %}
+				{% if operation1.prefix =='_evaluation_module_workflow' %}
+					<a class="{{ workflow_metadata(module, 'function', transition) }} btn-wrf btn btn-xs {{ workflow_metadata(module, 'class', transition) }} btn-outline" data-id="{{ module.id }}" data-title="{{ workflow_metadata(module, 'title', transition) }}" data-transition="{{ transition.name }}">
+						<i class="fa {{ workflow_metadata(module, 'icon', transition) }}"></i>
+						&nbsp;{{ workflow_metadata(module, 'title', transition) }}
+					</a>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+
+	{% endfor %}
+
+</div>
+<div class="breadcrumbs-evaluation">
+	{{ wo_render_breadcrumbs() }}
+</div>

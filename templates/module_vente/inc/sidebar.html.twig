@@ -1,0 +1,74 @@
+<div id="wrapper">
+    <!-- Sidebar -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                 <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <ul class="sidebar-app-url ">
+                            <li><a href="index.html"><img class="img-side-ugouv" src="{{asset('/img/logo-blackwhite.png')}}" <span>U3S-ERP</span></a>
+                                <p>
+                                    
+                                    {{ app.session.get('moduleCourantUgouvVente').abreviation|upper }}
+                                </p>
+                                <div>
+                                    <input id="search_keywords2" type="text" class="form-control search_keywords2 input-search" placeholder="Rechercher ...">
+                                    <i class="fa fa-search input-search-i"></i>
+                                </div>
+                            </li>
+                        </ul>
+
+                        {# <img alt="image" class="rounded-circle" src="{{asset('/img/profile_small.jpg')}}"/>#}
+                        {#
+                        <img alt="image" class="rounded-circle" src="{{ url }}" style="width: 48px ;height: 48px "/>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
+                            <span class="block m-t-xs font-bold">{{ app.user.nom }} {{ app.user.prenom }}</span>
+                            <span class="text-muted text-xs block">Utilisateur <b class="caret"></b></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a class="dropdown-item" href="{{path('user_profil_index')}}">Mon profil</a></li>
+                
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{path('logout')}}">Déconnexion</a></li>
+                        </ul>
+                        #}
+                    </div>
+                </li>
+
+
+                
+                {% if app.session.get('modules')[app.session.get('moduleCourantUgouvVente').prefix]['dossiers'][app.session.get('dossierCourantUgouvVente').prefix]['sousModules']   is defined  %}
+
+
+                    {% for key , sousModule in app.session.get('modules')[app.session.get('moduleCourantUgouvVente').prefix]['dossiers'][app.session.get('dossierCourantUgouvVente').prefix]['sousModules']|sort((a, b) => a.ordr <=> b.ordr) %}
+                       {% set active = '' %}
+                       {% if sousModule.activeLink in app.request.getPathInfo %}
+                           {% set active  = 'active' %}
+                        {%endif%}
+
+                        <li class="colp {{active}}">
+                            <a href="{% if sousModule.route is not null  %} {{ path(sousModule.route) }} {%  endif %}"><i class="fa {{sousModule.icon}}"></i> <span class="nav-label">{{ sousModule.titre|capitalize }} </span>  </a>
+                            {% if sousModule.operations is defined  %}
+                                <ul class="nav nav-second-level collapse">
+                                    {%  for key , operation in sousModule.operations %}
+                                        {% if operation.verticale %}
+                                            <li class="colp">
+                                                <a href="{% if operation.route is not null  %} {{ path(operation.route) }} {%  endif %}"><i class="fa {{operation.icon}}"></i> <span class="nav-label">{{ operation.titre|capitalize }}</span></a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}   
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+
+
+                {% endif %}
+
+
+
+
+            </ul>
+        </div>
+    </nav>
+

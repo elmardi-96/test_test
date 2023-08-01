@@ -1,0 +1,212 @@
+{% extends 'base_empty.html.twig' %}
+
+
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+    <div class="wrapper wrapper-content">
+        <div class="container">
+
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5><i class="fa fa-info-circle"></i> &nbsp;Informations sur l'utilisateur : &nbsp;{{ user.nomcomplet }}  </h5>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="row  m-t-xs">
+                                <div class="col-md-6">
+
+                                    <div class="profile-image">
+                                        {% set url = asset('images/user/profil/profil.png') %}
+                                        {% if user.imageName is not null  %}
+                                            {% set url = asset('images/user/profil/' ~ user.imageName)  %}
+                                        {% endif %}
+
+                                        <img src="{{ url }}" class="rounded-circle circle-border m-b-md profil-img" alt="profile">
+                                    </div>
+                                    <div class="profile-info">
+                                        <div class="">
+                                            <div>
+                                                <h2 class="no-margins">
+                                                    {{ user.nom }}  {{ user.prenom }}
+                                                </h2>
+                                                <h4>{% if user.poste %} 
+                                                    {{user.poste ?  user.poste.designation  }}  ({{ user.poste ? user.poste.abreviation  }}) 
+                                                    {% endif %}
+                                                  </h4>
+                                                    <small>
+                                                        {{ user.poste ? user.poste.description }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+{# 
+                                {% include './user/profil/inc/profil_statut.html.twig' %} #}
+
+                                <div class="row m-t-sm">
+                                    <div class="col-lg-12">
+                                        <div class="panel blank-panel">
+                                            <div class="panel-heading">
+                                                <div class="panel-options">
+                                                   
+                                                    <ul class="nav nav-tabs">
+                                                        <li><a class="nav-link active">Informations</a></li>
+                                                       
+
+                                                  {#      <li><a class="nav-link {% if "user_profil_info"  in current_path  %} active {%endif%}" href="{{ path('user_profil_info', {'id' : user.id})}}">Informations</a></li>
+                                                 #}   
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-body">
+
+
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active">
+                                                        <div style="text-align: left">
+                                                            <h2>compte informations</h2>
+                                                        </div>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="row">
+                                                            <div class="col-md-6 b-r">
+                                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;"><label class="col-sm-4 required font-weight-bold">Email :</label>
+
+                                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.email }}</p>
+                                                                        </div>
+                                                        
+                                                                </div>
+
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;"><label class="col-sm-4 required font-weight-bold">Nom :</label>
+
+                                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.nom }}</p>
+                                                                        </div>
+                                                        
+                                                                </div>
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;">
+                                                                <label class="col-sm-4 required font-weight-bold">Prénom :</label>
+
+                                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.prenom }}</p>
+                                                                        </div>
+                                                        
+                                                                </div>
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;">
+                                                                <label class="col-sm-4 required font-weight-bold">Sexe :</label>
+
+                                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.sexe }}</p>
+                                                                        </div>
+                                                        
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+
+
+                                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;">
+                                                                <label class="col-sm-4 required font-weight-bold">Téléphone personnel :</label>
+
+                                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.telePersonnel }}</p>
+                                                                        </div>
+                                                        
+                                                                </div>
+
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                
+                                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;">
+                                                                <label class="col-sm-4 required font-weight-bold">Téléphone entreprise :</label>
+
+                                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.teleEntreprise }}</p>
+                                                                        </div>
+                                                        
+                                                                </div>
+
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                
+                                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;">
+                                                                <label class="col-sm-4 required font-weight-bold">Adresse :</label>
+
+                                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.adresse }}</p>
+                                                                        </div>
+                                                        
+                                                                </div>
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                
+                                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;">
+                                                                <label class="col-sm-4 required font-weight-bold">Pays :</label>
+
+                                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.pays }}</p>
+                                                                        </div>
+                                                        
+                                                                </div>
+
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                
+                                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;">
+                                                                <label class="col-sm-4 required font-weight-bold">Ville :</label>
+
+                                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.ville }}</p>
+                                                                        </div>
+                                                        
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="hr-line-dashed"></div>
+                                                                
+                                                                
+                                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;">
+                                                                <label class="col-sm-4 required font-weight-bold">Signature :</label>
+
+                                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.signature }}</p>
+                                                                        </div>
+                                                        
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--statistique inc -->    
+
+            </div>
+
+        </div>
+        {% endblock %}
+
+
+
+            {% block javascripts %}
+                {{ parent() }}
+                {{ encore_entry_script_tags('profil') }}
+            {% endblock %}

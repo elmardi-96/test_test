@@ -1,0 +1,26 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Modifier | Note interne{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="edit">
+
+
+        {{ include('./module_ressource_humaine/grs_note_interne/_form.html.twig',{'button_label': 'Modifier'}) }}
+
+    
+
+    </div>
+
+
+
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('grs_note_interne') }}
+{% endblock %}

@@ -1,0 +1,501 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , "autocomplete":"off", 'class':'form'}}) }}
+
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+	<div class="col-lg-12">
+		{% include './tresorerie/tr_alimentation/inc/workflow_breadcumb.html.twig' %}
+	</div>
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+		{{ wo_render_breadcrumbs() }}
+	</div>
+</div>
+<br/><br/>
+
+<div class="row pt-20">
+	<div class="col-lg-12 ">
+		<div class="ibox ">
+			<div class="ibox-title ibox-title2">
+				<h5>Informations  compte Site-Banque</h5>
+			</div>
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div
+							class="panel blank-panel">
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+                                         
+
+											
+
+											{# <div class="hr-line-dashed"></div> #}
+
+											<div class="row">
+											    
+												<div class="col-sm-5">
+												
+												    <div class="form-group row">
+
+														{{ form_label(form.compteIntern ,'Site (*) ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-7">
+															{{ form_widget(form.compteIntern,{'attr':{'class':'sel2 form-control form-control-sm sites'}}) }}
+														</div>
+
+													</div>
+
+													<div class="form-group row">
+														<label class="col-sm-4"> Compte bancaire (*) </label>
+                                                        <div class="col-sm-7">
+															<select name="compteBanque" class=" form-control list_actions  compteBanque" style="margin-top:0px;">
+															<option>Veuillez choisir un dossier</option>
+															 <option value="{{compte.id}}"> {{compte.designation}} </option>
+															
+															</select>
+												       	</div>
+
+													</div>
+
+													<div class="form-group row">
+
+														{{ form_label(form.typeCompte ,'Type (*) ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-7">
+															{{ form_widget(form.typeCompte,{'attr':{'class':'sel2 form-control form-control-sm paiement'}}) }}
+														</div>
+
+													</div>
+
+													<div class="form-group row">
+
+														{{ form_label(form.montant ,'Montant (*) ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-7">
+															{{ form_widget(form.montant,{'attr':{'class':'form-control form-control-sm paiement'}}) }}
+														</div>
+
+													</div>
+												</div>
+
+
+												<div class="col-sm-5">
+
+												    
+
+													<div class="form-group row pt-1 mt-4">
+														<label  class="col-sm-3 mt-2" style="font-size:14px !important;  ">Solde CSB</label>
+														<div class="col-sm-7">
+															<input  type="text"  style="height:40px; font-size:13px !important;"
+															                     class="text-right form-control form-control solde_csb font-weight-bold " disabled>
+														</div>
+
+													</div>
+
+												</div>
+
+
+												
+											     
+											</div> 
+											
+											
+											{# <div class="hr-line-dashed"></div> #}
+											{# <div class="row">
+											    
+												<div class="col-sm-5">
+												   <div class="form-group row">
+														{{ form_label(form.typeCompte ,'Type (*) ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-7">
+															{{ form_widget(form.typeCompte,{'attr':{'class':'sel2 form-control form-control-sm paiement'}}) }}
+														</div>
+
+													</div>
+												    
+												</div>
+
+											     
+											</div> #}
+
+
+											{# <div class="hr-line-dashed"></div> #}
+											{# <div class="row">
+
+												<div class="col-sm-5">
+
+						                             <div class="form-group row">
+														{{ form_label(form.montant ,'Montant (*) ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-7">
+															{{ form_widget(form.montant,{'attr':{'class':'form-control form-control-sm paiement'}}) }}
+														</div>
+
+													</div>
+												
+												</div>
+
+											     
+											</div> #}
+
+
+
+									</div>
+
+
+								</div>
+
+
+								{% if alimentation is defined %}
+									<input type="hidden" name="_id" id="_id" value="{{ alimentation.id }}"/>
+								{% endif %}
+
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+		
+		{# --- information site --- #}
+
+
+		<div class="ibox mt-2">
+			<div class="ibox-title ibox-title2">
+				<h5>informations compte Site-Conso</h5>
+			</div>
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div
+							class="panel blank-panel">
+							{# <div class="panel-heading">
+								<div class="panel-options">
+									{% include './tresorerie/tr_alimentation/inc/navigation.html.twig' %}
+								</div>
+							</div> #}
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+
+											
+
+                                        
+                                        
+										{# <div class="hr-line-dashed"></div> #}
+
+										
+										{# <div class="row">
+											
+											<div class="col-sm-5">
+											    <div class="form-group row">
+													<label  class="col-sm-4">Site</label>
+													<div class="col-sm-7">
+														<input type="text" class="form-control form-control site_compte" disabled >
+													</div>
+
+												</div>
+											</div>
+												
+										</div>  #}
+										
+
+										{# <div class="hr-line-dashed"></div> #}
+
+										<div class="row">
+
+										        
+											    
+												<div class="col-sm-5">
+
+												    <div class="form-group row">
+														<label  class="col-sm-4">Site</label>
+														<div class="col-sm-7">
+															<input type="text" class="form-control form-control site_compte" disabled >
+														</div>
+
+													</div>
+
+												    <div class="form-group row">
+														<label  class="col-sm-4">Montant dépot</label>
+														<div class="col-sm-7">
+															<input type="text" class="text-right form-control form-control depot_compte" disabled >
+														</div>
+
+													</div>
+
+													<div class="form-group row">
+														<label  class="col-sm-4">Montant retrait</label>
+														<div class="col-sm-7">
+															<input type="text" class="text-right form-control form-control retrait_compte" disabled>
+														</div>
+
+													</div>
+
+
+												</div>
+
+
+
+												<div class="col-sm-5 pt-3">
+													<div class="form-group row">
+														<label  class="col-sm-3" style="font-size:14px !important; margin-top: 10px;">Solde CSC</label>
+														<div class="col-sm-7">
+															<input  type="text"  style="height:40px; font-size:13px !important;"
+															                     class="text-right form-control form-control solde font-weight-bold " disabled>
+														</div>
+
+													</div>
+												</div>
+
+
+												
+											     
+										</div>
+
+										{# <div class="hr-line-dashed"></div> #}
+
+										{# <div class="row">
+
+											    <div class="col-sm-5">
+
+													<div class="form-group row">
+														<label  class="col-sm-4">Montant retrait</label>
+														<div class="col-sm-7">
+															<input type="text" class="text-right form-control form-control retrait_compte" disabled>
+														</div>
+
+													</div>
+
+											    </div>
+												
+										</div> #}
+
+
+									</div>
+
+
+								</div>
+
+
+								{% if alimentation is defined %}
+									<input type="hidden" name="_id" id="_id" value="{{ alimentation.id }}"/>
+								{% endif %}
+
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+        
+
+		{# --- informatin conso --- #}
+
+		{# <div class="ibox mt-2">
+			<div class="ibox-title ibox-title2">
+				<h5>informations conso </h5>
+			</div>
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+  
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div
+							class="panel blank-panel">
+							
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+
+											
+
+
+										
+										<div class="row">
+											<div class="col-sm-5">
+
+											    <div class="form-group row">
+													<label  class="col-sm-4">Compte conso (Sold)</label>
+													<div class="col-sm-7">
+														<input type="text" class="text-right form-control form-control compte_conso" disabled>
+													</div>
+
+												</div>
+
+												<div class="form-group row">
+													<label  class="col-sm-4">Compte placement (Mt placement)</label>
+													<div class="col-sm-7">
+														<input type="text" class="text-right form-control form-control compte_placement" disabled>
+													</div>
+
+												</div>
+
+
+												<div class="form-group row">
+													<label  class="col-sm-4">Montant valorisé</label>
+													<div class="col-sm-7">
+														<input type="text" class="text-right form-control form-control montant_valorise" disabled>
+													</div>
+
+												</div>
+
+										    </div>
+
+
+											<div class="col-sm-5">
+
+												<div class="form-group row pt-3">
+													<label  class="col-sm-3" style="font-size:14px !important; margin-top: 10px;">Sold conso</label>
+													<div class="col-sm-7">
+														<input type="text" style="height:40px; font-size:13px !important;"
+														                   class="font-weight-bold text-right form-control form-control total_conso" disabled>
+													</div>
+
+												</div>
+
+										    </div>
+
+									    </div>
+
+									</div>
+
+
+								</div>
+
+
+								{% if alimentation is defined %}
+									<input type="hidden" name="_id" id="_id" value="{{ alimentation.id }}"/>
+								{% endif %}
+
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div> #}
+
+
+
+		{# ---- informations trésorerie ---- #}
+
+		<div class="ibox mt-2">
+			<div class="ibox-title ibox-title2">
+				<h5>informations trésorerie </h5>
+			</div>
+
+			<div class="ibox-content p-0 m-0">
+
+				<div class="message-success"></div>
+
+  
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div
+							class="panel blank-panel">
+							{# <div class="panel-heading">
+								<div class="panel-options">
+									{% include './tresorerie/tr_alimentation/inc/navigation.html.twig' %}
+								</div>
+							</div> #}
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+
+											
+
+										<div class="row">
+
+											<div class="col-sm-5 p-0">
+
+
+										    </div>
+
+
+											<div class="col-sm-5 p-0">
+
+												<div class="form-group row ">
+													<label  class="col-sm-3" style="font-size:14px !important; margin-top: 10px;">Trésorerie total</label>
+													<div class="col-sm-7">
+														<input type="text" value={{ (sold_conso + mt_placement) + total_mt_final}}
+														 style="height:40px; font-size:13px !important;"
+														                   class="font-weight-bold text-right form-control form-control tresorerie_total" disabled>
+													</div>
+
+												</div>
+
+										    </div>
+
+									    </div>
+
+										{# <div class="hr-line-dashed"></div> #}
+										{# <div class="row">
+											<div class="col-sm-5">
+
+												<div class="form-group row">
+													<label  class="col-sm-4">Montant valorisé</label>
+													<div class="col-sm-7">
+														<input type="text" class="text-right form-control form-control montant_valorise" disabled>
+													</div>
+
+												</div>
+
+										    </div>
+									     </div> #}
+
+
+
+
+									</div>
+
+
+								</div>
+
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+
+
+	</div>
+</div>
+{{ form_end(form,{'render_rest': false}) }}

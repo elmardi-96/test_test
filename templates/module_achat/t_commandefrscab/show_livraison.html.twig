@@ -1,0 +1,310 @@
+<form class="_generer_form" autocomplete="off">
+
+
+	<div class="col-md-12">
+		<div class="panel-body">
+			<div class="tab-content">
+				<div class="tab-pane active show" id="tab-1">
+					{% if workflow_has_marked_place(commande, 'valider') %}
+						<div class="row">
+
+
+							<div class="col-md-12">
+								<h3>Saisie Receptions</h3>
+
+
+								<div class="hr-line-dashed"></div>
+								
+								<div class="col-md-12">
+									<div class="form-group row">
+										<div class="col-sm-4">
+											<label>Type </label>
+										</div>
+										<div class="col-sm-2">
+											<input type="text" disabled  value='{{ commande.type ? commande.type.v }}' name="type" class="form-control form-control-sm">
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<div class="form-group row">
+										<div class="col-sm-4">
+											<label>Date Rcp (*) </label>
+										</div>
+										<div class="col-sm-2">
+											<input type="date" value='{{'now'|date('Y-m-d')}}' name="dateDocAsso" class="form-control form-control-sm">
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed"></div>
+								<div class="col-md-12 ">
+									<div class="form-group row">
+										<div class="col-sm-4">
+											<label>Reference (*) </label>
+										</div>
+										<div class="col-sm-3">
+
+											{# <input type="text" name="refDocAsso" placeholder="Reference" class="form-control form-control-sm" value="REF-{{commande.code  }}"> #}
+											<input type="text" name="refDocAsso" placeholder="Reference" class="form-control form-control-sm" value="">
+										</div>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed"></div>
+								<div class="col-md-12 ">
+									<div class="form-group row">
+										<div class="col-sm-4">
+											<label>Description </label>
+										</div>
+										<div class="col-sm-4">
+											<textarea name="description" placeholder="Description" class="form-control form-control-sm"></textarea>
+
+										</div>
+									</div>
+
+								</div>
+
+
+								<input type="hidden" name="_id" value="{{ commande.id }}">
+
+								<input type="hidden" name="token" value="{{ csrf_token('_csrf_token') }}">
+								<input type="hidden" name="dataSerialize" value="{{data|json_encode(constant('JSON_PRETTY_PRINT')) }}">
+
+
+							</div>
+									<div class="col-lg-12">
+			<div class="ibox ">
+				<div class="ibox-content">
+					<div class="" style="overflow-y: scroll;height: 400px;overflow-x: hidden;  scrollbar-width: thin;">
+								<table class="t-m table table-striped table-bordered table-hover grid-reception" id="grid-reception">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th title="Reference">Ref</th>
+											<th title="Article">Article</th>
+											<th title="Gerer en stock">G.S</th>
+											<th title="QNT achat en cours">QNT en achat
+											</th>
+											<th title="QNT vente en cours">QNT en vente</th>
+											<th title="Quantite en stock">QNT  stock</th>
+											<th title="P.U">P.U</th>
+											<th title="TVA">TVA</th>
+											<th title="TVA">Remise</th>
+											<th title="Quantite Commande">QNT Cmd</th>
+											<th title="Quantite receptionnee">QNT recept</th>
+                                                                                        <th title="Reste a receptionner">Reste a <br/>recept</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										{% set total = 0 %}
+										{% for key , article in data %}
+
+											{% set total = total +  article.prixTtcReste %}
+											<tr>
+												<td>{{ article.id}}</td>
+												<td>{{ article.code }}</td>
+												<td>{{ article.titre }}</td>
+
+												<td>{{ article.gerer }}</td>
+												<td>{{ article.quantiteEncoursAchat |number_format(2, '.', ',') }}</td>
+												<td>{{ article.quantiteEncoursVente |number_format(2, '.', ',') }}</td>
+
+												<td>
+													{% if  article.somme <0 %}
+														<span>
+															<i class="fa fa-circle" style="color: #ff0e00"></i>
+															{{ article.somme|number_format(2, '.', ',') }}</span>
+													{% else %}
+														<span>
+															<i class="fa fa-circle" style="color: #1ab394"></i>
+															{{ article.somme |number_format(2, '.', ',') }}</span>
+													{% endif %}
+												</td>
+
+												<td>{{ article.prixUnitaire |number_format(2, '.', ',') }}</td>
+
+
+												<td>
+													{% if article.tva is not empty %}
+														{{ article.tva|number_format(2, '.', ',') }}
+														%
+														{% else %}-
+													{% endif %}
+												</td>
+												<td>
+													{% if article.remise is not empty %}
+														{{ article.remise|number_format(2, '.', ',') }}
+														%
+														{% else %}-
+													{% endif %}
+												</td>
+
+												<td>{{ article.quantite |number_format(2, '.', ',') }}</td>
+												<td>{{ article.quantiteLivre |number_format(2, '.', ',') }}</td>
+												<td>
+													<input data-prixunitaire="{{ article.prixUnitaire }}" data-tva="{{ article.tva }}" name="reste[{{ article.id }}]" class="decimal_places wt-60 aLivrer {% if article.reste == 0 %} disable {% endif %}" type="text" value="{{ article.reste }}"/>
+												</td>
+											</tr>
+
+										{% endfor %}
+
+
+									</tbody>
+									<tfoot>
+										<tr>
+											<th colspan="10" style="text-align:right">
+												<table class="table-subtotal">
+													<tr>
+														<td>Total HT
+														</td>
+														<td>{{ prixHtReste }}</td>
+													</tr>
+
+													<tr class="subtotal-top-border">
+														<td>TVA
+														</td>
+														<td>{{prixTvaReste}}</td>
+													</tr>
+													{% if prixRemiseReste is not empty %}
+														<tr class="subtotal-top-border">
+															<td>Remise
+															</td>
+															<td>{{prixRemiseReste}}</td>
+														</tr>
+													{% endif %}
+
+													<tr class="subtotal-top-border">
+														<td>Total TTC
+														</td>
+														<td>{{prixTotalTtcReste}}</td>
+													</tr>
+												</table>
+											</th>
+
+										</tr>
+									</tfoot>
+								</table>
+											</div>
+
+				</div>
+			</div>
+		</div>
+
+
+							</div>
+
+
+							{% if acomptesSansFacture %}
+
+
+								<div class="col-md-12">
+									<h3>Liste acomptes</h3>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="alert alert-success">
+												<a class="alert-link" href="#">NB :
+												</a>
+												le montant de cette reception doit être superieur ou egale au montant d'acompte .
+											</div>
+										</div>
+									</div>
+
+									<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Date</th>
+												<th>Mode.p</th>
+												<th>Banque</th>
+												<th>Devise</th>
+												<th>Ref</th>
+												<th>Date echeance</th>
+												<th>Description</th>
+												<th>Pourc %</th>
+												<th>Montant</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											{# {{ dump(acomptesSansFacture) }}#}
+
+
+											{% set total = 0 %}
+											{% for key , acompte in acomptesSansFacture  %}
+												<input type="hidden" name="acomptes[{{ acompte.id }}]" value="{{ acompte.montant }}"/>
+
+												{% set total = total + acompte.montant %}
+												<tr>
+													<td>{{key +1 }}</td>
+
+													<td>{{acompte.date ? acompte.date|date("d/m/Y")}}</td>
+													<td>{{acompte.modepaiement ? acompte.modepaiement.designation }}</td>
+													<td>{{acompte.banque ? acompte.banque.designation }}</td>
+													<td>{{acompte.devise ? acompte.devise.designation }}</td>
+													<td>{{acompte.numcheque}}</td>
+													<td>{{acompte.dateecheance ? acompte.dateecheance|date("d/m/Y") }}</td>
+													<td>
+														{{acompte.description}}
+													</td>
+													<td>{{acompte.pourcentage~'%'}}</td>
+													<td>{{acompte.montant|number_format(2)}}</td>
+
+												</tr>
+											{% endfor %}
+										</tbody>
+										<tfoot>
+											<tr>
+												<th colspan="9" style="text-align:right">Total</th>
+												<th>{{total|number_format(2)}}</th>
+
+											</tr>
+										</tfoot>
+									</table>
+
+								</div>
+
+							{% endif %}
+
+
+						</div>
+						<div class="row">
+							<div class="col-lg-12 btn-bottom-position">
+								<div class="title-action">
+
+
+									{% if workflow_has_marked_place(commande, 'valider') %}
+										<button class="btn btn-sm btn-white btn-white  btn-primary  my-button2 mbt btn-register font-size-11" type="submit">
+											<i class="fa fa-save"></i>
+											{{ button_label|default('Enregistrer') }}</button>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+
+				{% else  %}
+					<div class="forum-item animated length">
+						<div class="row">
+							<div class="col-md-9">
+								<div class="forum-icon">
+									<i class="fa fa-warning"></i>
+								</div>
+								<a class="forum-item-title">Important</a>
+								<div class="forum-sub-title">
+									Pour passer une livraison , il faut tout d'abord valider ce bon de commande.
+									<a href="{{ path('t_commandefrscab_show' , {id:commande.id})}}">{{ commande.code }}</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				{% endif %}
+
+
+			</div>
+		</div>
+	</div>
+
+</form><br><br>

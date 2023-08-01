@@ -1,0 +1,271 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+
+
+{% block title %}Alimentation index | Tresorerie
+{% endblock %}
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-6">
+            {% include './tresorerie/Banque_consolides/inc/workflow_breadcumb.html.twig' %}
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="title-action">
+            <div class="dropdown dropdown-inline right mt-1 mr-3" > 
+                <a class=""style ="color:#676A6C; font-size:15px; "  href="javascript:;" class="" data-toggle="dropdown" > 	
+                  <i class="fa fa-ellipsis-v text-black " style="" > </i>	
+                </a> 
+                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right " x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-111px, 26px, 0px);"> 	
+                    <ul class="dropdown-menu show drp-list" x-placement="bottom-start"> 
+                        <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">Choisir operation :</li>
+                         {% for key ,  operation in operations %}
+                            {% if operation.verticale and  operation.prefix== '_new'%}
+                                <a {% if operation.route is not null  %}  href="{{ path(operation.route) }}" {%  endif %}  id="{{operation.prefix}}" class="op-hor btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        <a href="{{ path('tr_caisse_list_export_placement_rachat') }}" target="_blank" class="op-hor btn  btn-xs"><i class="fa fa-download"></i> {{ "Extraction plac/rachat"|capitalize }}</a>                        
+                    </ul>
+                </div> 	
+            </div>
+
+
+               
+
+
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+    </div>
+
+
+    <br/>
+    <br/>
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+        <div class="actions modal fade right" id="gain_perte" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+            <div class="modal-dialog modal-full-height modal-small modal-right " style="max-width: 30% !important; width:30% !important" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalPreviewLabel1"> Gain perte
+                        </h5>
+                        <button type="button" class="close close_lettrage" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body bo-0">
+                        
+                        <div class="bod1">
+                        <form id="gain_perte_submit">
+                            
+                            <div class="form-group mt-2">
+                                 
+                                <div class="">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="reste">Quantite (*)</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number" name="pa_quantite" value="" step="0.01" class="form-control form-control-sm pa_quantite" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                           
+                            <div class="form-group">
+                                 
+                                <div class="">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="reste">Valeur Achat Unitaire (*) </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number" name="pa_valeurAchatUnitaire" step="0.01" value="" class="form-control form-control-sm pa_valeurAchatUnitaire" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                 
+                                <div class="">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="reste">Valeur Vente Unitaire (*) </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number" name="pa_valeurVenteUnitaire"  step="0.01" value="" class="form-control form-control-sm pa_valeurVenteUnitaire">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                 
+                                <div class="">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="reste">Valeur Achat TOTAL  </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number" name="valeur_achat_total" value="" class="text-right form-control form-control valeur_achat_total" readonly >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                 
+                                <div class="">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="reste">Valeur Vente TOTAL</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number" name="valeur_vente_total" value="" class="text-right form-control form-control valeur_vente_total" readonly >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                 
+                                <div class="">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="reste">Marge Opération Unitaire </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number" name="marge_operation_unitaire" value="" class="text-right form-control form-control marge_operation_unitaire" readonly >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             
+                           
+                             <div class="form-group">
+                                 
+                                <div class="">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="reste">Marge Opération total</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number" name="marge_operation_total" value="" class="text-right form-control form-control marge_operation_total" readonly >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+
+                            <div class="form-group text-right mt-2">
+                                <label class="col-sm-4 required">
+                                    <button class="save_lettrage btn-register btn btn-white btn-block my-button  upper btn-xs my-button2" data-style="expand-left" type="submit">
+                                        <i class="fa fa-save "></i>
+                                        ENREGISTRER
+                                    </button>
+                                </label>
+                        
+                            
+                        
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <div class="row">
+                            <div class="col-2 list_actions_bloc" style="position: fixed ; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+
+                                {# <select class="select2_demo _3 form-control _multiple_actions">
+                                        <option value="">Action</option>
+                                        {% for key , operation in  operations  %}
+                                                {% if operation.multiple %}
+                                                        <option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+                                                {% endif %}
+                                        {% endfor %}
+                                </select> #}
+
+                            </div>
+
+
+                        </div>
+                        <!--color : <span style="color:#ff6a6a">ddd</span>-->
+
+                        <table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid_consolide" style="width: 100%">
+                            <thead>
+
+
+                                <tr>
+                                    {# <th>#</th> #}
+                                    <th>Code</th>
+                                    <th>Date</th>
+                                    <th>Observation</th>
+                                    <th>MP</th>
+                                    <th>OPR</th>
+                                   
+                                </tr>
+                            </thead>
+                            
+                            {# <tfoot>
+
+                                <tr>
+                                    <td class="font-weight-bold" style="font-size:11px; border-bottom:none;"></td>
+                                    <td class="font-weight-bold" style="font-size:11px; border-bottom:none;"></td>
+                                    <td class="font-weight-bold" style="font-size:11px; border-bottom:none;"></td>
+                                    <td class="font-weight-bold" style="font-size:11px; border-bottom:none;"></td>
+                                    <td class="font-weight-bold" style="font-size:11px; border-bottom:none;"></td>
+                                    <td class="font-weight-bold" style="font-size:11px; border-bottom:none;">{{montant}}</td>
+                                  
+
+                            
+                                </tr>
+                                
+                            </tfoot> #}
+
+
+                        </table> 
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('alimentation') }}
+{% endblock %}

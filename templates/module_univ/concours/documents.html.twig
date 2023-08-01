@@ -1,0 +1,119 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Documents | Concours | UNIV{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Univ , Documents </h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+                {#% include './module_achat/facturefrs/inc/workflow.html.twig' %#}
+
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+        {#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+#} 
+
+    </div>
+    <br/><br/>
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+
+                    {#{% include './module_achat/facturefrs/inc/workflow_breadcumb.html.twig' %}#}
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {#<ul class="nav nav-tabs">
+                                            <li><a class="nav-link active show" href="#tab-1" data-toggle="tab">Informations</a></li>
+                                            <li><a class="nav-link" href="#tab-2" data-toggle="tab">Articles</a></li>
+
+                                            <li><a class="nav-link" href="#tab-3" data-toggle="tab">Le suivi des opérations </a></li>
+
+                                        </ul>#}
+                                        {% include './module_univ/concours/inc/ac_navigation.html.twig' %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+                                                <div class="row">
+                                                    <div class="col-md-4 b-r">
+                                                        <h3 class="m-t-none m-b">IMPRESSION GLOBALE </h3>
+                                                        <ul class="folder-list m-b-md" style="padding: 0">
+                                                            {% for  detail in concours.details %}
+                                                         
+                                                            <li><a target="_blank" href="{{ path('module_univ_concours_ac_etudiant_pdf' , {id:concours.id , frm:detail.formation.id})}}"> <i class="fa fa-print "></i> Liste globale   ({{detail.formation.designation}})</a></li>
+                                                           
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-md-4 b-r">
+                                                        <h3 class="m-t-none m-b">IMPRESSION LISTE PRINCIPALE</h3>
+                                                        <ul class="folder-list m-b-md" style="padding: 0">
+                                                            {% for  detail in concours.details %}
+                                                         
+                                                            <li><a target="_blank" href="{{ path('module_univ_concours_ac_etudiant_principale_pdf' , {id:concours.id , frm:detail.formation.id})}}"> <i class="fa fa-print "></i> Liste principale   ({{detail.formation.designation}})</a></li>
+                                                           
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-4 b-r">
+                                                        <h3 class="m-t-none m-b">IMPRESSION LISTE D'ATTENTE </h3>
+                                                        <ul class="folder-list m-b-md" style="padding: 0">
+                                                            {% for  detail in concours.details %}
+                                                         
+                                                            <li><a target="_blank" href="{{ path('module_univ_concours_ac_etudiant_attente_pdf' , {id:concours.id , frm:detail.formation.id})}}"> <i class="fa fa-print "></i> Liste d'attente   ({{detail.formation.designation}})</a></li>
+                                                           
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                           
+    
+
+    
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if etudiant is defined %}
+        <input type="hidden" name="_id" value="{{ etudiant.id }}" />
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('univ_concours') }}
+    {{ encore_entry_script_tags('univ_data_select') }}
+{% endblock %}

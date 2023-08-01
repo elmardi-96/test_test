@@ -1,0 +1,175 @@
+{% extends 'base_univ.html.twig' %}
+
+
+{% block title %}Supprimer Bordereaux | Honoraires | UNIV
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div id="right-sidebar" class="actions animated"></div>
+
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+		<div class="col-lg-4">
+			<h2 class="fo">Univ ,Bordereaux -  Honoraire</h2>
+			{#{ wo_render_breadcrumbs() }#}
+		</div>
+
+
+		<div class="col-lg-8">
+			<div class="title-action">
+				<div
+					class="title-action">{# {% for key ,  operation in operations  %}
+						                        {% if  operation.horizontale %}
+						                            <a {% if operation.route is not null  %}  href="{{ path(operation.route) }}" {%  endif %}  id="{{operation.prefix}}" class="btn btn-white btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+						                        {% endif %}
+						                    {% endfor %}#}
+				</div>
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+	</div>
+	<br/><br/>
+
+	<div class="row pt-20">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div
+					class="ibox-content" style="padding-top: 4px ;">
+
+					{#{% include './module_achat/facturefrs/inc/workflow_breadcumb.html.twig' %}#}
+
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+
+										{% if  bordereaux.id > 0 %}
+											<!-- <a href="#" class="btn btn-xs btn-danger btn-outline" id="_delete"><i class="fa fa-trash"></i> Supprimer</a>-->
+											<div id="test" data-bordereaux-id="{{ bordereaux.id|json_encode }}"></div>
+
+										{% endif  %}
+									
+									{% include './module_univ/honoraire/bordereaux/inc/navigation.html.twig' %}
+								</div>
+							</div>
+							<div class="col-md-12 scroll_content">
+								<div class="panel-body">
+									<div class="tab-content">
+										<div class="tab-pane active show" id="tab-1">
+											{% if workflow_has_marked_place(bordereaux, 'valider') %}
+											<div class="col-md-12 ">
+												<div class="forum-item animated bounce">
+													<div class="row">
+														<div class="col-md-9">
+															<div class="forum-icon">
+																<i class="fa fa-warning"></i>
+															</div>
+															<a class="forum-item-title">Important</a>
+															<div class="forum-sub-title">
+																ce bordereaux est validé vous ne pouvez pas le modifier  ,
+																<br/>
+																<b>Date :
+																	{{ bordereaux.dateValider|date('Y-m-d ') }}</b>
+															</a>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									{% else %}
+
+											<div class="row">
+												<div class="col-3">
+													<select class="form-control _multiple_actions" style="display: none">
+														<option value="">Action</option>
+
+														<option value="_supprimer_reglement">
+															Supprimer de Bourdereau</option>
+													</select>
+												</div>
+												<div
+													class="col-2 list_actions_bloc" style="position: fixed ; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>{#  <select class="select2_demo _3 form-control _multiple_actions">
+														                                                            <option value="">Action</option>
+														                                                            {% for key , operation in  operations  %}
+														                                                                {% if operation.multiple %}
+														                                                                <option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+														                                                           {% endif %}
+														                                                                {% endfor %}
+														                                                        </select>#}
+												</div>
+											</div>
+
+											<table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid3" style="width: 100%">
+												<thead>
+													<tr>
+														<th>#</th>
+
+														<th>Cours</th>
+														<th>D.Heure</th>
+														<th>NOM</th>
+														<th>PRENOM</th>
+														<th>GRADE</th>
+														<th>NBR.H</th>
+														<th>MONTANT</th>
+														<th>ETB</th>
+														<th>FRM</th>
+													
+														<th>ANNEE</th>
+														<th>PRM</th>
+														<th>SEM</th>  
+														<th>MDL</th>
+														<th>ELE</th>
+														<th>NATURE</th>
+														<th>STATUT</th>
+
+													</tr>
+												</thead>
+												<tfoot>
+													<tr>
+														<th>#</th>
+
+														<th>Cours</th>
+														<th>Date Heure</th>
+														<th>Nom</th>
+														<th>Prenom</th>
+														<th>grad</th>
+														<th>nbr H</th>
+														<th>Montant</th>
+														<th>etab</th>
+														<th>for</th>
+														<th>Année</th>
+														<th>PRM</th>
+														<th>Semestre</th>  
+														<th>Module</th>
+														<th>Elément</th>
+														<th>Nbr.Epv</th>
+														<th>Statut</th>
+
+
+													</tr>
+												</tfoot>
+											</table>
+											{% endif %}
+										</div>
+
+								
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div>{% endblock %}{% block javascripts %}{{ parent() }}{{ encore_entry_script_tags('univ_honoraire_bordereaux') }}{% endblock %}

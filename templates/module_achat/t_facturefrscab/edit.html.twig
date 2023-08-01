@@ -1,0 +1,13 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}FACTURES FOURNISSEUR{% endblock %}
+
+{% block body %}
+    <h1>Modifier FACTURES FOURNISSEUR</h1>
+
+    {{ include('t_commandefrscab/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('t_commandefrscab_index') }}">back to list</a>
+
+    {{ include('t_commandefrscab/_delete_form.html.twig') }}
+{% endblock %}

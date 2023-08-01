@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="fr">
+<title>DEMANDE </title>
+
+	</head>
+	<style>
+
+{# @page { size: 360pt 360pt; } #}
+
+		@page {
+			margin: 220px 20px 210px 20px !important;
+			padding: 0px 0px 0px 0px !important;
+		}
+
+		body {
+			font-family: 'Courier';
+			font-size: 9px;                
+			font-weight: 100;
+
+		}
+
+         .header {
+        position: fixed;
+        top: -220px;
+        left: 0px;
+        right: 0px;
+        }
+   
+
+		.logo {
+			max-width: 250px;
+			max-height: 100px;
+			text-align: right;
+		}
+	
+		.footer {
+			/*border-top: 2px solid #555555;*/
+			margin-top: 10px;
+			font-size: 9px;
+			text-align: center;
+			position: fixed;
+			bottom: 150px;
+            left: 0px;
+            right: 0px;
+
+
+		}
+	
+		*,body {
+            font-family: Courier, sans-serif;
+           text-transform: uppercase ;
+
+		}
+
+
+		main {
+			margin-top: 0;
+		}
+        .page_break {page-break-inside: auto;}
+        .sig img{
+            max-width: 200px;
+                    max-height: 50px;
+                    margin-left: 50px;
+        }
+        @font-face {
+		font-family:'Signaturex' ;
+		src:url("./font/SignaturexDemoRegular.ttf") ;
+		}
+
+main {
+    margin-top:0px;
+}
+	</style>
+
+
+
+	<body>
+
+<div class="header">
+
+{{ include ('tresorerie/ordre_virement/pdf/header.html.twig') }}      
+</div>
+{% if TrTransactionOne.executer == 1 %}
+    <div class="content" style=" position: absolute; opacity: 0.2; font-size: 155px; transform: rotate(-55deg); text-align:center; align-items: center; padding: 30mm -40mm;">
+        <b>DEJA REGLE</b>
+    </div>
+{% endif %}
+<div class="footer">
+
+ {% if TrTransactionOne.Dossier.id == 38 %}
+    {{ include ('tresorerie/ordre_virement/pdf/footer2.html.twig') }}  
+
+{% else %}
+    {{ include ('tresorerie/ordre_virement/pdf/footer.html.twig') }} 
+
+{% endif %}
+
+</div>
+
+
+<body>
+
+
+
+    <div style="padding-right : 15px; font-size:12px; margin-left:60px; margin-right:60px;margin-top:15px">
+    <div style="margin-left:300px; margin-bottom:10px;">
+
+
+            {% if TrTransactionOne.Dossier.id == 104 or TrTransactionOne.Dossier.id == 38 or TrTransactionOne.Dossier.id == 139 or TrTransactionOne.Dossier.id == 105 or TrTransactionOne.Dossier.id == 138 or TrTransactionOne.Dossier.id == 27  or TrTransactionOne.Dossier.id == 213 %}
+                <p style="padding-right:15px; 
+                            text-transform: uppercase; 
+                            line-height:2.2;
+                            text-align: center;">
+                <b>A L'attention de Monsieur le Directeur <br> DU CENTRE D’AFFAIRES RABAT/SOUISSI
+                <br><span >ATTIJARIWAFA BANK</span></b>
+                </p>
+
+            {% elseif TrTransactionOne.Dossier.id == 1 or TrTransactionOne.Dossier.id == 3 %}
+                <p style=' text-align: center; padding-right:30px; 
+                        text-transform: uppercase; 
+                        line-height:1.5;'>
+                    <b> A L'ATTENTION DE MONSIEUR LE DIRECTEUR <br>
+                    L' AGENCE ATTIJARIWAFA BANK  <br>KHOURIBGA PRINCIPALE
+                    </b> </p>
+            {% elseif TrTransactionOne.Dossier.id == 2 %}
+
+
+            <p style='text-align: center; padding-right:15px; 
+                        text-transform: uppercase; 
+                        line-height:1.5;'>
+                        <b> A L'ATTENTION DE MONSIEUR LE DIRECTEUR <br>
+                        L' AGENCE ATTIJARIWAFA BANK  <br>YOUSSOUFIA HAY HASSANI
+            </b> </p>
+
+            {% elseif TrTransactionOne.operation.pPiece.id == 30  %} 
+            <p style='text-align: right; padding-right:15px; 
+                        text-transform: uppercase; 
+                        line-height:2.2;'><b>A L'ATTENTION DE MADAME LA DIRECTRICE<br> ATTIJARIWAFABANK MADINAT AL IRFANE</b> </p>
+            {% else  %} 
+            <p style='text-align: right; padding-right:15px; 
+                        text-transform: uppercase; 
+                        line-height:2.2;'><b>A L'ATTENTION DE MONSIEUR LE DIRECTEUR<br> ATTIJARIWAFABANK MADINAT AL IRFANE</b> </p>
+
+            {% endif  %}
+
+   </div>
+
+
+
+
+
+    <p style="margin-left: 15px;"> <b>OBJET :</b> 
+    {% if TrTransactionOne.operation.pPiece.id == 28 %}
+        COMPTE TITRES NUMERO 0000270210 <br>
+        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; ORDRE DE PLACEMENT
+    {% elseif TrTransactionOne.operation.pPiece.id == 30 %}
+        COMPTE TITRES NUMERO 0000270210 <br>
+        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; ORDRE DE RACHAT OPCVM
+    {% else %}
+        {% if TrTransactionOne.operation.compte %}
+            ORDRE DE VIREMENT
+        {% else %}
+            ENCAISSEMENT EXTERNE
+        {% endif %}
+    {% endif %}
+    </p>
+    <br />
+    <br>
+
+
+     <p style="margin-left: 15px;">
+
+    {# {% if TrTransactionOne.Dossier.id == 38 or TrTransactionOne.Dossier.id == 139 or TrTransactionOne.Dossier.id == 105 or TrTransactionOne.Dossier.id == 138 or TrTransactionOne.Dossier.id == 104 or TrTransactionOne.Dossier.id == 27 or TrTransactionOne.Dossier.id == 1 or TrTransactionOne.Dossier.id == 2   %}
+        <b>MONSIEUR,</b>
+    {% else %}
+        <b>MONSIEUR,</b>
+    {% endif %} #}
+    {% if TrTransactionOne.operation.pPiece.id == 30 %}
+        <b>MADAME,</b>
+    {% else %}
+        <b>MONSIEUR,</b>
+    {% endif %}
+     </p>
+
+
+        <div>
+            <div style="text-align:justify; text-justify: inter-word; line-height:2.1; margin-left: 15px; margin-right: 15px;text-transform:uppercase;">
+               {% if TrTransactionOne.operation.pPiece.id == 30  %} 
+                <p>Par le credit de notre compte N°:<b>
+                {% else %}
+                     <p>Par débit de notre compte N°:<b>
+                {% endif %}
+
+                    {% if TrTransactionOne.operation.pPiece.id ==  32 or  TrTransactionOne.operation.pPiece.id ==  33 or TrTransactionOne.operation.pPiece.id == 47 %}
+                            {% if '_' in TrTransactionOne.operation.compte.numCompte %}
+                                {{  TrTransactionOne.operation.compte.numCompte|split('_')[0] }} </b>
+                            {% else %}
+                                {{  TrTransactionOne.operation.compte.numCompte }} </b>
+                            {% endif %}
+                    {% else %}
+                        {% if TrTransactionOne.operation.pPiece.id != 34 %}
+                          {{TrTransactionOne.operation.compte.numCompte|split('_')[0]}}</b>
+                        {% else %}
+                          {{TrTransactionOne.operation.compte.numCompte}}</b>
+                        {% endif %}
+                    {% endif %}
+
+                    ouvert auprès de votre agence au nom de la (l') 
+                    
+                    <b>   {% if TrTransactionOne.operation.pPiece.id ==  32 or  TrTransactionOne.operation.pPiece.id ==  33 or TrTransactionOne.operation.pPiece.id == 47 %}
+                          {{  TrTransactionOne.operation.compte.designation }} </b>
+                    {% else %}
+                        {% if TrTransactionOne.operation.pPiece.id in [34,30] %}
+                            {{TrTransactionOne.operation.compte.description}}</b>
+                        {% else %}
+                            {{TrTransactionOne.operation.compte.designation}}</b>
+                        {% endif %}
+                    {% endif %}
+                   
+                    </b>nous vous prions de bien vouloir exécuter 
+                    {% if TrTransactionOne.operation.pPiece.id ==  28 %}
+                    UNE OPERATION DE <b>PLACEMENT CAP MONETAIRE PREMIERE</b> POUR UN MONTANT DE
+                    {% elseif TrTransactionOne.operation.pPiece.id ==  30 %}
+                    UNE OPERATION DE <b>RACHAT CAP MONETAIRE PREMIERE</b> POUR UN MONTANT DE
+                    {% else %}
+                    le(s) virement(s) totalisent le montant de
+                    {% endif %}
+
+                    <b>{{somme|number_format(2, ',', ' ') }} Dhs
+					({{text}})</b>
+                    {% if TrTransactionOne.operation.pPiece.id not in [28,30] %}
+                    au profit de bénéficiaire cites:
+                    {% endif %}
+                </p>
+            </div>
+        <br><br>
+        </div>
+{# {%  set lines = TrTransactions | length %} #}
+{%  if TrTransactions | length <= 3 and TrTransactionOne.operation.pPiece.id not in [28,30] %}
+{# {%  set content = 'oui' %} #}
+{# {%  else %} #}
+{# {%  set content = 'non' %} #}
+{# {%  endif %} #}
+{{ include ('tresorerie/ordre_virement/pdf/content.html.twig')}}  
+{# ,{'content' :content})  #}
+{# {% if TrTransactions | length <=2 %} #}
+
+{% endif %}
+
+
+<p style="padding: 20px;text-transform:uppercase;" >Veuillez croire, 
+
+ {% if TrTransactionOne.Dossier.id == 38 or TrTransactionOne.Dossier.id == 139 or TrTransactionOne.Dossier.id == 105 or TrTransactionOne.Dossier.id == 138 or TrTransactionOne.Dossier.id == 104 or TrTransactionOne.Dossier.id == 27 or TrTransactionOne.Dossier.id == 1 or TrTransactionOne.Dossier.id == 2  %}
+               
+Monsieur
+{% else  %}
+
+Monsieur 
+
+{% endif %}
+            en nos salutations les meilleures. </p>
+
+	</div>
+
+
+
+</body>
+
+{%  if TrTransactions | length > 3 and TrTransactionOne.operation.pPiece.id not in [28, 30] %}
+    {# {%  set content = 'oui' %} #}
+    <div class='page2' style="page-break-before: always;">
+    {{ include ('tresorerie/ordre_virement/pdf/content.html.twig')  }}   
+    {# ,{'content' :content} #}
+    </div>
+{# {%  else %}
+{%  set content = 'non' %}
+#}
+{%  endif %}
+
+
+
+
+

@@ -1,0 +1,430 @@
+@page {
+    margin: 15px 20px;
+    height:250px;
+    margin-top: 180px ;
+
+}
+body {
+    font-size: 11px;
+
+}
+.logo {
+    max-width: 220px;
+    max-height: 80px;
+    position: absolute;
+    left: 550px;
+}
+.logo-smco {
+    max-width: 140px;
+    max-height: 140px;
+    position: absolute;
+    left: 590px;
+}
+
+.logo-pdmf {
+    max-width: 320px;
+    max-height: 320px;
+    position: absolute;
+    left: 10px;
+    top: 20px;
+}
+.logo-a2mf {
+    max-width: 160px;
+    max-height: 160px;
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    overflow: hidden;
+}
+.logo-mtrs {
+    max-width: 320px;
+    max-height: 320px;
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    overflow: hidden;
+}
+
+.logo-a2mf3 {
+    max-width: 450px;
+    max-height: 450px;
+    position: absolute;
+    left: 150px;
+    top: 290px;
+    opacity: 0.2;
+}
+
+.table-header {
+    width: 100%;
+    text-transform: uppercase;
+    margin-bottom: 100px;
+
+
+}
+
+.table-sub-title {
+    font-size: 12px;
+    border: 1px solid #555555;
+    margin-bottom: 5px;
+}
+
+.table-header label {
+    font-size: 12px;
+    font-weight: 200;
+}
+.table-content {
+    position: relative;
+    top: 5px;
+    font-size: 9px;
+}
+.table-content thead tr th {
+    text-align: center;
+}
+.th1 {
+    width: 250px;
+    height: 100px;
+}
+.th2 {
+    width: 100px;
+    height: 100px;
+}
+
+
+h3 {
+    padding: 15px 0;
+    text-align: center;
+    background: #e7e6e6;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+h4 {
+    padding: 15px 0;
+    text-align: center;
+    border: 1px solid #555555;
+}
+
+
+.table-content {
+    width: 100%;
+    font-size: 10px;
+    border-collapse: collapse;
+
+}
+
+.table-content tr {
+    border-bottom: 1px solid red;
+}
+
+
+.table-content td {
+    padding: 4px;
+    font-size: 8px;
+    border-bottom: 1px solid #eee;
+
+}
+.table-content thead {
+    color: black;
+    background: #ababab;
+
+}
+
+.table-content thead th {
+    padding: 4px 2px;
+    font-size: 7px;
+    width: 10px;
+}
+
+
+.table-content tbody tr td:nth-child(n + 3) {
+    text-align: right;
+}
+.table-content thead tr th:nth-child(n + 3) {
+    text-align: right;
+}
+.table-ttc {
+    font-size: 10px;
+    width: 40%;
+    float: right;
+    font-weight: bold;
+    border-collapse: collapse;
+    position: relative;
+    top: 35px;
+
+}
+
+.table-ttc tr td {
+    padding: 1px 3px;
+}
+
+.table-ttc tr td:nth-child(1) {
+
+    padding: 1px 3px;
+    width: 100px;
+    background: #eee;
+    margin-left: 50%;
+    width: 50%;
+}
+
+.table-ttc tr td:nth-child(2) {
+    text-align: right;
+    width: 50%;
+    /*background:red;*/
+}
+
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 350px;
+
+    /** Extra personal styles **/
+    color: white;
+    text-align: center;
+    line-height: 35px;
+    margin-bottom: 250px;
+}
+main {
+    margin-top: 140px;
+}
+
+footer {
+    position: fixed;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    height: 50px;
+
+    /** Extra personal styles **/
+    text-align: center;
+
+}
+
+
+.footer {
+    border-top: 1px solid #eee;
+    margin-top: 0;
+    font-size: 9px;
+    text-align: center;
+    position: fixed;
+    bottom: 55px;
+}
+.footer-a2mf {
+    background: #2b2b2b;
+    color: white;
+    height: 20px;
+    width: 800px;
+    margin-top: 0;
+    font-size: 10px;
+    position: fixed;
+    bottom: -25px;
+    left: -20px;
+    text-align: left;
+    padding: 10px 15px;
+
+}
+.footer-a2mf2 {
+    background: #CCCC99;
+    color: white;
+    height: 20px;
+    width: 100px;
+    margin-top: 0;
+    font-size: 10px;
+    position: fixed;
+    bottom: -25px;
+    right: -20px;
+    text-align: left;
+    padding: 10px 15px;
+
+}
+.footer-a2mf:after {}
+.footer-a2mf2::before {
+    top: -2px;
+    transform: skew(-30deg);
+    border-top: 2px solid white;
+
+}
+.footer-a2mf2::after {
+    bottom: -20px;
+    transform: skew(30deg);
+    border-bottom: 2px solid white;
+}
+
+.footer-a2mf2::before,
+.footer-a2mf2::after {
+    content: "";
+    position: absolute;
+    left: -6px;
+    height: 20px;
+    width: 7px;
+    background: white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+
+}
+
+
+.footer label {
+
+    padding-left: 10px;
+
+}
+
+.headFacture {
+    border-collapse: collapse;
+    width: 100%;
+
+}
+.line {
+    display: block;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    padding: 0 5px;
+}
+.second {
+    background: #dcd4df;
+    padding: 5px;
+    margin: 0 10px;
+}
+.second2 {
+    background: #dcd4df;
+    padding: 5px;
+    margin: 0 10px;
+}
+.second3 {
+    background: #dcd4df;
+    padding: 5px;
+    margin: 0 10px;
+    position: relative;
+    top: -5px
+}
+.second4 {
+    background: #dcd4df;
+    padding: 5px;
+    margin: 0 10px;
+    position: relative;
+    top: -10px
+}
+.line-bottom {
+    margin-bottom: 10px;
+}
+.line-top {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+.first {
+    margin-top: 10px;
+    position: relative;
+    top: 8px;
+}
+.line2 {
+    display: block;
+    border-bottom: 1px solid black;
+    width: 40%;
+    z-index: 999999;
+    opacity: 0.2;
+}
+.hSmeco {
+    background: #1d1944;
+    color: white;
+    height: 5px;
+}
+.logo-a2mf {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+}
+.table-a2mf {
+    border-collapse: collapse;
+    font-size: 10px;
+    line-height: 7px;
+}
+.table-a2mf2 {
+    border-collapse: collapse;
+    font-size: 10px;
+    line-height: 7px;
+    float: right;
+    position: relative;
+    top: -30px;
+    padding-right: 3%;
+}
+.dateFac {
+    position: absolute;
+    top: 10px;
+    background: #CCCC99;
+    width: 24%;
+    text-align: center;
+    padding: 2px;
+    font-weight: bold;
+}
+.nFac {
+    position: absolute;
+    top: 150px;
+    left: 570px;
+    background: #CCCC99;
+    width: 24%;
+    text-align: center;
+    padding: 2px;
+
+
+}
+.head_date {
+    border-collapse: collapse;
+    width: 100%;
+}
+.head_date td {
+
+    font-size: 11px;
+    text-transform: uppercase;
+
+}
+.line3 {
+    display: block;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    position: absolute;
+    top: 33%;
+}
+.line2 {
+    display: block;
+    border-bottom: 1px solid black;
+    width: 50%;
+    z-index: 999999;
+    opacity: 0.2;
+}
+
+.table-mtrs {
+    border-collapse: collapse;
+    line-height: 12px;
+    width: 80%;
+    padding: 5px;
+}
+.footer-mtrs {
+    background: #76869f;
+    color: white;
+    height: 55px;
+    width: 770px;
+    margin-top: 0;
+    font-size: 10px;
+    position: fixed;
+    bottom: -25px;
+    left: -20px;
+    text-align: center;
+    padding: 10px 15px;
+
+}
+.fix {
+    max-width: 15px;
+    max-height: 15px;
+}
+.tel {
+    max-width: 15px;
+    max-height: 15px;
+}
+.home {
+    max-width: 25px;
+    max-height: 25px;
+    padding-left: -5px;
+}

@@ -1,0 +1,114 @@
+<header>
+	<div style="width:800px;position:absolute;top:-25px;left:-20px;height:25px;background:#76869f;"></div>
+	<table class="table-header">
+		<tr>
+			<th>
+				<img src="{{ asset(image)[1:] }}" class="logo-mtrs" alt="Logo">
+			</th>
+
+		</tr>
+
+	</table>
+    <table class="table-header" style="width:auto;position:absolute;top:90px;left:20px;line-height:12px;">
+        <tr>
+            <td><img src="{{ asset('/images/icon/fix.jpg')[1:] }}" class="tel" />  </td>
+            <td style="color:black;font-size:8px;">{{ cab.client ? cab.client.tel1 : "00-212-6-95-27-36-66"  }} {#00-212-6-95-27-36-66#}  </td>
+        </tr>
+          <tr>
+            <td><img src="{{ asset('/images/icon/tel.png')[1:] }}" class="tel" /> </td>
+            <td style="color:black;font-size:8px;">{{ cab.client ? cab.client.tel2 : "00-212-6-95-27-36-66"  }} {#00-212-6-04-86-23-83#}  </td>
+        </tr>
+        <tr>
+            <td><img src="{{ asset('/images/icon/home.png')[1:] }}" class="home" />  </td>
+            <td style="color:black;font-size:8px;">{{ cab.client ? cab.client.adresse : "00-212-6-95-27-36-66"  }} {#N°18 RUE 3 LOT RATC 1 er ETAGE AL QODS SIDI BERNOUSSI CASABLANCA #} </td>
+        </tr>
+    </table>
+
+	<div style="position:absolute;left:50%;top:20px;color:white;background:#354b65;width:100%;">
+
+		<table class="table-mtrs">
+			<tr>
+				<td style="width:35%;">NUM FACTURE :
+				</td>
+				<td style="width:45%;background:#bfcbd6;color:black;text-align:center;font-family: 'courierbold';">{{cab.code}}</td>
+			</tr>
+		</table>
+		<table class="table-mtrs" style="width:65%">
+			<tr>
+				<td style="width:35%;">DATE FACTURE :
+				</td>
+				<td style="width:30%;background:#bfcbd6;color:black;text-align:center;font-family: 'courierbold';">{{ cab.datefacture ? cab.datefacture|date("d/m/Y") : "now"|date("d/m/Y")  }}</td>
+			</tr>
+		</table>
+
+
+	</div>
+	<div style="position:absolute;left:50%;top:80px;color:white;background:#b6bcc9;width:100%;border:0.5px solid black;">
+		<table class="table-mtrs">
+			<tr>
+				<td style="width:35%;font-family: 'courierbold';color:black;font-size:9px;">CODE CLIENT :
+				</td>
+				<td style="width:45%;color:black;font-family: 'courierbold';font-size:11px;">{{ cab.client ? cab.client.code : null  }}</td>
+			</tr>
+		</table>
+		<table class="table-mtrs">
+			<tr>
+				<td style="width:40%;font-family: 'courierbold';color:black;font-size:9px;">DESIGNATION CLIENT :
+				</td>
+				<td style="width:40%;color:black;font-family: 'courierbold';font-size:11px;">{{ cab.client ? cab.client.societe : null  }}</td>
+			</tr>
+		</table>
+		<table class="table-mtrs">
+			<tr>
+				<td style="width:35%;font-family: 'courierbold';color:black;font-size:9px;">ADRESSE :
+				</td>
+				<td style="width:45%;color:black;font-family: 'courierbold';font-size:11px;">{{ cab.client ? cab.client.adresse : null  }}</td>
+			</tr>
+		</table>
+	</div>
+	<div style="height:100px;width:100%;display:block;"></div>
+</header>
+<footer>
+	<div class="footer-mtrs">
+
+		<p>
+			{% if cab.dossier  %}
+				{{ cab.dossier.titre }}
+
+				{% if  cab.dossier.rc %}
+					<label>RC :</label>
+					{{ cab.dossier.rc }}
+					|
+				{% endif %}
+				{% if  cab.dossier.ice %}
+					<label>ICE :</label>
+					{{ cab.dossier.ice }}
+					|
+				{% endif %}
+				{% if  cab.dossier.iff %}
+					<label>IF :</label>
+					{{ cab.dossier.iff }}
+					|
+				{% endif %}
+				{% if  cab.dossier.cnss %}
+					<label>CNSS :</label>
+					{{ cab.dossier.cnss }}
+					|
+				{% endif %}
+				{% if  cab.dossier.patente %}
+					<label>PATENTE :</label>
+					{{ cab.dossier.patente }}
+					|
+				{% endif %}
+				Adresse : N° 18, LotIchrak Center Hay Hassani Casablanca Fax 05.22.65.58.90 | Fixe 05.22.65.58.90 | Gsm 06.62.34.62.05 | Mail contact@u3s.ma
+			{% endif %}
+		</p>
+	</div>
+</footer>
+<table class="head_date" style=" position:absolute;top:200px;">
+	<tr style='width:50%;'>
+		<td style="width:45%"></td>
+		<td class="bol" style="width:55%;position:relative;left:5px;font-size:25px;">FACTURE</td>
+	</tr>
+</table>
+<br/><br/><br/><br/><br/><br/><br/><br/>

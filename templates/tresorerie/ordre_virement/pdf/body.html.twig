@@ -1,0 +1,126 @@
+<div style="padding-right : 15px; font-size:12px; margin-left:60px; margin-right:60px;margin-top:70px">
+    <div style="margin-left:300px; margin-bottom:10px;">
+
+
+            {% if TrTransactionOne.Dossier.id == 38 %}
+                <p style="text-align: right; padding-right:15px; 
+                            text-transform: uppercase; 
+                            line-height:2.2;">
+                <b>A L'attention de Monsieur le Directeur <br> DU CENTRE D’AFFAIRES RABAT/SOUISSI
+                <br ><span >ATTIJARIWAFA BANK</span></b>
+                </p>";
+
+            {% elseif TrTransactionOne.Dossier.id == 1 %}
+                <p style=' text-align: center; padding-right:30px; 
+                        text-transform: uppercase; 
+                        line-height:1.5;'>
+                    <b> A L'ATTENTION DE MONSIEUR LE DIRECTEUR <br>
+                    L' AGENCE ATTIJARIWAFA BANK  <br>KHOURIBGA PRINCIPALE
+                    </b> </p>
+            {% elseif TrTransactionOne.Dossier.id == 2 %}
+
+
+            <p style='text-align: center; padding-right:15px; 
+                        text-transform: uppercase; 
+                        line-height:1.5;'>
+                        <b> A L'ATTENTION DE MONSIEUR LE DIRECTEUR <br>
+                        L' AGENCE ATTIJARIWAFA BANK  <br>YOUSSOUFFIA HAY HASSANI
+            </b> </p>
+
+            {% else  %} 
+            <p style='text-align: right; padding-right:15px; 
+                        text-transform: uppercase; 
+                        line-height:2.2;'><b>A L'attention de Madame la Directrice <br> AttijariWafabank Madinat Al Irfane</b> </p>
+
+            {% endif  %}
+
+   </div>
+
+
+
+
+
+    <p style="margin-left: 15px;"> <b>OBJET :</b> ORDER DE VIREMENT</p>
+    <br />
+    <br>
+
+
+     <p style="margin-left: 15px;">
+
+    {% if TrTransactionOne.Dossier.id == 38 %}
+        <b>MONSIEUR,</b>
+    {% else %}
+        <b>MADAME,</b>
+    {% endif %}
+
+     </p>
+
+      {% set sum = 0 %}
+    {% for  TrTransaction in  TrTransactions %}
+              {% set sum = sum +  TrTransaction.montant|round(2, 'ceil')|number_format(2, ',', ' ') %} 
+    {% endfor %}
+        <div>
+            <div style="text-align:justify; text-justify: inter-word; line-height:2.1; margin-left: 15px; margin-right: 15px;text-transform:uppercase;">
+                <p>Par débit de notre compte N°:<b>
+                {{TrTransactionOne.Dossier.CompteBancaire}}</b>
+                    ouvert auprès de votre agence au nom de la (l')
+                    <b>{{TrTransactionOne.Dossier.LibelleCompte}}</b> </b>nous vous prions de bien vouloir exécuter le(s) virement(s) totalisent le montant de
+                    <b>{{ sum|round(2, 'ceil')|number_format(2, ',', ' ') }}  Dhs
+                        (TEXT)</b>
+                    au profit de bénéficiaire cites:
+                </p>
+            </div>
+        <br><br>
+        </div>
+
+
+
+   
+    
+  
+
+
+
+ 
+
+
+ 
+
+
+</div>
+
+
+
+
+
+{{TrTransactionOne.CodeBq}}
+
+
+
+
+<div>code_bq: {{code_bq}}</div>
+<div>chemin image :{{image}}</div>
+
+
+{% for  TrTransaction in TrTransactions %}
+
+        <br>
+
+        
+        <div>-------------------------------------------- </div>
+        
+        {% if TrTransaction.Client is not null %}
+          <div>Client RIB : {{TrTransaction.Client.Rib}}</div>
+        {% endif %}
+        {% if TrTransaction.Fournisseur is not null %}
+          <div>Fournisseur Nom :  {{TrTransaction.Fournisseur.nom}}</div>
+        {% endif %}
+        {# <div>Rib : {{TrTransaction.Fournisseur.nom}}</div> #}
+        <div>Montant : {{TrTransaction.montant }} </div></li>
+
+        <div>-------------------------------------------- </div>
+
+{% endfor %}
+
+
+

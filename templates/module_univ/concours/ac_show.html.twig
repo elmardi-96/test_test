@@ -1,0 +1,327 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Consulter | Concours | UNIV
+{% endblock %}
+{% block body %}
+
+
+    {{ render(controller('App\\Controller\\moduleUniv\\concours\\UnivConcoursController:infosConcours',{ 'id': concours.id})) }}
+
+
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Univ , Concours Consulter
+            </h2>
+        </div>
+        <div class="col-lg-8">
+
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+    </div>
+
+
+
+    <input type="hidden" value="{{ concours.id }}" class="concours_id"/>    
+    <br/><br/>
+
+
+    <div class="row pt-20">
+
+        <div class="col-md-12 paddin">
+            <div class="ibox">
+
+                <div class="ibox-content">
+                    <div class="panel blank-panel">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                                {% if concours.avecConcours==true %}
+                                    {% include './module_univ/concours/inc/ac_navigation.html.twig' %}
+                                {% else %}
+                                    {% include './module_univ/concours/inc/sc_navigation.html.twig' %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab-1">
+                                        <div class="row">
+
+                                            <div class="col-md-6 b-r">
+                                                <h3 class="m-t-none m-b">Informations </h3>
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                {#<div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ admission.preinscription.etudiant ? admission.preinscription.etudiant.id }}</p>
+                                                    </div>
+                                                </div>#}
+
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Code </label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.code}}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Designation</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.designation}}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Abréviation</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.abreviation}}</p>
+                                                    </div>
+
+                                                </div>
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Année</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.annee}}</p>
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Date concours :</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.date ? concours.date|date('d/m/Y') : '' }}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Heure début :</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.heure ? concours.heure|date('H:i:s') : '' }}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Heure Fin :</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.heureFin ? concours.heureFin|date('H:i:s') : '' }}</p>
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Avec concours :</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.avecConcours ? 'oui' : 'non' }}</p>
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="col-md-6 b-r">
+
+
+
+                                                <h3 class="m-t-none m-b">Formations </h3>
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                <table class="t-m table table-striped table-bordered table-hover w-m dataTable datatable-default" id="datatable-show3">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="5%">#</th>
+
+                                                            <th>Etablissement</th>
+                                                            <th>Formation</th>
+                                                            <th>Année</th>
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        {% for key ,  detail in concours.details %}
+
+                                                            <tr>
+                                                                <td>{{key +1 }}</td>
+                                                                <td>{{detail.formation ? detail.formation.etablissement.designation }}</td>    
+                                                                <td>{{detail.formation ? detail.formation.designation }}</td>    
+                                                                <td>{{detail.annee ? detail.annee.designation }}</td> 
+
+                                                            </tr>
+                                                        {% endfor %}
+
+                                                    </tbody>
+
+                                                </table>
+
+
+                                                <h3 class="m-t-none m-b">Grille</h3>
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div> 
+                                                <table class="t-m table table-striped table-bordered table-hover w-m dataTable datatable-default" id="datatable-show3">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="5%">#</th>
+                                                            <th>Nature.Dem</th>
+                                                            <th>Type.Bac</th>
+                                                            <th>Seuil</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for key ,  grille in concours.grilles %}
+                                                            <tr>
+                                                                <td>{{key +1 }}</td>
+                                                                <td>{{grille.natureDemande ? grille.natureDemande.designation }}</td>  
+                                                                <td>{{grille.typeBac ? grille.typeBac.designation }}</td>    
+                                                                <td>{{grille.seuil|number_format(2)}}</td>   
+
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+
+                                                </table>
+
+
+                                            </div>
+
+
+                                        </div>
+                                        <br><br>
+                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                        
+                                        {% if concours.avecConcours==true %}
+                                        <div class="row">
+                                            <div class="col-md-6 b-r">
+
+
+
+                                                <h3 class="m-t-none m-b">Matiéres </h3>
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                <table class="t-m table table-striped table-bordered table-hover w-m dataTable datatable-default" id="datatable-show3">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="5%">#</th>
+                                                            <th width="20%">code</th>
+                                                            <th width="15%">Matiére</th>
+                                                            <th width="15%">abreviation</th>
+
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% set c = 0 %}
+                                                        {% for matiere in concours.matieres %}
+                                                            {% set c = c + 1 %}
+                                                            <tr>
+                                                                <td>{{c}}</td>
+                                                                <td>{{matiere.code}}</td>    
+                                                                <td>{{matiere.designation}}</td>    
+                                                                <td>{{matiere.abreviation}}</td>    
+
+                                                            </tr>
+                                                        {% endfor %}
+
+                                                    </tbody>
+
+                                                </table>
+
+                                            </div>
+
+
+                                            <div class="col-md-6 b-r">  
+
+                                                <h3 class="m-t-none m-b">classements </h3>
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div> 
+                                                <table class="t-m table table-striped table-bordered table-hover w-m dataTable datatable-default" id="datatable-show3">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="5%">#</th>
+                                                            <th>Etablissement</th>
+                                                            <th>Formation</th>
+                                                            <th>Nat.demande</th>
+                                                            <th>LP</th>
+                                                            <th>LD</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        {% for key ,  detail in concours.details %}
+                                                            {% for key ,  classsement in detail.classements %}
+                                                                <tr>
+                                                                    <td>{{key +1 }}</td>
+                                                                    <td>{{classsement.concoursdet.formation ? classsement.concoursdet.formation.etablissement.designation }}</td>    
+                                                                    <td>{{classsement.concoursdet.formation ? classsement.concoursdet.formation.designation }}</td>    
+                                                                    <td>{{classsement.natureDemande ? classsement.natureDemande.designation }}</td>    
+                                                                    <td>{{1|number_format(2, '.', ',') }} <br/> {{classsement.lp|number_format(2, '.', ',') }}</td> 
+                                                                    <td> {{(classsement.lp + 1 )|number_format(2, '.', ',') }}<br/>  {{(classsement.lp + classsement.ld)|number_format(2, '.', ',') }}</td> 
+
+                                                                </tr>
+                                                            {% endfor %}
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                                    
+                                           {% endif %}         
+                                                    
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+            {% if concours is defined %}
+                <input type="hidden" name="_id" value="{{ concours.id }}" id="_id"/>
+            {% endif %}
+        {% endblock %}
+
+
+        {% block javascripts %}
+            {{ parent() }}
+            {{ encore_entry_script_tags('univ_concours') }}
+        {% endblock %}

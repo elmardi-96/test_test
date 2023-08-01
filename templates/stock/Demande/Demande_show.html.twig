@@ -1,0 +1,527 @@
+{% extends 'base_ugouv.html.twig' %}
+{% set current_path = app.request.get('_route') %}
+{% block title %}Demande transfert stock | Stock
+{% endblock %}
+{% block body %}
+	<form id="stock_transfer">
+		<div id="right-sidebar" class="actions animated"></div>
+
+
+		{# ------- Ajouter par moi ------- #}
+
+
+		{# -------- Ajouter par moi --------- #}
+
+		<div class="new">
+
+			<div class="row wrapper white-bg page-heading fixed-top-navigation-button">
+
+
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-6">
+							<h4>Demande Stock</h4>
+						</div>
+					</div>
+				</div>
+				<div class="border-b"></div>
+				<div class="col-lg-12">
+					<div class="col-lg-12">
+						<ol id="wo-breadcrumbs" class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+							<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+								<span itemprop="name">Applications</span><meta itemprop="position" content="1"/><span class="separator">/</span>
+							</li>
+							<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+								<span itemprop="name">module gestion de stock</span><meta itemprop="position" content="2"/><span class="separator">/</span>
+							</li>
+							<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+								<span itemprop="name">Demande</span><meta itemprop="position" content="3"/><span class="separator">/</span>
+							</li>
+
+						</ol>
+					</div>
+
+				</div>
+
+			</div>
+			<br/>
+
+			<div class="wrapper wrapper-content animated fadeInRight" style="padding-left: 0; padding-right: 0">
+				<div class="row" style="font-size: 9.5px !important">
+					<div class="col-lg-12 no-pad-right no-pad-left">
+						<div class="ibox" style="margin-top: 10px">
+							<div class="ibox-content" style="margin-bottom: -20px;height: 112px;">
+								<div class="message-success"></div>
+								<h4 class="m-t-none m-b">informations generales</h4>
+
+								<div class="row m-t-sm">
+									<div class="col-lg-12">
+										<div class="panel blank-panel">
+											<div class="col-md-12" style="padding-top: 0%">
+												<div class="panel-body">
+													<div class="tab-content">
+														<div class="tab-pane active show" id="tab1-1">
+															<div class="row">
+															
+																	
+																
+																<div class="col-md-6 b-r">
+																	<div class="form-group row">
+																		<div class="col-sm-6 dm-a-dropdown"></div>
+																	</div>
+
+
+																	<div class="form-group row">
+																		<label class="col-sm-2">Demandeur </label>
+																		<div class="col-sm-8">
+																			<p style="margin-bottom: 0 !important">{{DemandStockCab.demandeur.nomDossier}}</p>
+																		</div>
+
+																	</div>
+																	<div class="form-group row">
+																		<label class="col-sm-2">Recepteur</label>
+																		<div class="col-sm-8	">
+																			<p style="margin-bottom: 0 !important">{{DemandStockCab.recepteur.nomDossier}}</p>
+
+																		</div>
+
+																	</div>
+																	
+																	
+																</div>
+				                                            {% if DemandStockCab.status.id == 8 %}
+
+																
+																
+															
+																<div class="col-md-6 b-r">
+																	<div class="form-group row">
+																		<div class="col-sm-6 dm-a-dropdown"></div>
+																	</div>
+
+
+																	<div class="form-group row">
+																		<label class="col-sm-2">Code Achat </label>
+																		<div class="col-sm-8">
+																			<p style="margin-bottom: 0 !important">{{achat ? achat.code : null }}</p>
+																		</div>
+
+																	</div>
+																	{# <div class="hr-line-dashed  clt"></div> #}
+																	<div class="form-group row">
+																		<label class="col-sm-2">Code Devi</label>
+																		<div class="col-sm-8">
+																			<p style="margin-bottom: 0 !important">{{devis ? devis.code : null}}</p>
+
+																		</div>
+
+																	</div>
+															
+																	
+
+																</div>
+																{% endif %}
+																
+															</div>
+
+
+															<div class="ibox selected" style="float: right; position: relative; top: -85px;width:14%">
+																<div class="ibox-content pd-0">
+																	<div class="tab-content">
+																		<div id="contact-1" class="tab-pane active">
+																			<div class="client-detail-">
+																				<div class="full-height-scroll">
+
+
+																					<ul class="list-group clear-list">
+																						<li class="list-group-item fist-item">
+																							<div class="panel-default">
+																								<div class="div-panel-header">
+																									<h5 class="panel-title p-title-style">
+																										<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+																											<i class="fa fa-file-pdf-o"></i>
+																											Impressions associé</a>
+																									</h5>
+																								</div>
+
+																								<div id="collapseOne" class="panel-collapse in collapse">
+																									<div class="panel-body">
+																										<ul
+																											class="folder-list m-b-md pd-0-10">
+																											{# {% if DemandStockCab.status.id == 1 or DemandStockCab.status.id == 2 %} #}
+																											{% if DemandStockCab.typeop_id.id == 1 %}
+																												<li>
+																													<a href="{{ path('demandeStock_document_pdf' , {id:DemandStockCab.id})}}" target="_blank">
+																														<i class="fa fa-file-pdf-o"></i>
+																														DM-Stock ({{ DemandStockCab.code }})</a>
+																												</li>
+																												{# {% endif %} #}
+
+																												{# {% if DemandStockCab.status.id == 6 or DemandStockCab.status.id == 5 %} #}
+
+																												<li>
+																													<a href="{{ path('demandeStock_document2_pdf' , {id:DemandStockCab.id})}}" target="_blank">
+																														<i class="fa fa-file-pdf-o"></i>
+																														LV-Stock ({{ DemandStockCab.code }})</a>
+																												</li>
+																												{% elseif DemandStockCab.typeop_id.id == 3 %}
+																												<li>
+																													<a href="{{ path('demandeStock_dechets_pdf' , {id:DemandStockCab.id})}}" target="_blank">
+																														<i class="fa fa-file-pdf-o"></i>
+																														DCH-Stock ({{ DemandStockCab.code }})</a>
+																												</li>
+																											{% else %}
+
+																												<li>
+																													<a href="{{ path('RouterStock_document3_pdf' , {id:DemandStockCab.id})}}" target="_blank">
+																														<i class="fa fa-file-pdf-o"></i>
+																														RT-Stock ({{ DemandStockCab.code }})</a>
+																												</li>
+																											{% endif %}
+																											{# {% endif %} #}
+																										</ul>
+																									</div>
+																								</div>
+
+																							</div>
+																						</li>
+																					</ul>
+																				</div>
+																			</div>
+
+																		</div>
+																	</li>
+
+																</ul>
+																<br/>
+
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="ibox">
+		<div class="ibox-content">
+		<div class="row">
+		
+    <div class="col-10">
+	<br>
+			<h5 style="margin-bottom: 0">Details</h5>
+    </div>
+
+
+
+{# =================== start Popup ====================== #}
+{% if DemandStockCab.status.id == 10 or DemandStockCab.status.id == 6 %}
+   				 <div class="col-2">
+				 <br>
+					<input type="text"  class="form-control  input-group-lg myInput" data-id="{{DemandStockCab.id}}" placeholder="Scan Code Article ....">
+				</div>
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="top: 15px; transform: translate(0, 0); margin: 0 auto;" role="document">
+					<div class="modal-content">
+						<div id="content_produit">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-warning class_pop" data-id="{{DemandStockCab.id}}" data-dismiss="modal">Close</button>
+								<button type="button" id="btn_save_qty_liv" class="btn btn-primary" data-id="{{DemandStockCab.id}}" data-dismiss="modal">Save</button>
+						</div>
+					</div>
+				</div>
+				</div>
+	{% endif %}
+{# =================== End Popup ====================== #}
+	
+	
+  </div>
+
+			<br/>
+			<div id="tab-1" class="tab-pane active full-height-scroll-show" style="height: 273px !important">
+				<div class="full-height-scroll full-height-scroll-show">
+					<div class="table-responsive">
+						<table class="m-add t-m table table-striped table-bordered table-hover dataTables-example table-detail">
+							<thead style="font-size: 9.5px">
+								<tr>
+									<th style="width: 5%;text-align: center">#</th>
+									<th style="width: 5%;text-align: center">code</th>
+									<th style="width: 45%;text-align: start; ">ARTICLE</th>
+									<th style="width: 5%;text-align: center; ">quantité</th>
+									<th style="width: 5%;text-align: center; ">Prix</th>
+									<th style="width: 7%;text-align: center; ">qty a livrée</th>
+									<th style="width: 7%;text-align: center; ">reste a livrée</th>
+									{# {% if  DemandStockCab.Status.designation == 'Prête' or DemandStockCab.Status.designation == 'Livraison partielle' or DemandStockCab.Status.designation == 'Livraison Complète'%}
+										<th style="width: 7%;text-align: center; ">CHOIX UNITE</th>
+									{% else %}
+										<th style="width: 7%;text-align: center; ">Conditionnement</th>
+									{% endif %} #}
+									{% if dc.Role_STK == 'RC' %}
+										<th style="width: 7%;text-align: center; ">Quantité Stock</th>
+									{% endif %}
+									<th style="width: 7%;text-align: center; ">Conditionnement</th>
+
+
+									<th style="width: 1%; display: inline-flex">observation</th>
+								</tr>
+							</thead>
+
+
+							<tbody
+								class="article_disponible ">
+								{# {{dump(DemandStockCab.DemandeStockDets)}}   #}
+								{% for i, demandDet in DemandStockCab.DemandeStockDets %}
+								
+								
+									<tr class="{{demandDet.Id}}">
+
+										<td style="width: 5%;text-align: center">{{i + 1}}</td>
+										<td style="width: 5%;text-align: center">{{demandDet.Uarticle.code}}</td>
+
+										<td style="width: 30%;position: relative;text-align: start">
+											{{demandDet.Uarticle.titre}}
+
+
+											-  Conditionnement commend :
+											{{demandDet.Conditionnement}}
+
+										</td>
+
+										<td style="width: 5%;text-align: center;" class="quantiteDisponible">
+											{{demandDet.Qte}}
+										</td>
+
+										{% if dc.Role_STK == 'DE' %}
+											<td style="width: 5%;text-align: center">
+												{{demandDet.Prix}}
+											</td>
+											<td style="width: 5%;text-align: center;">
+												{{demandDet.Qt_livre}}
+											</td>
+											<td style="width: 5%;text-align: center;">
+												{{  demandDet.qte}} 
+											</td>
+											
+											<td style="width: 5%;text-align: center;">
+												{{demandDet.Conditionnement}}
+											</td>
+											<td style="width: 5%;text-align: center;">
+												{{demandDet.observation}}
+											</td>
+
+
+										{% else %}
+											{% if DemandStockCab.Status.designation == 'Envoyé'%}
+												<td style="width: 5%;text-align: center">
+													<input style="outline:none;border-color:white;box-shadow: 0.2px 0.5px;" class="detInputPrix decimal_places" id="{{demandDet.Id}}" type="number" value="{{demandDet.Uarticle.prixvente}}"/>
+												</td>
+												<td style="width: 5%;text-align: center;">
+													{{demandDet.Qt_livre}}
+												</td>
+												{% if dc.Role_STK == 'RC' %}
+												<td style="width: 5%;text-align: center;">
+												{{demandDet.qte}}
+											</td>
+														{% if demandDet.Qte < artsum[i]  %} {# if the quantity in the demand is less than the quantity in the article #}
+															<td style="width: 5%;text-align: center;background-color: #AACB73; color: black;"> {# set background color to light green #}
+																{{artsum[i]|number_format(2, '.', '')}} {# display the article quantity with 2 decimal points #}
+																</td>
+															{% elseif demandDet.Qte > artsum[i]%} {# if the quantity in the demand is greater than the quantity in the article #}
+																<td style="width: 5%;text-align: center;background-color: #F37878; color: black;"> {# set background color to light red #}
+																	{{artsum[i]|number_format(2, '.', '')}} {# display the article quantity with 2 decimal points #}
+																</td>
+															{% else %} {# if the quantity in the demand is equal to the quantity in the article #}
+																<td style="width: 5%;text-align: center;;background-color: #F6FFA4; color: black;"> {# set background color to light yellow #}
+																	{{artsum[i]|number_format(2, '.', '')}} {# display the article quantity with 2 decimal points #}
+																</td>
+														{% endif %} 
+														
+												{% endif %}
+												<td style="width: 5%;text-align: center;">
+													{{demandDet.Conditionnement}}
+												</td>
+												<td style="width: 5%;text-align: center;">
+													{{demandDet.observation}}
+												</td>
+
+
+											{% elseif  DemandStockCab.Status.designation == 'Prête' or DemandStockCab.Status.designation == 'Livraison partielle' or DemandStockCab.Status.designation == 'Livraison Complète'%}
+												<td style="width: 5%;text-align: center">
+													{{demandDet.Prix}}
+												</td>
+													<td style="width: 5%;text-align: center;">
+												
+															{{demandDet.Qt_livre}}  
+
+													</td>
+												<td style="width: 5%;text-align: center">
+													<input style="outline:none;border-color:white;box-shadow: 0.2px 0.5px;"
+													  class="detInputQtlivre decimal_places"
+													  id="{{demandDet.Id}}"
+													  type="number" 
+													  
+													  
+													  {# value="{{demandDet.Qt_livre}}"  #}
+													{% if demandDet.Qt_livre == demandDet.qte 
+													or demandDet.Qt_livre >= demandDet.qte %} 
+													  value="0" disabled
+														{% else %}
+													value="{{demandDet.qte - demandDet.Qt_livre}}" 
+													{% endif %}/>
+												</td>
+
+												{# <td style="width: 5%;text-align: center;">
+													<select name="conditionnement_livre" class="form-control conditionnement_livre form-control-sm sel2">
+														{# <option value="">CHOIX UNITE</option>
+														{% for uni in cond_liv %}
+															<option value="{{uni.id}}">{{uni.designation}}</option>
+														{% endfor %}
+													</select>
+												</td> #}
+												{% if dc.Role_STK == 'RC' %}
+														{% if demandDet.Qte < artsum[i]  %} {# if the quantity in the demand is less than the quantity in the article #}
+															<td style="width: 5%;text-align: center;background-color: #AACB73; color: black;"> {# set background color to light green #}
+																{{artsum[i]|number_format(2, '.', '') }} {# display the article quantity with 2 decimal points #}
+																</td>
+															{% elseif demandDet.Qte > artsum[i]%} {# if the quantity in the demand is greater than the quantity in the article #}
+																<td style="width: 5%;text-align: center;background-color: #F37878; color: black;"> {# set background color to light red #}
+																	{{artsum[i]|number_format(2, '.', '') }} {# display the article quantity with 2 decimal points #}
+																</td>
+															{% else %} {# if the quantity in the demand is equal to the quantity in the article #}
+																<td style="width: 5%;text-align: center;;background-color: #F6FFA4; color: black;"> {# set background color to light yellow #}
+																	{{artsum[i]|number_format(2, '.', '') }} {# display the article quantity with 2 decimal points #}
+																</td>
+														{% endif %} 
+												{% endif %}
+												<td style="width: 5%;text-align: center;">
+													{{demandDet.Conditionnement}}
+												</td>
+												<td style="width: 5%;text-align: center;">
+													{{demandDet.observation}}
+												</td>
+											{% else %}
+												<td style="width: 5%;text-align: center">
+													{{demandDet.Prix}}
+												</td>
+													<td style="width: 5%;text-align: center;">
+														{{demandDet.Qt_livre }}
+													</td>
+												<td style="width: 5%;text-align: center;">
+													{{demandDet.Qt_livre}}
+												</td>
+												{% if dc.Role_STK == 'RC' %}
+												
+														{% if demandDet.Qte < artsum[i]  %} {# if the quantity in the demand is less than the quantity in the article #}
+															<td style="width: 5%;text-align: center;background-color: #AACB73; color: black;"> {# set background color to light green #}
+																{{artsum[i]|number_format(2, '.', '')}} {# display the article quantity with 2 decimal points #}
+																</td>
+															{% elseif demandDet.Qte > artsum[i]%} {# if the quantity in the demand is greater than the quantity in the article #}
+																<td style="width: 5%;text-align: center;background-color: #F37878; color: black;"> {# set background color to light red #}
+																	{{artsum[i]|number_format(2, '.', '')}} {# display the article quantity with 2 decimal points #}
+																</td>
+															{% else %} {# if the quantity in the demand is equal to the quantity in the article #}
+																<td style="width: 5%;text-align: center;;background-color: #F6FFA4; color: black;"> {# set background color to light yellow #}
+																	{{artsum[i]|number_format(2, '.', '')}} {# display the article quantity with 2 decimal points #}
+																</td>
+														{% endif %} 
+												{% endif %}
+
+												<td style="width: 5%;text-align: center;">
+														{{ demandDet.conditionnement}}</td>										
+												</td>
+									
+										<td style="width: 5%;text-align: center;">
+											{{demandDet.observation}}
+										</td>
+									{% endif %}
+								{% endif %}
+								<td style="width: 7%;text-align: center"></td>
+							</tbody>
+						</tr>
+					{% endfor %}
+				</tbody>
+
+				<tfoot>
+					<tr style="display: none" class="edit-new-mouvement"></tr>
+				</tfoot>
+			</table>
+
+			<div class="mail-body text-right tooltip-demo buttons_foot">
+			
+			{% if DemandStockCab.Status.id == 1 or DemandStockCab.Status.id == 2 or DemandStockCab.Status.id == 3 or
+			DemandStockCab.Status.id == 4 or DemandStockCab.Status.id ==  9 or DemandStockCab.Status.id == 10  %}
+			
+				<button id="anuller_demande" data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white btn-warning btn-outline waves-effect waves-light" data-style="expand-left">
+					<i class="fa fa-close"></i>
+					Anuller
+					</button>
+					{% endif %}
+				{# {{dump(dc.Role_STK)}} #}
+				{# {% if dc.Role_STK == 'DE'    %} #}
+				{% if DemandStockCab.Status.id == 1 and (dc.Role_STK == 'DE'  or stockRole == 'RC') %}
+					<button id="envoyer_demande" data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+						<i class="fa fa-arrow-right"></i>
+						Envoyer
+
+					</button>
+				{% elseif DemandStockCab.Status.id == 3 and (dc.Role_STK == 'DE'  or stockRole == 'RC')%}
+					<button id="valider_demande" data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+						<i class="fa fa-arrow-right"></i>
+						Valider
+					</button>
+
+				{% endif %}
+				{# {% else %} #}
+				{# {{dump(DemandStockCab.Status.designation)}} #}
+				{% if DemandStockCab.Status.id == 2 and  dc.Role_STK == 'RC'%}
+					<button id="chiffrer_demande"  data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+						<i class="fa fa-arrow-right"></i>
+						Chiffrer
+					</button>
+
+				{% elseif DemandStockCab.Status.id == 4 and  dc.Role_STK == 'RC'  %}
+					<button id="prete_demande" data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+						<i class="fa fa-arrow-right"></i>
+						Prête
+					</button>
+				{% elseif DemandStockCab.Status.id == 10 and  dc.Role_STK == 'RC'   %}
+					<button id="Livraison_Partielle_demande" data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+						<i class="fa fa-arrow-right"></i>
+						Livraison partielle
+					</button>
+					<button id="Livraison_Complete_demande" data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+						<i class="fa fa-arrow-right"></i>
+						Livraison Complète
+					</button>
+				{% elseif DemandStockCab.Status.id == 6 and DemandStockCab.Uantenne is not null and  dc.Role_STK == 'RC'  %}
+					<button id="Livraison_Partielle_demande" data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+						<i class="fa fa-arrow-right"></i>
+						Livraison partielle
+					</button>
+					<button id="Livraison_Complete_demande" data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+						<i class="fa fa-arrow-right"></i>
+						Livraison Complète
+					</button>
+
+				{% endif %}
+				{# {% endif %} #}
+			</div>
+		</div>
+	</div>
+</div></div></form>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('demande') }}
+{% endblock %}

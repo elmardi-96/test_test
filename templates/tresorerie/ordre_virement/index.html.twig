@@ -1,0 +1,490 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}Transaction index | Tresorerie
+{% endblock %}
+
+{% block body %}
+
+	<div class="actions modal fade right" id="modalTypeCheque" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog modal-full-height modal-small modal-right " style="max-width: 28% !important; width:28% !important" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalPreviewLabel1">
+						Impression Chèque
+					</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+
+				<div class="modal-body bo-0">
+					<div class="text-center spr1" style="display: none;">
+						<br/>
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod1 mt-2 ml-3" style="">
+						<a target="_blank" href="#" class="btn btn-success cheque_normal">Imprimer Chèque</a>
+						<a target="_blank" href="#" class="btn btn-success cheque_physique">Impri Chèque Physique</a>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="actions modal fade right" id="ModalDocumentDynamique1" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog modal-full-height modal-operation modal-right " role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel1">
+						Transaction
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="text-center spr1">
+						<br/>
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod1"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="actions modal fade right" id="ModalDocumentDynamiqueValider" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel1">
+						Transaction Valider
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="text-center spr_valider">
+						<br/>
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod_valider"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="actions modal fade right" id="virment_annuler" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel1">
+						Annulation
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="bod">
+						<form class="save_annulation">
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label for="motif">Code Cheque Impaye 
+									</label>
+									<input class="form-control" id="ChequeImpaye" name="ChequeImpaye" type="text">
+
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label for="motif">Motif
+									</label>
+									<input class="form-control" id="motif" name="motif" type="text">
+
+								</div>
+							</div>
+							<div class="form-group row mt-2">
+								<div class="col-md-12" style="display: flex;align-items: center;">
+									<input id="cheque_impaye" name="cheque_impaye" type="checkbox" class="mr-1">
+									<label for="cheque_impaye" class="mb-0">Chéque impayé</label>
+
+								</div>
+							</div>
+
+							<div class="form-group row mt-2">
+								<label class="col-sm-12 required">
+									<button class="save_new btn-register btn btn-white btn-block my-button  upper btn-xs my-button2" data-style="expand-left" type="submit">
+										<i class="fa fa-save "></i>
+										ENREGISTRER
+									</button>
+								</label>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="actions modal fade right" id="acquise" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel1">
+						Accusé
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="bod">
+						<form class="save_acquise">
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label for="motif">Date
+									</label>
+									<input class="form-control" id="date_acquise" name="date_acquise" type="date">
+
+								</div>
+							</div>
+
+							<div class="form-group row mt-2">
+								<label class="col-sm-12 required">
+									<button class="btn-register btn btn-white btn-block my-button  upper btn-xs my-button2" data-style="expand-left" type="submit">
+										<i class="fa fa-save "></i>
+										ENREGISTRER
+									</button>
+								</label>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="actions modal fade right" id="gain_perte_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel1">
+						Gain/Perte de change
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="bod">
+						<form class="save_gain_perte">
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label for="type">Type
+									</label>
+									<select name="type" id="gain_perte_type">
+										<option value="gain">Gain</option>
+										<option value="perte">Perte</option>
+									</select>
+
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label for="montant">montant (MAD)
+									</label>
+									<input class="form-control" id="montant" name="montant" type="number" , step=".01">
+
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label for="observation">observation
+									</label>
+									<input class="form-control" id="observation" name="observation" type="text">
+
+								</div>
+							</div>
+
+							<div class="form-group row mt-2">
+								<label class="col-sm-12 required">
+									<button class="btn-register btn btn-white btn-block my-button  upper btn-xs my-button2" data-style="expand-left" type="submit">
+										<i class="fa fa-save "></i>
+										ENREGISTRER
+									</button>
+								</label>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+		<div class="col-lg-12">
+			{% include './tresorerie/ordre_virement/inc/workflow_breadcumb.html.twig' %}
+		</div>
+
+
+		<div class="col-lg-6">
+			<div
+				class="title-action">{# {% for key ,  operation in operations %}
+															{% if operation.verticale and  operation.prefix== '_new'%}
+																<a {% if operation.route is not null %} href="{{ path(operation.route) }}" {% endif %} id="{{operation.prefix}}" class="op-hor btn btn-white btn-xs {{operation.classCs}}">
+																	<i class="fa {{ operation.icon }}"></i>
+																	{{ operation.titre|capitalize }}</a>
+															{% endif %}
+														{% endfor %} #}
+
+
+			</div>
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+
+	</div>
+
+
+	<br/>
+	<br/>
+	<div class="row border-bottom white-bg dashboard-header mt-20">
+		<div class="col-lg-12">
+
+			<div class="ibox">
+
+
+				<!-- Button trigger modal -->
+
+
+				<!-- Modal -->
+					<div class="modal fade" id="check" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> <div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">entrer une taille par PX</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<label for="taille">taille :</label>
+								<input style="outline:none;" type="text" class="taille" id="taille" name="taille">&nbsp;px&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label for="taille">la taille réelle :</label>
+								<span id='ntaille'>{{app.session.get('height')}}
+								</span>
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary " id="souvg">Sauvegarder</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="row border-bottom white-bg dashboard-header mt-10">
+		<div class="col-lg-12">
+			<div class="ibox ">
+				<div class="ibox-content">
+					<div class="table-responsive" style="overflow-x:auto;">
+						<div class="row">
+							<div class="col-2 list_actions_bloc" style="position: fixed ; display: none;"></div>
+
+
+						</div>
+						<!--color : <span style="color:#ff6a6a">ddd</span>-->
+						{# <select class=" form-control" id="valid" style="width: 15%; display:none;   margin-left: -5px;">
+																			<option value="">Action</option>
+																			<option value="1">Valider transaction</option>
+																			<option value="2">Générer</option>
+																		</select> #}
+						<form name="action_test" class="action_test">
+							<table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid2" style="width: 100%">
+								<thead>
+									<tr>
+										<th style="width:5%;">#</th>
+										<th>Code</th>
+										<th>Date</th>
+										<th>Observation</th>
+										<th>MP</th>
+										<th>Montant</th>										
+										<th>signature</th>
+										<th>OPR</th>
+									</tr>
+								</thead>
+							</table>
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mail-body text-right tooltip-demo buttons_foot">
+		{% for key ,  operation in operations %}
+			{% if operation.prefix== '_annuler'%}
+				<button style="float: right;" type="button" class="btn btn-warning mr-2 annuler">
+					<i class="fa fa-times-square"></i>
+					annuler
+				</button>
+
+			{% endif %}
+		{% endfor %}
+
+		{# executer #}
+
+		<button type="button" class="btn btn-primary mr-2 executernew" >
+			<i class="fa fa-check-square"></i>
+			exécuter
+		</button>
+		{# <button style="float: right;" type="button" class="btn btn-primary mr-2 ">
+								<i class="fa fa-check-square"></i>  exécuter
+							</button> #}
+	</div>
+
+
+	<!-- Modal -->
+	<div class="modal fade bd-example-modal-lg" id="executernew" tabindex="-1" role="dialog" aria-labelledby="executernewLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document" style="z-index: 9999;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="executernewLabel">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			
+				<style>
+					#executer_datatble_wrapper {
+						height: 200px; /* Set the desired height for the table container */
+						overflow-y: scroll;
+						overflow-x: hidden;
+
+					}
+					
+				</style>
+				<div class="modal-body">
+
+					<div class="row g-3 align-items-center">
+					<div class="col-1">
+						<label for="inputRemise" class="col-form-label">Remise</label>
+					</div>
+					<div class="col-5">
+						<input type="text" id="inputRemise" class="form-control" placeholder="Numéro Remise...">
+					</div>
+					<div class="col-1">
+						<label for="inputTotal" class="col-form-label">Total</label>
+					</div>
+				<div class="col-5">
+				<input type="text" id="totalMontant" class="form-control" readonly style="text-align: right;">
+				</div>
+
+					</div>
+					<table class=" table tb cmd display table-striped table-bordered table-hover" id="executer_datatble" class="display" style="width:100%">
+						<thead>
+							<tr>
+								<th style="text-align: center;">#</th>
+								<th style="text-align: center;">id</th>
+								<th style="text-align: center;">code</th>
+								<th style="text-align: center;">code BQ</th>
+								<th style="text-align: center;">montan</th>
+							</tr>
+						</thead>
+						<tbody class="bodycodebq"></tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary executer">exécuter</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+			<!-- Modal -->
+			<div class="modal fade" id="motifeModal" tabindex="-1" aria-labelledby="motifeModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+			
+				<div class="modal-body">
+						<div class="mb-3">
+						<label for="ajouter motif annulation" class="form-label">ajouter motif annulation</label>
+						<textarea class="form-control" id="annulation" placeholder="écrivez la raison pour laquelle vous annulez..." name="ajouter_motif" rows="3" required></textarea>
+						</div>	
+						
+						<button type="button" class="btn btn-warning CloseClose" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary executer">exécuter</button>
+					
+				
+					
+				</div>
+				{# <div class="modal-footer">
+					
+				</div> #}
+				</div>
+			</div>
+			</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+	<script>
+		$('body #souvg').click(function (e) {
+
+let height = $(".taille").val();
+let path = "/virement/height/" + height;
+$.ajax({
+url: path,
+success: function (response) {
+alert('Height Updated');
+$('#ntaille').text(response);
+}
+});
+e.preventDefault();
+});
+	</script>
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('virement') }}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base_univ.html.twig' %}
+
+{% block title %}Modifier | Epreuves | UNIV{% endblock %}
+
+{% block body %}
+<div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+     <div class="edit">
+    {{ include('./module_univ/evaluation/configepv/_form.html.twig',{'button_label': 'Modifier'}) }}
+    </div>
+
+{{ render(controller('App\\Controller\\moduleUniv\\evaluation\\EvaluationAnneeController:ChoixPromotion',{ 'id': epreuve.ControleEpreuve.controleElement.controleModule.controleSemestre.controlePromotion ,'type':'epv','active':epreuve.id}))}}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('univ_epreuve') }}
+{% endblock %}

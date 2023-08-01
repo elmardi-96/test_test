@@ -1,0 +1,188 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Informations | Réglement fournisseur | Ugouv achat
+{% endblock %}
+
+{% block body %}
+	{% set current_path = app.request.get('_route') %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-12">
+			{% include './module_achat/t_reglementfrscab/inc/workflow_breadcumb.html.twig' %}
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './module_achat/t_reglementfrscab/inc/workflow.html.twig' %}
+		</div>
+	</div>
+	<br/><br/>
+
+
+	<div class="row pt-20">
+		<div class="col-lg-12 ">
+			<div class="ibox">
+				<div
+					class="ibox-content">
+					{#% include './ugouv/achat/t_reglementfrscab/inc/workflow_breadcumb.html.twig' %#}
+					<div class="message-success"></div>
+
+
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										{% include './module_achat/t_reglementfrscab/inc/navigation.html.twig' %}
+
+									</div>
+								</div>
+
+								<div class="panel-body">
+									<div class="col-md-12">
+										<div class="tab-content">
+											<div class="tab-pane active" id="tab-1">
+
+
+												<div class="row">
+													<div class="col-md-12">
+
+														<h3 class="m-t-none m-b">Informations réglement fournisseur
+														</h3>
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-4 required">
+																Code Réglement	 :</label>
+
+															<div class="col-sm-4">
+																{{ t_reglementfrs.code }}
+															</div>
+
+														</div>
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+
+															<label class="col-sm-4 required">
+																Date Réglement	 :</label>
+															<div class="col-sm-4">
+																{{t_reglementfrs.datereglement|date("d/m/Y")}}
+															</div>
+														</div>
+
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+
+															<label class="col-sm-4 required">Code Facture	 :</label>
+															<div class="col-sm-4">
+																<a href="{{ path('ua_t_facturefrscab_consulte' , {id:t_reglementfrs.factureFournisseur.id})}}">{{ t_reglementfrs.factureFournisseur.code }}</a>
+
+
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-4 required">Date de facture	:</label>
+
+															<div class="col-sm-4">
+																{{t_reglementfrs.factureFournisseur.datefacture|date("d/m/Y") }}
+
+
+															</div>
+
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+
+															<label class="col-sm-4 required">Mode de Paiement	 :</label>
+															<div class="col-sm-4">
+																{{t_reglementfrs.modepaiement ? t_reglementfrs.modepaiement.designation }}
+
+
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+
+															<label class="col-sm-4 required">Banque	 :</label>
+															<div class="col-sm-4">
+																{{t_reglementfrs.banque ? t_reglementfrs.banque.designation }}
+
+
+															</div>
+														</div>
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+
+															<label class="col-sm-4 required">Montant Facture		 :</label>
+															<div class="col-sm-4">
+																{{t_reglementfrs.factureFournisseur.montant|number_format(2)}}
+																{{ t_reglementfrs.devise ? t_reglementfrs.devise.designation }}
+
+
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-4 required">Montant Réglement		:</label>
+
+															<div class="col-sm-4">
+																{{t_reglementfrs.mtreglement  |number_format(2)}}
+																{{ t_reglementfrs.devise ? t_reglementfrs.devise.designation }}
+
+
+															</div>
+
+														</div>
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+
+															<label class="col-sm-4 required">Observation	 :</label>
+															<div class="col-sm-4">
+																{{t_reglementfrs.observation ? t_reglementfrs.observation }}
+
+
+															</div>
+														</div>
+
+													</div>
+
+
+												</div>
+
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	{% set commande = [] %}
+	{% set facture = t_reglementfrs.factureFournisseur %}
+	{% for livraison in t_reglementfrs.factureFournisseur.livraisons  %}
+		{% set commande = livraison.commande %}
+	{% endfor %}
+	{{ include('./module_achat/inc/t_commandefrscab.html.twig' ,{'commande': commande,'position':'reglement'}) }}
+
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('treglementfrscab') }}
+
+
+{% endblock %}

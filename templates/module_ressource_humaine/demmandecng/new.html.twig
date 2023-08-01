@@ -1,0 +1,23 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Conge , nouveau | GRS{% endblock %}
+
+
+
+
+{% block body %}
+    
+    <div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+
+<div class="new">
+    {{ include('./module_ressource_humaine/demmandecng/_form.html.twig') }}
+<br/><br/>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('grs_conge') }}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% if compte is defined and compte is not empty and compte.id is not empty   %}
+
+	<div class="wrf-positions">
+
+
+	
+			{% for key ,  operation in operations  %}
+				{% if  operation.prefix == '_delete' %}
+					<a id="{{operation.prefix}}" data-id="{{compte.id}}" data-token="{{ csrf_token('delete' ~ compte.id) }}" class='btn-wrf btn btn-xs btn-danger btn-outline {{operation.classCs}}'>
+						<i class="fa {{ operation.icon }}"></i>
+						{{ operation.titre|capitalize }}</a>
+				{% endif %}
+			{% endfor %}
+
+	
+		<div id="test" data-compte-id="{{ compte.id|json_encode }}"></div>
+
+	</div>
+{% endif %}
+
+
+{{ wo_render_breadcrumbs() }}

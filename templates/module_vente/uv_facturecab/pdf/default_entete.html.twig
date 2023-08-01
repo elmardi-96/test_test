@@ -1,0 +1,77 @@
+<table class="table-header">
+	<tr>
+		<th>
+			<img src="{{ asset(image)[1:] }}" class="logo" alt="Logo">
+		</th>
+		<th class="th2"><br></th>
+		<th class="th3">
+
+			RAISON SOCIAL :
+			<label>{{ cab.client  ? cab.client.societe  }}</label><br>
+			ADRESSE :
+			<label>{{ cab.client  ? cab.client.adresse  }}</label><br>
+			TEL :
+			<label>{{ cab.client  ? cab.client.tel1 ~ ' / '~  cab.client.tel2 }}</label><br>
+
+
+		</th>
+	</tr>
+
+</table>
+<br>
+<h3>FACTURE CLIENT N°
+	{{ cab.code }}</h3>
+
+
+<p style="float: right">
+	DATE :
+	{{ cab.created ? cab.created|date("d/m/Y")  }}</p>
+<table class="table-sub-title">
+	<tr>
+		<td style="border-bottom: 1px solid #555 ; font-weight: bold;text-align:center" colspan="4">
+			INFORMATIONS OPERATION
+		</td>
+
+
+	</tr>
+	<tr>
+		<td>
+			REF COMMANDE CLIENT :</td>
+		<td>{{ cab.refDocAsso }}</td>
+		<td>
+			REF COMMANDE :</td>
+
+		<td>{{ cab.livraisons[0] ? cab.livraisons[0].commande.code }}</td>
+	</tr>
+
+	<tr>
+		<td>
+			LIVRAISONS :</td>
+		<td>
+			{% for key1 , detail1 in cab.livraisons   %}
+				{{ detail1.code }}
+				<br/>
+			{% endfor %}
+		</td>
+		<td>
+			DATE COMMANDE :</td>
+		<td>{{ cab.livraisons[0] ? cab.livraisons[0].commande.dateDocAsso|date("d/m/Y") }}</td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td></td>
+		<td>
+			DATE ECHEANCE :</td>
+		<td>xxxxxxxx</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td>
+			MODE DE PAIEMENT :</td>
+		<td>{#{ cab.dateoperation ? cab.dateoperation|date("d/m/Y")  }#}xxxxxxxx</td>
+	</tr>
+
+
+</table>

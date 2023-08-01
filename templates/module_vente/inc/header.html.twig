@@ -1,0 +1,62 @@
+<div id="page-wrapper" class="gray-bg">
+	<div class="row">
+
+
+		<nav class="navbar navbar-fixed-top" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+					<i class="fa fa-bars"></i>
+				</a>
+
+				<ul class="navbar-top-links navbar-top-dossier">
+					<li
+						class="nav-item">
+						{#<a class="nav-link" href="{{ path('_ugouv_vente_dossiers_by_module',{'id':app.session.get('moduleCourantUgouvVente').id}) }}">
+																																																																			<i class="fa fa-folder"></i>
+																																																																			{% if (app.session.get('modules')[app.session.get('moduleCourantUgouvVente').prefix]['dossiers'][app.session.get('dossierCourantUgouvVente').prefix]  is defined) %}
+																																																																				{%   set dossier = app.session.get('modules')[app.session.get('moduleCourantUgouvVente').prefix]['dossiers'][app.session.get('dossierCourantUgouvVente').prefix] %}
+																																																																				{{ dossier.titre }}
+																																																																				({{ (dossier.abreviation) }})
+																																																																			{% endif %}
+																																																																		</a>#}
+						{%   set dossier = app.session.get('modules')[app.session.get('moduleCourantUgouvVente').prefix]['dossiers'][app.session.get('dossierCourantUgouvVente').prefix] %}
+						<div class="btn-group">
+							<button data-toggle="dropdown" class="btn btn-default btn-xs  drop-down-class" aria-expanded="false">
+								<i class="fa fa-folder"></i>
+								{{ dossier.titre }}
+								({{ (dossier.abreviation) }})</button>
+							<ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; top: 24px; left: 0px; will-change: top, left;">
+								{% for dos in app.session.get('modules')[app.session.get('moduleCourantUgouvVente').prefix]['dossiers'] %}
+									{% if dossier.id != dos.id  %}
+										<li>
+											<a class="dropdown-item " style="font-size: 11px;color: #616161 !important;text-transform: uppercase;" href="{{ path('dossier_courant_vente',{'module_id':app.session.get('moduleCourantUgouvVente').id,'dossier_id':dos.id}) }}">
+												<i class="fa fa-folder"></i>
+												{{ dos.titre }}
+												({{ (dos.abreviation) }})</a>
+										</li>
+									{% endif %}
+								{% endfor %}
+
+								<li class="dropdown-divider"></li>
+								<li>
+									<a class="dropdown-item" style="font-size: 11px;color: #616161 !important;text-transform: uppercase;" href="{{ path('_ugouv_vente_dossiers_by_module',{'id':app.session.get('moduleCourantUgouvVente').id}) }}">
+										<i class="fa fa-folder"></i>
+										Tout les dossiers sds</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<ul class="nav navbar-top-links navbar-right ">
+
+				{% include './inc/header_app_config_logout.html.twig' %}
+
+
+			</ul>
+
+
+		</nav>
+
+
+	</div>

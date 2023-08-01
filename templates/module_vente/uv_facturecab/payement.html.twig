@@ -1,0 +1,321 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}New TReglementfrs
+{% endblock %}
+
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+
+    <div class="new">
+        {{ form_start(form ,{'attr':{'novalidate': 'novalidate' ,"autocomplete":"off", 'class':'form'}}) }}
+
+
+        <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+            <div class="col-lg-6">
+                {% include './module_vente/uv_facturecab/inc/workflow_breadcumb.html.twig' %}
+            </div>
+
+
+            <div class="col-lg-6">
+                <div
+                    class="title-action">
+                    {% if workflow_has_marked_place(facture, 'valider') %}
+                        <button class="btn btn-white  btn-xs btn-lg my-button2" type="submit">
+                            <i class="fa fa-save"></i>
+                            {{ button_label|default('Enregistrer') }}</button>
+                        {% endif %}
+                </div>
+            </div>
+
+            <div class="border-b"></div>
+            <div class="col-lg-12">
+                {% include './module_vente/uv_facturecab/inc/workflow.html.twig' %}
+            </div>
+
+        </div>
+        <br/><br/>
+        <div class="row pt-20">
+            <div class="col-lg-12 ">
+                <div class="ibox">
+                    <div class="ibox-content">
+
+                        <div class="message-success"></div>
+
+
+                        <div class="row m-t-sm">
+                            <div class="col-lg-12">
+                                <div class="panel blank-panel">
+                                    <div class="panel-heading">
+                                        <div class="panel-options">
+                                            {% include './module_vente/uv_facturecab/inc/navigation.html.twig' %}
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="panel-body">
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab-1">
+
+
+                                                    <div class="row">
+                                                        <div class="col-md-6 b-r">
+                                                            {% if workflow_has_marked_place(facture, 'valider') %}
+                                                                <h3 class="m-t-none m-b">Informations
+                                                                </h3>
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-4 required">
+                                                                        Mt Facture :</label>
+
+                                                                    <div class="col-sm-8">
+                                                                        {{ mttc|number_format(2) }}
+                                                                    </div>
+                                                                </div>
+
+                                                                <div id="test" data-facture-id="{{ facture.id|json_encode }}"></div>
+                                                                <div class="hr-line-dashed"></div>
+                                                                <div class="form-group row" >
+                                                                    {{ form_label(form.compte ,'destination reglement (*) ', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                    <div class="col-sm-6">
+                                                                        {{ form_widget(form.compte,{'attr':{'class':'sel2 form-control form-control-sm'}}) }}
+                                                                        <span class="form-error-message">
+                                                                            {{ form_errors(form.compte) }}
+                                                                        </span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="hr-line-dashed"></div>
+
+                                                                <div class="form-group row">
+                                                                    {{ form_label(form.datereglement ,'Date Demande Paiement ', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                    <div class="col-sm-4">
+                                                                        {{ form_widget(form.datereglement,{'attr':{'class':'form-control'}  }) }}
+
+
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                                <div class="hr-line-dashed"></div>
+
+                                                                <div class="form-group row">
+                                                                    {{ form_label(form.mtreglement ,'Montant Paiement ', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                    <div class="col-sm-4">
+                                                                        {{ form_widget(form.mtreglement,{'attr':{'class':'form-control form-control-sm ','placeholder':'Montant paiement','value':mttc - mtreg}  }) }}
+                                                                    </div>
+
+                                                                </div>
+
+
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                <div class="form-group row">
+                                                                    {{ form_label(form.devise ,'Devise ', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                    <div class="col-sm-3">
+                                                                        {{ form_widget(form.devise,{'attr':{'class':'sel2 form-control form-control-sm'}}) }}
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                <div class="form-group row" >
+                                                                    {{ form_label(form.modepaiement ,'mode Paiement ', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                    <div class="col-sm-6">
+                                                                        {{ form_widget(form.modepaiement,{'attr':{'class':'sel2 form-control form-control-sm paiement'}}) }}
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="bloc_cheque" style="display: none;">
+                                                                    <div class="hr-line-dashed"></div>
+                                                                    <div class="form-group row">
+                                                                        {{ form_label(form.numcheque ,'Reference	', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                        <div class="col-sm-4">
+                                                                            {{ form_widget(form.numcheque,{'attr':{'class':'form-control','placeholder':'Reference'}  }) }}
+
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="hr-line-dashed"></div>
+                                                                    <div class="form-group row">
+                                                                        {{ form_label(form.dateecheance ,'date d\'echeance	', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                        <div class="col-sm-4">
+                                                                            {{ form_widget(form.dateecheance,{'attr':{'class':'form-control'}  }) }}
+
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                           </div>
+
+
+                                                            <div class="col-md-6">
+
+                                                                <h3 class="m-t-none m-b">Informations client</h3>
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-4 required">
+                                                                        client  :</label>
+
+                                                                    <div class="col-sm-8">
+                                                                        {{facture.client ? facture.client.societe}}
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                <div class="form-group row" >
+                                                                    {{ form_label(form.banque ,'banque client ', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                    <div class="col-sm-6">
+                                                                        {{ form_widget(form.banque,{'attr':{'class':'sel2 form-control form-control-sm'}}) }}
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                                <div class="hr-line-dashed"></div>
+                                                                <div class="form-group row">
+                                                                    {{ form_label(form.observation ,'Observation ', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                    <div class="col-sm-8">
+                                                                        {{ form_widget(form.observation,{'attr':{'class':' form-control form-control-sm observation','placeholder':'observation'}}) }}
+                                                                    </div>
+
+                                                                </div>
+
+
+
+                                                            </div>
+
+                                                            {{ form_end(form) }}        
+
+                                                        {% else  %}
+                                                            <div class="forum-item animated length">
+                                                                <div class="row">
+                                                                    <div class="col-md-9">
+                                                                        <div class="forum-icon">
+                                                                            <i class="fa fa-warning"></i>
+                                                                        </div>
+                                                                        <a  class="forum-item-title">Important</a>
+                                                                        <div class="forum-sub-title">
+                                                                            Pour passer un Paiement , il il faut tout d'abord valider cette Facture . <a href="{{ path('uv_facturecab_show' , {id:facture.id})}}">{{ facture.code }}</a>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% if workflow_has_marked_place(facture, 'valider') %}
+            <div class="row justify-content-md-center">
+                <div class="col-lg-12 ">
+                    <div class="ibox ">
+                        <div class="ibox-title m-min">
+                        </div>
+                        <div class="ibox-content">
+
+
+                            <div class="table-responsive">
+                                <div class="col-md-12 m-mar-t">
+                                    <h5 class="m-left">HISTORIQUE DE PAIEMENT</h5>
+                                    <table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show2">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>code </th>
+                                                <th>Date</th>
+                                                <th>Mode.p</th>
+                                                <th>Banque</th>
+
+                                                <th>Ref</th>
+                                                <th>Date echeance</th>
+                                                <th>Description</th>
+                                                <th>Montant </th>
+                                                <th>Devise</th>
+                                                <th>Imprimer</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {% set totale = 0 %}
+                                            {% set c = 0 %}
+                                            {% for reglement in facture.reglements %}
+                                                {% set c = c + 1 %}
+                                                {% set totale =  totale + reglement.mtreglement %}
+                                                <tr class="edit-new-article">
+                                                    <td>{{c}}</td>
+                                                    <td><a class="active-link" href="{{ path("uv_reglementcab_show" , {id:reglement.id} ) }}">{{ reglement.code }}</a> </td>
+
+                                                    <td>{{ reglement.datereglement ? reglement.datereglement|date('d-m-Y') : '' }}</td>
+                                                    <td>{{reglement.modepaiement ? reglement.modepaiement.designation }}</td>
+                                                    <td>{{reglement.banque ? reglement.banque.designation }}</td>
+                                                    {#<td>{{t_reglementfr1.devise ? t_reglementfr1.devise.designation }}</td>#}
+                                                    <td>{{reglement.numcheque}}</td>
+                                                    <td>{{reglement.dateecheance ? reglement.dateecheance|date("d/m/Y") }}</td>
+
+                                                    <td>
+                                                        {{reglement.observation}}
+                                                    </td>
+                                                    <td>{{ reglement.mtreglement|number_format(2) }}</td>
+                                                    <td>{{ reglement.devise ? reglement.devise.designation }}</td>
+
+                                                    <td>
+                                                        <a target="_blank" href="{{ path('pdf_show_reglement_vente',{id:reglement.id})}}" class="btn btn-xs btn-white btn-outline">
+                                                            <i class="fa fa-print"></i>&nbsp; Imprimer</a>
+                                                    </td>
+                                                </tr>
+
+                                            {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="3" style="text-align:right">Total:</th>
+
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <br><br>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('Vtfacturefrscab') }}
+{% endblock %}

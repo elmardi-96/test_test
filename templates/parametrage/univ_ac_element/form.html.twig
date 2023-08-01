@@ -1,0 +1,227 @@
+<div class="sidebar-container new">
+
+	<div class="ibox-tools"></div>
+
+	<div class="tab-content ">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+				</h3>
+				<small>
+					{% if  univ_ac_element.id > 0 %}
+						Modifier
+					{% else %}
+						Ajouter
+					{% endif %}
+				</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<table class="table small m-b-xs">
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="ibox ">
+					<div class="ibox-content">
+
+
+						{% if  univ_ac_element.id > 0 %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_edit'}}) }}
+						{% else %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+						{% endif  %}
+
+
+						<div class="row">
+
+
+							<div class="col-md-12 b-r">
+
+								{% if  univ_ac_element.id > 0 %}
+									<div id="test" data-element-id="{{ univ_ac_element.id|json_encode }}"></div>
+
+								{% endif  %}
+								<div class="hr-line-dashed paddi hr-line-dashed paddi-co"></div>
+
+
+								<div class="form-group row">
+									{{ form_label(form.designation ,'Designation (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.designation,{'attr':{'class':'form-control form-control-sm','placeholder': 'designation'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.designation) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.coefficient ,'Coefficient (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.coefficient,{'attr':{'class':'form-control form-control-sm select2','placeholder': 'coefficient'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.coefficient) }}
+										</span>
+									</div>
+
+								</div>
+
+								<div class="hr-line-dashed paddi"></div>
+
+								<div class="form-group row">
+									<label class="col-sm-12 required ">Etablissement (*)</label>
+									<div class="col-sm-12 ">
+										<select class="form-control etablissement select2">
+											{{ etablissement|raw }}</select>
+									</div>
+
+
+								</div>
+
+
+								<div class="hr-line-dashed paddi"></div>
+
+								<div class="form-group row">
+									<label class="col-sm-12 required ">Formation (*)</label>
+									<div class="col-sm-12 ">
+										<select name="formation" class=" form-control formation select2">
+											<option>choix formation...</option>
+											{% if  univ_ac_element.id > 0 %}
+												{{ formation|raw }}
+											{% endif %}
+
+
+										</select>
+									</div>
+
+
+								</div>
+
+
+								<div class="hr-line-dashed paddi"></div>
+
+								<div class="form-group row">
+									<label class="col-sm-12 required ">Promotion (*)</label>
+									<div class="col-sm-12 ">
+										<select name="promotion" class=" form-control promotion select2">
+											<option>choix promotion...</option>
+											{% if  univ_ac_element.id > 0 %}
+												{{ promotion|raw }}
+											{% endif %}
+
+										</select>
+									</div>
+
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+
+								<div class="form-group row">
+									<label class="col-sm-12 required ">Semestre (*)</label>
+									<div class="col-sm-12 ">
+										<select name="semestre" class=" form-control semestre select2">
+											<option>choix Semestre...</option>
+											{% if  univ_ac_element.id > 0 %}
+												{{ semestre|raw }}
+											{% endif %}
+
+										</select>
+									</div>
+
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+
+
+									{{ form_label(form.module ,'Module (*):', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{% if  univ_ac_element.id > 1 %}
+
+											{{ form_widget(form.module,{'attr':{'class':'form-control form-control-sm select2 module_select','placeholder': 'Module'}}) }}
+
+										{% else %}
+											<select id="univ_ac_element_module" name="univ_ac_element[module]" required="required" class="form-control form-control-sm select2 module_select" placeholder="Module">
+												<option value="">Choix Module ...</option>
+											</select>
+
+										{% endif  %}
+										<span class="form-error-message">
+											{{ form_errors(form.module) }}
+										</span>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+
+								<div class="form-group row">
+									{{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.active) }}
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								{% if  univ_ac_element.id > 0 %}
+									<div class="form-group row">
+										<div class="col-sm-6">
+											<button class="btn btn-primary btn-block btn-xs  button-edit-element">
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Modifier') }}</button>
+
+										</div>
+										<div class="col-sm-6">
+											{% for operation in operations|filter(operation => operation.prefix == '_delete') %}
+
+												<a {% if operation.route is not null %} data-id="{{univ_ac_element.id}}" data-token="{{ csrf_token('delete' ~ univ_ac_element.id) }}" href="#{# {{ path(operation.route) }} #}" {% endif %} id="{{operation.prefix}}" class="btn btn-block btn-xs btn-danger _delete{{operation.classCs}}">
+													<i class="fa {{ operation.icon }}" style="color: white !important;"></i>
+													{{ operation.titre|capitalize }}</a>
+
+											{% endfor %}
+										</div>
+
+
+									</div>
+								{% else %}
+									<div class="form-group row">
+
+										<div class="col-sm-5">
+											<button class="btn btn-primary btn-block btn-xs  button-save-element">
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Enregistrer') }}</button>
+
+										</div>
+										<div class="col-sm-7">
+											<button class="btn btn-primary btn-block btn-xs  button-save-add-element">
+												<i class="fa fa-save"></i>
+												&nbsp;Enregistrer et Ajouter</button>
+
+										</div>
+									</div>
+								{% endif  %}
+
+
+							</div>
+
+						</div>
+
+						{{form_widget(form._token)}}
+						{{ form_end(form,{'render_rest': false}) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

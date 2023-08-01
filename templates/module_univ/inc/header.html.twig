@@ -1,0 +1,47 @@
+
+
+{% set current_path = app.request.get('_route') %}
+<div id="page-wrapper" class="gray-bg {% if " module_univ_index"  in current_path  %}  {%endif%} ">
+    <div class="row">
+        <nav class="navbar navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                    <i class="fa fa-bars"></i>
+                </a>
+
+                <ul class="navbar-top-links navbar-top-dossier">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('module_univ_index') }}">
+                            <i class="fa fa-folder"></i>
+                            {% if (app.session.get('modules')['_univ']['dossiers']['_default_univ']  is defined) %}
+                                {%   set dossier = app.session.get('modules')['_univ']['dossiers']['_default_univ']  %}
+                                {{ dossier.titre }}
+                                ({{ app.session.get('modules')['_univ']['abreviation'] }})
+                            {% endif %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+
+                {% include './inc/header_app_config_logout.html.twig' %}
+
+
+            </ul>
+
+
+        </nav>
+        {#<div class="row">
+                        <nav class="navbar navbar-fixed-top" role="navigation">
+                            <div class="navbar-header">
+                                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href=""><i class="fa fa-bars"></i></a>
+                                <div class="single-mdl">
+                                    <img src="{{asset('img/modules/'~app.session.get('modules')['_univ']['image'])}}" class="rounded-circle circle-border m-b-md" alt="module conge image"> <a href="{{ path('module_univ_index') }}"><h2> {{ app.session.get('modules')['_univ']['titre']|upper }} </h2></a>
+                                </div>
+                            </div>
+                            <ul class="nav navbar-top-links navbar-right">
+                               {% include './inc/header_app_config_logout.html.twig' %}
+                            </ul>
+                        </nav>#}
+    </div>
+

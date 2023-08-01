@@ -1,0 +1,142 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+	<div class="col-lg-4">
+		<h2 class="fo">GRS, Demande Congé
+		</h2>
+	</div>
+
+	<div class="col-lg-8">
+		<div class="title-action">
+			<button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}</button>
+
+
+		</div>
+	</div>
+
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+		{{ wo_render_breadcrumbs() }}
+	</div>
+
+</div>
+<br/><br/><br/>
+
+<div class="row pt-20">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+							<div class="panel-heading">
+								<div class="panel-options">
+									<ul class="nav nav-tabs">
+										<li>
+											<a class="nav-link active" href="#tab-1" data-toggle="tab">informations
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="panel-body">
+
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab-1">
+
+
+										<div class="row">
+											<div class="col-md-6 b-r">
+
+												<h3 class="m-t-none m-b">Informations
+												</h3>
+												{% if is_granted('ROLE_ADMIN') %}
+												<div class="form-group row">
+													{{ form_label(form.userDemande ,'demandé pour :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-4">
+														{{ form_widget(form.userDemande,{'attr':{'class':'form-control  form-control-sm'}}) }}
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+												{% endif %}
+												<div class="form-group row">
+													{{ form_label(form.dateDebut ,'dateDebut :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-4">
+														{{ form_widget(form.dateDebut,{'attr':{'class':'form-control  form-control-sm'}}) }}
+													</div>
+												</div>
+												<div class="hr-line-dashed"></div>
+												<div class="form-group row">
+													{{ form_label(form.dateFin ,'dateFin  :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-4">
+														{{ form_widget(form.dateFin,{'attr':{'class':'form-control  form-control-sm'}}) }}
+													</div>
+												</div>
+											</div>
+
+
+											<div class="col-md-6">
+
+												<h3 class="m-t-none m-b"><br></h3>
+
+												<div class="form-group row">
+													{{ form_label(form.type ,'type :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-8 input-group">
+														{{ form_widget(form.type,{'attr':{'class':' form-control form-control-sm','placeholder':'Type'}}) }}
+
+														{#  <span class="input-group-btn">
+														                                                                                                                                                                              <a title="Ajouter une affaire" class="_t_affaire_quick btn btn-white btn-bitbucket"> <i class="fa fa-plus-circle"></i></a> 
+														                                                                                                                                                                          </span>#}
+													</div>
+
+
+												</div>
+
+												<div class="hr-line-dashed"></div>
+
+
+												<div class="form-group row">
+													{{ form_label(form.description ,'description :', {'label_attr':{'class':'col-sm-4'}}) }}
+													<div class="col-sm-8">
+														{{ form_widget(form.description,{'attr':{'class':'form-control form-control-sm','placeholder':'Description'}}) }}
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+
+									</div>
+
+
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{% if grs_conge is defined %}
+	<input type="hidden" name="_id" value="{{ grs_conge.id }}"/>
+{% endif %}
+
+
+{{ form_end(form) }}

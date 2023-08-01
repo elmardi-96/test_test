@@ -1,0 +1,78 @@
+<div id="wrapper">
+
+    {#{{ dump(app.request.getPathInfo) }}#}
+    <!-- Sidebar -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul
+                class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <ul class="sidebar-app-url ">
+                            <li>
+                                <a style="cursor:default">
+                                    <img class="img-side-ugouv" src="{{asset('/img/logo-blackwhite.png')}}" /><span>U3S-ERP</span></a>
+                                <p>
+
+                                    {# {{app.session.get('dossierCourant').abreviation|upper }} #}
+                                    UGOUV SOLUTION 
+                                </p>
+                                <div>
+                                    <input id="search_keywords2" type="text" class="form-control search_keywords2 input-search" placeholder="Rechercher ...">
+                                    <i class="fa fa-search input-search-i"></i>
+                                </div>
+                            </li>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                {% if app.session.get('dossiers')[app.session.get('dossierCourant').prefix].modules  is defined  %}
+                    {% for key , module in  app.session.get('dossiers')[app.session.get('dossierCourant').prefix].modules|sort((a, b) => a.ord <=> b.ord) %}
+                        {% if module.solution_prefix =='_sys_ugouv' %}
+                            {% set active = '' %}
+                            {% set inactive = '' %}
+                            {% if module.activeLink in app.request.getPathInfo %}
+                                {% set active  = 'active' %}
+                            {% endif %}
+                            <li class="{{active}} colp" >
+                                <a {% if module.route is not null %} href="javascript:void(0){#{{ path(module.route) }}#}" {% endif %}>
+                                    <i class="fa {{module.icon}}"></i>
+                                    <span class="nav-label">{{ module.abreviation|capitalize }}</span>
+                                    <i class="fa arrow"></i>
+                                </a>
+                                {% if module.sousModules is defined  %}
+                                    <ul class="nav nav-second-level collapse {{inactive}}">
+                                        {%  for key , sousModule in module.sousModules|sort((a, b) => a.ordr <=> b.ordr)  %}
+                                            <li class="{% if sousModule.route in app.request.attributes.get('_route') %} active {% endif %} colp">
+                                                <a {% if  sousModule.route is not null %} href="{{ path(sousModule.route) }}" {% endif %}>
+                                                    <i class="fa {{sousModule.icon}}"></i>
+                                                    <span class="nav-label">{{ sousModule.titre|capitalize }}</span>
+                                                    {# <i class="fa arrow"></i> #}
+                                                </a>
+                                                {# {% if sousModule.operations is defined  %}
+                                                    <ul class="nav nav-third-level">
+                                                        {%  for key , operation in sousModule.operations  %}
+                                                            {% if operation.verticale %}
+                                                                <li class="{% if operation.route in app.request.attributes.get('_route') %} active {% endif %}colp">
+                                                                    <a {% if operation.route is not null %} href="{{ path(operation.route) }}" {% endif %}>
+                                                                        <i class="fa {{operation.icon}}"></i>
+                                                                        <span class="nav-label">{{ operation.titre|capitalize }}</span>
+                                                                    </a>
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endif %} #}
+                                            </li>
+
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <!-- End Sidebar -->

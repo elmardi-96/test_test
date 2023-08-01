@@ -1,0 +1,213 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form _dossier_update'}}) }}
+<div class="sidebar-container">
+
+
+    <div class="tab-content bod">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3>
+                    <i class="fa fa-info-circle"></i>
+                    Informations : 
+                    <span class="annee"></span>
+                </h3>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.titre ,'Titre(*) :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.titre,{'attr':{'class':'form-control  form-control-sm','placeholder':'Titre'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.titre)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.titre) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.abreviation ,'Abréviation(*) :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.abreviation,{'attr':{'class':'form-control  form-control-sm','placeholder':'Abréviation'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.abreviation)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.abreviation) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.nomDossier ,'Nom du dossier (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.nomDossier,{'attr':{'class':'form-control  form-control-sm','placeholder':'Nom du dossier'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.nomDossier)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.nomDossier) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 required ">Logo(*) :</label>
+                                        <div class="col-sm-12 custom-file">
+                                            {{ form_widget(form.imageFile.file, { 'attr': {'class': 'custom-file-input'} }) }}
+                                            <label for="logo" class="custom-file-label">image ...</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        {{ form_label(form.description ,'Description(*) :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.description,{'attr':{'class':'form-control  form-control-sm','placeholder':'Description'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.description)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.description) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.prefix ,'Prefix :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.prefix,{'attr':{'class':'form-control  form-control-sm','placeholder':'Prefix'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.prefix)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.prefix) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.active ,'Active :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.active,{'attr':{'class':'form-control  form-control-sm', 'style':'border:0px', 'placeholder':'Active'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.active)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.active) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        {{ form_label(form.adresse ,'Adresse :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.adresse,{'attr':{'class':'form-control  form-control-sm','placeholder':'Adresse'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.adresse)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.adresse) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="hr-line-dashed paddi"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        {{ form_label(form.tel ,'Tél :', {'label_attr':{'class':'col-sm-12'}}) }}
+                                        <div class="col-sm-12">
+                                            {{ form_widget(form.tel,{'attr':{'class':'form-control  form-control-sm','placeholder':'Tél'}}) }}
+
+                                            <div class="form-error {% if form_errors(form.tel)|length > 0 %}error-class-tab{% endif %}">
+                                                {{ form_errors(form.tel) }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="hr-line-dashed paddi"></div>
+
+                            <div class="row">
+                                {#<div class="col-md-6">
+                                    <button class="btn btn-white btn-xs btn-lg my-button1 btn-block waves-effect waves-light" data-style="expand-left" type="submit" data-type="1">
+                                        <i class="fa fa-save"></i>
+                                        Enregistrer et affecter
+                                    </button>
+                                </div>#}
+
+                                <div class="col-md-6">
+                                    <button class="btn btn-white btn-xs btn-lg my-button2 btn-block waves-effect waves-light" data-style="expand-left" type="submit" data-type="2">
+                                        <i class="fa fa-save"></i>
+                                        Enregistrer
+                                    </button>
+                                </div>
+
+
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center spr" style="display:none;">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+
+</div>
+
+{{form_widget(form._token)}}
+{{ form_end(form,{'render_rest': false}) }}

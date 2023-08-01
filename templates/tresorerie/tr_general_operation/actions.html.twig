@@ -1,0 +1,27 @@
+<div class="dropdown dropdown-inline center"> 
+	<a href="javascript:;" class="" data-toggle="dropdown" > 	
+      <span class="svg-icon svg-icon-md"> 	  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="15px" viewBox="0 0 24 24" version="1.1" class="svg-color"> 
+       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <rect x="0" y="0" width="24" height="24"></rect> 
+            <circle fill="#000000" cx="5" cy="12" r="2"></circle> <circle fill="#000000" cx="12" cy="12" r="2"></circle>
+            <circle fill="#000000" cx="19" cy="12" r="2"></circle>
+       </g>
+       </svg> 	 </span> 	
+    </a> 
+    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right " x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-111px, 26px, 0px);"> 	
+          <ul class="dropdown-menu show drp-list" x-placement="bottom-start"> 
+            <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">Choisir operation :</li>
+                <li>
+                    {# <center> #}
+                    <a title='information supplementaire ' class='info_op'><i class='fa fa-info'></i> Details</a>
+                    {# </center> #}
+                </li>
+                {% if montant_final is not null and (montant_final > 0 and piece == 'ENNI') %}
+                <li>
+                    {# <center> #}
+                    <a title='lettrage' data-modal='lettrage' data-id='{{id}}' class='info_lettrage'><i class='fa fa-plus'></i> Lettrage</a>
+                    {# </center> #}
+                </li>
+                {% endif %}
+          </ul>
+     </div> 	
+</div>

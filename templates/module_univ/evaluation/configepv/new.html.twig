@@ -1,0 +1,34 @@
+{% extends 'base_univ.html.twig' %}
+
+{% block title %}Epreuve , nouveau | UNIV{% endblock %}
+
+
+
+
+{% block body %}
+
+    <div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+
+
+    
+   {# {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+        <i class="fa fa-save"></i>
+        {{ button_label|default('Enregistrer') }}</button>
+        {{ form_end(form,{'render_rest': false}) }}#}
+
+
+      <div class="new">
+          {{ include('./module_univ/evaluation/configepv/_form.html.twig',{'button_label': 'Ajouter'}) }}
+          <br/><br/>
+      </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+      {{ encore_entry_script_tags('univ_etudiant') }}
+{% endblock %}

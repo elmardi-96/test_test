@@ -1,0 +1,92 @@
+
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'_upload'}}) }}
+<div class="sidebar-container new">
+
+	<div class="ibox-tools"></div>
+
+	<div class="tab-content ">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+
+				</h3>
+				<small>
+					{# 
+																														{% if  p_projet.id > 0 %}
+																															Modifier
+																														{% else %}
+																															Ajouter
+																														{% endif %} #}
+				</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<table class="table small m-b-xs">
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="ibox ">
+					<div class="ibox-content">
+
+
+						<div class="row">
+							<div class="col-md-12 ">
+
+								<h3 class="m-t-none m-b">
+									Ajouter un nouveau fichier/document/image</h3>
+								<div class="hr-line-dashed"></div>
+								<div class="form-group row">
+									<label class="col-sm-12 required ">charger votre Fichier(*) :</label>
+								</div>
+								<div class="form-group row">
+									<div class="col-sm-12 custom-file">
+										{{ form_widget(form.imageFile.file, { 'attr': {'class': 'custom-file-input','multiple': true} }) }}
+										<label for="logo" class="custom-file-label">fichier ,document , image ...</label>
+												<span class="form-error-message">
+													{{ form_errors(form.imageFile.file) }}
+												</span>
+									</div>
+								</div>
+								<div class="hr-line-dashed"></div>
+								<div class="form-group row">
+
+									<div class="col-sm-6">
+										<button class="btn btn-white btn-block btn-xs my-button" data-style="expand-right" type="submit">
+											<i class="fa fa-save"></i>
+											{{ button_label|default('Enregistrer') }}
+										</button>
+									</div>
+								</div>
+
+
+							</div>
+
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% if commande is defined %}
+	<input type="hidden" name="_id" value="{{ commande.id }}"/>
+{% endif %}
+
+{{ form_end(form,{'render_rest': false}) }}
+

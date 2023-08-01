@@ -1,0 +1,169 @@
+{#{{ dump(historiques) }}#}
+
+
+<div class="col-lg-12">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <h5>Historique des opérations </h5>
+            <div class="ibox-tools">
+                <span class="label label-warning-light float-right">{{ historiques|length }} opération (s)</span>
+            </div>
+        </div>
+
+        <div class="ibox-content">
+
+            <div>
+                <div class="feed-activity-list">
+
+                    {% for k,historique in historiques %}
+                        <div class="feed-element {% if k >= 5 %} show_more_historique {%endif%}">
+                            <a class="float-left" {#href="profile.html"#}>
+                                <img alt="image" class="rounded-circle" src="{{asset('images/user/profil/' ~ historique.image  )}}">
+                            </a>
+                            <div class="media-body ">
+                                <small class="float-right">
+                                    
+                                    
+                                    {% set title =""%}
+                                        {% set class_css =""%}
+                                        {% for k, v in historique.metadata %}
+                                            {% if k=='title' %}
+                                                {% set title = v %}
+                                            {% endif %}   
+
+                                            {% if k=='class_css' %}
+                                                {% set class_css = v %}
+                                            {% endif %}   
+                                        {% endfor %}
+                                    
+                                    {#<ul class="category-list" style="padding: 0">
+
+                                        
+                                        
+                                        <li><a href="#"> <i class="fa fa-circle {{ class_css }}"></i> {{ title }} </a></li>
+
+
+
+
+                                    </ul>#}
+                                    {{ historique.date }}<br/>
+                                        <span class="label label-creer float-right {{ class_css }}">{{ title }}</span>
+                                       {# <span class="label label-annule float-right">Annulé</span>
+                                        <span class="label label-encours float-right">Encours </span>
+                                        <span class="label label-valide float-right">validé</span>
+                                        <span class="label label-traite float-right">traité</span>
+                                        
+                                        
+                                        <span class="label label-genere float-right">Généré</span>
+                                        <span class="label label-archive float-right">Archivé</span>#}
+                                        
+                                        
+                                </small>
+                                <strong>{{ historique.user_nom }} {{ historique.user_prenom }} ({{ historique.user_username  }})</strong> est 
+
+                                <strong> 
+                                    {{ title }}
+                                </strong>  cette commande:<br>
+                                <small class="text-muted">Le {{ historique.time|date('d-m-Y') }} à {{ historique.time|date('H:i:s') }} </small>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {#
+                    <div class="feed-element">
+                        <a class="float-left" href="profile.html">
+                            <img alt="image" class="rounded-circle" src="img/a2.jpg">
+                        </a>
+                        <div class="media-body ">
+                            <small class="float-right">2h ago</small>
+                            <strong>Mark Johnson</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                            <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
+                        </div>
+                    </div>
+                    <div class="feed-element">
+                        <a class="float-left" href="profile.html">
+                            <img alt="image" class="rounded-circle" src="img/a3.jpg">
+                        </a>
+                        <div class="media-body ">
+                            <small class="float-right">2h ago</small>
+                            <strong>Janet Rosowski</strong> add 1 photo on <strong>Monica Smith</strong>. <br>
+                            <small class="text-muted">2 days ago at 8:30am</small>
+                        </div>
+                    </div>
+                    <div class="feed-element">
+                        <a class="float-left" href="profile.html">
+                            <img alt="image" class="rounded-circle" src="img/a4.jpg">
+                        </a>
+                        <div class="media-body ">
+                            <small class="float-right text-navy">5h ago</small>
+                            <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                            <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                            <div class="actions">
+                                <a href=""  class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                <a href=""  class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feed-element">
+                        <a class="float-left" href="profile.html">
+                            <img alt="image" class="rounded-circle" src="img/a5.jpg">
+                        </a>
+                        <div class="media-body ">
+                            <small class="float-right">2h ago</small>
+                            <strong>Kim Smith</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                            <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
+                            <div class="well">
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                            </div>
+                            <div class="float-right">
+                                <a href=""  class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                            </div>
+                        </div>
+                    </div>
+                    #}
+
+                </div>
+
+                <button class="btn btn-white  m-t show_more_historique_btn"><i class="fa fa-arrow-down"></i> Tout afficher </button>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+{#{{ dump(commande.historique|length) }}
+{{ dump(commande.historique) }}#}
+{#{% if commande.historique|length > 1  %}#}
+{#{% for historique in commande.historique|reverse %}
+
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <dl class="dl-horizontal" style="margin: 0">
+
+                {% for k, v in historique.current_place %}
+                    <dt>{{ workflow_metadata(commande, 'title' ,k) }}</dt>
+
+                  
+
+                {% endfor %}
+
+                <dt>date de creation</dt>
+                <dd>{{ historique.time|date('Y-m-d H:i:s') }}</dd>
+
+                <dt>Créer par </dt>
+                <dd>{{ historique.user }}</dd>
+
+
+            </dl>
+        </div>
+    </div>
+{% endfor %}#}
+
+{#{% endif  %}#}

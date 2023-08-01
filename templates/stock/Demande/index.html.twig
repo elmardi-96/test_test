@@ -1,0 +1,113 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}
+	Demande stock | Stock
+{% endblock %}
+
+{% block body %}
+
+	<div id="loading-spinner" class="overlay">
+		<div class="spinner"></div>
+	</div>
+
+	<div class="row wrapper white-bg page-heading fixed-top-navigation-button">
+		<div class="col-lg-6">
+			Stock, Demande
+		</div>
+		<div class="col-lg-6">
+			<div class="title-action">
+				{% for key, operation in operations %}
+					{% if operation.horizontale %}
+						<a {% if operation.route is not null %} href="{{ path(operation.route) }}" {% endif %} id="{{ operation.prefix }}" class="op-hor btn btn-sm btn-white btn-register waves-effect waves-light {{ operation.classCs }}">
+							<i class="fa {{ operation.icon }}"></i>
+							{{ operation.titre|capitalize }}</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+	</div>
+	<br/><br/>
+
+	<div class="row border-bottom white-bg dashboard-header mt-20">
+		<div class="col-lg-12">
+			<input type="hidden" value="{{ dc.Role_STK }}" id="role_stk"/>
+			<div class="ibox">
+				<div class="ibox-content">
+					<div class="" style="overflow-x: scroll">
+						<div class="row">
+							{% if dc.Role_STK == 'RC' %}
+								<div class="container text-center">
+									<div class="row align-items-center">
+										<div class="col-2">
+											<select class="select2_demo _3 form-control list_actions sel2 _demandestk_facture">
+												<option value="">Action</option>
+												{% for key, operation2 in operations2 %}
+													{% if operation2.multiple and operation2.titre != "Affecté" %}
+														<option value="{{ operation2.prefix }}">{{ operation2.titre|capitalize }}</option>
+													{% endif %}
+												{% endfor %}
+											</select>
+										</div>
+										<div class="col-2">
+											<select class="select2_demo _3 form-control list_actions sel2" id="postion">
+												<option value="tout">position actuel</option>
+												{% for postion in postions %}
+													<option value="{{ postion.id }}">{{ postion.designation }}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="col-2">
+											<select class="select2_demo _3 form-control list_actions sel2" id="statusSelect">
+												<option value="tout">Type</option>
+												{% for TypeOp in TypeOps %}
+													<option value="{{ TypeOp.id }}">{{ TypeOp.designation }}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="col-4">
+											<select class="select2_demo _3 form-control list_actions sel2" id="Touts_Client">
+												<option value="">demandeur</option>
+												{% for client in clients %}
+													<option value="{{ client.demandeur.id }}">{{ client.demandeur }}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+								</div>
+							{% endif %}
+						</div>
+
+						<table class="table tb display table-striped table-bordered table-hover dataTables-example cmd" id="grid13" style="width: 100%">
+							<thead>
+								<tr>
+									<th>
+										<input type="checkbox" id="select-all">
+									</th>
+									<th>Code</th>
+									<th>antenne</th>
+									<th>Client</th>
+									<th>Type Operation</th>
+									<th>Fourniseur</th>
+									<th>Date</th>
+									<th>Prix.T</th>
+									<th>Statut</th>
+								</tr>
+							</thead>
+							<tbody class="commande"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('demande') }}
+{% endblock %}

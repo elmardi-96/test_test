@@ -1,0 +1,140 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+<div class="form-validation-msg" style="display:none">
+    {# message flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div data-toastr="{{ label }}" class="toastr-msg">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {# form global errors  #}
+    <div class="form-errors"></div>
+</div>
+
+<div id="right-sidebar" class="actions animated" >
+
+    </div>
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-6">
+            <h2 class="fo">Utilisateurs <span> Utilisateurs </span></h2>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="title-action">
+                <div class="title-action">
+                    <a href="{{ path('user_new') }}" class="btn btn-white btn-xs" id="new_action"><i class="fa fa-pencil"></i> Ajouter </a>
+                </div>   
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+
+    </div>
+    {# <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-4">
+
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+        <div class="col-lg-8">
+            <div class="title-action">
+                <div class="title-action">
+                    <a href="{{ path('user_new') }}" class="btn btn-white btn-xs" id="new_action"><i class="fa fa-pencil"></i> Ajouter </a>
+                    <a href="#" class="btn btn-white btn-xs" id="edit_action"><i class="fa fa-edit"></i> Modifier</a>
+                    <a href="#" class="btn btn-white btn-xs statut_action"><i class="fa fa-check "></i> Statut </a>
+                    <a href="#" class="btn btn-white btn-xs" id="show_action"><i class="fa fa-eye"></i> Consulter</a>
+                    <a href="#" class="btn btn-white btn-xs" id="_delete"><i class="fa fa-trash"></i> Supprimer</a>
+                </div>   
+            </div>
+        </div>
+
+
+
+    </div> #}
+
+
+
+
+
+
+
+
+
+
+
+    <br/> 
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="ibox ">{# 
+                    <div class="ibox-title">
+                        <h5>Utilisateurs  </h5>
+
+                    </div> #}
+                    <div class="row border-bottom white-bg dashboard-header mt-20"> 
+
+
+
+
+                        <div class="table-responsive">
+
+
+                            <table class="table cmd tb  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%" >
+                                <thead>
+
+
+
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Login</th>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Roles</th>
+                                    </tr>
+                                </thead>
+
+                                
+
+
+                                <tfoot>
+                                    <tr> 
+                                        <th>Action</th>
+                                        <th>Login</th>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Roles</th>
+                                    </tr>
+                                </tfoot>
+
+
+                            </table>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('user') }}
+{% endblock %}

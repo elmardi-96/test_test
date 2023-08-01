@@ -1,0 +1,194 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Depot transfert stock | Stock
+{% endblock %}
+
+{#{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}#}
+
+{% block body %}
+	{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'stock_depot_trensfert'}}) }}
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+		<div class="col-lg-4">
+			<h2 class="fo">Stock , depot
+			</h2>
+		</div>
+
+		<div class="col-lg-8">
+			<div class="title-action">
+				<button class="btn btn-white btn-xs btn-lg" type="submit">
+					<i class="fa fa-save"></i>
+					{{ button_label|default('Transfert stock') }}</button>
+
+			</div>
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+
+	</div>
+	<br/><br/>
+
+	<div class="row pt-20">
+		<div class="col-lg-12 ">
+			<div class="ibox">
+
+				<div class="ibox-content">
+
+					<div class="message-success"></div>
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										<ul class="nav nav-tabs">
+
+											<li>
+												<a class="nav-link  active" href="">Transfert stock
+												</a>
+											</li>
+
+										</ul>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="panel-body">
+
+										<div class="tab-content">
+											<div class="tab-pane active" id="tab-1">
+												<div class="row">
+													<div class="col-md-12 b-r">
+
+														<h3 class="m-t-none m-b">Informations</h3>
+														
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.article ,'Article :', {'label_attr':{'class':'col-sm-3'}}) }}
+															<div class="col-sm-4">
+																{{ form_widget(form.article,{'attr':{'class':'form-control form-control-sm sel2'}}) }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.depotSource ,'Depot source :', {'label_attr':{'class':'col-sm-3'}}) }}
+															<div class="col-sm-4">
+																{{ form_widget(form.depotSource,{'attr':{'class':'form-control form-control-sm sel2'}}) }}
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															{{ form_label(form.depotDestination ,'Depot destination :', {'label_attr':{'class':'col-sm-3'}}) }}
+															<div class="col-sm-4">
+																{{ form_widget(form.depotDestination,{'attr':{'class':'form-control form-control-sm sel2'}}) }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.quantite ,'Prix de Achat Min :', {'label_attr':{'class':'col-sm-3'}}) }}
+															<div class="col-sm-3">
+																{{ form_widget(form.quantite,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Quantite'}}) }}
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															{{ form_label(form.description ,'Description :', {'label_attr':{'class':'col-sm-3'}}) }}
+															<div class="col-sm-4">
+																{{ form_widget(form.description,{'attr':{'class':'form-control  description' ,'placeholder':'Description'}}) }}
+															</div>
+														</div>
+
+
+													</div>
+
+													{#<div class="col-md-8">
+														<div class="table-responsive">
+															<div class="col-md-12">
+																<h3 class="m-t-none m-b">Historique de transfert stock entre deux depots.</h3>
+																<div class="hr-line-dashed"></div>
+																<br/>
+																<table class="t-m table table-striped table-bordered table-hover dataTables-example dataTable" id="datatable-show3">
+																	<thead>
+																		<tr>
+
+																			<th>#</th>
+																			<th>Depot source :
+																			</th>
+																			<th>Article :</th>
+																			<th>Quantite :</th>
+																			<th>Date de creation :</th>
+																			<th>Cree par :</th>
+																			<th>Remarques:</th>
+																		</tr>
+																	</thead>
+
+																	<tbody>
+																		{% for key , mouvement in mouvements %}
+																			<tr>
+																				<td>{{key+1}}</td>
+																				<td>{{ mouvement.depot ?  mouvement.depot.titre }}</td>
+																				<td>{{ mouvement.article ? mouvement.article.titre }}</td>
+
+																				<td>
+																					{% if mouvement.quantite > 0 %}
+																						<i class="fa fa-circle text-navy"></i>
+																					{% else %}
+																						<i class="fa fa-circle text-danger"></i>
+																					{% endif %}
+																					{{ mouvement.quantite }}
+																				</td>
+																				<td>
+																					<span class="fa fa-clock-o"></span>
+																					{{ mouvement.created ? mouvement.created|date('Y-m-d H:i:s')}}</td>
+																				<th>
+																					<span class="fa fa-user"></span>
+																					{{ mouvement.userCreated ? mouvement.userCreated.nom~' '~mouvement.userCreated.prenom   }}</th>
+																				<td>
+																					{{ mouvement.description }}</td>
+																			</tr>
+																		{% endfor %}
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>#}
+
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+
+		</div>
+
+		<div class="hr-line-dashed"></div>
+
+
+	</div>
+	{% if Uarticle is defined %}
+		<input type="hidden" name="_id" value="{{ Uarticle.id }}"/>
+	{% endif %}
+
+	{{ form_end(form,{'render_rest': false}) }}
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('udepot') }}
+{% endblock %}

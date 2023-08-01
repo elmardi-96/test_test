@@ -1,0 +1,156 @@
+#symfony workflow
+#dump forkflow to image
+ php bin/console workflow:dump blog_publishing | dot -Tpng -o blog_publishing.png
+ php bin/console workflow:dump ua_t_livraisonfrscab | dot -Tpng -o ua_t_livraisonfrscab.png
+ 
+ php bin/console workflow:dump univ_ac_epreuve | dot -Tpng -o epreuve_workflow.png
+
+  php bin/console workflow:dump grs_conge | dot -Tpng -o grs_conge.png
+
+#dump metadata workflow
+
+ php bin/console config:dump-reference framework workflows
+
+
+
+#database
+mysql -u root  ugouv_16 < C:\Users\user\Downloads\ugouvma16.sql
+
+
+#dump workflow configurations
+php bin/console config:dump-reference framework workflows
+
+
+# Symfony Flex
+php bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json
+
+#load fixtures
+php bin/console doctrine:fixtures:load
+#pour ajouter un groupe
+php bin/console doctrine:fixtures:load   --group=us
+
+#Ajouter les modules Achat et ventes de ugouv 
+
+#php bin/console doctrine:fixtures:load    --group=DefaultParam --group=UnivVente --group=UnivAchat
+#php bin/console doctrine:fixtures:load   --group=UnivVente --group=UnivAchat --group=DefaultParam
+#php bin/console doctrine:fixtures:load   --group=DefaultParamN1 --group=DefaultParamN2 
+
+
+php bin/console doctrine:fixtures:load   --group=DefaultParamN1 --group=DefaultParamN2 --append
+
+
+php bin/console doctrine:fixtures:load   --group=DefaultParamN1 --group=DefaultParamN2 --group=DefaultParamN3 --append
+
+
+
+php bin/console doctrine:fixtures:load   --group=ModuleUnivDataPlanning
+#pour plus d'informations
+php bin/console doctrine:fixtures:load   --help
+
+
+
+#couleurs status 
+CREE  #d1dade
+EN COURS #ffbd75
+TRAITE #1ab394
+ANNULE #ff6a6a
+
+
+#Ajouter les dépendances nécessaires
+composer install 
+
+
+#Ajouter les dépendances js nécessaires
+yarn install 
+
+#mise ajour de la base de données 
+php bin/console doctrine:schema:update --force
+
+
+
+SELECT Max(RIGHT(code_demande, 12) ) FROM `t_achatdemandeinternecab`
+                ap_valider_modifier_c :
+                    from: modifier
+                    to:   valider
+                    metadata :
+                        arrow_color : red 
+
+                ap_cloturer_env :
+                    from : cloturer
+                    to :   envoyer
+                    metadata :
+                        arrow_color : limegreen
+                ap_cloturer_clsfa :
+                    from : cloturer
+                    to :   classe_facture  
+                    metadata :
+                        arrow_color : limegreen
+                ap_cloturer_cr_fac :
+                    from : cloturer
+                    to :   creer_facture  
+                    metadata :
+                        arrow_color : limegreen          
+                ap_cloturer_cr_comm :
+                    from : cloturer
+                    to :   creer_commande  
+                    metadata :
+                        arrow_color : limegreen
+
+                ap_cloturer_reo :
+                    from : cloturer
+                    to :   reouvririr 
+                    metadata :
+                        arrow_color : limegreen
+                   
+
+                ap_cloturer_supp :
+                    from : cloturer
+                    to :   supprimer  
+                    metadata :
+                        arrow_color : limegreen
+
+                ap_cloturer_cl :
+                    from : cloturer
+                    to :   cloner    
+                    metadata :
+                        arrow_color : limegreen      
+                ap_cloturer_reo_val :
+                    from : reouvririr
+                    to :   valider  
+                    metadata :
+                        arrow_color : red 
+
+
+
+
+
+
+
+
+
+  * @Assert\File(
+     *     maxSize = "10024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Fichier Non Valide"
+     * )
+
+
+Did you mean to call e.g. "getATime",
+ "getBasename", "getCTime", "getClientMimeType", "getClientOriginalExtension", 
+"getClientOriginalName", "getClientSize", "getError", "getErrorMessage",
+ "getExtension", "getFileInfo", "getFilename", "getGroup", 
+"getInode", "getLinkTarget", "getMTime", "getMaxFilesize", 
+"getMimeType", "getOwner", "getPath", "getPathInfo",
+ "getPathname", "getPerms", "getRealPath", "getSize" or "getType"?
+
+
+
+
+
+
+
+
+
+
+
+

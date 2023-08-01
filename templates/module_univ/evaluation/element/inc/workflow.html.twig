@@ -1,0 +1,63 @@
+{#% for transition in workflow_transitions(epreuve) %}    
+    <form style="display: inline-block" id="{{ workflow_metadata(epreuve, 'function', transition) }}">
+        <input type="hidden" name="_id" value="{{ epreuve.id }}"/>
+        <input type="hidden" name="statut" value="{{ workflow_metadata(epreuve, 'statut', transition) }}"/>
+        <input type="hidden" name="sous_module" value="{{ workflow_metadata(epreuve, 'sous_module', transition) }}"/>
+        <input type="hidden" name="title" value="{{ workflow_metadata(epreuve, 'title', transition) }}"/>
+        <input type="hidden" name="transition" value="{{ transition.name }}"/>
+        <button class="btn btn-xs {{ workflow_metadata(epreuve, 'class', transition) }}  btn-outline" type="submit"  type="submit"><i class="fa {{ workflow_metadata(epreuve, 'icon', transition) }}"></i> {{ workflow_metadata(epreuve, 'title', transition) }}</button>
+    </form>
+{% else %}
+   
+{% endfor %#}
+
+
+
+
+<div class ="wrf-positions" >
+{% for transition in workflow_transitions(element) %}
+    {#{{ dump(workflow_marked_places(commande)) }}#}
+    {% set url = "" %}
+    {% if workflow_metadata(element, 'function', transition) %}
+        {%  set  url= path(workflow_metadata(element, 'function', transition), {id: element.id}) %}
+    {% endif %} 
+    {#<form style="display: inline-block"  id="{{ workflow_metadata(demande, 'function', transition) }}">
+        <input type="hidden" name="_id" value="{{ demande.id }}"/>
+        <input type="hidden" name="statut" value="{{ workflow_metadata(demande, 'statut', transition) }}"/>
+        <input type="hidden" name="sous_module" value="{{ workflow_metadata(demande, 'sousModule', transition) }}"/>
+        <input type="hidden" name="title" value="{{ workflow_metadata(demande, 'title', transition) }}"/>
+        <input type="hidden" name="transition" value="{{ transition.name }}"/>
+        <button class="btn-wrf btn btn-xs {{ workflow_metadata(demande, 'class', transition) }}  btn-outline" type="submit"  type="submit"><i class="fa {{ workflow_metadata(demande, 'icon', transition) }}"></i>{{ workflow_metadata(demande, 'title', transition) }}</button>
+    </form>
+        #}
+        
+        
+  		{% for operation1 in operations|sort((a, b) => a.ordr <=> b.ordr)%}
+			{#{dump(operation1)}#}
+
+			{% if operation1.parent =='_evaluation_element' %}
+				{% if operation1.prefix =='_evaluation_element_workflow' %}
+					<a class="{{ workflow_metadata(element, 'function', transition) }} btn-wrf btn btn-xs {{ workflow_metadata(element, 'class', transition) }} btn-outline" data-id="{{ element.id }}" data-title="{{ workflow_metadata(element, 'title', transition) }}" data-transition="{{ transition.name }}">
+						<i class="fa {{ workflow_metadata(element, 'icon', transition) }}"></i>
+						&nbsp;{{ workflow_metadata(element, 'title', transition) }}
+					</a>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+
+   
+{% endfor %}
+
+</div>
+
+<div class="breadcrumbs-evaluation">
+{{ wo_render_breadcrumbs() }}
+</div>
+
+
+
+
+
+
+
+

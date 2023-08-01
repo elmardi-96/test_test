@@ -1,0 +1,309 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Consulter Planification | Planning & programmation | UNIV
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		{#<div class="col-lg-4">
+			<h2 class="fo">Univ , Information planning
+			</h2>
+		</div>#}
+		<div class="col-lg-12">
+            {% include './module_univ/cours/inc/workflow_breadcumb.html.twig' %}
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './module_univ/cours/inc/workflow.html.twig' %}
+
+        </div>
+		
+	
+		
+		{#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+																																																										#}
+
+	</div>
+	<br/><br/>
+	<div class="row pt-20">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div
+					class="ibox-content">
+
+					{#{% include './module_achat/facturefrs/inc/workflow_breadcumb.html.twig' %}#}
+					
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										{% include './module_univ/cours/inc/navigation.html.twig' %}
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="panel-body">
+
+										<div class="tab-content">
+											<div class="tab-pane active show" id="tab-1">
+												<div class="row">
+													<div class="col-md-6 b-r">
+														<h3 class="m-t-none m-b">Informations
+														</h3>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.id }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Code</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.code }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Code programmation</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.programmation ? UnivPlEmptime.programmation.code : "" }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Description</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.description }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Date début</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.start | date("m/d/Y H:i:s") }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Date fin</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.end | date("m/d/Y H:i:s") }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Semaine</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.semaine }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Salle</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.salle ? UnivPlEmptime.salle.designation : "" }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Nature épreuve</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.programmation.natureEpreuve ? UnivPlEmptime.programmation.natureEpreuve.designation : "" }}</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Module</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.programmation.element.module ? UnivPlEmptime.programmation.element.module.designation : "" }}</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Elément</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.programmation.element ? UnivPlEmptime.programmation.element.designation : "" }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div><br/>
+														<h3 class="m-t-none m-b">Informations ACADÉMIQUE
+														</h3>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.programmation.element.module.semestre.promotion.formation.etablissement ? UnivPlEmptime.programmation.element.module.semestre.promotion.formation.etablissement.designation : "" }}</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Formation</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.programmation.element.module.semestre.promotion.formation ? UnivPlEmptime.programmation.element.module.semestre.promotion.formation.designation : "" }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Promotion</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.programmation.element.module.semestre.promotion ? UnivPlEmptime.programmation.element.module.semestre.promotion.designation : "" }}</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Année</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ UnivPlEmptime.programmation.annee ? UnivPlEmptime.programmation.annee.designation : "" }}</p>
+															</div>
+														</div>
+
+													</div>
+													<div class="col-md-6">
+														<h3 class="m-t-none m-b">
+															La liste des enseignants
+														</h3>
+														<div class="hr-line-dashed"></div>
+														<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show2">
+															<thead>
+																<tr>
+																	<th style="width:5%">#</th>
+																	<th style="width:10%">Code</th>
+																	<th style="width:35%">Nom
+																	</th>
+																	<th style="width:20%">Prénom</th>
+																	<th style="width:5%">Nature
+																	</th>
+																</tr>
+															</thead>
+															<tbody>
+
+																{% for ens  in  UnivPlEmptimens %}
+																	<tr>
+																		<td>
+																			{{ loop.index }}
+																		</td>
+																		<td>
+																			{{ ens.enseignant ? ens.enseignant.code : ''}}
+																		</td>
+																		<td>
+																			{{ ens.enseignant ? ens.enseignant.nom : ''}}
+																		</td>
+																		<td>
+																			{{ ens.enseignant ? ens.enseignant.prenom : ''}}
+																		</td>
+																		<td>
+																			{{ ens.enseignant ? ens.enseignant.nature : ''}}
+																		</td>
+																	</tr>
+																{% endfor %}
+																{# {% endif %} #}
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div
+					class="ibox-title m-min"><!--<h5>La liste des Articles</h5>-->
+				</div>
+				<div class="ibox-content">
+					<div class="table-responsive">
+						<div class="col-md-12">
+							<br/>
+							<h3 class="m-left">La liste des groupes étudiants</h3><br/><br/>
+
+							<div class="">
+								{% if DivisionGroupeDetail is empty %}
+									<div class="alert alert-warning">
+										Cette séance n'appartiant à aucune groupe.
+									</div>
+								{% elseif EtudiantGroupe is empty %}
+									<div class="alert alert-warning">
+										Ce groupe n'a pas des étudiants
+									</div>
+								{% else %}
+									<h3 class="lighter smaller">
+										<i class="ace-icon fa fa-group smaller-90 back-et"></i>
+										{{DivisionGroupeDetail.designation}}
+									</h3>
+
+									<table class="t-m table table-striped table-bordered table-hover display w-m dataTables-example dataTable" id="datatable-show">
+										<thead>
+											<tr>
+												<th style="width:30% ; background: transparent">code Inscripion</th>
+												<th style="width:30% ; background: transparent">code admission</th>
+												<th style="width:30% ">Nom</th>
+												<th style="width:40% ">Prénom</th>
+
+											</tr>
+										</thead>
+										<tbody>
+
+											{% for Etudiant in EtudiantGroupe %}
+
+
+												{# {{Etudiant.divisionGroupeDetail}}#}
+												{% if DivisionGroupeDetail == Etudiant.divisionGroupeDetail %}
+
+													<tr>
+														<td>{{Etudiant.inscription.code}}
+														</td>
+														<td>{{Etudiant.inscription.admission.code}}</td>
+														<td>
+															{% if Etudiant.inscription.admission.preinscription.etudiant.prenom is defined %}
+																{{ Etudiant.inscription.admission.preinscription.etudiant.prenom }}
+															{% else %}
+																-
+															{% endif %}
+														</td>
+														<td>
+															{% if Etudiant.inscription.admission.preinscription.etudiant.nom is defined %}
+																{{ Etudiant.inscription.admission.preinscription.etudiant.nom }}
+															{% else %}
+																-
+															{% endif %}
+														</td>
+
+													</tr>
+												{% endif %}
+
+											{% endfor %}
+
+										</tbody>
+									</table>
+								{% endif %}
+
+
+							</div>
+						</div>
+					</div>
+					<!--<span class="float-right">
+																																																				                                                                                                                        <b>Total :
+																																																				                                                                                                                                {"{total}#}</b>
+																																																				                                                                                                                </span>-->
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div>{#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}{% endblock %}{% block javascripts %}{{ parent() }}{{ encore_entry_script_tags('univ_planning') }}{% endblock %}

@@ -1,0 +1,22 @@
+{% if grs_note_interne is defined and grs_note_interne is not empty and grs_note_interne.id is not empty   %}
+
+	<div class="wrf-positions">
+
+
+	
+			{% for key ,  operation in operations  %}
+				{% if  operation.prefix == '_delete' %}
+					<a id="{{operation.prefix}}" data-id="{{grs_note_interne.id}}" data-token="{{ csrf_token('delete' ~ grs_note_interne.id) }}" class='btn-wrf btn btn-xs btn-danger btn-outline {{operation.classCs}}'>
+						<i class="fa {{ operation.icon }}"></i>
+						{{ operation.titre|capitalize }}</a>
+				{% endif %}
+			{% endfor %}
+
+	
+		<div id="test" data-grs_note_interne-id="{{ grs_note_interne.id|json_encode }}"></div>
+
+	</div>
+{% endif %}
+
+
+{{ wo_render_breadcrumbs() }}

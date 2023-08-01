@@ -1,0 +1,19 @@
+{% extends 'base_univ.html.twig' %}
+
+{% block title %}Modifier | Etudiant | UNIV{% endblock %}
+
+{% block body %}
+<div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+     <div class="edit">
+    {{ include('./module_univ/etudiant/_form.html.twig',{'button_label': 'Enregistrer'}) }}
+    </div>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('univ_etudiant') }}
+{% endblock %}

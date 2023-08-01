@@ -1,0 +1,16 @@
+
+{% extends 'base_univ.html.twig' %}
+
+
+{% block body %}
+
+    <div class="new">    
+        {{ include('module_univ/preinscription_grille/_form.html.twig') }}
+        </div>
+{% endblock %}
+
+
+{% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('univ_preinscription_grille') }}
+{% endblock %}

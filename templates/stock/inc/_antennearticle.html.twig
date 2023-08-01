@@ -1,0 +1,60 @@
+<tr class="parrentArticle">
+	<td style="width: 3%"></td>
+	<td style="width: 30%" style="position: relative;">
+		<select name="article" class="form-control article_disponible form-control-sm">
+			<option value="">CHOIX ARTICLE</option>
+
+			{% for article in articles %}
+				{# {% if article.quantite > 0%} #}
+				<option data-q="{{article.quantite}}" data-p="{{article.prix_vente}}" data-name="{{article.titre}}" id="{{article.id}}" value="{{article.id}}">
+					{{article.id}}
+					-
+					{{article.titre}}
+					- Quantite:
+					{{article.quantite }}
+					- Conditionnement :
+					{% if article.type %}
+					{{article.type }}
+					{% else %}
+					 NULL
+					{% endif %}
+
+				</option>
+				{# {% endif %} #}
+			{% endfor %}
+		</select>
+
+
+	</td>
+
+	<td style="width: 10%">
+		<input name="quantitie" type="number" class="form-control quantitty form-control-sm decimal_places" placeholder="Quantite">
+	</td>
+	<td style="width: 10%">
+		<input name="prixVente" type="number" class="form-control prix_vente form-control-sm decimal_places" disabled placeholder="0.00">
+	</td>
+	{# <td style="width: 5%"> #}
+
+		{# <select name="Conditionnement" class="form-control Conditionnement form-control-sm" disabled>
+			<option value=""> Conditionnement</option>
+			{% for unite in unites %}
+				<option value="{{unite.type}}">
+					{{unite.type}}
+				</option>
+			{% endfor %}
+		</select> #}
+		{# <input name="Conditionnement" type="text" class="form-control Conditionnement form-control-sm" placeholder="Conditionnement"> #}
+	{# </td> #}
+	<td style="width: 10%">
+		<input name="observation" type="text" class="form-control observation form-control-sm" placeholder="observation">
+	</td>
+
+	<td style="width: 7%">
+		<a style="padding: 7px ; " class="add_article_stock_active btn-icon-detail btn btn-white btn-primary btn-outline  btn-xs my-button2 upper waves-effect waves-light">
+			<i class=" fa  fa-plus" aria-hidden="true"></i>
+		</a>
+	</td>
+
+</tr>
+<p class="alreadyexist" style="display: none; color: red; left: 0; bottom: 0;">ARTICLE EST DEJA EXISTE</p>
+<p class="alreadyQuantity" style="display:none; color: red; left: 0; bottom: 0;">Priere de verifier la quantity</p>

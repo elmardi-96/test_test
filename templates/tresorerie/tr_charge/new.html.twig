@@ -1,0 +1,73 @@
+
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}Ajouter | Charge{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="new">
+
+
+        {{ include('./tresorerie/tr_charge/_form.html.twig',{'button_label': 'Enregistrer'}) }}
+
+    
+        <div class="row">
+			<div class="col-lg-12 ">
+				<div class="ibox ">
+					<div class="ibox-content">
+
+						<div class="table-responsive table-responsive-2">
+							<div class="col-md-12 m-mar-t2">
+								<h5 class="m-left">La liste des Comptes</h5>
+								<table class="m-add t-m table table-striped table-bordered table-hover dataTables-example table-detail">
+									<thead>
+										<tr>
+
+											<th style="width: 3%">#
+											</th>
+											<th style="width: 33%">Compte
+											</th>
+											<th style="width: 7%">Unite </th>
+											<th style="width: 7%">Qantite
+											</th>
+											<th style="width: 7%">P.U</th>
+											<th style="width: 7%">TVA % </th>
+
+										
+											<th style="width: 10%">TTC </th>
+
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+									<tfoot>
+										<tr style="display: none" class="edit-new-article">
+                                           
+                                        
+                                            {{ include('./tresorerie/tr_charge/_form_detail.html.twig',{'button_label': 'Ajouter '}) }}
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						</div>
+						<div></div>
+						{#<button class="new-article-btn btn btn-xs btn-primary" type="button"><i class="fa fa-arrows"></i>&nbsp; Nouveau Article</button>#}
+					</div>
+				</div>
+			</div>
+		</div>
+
+    </div>
+
+
+
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('charge') }}
+{% endblock %}

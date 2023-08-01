@@ -1,0 +1,17 @@
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+    
+    {# <li> <a class="nav-link {% if "parametrage_univ"  in current_path  %} active {%endif%}" href="{{ path('parametrage_univ')}}" ><i class="fa fa-file-text"></i>Paramètrage Univ</a></li> #}
+    <li> <a class="nav-link {% if "parametrage_ugouv"  in current_path  %} active {%endif%}" href="{{ path('parametrage_ugouv' )}}" ><i class="fa fa-info-circle"></i>Autre Paramètrages</a></li> 
+    {% if is_granted('ROLE_SUPER_ADMIN') %} 
+                <li> <a class="nav-link {% if "parametrage_appconfig"  in current_path  %} active {%endif%}" href="{{ path('parametrage_appconfig')}}" ><i class="fa fa-file-text"></i>App configuration</a></li>
+    {% endif %}
+    
+</ul>

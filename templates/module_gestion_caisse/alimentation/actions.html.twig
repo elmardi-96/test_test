@@ -1,0 +1,35 @@
+<div class="dropdown dropdown-inline center"> 
+	<a href="javascript:;" class="" data-toggle="dropdown" > 	
+      <span class="svg-icon svg-icon-md"> 	  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="15px" viewBox="0 0 24 24" version="1.1" class="svg-color"> 
+       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <rect x="0" y="0" width="24" height="24"></rect> 
+            <circle fill="#000000" cx="5" cy="12" r="2"></circle> <circle fill="#000000" cx="12" cy="12" r="2"></circle>
+            <circle fill="#000000" cx="19" cy="12" r="2"></circle>
+       </g>
+       </svg> 	 </span> 	
+    </a> 
+    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right " x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-111px, 26px, 0px);"> 	
+          <ul class="dropdown-menu show drp-list" x-placement="bottom-start"> 
+            <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">Choisir operation :</li>
+                {% for key ,  operation in operations %}
+                    {% if operation.verticale and operation.prefix == "_new" %}
+                    <li>
+                        <a {% if operation.route is not null  %}  href="#" {%  endif %}  id="{{operation.prefix}}" data-transition="undefined" data-id="{{id}}"   id_row="50003" class="new_operation_button op-hor btn btn-white btn-xs {{operation.classCs}}"><i class="fa fa-plus"  {{ operation.icon }}></i> 
+                        {{ operation.titre|capitalize }}
+                        </a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                <li>
+                    <a  href="#" id="_transfer" data-transition="undefined" data-id="{{id}}"   class="op-hor btn btn-white btn-xs"><i class="fa fa-plus"></i> 
+                    {{ "Transfer"|capitalize }}
+                    </a>
+                </li>
+                <li>
+                    <a  href="{{path('caisse_alimentation_export', {compte: cmpt_id})}}" id="" target="_blank"  class="op-hor btn btn-white btn-xs"><i class="fa fa-plus"></i> 
+                    {{ "Export"|capitalize }}
+                    </a>
+                </li>
+                
+          </ul>
+     </div> 	
+</div>

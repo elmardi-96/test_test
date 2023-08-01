@@ -1,0 +1,362 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Classement | Concours | UNIV
+{% endblock %}
+{% block body %}
+    {{ render(controller('App\\Controller\\moduleUniv\\concours\\UnivConcoursController:infosConcours',{ 'id': concours.id})) }}
+
+    <input type="hidden" value="{{ concours.id }}" class="concours_id"/>
+    <form name="form_classement_pre" class="form_classement" >
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Formations sans concours
+            </h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+                <input type="hidden" value="{{ concours.id }}" class="concours_id"/>
+              
+                    
+                    <button class="btn btn-white btn-xs btn-lg my-button2 "  style="margin-left: 15px;" type="submit">
+                        <i class="fa fa-barcode"></i>
+                        Générer Classement</button>
+                       
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row pt-20">
+
+        <div class="col-md-12 paddin">
+            <div class="ibox">
+
+                <div class="ibox-content">
+                    <div class="panel blank-panel">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                                {% include './module_univ/concours/inc/ac_navigation.html.twig' %}
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+
+                            <div class="col-md-12">
+                                <div class="tab-content">
+
+                                    <div class="tab-pane active" id="tab-1">
+                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+                                            {% for key , result in results %}
+                                                <a class="nav-link {% if key ==0 %} active {% endif %}" id="v-pills-home-tab" data-toggle="pill" href="#{{ key }}" aria-selected="{% if key ==0 %} true {% else %} false {% endif %}">
+                                                    <i class="fa fa-drivers-license-o"></i>
+                                                    {{  result.formation.designation|upper }}
+                                                    ({{ result.formation.abreviation }})
+                                                </a>
+
+                                            {% endfor %}
+
+
+                                        </div>
+                                        <div class="tab-content" id="v-pills-tabContent">
+
+                                            {% for key , result in results %}
+                                                <div class="tab-pane fade {% if key ==0 %} show active  {% endif %} " id="{{ key }}">
+
+
+                                                    <div class="row m-2">
+                                                        <p class="m-b-xs">&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                            <strong>
+                                                                {{ result.formation.designation|upper }}
+                                                                ({{ result.formation.abreviation }}) : CLASSEMENT FORMATION
+                                                            </strong>
+                                                        </p>
+                                                   
+                                                        <div class="col-md-12">
+                                                            <table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable  datatable-default">
+                                                                <thead>
+                                                                    <tr>
+                                                                        
+                                                                        <th>code.etu</th>
+                                                                        <th>code.pre</th>
+                                                                        <th>nom :</th>
+                                                                        <th>prenom</th>
+                                                                        <th>nat.Dem
+                                                                        </th>
+                                                                        <th>type.bac
+                                                                        </th>
+                                                                        <th>moybac
+                                                                        </th>
+                                                                        <th>moy.conc</th>
+                                                                        <th>rang p</th>
+                                                                        <th>rang s</th>
+                                                                        <th>Classement</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {% if result.formationEtudiants is defined %}
+                                                                        {% for key , etudiant  in  result.formationEtudiants %}
+                                                                            <tr>
+                                                                                
+                                                                               
+                                                                                <td>{{ etudiant.code_etudiant}}</td>
+                                                                                <td>{{ etudiant.code}}</td>
+                                                                                <td>{{ etudiant.nom}}</td>
+                                                                                <td>{{ etudiant.prenom}}</td>
+                                                                                <td>{{ etudiant.nature}}</td>
+                                                                                <td>{{ etudiant.bac}}</td>
+                                                                                <td>{{ etudiant.moyenne_bac|number_format(2, '.', ',')}}</td>
+                                                                                <td>{{ etudiant.moyenne|number_format(2, '.', ',')}}</td>
+                                                                                <td>{% if etudiant.rang_p == null or etudiant.rang_p ==0 %}
+                                                                                    -
+                                                                                    {% else %}
+                                                                                    {{ etudiant.rang_p}}
+                                                                                    {% endif %}
+                                                                                    </td>
+                                                                                <td>
+                                                                                    {% if etudiant.rang_s == null or etudiant.rang_s ==0 %}
+                                                                                    -
+                                                                                    {% else %}
+                                                                                    {{ etudiant.rang_s}}
+                                                                                    {% endif %}
+                                                                                   
+                                                                                   </td>
+                                                                               
+                                                                                <td> 
+                                                                                 
+                                                                                    {{ key +1 }}</td>
+                                                                            </tr>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+
+
+                                                                </tbody>
+                                                            </table>
+                                      
+                                                        </div>
+                                                    {% if result.formationEtudiants is defined %}
+                                                        {% for key , etudiant  in  result.formationEtudiants %}
+                                                            <tr>
+                                                                
+                                                                <input type="hidden"  name="etudiantP['etu'{{ etudiant.id}}][id]" value="{{ etudiant.id}}">
+                                                                <input type="hidden"  name="etudiantP['etu'{{ etudiant.id}}][clasP]" value="{{ key +1}}">
+                                                                   
+                                                            </tr>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                        <div class="row m-2">
+                                                            <p class="m-b-xs">&nbsp;&nbsp;
+                                                                <strong>
+                                                                    {{ result.formation.designation|upper }}
+                                                                    ({{ result.formation.abreviation }}) : CLASSEMENT PAR NATURE DEMANDE
+                                                                </strong>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-md-12">
+
+                                                            {% for key2 , natureDemandeEtudiant  in  result.natureDemandeEtudiants %}
+
+
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h5 class="panel-title">
+                                                                            <a data-toggle="collapse" href="#tab{{key}}-{{ key2 + 1 }}">Nature demande :
+                                                                                {{natureDemandeEtudiant.natureDemande.designation}}</a>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div id="tab{{key}}-{{key2 + 1 }}" class="panel-collapse collapse {% if key2 == 0 %}{% endif %}">
+                                                                        <div class="panel-body">
+
+                                                                            <div class="tab-pane active show" id="tab-2">
+
+
+                                                                                <p class="m-b-xs">&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                    <strong>
+                                                                                        La liste principale
+                                                                                    </strong>
+                                                                                </p>
+                                                                                <br/>
+                                                                           
+                                                                                 
+                                                                                <div class="col-md-12">
+                                                                                    <table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable datatable-default">
+                                                                                        <thead>
+                                                                                            <tr>
+
+                                                                                                <th>code.etu</th>
+                                                                                                <th>code.pre</th>
+                                                                                                <th>nom :</th>
+                                                                                                <th>prenom</th>
+                                                                                                <th>nat.Dem
+                                                                                                </th>
+                                                                                                <th>type.bac
+                                                                                                </th>
+                                                                                                <th>moybac
+                                                                                                </th>
+                                                                                                <th>moy.conc</th>
+                                                                                                <th>rang p</th>
+                                                                                                <th>rang s</th>
+                                                                                                <th>Classement</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            {% if natureDemandeEtudiant.etudiantsListePrincipale is defined %}
+                                                                                                {% for key , etudiant  in  natureDemandeEtudiant.etudiantsListePrincipale %}
+                                                                                                    <tr>
+                                                                                                        <input type="hidden"  name="etudiantS['etu'{{ etudiant.id}}][id]" value="{{ etudiant.id}}">
+                                                                                                        <td>{{ etudiant.code_etudiant}}</td>
+                                                                                                        <td>{{ etudiant.code}}</td>
+                                                                                                        <td>{{ etudiant.nom}}</td>
+                                                                                                        <td>{{ etudiant.prenom}}</td>
+                                                                                                        <td>{{ etudiant.nature}}</td>
+                                                                                                        <td>{{ etudiant.bac}}</td>
+                                                                                                        <td>{{ etudiant.moyenne_bac|number_format(2, '.', ',')}}</td>
+                                                                                                        <td>{{ etudiant.moyenne|number_format(2, '.', ',')}}</td>
+                                                                                                        <td>{% if etudiant.rang_p == null or etudiant.rang_p ==0 %}
+                                                                                                            -
+                                                                                                            {% else %}
+                                                                                                            {{ etudiant.rang_p}}
+                                                                                                            {% endif %}
+                                                                                                            </td>
+                                                                                                        <td>
+                                                                                                            {% if etudiant.rang_s == null or etudiant.rang_s ==0 %}
+                                                                                                            -
+                                                                                                            {% else %}
+                                                                                                            {{ etudiant.rang_s}}
+                                                                                                            {% endif %}
+                                                                                                           
+                                                                                                           </td>
+                                                                                                        <td>
+                                                                                                            <input type="hidden"  name="etudiantS['etu'{{ etudiant.id}}][clasS]" value="{{ etudiant.ordre }}">
+                                                                                                            <input type="hidden"  name="etudiantS['etu'{{ etudiant.id}}][lp]" value="LP">
+
+                                                                                                             {{ etudiant.ordre }}</td>
+                                                                                                    </tr>
+                                                                                                {% endfor %}
+                                                                                            {% endif %}
+
+
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                         
+
+                                                                                <p class="m-b-xs">&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                    <strong>
+                                                                                        La liste d'attente
+                                                                                    </strong>
+                                                                                </p>
+
+                                                                                <br/>
+                                                                                <div class="col-md-12">
+                                                                                    <table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable datatable-default">
+                                                                                        <thead>
+                                                                                            <tr>
+
+                                                                                                <th>code.etu</th>
+                                                                                                <th>code.pre</th>
+                                                                                                <th>nom :</th>
+                                                                                                <th>prenom</th>
+                                                                                                <th>nat.Dem
+                                                                                                </th>
+                                                                                                <th>type.bac
+                                                                                                </th>
+                                                                                                <th>moybac
+                                                                                                </th>
+                                                                                                <th>moy.conc</th>
+                                                                                                <th>rang p</th>
+                                                                                                <th>rang s</th>
+                                                                                                <th>Classement</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            {% if natureDemandeEtudiant.etudiantsListeAttente is defined %}
+                                                                                                {% for key , etudiant  in  natureDemandeEtudiant.etudiantsListeAttente %}
+                                                                                                    <tr>
+                                                                                                        <input type="hidden"  name="etudiantS['etu'{{ etudiant.id}}][id]" value="{{ etudiant.id}}">
+                                                                                                        <td>{{ etudiant.code_etudiant}}</td>
+                                                                                                        <td>{{ etudiant.code}}</td>
+                                                                                                        <td>{{ etudiant.nom}}</td>
+                                                                                                        <td>{{ etudiant.prenom}}</td>
+                                                                                                        <td>{{ etudiant.nature}}</td>
+                                                                                                        <td>{{ etudiant.bac}}</td>
+                                                                                                        <td>{{ etudiant.moyenne_bac|number_format(2, '.', ',')}}</td>
+                                                                                                        <td>{{ etudiant.moyenne|number_format(2, '.', ',')}}</td>
+                                                                                                        <td>{% if etudiant.rang_p == null or etudiant.rang_p ==0 %}
+                                                                                                            -
+                                                                                                            {% else %}
+                                                                                                            {{ etudiant.rang_p}}
+                                                                                                            {% endif %}
+                                                                                                            </td>
+                                                                                                        <td>
+                                                                                                            {% if etudiant.rang_s == null or etudiant.rang_s ==0 %}
+                                                                                                            -
+                                                                                                            {% else %}
+                                                                                                            {{ etudiant.rang_s}}
+                                                                                                            {% endif %}
+                                                                                                           
+                                                                                                           </td>
+                                                                                                        <td>
+                                                                                                            <input type="hidden"  name="etudiantS['etu'{{ etudiant.id}}][clasS]" value="{{ etudiant.ordre}}">
+                                                                                                            <input type="hidden"  name="etudiantS['etu'{{ etudiant.id}}][lp]" value="LD">
+                                                                                                            {{ etudiant.ordre }}</td>
+                                                                                                    </tr>
+                                                                                                {% endfor %}
+                                                                                            {% endif %}
+
+
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+
+                                                                                <br/>
+
+
+                                                                            </div>
+                                                                            <br><br>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            {% endfor %}
+
+
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            {% endfor %}
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>  
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('univ_concours') }}
+{% endblock %}

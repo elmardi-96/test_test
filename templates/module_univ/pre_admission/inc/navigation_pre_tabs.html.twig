@@ -1,0 +1,36 @@
+{#% set current_path = app.request.get('_route') %}
+<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+	<a class="nav-link {% if "module_univ_admissible_show_sansconcours_admissible"  in current_path  %} active {% endif %}" href="{{ path('module_univ_admissible_show_sansconcours_admissible')}}">
+		<i class="fa fa fa-check-square"></i>
+		Condidats Admissibles
+	</a>
+
+
+	<a class="nav-link {% if "module_univ_preadmission_show_sansconcours_non_admissible"  in current_path  %} active {% endif %}" href="{{ path('module_univ_preadmission_show_sansconcours_non_admissible')}}">
+		<i class="fa fa-minus-square"></i>
+		Condidats non Admissibles
+	</a>
+
+
+</div>
+#}
+
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+    
+    
+    <li> <a class="nav-link {% if "module_univ_admissible_show_sansconcours_admissible"  in current_path  %} active {%endif%}" href="{{ path('module_univ_admissible_show_sansconcours_admissible' )}}" ><i class="fa fa-check-square"></i> 	Condidats Admissibles</a></li>
+
+    <li> <a class="nav-link {% if "module_univ_preadmission_show_sansconcours_non_admissible"  in current_path  %} active {%endif%}" href="{{ path('module_univ_preadmission_show_sansconcours_non_admissible' )}}" ><i class="fa fa-minus-square"></i>  Condidats non Admissibles</a></li>
+
+          
+
+   
+</ul>

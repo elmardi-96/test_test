@@ -1,0 +1,157 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+
+{% block title %}Livraison index | Vente{% endblock %}
+
+{% block body %}
+<div class="modal fade right" id="facturePopUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+    <div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalPreviewLabel">Generer Facture</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body bo">
+                <div class="text-center spr2" style="display: none;">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <div class="bod2" style=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-6">
+				{% include './module_vente/uv_livraisoncab/inc/workflow_breadcumb.html.twig' %}
+			{#{ wo_render_breadcrumbs() }#}
+		</div>
+
+
+        <div class="col-lg-6">
+            <div class="title-action">
+
+
+
+                    {#% for key ,  operation in operations  %}
+                        {% if operation.horizontale %}
+                            <a {% if operation.route is not null  %}  href="{{ path(operation.route) }}" {%  endif %}  id="{{operation.prefix}}" class="btn btn-white btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+                        {% endif %}
+                    {% endfor %#}
+
+  
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+    </div>
+
+
+    <br/> <br/>
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+            <div class="col-lg-12">
+
+                <div class="ibox ">
+                    <div class="ibox-content" style="padding-top: 0px"> 
+                        <div class="" style="overflow-x: scroll;">
+                            <div class="row" >
+
+                                <div class="col-3">
+                                    <select class="form-control _multiple_actions" style="display: none">
+                                        <option value="">Action</option>
+                                        <option value="_genener_factures"> Generer Facture </option>
+                                    </select>
+                                </div>
+                                <div class="col-2 list_actions_bloc" style="position: fixed ; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+                                   
+                                    <select class="select2_demo _3 form-control _multiple_actions">
+                                        <option value="">Action</option>
+                                        {% for key , operation in  operations %}
+                                            {% if operation.multiple %}
+                                                <option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+
+                                </div>
+
+
+
+                            </div>
+                            <table class="table cmd display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%">
+                                <thead>
+
+
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Code</th>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Client</th>
+                                        <th>Mt Ht</th>
+                                        <th>Mt TVA</th>
+                                        <th>Mt TTC</th>
+                                        <th>signature</th>
+                                        <th>Ref Cmd</th>
+                                        <th>FA</th>
+									    <th>RG</th>
+                                        <th>Statut</th>
+                                        <th>Opr</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="commande"></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Code</th>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Client</th>
+                                        <th>Mt Ht</th>
+                                        <th>Mt TVA</th>
+                                        <th>Mt TTC</th>
+                                         <th>signature</th>
+
+                                        <th>Ref Cmd</th>
+                                        <th>FA</th>
+									    <th>RG</th>
+                                        <th>Statut</th>
+                                        <th>Opr</th>
+                                    </tr>
+                                </tfoot>
+
+
+                            </table>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('livraisoncab') }}
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base_achat_ugouv.html.twig' %}
+
+{% block title %}New TCommandefrscab{% endblock %}
+
+{% block sidebar %} 
+    {% include './ugouv/achat/inc/sidebar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+
+<div id="right-sidebar" class="actions animated" >
+
+
+</div>
+
+
+
+    <div class="new">
+
+ {% include './ugouv/achat/inc/navigation.html.twig' %}
+
+        {{ include('ugouv/achat/t_commandefrscab/_form.html.twig') }}
+        
+        <div class="row justify-content-md-center">
+            <div class="col-lg-11 ">
+                <div class="ibox ">     
+                    <div class="ibox-title">
+                        <h5>SAISIE ARTICLE <small>saisie article.</small></h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" class="dropdown-item">Config option 1</a>
+                                </li>
+                                <li><a href="#" class="dropdown-item">Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+                            <table class="table table-striped t-m table table-striped table-bordered table-hover dataTables-example dataTable table-detail">
+                                <thead>
+                                    <tr>
+                                          <!-- Ord	Article	ute	Qte	p.unit	tva	M.TTC	Supp--> 
+
+                                        <th># </th>
+                                        <th>Article </th>
+                                        <th>Unité  </th>
+                                        <th>Quantité </th>
+                                        <th>Prix Unitaire :</th>
+                                        <th>TVA par default(20%) :</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr style="display: none" class="edit-new-article">
+                                        <th colspan="7">
+                                        {{ include('ugouv/achat/t_commandefrscab/_form_detail.html.twig',{'button_label': 'Ajouter Article'}) }}
+                                        </th>
+                                    </tr> 
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div>
+                            
+                        </div>
+                        <button class="new-article-btn btn btn-xs btn-primary" type="button"><i class="fa fa-arrows"></i>&nbsp; Nouveau Article</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+ {{ parent() }}
+{{ encore_entry_script_tags('tcommandefrscab') }}
+
+<!--<script src="{#{ asset('build/runtime.js') }#}"></script>
+<script src="{#{ asset('build/tcommandefrscab.js') }#}"></script>-->
+   
+{% endblock %}

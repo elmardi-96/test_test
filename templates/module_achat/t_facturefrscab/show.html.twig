@@ -1,0 +1,451 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Informations | Facture fournisseur | Ugouv achat
+{% endblock %}
+
+
+{% block body %}
+
+	<div id="right-sidebar" class="actions animated"></div>
+	<div class="actions modal fade right" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel">GeNeRER
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="text-center spr">
+						<br/>
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div id="right-sidebar" class="actions animated"></div>
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-12">
+			{{ include('./module_achat/t_facturefrscab/inc/workflow_breadcumb.html.twig',{'page_actuel': 'show'})}}
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+	</div>
+	<br/>
+	<br/>
+
+
+	{# {{ dump(operations) }}#}
+	<div class="wrapper wrapper-content  animated fadeInRight p-r-l-0">
+		<div class="row">
+			<div class="col-10 no-pad-right no-pad-left p-b-0">
+				<div class="ibox">
+					<div class="ibox-content">
+						<h4>informations generales
+							<span class="f-r hint--bottom-left" aria-label="{{ facture.positionActuel }}">
+								<i class=" f-r fa fa-circle wf-color wf-color-{{ facture.positionActuel }} "></i>
+							</span>
+
+
+						</h4>
+						<div class="row m-t-sm">
+							<div class="col-lg-12">
+								<div class="panel blank-panel">
+
+
+									<div class="col-md-12 p-t-0">
+										<div class="panel-body">
+
+											<div class="tab-content">
+												<div class="tab-pane active show" id="tab1-1">
+
+
+													<div class="row">
+
+														<div class="col-md-6 b-r">
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required ">Code
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">{{ facture.code }}</p>
+																</div>
+
+															</div>
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required">DATE FACTURE
+																</label>
+
+																<div class="col-sm-8">
+																	{{facture.dateDocAsso|date("d/m/Y") }}
+
+
+																</div>
+
+															</div>
+
+
+															<div class="form-group row ph">
+
+																<label class="col-sm-4 required">
+																	Fournisseur
+																</label>
+																<div class="col-sm-8">
+																	{{facture.fournisseur ? facture.fournisseur.nom}}
+																</div>
+															</div>
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required">
+																	Parvenue
+																</label>
+
+																<div class="col-sm-8">
+																	{{facture.parvenue ? facture.parvenue.v}}
+																</div>
+
+															</div>
+
+
+														</div>
+														<div class="col-md-6">
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required">
+																	Ref DocAsso
+																</label>
+
+																<div class="col-sm-8">
+																	{{facture.refDocAsso}}
+																</div>
+
+															</div>
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required">
+																	Date DocAsso
+																</label>
+
+																<div class="col-sm-8">
+																	{{facture.dateDocAsso|date("d/m/Y")}}
+																</div>
+
+															</div>
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required">
+																	Autre inforamtion
+																</label>
+
+																<div class="col-sm-8">
+																	{{facture.observation}}
+																</div>
+
+															</div>
+															{% if facture.avoir =='1' %}
+															<div class="form-group row ph">
+																<label class="col-sm-4 required">
+																type Facture 
+																</label>
+
+																<div class="col-sm-8">
+																	Avoir
+																</div>
+
+															</div>
+															{% endif %}
+															
+															
+														</div>
+													</div>
+												</div>
+
+
+											</div>
+
+										</div>
+
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="ibox">
+					<div class="ibox-content">
+						<h4 class="m-b-0">Details</h4>
+						<div id="tab-1" class="tab-pane active">
+							<div class="full-height-scroll">
+								<div class="table-responsive">
+
+									<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable">
+										<thead>
+											<tr>
+												<th style="width:2%;" class="center">#</th>
+												<th style="width:5%;" class="center">Reference</th>
+												<th style="width:40%;" class="center">Article</th>
+												<th style="width:3%;" class="center">U</th>
+												<th style="width:5%;" class="center">Quantité</th>
+												<th style="width:7%;" class="center">Prix unitaire</th>
+												<th style="width:3%;" class="center">TVA%</th>
+												<th style="width:8%;" class="center">Montant TVA</th>
+												<th style="width:5%;" class="center">REMISE%</th>
+												<th style="width:9%;" class="center">Montant REMISE</th>
+												<th style="width:5%;" class="center">TOTAL</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											{% for detail  in  facture.details %}
+												<tr>
+													<td>{{ loop.index }}</td>
+													<td>{{detail.article ? detail.article.code :''}}</td>
+													<td>
+														{{ detail.article ? detail.article.titre:''}}
+														{% if detail.observation %}
+															<br/><b>Informations complementaires :
+																{{ detail.observation}}</b>
+														{% endif %}
+
+													</td>
+													<td class="center">{{ detail.unite ? detail.unite.abreviation:''}}</td>
+													<td class="center">{{ detail.quantiteformat|number_format(0, '.', ',') }}</td>
+													<td class="text-end">{{ detail.prixunitairefomat }}</td>
+													<td class="center">{{detail.tvafomat|number_format(0, '.', ',') }}</td>
+													<td class="text-end">{{ detail.prixtvaformat }}</td>
+													<td class="text-end">{{ detail.remisefomat }}
+													</td>
+													<td class="text-end">{{ detail.prixremiseformat }}
+													</td>
+													<td class="text-end-padding">{{detail.prixttcformat }}</td>
+												</tr>
+											{% endfor %}
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-2 no-pad-left pdr-5">
+				<div class="ibox">
+
+
+					<div class="ibox-content prix_bloc">
+						<div class="ibox-heading">
+							<h3>Total HT
+								<div class="stat-percent">{{ facture.prixht|number_format(2, ',', ' ') }}
+									{{facture.devise ? facture.devise.designation}}
+								</div>
+							</h3>
+						</div>
+						<hr/>
+						<div class="ibox-heading">
+							<h3>TOTAL TAXES
+								<div class="stat-percent">{{ facture.prixtva|number_format(2, ',', ' ') }}
+									{{facture.devise ? facture.devise.designation}}</div>
+							</h3>
+						</div>
+						{% if facture.prixremise > 0 %}
+							<hr/>
+							<div class="ibox-heading">
+								<h3>TOTAL REMISE
+									<div class="stat-percent">{{ facture.prixremise|number_format(2, ',', ' ') }}
+										{{facture.devise ? facture.devise.designation}}</div>
+								</h3>
+							</div>
+						{% endif %}
+
+						<hr/>
+						<div class="ibox-heading">
+							<h1>Total T.T.C
+								<div class="stat-percent">{{ facture.prixttc|number_format(2, ',', ' ') }}
+									{{facture.devise ? facture.devise.designation}}</div>
+							</h1>
+						</div>
+						<hr/>
+
+
+					</div>
+				</div>
+				<div class="ibox selected">
+					<div class="ibox-content pd-0">
+						<div class="tab-content">
+							<div id="contact-1" class="tab-pane active">
+								<div class="client-detail-">
+									<div class="full-height-scroll">
+
+
+										<ul class="list-group clear-list">
+											<li class="list-group-item fist-item">
+												<div class="panel-default">
+													<div class="div-panel-header">
+														<h5 class="panel-title p-title-style">
+															<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+																<i class="fa fa-file-pdf-o"></i>
+																Impressions associé</a>
+														</h5>
+													</div>
+													<div id="collapseOne" class="panel-collapse in collapse">
+														<div class="panel-body">
+															<ul class="folder-list m-b-md" style="padding: 0px 10px;">
+																<li>
+																	<a href="{{ path('t_UaTFacturefrscab_document_pdf' , {id:facture.id})}}" data-valide="{{facture.statutsig}}" {% if facture.fournisseur and facture.fournisseur.categorie.k != "externe" %}class="imprime_document" {% endif %} target="_blank">
+																		<i class="fa fa-file-pdf-o"></i>
+																		Facture Fournisseur ({{ facture.code }})</a>
+																</li>
+
+
+															</ul>
+														</div>
+													</div>
+												</div>
+											</li>
+
+                                            <li class="list-group-item fist-item">
+                                                <div class="panel-default">
+                                                    <div class="div-panel-header">
+                                                        <h5 class="panel-title p-title-style">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="false" class="collapsed">
+                                                                <i class="fa fa-clipboard"></i>
+                                                                LIENS ASSOCIé</a>
+                                                        </h5>
+                                                    </div>
+
+                                                    <div id="collapseTree" class="panel-collapse in collapse">
+													{% if facture.ppiece.id !=  71 %}
+													<div class="panel-body">
+                                                            {{ include('./module_achat/inc/flux_demande.html.twig',{'demande': facture.livraisons[0].commande.referenceBci   ,'commande' : facture.livraisons[0].commande , 'active_facture':true}) }}
+
+                                                        </div>{% endif %}
+													
+                                                        
+                                                    </div>
+
+                                                </div>
+                                            </li>
+
+										</ul>
+										<br/>
+										
+
+										{# <div id="vertical-timeline" class="vertical-container dark-timeline">
+																																																										
+																																																										
+																																																										                                            <div class="vertical-timeline-block">
+																																																										                                                <div class="vertical-timeline-icon gray-bg">
+																																																										                                                    <i class="fa fa-clipboard"></i>
+																																																										                                                </div>
+																																																										                                                <div class="vertical-timeline-content">
+																																																										                                                    <p>{{ facture.code }}
+																																																										                                                    </p>
+																																																										                                                    <span class="vertical-date small text-muted">
+																																																										                                                        <i class="fa fa-clock-o" title="la date de creation"></i>
+																																																										                                                        {{ facture.created ? facture.created|date('d/m/Y H:i:s')}}
+																																																										
+																																																										                                                    </span>
+																																																										                                                </div>
+																																																										                                            </div>
+																																																										
+																																																										
+																																																										                                            {%  for key, livraison in facture.livraisons %}
+																																																										
+																																																										                                                <div class="vertical-timeline-block">
+																																																										                                                    <div class="vertical-timeline-icon gray-bg">
+																																																										                                                        <i class="fa fa fa-list-alt"></i>
+																																																										                                                    </div>
+																																																										                                                    <div class="vertical-timeline-content">
+																																																										                                                        <p>{{ livraison.code }}
+																																																										                                                        </p>
+																																																										                                                        <span class="vertical-date small text-muted">
+																																																										                                                            <i class="fa fa-clock-o" title="la date de creation"></i>
+																																																										                                                            {{ livraison.created ? livraison.created|date('d/m/Y H:i:s')}}
+																																																										
+																																																										                                                        </span>
+																																																										                                                    </div>
+																																																										                                                </div>
+																																																										
+																																																										
+																																																										
+																																																										
+																																																										                                                {% if livraison.commande is not empty %}
+																																																										                                                    <div class="vertical-timeline-block">
+																																																										                                                        <div class="vertical-timeline-icon gray-bg">
+																																																										                                                            <i class="fa fa-check-square-o"></i>
+																																																										                                                        </div>
+																																																										                                                        <div class="vertical-timeline-content">
+																																																										                                                            <p>{{ livraison.commande.code }}
+																																																										                                                            </p>
+																																																										                                                            <span class="vertical-date small text-muted">
+																																																										                                                                <i class="fa fa-clock-o" title="la date de creation"></i>
+																																																										                                                                {{ livraison.commande.created ? livraison.commande.created|date('d/m/Y H:i:s')}}
+																																																										
+																																																										                                                            </span>
+																																																										                                                        </div>
+																																																										                                                    </div>
+																																																										
+																																																										                                                    {% if livraison.commande.referenceBci is not empty %}
+																																																										                                                        <div class="vertical-timeline-block">
+																																																										                                                            <div class="vertical-timeline-icon gray-bg">
+																																																										                                                                <i class="fa fa-file-text-o"></i>
+																																																										                                                            </div>
+																																																										                                                            <div class="vertical-timeline-content">
+																																																										                                                                <p>{{ livraison.commande.referenceBci.code }}
+																																																										                                                                </p>
+																																																										                                                                <span class="vertical-date small text-muted">
+																																																										                                                                    <i class="fa fa-clock-o" title="la date de creation"></i>
+																																																										                                                                    {{ livraison.commande.referenceBci.created ? livraison.commande.referenceBci.created|date('d/m/Y H:i:s')}}
+																																																										
+																																																										                                                                </span>
+																																																										                                                            </div>
+																																																										                                                        </div>
+																																																										                                                    {% endif %}
+																																																										                                                {% endif %}
+																																																										
+																																																										
+																																																										
+																																																										                                            {% endfor %}
+																																																										                                        </div>#}
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+{{ include('./module_achat/t_facturefrscab/inc/workflow.html.twig',{'page_actuel': 'show'}) }}
+
+<br><br>
+
+
+{{ render(controller('App\\Controller\\ModuleAchat\\UaTFacturefrscabController:showhistorique',{ 'facture': facture.id})) }}{% endblock %}{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('tfacturefrscab') }}{% endblock %}

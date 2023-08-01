@@ -1,0 +1,1182 @@
+{% set t = 3 %}
+{% set margin_left = "" %}
+{% set margin_right = "" %}
+{% set margin_top = "" %}
+{% set margin_bottom = "" %}
+{% set position_logo = "" %}
+{% set ajouter_info_pied_page = false %}
+{% for para in parametre %}
+    {% if para.abriviation == "marge_L" %}
+        {% set margin_left = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "marge_R" %}
+        {% set margin_right = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "marge_T" %}
+        {% set margin_top = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "marge_B" %}
+        {% set margin_bottom = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "position_logo" %}
+        {% set position_logo = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "ajouter_info_pied_page" %}
+        {% if para.valeur == "checked" %}
+            {% set ajouter_info_pied_page = true %}
+        {% endif %}
+    {% endif %}
+
+{% endfor %}
+
+
+<style type="text/Css">
+    body{
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    .titre-reb{
+        width: 100%;
+        background: #1f4f7a;
+        font-size: 9px ;
+        padding:3px 10px;
+        color: #f1f1f1;
+        font-weight: bold
+    }
+    div.zone_over
+    {
+        display: block;
+        width: 40%;
+        word-wrap:break-word !important;
+    }
+    .slh tr td {
+        border-bottom: 2px solid black;
+    }
+    .mo tr td{
+        padding:4px;
+
+    }
+    .table-parours {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .table-parours th {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        width:auto;
+        font-size: 10px;
+        background: #eee;
+    }
+    .table-parours td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        width: auto;
+        font-size: 10px;
+        background: white;
+    }
+
+    .tb1{
+    width: 100%;
+    border : 1px solid black
+    }
+    .tb2{
+        width: 100%; 
+        text-align: left; 
+        font-size: 8px;
+        margin-top:12px;
+        margin-left:0px;
+    }
+    .tb3{
+        width: 100%; 
+        text-align: left; 
+        font-size: 12px;
+        margin-top:0px;
+    }
+    .tb4{
+        width: 100%; 
+        text-align: left; 
+        font-size: 10px;
+        font-weight: bold;
+        margin-top:6px;
+    }
+    .tb5{
+        width: 100%;
+        margin-top:6px;
+        margin-left:-4px;
+        font-size:10px;
+        font-weight: bold;
+    }
+    .tb6{
+        width: 100%; text-align: left; font-size: 12px;margin-top:12px;
+    }
+    .tb7{
+        width: 100%; text-align: left; font-size: 10px;font-weight: bold;margin-top:12px;
+    }
+    .tb8{
+        width: 100%; text-align: center; font-size: 11px;margin-top:12px;
+    }
+    .tb9{
+        width: 100%;margin-top:12px;margin-left:-4px;font-size:10px;font-weight: bold;
+    }
+    .tb10{
+        width: 50%;margin-top:12px;margin-left:-4px;font-size:10px;font-weight: bold;
+    }
+    .tb11{
+        width: 50% ;position: absolute;top:54%;left:50.5%;font-size:10px;font-weight: bold;
+    }
+    .tb12{
+        width: 88%;margin-top:12px;margin-left:-4px;font-size:10px;font-weight: bold;
+    }
+    .tb13{
+        width: 88%;margin-top:6px;margin-left:-4px;font-size:10px;font-weight: bold;
+    }
+    .tb14{
+        width:20%;margin-left:-6px;
+    }
+    .tb15{
+        width: 50% ;position: absolute;left:50.5%;font-size:10px;font-weight: bold;
+    }
+    .tb16{
+        width: 50% ;position: absolute;left:-0.4%;font-size:10px;font-weight: bold;
+    }
+    .tb17{
+        width: 100%
+    }
+    .tb18{
+        margin-top:2px
+    }
+    .tb19{
+        width: 50% ;position: absolute;top:17.8%;left:51%;font-size:10px;font-weight: bold;
+    }
+    .tb20{
+       width: 50% ;position: absolute;top:35.2%;left:51%;font-size:10px;font-weight: bold;
+    }
+    .th1{
+        width:20% ;
+    }
+    .th2{
+        width:60%;
+        text-align:center;
+        font-size:11px;
+        border-left : 1px solid black ;
+        border-right : 1px solid black ;
+        padding-bottom : 10px;
+    }
+    
+    .th3{
+        width:20%;
+        font-size:11px;
+        text-align:center
+    }
+    .th4{
+        width:60%;
+        text-align:center;
+        font-size:11px;
+        border-left : 1px solid black ;
+        border-right : 1px solid black ;
+        padding:6px;
+    }
+    .th5{
+        width:103%
+    }
+    .th6{
+        width:97.2%
+    }
+    .td1{
+        width: 100% ;
+        border-top:1.2px solid  gray;
+        color: black ;
+        padding-left:5px;
+        text-align : center;
+        padding : 5px
+    }
+    .td2{
+        width: 100% ;
+        background : #1f4e79; 
+        color: #fff ;
+        padding-left: 15px;
+        padding-top:3px;
+        padding-bottom:3px;
+    }
+    .td3{
+        width: 165px ;
+        background : #ddd;
+    }
+    .td4{
+        width: 165px ; 
+        border:1px solid gray;
+    }
+    .td5{
+        width: 70px;
+        background : #ddd;
+        border-right : 1px solid white;
+    }
+    .td6{
+        width: 75px;
+        border:1px solid gray;
+    }
+    .td7{
+        width: 70px;
+        border-left : 2px solid white;
+        background : #ddd;
+        margin-left:5px;
+        border-right : 1px solid white;
+    }
+    .td8{
+        width: 90px;
+        border:1px solid gray;
+    }
+    .td9{
+        width: 165px;
+        border-left : 2px solid white;
+        background : #ddd;
+        margin-left:5px;
+        border-right : 2px solid white;
+    }
+    .td10{
+        width: 155px;
+        border:1px solid gray;
+    }
+    .td11{
+        width: 165px ;border:1px solid gray;
+    }
+    .td12{
+        width: 100% ;background: #ddd; color: black ;padding-left: 15px;padding-top:5px;padding-bottom:5px;
+    }
+    .td13{
+        width: 100% ;background: #ddd; color: black ;padding-left: 15px;padding-top:4px;padding-bottom:4px;
+    }
+    .td14{
+        width: 100% ;background: #ddd; color: black ;padding-left: 15px;border-left:4px solid white;padding-top:4px;padding-bottom:4px;
+    }
+    .td15{
+        width: 25% ;background : #ddd;
+    }
+    .td16{
+        width: 33% ;border:1px solid gray;
+    }
+    .td17{
+        width: 32.2% ;border:1px solid gray;
+    }
+    .td18{
+        border:1px solid gray;width: 83%;padding-bottom: 45px;text-align: left;padding-top:6px;padding-left:5px;
+    }
+    .td19{
+        width:5%
+    }
+    .td20{
+        width: 130px ;background : #ddd;border-right : 1px solid white;
+    }
+    .td21{
+        width: 100px ;border:1px solid gray;
+    }
+    .td22{
+        width: 100px; border-left : 2px solid white;background : #ddd;border-right : 1px solid white;
+    }
+    .td23{
+        width: 100px;border:1px solid gray;
+    }
+    .td24{
+        width: 100px;border-left : 2px solid white;background : #ddd;border-right : 2px solid white;
+    }
+    .td25{
+        width: 90px ;border:1px solid gray;
+    }
+    .td26{
+        width:49%;
+    }
+    .td27{
+        width:1%
+    }
+    .td28{
+        width:49%;padding-top:6px;
+    }
+    .td29{
+        border:none
+    }
+    .td30{
+        border:none;color:white;
+    }
+    .td31{
+         border:1px solid gray;width: 79%;padding-bottom: 6px;text-align: left;padding-top:6px;padding-left:5px;
+    }
+    .td32{
+        width:2.6%;
+    }
+    .td33{
+        width: 165px ; 
+        border:1px solid gray;
+    }
+    .div1{
+        position: relative;left: 5%;width:90%;border-top:1px solid gray;padding:5px;text-align: center;font-size: 8px;
+    }
+   .img{
+        margin-left: 5px;
+        margin-top:-25px;
+        width: 100%; 
+        padding : 5px;
+    }
+</style>
+
+
+
+    <table class="tb1" cellspacing="0" >
+        <tr>
+            <th class="th1">
+                <br/><br/>
+                <img class="img" src="{{ asset('img/Logo_UIASS.png')[1:] }}" class="logo" alt="Logo">
+                <br/>
+
+            </th>
+            <th class="th2">
+                <br/>
+                UNIVERSITE INTERNATIONALE ABULCASIS DES SCIENCES DE LA SANTE <br/>
+                Fiche synthèse de dossier de candidature
+                <br/>
+
+            </th>
+            <th class="th3">
+                <br/>
+                ID_INSCRIPTION
+
+        <table cellspacing="0" class="tb2" >
+            <tr>
+                <td class="td1">{{ etudiant.code }}</td> 
+            </tr>
+            <tr>
+                <td class="td1"> Statut candidature : </td> 
+            </tr>
+
+
+
+        </table>
+
+
+    </th>
+    </tr>
+
+    </table>
+
+
+    <br/>
+
+    <table class="tb1" cellspacing="0" >
+        <tr>
+            <th class="th1 ">
+
+            </th>
+            <th class="th4">
+
+                {# <?php echo $value->designation_etablissement; ?> #}
+
+            </th>
+            <th class="th3">
+
+            </th>
+        </tr>
+
+    </table>
+
+
+    <br/>
+
+
+
+
+    <table cellspacing="0" class="tb3" >
+        <tr>
+            <td class="td2"> I. INFORMATIONS PERSONNELLES DU CANDIDAT</td> 
+        </tr>
+        <tr>
+
+        </tr>
+
+
+    </table>
+
+    <table cellspacing="0" class="tb4" >
+
+        <tr>
+
+        </tr>
+
+
+    </table>
+    <table cellspacing="4px" class="tb5 mo">
+        <tr>
+            <td class="td3"> &nbsp;&nbsp;&nbsp;&nbsp;Nom :</td> 
+
+            <td class="td4">{{ etudiant.nom }}</td> 
+
+            <td class="td3"> &nbsp;&nbsp;&nbsp;&nbsp;Prénom :</td> 
+
+            <td class="td33">{{ etudiant.prenom }}</td>
+        </tr>
+    </table>
+    <table cellspacing="4px" class="tb5 mo">
+        <tr >
+
+            <td class="td5">&nbsp;&nbsp;&nbsp;&nbsp; Age :</td> 
+            <td class="td6">{{ etudiant.dateNaissance | date("m/d/Y")}}</td> 
+
+            <td class="td7">&nbsp;&nbsp;&nbsp;&nbsp; Sexe :</td> 
+            <td class="td8">{{ etudiant.sexe }}</td> 
+
+            <td class="td9">&nbsp;&nbsp;&nbsp;&nbsp; Ville :</td> 
+            <td class="td10">{{ etudiant.ville }}</td> 
+        </tr>
+    </table>
+    <table cellspacing="4px" class="tb5 mo" >
+
+        <tr >
+            <td class="td3"> &nbsp;&nbsp;&nbsp;&nbsp;Nationalité  :</td> 
+
+            <td class="td11">{{ etudiant.nationalite }}</td> 
+
+            <td class="td3"> &nbsp;&nbsp;&nbsp;&nbsp;N° de téléphone :</td> 
+
+            <td class="td11">{{ etudiant.tel1 }}</td>
+
+
+        </tr>
+
+
+    </table>
+
+    <table cellspacing="0" class="tb6" >
+        <tr>
+            <td class="td2">II. INFORMATIONS SUR LE CURSUS SCOLAIRE / UNIVERSITAIRE DU CANDIDAT</td> 
+        </tr>
+        <tr>
+
+        </tr>
+
+
+    </table>
+
+
+    <table cellspacing="0" class="tb7" >
+        <tr>
+            <td class="td12"> II. A - Cursus scolaire</td> 
+        </tr>
+        <tr>
+
+        </tr>
+
+
+    </table>
+
+
+    <table cellspacing="0" class="tb8" >
+        <tr>
+            <td class="td13"> II. A .1 - Informations générales sur le baccalauréat</td> 
+            <td class="td14"> II. A . 2 - Notes obtenues aux matières scientifiques</td> 
+        </tr>
+        <tr>
+
+        </tr>
+
+
+    </table>
+
+
+    <table cellspacing="4px" class="tb9 mo" >
+        <tr>
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Type de bac : </td> 
+
+            <td class="td16">{# <?php
+                $tb = new x_type_bac();
+                $type_bac = $tb->selectByIdColumn("code", $value->id_type_bac);
+                echo $type_bac['designation'];
+                ?> #}
+                {{ etudiant.typeBac ?  etudiant.typeBac.designation}}
+                </td> 
+
+
+
+    {# <?php $t_preinscriptionrelevenotes = new t_preinscriptionrelevenotes(); ?> #}
+
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Mathématiques : </td> 
+
+            <td class="td17">{# <?php echo $notes = $t_preinscriptionrelevenotes->GetNoteByCodeEtudiantMatiere($value->code_etudiant, "MAT0000006"); ?> #}</td>
+
+        </tr>
+
+        <tr>
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Série : </td> 
+
+            <td class="td16"> {#  <?php
+                $tb = new x_serie_bac();
+                $filiere = $tb->selectByIdColumn("code", $value->id_filiere);
+                echo $filiere['abr'];
+                ?> #}
+                {{ etudiant.filiere ?  etudiant.filiere.abreviation}}
+            </td> 
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Physique/Chimie : </td> 
+
+
+
+            <td class="td17">{# <?php echo $notes = $t_preinscriptionrelevenotes->GetNoteByCodeEtudiantMatiere($value->code_etudiant, "MAT0000005"); ?> #}</td>
+
+
+
+
+
+
+        </tr>
+
+        <tr>
+
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Moyenne obtenue : </td> 
+
+            <td class="td16">{# <?php echo number_format($value->moyenne_bac, 2) ?> #}{{etudiant.moyenneBac}}</td> 
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;SVT : </td> 
+
+            <td class="td17">{# <?php echo $notes = $t_preinscriptionrelevenotes->GetNoteByCodeEtudiantMatiere($value->code_etudiant, "MAT0000004"); ?> #}</td>
+
+
+
+
+
+
+        </tr>
+
+        <tr>
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Année d'obtention : </td> 
+
+            <td class="td16">{{etudiant.anneeBac}}</td> 
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Français : </td> 
+
+            <td class="td17">{# <?php echo $notes = $t_preinscriptionrelevenotes->GetNoteByCodeEtudiantMatiere($value->code_etudiant, "MAT0000002"); ?> #}</td>
+
+
+        </tr>
+
+        <tr>
+
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Classement du candidat  : </td> 
+
+            <td class="td16"></td> 
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Anglais : </td> 
+
+            <td class="td17">{# <?php echo $notes = $t_preinscriptionrelevenotes->GetNoteByCodeEtudiantMatiere($value->code_etudiant, "MAT0000003"); ?> #}</td>
+
+
+        </tr>
+
+
+    </table>
+    <table cellspacing="0" class="tb7" >
+        <tr>
+            <td class="td12"> II. B - Cursus universitaire</td> 
+        </tr>
+        <tr>
+
+        </tr>
+
+
+    </table>
+
+
+
+
+
+
+    <table cellspacing="4px"  class="mo tb10">
+        <tr>
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Type de bac : </td> 
+
+            <td class="td16">
+               {#  <?php
+                $tb = new x_type_bac();
+                $type_bac = $tb->selectByIdColumn("code", $value->id_type_bac);
+                echo $type_bac['designation'];
+                ?> #}
+                {{ etudiant.typeBac ?  etudiant.typeBac.designation}}
+            </td> 
+
+
+        </tr>
+
+        <tr>
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Série : </td> 
+
+            <td class="td16">
+
+              {#   <?php
+                $tb = new x_serie_bac();
+                $filiere = $tb->selectByIdColumn("code", $value->id_filiere);
+                echo $filiere['abr'];
+                ?> #}
+                {{ etudiant.filiere ?  etudiant.filiere.abreviation}}
+            </td> 
+
+
+
+
+
+
+        </tr>
+
+        <tr>
+
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Moyenne obtenue : </td> 
+
+            <td class="td16">{# <?php echo number_format($value->moyenne_bac, 2) ?> #}</td> 
+
+
+
+
+
+        </tr>
+
+
+
+    </table>
+
+    <br/> <br/>
+    <table class="tb11"> 
+        <tr>    
+            <td class="td18">
+                Observation <br/>
+               {#  <?php  echo $value->obs ; ?> #}
+                {{ etudiant.obs}}
+            </td>
+        </tr>
+    </table>
+
+
+    <table cellspacing="0" class="tb6" >
+        <tr>
+            <td class="td2"> III. CRITERES DU CONCOURS</td> 
+        </tr>
+        <tr>
+
+        </tr>
+
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <table cellspacing="4px"  class="tb12 mo">
+        <tr>
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Type de candidature : </td> 
+
+            <td class="td16">
+
+  {#   <?php
+    $tb = new nature_demande();
+    $nature = $tb->selectByIdColumn("code", $value->id_nature_demande);
+    echo $nature['designation'];
+    ?> #}
+            {{etudiant.natureDemande ? etudiant.natureDemande.designation}}
+            </td> 
+
+
+           {#  <?php
+            $admis = "";
+            $la = "";
+            if ($value->admission == 'ADMIS') {
+                $admis = "Oui";
+            }
+            if ($value->admission == 'LA') {
+                $admis = "Oui";
+            }
+            ?> #}
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Admis FMP 2015 : </td> 
+
+            <td class="td17">{# <?php echo $admis ?> #}</td>
+
+        </tr>
+
+        <tr>
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Type de baccalauréat : </td> 
+
+            <td class="td16">{# <?php echo $type_bac['designation']; ?>  #}
+                {{ etudiant.typeBac ?  etudiant.typeBac.designation}}
+            </td> 
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;LA FMP 2015 : </td> 
+
+            <td class="td17">{# <?php echo $la ?> #}</td>
+
+
+
+
+        </tr>
+
+
+
+
+    </table>
+
+
+
+
+
+
+    <table cellspacing="0" class="tb6" >
+        <tr>
+            <td class="td2"> IV. BOURSE</td> 
+        </tr>
+        <tr>
+
+        </tr>
+
+
+    </table>
+
+
+    <table cellspacing="4px" class="tb13 mo">
+
+        <tr >
+            <td class="td19" cellspacing="0" >
+                <table class="tb14">
+                    <tr>
+                        <td class="td20">&nbsp;&nbsp;&nbsp;&nbsp; Situation des parents :</td> 
+                        <td class="td21">
+
+                           {#  <?php
+                            $situation_parents = "";
+                            switch ($value->situation_parents) {
+                                case "marie":
+                                    $situation_parents = 'Marié';
+                                    break;
+                                case "divorce":
+                                    $situation_parents = 'Divorcé';
+                                    break;
+                                case "veuve":
+                                    $situation_parents = 'Veuve';
+                                    break;
+                            }
+                            echo $situation_parents;
+                            ?> #}
+                            {{etudiant.stFamilleParent}}
+
+                        </td> 
+
+                        <td class="td22">&nbsp;&nbsp;&nbsp;&nbsp; Nombre d'enfants :</td> 
+                        <td class="td23">
+                            {# <?php echo $value->nombre_enfants ; ?> #}
+                            {{etudiant.nombreEnfants}}
+                        </td> 
+
+                        <td class="td24">&nbsp;&nbsp;&nbsp;&nbsp; Total revenus :</td> 
+                        <td class="td25">----</td> 
+
+                    </tr>
+
+
+                </table>
+
+            </td> 
+
+
+
+
+        </tr>
+
+
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <table cellspacing="0" class="tb8" >
+        <tr>
+            <td class="td13"> IV. A - Informations sur le père</td> 
+            <td class="td14"> IV. B - Informations sur la mère</td> 
+        </tr>
+        <tr>
+
+        </tr>
+
+
+    </table>
+
+
+    <table cellspacing="4px" class="tb9" class="mo">
+        <tr>
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Profession : </td> 
+
+            <td class="td16"> {{etudiant.professionP}} </td> 
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Profession : </td> 
+
+            <td class="td17">{{etudiant.professionM}}</td>
+
+        </tr>
+
+        <tr>
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Revenu mensuel : </td> 
+
+            <td class="td16">{{etudiant.salaireP}}</td> 
+
+            <td class="td15"> &nbsp;&nbsp;&nbsp;&nbsp;Revenu mensuel : </td> 
+
+            <td class="td17">{{etudiant.salaireM}}</td>
+
+
+
+
+        </tr>
+
+
+
+    </table>
+
+
+    <table class="tb15"> 
+        <tr>    
+            <td class="td18">
+                Observation  
+            </td>
+        </tr>
+    </table>
+    <table class="tb16"> 
+        <tr>    
+            <td class="td18">
+                Observation  
+            </td>
+        </tr>
+    </table>
+<br><br>
+
+    <!--2iem page-->
+    <page></page>
+
+    <table cellspacing="0" class="tb6" >
+        <tr>
+            <td class="td2"> V. ETAT DU DOSSIER DE CANDIDATURE</td> 
+        </tr>
+        <tr>
+
+        </tr>
+
+
+    </table>
+
+    <table cellspacing="0" class="tb17">
+
+        <tr>
+            <td class="td26">
+
+
+                <table cellspacing="0"  class="table-parours">
+                    <tr>
+                        <th>Pièces fournies au dossier de candidature </th>
+                        <th>Etat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <td>1 Formulaire de pré-inscription</td>
+                        <td></td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td>1 copie conforme du relevé de notes obtenues</td>
+                        <td></td>
+
+                    </tr>
+
+                    <tr>
+                        <td>1 copie conforme de la CIN</td>
+                        <td></td>
+
+                    </tr>
+
+
+
+                    <tr>
+                        <td>1 demande manuscrite</td>
+                        <td></td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td>1 engagement légalisé de l'authenticité des pièces fournies</td>
+                        <td></td>
+
+                    </tr>
+
+
+
+                    <tr>
+                        <td>4 photos d'identité</td>
+                        <td></td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td>2 enveloppes timbrées</td>
+                        <td></td>
+
+                    </tr>
+
+                    <tr>
+                        <td>1 chèque de 1500 dhs de frais d'étude de dossier</td>
+                        <td></td>
+
+                    </tr>
+
+
+                </table>
+
+            </td>
+            <td class="td27"></td>
+            <td class="td28">
+
+
+                <table cellspacing="0"  class="table-parours tb18">
+                    <tr>
+                        <th>Pièces fournies au dossier de bourse</th>
+                        <th>Etat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+                    </tr>
+                    <tr>
+                        <td>Relevé de notes des trois dernières années</td>
+                        <td></td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td>Attestation de salaire du père</td>
+                        <td></td>
+
+                    </tr>
+
+                    <tr>
+                        <td>Attestation de salaire de la mère</td>
+                        <td></td>
+
+                    </tr>
+
+
+
+                    <tr>
+                        <td class="td29">Déclaration des revenus</td>
+                        <td class="td29"></td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td class="td30">1 Formulaire de pré-inscription</td>
+                        <td class="td29"></td>
+
+                    </tr>
+
+
+
+                    <tr>
+                        <td class="td30">1 Formulaire de pré-inscription</td>
+                        <td class="td29"></td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td class="td30">1 Formulaire de pré-inscription</td>
+                        <td class="td29"></td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="td30">1 chèque de 1500 dhs de frais d'étude de dossier</td>
+                        <td class="td29"></td>
+
+                    </tr>
+
+
+                </table>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <table class="tb19"> 
+        <tr>    
+            <td class="td31">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum 
+            </td>
+        </tr>
+    </table>
+
+
+
+
+
+    <table cellspacing="0" class="tb17">
+
+        <tr>
+            <td class="td26">
+
+
+                <table cellspacing="0"  class="table-parours">
+                    <tr>
+                        <th class="th5">ADMISSIBILITE AU CONCOURS </th>
+                    </tr>
+                    <tr>
+                        <td>Admissible</td>
+
+
+                    </tr>
+
+
+                    <tr>
+                        <td>Admis sans concours</td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>Admis sous reserve</td>
+
+
+                    </tr>
+
+
+
+                    <tr>
+                        <td>Non admissible</td>
+
+
+                    </tr>
+
+
+
+
+
+
+
+                </table>
+
+            </td>
+            <td class="td32"></td>
+            <td class="td28">
+
+
+                <table cellspacing="0"  class="table-parours tb18">
+                    <tr>
+                        <th class="th6">Observation</th>
+
+                    </tr>
+                    <tr>
+                        <td class="td30">1 Formulaire de pré-inscription</td>
+
+
+                    </tr>
+
+
+
+                    <tr>
+                        <td class="td30">1 Formulaire de pré-inscription</td>
+
+
+                    </tr>
+
+
+                    <tr>
+                        <td class="td30">1 Formulaire de pré-inscription</td>
+                        <td class="td29"></td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="td30">1 chèque de 1500 dhs de frais d'étude de dossier</td>
+                        <td class="td29"></td>
+
+                    </tr>
+
+
+                </table>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <table class="tb20"> 
+        <tr>    
+            <td class="td31">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum  
+            </td>
+        </tr>
+    </table>
+   
+{# <?php endforeach; ?> #}
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+
+
+<page_footer>
+    <div class="div1"><p>Faculté de Médecine Abulcasis (Hôpital Cheikh Zaid), Hay Riad, Madinat Al Irfane, Avenue Allal El Fassi, BP 6533, 10 000 Rabat - MAROC</p>
+    </div>
+</page_footer>

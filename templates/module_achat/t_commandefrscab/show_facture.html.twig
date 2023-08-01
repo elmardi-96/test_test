@@ -1,0 +1,176 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Bon Commande  fournisseur , Factures | Achat{% endblock %}
+{% block body %}
+
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_generer_facture'}}) }}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Achat , Bon Commande  fournisseur</h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+                <div class="title-action">
+                    <button class="btn btn-white btn-xs btn-lg" type="submit">
+                        <i class="fa fa-save"></i>
+                        {{ button_label|default('Enregistrer') }}</button>
+                    {#% include './module_achat/commandefrs/inc/workflow.html.twig' %#}
+                </div>   
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    {#    {{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+   #} 
+    </div>
+    <br/><br/><br/>
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content" style="padding-top: 4px ;">
+                    {#% include './module_achat/commandefrs/inc/workflow_breadcumb.html.twig' %#}
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {% include './module_achat/t_commandefrscab/inc/navigation.html.twig' %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+
+                                                <div id="test" data-commande-id="{{ commande.id|json_encode }}"></div>
+                                                {#    <div class="form-group">
+                                                        {{ form_label(form.fournisseur ,'Fournisseur (*):', {'label_attr':{'class':'col-sm-12'}}) }} 
+                                                        {{ form_widget(form.fournisseur,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                                                    </div>#}
+                        
+                                                    
+                        
+                                                    <div class="form-group">
+                                                        {{ form_label(form.refDocAsso ,'Reference (*):', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                        <div class="col-sm-4">
+                                                        {{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control'}}) }}  
+                                                    </div>
+                                                    </div>
+                        
+                                                    <div class="form-group">
+                                                        {{ form_label(form.dateDocAsso ,'Date facture (*):', {'label_attr':{'class':'col-sm-4' ,'placeholder':'Reference'}}) }} 
+                                                        <div class="col-sm-4">
+                                                        {{ form_widget(form.dateDocAsso,{'attr':{'class':'form-control form-control select2_dossiers'}}) }} 
+                                                    </div>
+                                                    </div>
+                        
+                        
+                                                    <br/>
+                                                    <div class="form-group">
+                                                        {{ form_label(form.livraisonFacture ,'Choix des Livraisons  :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                        <div class="col-sm-4">
+                                                            {{ form_widget(form.livraisonFacture,{'attr':{'class':'form-check-inline form-control select2_livraison'}}) }}
+                                                        </div>
+                                                    </div>
+                                                    {#{% if livraison is defined %}
+                                                        <input type="hidden" name="_id" value="{{ livraison.id }}" />
+                                                    {% endif %}#}
+                                                  
+                                                    {{ form_end(form,{'render_rest': false}) }}
+                                               
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="ibox ">
+    
+            <div class="ibox-title">
+                <h5>Details {{commande.id}}
+                </h5>
+                <div class="ibox-tools">
+                    
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="table-responsive">
+                    {% for livraison  in  commande.livraisons %}
+                    {% for facture  in  livraison.factureLivraison %}
+                  
+                  <h4>Facture :  {{facture.code}}</h4><br>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Article
+                                </th>
+                                <th>Quantite
+                                </th>
+                                <th>Prix Unitaire
+                                </th>
+                                <th>TVA :</th>
+                                <th>Prix TTC</th>
+                                <th>Observation :</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for detail  in  facture.details %}
+                                <tr>
+                                    <td>
+                                       
+                                        {{ detail.article.titre }}
+                                    </td>
+                                    <td>
+                                        {{ detail.quantite }}
+                                    </td>
+                                    <td>
+                                        {{ detail.prixunitaire }}
+                                    </td>
+                                    <td>
+                                        {{ detail.tva }}
+                                    </td>
+                                    <td>{{ detail.prixttc }}</td>
+                                    <td>
+                                        {{ detail.observation }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            {# {% endif %} #}
+                        </tbody>
+                    </table>
+                    {% endfor %}
+                    {% endfor %}
+                
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    {#{ render(controller('App\\Controller\\moduleAchat\\MaLivraisonfrscabController:showhistorique',{ 'livraison': livraison.id})) }#}
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('tcommandefrscab') }}
+{% endblock %}

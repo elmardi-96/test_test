@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="fr">
+<title>DEMANDE </title>
+
+	</head>
+	<style>
+
+{# @page { size: 360pt 360pt; } #}
+
+		@page {
+			margin: 220px 20px 210px 20px !important;
+			padding: 0px 0px 0px 0px !important;
+		}
+
+		body {
+			font-family: 'Courier';
+			font-size: 9px;                
+			font-weight: 100;
+
+		}
+
+         .header {
+        position: fixed;
+        top: -220px;
+        left: 0px;
+        right: 0px;
+        }
+   
+
+		.logo {
+			max-width: 250px;
+			max-height: 100px;
+			text-align: right;
+		}
+	
+		.footer {
+			/*border-top: 2px solid #555555;*/
+			margin-top: 10px;
+			font-size: 9px;
+			text-align: center;
+			position: fixed;
+			bottom: 150px;
+            left: 0px;
+            right: 0px;
+
+
+		}
+	
+		*,body {
+            font-family: Courier, sans-serif;
+           text-transform: uppercase ;
+
+		}
+
+
+		main {
+			margin-top: 0;
+		}
+.page_break {page-break-inside: auto;}
+
+
+main {
+    margin-top:0px;
+}
+	</style>
+
+
+
+	<body>
+
+<div class="header">
+
+{{ include ('tresorerie/ordre_virement/pdf/intenre/header.html.twig') }}   
+
+
+      
+</div>
+<div class="footer">
+
+ {% if TrTransactionOne.Dossier.id == 38 %}
+    {{ include ('tresorerie/ordre_virement/pdf/intenre/footer2.html.twig') }}  
+
+{% else %}
+    {{ include ('tresorerie/ordre_virement/pdf/intenre/footer.html.twig') }} 
+
+{% endif %}
+
+</div>
+
+<body>
+
+
+
+    <div style="padding-right : 15px; font-size:12px; margin-left:60px; margin-right:60px;margin-top:15px">
+    <div style="margin-left:300px; margin-bottom:10px;">
+
+
+            
+            <p style='text-align: right; padding-right:15px; 
+                        text-transform: uppercase; 
+                        line-height:2.2;'><b>departement banque et regies<br>fondation cheikh zaid rabat</b> </p>
+
+
+
+   </div>
+
+
+
+
+
+    <p style="margin-left: 15px;"> <b>OBJET :</b> REGLEMENT INTERNE</p>
+    <br />
+    <br>
+
+
+     <p style="margin-left: 15px;">
+
+    <b>MONSIEUR,</b>
+
+     </p>
+
+
+        <div>
+            <div style="text-align:justify; text-justify: inter-word; line-height:2.1; margin-left: 15px; margin-right: 15px;text-transform:uppercase;">
+                <p>Par débit de notre compte N°:<b>
+                    {% if TrTransactionOne.operation.compte %}
+                        {{TrTransactionOne.operation.compte.numCompte}}</b>
+                    {% else %}
+                        {{TrTransactionOne.operation.parent.compte.numCompte}}</b>
+                    {% endif %}
+                    
+
+                     au nom de la (l') 
+                    
+                    <b>   
+                    {% if TrTransactionOne.operation.pPiece.id ==  32 or  TrTransactionOne.operation.pPiece.id ==  33 %}
+                          {{  TrTransactionOne.operation.compte.designation }}
+                    {% else %}
+                            {% if TrTransactionOne.operation.compte %}
+                                {{TrTransactionOne.operation.compte.description}}
+                            {% else %}
+                                {{TrTransactionOne.operation.parent.compte.description}}
+                            {% endif %}
+                    {% endif %}
+                    </b>
+                   
+                    </b>nous vous prions de bien vouloir exécuter le(s) reglement(s) virtuel(s) totalisent le montant de
+
+                    <b>{{somme |number_format(2, ',', ' ') }} Dhs
+					({{text}})</b>
+                    au profit de bénéficiaire cites:
+                </p>
+            </div>
+        <br><br>
+        </div>
+{# {%  set lines = TrTransactions | length %} #}
+{%  if TrTransactions | length <= 3 %}
+{# {%  set content = 'oui' %} #}
+{# {%  else %} #}
+{# {%  set content = 'non' %} #}
+{# {%  endif %} #}
+{{ include ('tresorerie/ordre_virement/pdf/intenre/content.html.twig')}}  
+{# ,{'content' :content})  #}
+{# {% if TrTransactions | length <=2 %} #}
+
+{% endif %}
+
+
+<p style="padding: 20px;;text-transform:uppercase;">Veuillez croire, 
+
+ {% if TrTransactionOne.Dossier.id == 38 or TrTransactionOne.Dossier.id == 139 or TrTransactionOne.Dossier.id == 105 or TrTransactionOne.Dossier.id == 138 or TrTransactionOne.Dossier.id == 104 or TrTransactionOne.Dossier.id == 27 or TrTransactionOne.Dossier.id == 1 or TrTransactionOne.Dossier.id == 2  %}
+               
+Monsieur
+{% else  %}
+
+Monsieur 
+
+{% endif %}
+            en nos salutations les meilleures. </p>
+
+	</div>
+
+
+
+</body>
+
+{%  if TrTransactions | length > 3  %}
+    {# {%  set content = 'oui' %} #}
+    <div class='page2' style="page-break-before: always;">
+    {{ include ('tresorerie/ordre_virement/pdf/intenre/content.html.twig')  }}   
+    {# ,{'content' :content} #}
+    </div>
+{# {%  else %}
+{%  set content = 'non' %}
+#}
+{%  endif %}
+
+
+
+
+

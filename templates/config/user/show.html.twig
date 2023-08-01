@@ -1,0 +1,172 @@
+ {% extends 'base_config.html.twig' %}
+
+{% block title %}TAchatdemandeinternecab
+{% endblock %}
+
+
+{% block sidebar %} 
+    {% include './config/inc/sidebar.html.twig' %}
+{% endblock %}
+
+
+
+{% block body %}
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+
+            {{ wo_render_breadcrumbs() }}
+        </div>
+        <div class="col-lg-8">
+        <div class="title-action">
+        <a href="{{path('user_edit', {'id' : user.id})}}" class="btn btn-primary btn-xs btn-lg"><i class="fa fa-pencil"></i> Modifier</a>
+            
+        </div>
+    </div>
+    </div><br><br><br>
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="ibox">
+                        <div class="ibox-content">
+                        <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        <ul class="nav nav-tabs">
+                                            <li><a class="nav-link active show" href="#tab-1" data-toggle="tab">informations de base</a></li>
+                                            <li><a class="nav-link" href="#tab-2" data-toggle="tab">informations de création</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="padding: 4%; padding-top: 0%;">
+                                <div class="panel-body">
+
+                                <div class="tab-content">
+                                <div class="tab-pane active show" id="tab-1">
+                                    <div class="row">
+                                            <div class="col-md-6 b-r">
+                                                <h3 class="m-t-none m-b">Informations </h3>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row" style="margin-bottom: -15px;">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+
+                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.id }}</p>
+                                                        </div>
+                                        
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;"><label class="col-sm-4 required font-weight-bold">Nom :</label>
+
+                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.nom }}</p>
+                                                        </div>
+                                        
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row" style="margin-bottom: -15px;"><label class="col-sm-4 required font-weight-bold">Prénom :</label>
+
+                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.prenom }}</p>
+                                                        </div>
+                                        
+                                                </div>
+                                              
+                                                
+                                               
+                                                
+                                            </div>
+                                        <div class="col-md-6">
+                                                <h3 class="m-t-none m-b"><br></h3>
+                                                 <div class="hr-line-dashed"></div>
+                                                <div class="form-group row" style="margin-bottom: -15px;"><label class="col-sm-4 required font-weight-bold">username :</label>
+
+                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.username }}</p>
+                                                        </div>
+                                        
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row" style="margin-bottom: -15px;"><label class="col-sm-4 required font-weight-bold">Email :</label>
+
+                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.email }}</p>
+                                                        </div>
+                                        
+                                                </div>
+                                               
+                                               
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab-2">
+
+                                        <div class="row">
+                                            <div class="col-md-6 b-r">
+                                                <h3 class="m-t-none m-b">Informations </h3>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row" style="margin-bottom: -15px;" style="margin-bottom: -15px;"><label class="col-sm-4 required font-weight-bold">Date de création :</label>
+
+                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.created|date('d/m/Y')}}</p>
+                                                        </div>
+                                        
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row" style="margin-bottom: -15px;"><label class="col-sm-4 required font-weight-bold">Date de modification:</label>
+
+                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.updated|date('d/m/Y')}}</p>
+                                                        </div>
+                                        
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row" style="margin-bottom: -15px;"><label class="col-sm-4 required font-weight-bold">Date de modification:</label>
+
+                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">
+                                                        {% if user.isActive == true %}
+                                                        <dd class="mb-1"><span class="label label-primary"><i class="fa fa-unlock"></i> Activé</span></dd>
+                                                        {% elseif user.isActive == false %}
+                                                        <dd class="mb-1"><span class="label label-danger"><i class="fa fa-lock"></i> Désactivé</span></dd>
+                                                        {% endif %}
+                                                        </p>
+                                                        </div>
+                                        
+                                                </div>
+                                              
+                                                
+                                               
+                                                
+                                            </div>
+                                        <div class="col-md-6">
+                                                <h3 class="m-t-none m-b"><br></h3>
+                                                 <div class="hr-line-dashed"></div>
+                                                <div class="form-group row" style="margin-bottom: -15px;"><label class="col-sm-4 required font-weight-bold">Modifier par:</label>
+
+                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.userUpdated }}</p>
+                                                        </div>
+                                        
+                                                </div>
+                                               
+<div class="hr-line-dashed"></div>
+                                                <div class="form-group row" style="margin-bottom: -15px;"><label class="col-sm-4 required font-weight-bold">Créer par:</label>
+
+                                                        <div class="col-sm-8"><p class="form-control-static" style="margin-top: 8px">{{ user.userCreated }}</p>
+                                                        </div>
+                                        
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                        </div>
+                                    </div>
+
+                                    </div>
+                                </div>
+
+                                </div>
+                                
+
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+      
+                </div>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}{% block footer %}{% endblock %}

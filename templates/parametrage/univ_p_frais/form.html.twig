@@ -1,0 +1,236 @@
+<div class="sidebar-container new">
+
+	<div class="ibox-tools"></div>
+
+	<div class="tab-content ">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+				</h3>
+				<small>
+					{% if  univ_p_frais.id > 0 %}
+						Modifier
+					{% else %}
+						Ajouter
+					{% endif %}
+				</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<table class="table small m-b-xs">
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="ibox ">
+					<div class="ibox-content">
+
+
+						{% if  univ_p_frais.id > 0 %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_edit'}}) }}
+						{% else %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+						{% endif  %}
+
+
+						<div class="row">
+
+
+							<div class="col-md-12 b-r">
+
+								{% if  univ_p_frais.id > 0 %}
+									<div id="test" data-frai-id="{{ univ_p_frais.id|json_encode }}"></div>
+
+								{% endif  %}
+								<div class="form-group row">
+									<label class="col-sm-12 required ">Etablissement (*)</label>
+									<div class="col-sm-12 ">
+										<select class=" form-control etablissement select2">
+											{{ etablissement|raw }}</select>
+									</div>
+
+
+								</div>
+								<div class="hr-line-dashed paddi "></div>
+								<div class="form-group row">
+									{{ form_label(form.formation ,'Formation (*) ', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+
+										{% if  univ_p_frais.id > 1 %}
+											{{ form_widget(form.formation,{'attr':{'class':'form-control  form-control-sm sel2 select2 formation','placeholder':'Formation (*) '}}) }}
+
+										{% else %}
+											<select id="univ_p_frais_formation" name="univ_p_frais[formation]" required="required" class="form-control form-control-sm sel2 select2 formation select2-hidden-accessible" placeholder="Formation (*) " data-select2-id="select2-data-univ_p_frais_formation" tabindex="-1" aria-hidden="true">
+												<option value="" selected="selected" data-select2-id="select2-data-174-7go1">Choix formation
+												</option>
+											</select>
+										{% endif  %}
+										<div class="form-error {% if form_errors(form.formation)|length > 0 %}error-class-tab{% endif %}">
+											{{ form_errors(form.formation) }}
+										</div>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi "></div>
+								<div class="form-group row">
+									{{ form_label(form.natureDemande ,'Nature demande', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.natureDemande,{'attr':{'class':'form-control form-control-sm select2','placeholder': 'Nature demande'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.natureDemande) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.cat ,'Categorie frais', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.cat,{'attr':{'class':'form-control form-control-sm select2','placeholder': 'Categorie frais'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.cat) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.designation ,'Designation (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.designation,{'attr':{'class':'form-control form-control-sm','placeholder': 'Designation'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.designation) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.rubrique ,'Rubrique (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.rubrique,{'attr':{'class':'form-control form-control-sm','placeholder': 'Rubrique'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.rubrique) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.nature ,'Nature (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.nature,{'attr':{'class':'form-control form-control-sm','placeholder': 'Nature'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.nature) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+
+								<div class="form-group row">
+									{{ form_label(form.varier ,'Varier', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.varier) }}
+										<span class="form-error-message">
+											{{ form_errors(form.varier) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.categorie ,'Categorie (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.categorie,{'attr':{'class':'form-control form-control-sm','placeholder': 'categorie'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.categorie) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.montant ,'Montant (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.montant,{'attr':{'class':'form-control form-control-sm','placeholder': 'Montant'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.montant) }}
+										</span>
+									</div>
+
+								</div>
+
+								<div class="hr-line-dashed paddi"></div>
+
+								<div class="form-group row">
+									{{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.active) }}
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								{% if  univ_p_frais.id > 0 %}
+									<div class="form-group row">
+										<div class="col-sm-6">
+											<button class="btn btn-primary btn-block btn-xs  button-edit-frai">
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Modifier') }}</button>
+
+										</div>
+										<div class="col-sm-6">
+											{% for operation in operations|filter(operation => operation.prefix == '_delete') %}
+
+												<a {% if operation.route is not null %} data-id="{{univ_p_frais.id}}" data-token="{{ csrf_token('delete' ~ univ_p_frais.id) }}" href="#{# {{ path(operation.route) }} #}" {% endif %} id="{{operation.prefix}}" class="btn btn-block btn-xs btn-danger _delete{{operation.classCs}}">
+													<i class="fa {{ operation.icon }}" style="color: white !important;"></i>
+													{{ operation.titre|capitalize }}</a>
+
+											{% endfor %}
+										</div>
+
+
+									</div>
+								{% else %}
+									<div class="form-group row">
+
+										<div class="col-sm-5">
+											<button class="btn btn-primary btn-block btn-xs  button-save-frai">
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Enregistrer') }}</button>
+
+										</div>
+										<div class="col-sm-7">
+											<button class="btn btn-primary btn-block btn-xs  button-save-add-frai">
+												<i class="fa fa-save"></i>
+												&nbsp;Enregistrer et Ajouter</button>
+
+										</div>
+									</div>
+								{% endif  %}
+
+
+							</div>
+
+						</div>
+
+						{{form_widget(form._token)}}
+						{{ form_end(form,{'render_rest': false}) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

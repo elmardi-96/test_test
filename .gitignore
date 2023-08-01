@@ -1,0 +1,54 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/var/
+/.env
+/nbproject/
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
+/nbproject/private/
+###> symfony/webpack-encore-bundle ###
+
+/node_modules/ 
+
+#/public/build/
+
+
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+ history/
+ .history/* 
+
+php.ini
+.user.ini
+
+##/public/build/*
+##/public/js/fos_js_routes.json 
+
+
+
+
+
+
+
+
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+.env
+
+/vendor
+.env

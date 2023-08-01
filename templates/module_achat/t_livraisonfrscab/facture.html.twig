@@ -1,0 +1,134 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i>  </small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+               
+
+                <div class="ibox">
+                    <div class="ibox-content">
+
+                        <h3>Generer Facture </h3>
+                       
+                            {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_facture'}}) }}
+                        <div class="form-group">
+
+
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 required">
+                                    Montant 
+                                </label>
+
+                                <div class=" col-sm-12 ">
+						{{montant|number_format(2, '.', ',')}} 
+                                
+                                </div>
+
+                            </div>
+                            <br/>
+                            {%if remise!=0%}
+                            <div class="form-group row">
+                                <label class="col-sm-12 required">
+                                    Remise 
+                                </label>
+
+                                <div class=" col-sm-12 ">
+						{{remise|number_format(2, '.', ',')}} 
+                                
+                                </div>
+
+                            </div>
+                            <br>
+                            {%endif%}
+                            <div class="form-group row">
+                                <label class="col-sm-12 required">
+                                    Date facture (*)
+                                </label>
+
+                                <div class="col-sm-12">
+                                    {{ form_widget(form.dateFacture,{'attr':{'class':'form-control form-control-sm col-sm-12'}}) }} 
+
+                                </div>
+
+                            </div>
+                            <br/>
+                            <div class="form-group row">
+                                <label class="col-sm-12 required">
+                                    Reference docAsso (*)
+                                </label>
+
+                                <div class="col-sm-12">
+                                    {{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control-sm col-sm-12' ,'placeholder':'Reference'}}) }} 
+                                </div>
+
+                            </div>
+                            
+                            <br/>
+                            <div class="form-group row">
+                                <label class="col-sm-12 required">
+                                    Date docAsso (*)
+                                </label>
+
+                                <div class="col-sm-12">
+                                    {{ form_widget(form.dateDocAsso,{'attr':{'class':'form-control form-control-sm col-sm-12'}}) }} 
+
+                                </div>
+
+                            </div>
+                            <br/>
+                           
+                            <div style="display: none;">
+                                {{ form_label(form.mtremise ,'remise (*) : ', {'label_attr':{'class':'col-sm-12'}}) }} 
+                                {{ form_widget(form.mtremise,{'attr':{'class':'form-control form-control-sm col-sm-12'}}) }} 
+                            </div>
+                            
+                             {{ form_widget(form.ids,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                            
+                            
+                        </div>
+                        
+                        <br/>
+                     
+                      
+                        <button type="submit" class="btn btn-white btn-block btn-xs my-button"><i class="fa fa-save"></i> Enregistrer</button>
+                        {{ form_end(form) }}
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

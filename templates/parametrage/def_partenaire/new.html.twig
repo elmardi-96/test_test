@@ -1,0 +1,25 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Partenaire index{% endblock %}
+
+
+
+{% block body %}
+    
+    <div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+
+<div class="new">
+ {% include './config/inc/navigation.html.twig' %}
+
+    
+        {{ include('./parametrage/def_partenaire/_form.html.twig') }}
+        
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('def_partenaire') }}
+{% endblock %}

@@ -1,0 +1,28 @@
+
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}Ajouter | Alimentation{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="new">
+
+
+        {{ include('./tresorerie/Banque_consolides/_form.html.twig') }}
+
+    
+
+    </div>
+
+
+    {{ include('./tresorerie/Banque_consolides/inc/workflow.html.twig',{'page_actuel': 'new'}) }}
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('alimentation') }}
+{% endblock %}

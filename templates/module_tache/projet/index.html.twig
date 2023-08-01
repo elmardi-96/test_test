@@ -1,0 +1,94 @@
+{% extends 'base_tache.html.twig' %}
+
+
+
+{% block title %}TAchatdemandeinternecab index{% endblock %}
+
+
+{% block body %}
+
+
+
+
+
+
+
+    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+
+
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-4">
+            <h2 class="fo">Achat , Pré-commande </h2>
+            {#{ wo_render_breadcrumbs() }#}
+        </div>
+
+
+        <div class="col-lg-8">
+            <div class="title-action">
+
+
+
+
+                {#  {% for key ,  operation in operations %}
+                      {% if operation.horizontale  %}
+                          <a {% if operation.route is not null  %}  href="{{ path(operation.route) }}" {%  endif %}  id="{{operation.prefix}}" class="btn btn-white btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+                      {% endif %}
+                  {% endfor %}
+  #}
+
+
+
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+    </div>
+
+
+    <br/><br/><br/>
+
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            {% for key , projet in projets %}
+                <div class="col-lg-3 box-app">
+                    <div class="feed-element">
+
+                        <img alt="image" class="float-left rounded-circle" src="{{asset('/img/images.png')}}">
+
+                        <div class="media-body ">
+
+                            <strong>{{ projet.abreviation }}</strong>. <br>
+                            <p class="text-muted">{{ projet.designation }}</p>
+                            <div class="actions">
+                                <a href="" class="btn btn-xs btn-white float-left"><i class="fa fa-check"></i>  Accéder </a>
+                                <a class="btn btn-xs btn-white float-right" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><i class="fa fa-info-circle"></i>  Plus d'informations</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+
+            {% endfor %}   
+
+        </div>
+    </div> 
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('tachatdemandeinternecab') }}
+{% endblock %}

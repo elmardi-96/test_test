@@ -1,0 +1,289 @@
+{% set current_path = app.request.get('_route') %}
+<div
+	id="wrapper">
+	<!-- Sidebar -->
+	<nav class="navbar-default navbar-static-side" role="navigation" >
+		<div class="sidebar-collapse-parametrage">
+			<ul class="nav metismenu" id="side-menu">
+				{% include './inc/sidebar_header.html.twig' %}
+
+
+				<li class="colp {% if "univ_ac_etablissement_index"  in current_path or "univ_ac_formation_index"  in current_path or "univ_ac_promotion_index"  in current_path or "univ_ac_semestre_index"  in current_path  or "univ_ac_module_index"  in current_path or "univ_ac_element_index"  in current_path  %} active {%endif%}">
+					<a href="# ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">
+							informations académique</span>
+					</a>
+					<ul class="nav nav-second-level collapse">
+
+						<li class=" {% if "univ_ac_etablissement_index"  in current_path  %} active {%endif%}">
+							<a href="{{ path('univ_ac_etablissement_index') }} ">
+								<i class="fa fa-table"></i>
+								<span class="nav-label">Etablissement</span>
+							</a>
+						</li>
+						<li class=" {% if "univ_ac_formation_index"  in current_path  %} active {%endif%} colp" >
+							<a href="{{ path('univ_ac_formation_index') }} ">
+								<i class="fa fa-table"></i>
+								<span class="nav-label">Formation</span>
+							</a>
+						</li>
+						<li class=" {% if "univ_ac_promotion_index"  in current_path  %} active {%endif%} colp">
+							<a href="{{ path('univ_ac_promotion_index') }} ">
+								<i class="fa fa-table"></i>
+								<span class="nav-label">Promotion</span>
+							</a>
+						</li>
+						<li class=" {% if "univ_ac_semestre_index"  in current_path  %} active {%endif%} colp">
+							<a href="{{ path('univ_ac_semestre_index') }} ">
+								<i class="fa fa-table"></i>
+								<span class="nav-label">Semestre</span>
+							</a>
+						</li>
+						<li class=" {% if "univ_ac_module_index"  in current_path  %} active {%endif%} colp">
+							<a href="{{ path('univ_ac_module_index') }} ">
+								<i class="fa fa-table"></i>
+								<span class="nav-label">Module</span>
+							</a>
+						</li>
+						<li class=" {% if "univ_ac_element_index"  in current_path  %} active {%endif%} colp">
+							<a href="{{ path('univ_ac_element_index') }} ">
+								<i class="fa fa-table"></i>
+								<span class="nav-label">Element</span>
+							</a>
+						</li>
+
+					</ul>
+				</li>
+				<li class=" {% if "univ_p_frais_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_frais_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Frais</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_document_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_document_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Document</span>
+					</a>
+				</li> 
+				<li class=" {% if "univ_p_statut_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_statut_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Statut</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_x_modalite_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_x_modalite_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Modalité</span>
+					</a>
+				</li>
+
+				<li class=" {% if "univ_x_filiere_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_x_filiere_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">filière</span>
+					</a>
+				</li>
+
+
+				<li class=" {% if "univ_x_type_bac_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_x_type_bac_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Type de bac</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_nature_demande_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_nature_demande_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Nature demande</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_ac_departement_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_ac_departement_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Département</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_ac_annee_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_ac_annee_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Année</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_x_academie_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_x_academie_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Académie</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_x_langue_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_x_langue_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Langue</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_matiere_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_matiere_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Matière</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_couleur_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_couleur_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Couleur</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_batiment_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_batiment_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Batiment</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_direction_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_direction_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Direction</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_enseignant_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_enseignant_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Enseignant</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_enseignant_grille_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_enseignant_grille_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Enseignant grille</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_estatut_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_estatut_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">EStatut</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_etage_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_etage_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Etage</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_frais_categorie_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_frais_categorie_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Frais categorie</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_grade_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_grade_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Grade</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_mesure_alerte_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_mesure_alerte_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Mesure alerte</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_nature_alerte_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_nature_alerte_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Nature alerte</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_organisme_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_organisme_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Organisme</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_salle_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_salle_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Salle</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_signataire_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_signataire_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Signataire</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_d_service_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_d_service_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Service</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_pr_nature_epreuve_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_pr_nature_epreuve_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Nature epreuve</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_charge_facture_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_charge_facture_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Charge facture</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_delai_paiement_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_delai_paiement_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Delai Paiement</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_document_attribution_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_document_attribution_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Document attribution</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_situation_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_situation_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Situation</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_statut_epreuve_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_statut_epreuve_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Statut epreuve</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_type_element_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_type_element_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Type element</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_p_ville_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_p_ville_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Ville</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_x_banque_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_x_banque_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Banque</span>
+					</a>
+				</li>
+				<li class=" {% if "univ_x_serie_bac_index"  in current_path  %} active {%endif%} colp" >
+					<a href="{{ path('univ_x_serie_bac_index') }} ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">Serie bac</span>
+					</a>
+				</li>
+
+
+			</ul>
+		</div>
+	</nav>
+
+	<!-- End Sidebar -->

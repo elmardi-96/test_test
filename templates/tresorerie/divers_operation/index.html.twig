@@ -1,0 +1,209 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}index | operation
+{% endblock %}
+
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+		<div class="col-lg-12">
+			{% include './tresorerie/divers_operation/inc/workflow_breadcumb.html.twig' %}
+		</div>
+		<div class="col-lg-12">
+			{% include './tresorerie/divers_operation/action.html.twig' %}
+		</div>
+		{# ========================================================================================== #}
+		{# ===================================  START =============================================== #}
+
+		{# ==================   Start Modal ===================== #}
+			<div class="actions modal fade right pt-2" style="z-index: 9999998 !important;" id="ajout_divers" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'> <div class="modal-dialog modal-full-height modal-right modal-md" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="margin-top: 11px;">
+						<br>
+						<h5 class="modal-title" id="exampleModalPreviewLabel1">
+							DIVERS OPEATION
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body bo-0">
+
+						<div class="bod_valider" style="">
+							<div class="sidebar-container">
+
+								<div class="ibox-tools">
+									<a class="close-link close-me" href="">
+										<i class="fa fa-times"></i>
+									</a>
+								</div>
+
+								<div class="tab-content">
+
+
+									<div id="tab-1" class="tab-pane active">
+										<br>
+										<div class="right-sidebar-content">
+
+
+											<div class="ibox">
+												<div class="ibox-content">
+													<div class="row">
+														<div class="col-md-12">
+															<style>
+																input.is-invalid {
+																	border-color: red !important;
+																}
+															</style>
+															<form method="POST" action="{{ path('divers_operation_insert') }}">
+																<div class="form-row">
+																	<div class="form-group col-md-12">
+																		<label for="Article_id">Artilce
+																		</label>
+																		<select id="Article_id" name="Article_id" class="form-control sel2">
+																			<option selected disabled>Choose Article...</option>
+																			{% for artilce in artilces %}
+																				<option value="{{ artilce.id }}">{{ artilce.titre }}</option>
+																			{% endfor %}
+																		</select>
+																	</div>
+																	<div class="form-group col-md-6">
+																		<label for="Montant">Montant</label>
+																		<input type="number" name="Montant" class="form-control" id="Montant" placeholder="Montant ....">
+																	</div>
+																	<div class="form-group col-md-6">
+																		<label for="TVA">Tva</label>
+																		<input type="Tva" name="Tva" class="form-control" id="TVA" placeholder="TVa">
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<label for="Observation">Observation</label>
+																	<input type="text" name="Observation" class="form-control" id="Observation" placeholder="Observation ....">
+																</div>
+																<div class="form-row">
+																	<div class="form-group col-md-6">
+																		<label for="Date">Date</label>
+																		<input type="date" name="Date" class="form-control" id="Date">
+																	</div>
+
+																	{# <div class="form-group col-md-6">
+																																																				<label for="inputZip">Zip</label>
+																																																				<input type="text" class="form-control" id="inputZip">
+																																																			</div> #}
+																</div>
+																<br>
+																<button type="submit" class="btn btn-primary" id="ajoute_divers">
+																	<i class="fa fa-plus"></i>
+																	&nbsp;Ajoute
+																</button>
+
+															</form>
+
+
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		{# ==================   End Modal ===================== #}
+		{# ===================================  END =============================================== #}
+		{# ========================================================================================== #}
+
+		<div class="col-lg-6">
+			<div class="title-action">
+				<div class="title-action"></div>
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+	</div>
+	<br/>
+	<br/>
+
+	<div class="row border-bottom white-bg dashboard-header" style="margin:20px	1px 0">
+		<div class="col-lg-12">
+
+			<div class="ibox ">
+				<div class="ibox-content" style="padding-top: 0px">
+					<div class="" >
+						<div class="row">
+						</div>
+						<table class="table tb cmd display table-striped table-bordered table-hover dataTables-example" id="divers_datatble" style="width: 100%">
+							<thead>
+								<tr>
+									<th style="text-align: start;">#</th>
+									<th style="text-align: center;">Code</th>
+                                    <th style="text-align: center;">observation</th>
+                                    <th style="text-align: center;">Article </th>
+                                    <th style="text-align: center;">partenaire</th>
+									<th style="text-align: center;">Montant</th>
+									<th style="text-align: center;">Tva</th>
+									<th style="text-align: center;">date</th>
+								</tr>
+							</thead>
+							<tbody>
+               			    {% for key, facture in factures %}
+								{% set url = "<a class='active-link' href='" ~ path('t_UaTFacturefrscab_document_pdf', {'id': facture.id}) ~ "' target='_blank'>" ~ facture.code  %}
+								{% set code = "<span class='hint--right' aria-label='cliquez ici pour impression  :" ~ facture.code ~ "'>" ~ url ~ "</span>" %}
+
+								{% if facture.observation|length >= 30 %}
+									{% set observation = facture.observation|slice(0, 30) ~ '<span style="position: absolute; font-weight:bold; cursor:pointer" class="hint--right" aria-label="' ~ facture.observation ~ '"> ' ~ '&nbsp;...' ~ '</span>' %}
+								{% else %}
+									{% set observation = facture.observation %}
+								{% endif %}
+
+								{% if facture.fournisseur.nom|length >= 30 %}
+									{% set fournisseur = facture.fournisseur.nom|slice(0, 30) ~ '<span style="position: absolute; font-weight:bold; cursor:pointer" class="hint--right" aria-label="' ~ facture.fournisseur.nom ~ '"> ' ~ '&nbsp;...' ~ '</span>' %}
+								{% else %}
+									{% set fournisseur = facture.fournisseur.nom %}
+								{% endif %}
+								
+								{% if facture.details[0].article.titre|length >= 30 %}
+									{% set article = facture.details[0].article.titre|slice(0, 30) ~ '<span style="position: absolute; font-weight:bold; cursor:pointer" class="hint--right" aria-label="' ~ facture.details[0].article.titre ~ '"> ' ~ '&nbsp;...' ~ '</span>' %}
+								{% else %}
+									{% set article = facture.details[0].article.titre %}
+								{% endif %}
+
+								<tr>
+									<td style="text-align: start;">{{ key + 1 }}</td>
+									<td style="text-align: start;">{{ code|raw }}</td>
+									<td style="text-align: start;">{{ observation|raw  }}</td>
+                                    <td style="text-align: start;">{{ article|raw}}</td>
+									<td style="text-align: start;">{{ fournisseur|raw}}</td>
+
+									<td style="text-align: end;">{{ facture.montant|number_format(2, ',', ' ')}}</td>
+									<td style="text-align: center;">{{ facture.details[0].tva}} %</td>
+									<td style="text-align: center;">{{ facture.created|date('Y-m-d H:i:s')}}</td>
+								</tr>
+                            {% endfor %}
+							
+							</tbody>
+							
+						</table>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>{% endblock %}{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('transaction') }}{% endblock %}

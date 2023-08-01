@@ -1,0 +1,27 @@
+
+{% extends 'base_tresorerie.html.twig' %}
+
+{% block title %}Ajouter | Alimentation{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="new">
+
+
+        {{ include('./tresorerie/tr_alimentation/_form.html.twig',{'button_label': 'Enregistrer'}) }}
+
+    
+
+    </div>
+
+
+    {{ include('./tresorerie/tr_alimentation/inc/workflow.html.twig',{'page_actuel': 'new'}) }}
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('operation') }}
+{% endblock %}

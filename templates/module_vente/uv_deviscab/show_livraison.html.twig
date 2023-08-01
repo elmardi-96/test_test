@@ -1,0 +1,477 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Vente , Devis Client , consulter articles | Achat
+{% endblock %}
+{% block body %}
+	<form class="_generer_form" autocomplete="off" ,>
+		<div id="right-sidebar" class="actions animated"></div>
+
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+			<div class="col-lg-6">
+				{% include './module_vente/uv_deviscab/inc/workflow_breadcumb.html.twig' %}
+			</div>
+			<div class="col-lg-6">
+				<div
+					class="title-action">
+
+					{#% include './ugouv/achat/t_commandefrscab/inc/workflow.html.twig' %#}
+					{% if workflow_has_marked_place(devis, 'valider') %}
+						{#  <button class="btn btn-white btn-xs btn-lg my-button2 verifier" name="verifier">
+																																																																																																                            <i class="fa fa-check-square"></i>
+																																																																																																                            {{ button_label|default('Verification') }}
+																																																																																																                        </button>#}
+						<button class="btn btn-white btn-xs btn-lg my-button2 save" id="disable" name="save">
+							<i class="fa fa-save"></i>
+							{{ button_label|default('Enregistrer') }}
+						</button>
+					{% endif %}
+
+				</div>
+			</div>
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+				{% include './module_vente/uv_deviscab/inc/workflow.html.twig' %}
+			</div>
+			{#    {{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+																																																                                                                                                                                                                                                        #}
+		</div>
+		<br/><br/>
+		<div class="row pt-20">
+			<div class="col-lg-12">
+				<div class="ibox">
+					<div
+						class="ibox-content">
+						{#% include './ugouv/achat/t_commandefrscab/inc/workflow_breadcumb.html.twig' %#}
+						<div class="row m-t-sm">
+							<div class="col-lg-12">
+								<div class="panel blank-panel">
+									<div class="panel-heading">
+										<div class="panel-options">
+											{% include './module_vente/uv_deviscab/inc/navigation.html.twig' %}
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="panel-body">
+											<div class="tab-content">
+
+
+												<div class="tab-pane active show" id="tab-1">
+
+													<div class="row">
+														{% if workflow_has_marked_place(devis, 'valider') or workflow_has_marked_place(devis, 'commander') %}
+															<div class="col-md-12">
+																<h3>Saisie Livraison</h3>
+																<div class="hr-line-dashed"></div>
+																<div class="col-md-12">
+																	<div class="form-group row">
+																		<div class="col-sm-4">
+																			<label>
+																				Date Livraison (*) :</label>
+																		</div>
+																		<div class="col-sm-2">
+																			<input type="date" name="dateDocAsso" value='{{'now'|date('Y-m-d')}}' class="form-control form-control-sm">
+																		</div>
+																	</div>
+																</div>
+																<div class="hr-line-dashed"></div>
+																<div class="col-md-12 ">
+																	<div class="form-group row">
+																		<div class="col-sm-4">
+																			<label>Reference (*) :</label>
+																		</div>
+																		<div class="col-sm-3">
+
+																			<input type="text" name="refDocAsso" placeholder="Reference" class="form-control form-control-sm" value="REF-{{devis.code  }}">
+																		</div>
+																	</div>
+
+																</div>
+
+																<div class="hr-line-dashed"></div>
+																<div class="col-md-12 ">
+																	<div class="form-group row">
+																		<div class="col-sm-4">
+																			<label>Description :</label>
+																		</div>
+																		<div class="col-sm-4">
+																			<textarea name="description" placeholder="Description" class="form-control form-control-sm"></textarea>
+
+																		</div>
+																	</div>
+
+																</div>
+
+															</div>
+															<input type="hidden" name="_id" value="{{ devis.id }}">
+															<input type="hidden" name="token" value="{{ csrf_token('_csrf_token') }}">
+															<input type="hidden" name="dataSerialize" value="{{data|json_encode(constant('JSON_PRETTY_PRINT')) }}">
+
+															<div class="col-md-12">
+																<table class="t-m table table-striped table-bordered table-hover dataTables-example dataTable datatable-show3" id="datatable-show3">
+																	<thead>
+																		<tr>
+																			<th>#</th>
+																			<th>Reference</th>
+																			<th>Article</th>
+
+																			<th>G.S</th>
+
+																			<th>P.U</th>
+																			<th>TVA</th>
+																			<th>Remise</th>
+																			<th>QNT en vente
+																			</th>
+																			<th>QNT en Achat</th>
+																			<th>
+																				QNT stock</th>
+
+																			<th>QNT Cmd</th>
+
+																			<th>QNT livre</th>
+																			<th>Reste</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+
+																		{% for key , article in data %}
+																			<tr>
+																				<td>{{ key }}</td>
+																				<td>{{ article.code }}</td>
+																				<td>{{ article.titre }}</td>
+
+																				<td>{{ article.gerer |number_format(2, '.', ',')}}</td>
+																				<td>{{ article.prixUnitaire |number_format(2, '.', ',')}}</td>
+																				<td>{{ article.tva |number_format(2, '.', ',') }}
+																					%</td>
+																				<td>{{ article.remise |number_format(2, '.', ',') }}
+																					%
+																				</td>
+																				<td>{{ article.quantiteEncoursVente |number_format(2, '.', ',') }}</td>
+																				<td>{{ article.quantiteEncoursAchat |number_format(2, '.', ',')}}</td>
+																				<td>
+																					{% if  article.somme <0 %}
+																						<span>
+																							<i class="fa fa-circle" style="color: #ff0e00"></i>
+																							{{ article.somme |number_format(2, '.', ',')}}</span>
+																					{% else %}
+																						{{ article.somme |number_format(2, '.', ',')}}
+																						<i class="fa fa-circle" style="color: #1ab394"></i>
+																					{% endif %}
+																				</td>
+
+																				<td>{{ article.quantite |number_format(2, '.', ',')}}</td>
+																				<td>{{ article.quantiteLivre |number_format(2, '.', ',')}}</td>
+																				<td>
+																					<input name="reste[{{ article.id }}]" type="text" value="{{ article.reste }}"/></td>
+																			</tr>
+																		{% endfor %}
+																	</tbody>
+
+																	<tfoot>
+																		<tr>
+																			<th colspan="10" style="text-align:right">
+																				<table class="table-subtotal">
+																					<tr>
+																						<td>Total HT
+																						</td>
+																						<td>{{ prixHtReste }}</td>
+																					</tr>
+
+																					<tr class="subtotal-top-border">
+																						<td>TVA
+																						</td>
+																						<td>{{prixTvaReste}}</td>
+																					</tr>
+																					{% if prixRemiseReste is not empty %}
+																						<tr class="subtotal-top-border">
+																							<td>Remise
+																							</td>
+																							<td>{{prixRemiseReste}}</td>
+																						</tr>
+																					{% endif %}
+
+																					<tr class="subtotal-top-border">
+																						<td>Total TTC
+																						</td>
+																						<td>{{prixTotalTtcReste}}</td>
+																					</tr>
+																				</table>
+																			</th>
+
+																		</tr>
+																	</tfoot>
+																</table>
+															</div>
+														{% else %}
+															<div class="col-md-12 ">
+																<div class="forum-item animated bounce">
+																	<div class="row">
+																		<div class="col-md-9">
+																			<div class="forum-icon">
+																				<i class="fa fa-warning"></i>
+																			</div>
+																			<a class="forum-item-title">Important</a>
+																			<div class="forum-sub-title">
+																				Pour passer une livraison , il faut tout d'abord valider ce devis client
+																				<br/>
+																				<a href="{{path('uv_deviscab_show',{'id':devis.id})}}">{{ devis.code }}</a>
+
+																			</div>
+																		</div>
+
+																	</div>
+																</div>
+															</div>
+														{% endif %}
+													</div>
+
+
+												</div>
+
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% if devis.livraison is not empty %}
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ibox ">
+
+						<div class="ibox-content mcol">
+							<div class="table-responsive">
+								<div class="col-md-12 m-mar-t">
+									<div class="row">
+										<div class="col-md-12">
+											<h5 class="m-left">Livraisons</h5>
+										</div>
+									</div>
+									{% for  key , livraison  in  devis.livraison %}
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<h5 class="panel-title">
+													<a data-toggle="collapse" data-parent="#accordion" href="#tab{{livraison.id}}">Livraison
+														{{ key +1 }}
+														:
+														{{livraison.code}}</a>
+												</h5>
+											</div>
+											<div id="tab{{livraison.id}}" class="panel-collapse collapse in {% if key == 0 %}show{% endif %}">
+												<div class="panel-body">
+
+													<div class="tab-pane active show" id="tab-2">
+
+														<div class="row">
+															<div class="col-md-12">
+
+
+																<div class="form-group row p-l">
+																	<label class="col-sm-4 required">
+																		Code Livraison :
+																	</label>
+																	<div class="col-sm-8">
+																		<a href="{{ path('uv_livraisoncab_show',{id:livraison.id})}}" class="hover-none btn btn-xs btn-white border-none">
+																			{{livraison.code }}</a>
+																	</div>
+																</div>
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row p-l">
+																	<label class="col-sm-4 required">
+																		Imprimer livraison:
+																	</label>
+																	<div class="col-sm-8">
+																		<a target="_blank" href="{{ path('uv_livraisoncab_pdf',{id:livraison.id})}}" class="btn btn-xs btn-white btn-outline">
+																			<i class="fa fa-print"></i>&nbsp; Imprimer
+																		</a>
+																	</div>
+																</div>
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row p-l">
+																	<label class="col-sm-4 required">
+																		Refe DV Frs	:</label>
+																	<div class="col-sm-8">
+																		{{livraison.refDocAsso }}
+																	</div>
+																</div>
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row p-l">
+																	<label class="col-sm-4 required">
+																		Client :</label>
+																	<div class="col-sm-8">
+																		{{ livraison.client ? livraison.client.societe}}
+																	</div>
+																</div>
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row p-l">
+																	<label class="col-sm-4 required">dateDocAsso :</label>
+																	<div class="col-sm-8">
+
+																		{{livraison.dateDocAsso|date("d/m/Y") }}
+
+																	</div>
+																</div>
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row p-l">
+																	<label class="col-sm-4 required">
+																		Description	:</label>
+																	<div class="col-sm-8">
+																		{{livraison.description }}
+																	</div>
+																</div>
+
+
+															</div>
+															<br/>
+															<div class="col-md-12">
+																<table class="t-m table table-striped table-bordered table-hover dataTables-example dataTable datatable-show4" id="datatable-show4">
+																	<thead>
+																		<tr>
+																			<th>Reference
+																			</th>
+																			<th>Article
+																			</th>
+																			<th>Observation :</th>
+																			<th>Gerer en stock</th>
+																			<th>Quantite
+																			</th>
+																			<th>PU
+																			</th>
+																			<th>TVA :</th>
+																			<th>REMISE :</th>
+																			<th>TTC</th>
+
+																		</tr>
+																	</thead>
+																	<tbody>
+																		{% set prixtc = 0 %}
+																		{% set tottva = 0 %}
+																		{% set ht = 0 %}
+																		{% set remise = 0 %}
+
+
+																		{% for detail  in  livraison.details %}
+
+																			{% set ht = ht + detail.getPrixHt %}
+																			{% set tottva = tottva + detail.getPrixTva  %}
+																			{% set remise = remise +  detail.getPrixRemise %}
+
+																			<tr>
+																				<td>
+																					{{ detail.article.titre }}
+																				</td>
+																				<td>
+																					{{ detail.article.code }}
+																				</td>
+																				<td>
+																					{{ detail.observation }}
+																				</td>
+																				<td>
+																					{% if detail.article.gererEnStock == 1 %}
+																						OUI
+																					{% else %}
+																						NON
+																					{% endif %}
+
+																				</td>
+																				<td>
+																					{{ detail.quantite }}
+																				</td>
+																				<td>
+																					{{ detail.prixunitaire|number_format(2, '.', ',') }}
+																				</td>
+																				<td>
+																					{% if detail.tva is not empty %}
+																						{{ detail.tva }}
+																						%
+																						{% else %}-
+																					{% endif %}
+																				</td>
+																				<td>
+																					{% if detail.remise is not empty %}
+																						{{ detail.remise }}
+																						%
+																						{% else %}-
+																					{% endif %}
+																				</td>
+																				<td>
+																					{% set prixtc = prixtc + detail.prixttc %}
+																					{{ detail.prixttc |number_format(2, '.', ',') }}</td>
+
+																			</tr>
+																		{% endfor %}
+
+																		{# {% endif %} #}
+																	</tbody>
+																	<tfoot>
+																		<tr>
+																			<th colspan="9" style="text-align:right">
+																				<table class="table-subtotal">
+																					<tr>
+																						<td>Total HT
+																						</td>
+																						<td>{{ht|number_format(2, '.', ',')}} {{livraison.devise ?  livraison.devise.abreviation}}</td>
+																					</tr>
+
+																					<tr class="subtotal-top-border">
+																						<td>TVA
+																						</td>
+																						<td>{{tottva|number_format(2, '.', ',')}} {{livraison.devise ?  livraison.devise.abreviation}}</td>
+																					</tr>
+																					{% if remise !=0%}
+																						<tr class="subtotal-top-border">
+																							<td>REMISE
+																							</td>
+																							<td>{{remise|number_format(2, '.', ',')}} {{livraison.devise ?  livraison.devise.abreviation}}</td>
+																						</tr>
+																					{% endif %}
+																					<tr class="subtotal-top-border">
+																						<td>Total TTC
+																						</td>
+																						<td>{{prixtc|number_format(2, '.', ',')}} {{livraison.devise ?  livraison.devise.abreviation}}</td>
+																					</tr>
+																				</table>
+																			</th>
+
+																		</tr>
+																	</tfoot>
+																</table>
+															</div>
+
+														</div>
+
+
+													</div>
+													<br><br>
+
+
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</form>
+	<br><br>
+	{#{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showhistorique',{ 'commande': commande.id})) }#}
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('uventedevis') }}
+{% endblock %}

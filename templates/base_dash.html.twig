@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="{{asset('/img/icon.png')}}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <title>
+            {% block title %}
+                U3S-EPR
+            {% endblock %}
+        </title>
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+    </head>
+
+    <body class="top-navigation profil upper {{app.user.theme}} gray-bg">
+
+        <div id="wrapper">
+            <div id="page-wrapper" class="gray-bg">
+                <div class="row border-bottom white-bg">
+                    <nav class="navbar navbar-expand-lg navbar-static-top" role="navigation">
+
+                        <a href="{{ path('app') }}" class="navbar-brand nav-header">U3S-ERP</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fa fa-reorder"></i>
+                        </button>
+
+                        <div class="navbar-collapse collapse show" id="navbar">
+                            <ul class="nav navbar-nav mr-auto">
+                                
+                            </ul>
+                            <ul class="nav navbar-top-links navbar-right imp-tail">
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+                                        <img alt="image " class="rounded-circle img-logo" src="/images/user/profil/profil.png">
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-alerts pos-re">
+                                        <li>
+                                            <div class="pointer" data-aura-rendered-by="117:1576;a" data-proxy-id="aura-pos-lib-8" id="117:1576;a" style="position: absolute;left: 205.005px;top: -10.0101px;"></div>
+                                            <a href="mailbox.html" class="dropdown-item">
+                                                <div>
+                                                    <img alt="image " class="rounded-circle pro" src="/images/user/profil/profil.png">
+                                                    <p class="pap">{{ app.user.nom }}
+                                                        {{ app.user.prenom }}</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <h3 class="density-section-header" data-aura-rendered-by="77:1377;a">Informations du compte</h3>
+                                        </li>
+                                        <li class="profil-link">
+                                            <div class="">
+                                                <a href="{{path('user_profil_index')}}" class="pos-left color-green-theme">
+                                                    <strong>
+                                                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                                                        Mon Profil</strong>
+                                                </a>
+                                            </div>
+                                        </li>
+
+                                        {# <li class="">
+                                            <h3 class="density-section-header" data-aura-rendered-by="77:1377;a">Choix Theme</h3>
+                                        </li>
+                                        <li>
+                                            <div class="">
+                                                <table style="text-align: center; width:100%">
+                                                    <tr class="color-change">
+                                                        <td style=" width:5%"></td>
+                                                        {# <td style=" width:15%">
+                                                            <a href="#" name="theme" class="normal box">
+                                                                <i class="fa fa-circle text-navy" style="color: #585656 !important;"></i>
+                                                            </a>
+                                                        </td> 
+                                                        <td style=" width:15%">
+                                                            <a href="#" name="theme" class="bleu box">
+                                                                <i class="fa fa-circle text-navy"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td style=" width:15%">
+                                                            <a href="#" name="theme" class="marron box">
+                                                                <i class="fa fa-circle text-navy"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td style=" width:15%">
+                                                            <a href="#" name="theme" class="vert box">
+                                                                <i class="fa fa-circle text-navy"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </li>
+                                        <li class="">
+                                            <h3 class="density-section-header" data-aura-rendered-by="77:1377;a">Activer side barre</h3>
+                                        </li>
+                                        <li>
+                                            <div class="setings-item">
+                                                <form id="menu_position">
+                                                    <input type="radio" name="my_menu_position" {% if app.user.menuPosition==1 %} checked="" {% endif %} value="1"> Horizontale
+                                                    <input type="radio" name="my_menu_position" {% if app.user.menuPosition==0 or app.user.menuPosition is null %} checked="" {% endif %} value="0"> Verticale
+                                                </form>
+                                            </div>
+                                        </li> #}
+                                        <li class="">
+                                            <h3 class="density-section-header" data-aura-rendered-by="77:1377;a">Deconnexion</h3>
+                                        </li>
+                                        <li>
+                                            <div class="">
+                                                <a href="{{path('logout')}}" class="pos-left color-green-theme">
+                                                    <strong>
+                                                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                                        Deconnexion</strong>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                {#{{ dump(app.session) }} #}
+                {% block body  %}{% endblock %}
+                    <div class="footer" style="width: unset !important">
+                        <div>
+        <strong>Copyright</strong> Universal , scientific system & software &copy; {{ "now"|date("Y") }}
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+
+        {% endblock %}
+
+    </body>
+
+</html>

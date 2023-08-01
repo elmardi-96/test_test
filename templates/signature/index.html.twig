@@ -1,0 +1,237 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}Signature
+{% endblock %}
+{% block sidebar %}
+			{% if app.user.menuPosition is defined and app.user.menuPosition !=1  %}
+				<div id="wrapper">
+    <!-- Sidebar -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul
+                class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <ul class="sidebar-app-url ">
+                            <li>
+                                <a style="cursor:default">
+                                    <img class="img-side-ugouv" src="{{asset('/img/logo-blackwhite.png')}}" /><span>U3S-ERP</span></a>
+                                <p>
+                                    UGOUV SOLUTION 
+                                </p>
+                                <div>
+                                    <input id="search_keywords2" type="text" class="form-control search_keywords2 input-search" placeholder="Rechercher ...">
+                                    <i class="fa fa-search input-search-i"></i>
+                                </div>
+                            </li>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+				    
+					{% set active = '' %}
+                	{% set inactive = '' %} 	
+					{% for dd in distinctData %}
+						{% set c = 0 %}
+						 <li class="{{active}} colp" >
+				        {% for  ad in allData %}				
+						    {% if  dd.module_id == ad.module_id   %}
+							   {% if c == 0  %}
+									    <a class="module" href="#" id="{{ ad.module_id }}" style="padding: 10px 10px;">
+											<span class="nav-label" >  {{ ad.abreviation }} </span>
+											<i class="fa arrow"></i>
+										</a>
+							   {% endif %}
+							       <ul class="nav nav-second-level collapse {{inactive}}">
+                                        {# {%  for key , sousModule in module.sousModules|sort((a, b) => a.ordr <=> b.ordr)  %} #}
+                                            <li class="colp sous-module"  id="{{ ad.pdocument_id }}" style="padding: 0;" >
+                                                <a >         
+                                                    <span class="nav-label"> {{ ad.designation }}
+														{% if ad.modul == 1 %}
+															(<span class="modul{{ad.modul}}"> {{demandeAchatNoSigne}}</span>)
+														{% elseif ad.modul == 3 %}
+															(<span class="modul{{ad.modul}}">{{UatCommandeNoSigne}}</span>)
+														{% elseif ad.modul == 5 %}
+															(<span class="modul{{ad.modul}}">{{UatLivraisonNoSigne}}</span>)
+														{% elseif ad.modul == 7 %}
+															(<span class="modul{{ad.modul}}">{{UaTFacturefrscabNoSigne}}</span>)
+														{% elseif ad.modul == 9 %}
+															(<span class="modul{{ad.modul}}">{{devisNoSigne}}</span>)
+														{% elseif ad.modul == 10 %}
+															(<span class="modul{{ad.modul}}">{{UvCommandeNoSigne}}</span>)
+														{% elseif ad.modul == 11 %}
+															(<span class="modul{{ad.modul}}">{{UvLivraisonNoSigne}}</span>)
+														{% elseif ad.modul == 15 %}
+															(<span class="modul{{ad.modul}}">{{UvFactureNoSigne}}</span>)
+														{% elseif ad.modul == 17 %}
+															(<span class="modul{{ad.modul}}">{{DemandePaiementNoSigne}}</span>)
+														{% elseif ad.modul == 19 %}
+															(<span class="modul{{ad.modul}}">{{OrderPaiementNoSigne}}</span>)
+														{% endif %}
+													</span>
+                                                </a>
+                                            </li>
+                                        {# {% endfor %} #}
+                                    </ul>
+							   {% set c = 1 %}
+							{% endif %}
+						{% endfor %}
+						</li>
+				 {% endfor %}	
+            </ul>
+        </div>
+    </nav>
+    <!-- End Sidebar -->
+				{% endif %}
+			{% endblock %}
+{% block body %}
+
+
+<div class="card " style="margin-top: 20px;width: 100%;height:97%;">
+<div class=" msg_rubrique  text-primary" role="alert">
+<h1 style=" margin: 40px 0 0 50px;font-size: 23px;width: 80%;">
+		Priere de selectionner votre rubrique au niveau du menu a gauche</h1>
+</div>
+
+<div class="table_rubrique" style="display:none;">
+
+	<div class="ml-3 mr-3 mt-2 " >
+		
+		<div class="row" style="margin-top: 20px">
+				<div class="col-3">
+				<select name="dossier" id="dossier" class="form-control select2">
+					<option value="tout"  >TOUT</option>
+				
+					{# {% for dossier in dossiers %}
+						<option value="{{dossier.id}}" >{{dossier.titre}}</option>
+					{% endfor %} #}
+				</select>
+			</div>
+			
+			<div class="col-3">
+				<select name="dossier" id="filter" class="form-control select2">
+				<option value="0">SIGNÉ</option>
+					<option value="1" selected>NON SIGNÉ</option>
+					<option value="2" >TOUT</option>
+					
+				</select>
+			</div>
+						
+
+			<div class="form-check col-2" style="margin-left:83%;">
+			    <div class="dropdown dropdown-inline left" style="margin-top: -24px; display: flex; align-items: center; justify-content: flex-end; gap: 2em;">
+				<button type="button" class="btn btn-primary signature" ><i class="fa-solid fa-user-pen"></i>&nbsp;&nbsp; signature</button>
+				
+				
+						<a href="javascript:;" class="" data-toggle="dropdown" >
+							<span class="svg-icon svg-icon-md">
+								<svg xmlns="http://www.w3.org/2000/svg" style="transform: rotate(88deg);" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="15px" viewbox="0 0 24 24" version="1.1" class="svg-color">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<rect x="0" y="0" width="24" height="24"></rect>
+										<circle fill="#000000" cx="5" cy="12" r="2"></circle>
+										<circle fill="#000000" cx="12" cy="12" r="2"></circle>
+										<circle fill="#000000" cx="19" cy="12" r="2"></circle>
+									</g>
+								</svg>
+							</span>
+						</a>
+					<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right " x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-111px, 26px, 0px);">
+
+						<ul
+							class="dropdown-menu show drp-list" x-placement="bottom-start">
+							<li>
+								<a href="{{path('signature_export', {'sousModule':0})}}" target="_blank" id="" style="width: 100%; !important" data-transition="undefined" class="dropdown-item extraction">
+									extraction
+								</a>
+								<a href="{{path('signature_export_detaillee', {'sousModule':0})}}" target="_blank" id="" style="width: 100%; !important" data-transition="undefined" class="dropdown-item extraction_detail">
+									extraction détaillée
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			{% if is_granted('ROLE_SUPER_ADMIN') %}
+
+			<div class="form-check form-check-inline ml-4">
+				<input class="form-check-input radiosigner" type="radio" name="inlineRadioOptions" id="radiosasigner" value="radiosasigner" checked >
+				<label class="form-check-label font-weight-bold radiosasignerlabel" style="font-size :12px !important;font-weight: lighter;" for="radiosasigner" id="">A signer [ <span class="radiosasigner_count">0</span> ] </label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input radiosigner" type="radio" name="inlineRadioOptions" id="radioseninstance" value="radioseninstance">
+				<label class="form-check-label radioseninstancelabel" style="font-size :12px !important;font-weight: lighter;" for="radioseninstance" id="">En instance de signature [ <span class="radioseninstance_count">0</span> ] </label>
+			</div> 
+			
+		
+			
+			{% else %}
+
+			<div class="form-check form-check-inline ml-4">
+				<input class="form-check-input radiosigner" type="radio" name="inlineRadioOptions" id="radioseninstance" value="radioAsignerUser" checked>
+				<label class="form-check-label font-weight-bold" style="font-size :12px !important" for="radioseninstance">A signer [ <span class="radiosasigner_count">0</span> ] </label>
+			</div> 
+				
+				
+				
+				{% endif %}
+		</div>
+		<br>
+		<div class="table-responsive" style="overflow-x:scroll"> 
+			<table id="signature" class="table-detail t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" style="width:100%">
+				<thead>
+					<tr>
+						<th class="select-checkbox"><input type="checkbox" name="select_all" class="dt-checkboxes" id="select_all" ></th>
+						<th>#</th>
+						<th>Dossier</th>
+						<th>Code</th>
+						<th>date </th>
+						<th>postion </th>
+						<th>user</th>
+						<th>description</th>
+						<th>name</th>
+						<th>montant</th>
+						<th>statut</th>
+						<th>action</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+	<div class="actions modal fade right" id="lettrage" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog modal-full-height modal-small modal-right " style="max-width: 30% !important; width:30% !important" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel1"> Details
+                    </h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="text-center spr1">
+						<br/>
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod1" style="display: none;">
+						
+
+						
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	</div>
+	{% block javascripts %}
+		{{ parent() }}
+		{{ encore_entry_script_tags('signature') }}
+	{% endblock %}
+</div>
+{% endblock %}
+

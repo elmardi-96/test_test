@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>
+            {% block title %}U3S-EPR | Univ {% endblock %}
+        </title>
+        <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+        <link rel="shortcut icon" href="{{asset('/img/icon.png')}}" />
+
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+
+    </head>
+    <body class="fixed-nav fixed-nav-basic font-new {% if app.user.theme is defined  %} {{app.user.theme}} {%endif%} {% if app.user.menuPosition is defined and app.user.menuPosition ==1  %} top-menu-no-side-barre {%endif%}">
+
+        {% block sidebar %} 
+            {% if app.user.menuPosition is defined and app.user.menuPosition !=1  %}
+                {% include './univ/inc/sidebar.html.twig' %} 
+
+            {%endif%} 
+        {% endblock %}
+
+
+        {% block header %} 
+            {% include './univ/inc/header.html.twig' %}
+        {% endblock %}
+
+
+
+        {% block body %} 
+
+        {% endblock %} 
+
+
+        {% block footer %} 
+            {% include './inc/footer.html.twig' %}
+        {% endblock %}
+
+
+    </div>
+</div>  
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+</body>
+</html>

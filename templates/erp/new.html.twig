@@ -1,0 +1,253 @@
+{% extends 'base_u3s_erp.html.twig' %}
+
+{% block title %}Ajouter | Devis  | Module vente
+{% endblock %}
+
+{% block body %}
+
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div
+		class="new">
+		{#% include './erp/inc/navigation.html.twig' %#}
+
+
+		{{ include('./erp/_form.html.twig') }}
+
+
+		{% if existe.id is defined   %}
+
+			{%else%}
+
+		
+			<div class="row">
+				<div class="col-lg-12 ">
+					<div class="ibox ">
+						<div class="ibox-content">
+
+							<div class="table-responsive table-responsive-2">
+								<div class="col-md-12 m-mar-t2">
+
+
+									<div class="row">
+
+										<div class="col-md-6 b-r">
+
+											<h3 class="m-t-none m-b">Informations Demande
+											</h3>
+											<div class="hr-line-dashed hr-line-dashed-co"></div>
+											<div class="form-group row ph">
+												<label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+
+												<div class="col-sm-8">
+													<p class="form-control-static">{{demande.id}}</p>
+												</div>
+
+											</div>
+											<div class="hr-line-dashed hr-line-dashed-co"></div>
+											<div class="form-group row ph">
+												<label class="col-sm-4 required font-weight-bold font-weight-bold">Code</label>
+
+												<div class="col-sm-8">
+													<p class="form-control-static">{{demande.code}}</p>
+												</div>
+
+											</div>
+											<div class="hr-line-dashed hr-line-dashed-co"></div>
+											<div class="form-group row ph">
+												<label class="col-sm-4 required font-weight-bold font-weight-bold">Description</label>
+
+												<div class="col-sm-8">
+													<p class="form-control-static">{{demande.description}}</p>
+												</div>
+
+											</div>
+											<div class="hr-line-dashed hr-line-dashed-co"></div>
+											<div class="form-group row ph">
+												<label class="col-sm-4 required font-weight-bold font-weight-bold">Date Devis</label>
+
+												<div class="col-sm-8">
+													<p class="form-control-static">{{demande.dateDevis|date("d/m/Y")}}</p>
+												</div>
+
+											</div>
+											<div class="hr-line-dashed hr-line-dashed-co"></div>
+											<div class="form-group row ph">
+												<label class="col-sm-4 required font-weight-bold font-weight-bold">mode Paiement</label>
+
+												<div class="col-sm-8">
+													<p class="form-control-static">{{demande.modePaiement ? demande.modePaiement.designation}}</p>
+												</div>
+
+											</div>
+											<div class="hr-line-dashed hr-line-dashed-co"></div>
+											<div class="form-group row ph">
+												<label class="col-sm-4 required font-weight-bold font-weight-bold">Condition Réglement</label>
+
+												<div class="col-sm-8">
+													<p class="form-control-static">{{demande.conditionReglement ? demande.conditionReglement.designation}}</p>
+												</div>
+
+											</div>
+                                            <br>
+
+										</div>
+
+										<div class="col-md-6 b-r">
+											<h3 class="m-t-none m-b">Demande de prix
+											</h3>
+
+											<div class="hr-line-dashed hr-line-dashed-co"></div>
+											<table class="table table-striped ">
+												<thead>
+													<tr>
+
+														<th>#</th>
+														<th>DESCRIPTION:</th>
+
+														<th>QNT :</th>
+
+
+													</tr>
+												</thead>
+
+												<tbody>
+
+
+													{% for key , dem in demande.demandePrix %}
+
+
+														<tr class="edit-new-article">
+
+															<td>{{key+1}}</td>
+															<td>{{dem.observation }}</td>
+															<td>{{dem.quantite }}</td>
+
+
+														</tr>
+
+													{% else %}
+														<tr>
+															<td colspan="20">no records found</td>
+														</tr>
+													{% endfor %}
+												</tbody>
+												<tfoot></tfoot>
+											</table>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="row">
+				<div class="col-lg-12 ">
+					<div class="ibox ">
+						<div class="ibox-content">
+
+							<div class="table-responsive table-responsive-2">
+								<div class="col-md-12 m-mar-t2">
+
+
+									<h3 class="m-t-none m-b">La liste des Articles
+									</h3>
+									<table class="m-add t-m table table-striped table-bordered table-hover dataTables-example table-detail">
+										<thead>
+											<tr>
+
+												<th style="width: 3%">#
+												</th>
+												<th style="width: 33%">Article
+												</th>
+												<th style="width: 7%">Unité :</th>
+												<th style="width: 7%">Qantité
+												</th>
+												<th style="width: 7%">P.U</th>
+												<th style="width: 7%">TVA % :</th>
+
+												<th style="width: 7%">Remise %:</th>
+												<th style="width: 7%">M.Remise :</th>
+												<th style="width: 10%">TTC :</th>
+
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for key , detail in details %}
+												<tr>
+													<td>{{key+1}}</td>
+													<td>{{detail.code}}
+														-
+														{{detail.titre}}</td>
+													<td>{{ detail.unite  }}</td>
+													<td>{{ detail.quantite }}</td>
+													<td>
+														{{ detail.prixunitaire|number_format(2, '.', ',')}}</td>
+													<td>
+														
+														{% if detail.tva%}
+														{{detail.remise}}
+														%
+													{% else %}
+														-
+													{% endif %}
+													</td>
+
+													<td>
+														{% if detail.remise%}
+															{{detail.remise}}
+															%
+														{% else %}
+															-
+														{% endif %}
+													</td>
+													<td>
+
+														{% if detail.montantRemise%}
+														{{ detail.montantRemise |number_format(2, '.', ',') }}
+													{% else %}
+														-
+													{% endif %}
+
+														
+													</td>
+													<td>{{ detail.prixttc|number_format(2) }}</td>
+													<td>
+														<a class='delete_element' id="{{key}}">
+															<i class='fa fa-trash text-navy'></i>
+														</a>
+													</td>
+												</tr>
+
+											{% endfor %}
+										</tbody>
+										<tfoot>
+											<tr style="display: none" class="edit-new-article">
+												{{ include('./erp/_form_detail.html.twig',{'button_label': 'Ajouter Article'}) }}
+											</tr>
+										</tfoot>
+										<div id="test" data-details="{{ details|json_encode }}"></div>
+									</table>
+								</div>
+							</div>
+							<div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{%endif%}
+
+
+		</div>
+	{% endblock %}
+
+	{% block javascripts %}
+		{{ parent() }}
+		{{ encore_entry_script_tags('erpclient') }}
+	{% endblock %}

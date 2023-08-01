@@ -1,0 +1,23 @@
+
+
+<div class="row">
+    <div class="btn-group btn-breadcrumb btn-breadcrumb2">
+        <a href="#" class="btn btn-default"><b>Dépot </b> </a>
+        {#% if  u_category is defined and u_category is not empty and u_category.id is not empty %}
+            {% set count = 0 %}
+            {% for key , place  in {"archiver":"Archivé" , "annuler":"Annulé" , "creer":"Crée" , "encours":"Encours" , "valider":"Validé"}  %}
+                {% if count >= 0 %}
+                    <a href="#" class="btn btn-default
+                       {% if workflow_has_marked_place(u_category, key)  %}
+                           btn-breadcrumb2-active
+                       {% endif %}
+                       ">{{ place }}</a>
+                    {% set count = count + 1%}
+                {% endif %}
+
+            {% endfor %} 
+        {% endif %#}
+    </div> 
+</div>
+
+

@@ -1,0 +1,138 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i> Informations sur  livraison client</small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Code </strong> {{ livraison.code }}
+                            </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Date  </strong>     {{ livraison.dateDocAsso ? livraison.dateDocAsso|date('Y-m-d') : '' }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Description </strong>    {{livraison.description}}
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="ibox">
+                    <div class="ibox-content style-left-popup">
+
+                        {% if livraison.facture %}
+
+                            <div class="alert alert-warning">
+                                cette livraison  dispose dejà une facture  .
+                                <br/>
+                                <b>Reference :  <a href="{{ path('uv_facturecab_show' , {id:livraison.facture.id})}}">{{ livraison.facture.code }}</a></b>
+                            </div>
+                        {% else %}
+
+
+                            <h3>Livraison Client </h3>
+                            <b>Generer Facture Client</b>
+
+
+
+
+                            {{ form_start(form ,{'attr':{'novalidate': 'novalidate' ,"autocomplete":"off", 'class':'form_generer'}}) }}
+
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group ">
+                                {{ form_label(form.dateDocAsso ,'Date facture (*) ', {'label_attr':{'class':'col-sm-12'}}) }}
+                                <div class="col-sm-12">
+                                    {{ form_widget(form.dateDocAsso,{'attr':{'class':'form-control form-control-sm'}}) }}
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group ">
+                                {{ form_label(form.refDocAsso ,'Reference (*) ', {'label_attr':{'class':'col-sm-12'}}) }}
+                                <div class="col-sm-12">
+
+                                    {{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Reference'}}) }}
+                                    <div class="errors_list"></div>
+                                </div>
+                            </div>
+                               <div class="hr-line-dashed"></div>
+                                
+                            <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="facture_avoir" id="facture_avoir" value="davoir">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                    Facture Avoir  </label>
+                                    </div>
+                                <div class="hr-line-dashed"></div>
+                                <br>
+
+
+
+
+{#
+  <button type="submit" class="btn btn-flat btn-sm btn-white my-button   upper btn-register waves-effect waves-light btn-register my-button2">
+                    <i class="fa fa-save"></i>
+                    &nbsp;Enregistrer
+                </button>#}
+                            <br/>
+
+                            {% if livraison is defined %}
+                                <input type="hidden" name="_id" value="{{ livraison.id }}"/>
+                            {% endif %}
+                            <button type="submit" class="btn btn-flat btn-sm btn-white my-button   upper btn-register waves-effect waves-light btn-register my-button2">
+                                <i class="fa fa-save"></i>
+                                &nbsp;Enregistrer</button>
+                                {{ form_end(form,{'render_rest': false}) }}
+
+
+                        {% endif %}
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

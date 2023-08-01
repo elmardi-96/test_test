@@ -1,0 +1,85 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form _epreuve'}}) }}
+<div class="sidebar-container">
+
+
+	<div class="tab-content bod">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					Année active :
+					<span class="annee">{{UnivPrProgrammation.annee.designation}}</span>
+				</h3>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<div class="ibox">
+					<div class="ibox-content">
+						<div class="">
+
+
+							
+							<div class="form-group row ">
+								{{ form_label(form.natureEpreuve ,'Nature', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.natureEpreuve,{'attr':{'class':'sel2 form-control  form-control-sm','placeholder':'Nature'}}) }}
+
+									<div class="form-error {% if form_errors(form.natureEpreuve)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.natureEpreuve) }}
+									</div>
+								</div>
+
+							</div>
+
+							<div class="hr-line-dashed paddi"></div>
+							<div class="form-group row">
+								{{ form_label(form.volumeHoraire ,'Volume horaire :', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.volumeHoraire,{'attr':{'class':'form-control  form-control-sm','placeholder':'Volume horaire :'}}) }}
+
+									<div class="form-error {% if form_errors(form.volumeHoraire)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.volumeHoraire) }}
+									</div>
+								</div>
+							</div>
+
+
+							<div class="hr-line-dashed paddi"></div>
+							<div class="form-group row ">
+								{{ form_label(form.observation ,'Observation', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.observation,{'attr':{'class':'form-control  form-control-sm','placeholder':'Observation'}}) }}
+
+									<div class="form-error {% if form_errors(form.observation)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.observation) }}
+									</div>
+								</div>
+
+							</div>
+							<br/>
+							<button class="btn btn-white btn-xs btn-lg my-button btn-block waves-effect waves-light" data-style="expand-left" type="submit">
+								<i class="fa fa-save"></i>
+								Enregistrer</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-center spr" style="display:none;">
+		<div class="spinner-border" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+
+
+</div>
+
+{{form_widget(form._token)}}
+{{ form_end(form,{'render_rest': false}) }}
+{#{dump(form)}#}

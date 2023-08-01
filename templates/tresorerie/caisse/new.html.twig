@@ -1,0 +1,28 @@
+
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}Ajouter | Alimentation{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="new">
+
+
+        {{ include('./tresorerie/caisse/_form.html.twig') }}
+
+    
+
+    </div>
+
+
+    {{ include('./tresorerie/caisse/inc/workflow.html.twig',{'page_actuel': 'new'}) }}
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('caisse') }}
+{% endblock %}

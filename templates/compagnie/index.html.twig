@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compagnie index{% endblock %}
+
+{% block body %}
+    <h1>Compagnie index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Logo</th>
+                <th>Capital</th>
+                <th>Adresse</th>
+                <th>Tel1</th>
+                <th>Tel2</th>
+                <th>Fax</th>
+                <th>Email1</th>
+                <th>Email2</th>
+                <th>DateCreation</th>
+                <th>NombreEmploye</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for compagnie in compagnies %}
+            <tr>
+                <td>{{ compagnie.id }}</td>
+                <td>{{ compagnie.nom }}</td>
+                <td>{{ compagnie.description }}</td>
+                <td>{{ compagnie.logo }}</td>
+                <td>{{ compagnie.capital }}</td>
+                <td>{{ compagnie.adresse }}</td>
+                <td>{{ compagnie.tel1 }}</td>
+                <td>{{ compagnie.tel2 }}</td>
+                <td>{{ compagnie.fax }}</td>
+                <td>{{ compagnie.email1 }}</td>
+                <td>{{ compagnie.email2 }}</td>
+                <td>{{ compagnie.dateCreation ? compagnie.dateCreation|date('Y-m-d') : '' }}</td>
+                <td>{{ compagnie.nombreEmploye }}</td>
+                <td>
+                    <a href="{{ path('compagnie_show', {'id': compagnie.id}) }}">show</a>
+                    <a href="{{ path('compagnie_edit', {'id': compagnie.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('compagnie_new') }}">Create new</a>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('tachatdemandeinternecab') }}
+{% endblock %}

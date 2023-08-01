@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="fr">
+<title>DEMANDE </title>
+
+	</head>
+	<style>
+
+
+
+		@page {
+			margin: 220px 20px 210px 20px !important;
+			padding: 0px 0px 0px 0px !important;
+		}
+
+		body {
+			font-family: 'Courier';
+			font-size: 9px;                
+			font-weight: 100;
+
+		}
+
+         .header {
+        position: fixed;
+        top: -220px;
+        left: 0px;
+        right: 0px;
+        }
+   
+
+		.logo {
+			max-width: 250px;
+			max-height: 100px;
+			text-align: right;
+		}
+	
+		.footer {
+			/*border-top: 2px solid #555555;*/
+			margin-top: 5px;
+			font-size: 9px;
+			text-align: center;
+			position: fixed;
+			bottom: 220px;
+            left: 0px;
+            right: 0px;
+
+
+		}
+	
+		*,body {
+            font-family: Courier, sans-serif;
+           text-transform: uppercase ;
+
+		}
+
+
+		main {
+			margin-top: 0;
+		}
+.page_break {page-break-inside: auto;}
+
+
+main {
+    margin-top:0px;
+}
+	</style>
+
+
+
+	<body>
+
+<div class="header">
+
+{{ include ('tresorerie/ordre_virement/pdf/intenre/header.html.twig') }}   
+
+
+      
+</div>
+<div class="footer">
+
+ {% if TrTransactionOne.Dossier.id == 38 %}
+    {{ include ('tresorerie/ordre_virement/pdf/footer2.html.twig') }}  
+
+{% else %}
+    {{ include ('tresorerie/ordre_virement/pdf/footerEsp.html.twig') }} 
+
+{% endif %}
+
+</div>
+
+<body>
+
+
+
+    <div style="padding-right : 15px; font-size:12px; margin-left:60px; margin-right:60px;margin-top:30px">
+    
+
+
+
+
+    <p style="margin-left: 15px;"> <b>OBJET :</b> VALIDATION SORTIE CAISSE</p>
+    <br />
+    <br>
+ 
+
+     
+
+
+        <div>
+            <div style="text-align:justify; text-justify: inter-word; line-height:2.1; margin-left: 15px; margin-right: 15px;text-transform:uppercase;">
+                <p><b>OPERATION - 1:</b> SORTIE CAISSE</p>
+                <p><b>N.réf:</b> {{cab.operation.code}}   <b>Date:</b>{{cab.operation.created|date("d/m/Y")}}</p>
+
+                <p >JE SOUSIGNE
+                    <b>
+                        {{cab.operation.fournisseur.nom}}           
+                    </b>, 
+                    QUE J'AI RECUPERE LE <b>{{TrTransactionOne.DateBq |date("d/m/Y")}}</b>, 
+                    <b>
+                        {{somme |number_format(2, ',', ' ') }} Dhs ({{text}})   
+                    </b> 
+                    PAR <b>DEPARETEMENT BANQUE ET REGIE FCZ</b>. 
+                    {% if cab.operation.autreInformation %}
+                        {{cab.operation.autreInformation}}
+                    {% endif %}
+                    .
+                </p>
+            </div>
+            <div style="text-align:justify; text-justify: inter-word; line-height:2.1; margin-left: 15px; margin-right: 15px;text-transform:uppercase;">
+                <p><b>OPERATION - 2:</b> régularisation caisse</p>
+                <p><b>N.réf:</b> {{cab.operation.parent.code}} <b>Date: </b>{{cab.operation.parent.created|date("d/m/Y")}}</p>
+
+                <p >
+                    EN CONTRE PARTIE DE L'OPERATION SOUS-MENTIONNée une operation de régularisation est actée comme suit: <br>
+                    Compte crédit: <b>{{cab.operation.parent.compte.designation}}</b><br>
+                    Compte débit : <b>{{cab.operation.parent.compteDestinataire.designation}}</b><br>
+                    Montant &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<b>
+                        {{somme |number_format(2, ',', ' ') }} {{devise3}} ({{text}})   
+                    </b> 
+                </p>
+            </div>
+        <br><br>
+        </div>
+
+
+
+	</div>
+
+
+
+</body>
+
+{%  if TrTransactions | length > 3  %}
+    {# {%  set content = 'oui' %} #}
+    <div class='page2' style="page-break-before: always;">
+    {# {{ include ('tresorerie/ordre_virement/pdf/content.html.twig')  }}    #}
+    {# ,{'content' :content} #}
+    </div>
+{# {%  else %}
+{%  set content = 'non' %}
+#}
+{%  endif %}
+
+
+
+
+

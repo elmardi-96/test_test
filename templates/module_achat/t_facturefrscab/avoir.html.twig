@@ -1,0 +1,313 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Avoir  | Facture fournisseur | Ugouv achat
+{% endblock %}
+{% block body %}
+    <form class="_generer_form" autocomplete="off">
+
+        <div id="right-sidebar" class="actions animated"></div>
+
+        <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+            <div class="col-lg-6">
+                {% include './module_achat/t_facturefrscab/inc/workflow_breadcumb.html.twig' %}
+            </div>
+            <div class="col-lg-6">
+                <div class="title-action">
+                    <button class="btn btn-white btn-xs btn-lg my-button2" type="submit">
+                        <i class="fa fa-save"></i>
+                        {{ button_label|default('Enregistrer') }}</button>
+                </div>
+            </div>
+            <div class="border-b"></div>
+            <div class="col-lg-12">
+                {% include './module_achat/t_facturefrscab/inc/workflow.html.twig' %}
+            </div>
+
+        </div>
+        <br/><br/>
+        <div class="row pt-20">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row m-t-sm">
+                            <div class="col-lg-12">
+                                <div class="panel blank-panel">
+                                    <div class="panel-heading">
+                                        <div class="panel-options">
+                                            {% include './module_achat/t_facturefrscab/inc/navigation.html.twig' %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="panel-body">
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active show" id="tab-1">
+                                                    <div class="row">
+                                                        <div class="col-md-9 table-responsive res">
+                                                            <table class="t-m table table-striped table-bordered table-hover dataTables-example dataTable" {#id="datatable-show3"#}>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>Reference</th>
+                                                                        <th>Article</th>
+
+
+
+
+
+                                                                        <th>Quantite </th>
+                                                                        <th>P.U</th>
+                                                                        <th>TVA</th>
+                                                                        <th>TTC</th>
+
+                                                                        <th>Quantite avoir</th>
+
+                                                                        <th>Quantite  a avoir</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {#{{ dump(data) }}#}
+                                                                    {% set total = 0 %}
+                                                                    {% for key , article in data %}
+
+                                                                        {% set total = total +  article.prixTtcReste %}
+                                                                        <tr>
+                                                                            <td>{{ key + 1 }}</td>
+                                                                            <td>{{ article.code }}</td>
+                                                                            <td>{{ article.titre }}</td>
+
+                                                                            <td>{{ article.reste }}</td>
+
+
+
+                                                                            <td>{{ article.prixUnitaire |number_format(2, '.', ',') }}</td>
+
+
+                                                                            <td>
+                                                                                {% if article.tva is not empty %}
+                                                                                    {{ article.tva }}
+                                                                                    %
+                                                                                {% else %}-
+                                                                                {% endif %}
+                                                                            </td>
+                                                                            <td>{{article.prixTtcReste|number_format(2) }}</td>
+
+                                                                            <td>{{ article.quantiteAvoir }}</td>
+
+                                                                            <td>
+                                                                                <input data-prixunitaire="{{ article.prixUnitaire }}" data-tva="{{ article.tva }}" name="reste[{{ article.id }}]" class="wt-60 aLivrer" type="text" />
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    {% endfor %}
+                                                                    <tr>
+                                                                        <td style="text-align: right" colspan="6">Total</td>
+                                                                        <td class="total">{{ total|number_format(2) }}</td>
+                                                                        <td class="total"></td>
+                                                                        <td class="total"></td>
+                                                                <input type="hidden" class="montantReception" name="montantReception" value="{{ total }}">
+                                                                <input type="hidden" name="_id" value="{{ facture.id }}">
+
+                                                                <input type="hidden" name="token" value="{{ csrf_token('_csrf_token') }}">
+                                                                <input type="hidden" name="dataSerialize" value="{{data|json_encode(constant('JSON_PRETTY_PRINT')) }}">
+
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% if avoir is not empty %}
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div
+                        class="ibox-title m-min"><!--<h5>La liste des Articles</h5>-->
+                    </div>
+                    <div class="ibox-content mcol">
+                        <div class="table-responsive">
+                            <div class="col-md-12 m-mar-t">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5 class="m-left">Avoir</h5>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel-group" id="accordion">
+
+                                        {% for key3 , facture  in  avoir %}
+                                            {% if facture.factureLivraisons is not empty %}
+
+                                                {% for key , livraison  in  facture.factureLivraisons %}
+
+
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h5 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#tab{{facture.id}}">Avoir
+                                                                    {{ key3 +1 }}
+                                                                    :
+                                                                    {{facture.code}}</a>
+                                                            </h5>
+                                                        </div>
+                                                        <div id="tab{{facture.id}}" class="panel-collapse collapse in {% if key3 == 0 %}show{% endif %}">
+                                                            <div class="panel-body">
+
+                                                                <div class="tab-pane active show" id="tab-2">
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-3">
+
+
+                                                                            <div class="form-group row p-l">
+                                                                                <label class="col-sm-4 required">
+                                                                                    Code avoir :
+                                                                                </label>
+                                                                                <div class="col-sm-8">
+
+                                                                                    {{facture.code }}
+                                                                                </div>
+                                                                                <label class="col-sm-4 required">
+                                                                                    Imprimer Avoir:
+                                                                                </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <a target="_blank" href="{{ path('t_UaTFacturefrscab_document_avoir_pdf',{id:facture.id})}}" class="btn btn-xs btn-white btn-outline">
+                                                                                        <i class="fa fa-print"></i>&nbsp; Imprimer
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="hr-line-dashed"></div>
+                                                                            <div class="form-group row p-l">
+                                                                                <label class="col-sm-4 required">
+                                                                                    Refe DV Frs	:</label>
+                                                                                <div class="col-sm-8">
+                                                                                    {{livraison.refDocAsso }}
+                                                                                </div>
+                                                                                <label class="col-sm-4 required">
+                                                                                    Fournisseur :</label>
+                                                                                <div class="col-sm-8">
+                                                                                    {{ livraison.fournisseur ? livraison.fournisseur.nom}}
+                                                                                </div>
+                                                                                <br/>
+                                                                                <label class="col-sm-4 required">dateDocAsso :</label>
+                                                                                <div class="col-sm-8">
+
+                                                                                    {{livraison.dateDocAsso|date("d/m/Y") }}
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="hr-line-dashed"></div>
+
+
+                                                                        </div>
+                                                                        <br/>
+                                                                        <div class="col-md-9">
+                                                                            <table class="t-m table table-striped table-bordered table-hover dataTables-example dataTable datatable-show4" id="datatable-show4">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Reference
+                                                                                        </th>
+                                                                                        <th>Article
+                                                                                        </th>
+                                                                                        <th>Observation :</th>
+                                                                                        <th>Gerer en stock</th>
+                                                                                        <th>Quantite
+                                                                                        </th>
+                                                                                        <th>PU
+                                                                                        </th>
+                                                                                        <th>TVA :</th>
+                                                                                        <th>TTC</th>
+
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+
+                                                                                    {% for detail  in  livraison.details %}
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                {{ detail.article.titre }}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {{ detail.article.code }}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {{ detail.observation }}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {% if detail.article.gererEnStock == 1 %}
+                                                                                                    OUI
+                                                                                                {% else %}
+                                                                                                    NON
+                                                                                                {% endif %}
+
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {{ detail.quantite }}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {{ detail.prixunitaire |number_format(2, '.', ',') }}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {% if detail.tva is not empty %}
+                                                                                                    {{ detail.tva }}
+                                                                                                    %
+                                                                                                {% else %}-
+                                                                                                {% endif %}
+                                                                                            </td>
+                                                                                            <td>{{ detail.prixttc |number_format(2, '.', ',') }}</td>
+
+                                                                                        </tr>
+                                                                                    {% endfor %}
+
+                                                                                    {# {% endif %} #}
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <br><br>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    {% endif %}
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}{{ encore_entry_script_tags('tfacturefrscab') }}
+{% endblock %}

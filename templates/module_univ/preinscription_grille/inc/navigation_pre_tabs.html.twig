@@ -1,0 +1,52 @@
+{% set current_path = app.request.get('_route') %}
+{#<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+	<a class="nav-link {% if "univ_t_preinscription_grille_index"  in current_path  %} active {% endif %}" href="{{ path('univ_t_preinscription_grille_index')}}">
+		<i class="fa fa-minus-square"></i>
+		Grille
+	</a>
+
+
+	<a class="nav-link {% if "univ_t_preinscription_grille_preinscription"  in current_path  %} active {% endif %}" href="{{ path('univ_t_preinscription_grille_preinscription')}}">
+		<i class="fa fa-bar-chart-o"></i>
+		 Etudiants valide
+	</a>
+
+	<a class="nav-link {% if "univ_t_preinscription_grille_non_valide"  in current_path  %} active {% endif %}" href="{{ path('univ_t_preinscription_grille_non_valide')}}">
+		<i class="fa fa-bar-chart-o"></i>
+		 Etudiants non valide
+	</a>
+
+
+
+
+
+</div>#}
+
+
+
+<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+    {% for operation1 in operations|sort((a, b) => a.ordr <=> b.ordr)%}
+	
+        {% if operation1.horizontale  %}
+		{% if operation1.route is not null  %}
+		{% if operation1.parent =='_preselection' %}
+
+
+		<a class="nav-link  {% if  operation1.route   in current_path  %} active {%endif%}" href="{{ path(operation1.route) }}">
+			<i class="fa {{ operation1.icon }}"></i>
+			{{ operation1.titre|capitalize }}
+		</a>
+
+
+
+		
+		
+            
+			{% endif %}
+            {% endif %}
+		{% endif %}
+	{% endfor %}
+
+</div>

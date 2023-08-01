@@ -1,0 +1,106 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small> Informations sur le document a imprimer  .</small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                              
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+                <div class="ibox">
+                    <div class="ibox-content">
+
+                     
+
+                        <form name="form" method="get" action="{{ path('module_univ_epreuve_pdf_show',{id:epreuve.id})}}" novalidate="novalidate" target="_blank">
+                            <h3 class="m-t-none m-b"> Type</h3>
+                            <div class="hr-line-dashed"></div>
+                            <br>
+                            <input type="radio" for="liste" id="liste" name="type" value="normal" checked>
+                         
+                            <label for="liste">Liste</label>
+                            <br>
+                            <input type="radio"  for="clair" id="clair" name="type" value="clair">
+                            <label for="clair">Clair</label>
+                            <br>
+                            <input type="radio"  for="anonymat" id="anonymat" name="type" value="anonymat">
+                            <label for="anonymat">Anonymat</label>
+                            <div class="hr-line-dashed"></div>
+                           
+<br>
+<h3 class="m-t-none m-b"> Statut</h3>
+<div class="hr-line-dashed"></div>
+                            <input type="radio" for="interne" id="interne" name="type2" value="interne" checked>
+                            <label for="interne">Interne</label>
+                            <input type="radio" for="affichage" id="affichage" name="type2" value="affichage">
+                            <label for="affichage">Affichage</label>
+                         
+
+                         
+                        
+                      
+
+                   
+
+
+                 <br>
+
+                     
+
+
+
+                   
+
+
+
+
+
+
+                       
+
+                      
+                        <button class="btn btn-white btn-block btn-xs"><i class="fa fa-print"></i> &nbsp;{{ button_label|default('Imprimer') }}</button>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

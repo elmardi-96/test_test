@@ -1,0 +1,87 @@
+{% if arr_gnotes is not empty %}
+<div class="card">
+	<h4 class="card-header text-center font-weight-bold text-uppercase py-4">Tableau des étudiants existe</h4>
+	<div class="card-body">
+		<div id="table" class="table-editable">
+			<div
+				class='table-responsive'>
+				<!--Table-->
+
+				<table id="kt_table_1" class="table table-bordered table-responsive-md table-striped text-cente kt_table_1" width="100%">
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th>Prenom</th>
+							<th>Note</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for detail  in  arr_gnotes %}
+							<tr>
+								<td>
+									{{ detail.inscription.admission.preinscription.etudiant.prenom }}
+								</td>
+                                <td>
+									{{ detail.inscription.admission.preinscription.etudiant.cin }}
+								</td>
+                                <td>
+									{{ detail.note }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+
+					<tfoot>
+						<tr>
+							<th>Nom</th>
+							<th>Prenom</th>
+                            <th>Note</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% if error is not empty %}
+<div class="card">
+	<h4 class="card-header font-weight-bold text-uppercase color-red"><i class='fa fa-exclamation-triangle color-red'></i> Tableau des erreurs</h4>
+	<div class="card-body">
+		<div id="table" class="table-editable">
+			<div
+				class='table-responsive'>
+				<!--Table-->
+                
+				<table id="kt_table_1" class="table table-bordered table-responsive-md table-striped text-cente kt_table_1" width="100%">
+					<thead>
+						<tr>
+							<th>Description</th>
+							<th>Message</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for er  in  error %}
+							<tr>
+								<td>
+									{{er.id}}
+								</td>
+								<td>
+									<i class='fa fa-exclamation-triangle color-red'></i> {{er.message|trim(', ', 'right')}}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+
+					<tfoot>
+						<tr>
+							<th>Ligne</th>
+							<th>Message</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}

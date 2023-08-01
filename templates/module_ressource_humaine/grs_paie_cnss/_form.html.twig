@@ -1,0 +1,205 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , "autocomplete":"off", 'class':'form'}}) }}
+
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+	<div class="col-lg-6">
+		{% include './module_ressource_humaine/grs_paie_cnss/inc/workflow_breadcumb.html.twig' %}
+	</div>
+
+	<div class="col-lg-6">
+		<div class="title-action">
+			{% if   workflow_has_marked_place(paie, 'creer') %}
+			<button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}
+			</button>
+			
+			{%endif%}
+
+		</div>
+	</div>
+
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+		{% include './module_ressource_humaine/grs_paie_cnss/inc/workflow.html.twig' %}
+	</div>
+</div>
+<br/><br/>
+
+<div class="row pt-20">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+							<div class="panel-heading">
+								<div class="panel-options">
+									{% include './module_ressource_humaine/grs_paie_cnss/inc/navigation.html.twig' %}
+								</div>
+							</div>
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+										{% if workflow_has_marked_place(paie, 'valider') or  workflow_has_marked_place(paie, 'generer') %}
+
+
+                                                <div class="forum-item animated bounce">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <div class="forum-icon">
+                                                                <i class="fa fa-warning"></i>
+                                                            </div>
+                                                            <a class="forum-item-title">Important</a>
+                                                            <div class="forum-sub-title">
+                                                                Vous ne pouvez pas modifier la cnss aprés la validation ,
+                                                                <br/>veuillez consulter ce lien pour plus d'informations sur cette paie
+                                                                <a href="{{ path('grs_cnss_show' , {id:paie.id})}}">{{ paie.code }}</a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            {% else  %}
+											<div class="row">
+												<div class="col-md-12 b-r">
+													<h3 class="m-t-none m-b">Informations 
+													</h3>
+												</div>
+											</div>
+											<div class="row">
+												
+
+
+													<div class="hr-line-dashed paddi"></div>
+													<div class="col-md-12">
+
+
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															{{ form_label(form.description ,'description :', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-2">
+																{{ form_widget(form.description,{'attr':{'class':'form-control form-control-sm','placeholder': 'description'}}) }}
+																<span class="form-error-message">
+																	{{ form_errors(form.description) }}
+																</span>
+															</div>
+														</div>
+
+												
+
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															{{ form_label(form.mois ,'Mois :', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-2">
+																{{ form_widget(form.mois,{'attr':{'class':'form-control form-control-sm','placeholder': 'Mois'}}) }}
+																<span class="form-error-message">
+																	{{ form_errors(form.mois) }}
+																</span>
+															</div>
+														</div>
+													
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															{{ form_label(form.annee ,'annee :', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-2">
+																{{ form_widget(form.annee) }}
+																<span class="form-error-message">
+																	{{ form_errors(form.annee) }}
+																</span>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed"></div>
+														
+
+														<div class="form-group row">
+															{{ form_label(form.dateOperation ,'Date :', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-2">
+																{{ form_widget(form.dateOperation) }}
+																<span class="form-error-message">
+																	{{ form_errors(form.dateOperation) }}
+																</span>
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.piece ,'Piéce :', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-2">
+																
+																{{ form_widget(form.piece,{'attr':{'class':'form-control form-control-sm'}}) }}
+
+																<span class="form-error-message">
+																	{{ form_errors(form.piece) }}
+																</span>
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row" style="display: none;">
+															{{ form_label(form.type ,'type :', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-2">
+															
+																{{ form_widget(form.type,{'attr':{'class':'form-control form-control-sm'}}) }}
+
+																<span class="form-error-message">
+																	{{ form_errors(form.type) }}
+																</span>
+															</div>
+														</div>
+
+														
+													</div>
+
+
+													<div class="hr-line-dashed paddi"></div>
+
+													<div class="col-md-6"></div>
+													<br>
+													
+                                                </div>
+
+												
+											</div>
+											{% endif %}
+
+
+										</div>
+
+
+										{% if paie is defined %}
+											<input type="hidden" name="_id" id="_id" value="{{ paie.id }}"/>
+										{% endif %}
+
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+
+		</div>
+
+	</div>
+</div>
+
+{{ form_end(form,{'render_rest': false}) }}

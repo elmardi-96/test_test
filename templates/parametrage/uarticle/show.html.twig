@@ -1,0 +1,376 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}UArticle
+{% endblock %}
+
+
+{% block body %}
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+		<div class="col-lg-6">
+			{% include './parametrage/uarticle/inc/workflow_breadcumb.html.twig' %}
+			{#{ wo_render_breadcrumbs() }#}
+		</div>
+		<div class="col-lg-6">
+			{#<div class="title-action">
+				
+
+				<a id="_delete" class="btn btn-white btn-xs my-button">
+					<i class="fa fa-trash"></i>
+					Suprimer</a>
+
+			</div>#}
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './parametrage/uarticle/inc/workflow.html.twig' %}
+		</div>
+	</div>
+	{#<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+		<div class="col-lg-4">
+			<h2 class="fo">UArticle
+			</h2>
+			{#{ wo_render_breadcrumbs() }# }
+		</div>
+		<div class="col-lg-8">
+			<div class="title-action">
+				
+
+				<a id="_imprimer" class="btn btn-white btn-xs ">
+					<i class="fa fa-print"></i>
+					Imprimer</a>
+				<a id="_delete" class="btn btn-white btn-xs ">
+					<i class="fa fa-trash"></i>
+					Suprimer</a>
+				<a id="_archiver" class="btn btn-white btn-xs ">
+					<i class="fa fa-archive"></i>
+					Archiver</a>
+
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+	</div>#}
+	<br><br>
+
+	<div class="row pt-20">
+		<div class="col-lg-12 ">
+			<div class="ibox">
+
+				<div class="ibox-content">
+
+					<div class="message-success"></div>
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+
+										
+										{%  include './parametrage/uarticle/inc/navigation_article.html.twig' %}
+
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="panel-body">
+
+										<div class="tab-content">
+											<div class="tab-pane active" id="tab-1">
+												<div class="row">
+													<div class="col-md-6 b-r">
+
+														<h3 class="m-t-none m-b">Informations</h3>
+
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Rererence [code] (*)</label>
+															<div class="col-sm-3">
+																<p class="form-control-static">{{ u_article.code }}</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Titre (*)</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ u_article.titre }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Depot (*)</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ u_article.depot ?  u_article.depot.titre }}</p>
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Description</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ u_article.description }}</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Disponible en (Vente)</label>
+															<div class="col-sm-2">
+																<p class="form-control-static">{{ u_article.etatVente }}</p>
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Disponible en (Achat)</label>
+															<div class="col-sm-2">
+																<p class="form-control-static">{{ u_article.etatAchat }}</p>
+															</div>
+														</div>
+
+
+									<!-- 					<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Nature Produit(*)</label>
+															<div class="col-sm-4 required font-weight-bold font-weight-bold">
+																<p class="form-control-static">{#{ u_article.nature }#}</p>
+															</div>
+														</div> -->
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Code Barre</label>
+															<div class="col-sm-4 required font-weight-bold font-weight-bold">
+																<p class="form-control-static">{{ u_article.codeBarre }}</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Unite</label>
+															<div class="col-sm-2">
+																<p class="form-control-static">{{ u_article.defaultUnite ? u_article.defaultUnite.abreviation  }}</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Url</label>
+															<div class="col-sm-8">
+																<p class="form-control-static url">{{ u_article.url }}</p>
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Code comptable (vente)</label>
+															<div class="col-sm-4 required font-weight-bold font-weight-bold">
+																<p class="form-control-static">{{ u_article.codeComptableVente }}</p>
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-6 required font-weight-bold font-weight-bold">Code comptable (vente a l'export)</label>
+															<div class="col-sm-4 required font-weight-bold font-weight-bold">
+																<p class="form-control-static">{{ u_article.codeComptableVenteExport }}</p>
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Code comptable (achat)</label>
+															<div class="col-sm-4 required font-weight-bold font-weight-bold">
+																<p class="form-control-static">{{ u_article.codeComptableAchat }}</p>
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-6">
+
+
+														<h3 class="m-t-none m-b">Prix Achat & Vente</h3>
+
+														
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Prix de Vente</label>
+															<div class="col-sm-3">
+																<p class="form-control-static">{{ u_article.prixVente }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Prix de Vente Min</label>
+															<div class="col-sm-3">
+																<p class="form-control-static">{{ u_article.prixVenteMin }}</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Prix de Achat</label>
+															<div class="col-sm-3">
+																<p class="form-control-static">{{ u_article.prixAchat }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Prix de Achat Min</label>
+															<div class="col-sm-3">
+																<p class="form-control-static">{{ u_article.prixAchatMin }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Tva</label>
+															<div class="col-sm-3">
+																<p class="form-control-static">{{ u_article.tva }} %</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<h3 class="m-t-none m-b">Dimensions & unites</h3>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Poids (*)</label>
+															<div class="col-sm-2">
+																<p class="form-control-static">{{ u_article.poid }}</p>
+															</div>
+															<label>x</label>
+															<div class="col-sm-2">
+																<p class="form-control-static">{{ u_article.poidUnite }}</p>
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-6 required font-weight-bold font-weight-bold">
+																Longueur x Largeur x Hauteur</label>
+
+															<div class="col-sm-1">
+																<p class="form-control-static">{{ u_article.longeur }}</p>
+															</div>
+															<label>x</label>
+															<div class="col-sm-1">
+																<p class="form-control-static">{{ u_article.largeur }}</p>
+															</div>
+
+															<label>x</label>
+															<div class="col-sm-1">
+																<p class="form-control-static">{{ u_article.hauteur }}</p>
+															</div>
+
+															<label>x</label>
+															<div class="col-sm-1">
+																<p class="orm-control form-control-sm form-control-select" style="width: 58px !important">{{ u_article.longLargHautUnite }}</p>
+															</div>
+
+
+														</div>
+
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Surface</label>
+															<div class="col-sm-2">
+																<p class="form-control-static">{{ u_article.surface }}</p>
+															</div>
+															<label>x</label>
+															<div class="col-sm-2">
+																<p class="form-control-static ">{{ u_article.surfaceUnite }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Volume</label>
+															<div class="col-sm-2">
+																<p class="form-control-static">{{ u_article.volume }}</p>
+															</div>
+															<label>x</label>
+															<div class="col-sm-2">
+																<p class="form-control-static">{{ u_article.volumeUnite }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Action</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">
+																	{% if u_article.active == 1 %}Activer{% else %}Desactiver
+																	{% endif %}
+																</p>
+															</div>
+
+														</div>
+
+
+													</div>
+													<div class="col-md-6">
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Autre Informations </label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ u_article.autreInformation }}</p>
+															</div>
+														</div>
+													</div>
+
+												</div>
+
+
+											</div>
+
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="test" data-article-id="{{ u_article.id|json_encode }}"></div>
+	{% if Uarticle is defined %}
+
+		<input type="hidden" name="_id" value="{{ Uarticle.id }}"/>
+	{% endif %}
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('uarticle') }}
+{% endblock %}

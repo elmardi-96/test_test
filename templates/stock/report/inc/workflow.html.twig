@@ -1,0 +1,8 @@
+<div class ="wrf-positions" >  
+{#<a id="_imprimer" class="btn btn-xs btn-white btn-outline btn-wrf" href=""><i class="fa fa-print"></i>&nbsp;Imprimer</a> 
+    {% if t_reglementfrs is defined and t_reglementfrs is not empty  and t_reglementfrs.id is not empty %}
+        <a class="_delete_reglement btn-wrf btn btn-xs btn-danger  btn-outline waves-effect waves-light" data-id="{{t_reglementfrs.id}}" data-token="{{ csrf_token('delete' ~ t_reglementfrs.id) }}" ><i class="fa fa fa-trash-o"></i> supprimer</a>
+    {% endif %}
+    #}
+</div>         
+{{ wo_render_breadcrumbs() }}

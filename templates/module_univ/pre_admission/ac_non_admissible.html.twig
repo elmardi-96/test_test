@@ -1,0 +1,187 @@
+{% extends 'base_univ.html.twig' %}
+
+{% block title %} Liste Non Admissible | Admission | UNIV{% endblock %}
+
+{% block body %}
+
+
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+        <div class="col-lg-3">
+
+            <h2 class="fo">Univ, Pré-admission</h2>
+
+
+        </div>
+
+
+        <div class="col-lg-9">
+            <div class="title-action">
+
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+
+
+    <br/><br/>
+
+
+    <div class="row pt-20">
+        <div class="col-lg-12 ">
+            <div class="ibox">
+
+                <div class="ibox-content">
+
+                    <div class="message-success"></div>
+
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+
+                                        {% include './module_univ/pre_admission/inc/navigation_pre.html.twig' %}
+
+
+                                    </div>
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="col-md-12">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-1">
+
+
+                                          
+
+                                                {#{% include './module_univ/admission/inc/navigation_verticale.html.twig' %}#}
+
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade show active">
+                                                        <div class="row m-2">
+                                                            <div class="col-md-12 b-r">
+                                                                <table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid4" style="width: 100%" >
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>#</th>
+
+                                                                            <th>Code </th>
+                                                                            <th>Nom</th>
+                                                                            <th>Prenom</th>
+
+                                                                            <th>Etablissement</th>
+                                                                            <th>Formation</th>
+                                                                            <th>Année</th>
+                                                                            <th>Range S</th>
+                                                                            <th>Range p</th>
+
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tfoot>
+                                                                        <tr> 
+                                                                            <th>#</th>
+
+                                                                            <th>Code </th>
+                                                                            <th>Nom</th>
+                                                                            <th>Prenom</th>
+
+                                                                            <th>Etablissement</th>
+                                                                            <th>Formation</th>
+                                                                            <th>Année</th>
+                                                                            <th>Range S</th>
+                                                                            <th>Range p</th>
+                                                                        </tr>
+                                                                    </tfoot>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+
+
+
+
+                                                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                                        <div class="row m-2">
+                                                            2
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                                        <div class="row m-2">
+
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                                        <div class="row m-2">
+
+                                                            3
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    {#    {{ include('univ_p_concourscab/_delete_form.html.twig') }}#}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('univ_admission') }}
+{% endblock %}

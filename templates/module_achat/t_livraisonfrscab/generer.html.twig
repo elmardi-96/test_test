@@ -1,0 +1,222 @@
+
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' ,"autocomplete":"off", 'class':'form_generer'}}) }}
+<div class="tab-pane active show " id="tab-1">
+
+	{% if workflow_has_marked_place(livraison, 'valider') %}
+
+
+		{% if livraison.getFacture() is not empty %}
+
+
+			<div class="forum-item animated bounce">
+				<div class="row">
+					<div class="col-md-9">
+						<div class="forum-icon">
+							<i class="fa fa-warning"></i>
+						</div>
+						<a class="forum-item-title">Important</a>
+						<div class="forum-sub-title">
+							cette livraison  dispose deja une facture .
+							<br/>
+							<b>Reference :
+
+
+								<a href="{{ path('ua_t_facturefrscab_consulte' , {id:livraison.getFacture().id}) }}">{{ livraison.getFacture().code }}</a>
+							</b>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		{% else %}
+
+			<div class="row">
+				<div class="col-md-12 ">
+					<div class="errors_list"></div>
+
+
+					{% set ids = [livraison.id] %}
+					<input type="hidden" name="_id" value="{{livraison.id }}"/>
+					{{ form_widget(form.ids,{'attr':{'class':'form-control form-control-sm'} ,'value': ids|json_encode()}) }}
+					{#{dump(traitAcompte)}#}
+					{% if traitAcompte['idAcompte'] is not empty %}
+						<p class="alert alert-success">
+							<i class="fa fa-warning"></i>
+							Vous avez un montant d'acompte sur cette commande sous montant
+							{{traitAcompte['montantAcompte']|number_format(2, '.', ',')}}
+							{{livraison.devise ?  livraison.devise.abreviation}}
+							pour plus d'information visitez l'acompte N°
+							<a href="{{path('ua_t_facturefrscab_consulte_acompte', {id:traitAcompte['idAcompte']})}}">{{traitAcompte['acompteRef']}}</a>
+						</p>
+					{% endif %}
+					<div class="form-group row">
+						<label class="col-sm-12">Code
+						</label>
+						<div class="col-sm-12">
+
+							<a href="{{ path('ua_t_livraisonfrscab_show' , {id:livraison.id})}}">{{ livraison.code }}</a>
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group row">
+						<label class="col-sm-12">Commande
+						</label>
+						<div class="col-sm-12">
+
+							<a href="{{ path('t_commandefrscab_show' , {id:livraison.commande.id})}}">{{ livraison.commande.code }}</a>
+						</div>
+					</div>
+					{% set prixtc = 0 %}
+					{% for detail  in  livraison.details %}
+						{% set prixtc = prixtc + detail.getPrixTtc() %}
+
+					{% endfor %}
+					<div class="hr-line-dashed"></div>
+					<div class="form-group row">
+						<label class="col-sm-12">Montant
+						</label>
+						<div class="col-sm-12">
+
+							{{prixtc|number_format(2, '.', ',')}}
+							{{livraison.devise ?  livraison.devise.abreviation}}
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group row">
+						<label class="col-sm-12">Date
+						</label>
+						<div class="col-sm-12">
+
+							{{ livraison.datelivraison ? livraison.datelivraison|date('d/m/Y') : '' }}
+						</div>
+					</div>
+
+
+					<div class="hr-line-dashed"></div>
+					<div class="form-group row">
+						<label class="col-sm-12">Description
+						</label>
+						<div class="col-sm-12">
+
+							{{livraison.observation}}
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group row">
+						{{ form_label(form.dateFacture ,'Date facture (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+						<div class="col-sm-12">
+							{{ form_widget(form.dateFacture,{'attr':{'class':'col-sm-12 form-control form-control-sm'}}) }}
+						</div>
+					</div>
+
+					<div class="hr-line-dashed"></div>
+					<div class="form-group row">
+						{{ form_label(form.dateDocAsso ,'Date docAsso (*) ', {'label_attr':{'class':'col-sm-12'}}) }}
+						<div class="col-sm-12">
+							{{ form_widget(form.dateDocAsso,{'attr':{'class':'col-sm-12 form-control form-control-sm'}}) }}
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group row">
+						{{ form_label(form.refDocAsso ,'Reference docAsso (*) ', {'label_attr':{'class':'col-sm-12'}}) }}
+						<div class="col-sm-12">
+
+							{{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control-sm col-sm-12' ,'placeholder':'Reference'}}) }}
+						</div>
+					</div>
+					{% if traitAcompte['idAcompte'] is not empty %}
+						<div class="hr-line-dashed"></div>
+						<div class="form-group row">
+							<label class="col-md-12">Montant acompte
+							</label>
+							<div class="col-sm-12">
+								<div>
+
+									<label>
+										<input type="checkbox" value="-1" name="acompte" checked="">
+										{{traitAcompte['montantAcompte']|number_format(2, '.', ',')}}
+										{{livraison.devise ?  livraison.devise.abreviation}}
+
+									</label>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+					<div class="hr-line-dashed"></div>
+
+
+					<div class="form-group row">
+						<label class="col-sm-12">
+							montant MAD
+						</label>
+						<div class="col-sm-12">
+							<input class="form-control form-control-sm col-sm-12" value="0" type="number" name="montant_mad">
+						</div>
+					</div>
+
+
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" name="facture_avoir" id="facture_avoir" value="fa">
+						<label class="form-check-label" for="facture_avoir">
+							Facture Avoir
+						</label>
+					</div>
+                    
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" name="ACHAT_PAR_SUBVENTION" id="ACHAT_PAR_SUBVENTION" value="SUBVENTION">
+						<label class="form-check-label" for="ACHAT_PAR_SUBVENTION">
+							ACHAT PAR SUBVENTION
+						</label>
+					</div>
+					<br>
+					<div class="form-group" id="partner-dropdown" style="display:none">
+                       <select class="form-control form-control-sm sel2 min-wind col-sm-12" name="partners" id="partner-select">
+                        <option value="" selected disabled>PARTENAIRE SUBVENTION</option>
+                        {% for partner in results %}
+                            <option value="{{ partner.id }}">{{ partner.nom }}</option>
+                        {% endfor %}
+                    </select>
+                            
+					</div>
+
+
+
+					<br><br><br>
+
+					<button class="btn btn-flat btn-sm btn-white my-button   upper btn-register waves-effect waves-light btn-register my-button2" type="submit">
+						<i class="fa fa-save"></i>
+						{{ button_label|default('Enregistrer') }}</button>
+
+
+				</div>
+			</div>
+
+
+			<br/>
+
+			{{ form_end(form,{'render_rest': false}) }}
+
+		{% endif %}
+
+
+	{% else  %}
+		<div class="forum-item animated length">
+			<div class="row">
+				<div class="col-md-9">
+					<div class="forum-icon">
+						<i class="fa fa-warning"></i>
+					</div>
+					<a class="forum-item-title">Important</a>
+					<div class="forum-sub-title">
+						Pour passer une Facture , il il faut tout d'abord valider cette livraison .
+						<a href="{{ path('ua_t_livraisonfrscab_show' , {id:livraison.id})}}">{{ livraison.code }}</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	{% endif %}
+
+
+</div>
+{{ form_end(form,{'render_rest': false}) }}

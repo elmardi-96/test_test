@@ -1,0 +1,160 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+    <div class="col-lg-4">
+        <h2 class="fo">GrsSoldeConge
+        </h2>
+        {#{ wo_render_breadcrumbs() }#}
+    </div>
+
+    <div class="col-lg-8">
+        <div class="title-action">
+            <button class="btn btn-primary btn-xs btn-lg" type="submit">
+                <i class="fa fa-save"></i>
+                {{ button_label|default('Enregistrer') }}</button>
+
+        </div>
+    </div>
+
+    <div class="border-b"></div>
+    <div class="col-lg-12">
+
+        {{ wo_render_breadcrumbs() }}
+    </div>
+</div>
+
+
+<br/><br/><br/><br>
+<div class="row justify-content-md-center">
+    <div class="col-lg-11 ">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>GrsSoldeConge
+                    <small>grs_solde_conge.</small>
+                </h5>
+
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+
+
+                </div>
+
+
+            </div>
+            <div class="ibox-content">
+
+                <div class="message-success"></div>
+
+                <div class="row m-t-sm">
+                    <div class="col-lg-12">
+                        <div class="panel blank-panel">
+                            <div class="panel-body">
+
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab-1">
+
+
+                                        <div class="row">
+                                            <div class="col-md-6 b-r">
+                                                <h3 class="m-t-none m-b">Informations
+                                                </h3>
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row">
+                                                    {{ form_label(form.titre,'Titre', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
+                                                    <div class="col-sm-10">
+                                                        {{ form_widget(form.titre,{'attr':{'class':'form-control form-control-sm','placeholder': 'Titre'}}) }}
+
+
+                                                        <span class="form-error-message">
+                                                            {{ form_errors(form.titre) }}
+                                                        </span>
+
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row">
+                                                    {{ form_label(form.duree,'Solde', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
+                                                    <div class="col-sm-10">
+                                                        {{ form_widget(form.duree,{'attr':{'class':'form-control form-control-sm','placeholder': 'Solde'}}) }}
+
+
+                                                        <span class="form-error-message">
+                                                            {{ form_errors(form.duree) }}
+                                                        </span>
+
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row">
+                                                    {{ form_label(form.description ,'Description', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
+                                                    <div class="col-sm-10">
+                                                        {{ form_widget(form.description,{'attr':{'class':'form-control form-control-sm','placeholder': 'Description'}}) }}
+                                                        <span class="form-error-message">
+                                                            {{ form_errors(form.description) }}
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row">
+                                                    {{ form_label(form.poste ,'Poste', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
+                                                    <div class="col-sm-10">
+                                                        {{ form_widget(form.poste,{'attr':{'class':'form-control form-control-sm','placeholder': 'Poste'}}) }}
+                                                        <span class="form-error-message">
+                                                            {{ form_errors(form.poste) }}
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3 class="m-t-none m-b"><br>
+                                                </h3>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row">
+                                                    {{ form_label(form.type ,'type conge', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
+                                                    <div class="col-sm-10">
+                                                        {{ form_widget(form.type,{'attr':{'class':'form-control form-control-sm','placeholder': 'type conge'}}) }}
+                                                        <span class="form-error-message">
+                                                            {{ form_errors(form.type) }}
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row">
+                                                    {{ form_label(form.active ,'Active :', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
+                                                    <div class="col-sm-10">
+                                                        {{ form_widget(form.active) }}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                    
+{{ form_end(form) }}
+

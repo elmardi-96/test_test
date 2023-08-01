@@ -1,0 +1,168 @@
+
+
+
+{% extends 'base_univ.html.twig' %}
+{% block title %}Univ , Consulter Pré-inscription Grille
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-4">
+			<h2 class="fo">Univ , Pré-inscription Grille
+			</h2>
+		</div>
+		<div class="col-lg-8">
+			<div class="title-action">
+				<div class="title-action">
+                   
+                    <a id="_delete" data-id="{{univ_t_preinscription_grille.id}}" data-token="{{ csrf_token('delete' ~ univ_t_preinscription_grille.id) }}" class="btn btn-white btn-xs">
+                        <i class="fa fa-trash"></i>
+                        Supprimer
+                    </a>
+                </div>
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+		{#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+																				#}
+
+	</div>
+	<br/><br/>
+	<div class="row pt-20">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div
+					class="ibox-content" style="padding-top: 4px ;">
+
+					{#{% include './module_achat/facturefrs/inc/workflow_breadcumb.html.twig' %}#}
+
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										
+									
+																																																																																																			                                        </ul>#}
+										{% include './module_univ/preinscription_grille/inc/navigation.html.twig' %}
+									</div>
+								</div>
+								<div class="col-md-12 scroll_content">
+									<div class="panel-body">
+										<div class="tab-content">
+											<div class="tab-pane active show" id="tab-1">
+												<div class="row">
+													<div class="col-md-6 b-r">
+														<h3 class="m-t-none m-b">INFORMATIONS</h3>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ univ_t_preinscription_grille.id }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Code
+															</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ univ_t_preinscription_grille.code }}</p>
+															</div>
+
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Moyenne
+															</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">
+																	{{ univ_t_preinscription_grille.moyenne  }}</a>
+																</p>
+															</div>
+
+														</div>
+
+														
+
+					
+													
+
+
+													</div>
+													<div class="col-md-6">
+
+														<h3 class="m-t-none m-b">INFORMATIONS FORMATION</h3>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+
+															<div class="col-sm-8">
+
+																<p class="form-control-static">{{ univ_t_preinscription_grille.formation.etablissement ? univ_t_preinscription_grille.formation.etablissement.designation }}</p>
+
+															</div>
+
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Formation</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ univ_t_preinscription_grille.formation ? univ_t_preinscription_grille.formation.designation }}</p>
+															</div>
+
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Année</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ univ_t_preinscription_grille.annee ? univ_t_preinscription_grille.annee.designation }}</p>
+															</div>
+
+														</div>
+
+
+													</div>
+													<div class="col-md-6">
+														<h3 class="m-t-none m-b"><br>
+														</h3>
+
+													</div>
+												</div>
+
+
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_preinscription_grille') }}
+{% endblock %}

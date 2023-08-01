@@ -1,0 +1,157 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Pré-inscription , Appel | Univ{% endblock %}
+{% block body %}
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'_document'}}) }}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Univ , Pré-inscriptions </h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+                <div class="title-action">
+                    {#% include './module_achat/facturefrs/inc/workflow.html.twig' %#}
+                    <button class="btn btn-white btn-xs btn-lg my-button " data-style="expand-left"  type="submit"> <i class="fa fa-save"></i> {{ button_label|default('Enregistrer') }}</button>
+                </div>   
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+        {#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+#} 
+
+    </div>
+    <br/><br/>
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content" style="padding-top: 4px ;">
+
+                    {#{% include './module_achat/facturefrs/inc/workflow_breadcumb.html.twig' %}#}
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {#<ul class="nav nav-tabs">
+                                            <li><a class="nav-link active show" href="#tab-1" data-toggle="tab">Informations</a></li>
+                                            <li><a class="nav-link" href="#tab-2" data-toggle="tab">Articles</a></li>
+
+                                            <li><a class="nav-link" href="#tab-3" data-toggle="tab">Le suivi des opérations </a></li>
+
+                                        </ul>#}
+                                        {% include './module_univ/preinscription/inc/navigation.html.twig' %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+                                                <div class="row">
+                                                    <div class="col-md-4 b-r">
+                                                        <h3 class="m-t-none m-b">Informations </h3>
+                                                      
+
+
+                               
+
+                                                      
+
+
+                                                        
+
+                                
+                                                        
+                                                     
+
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 required "> {{ form_label(form.preinscritionDocuments ,'Bource ', {'label_attr':{'class':'col-sm-12'}}) }}</label> 
+                                                            <div class="col-sm-8 ">
+                                                                
+                                                                {{ form_widget(form.preinscritionDocuments,{'attr':{'class':'form-check-inline form-control select2_dossiers'}}) }}
+                                                            </div>
+
+
+                                                            
+                                                        </div>
+
+
+
+
+
+                                                    </div>
+                                                  <div class="col-md-8">
+                                                        <h3 class="m-t-none m-b">Document Bourse </h3>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div> 
+                                                        <table class="table table-striped fichier-liste-style">
+                                                            <thead>
+                                                                <tr>
+                                                                  
+                                                                    <th width="20%">Designation</th>
+                                                                    <th width="15%">Abreviation</th>
+                                                                    <th width="15%">Crée par</th>
+                                                                    <th width="15%">date création</th>
+                                                                    <th width="5%">sup</th>
+                                                                   
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for univ_p_document in univ_p_documents %}
+                                                                <tr>
+                                                                   
+                                                                   <th>{{univ_p_document.designation}}</th>    
+                                                                   <th>{{univ_p_document.abreviation}}</th>    
+                                                                   <th>{{univ_p_document.UserCreated ? univ_p_document.UserCreated.nom}}</th>    
+                                                                   <th>{{univ_p_document.Created ? univ_p_document.Created|date("m/d/Y")}}</th>  
+                                                                {% if univ_p_document in preinscription.preinscritionDocumentsBource|keys %}
+                                                                <th><i class="fa fa-check-square-o"></i></th>    
+                                                                {% else %}
+                                                                <th><i class="fa fa-square-o"></i></th>         
+                                                                {% endif %}
+                                                                </tr>
+                                                                {% endfor %}
+
+                                                            </tbody>
+
+                                                            </table>
+                                                    </div> 
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if preinscription is defined %}
+    <input type="hidden" name="_id" value="{{ preinscription.id }}" />
+{% endif %}
+
+    {#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+    {{ form_end(form) }}
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('univ_preinscription') }}
+{% endblock %}

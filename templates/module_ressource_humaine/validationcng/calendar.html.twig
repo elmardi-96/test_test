@@ -1,0 +1,92 @@
+{% extends 'base_conge.html.twig' %}
+
+
+
+{% block title %}Gestion Ressource Humaines , index | Congé{% endblock %}
+
+
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('grs_conge') }}
+{% endblock %}
+{% block body %}
+
+
+
+
+
+
+
+    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+
+
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-4">
+            <h2 class="fo">GRS, Gestion Ressource Humaines </h2>
+            {#{ wo_render_breadcrumbs() }#}
+        </div>
+
+
+        <div class="col-lg-8">
+            <div class="title-action">
+                <div class="title-action">
+                    <a href="{{path('module_grs_demande_conge_new')}}" id="_new" class="btn btn-white btn-xs "><i class="fa fa-plus"></i> Nouveau</a>
+                </div>   
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+    </div>
+
+
+    <br/><br/><br/>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>GRS , Demande Congé </h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content" style="padding-top: 0px"> 
+
+                        <div id="calendar"></div><br>
+                        <h5>Statuts : </h5>
+                        <p class="small font-bold">
+                            {% for statut in statuts %}
+
+
+                                <span><i class="fa fa-circle" style="color: {{statut.coulleur}}"></i> {{ statut.titre }}</span>&nbsp; &nbsp; &nbsp; 
+
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('grs_conge') }}
+{% endblock %}

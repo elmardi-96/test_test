@@ -1,0 +1,104 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i> Informations sur la demande .</small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Code :</strong> {{ UaTLivraisonfrscab.code }}
+                            </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Date  :</strong> {{ UaTLivraisonfrscab.datelivraison ? UaTLivraisonfrscab.datelivraison|date('Y-m-d H:i:s') : '' }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Description :</strong>  {{UaTLivraisonfrscab.observation}}
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Statut :</strong>  {{UaTLivraisonfrscab.statut.statut}}
+                            </td>
+
+                        </tr>
+                        <tr>
+                                <td>
+                                    <strong>Fournisseur :</strong>  {{UaTLivraisonfrscab.fournisseur.nom}}
+                                </td>
+    
+                            </tr>
+                    </tbody>
+                </table>
+
+                <div class="ibox">
+                    <div class="ibox-content">
+                    {#% if UaTFacturefrscab.p_statutgrv.abreviation == "tr" %}
+                        
+                        <div class="alert alert-warning">
+                                Deja traite 
+                            </div>
+                    {% else %#}
+                        <h3>Bon commandee fournisseur </h3>
+                        {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_statut'}}) }}
+                        <div class="form-group">
+                            {{ form_label(form.statut ,'Statut :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                            {{ form_widget(form.statut,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                        </div>
+                     <br/>
+                        {% if UaTLivraisonfrscab is defined %}
+                            <input type="hidden" name="_id" value="{{ UaTLivraisonfrscab.id }}" />
+                        {% endif %}
+                        <button class="btn btn-white btn-block btn-xs"><i class="fa fa-save"></i> {{ button_label|default('Enregistrer') }}</button>
+                        {{ form_end(form,{'render_rest': false}) }}
+
+                    {#% endif %#}
+
+
+
+
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

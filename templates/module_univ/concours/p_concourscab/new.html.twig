@@ -1,0 +1,17 @@
+{% extends 'base_univ.html.twig' %}
+
+
+{% block title %}Ajouter | Concours | UNIV{% endblock %}
+
+{% block body %}
+    
+    <div class="new">    
+    {{ include('module_univ/concours/p_concourscab/_form.html.twig') }}
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_concours') }}
+{% endblock %}

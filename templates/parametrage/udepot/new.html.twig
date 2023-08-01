@@ -1,0 +1,17 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Depot nouveau | Stock{% endblock %}
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+    <div class="new">
+       {{ include('./parametrage/udepot/_form.html.twig') }}
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('udepot') }}
+{% endblock %}

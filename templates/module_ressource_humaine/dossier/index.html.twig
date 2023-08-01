@@ -1,0 +1,62 @@
+{% extends 'base_empty.html.twig' %}
+
+
+
+{% block title %}Ressource humaine{% endblock %}
+
+
+{% block body %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <input id="search_keywords" type="text" class="form-control search_keywords" placeholder="Pour trouver rapidement des dossiers, saisissez le texte de recherche ici." style="padding:6px"><br/>
+        <div class="panel panel-primary pan">
+            <div class="panel-heading panHe">
+                La liste des dossiers
+            </div>
+            <div class="panel-body">
+                <div class="row layout module1 clickdossier" id="">
+                    {% if app.session.get('modules')[module.prefix]['dossiers'] is defined  %}
+                        {% for key , d in app.session.get('modules')[module.prefix]['dossiers']  %}
+                            <div class="col-md-3 mb-2 {% if loop.index == 2 or loop.index == 3 %} se {% endif %}" data-id="{{d.id}}">
+                                <a href="{{ path('dossier_courant_grs' ,{'module_id':module.id , 'dossier_id':d.id}) }}" class="box-app float-left impo" data-id="{{d.id}}">
+                                    {% if d.logo == null %}
+                                        <img alt="image" class="roun rounded-circle  impo" src="{{asset('/img/dossiers-icon/default.png')}}">
+                                    {% else %}
+                                        <img alt="image" class="roun rounded-circle impo" src="{{asset('/images/parametrage/dossiers/'~d.logo~'')}}">
+                                    {% endif %}
+                                </a>
+                                <div class="media-body vertical-center " data-id="{{d.id}}">
+                                    <a href="{{ path('dossier_courant_grs' ,{'module_id':module.id , 'dossier_id':d.id}) }}" class="box-app float-left  col-black" data-id="{{d.id}}"><strong class="str">{{d.titre}} ({{ d.abreviation }})</strong></a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="hide">Aucun résultat à afficher</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+{% set current_path = app.request.get('_route') %}
+
+{% if compte is defined  and compte.id > 0 %}
+	{#% include './ugouv/vente/uv_deviscab/inc/workflow_breadcumb.html.twig' %#}
+{% endif %}
+
+<ul class="nav nav-tabs">
+	{% if compte.id %}
+		{% for operation in operations|sort((a, b) => a.ordr <=> b.ordr)%}
+
+			{% if operation.horizontale  %}
+				{% if operation.route is not null  %}
+					<li>
+
+
+						<a class="nav-link {% if  operation.route   in current_path  %} active {%endif%}" href="{{ path(operation.route , {id:compte.id}) }}">
+							<i class="fa {{ operation.icon }}"></i>
+							{{ operation.titre|capitalize }}
+						</a>
+					</li>
+
+
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	{% else %}
+		<li>
+			<a class="nav-link active">Informations</a>
+		</li>
+	{% endif %}
+</ul>

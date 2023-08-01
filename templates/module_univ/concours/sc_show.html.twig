@@ -1,0 +1,201 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Concours  | Univ
+{% endblock %}
+{% block body %}
+
+    
+     {{ render(controller('App\\Controller\\moduleUniv\\concours\\UnivConcoursController:infosConcours',{ 'id': concours.id})) }}
+
+    
+    
+    
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Univ , Concours Consulter
+            </h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+                <a class="btn btn-xs btn-white btn-outline" href="{{ path('module_univ_concours_p_concourscab_edit',{id:concours.id})}}"><i class="fa fa-pencil"></i>&nbsp;Modifier</a>
+
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+    </div>
+
+
+
+    <input type="hidden" value="{{ concours.id }}" class="concours_id"/>    
+    <br/><br/>
+
+
+    <div class="row pt-20">
+
+        <div class="col-md-12 paddin">
+            <div class="ibox">
+
+                <div class="ibox-content">
+                    <div class="panel blank-panel">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                               
+                                {% include './module_univ/concours/inc/sc_navigation.html.twig' %}
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab-1">
+                                        <div class="row">
+
+                                            <div class="col-md-6 b-r">
+                                                <h3 class="m-t-none m-b">Informations </h3>
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                {#<div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ admission.preinscription.etudiant ? admission.preinscription.etudiant.id }}</p>
+                                                    </div>
+                                                </div>#}
+
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Code </label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.code}}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Designation</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.designation}}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Abréviation</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.abreviation}}</p>
+                                                    </div>
+
+                                                </div>
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Année</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.annee}}</p>
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Date concours :</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.date ? concours.date|date('d/m/Y') : '' }}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Heure début :</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.heure ? concours.heure|date('H:i:s') : '' }}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                <div class="form-group row ph">
+                                                    <label class="col-sm-4 required font-weight-bold font-weight-bold">Heure Fin :</label>
+
+                                                    <div class="col-sm-8">
+                                                        <p class="form-control-static" >{{ concours.heureFin ? concours.heureFin|date('H:i:s') : '' }}</p>
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="col-md-6 b-r">
+                                                <h3 class="m-t-none m-b">Grilles </h3>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div> 
+                                                <table class="table table-striped fichier-liste-style">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="5%">#</th>
+                                                            <th width="20%">Formation</th>
+                                                            <th width="15%">Bac</th>
+                                                            <th width="15%">Nature</th>
+                                                            <th width="15%">Seuil</th>
+                                                            
+                                                           
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% set c = 0 %}
+                                                        {% for grille in grilles %}
+                                                        {% set c = c + 1 %}
+                                                        <tr>
+                                                           <td>{{c}}</td>
+                                                           <td>{{grille.formation}}</td>    
+                                                           <td>{{grille.bac}}</td>    
+                                                           <td>{{grille.nature}}</td>    
+                                                           <td>{{grille.seuil|number_format(2)}}</td>    
+                                                        </tr>
+                                                        {% endfor %}
+
+                                                    </tbody>
+
+                                                    </table>
+
+                                            </div>
+                                           
+                                        
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+            {% if concours is defined %}
+                <input type="hidden" name="_id" value="{{ concours.id }}" id="_id"/>
+            {% endif %}
+        {% endblock %}
+
+
+        {% block javascripts %}
+            {{ parent() }}
+            {{ encore_entry_script_tags('univ_concours') }}
+        {% endblock %}

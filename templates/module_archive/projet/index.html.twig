@@ -1,0 +1,43 @@
+{% extends 'base_projet.html.twig' %}
+
+{% block title %}Selection Projet
+{% endblock %}
+
+{% block body %}
+	<div
+		class="wrapper wrapper-content animated fadeInRight">
+		{#<input id="search_keywords" type="text" class="form-control search_keywords" placeholder="chercher dossier" style="padding:6px"><br/>#}
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				La liste des dossiers
+			</div>
+			<div class="panel-body">
+				<div class="row layout module" id="">
+					<div class="col-md-3 mb-2 clickdossier">
+						<a href="{{ path('module_achive_projet_new') }}" class="box-app float-left clickdossier">
+							<img alt="image" class="rounded-circle" src="{{asset('/images/module_archive/fichiers/archive.png')}}">
+						</a>
+						<div class="media-body vertical-center clickdossier">
+							<strong>Créer Nouveau Projet</strong>
+						</div>
+					</div>
+					{% for key , d in projet  %}
+						<div class="col-md-3 mb-2 clickdossier" data-id="{{d.id}}">
+							<a href="{{ path('archive' ,{'pro_id' : d.id}) }}" class="box-app float-left clickdossier" data-id="{{d.id}}">
+								{% if d.imageName == null %}
+									<img alt="image" class="rounded-circle" src="{{asset('/images/module_archive/fichiers/default.png')}}">
+								{% else %}
+									<img alt="image" class="rounded-circle" src="{{asset('/images/module_archive/fichiers/'~d.imageName~'')}}">
+								{% endif %}
+							</a>
+							<div class="media-body vertical-center clickdossier" data-id="{{d.id}}">
+								<strong>{{d.intitule}}
+									({{ d.abreviation }})</strong>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

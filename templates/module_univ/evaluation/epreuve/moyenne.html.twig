@@ -1,0 +1,160 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Moyenne | Evaluation | UNIV
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('univ_epreuve_moyenne') }}
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div id="right-sidebar" class="actions animated"></div>
+
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+		<div class="col-lg-6">
+			{% include './module_univ/evaluation/epreuve/inc/workflow_breadcumb.html.twig' %}
+		</div>
+
+		<div class="col-lg-6">
+			<div class="title-action">
+				{% if workflow_has_marked_place(epv, 'valider') or workflow_has_marked_place(epv, 'creer') %}
+					<button class="btn btn-white btn-xs btn-lg _save_epreuve my-button" data-etudiants='{{ result.inscriptions|json_encode }}' data-id="{{epv.id}}">
+						<i class="fa fa-save"></i>
+						Enregistrer</button>
+				{% endif %}
+				{#<button class="btn btn-white btn-xs btn-lg my-button promotion">
+					<i class="fa fa-info"></i>
+					Information</button>#}
+				{#																																																																																																																	<button class="btn btn-white btn-xs btn-lg refresh"><i class="fa fa-refresh"></i> Rafraîchir calendrier </button>#}
+			</div>
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './module_univ/evaluation/epreuve/inc/workflow.html.twig' %}
+		</div>
+	</div>
+	{#<header class="row w3-display-container w3-content w3-wide w3-display-flex-epreuve"  id="home">
+						<img class="w3-image" src="" alt="Architecture" width="1500" height="800">
+						<div class="w3-display-middle w3-margin-top w3-center" >
+							<h1 class="w3-xxlarge w3-text-white" >
+								<span class="w3-padding w3-black w3-opacity-min" >
+									<b>épreuve</b>
+								</span>
+							</h1>
+						</div>
+					</header>#}
+	<div class="row pt-add-200">
+		<div class="col-lg-12">
+
+			<div class="ibox ">
+				<div class="ibox-content" style="padding-top: 0px">
+
+					<div class="card-ribbon card-ribbon-epreuve">
+						<span>
+							<div class="style-position">épreuve</div>
+						</span>
+					</div>
+					<div class="row m-t-sm">
+						<div class="col-lg-12 padding-style">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+
+										{% include './module_univ/evaluation/epreuve/inc/navigation.html.twig' %}
+									</div>
+								</div>
+								<div class="col-md-12 scroll_content">
+									<div class="panel-body">
+										<div class="tab-content">
+											<div class="tab-pane active show affi" id="tab-1">
+												<div
+													class="table-responsive">
+
+
+													{#{ dump(result) }#}
+													{% if workflow_has_marked_place(epv, 'cloturer') %}
+														<div class="forum-item animated bounce">
+															<div class="row">
+																<div class="col-md-9">
+																	<div class="forum-icon">
+																		<i class="fa fa-warning"></i>
+																	</div>
+																	<a class="forum-item-title">Important</a>
+																	<div class="forum-sub-title">
+																		Vous ne pouvez pas ajouter les notes si vous n'êtes à la position validé ,
+																		<br/>veuillez consulter ce lien pour plus d'informations sur ce épreuve
+																		<a href="{{ path('module_univ_evaluation_moyenne_epreuve_information' , {id:epv.id})}}">{{ epv.description }}</a>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+
+
+													{% else %}
+														<table class="table  display table-bordered table-hover dataTables-example tabl table-epreuve table-evaluation" id="datatable-show-epreuve" style="width: 100%" data-moycalculer="1">
+															<thead>
+																<tr>
+																	<th>ord</th>
+																	<th>Code</th>
+																	<th>Nom</th>
+																	<th>Prénom</th>
+																	{% for key , epv in  result.epreuves %}
+																		<th>{{ epv.code }}
+																			<br/>
+																			TYPE :
+																			{{ epv.natureEpreuve }}
+																			<br/>
+																			COE :{{ epv.coefficient }}
+																			<br/>
+																			GRP:
+																			{{ epv.groupe }}</th>
+																	{% endfor %}
+																	<th width="3%">Moyenne
+																		<br/>
+																		enregistré</th>
+																	<th width="3%">Moyenne
+																		<br/>
+																		calculer</th>
+																</tr>
+
+															</thead>
+
+														</table>
+
+														<h5>Statuts :</h5>
+														<p class="small font-bold">
+															<span>
+																<i class="fa fa-circle" style="color: #263a4a"></i>
+																L'étudiant n'appartient pas a ce groupe</span>&nbsp; &nbsp; &nbsp;</p>
+													</span>
+													<span>
+														<i class="fa fa-circle" style="color: red"></i>
+														absent</span>&nbsp; &nbsp; &nbsp;
+												</span>
+											</p>
+
+										{% endif %}
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	{{ render(controller('App\\Controller\\moduleUniv\\evaluation\\EvaluationAnneeController:ChoixPromotion',{ 'id': epv.controleElement.controleModule.controleSemestre.controlePromotion ,'type':'epreuve','active':epv.id}))}}
+	<!-- Modal -->
+{% endblock %}
+{% block javascripts %}{#{ parent() }#}{{ encore_entry_script_tags('univ_epreuve_moyenne') }}
+{% endblock %}

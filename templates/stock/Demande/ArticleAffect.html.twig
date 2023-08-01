@@ -1,0 +1,86 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Demande stock | Stock
+{% endblock %}
+
+
+{% block body %}
+
+
+    
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-6">
+            {# {% include './module_achat/t_achatdemandeinternecab/inc/workflow_breadcumb.html.twig' %} #}
+            Stock , Affectation
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+           {{ wo_render_breadcrumbs() }}
+        </div>
+
+    </div>
+
+
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+        <div class="col-lg-12">
+
+            <div class="ibox ">
+
+                <div class="ibox-content">
+                     <div class="">
+                        {# <div class="row">
+                         {# {% if dc.Role_STK == 'RC' %}
+                           
+                        {% endif %} #}
+                        <div class="row" style="float:">
+							
+                        </div>
+                        </div>
+
+                        <br>
+                        <br>
+                                
+                                
+                       <table class="table tb cmd display table-striped table-bordered table-hover dataTables-example" id="grid17" style="width: 100%">
+
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Code</th>
+									<th>Date</th>
+									<th>Reference</th>
+									<th>description</th>
+									<th>Fournisseur</th>
+									<th>Mt.HT</th>
+									<th>Mt.TVA</th>
+									<th>MT.TTC</th>
+									<th>commande</th>
+									<th>facture</th>
+									<th>FA</th>
+									<th>RG</th>
+									<th>statut</th>
+									<th>Opr</th>
+									{#<th>FA</th>
+																											                                    <th>RG</th>#}
+								</tr>
+							</thead>
+							<tbody class="commande"></tbody>
+							
+						</table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('demande') }}
+{% endblock %}

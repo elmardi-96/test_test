@@ -1,0 +1,197 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+	<div class="col-lg-6">
+			{% if  user.id > 0 %}
+			<h2 class="fo">Utilisateurs ,
+				<span>Modifier utilisateur</span>
+			</h2>
+			{% else %}
+			<h2 class="fo">Utilisateurs ,
+				<span>Nouveau utilisateur</span>
+			</h2>
+			{% endif  %}
+		
+	</div>
+
+
+	<div class="col-lg-6">
+		<div class="title-action">
+			<button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}</button>
+			{#% if  user.id > 0 %}
+				<a href="#" class="btn btn-xs btn-danger btn-outline" id="_delete">
+					<i class="fa fa-trash"></i>
+					Supprimer</a>
+				<div id="test" data-etablissement-id="{{ user.id|json_encode }}"></div>
+
+			{% endif  %#}
+		</div>
+	</div>
+
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+
+		{{ wo_render_breadcrumbs() }}
+	</div>
+</div>
+
+
+<br/><br/>
+
+
+<div class="row pt-20 scroll_content">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+							<div class="panel-heading">
+								<div class="panel-options">
+									<ul class="nav nav-tabs">
+										<li>
+											<a class="nav-link active" href="#tab-1" data-toggle="tab"><i class="fa fa-drivers-license-o"></i>informations
+												
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+											<h3 class="m-t-none m-b">Informations
+												<div class="hr-line-dashed"></div>                                                 </h3>
+
+											<div class="row">
+
+
+												<div class="col-md-12 b-r">
+                                                
+													<div class="form-group row">
+														{{ form_label(form.nom ,'Nom :', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.nom,{'attr':{'class':'form-control form-control-sm','placeholder': 'Nom'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.nom) }}
+															</span>
+														</div>
+
+													</div>
+
+
+													<div class="hr-line-dashed"></div><div class="form-group row">
+														{{ form_label(form.prenom ,'Prénom :', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.prenom,{'attr':{'class':'form-control form-control-sm','placeholder': 'Prénom'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.prenom) }}
+															</span>
+														</div>
+
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.email ,'Email:', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.email,{'attr':{'class':'form-control form-control-sm','placeholder': 'Email'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.email) }}
+															</span>
+														</div>
+
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.username ,'Username:', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.username,{'attr':{'class':'form-control form-control-sm','placeholder': 'Username'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.username) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.plainPassword.first ,'Mot de passe:', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.plainPassword.first,{'attr':{'class':'form-control form-control-sm','placeholder': 'Mot de passe'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.plainPassword.first) }}
+															</span>
+														</div>
+
+													</div>
+                                                    <div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.plainPassword.second ,'Confirmation du mot de passe:', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.plainPassword.second,{'attr':{'class':'form-control form-control-sm','placeholder': 'Confirmation du mot de passe'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.plainPassword.second) }}
+															</span>
+														</div>
+
+
+													</div>
+                                                    <div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.roles ,'Roles:', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.roles,{'attr':{'class':'form-control form-control-sm'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.roles) }}
+															</span>
+														</div>
+
+													</div>
+                                
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.IsActive ,'Active :', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.IsActive) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+
+												</div>
+												
+
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	{{form_widget(form._token)}}
+	{{ form_end(form,{'render_rest': false}) }}
+

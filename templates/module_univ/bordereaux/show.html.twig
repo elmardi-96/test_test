@@ -1,0 +1,261 @@
+
+
+
+{% extends 'base_univ.html.twig' %}
+{% block title %}Consulter Bordereaux | Facturation | UNIV
+{% endblock %}
+{% block body %}
+
+<div class="form-validation-msg" style="display:none">
+    {# message flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div data-toastr="{{ label }}" class="toastr-msg">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {# form global errors  #}
+    <div class="form-errors"></div>
+</div>
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+	
+		<div class="col-lg-12">
+            {% include './module_univ/bordereaux/inc/workflow_breadcumb.html.twig' %}
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './module_univ/bordereaux/inc/workflow.html.twig' %}
+
+        </div>
+		
+		
+		{#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+																				#}
+
+	</div>
+	<br/><br/>
+
+
+	<div class="row pt-20">
+		<div class="col-lg-12 ">
+			<div class="ibox">
+	
+				<div class="ibox-content">
+	
+					<div class="message-success"></div>
+	
+	
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										{% include './module_univ/bordereaux/inc/navigation.html.twig' %}
+										{#% include './module_univ/concours/p_concourscab/ins/navigation.html.twig' %#}
+									</div>
+								</div>
+	
+								<div class="panel-body">
+									<div class="col-md-12">
+										<div class="tab-content">
+											<div class="tab-pane active" id="tab-1">
+	
+	
+												<div class="row">
+												
+													<div class="col-md-12 b-r">
+														<h3 class="m-t-none m-b">INFORMATIONS</h3>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ bordereaux.id }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Code
+															</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ bordereaux.code }}</p>
+															</div>
+
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+
+															<div class="col-sm-8">
+
+																<p class="form-control-static">{{ bordereaux.etablissement ? bordereaux.etablissement.designation }}</p>
+
+															</div>
+
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Date
+															</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">
+																	{{ bordereaux.date|date('d/m/Y')  }}</a>
+																</p>
+															</div>
+
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Mode paiement</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ bordereaux.modalite ? bordereaux.modalite.designation }}</p>
+															</div>
+
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Montant
+															</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">
+																	{{ bordereaux.montant  }}</a>
+																</p>
+															</div>
+
+														</div>
+
+					
+
+														
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Description
+															</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">
+																	{{ bordereaux.description  }}</a>
+																</p>
+															</div>
+
+														</div>
+					
+													
+									
+													
+
+													</div>
+												
+												</div>
+	
+	
+											</div>
+										</div>
+									</div>
+	
+								</div>
+							</div>
+						</div>
+	
+	
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+	<div class="row justify-content-md-center">
+		<div class="col-lg-12 ">
+			<div class="ibox ">
+				<div class="ibox-title m-min">
+				</div>
+				<div class="ibox-content">
+
+
+					<div class="table-responsive">
+						<div class="col-md-12 m-mar-t">
+							<h5 class="m-left" style="text-transform: uppercase;"> Réglements</h5>
+							<table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid4" style="width: 100%">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Code</th>
+										<th>C.Facture</th>
+										<th>Nom</th>
+										<th>Prénom</th>
+										<th>Banque</th>
+										<th>Date Reglement	 :</th>
+										<th>Montant réglement :</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									{% set totale = 0 %}
+									{% set c = 0 %}
+									{% for reglement in bordereaux.univTReglements %}
+										{% set c = c + 1 %}
+										{% set totale =  totale + reglement.montant %}
+										<tr class="edit-new-article">
+											<td>{{c}}</td>
+											<td>{{reglement.code}}</td>
+											<td>{{reglement.cab.code}}</td>
+											<td>{{reglement.cab.preinscription.etudiant.nom}}</td>
+											<td>{{reglement.cab.preinscription.etudiant.prenom}}</td>
+											<td>{{reglement.banque ? reglement.banque.abreviation : ''  }}</td>
+											<td>{{ reglement.dateReglement ? reglement.dateReglement|date('Y-m-d') : '' }}</td>
+											<td>{{ reglement.montant|number_format(2) }}</td>
+										</tr>
+
+									{% endfor %}
+								</tbody>
+								<tfoot>
+									
+										<tr>
+											<th>#</th>
+											<th>Code</th>
+											<th>C.Facture</th>
+											<th>Nom</th>
+											<th>Prénom</th>
+											<th>Banque</th>
+											<th>Date Reglement	 :</th>
+											<th>Montant réglement :</th>
+										</tr>
+								
+									
+								</tfoot>
+							</table>
+							<br>
+							<hr>
+						<br>
+								<h3 colspan="4" style="text-align:right">Total: {{totale}} DH</h3>
+
+							
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_bordereaux') }}
+{% endblock %}

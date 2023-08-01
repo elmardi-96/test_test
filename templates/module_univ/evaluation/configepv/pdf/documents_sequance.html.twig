@@ -1,0 +1,811 @@
+{% set t = 3 %}
+{% set margin_left = "" %}
+{% set margin_right = "" %}
+{% set margin_top = "" %}
+{% set margin_bottom = "" %}
+{% set position_logo = "" %}
+{% set ajouter_info_pied_page = false %}
+{% for para in parametre %}
+	{% if para.abriviation == "marge_L" %}
+		{% set margin_left = para.valeur %}
+	{% endif %}
+	{% if para.abriviation == "marge_R" %}
+		{% set margin_right = para.valeur %}
+	{% endif %}
+	{% if para.abriviation == "marge_T" %}
+		{% set margin_top = para.valeur %}
+	{% endif %}
+	{% if para.abriviation == "marge_B" %}
+		{% set margin_bottom = para.valeur %}
+	{% endif %}
+	{% if para.abriviation == "position_logo" %}
+		{% set position_logo = para.valeur %}
+	{% endif %}
+	{% if para.abriviation == "ajouter_info_pied_page" %}
+		{% if para.valeur == "checked" %}
+			{% set ajouter_info_pied_page = true %}
+		{% endif %}
+	{% endif %}
+
+{% endfor %}
+
+
+<style type="text/Css">
+	body{
+																					        font-family: 'Source Sans Pro', sans-serif;
+																					    }
+																					    .titre-reb{
+																					        width: 100%;
+																					        background: #1f4f7a;
+																					        font-size: 9px ;
+																					        padding:3px 10px;
+																					        color: #f1f1f1;
+																					        font-weight: bold;
+																					
+																					    }
+																					
+																					    .slh tr td {
+																					        border-bottom: 1px solid #292929;
+																					    }
+																					    .p1{
+																					        font-size: 10px;
+																					    }
+																					    .table1{
+																					        width: 100%;
+																					    }
+																					    .table2{
+																					        width: 100%;
+																					        text-align: center;
+																					        border: 1px solid #292929;
+																					        
+																					    }
+																					
+																					    .table4{
+																					        width: 100% ;
+																					        background: #FFFFFF; 
+																					        text-align: center
+																					    }
+																					    .table5{
+																					        width: 100%;
+																					        border: 1px solid #292929
+																					    }
+																					    .table6{
+																					        width: 100%; 
+																					        text-align: left; 
+																					        font-size: 12px
+																					    }
+																					    .table7{
+																					        width: 100%;
+																					        text-align: left; 
+																					        font-size: 9px;
+																                            border-collapse: collapse;
+																					    }
+																					    .table8{
+																					        width: 100%; 
+																					        text-align: left; 
+																					        font-size: 12px
+																					    }
+																					    .tr2{
+																					        background-color: #292929; 
+																					        color:white; 
+																					        font-size: 9px;
+																					    }
+																					    .divfooter{
+																					        position: relative;
+																					        left: 5%;
+																					        width:90%;
+																					        border-top:1px solid #000;
+																					        padding:5px;
+																					        text-align: center;
+																					        font-size: 11px;
+																					    }
+																					    .td1{
+																					        width: 35%; 
+																					        text-align: left;
+																					    }
+																					    .td2{
+																					        width: 65%; 
+																					        text-align: right;
+																					    }
+																					    .td3{
+																					        width: 30% ;
+																					    }
+																					    .td4{
+																					        border-bottom:  solid 1px #292929 ;
+																					        width: 100%
+																					    }
+																					    .td5{
+																					        width: 100% ; 
+																					        font-size: 11px ;
+																					        font-weight: bold
+																					    }
+																					    .td6{
+																					        width: 40% ;
+																					        font-size: 16px;
+																					        font-weight: bold ; 
+																					        border-right: 1px;
+																					        border-left: 1px;
+																					    }
+																					    .td8{
+																					        border-bottom:  solid 1px #292929 ;
+																					        width: 100%
+																					    }
+																					    .td9{
+																					        width: 100% ; 
+																					        font-size: 11px ;
+																					        font-weight: bold
+																					    }
+																					    .td10{
+																					        font-size: 11px;
+																					        width: 100% ; 
+																					        height: 10px;
+																					    }
+																					    .td11{
+																					        width: 100% ;
+																					        background: #292929; 
+																					        color: #fff ;
+																					        height: 17px
+																					    }
+																					    .td12{
+																					        padding: 10px 4px 1px 4px  ; 
+																					        font-weight: bold;
+																					        font-size: 13px
+																					    }
+																					    .td13{
+																					        padding: 5px 4px 10px 4px ; 
+																					        font-weight: bold;
+																					        font-size: 11px
+																					    }
+																					    .td14{
+																					        width: 50% ;
+																					    }
+																					    .td15{
+																					        width: 35% ;
+																					        border: 1px solid #292929
+																					    }
+																				        
+																					    .td16{
+																					        width: 100%
+																					    }
+																					    .td17{
+																					        width: 65%;
+																					        border: 1px solid #292929
+																					    }
+																					    .td18{
+																					        width: 10% ;
+																					    }
+																					    .td19{
+																					        width: 20% ;
+																					    }
+																					    .td20{
+																					        width: 35% ;
+																					    }
+																					    .td21{
+																					        width: 65%;
+																					    }
+																					    .td22{
+																					        width: 5%;
+																					        padding: 3px;
+																					        font-size: 10px;
+																					        text-align: left;
+																					    }
+																					    .td23{
+																					        width: 60%;
+																					        padding: 3px;
+																					        font-size: 10px;
+																					        text-align: left;
+																					    }
+																					    .td24{
+																					        width: 5%;
+																					        padding: 3px;
+																					        font-size: 10px;
+																					        text-align: center;
+																					    }
+																					    .td25{
+																					        width: 12%;
+																					        padding: 3px;
+																					        font-size: 10px;
+																					        text-align: right;
+																					    }
+																					    .td26{
+																					        width: 13%;
+																					        padding: 3px;
+																					        font-size: 10px;
+																					        text-align: right;
+																					    }
+																					    .tr1{
+																					        width:100%;
+																					    }
+																					    .th1{
+																					        width: 5%;
+																					        padding: 3px
+																					    }
+																					    .th2{
+																					        width: 60%;
+																					        padding: 3px;
+																				            text-align:center;
+																				
+																					    }
+																					    .th3{
+																					        width: 5%;
+																					        padding: 3px;
+																					        text-align: center
+																					    }
+																					    .th4{
+																					        width: 12%;
+																					        padding: 3px;
+																					        text-align: center;
+																					    }
+																					    .th5{
+																					        width: 13%;
+																					        padding: 3px;
+																					        text-align: center;
+																					    }
+																					    h5{
+																					        padding: 10px 4px  ; font-weight: bold;font-size: 13px
+																					    }
+																					    img{
+																					        margin-right: 20px;
+																					    }
+																					    .div1{
+																					        line-height: 20px;
+																					    }
+																					    .span1{
+																					        font-size: 12px ;
+																					        text-transform: uppercase ; 
+																					        font-weight: bold;
+																					    }
+																					    span{
+																					        font-size: 10px
+																					    }
+																					    .th1{
+																					        width: 100% ;
+																					        font-size: 11px ;
+																					        font-weight: 200
+																					    }
+																					    .th2{
+																					        width: 100% ; 
+																					        font-size: 11px ;
+																					        font-weight: 200
+																					    }
+																					    .logo{
+																					        width:100px;height:50px;
+																					    }
+																					    .border-left{
+																					        border-left:1px solid black;
+																					
+																					    }
+																					    .border-right{
+																					        border-right:1px solid black;
+																					    }
+																					    footer {
+																					        position: fixed; 
+																					        bottom: -90px; 
+																					        left: 0px; 
+																					        right: 0px;
+																					        height: 100px;                 
+																					    }
+																					    .w-80{
+																					        text-align:right;
+																					        width:80%;
+																					    }
+																					    .w-20{
+																					        text-align:right;
+																					        width:20%;
+																					    }
+																					    .font-8{
+																					        font-size:12px;
+																					    }
+										                                                .font-7{
+										                                                    display:block;
+										                                                    font-size:11px;
+										                                                    margin-top:3px;
+										                                                    margin-bottom:5px;
+										                                                }
+																				    .tb1{
+																				        width: 100%;
+																				    }
+																				    .block-gris{
+																				        display:block;
+																				        width:100%;
+																				        background:rgb(102, 102, 102);
+																				        height:15px;
+																				        color:white;
+																				        font-size:11px;
+																				        padding-left:5px;
+															                            margin-bottom:5px;
+																				    }
+																				    .w-50{
+																				        width:50%;
+																				    }
+																				    .w-50-b{
+																				        width:50%;
+																				        padding-left:5px;
+																				        padding-top:5px;
+																				        padding-bottom:5px;
+																				        border: 1px solid #292929;
+																				    }
+															                        .t-10{
+															                            margin-top:10px;
+															                        }
+																                    .table7 tr{
+																                        padding-top:5px;
+																                    }
+															                        .sep{
+															                            border-collapse: separate;
+															                        }
+											                                        .w-100-b{
+											                                            width:100%;
+											                                            height:20px;
+																				        padding-left:5px;
+																				        padding-top:5px;
+																				        padding-bottom:5px;
+																				        border: 1px solid #292929;
+											                                        }
+			                                                                        .block-black{
+			                                                                            																	        display:block;
+																				        width:100%;
+																				        background:black;
+																				        height:12px;
+																				        color:white;
+																				        font-size:11px;
+																				        padding-left:5px;
+															                            margin-bottom:5px;
+			                                                                        }
+	                                                                                .w-50-h-b{
+	                                                                                    width:50%;									                                            width:100%;
+											                                            height:30px;
+																				        padding-top:0px;
+																				        padding-bottom:5px;
+																				        border: 1px solid #292929;
+	                                                                                }
+                                                                                    .h-25{
+                                                                                        	      									                                            width:100%;
+											                                            height:25px;
+	                                                                                }
+	                                                                                .block-gris-d{
+																				        width:100.4%;
+																				        background:rgb(128, 128, 128);
+	                                                                                        position: relative;
+	    top: -9px;
+	    left: 0px;
+        text-align:center;
+        height:15px;
+        padding-top:0px;
+        font-size:11px;
+        font-weight:bold;
+	
+	                                                                                }
+</style>
+
+{% block header %}
+
+	<table class="tb1" align="center" cellspacing="0">
+
+		<tbody>
+
+			<tr>
+				<td class="w-80">
+
+					<b class="font-8"><br/>Université Internationale Abulcasis des Sciences de la Santé</b>
+
+				</td>
+
+				<td class="w-20">
+
+					<img src="{{ asset('img/Logo_UIASS.png')[1:] }}" class="logo" alt="Logo">
+
+				</td>
+
+			</tr>
+		</tbody>
+
+	</table>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+	<table class="table2">
+		<tr>
+			<td class="td3 border-right">
+				<table class="table1">
+					<tr>
+						<th class="th2"><b>ID Cours</b></th>
+					</tr>
+					<tr>
+						<td class="td4"></td>
+					</tr>
+					<tr>
+						<td class="td9" style="text-align:center">{{UnivPlEmptime.code}}</td>
+					</tr>
+				</table>
+			</td>
+			<td class="td6">FICHE SEQUENCE
+			</td>
+			<td class="td3 border-left">
+				<table class="table4">
+					<tr>
+						<th class="th2"><b>Date Cours</b></th>
+					</tr>
+					<tr>
+						<td class="td8"></td>
+					</tr>
+					<tr>
+						<td class="td9">{{UnivPlEmptime.datemp|date('Y/m/d')}}</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+
+	<br/>
+
+
+	<div class="block-gris">1-1 Information du Professeur</div>
+
+	<table class="table7">
+		<tr>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>Nom :</b>
+						</td>
+						<td class="w-50-b">{{UnivPlEmptimes.enseignant ? UnivPlEmptimes.enseignant.nom : ''}}</td>
+					</tr>
+				</table>
+			</td>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>Prénom :</b>
+						</td>
+						<td class="w-50-b">{{UnivPlEmptimes.enseignant ? UnivPlEmptimes.enseignant.prenom : ''}}</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>Grade :</b>
+						</td>
+						<td class="w-50-b">{{UnivPlEmptimes.enseignant.grade ? UnivPlEmptimes.enseignant.grade.designation : ''}}</td>
+					</tr>
+				</table>
+			</td>
+			<td class="w-50">
+				<table class="table7">
+					<tr>
+						<td class="w-50">
+							<table class="table7 sep">
+								<tr>
+									<td class="w-50-b">
+										<b>Nbre Séance :</b>
+									</td>
+									<td class="w-50-b"></td>
+								</tr>
+							</table>
+						</td>
+						<td class="w-50">
+							<table class="table7 sep">
+								<tr>
+									<td class="w-50-b">
+										<b>VH Cumulé Prof :</b>
+									</td>
+									<td class="w-50-b"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+
+		</tr>
+	</table>
+
+	<div class="block-gris t-10">1-2 Information du Cours</div>
+
+
+	<table class="table7">
+		<tr>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>Matière :</b>
+						</td>
+						<td class="w-50-b"></td>
+					</tr>
+				</table>
+			</td>
+			<td class="w-50">
+				<table class="table7">
+					<tr>
+						<td class="w-50">
+							<table class="table7 sep">
+								<tr>
+									<td class="w-50-b">
+										<b>Type Matière :</b>
+									</td>
+									<td class="w-50-b"></td>
+								</tr>
+							</table>
+						</td>
+						<td class="w-50">
+							<table class="table7 sep">
+								<tr>
+									<td class="w-50-b">
+										<b>Type Cours :</b>
+									</td>
+									<td class="w-50-b"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>Durée séance :
+							</b>
+						</td>
+						<td class="w-50-b"></td>
+					</tr>
+				</table>
+			</td>
+			<td class="w-50">
+				<table class="table7">
+					<tr>
+						<td class="w-50">
+							<table class="table7 sep">
+								<tr>
+									<td class="w-50-b">
+										<b>Heure début :</b>
+									</td>
+									<td class="w-50-b">{{UnivPlEmptime.start|date('Y/m/d g:i')}}</td>
+								</tr>
+							</table>
+						</td>
+						<td class="w-50">
+							<table class="table7 sep">
+								<tr>
+									<td class="w-50-b">
+										<b>Heure fin :</b>
+									</td>
+									<td class="w-50-b">{{UnivPlEmptime.end|date('Y/m/d g:i')}}</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>VH initial Matière :
+							</b>
+						</td>
+						<td class="w-50-b"></td>
+					</tr>
+				</table>
+			</td>
+			<td class="w-50">
+				<table class="table7">
+					<tr>
+						<td class="w-50">
+							<table class="table7 sep">
+								<tr>
+									<td class="w-50-b">
+										<b>VH Cumulé Mat:
+										</b>
+									</td>
+									<td class="w-50-b"></td>
+								</tr>
+							</table>
+						</td>
+						<td class="w-50">
+							<table class="table7 sep">
+								<tr>
+									<td class="w-50-b">
+										<b>VH restant Mat :</b>
+									</td>
+									<td class="w-50-b">ddd</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<b class="font-7">Description :</b>
+
+	<table class="table7">
+		<tr>
+			<td class="w-100-b"></td>
+		</tr>
+	</table>
+
+	<div class="block-gris t-10">1-3 Informations Classe</div>
+
+	<table class="table7">
+		<tr>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>Etablissement :</b>
+						</td>
+						<td class="w-50-b"></td>
+					</tr>
+				</table>
+			</td>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>Filière :</b>
+						</td>
+						<td class="w-50-b"></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>Classe/Groupe :</b>
+						</td>
+						<td class="w-50-b"></td>
+					</tr>
+				</table>
+			</td>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>Effectif :</b>
+						</td>
+						<td class="w-50-b"></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>Salle :</b>
+						</td>
+						<td class="w-50-b"></td>
+					</tr>
+				</table>
+			</td>
+			<td class="w-50">
+				<table class="table7 sep">
+					<tr>
+						<td class="w-50-b">
+							<b>Semestre :</b>
+						</td>
+						<td class="w-50-b"></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<div class="block-gris t-10">1-4 Déroulement du cours</div>
+
+	<b class="font-7">Objectif Pédagogique Opérationnel :</b>
+
+	<table class="table7">
+		<tr>
+			<td class="w-100-b"></td>
+		</tr>
+	</table>
+
+	<b class="font-7">Descriptif du déroulement de la séance (méthodes et supports pédagogique utilisés...) :</b>
+
+	<table class="table7">
+		<tr>
+			<td class="w-100-b"></td>
+		</tr>
+	</table>
+
+	<b class="font-7">Observation du professeur :</b>
+
+	<table class="table7">
+		<tr>
+			<td class="w-100-b"></td>
+		</tr>
+	</table>
+	<b class="font-7">Dispositions à prévoir pour la prochaine séance pédagogique :</b>
+
+	<table class="table7">
+		<tr>
+			<td class="w-100-b"></td>
+		</tr>
+	</table>
+
+	<div class="block-black t-10"></div>
+	<b class="font-7">Remarque d'ordre pédagogique :</b>
+
+	<table class="table7">
+		<tr>
+			<td class="w-100-b"></td>
+		</tr>
+	</table>
+
+
+	<table class="table7 ">
+		<tr>
+			<td class="w-50">
+				<b class="font-7">Remarque d'ordre pédagogique :</b>
+			</td>
+			<td class="w-50">
+				<b class="font-7">Remarque d'ordre comportemental :</b>
+			</td>
+		</tr>
+	</table>
+	<table class="table7 sep">
+		<tr>
+			<td class="w-50-h-b"></td>
+			<td></td>
+			<td class="w-50-h-b"></td>
+		</tr>
+	</table>
+	<b class="font-7">Recommandations :</b>
+
+	<table class="table7">
+		<tr>
+			<td class="w-100-b"></td>
+		</tr>
+	</table>
+	<div class="block-black t-10"></div>
+	<table class="table7 sep">
+		<tr>
+			<td class="w-50-h-b">
+				<div class="block-gris-d">Signature du professeur :</div>
+			</td>
+			<td></td>
+			<td class="w-50-h-b">
+				<div class="block-gris-d">Visa du Doyen :</div>
+			</td>
+		</tr>
+	</table>
+{% endblock %}
+{% block footer %}
+	<footer>
+		{% if ajouter_info_pied_page == true %}
+			<footer>
+				<div class="divfooter">
+					<p>
+						Av. Allal El Fassi Madinat Al Irfane Hay Riad 10000 Rabat
+					</p>
+				</div>
+			</footer>
+		{% endif %}
+	</footer>
+{% endblock %}

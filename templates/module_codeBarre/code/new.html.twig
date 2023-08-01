@@ -1,0 +1,27 @@
+{% extends 'base_code_barre.html.twig' %}
+
+{% block title %}Ajouter | Pré commande  | Ugouv achat{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="new">
+
+
+
+        {{ include('./module_codeBarre/code/_form.html.twig') }}
+
+
+
+    </div>
+
+
+
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('cb_fabrication') }}
+{% endblock %}

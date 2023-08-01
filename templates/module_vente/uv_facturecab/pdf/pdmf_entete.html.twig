@@ -1,0 +1,37 @@
+<table class="" style="position:absolute;top:75px;left:424px;width:250px;">
+	<tr>
+		<td style="font-size:10px;font-family: 'courierbold';"><b>Numéro </b></td>
+		<td> : </td>
+		<td style="font-size:9px;font-family: 'courierbold';">{{ UvFacturecab.code  }}</td>
+		
+		
+	</tr>
+	<tr>
+		<td style="font-size:10px;font-family: 'courierbold';"><b>Date </b></td>
+		<td> : </td>
+		<td style="font-size:9px;font-family: 'courierbold';">{{ UvFacturecab.datefacture ? UvFacturecab.datefacture|date("d/m/Y") : "now"|date("m/d/Y") }}</td>
+	</tr>
+	<tr>
+		<td style="font-size:10px;font-family: 'courierbold';"><b>Client </b></td>
+		<td> : </td>
+		<td style="font-size:9px;white-space:normal;font-family: 'courierbold';">{{ UvFacturecab.client ? UvFacturecab.client.societe : null }}  </td>
+		
+	</tr>
+	<tr>
+		<td style="font-size:10px;font-family: 'courierbold';"><b>ICE </b></td>
+		<td> : </td>
+		<td style="font-size:9px;font-family: 'courierbold';">{{ UvFacturecab.client ? UvFacturecab.client.ice : null }}</td>
+	</tr>
+	<tr>
+		
+		<td style="font-size:10px;font-family: 'courierbold';"><b>Adresse </b></td>
+		<td> : </td>
+		<td style="font-size:9px;font-family: 'courierbold';">{{ UvFacturecab.client ? UvFacturecab.client.adresse : null }}</td>
+	</tr>
+</table>
+
+
+
+<div class='titreFacture' style="position:absolute;top:-40px;left:330px;font-size: 43px;">FACTURE {{ UvFacturecab.type is defined and UvFacturecab.type.code == "FAA-C" ? "D'ANNULATION" : '' }}</div>
+
+<div style="display:block;border-bottom:1px solid #eee; width:100%;position:absolute;top:215px;"></div>

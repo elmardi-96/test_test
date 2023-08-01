@@ -1,0 +1,125 @@
+{% extends 'base_ugouv.html.twig' %}
+{% set current_path = app.request.get('_route') %}
+
+{% block title %}Depot | Stock{% endblock %}
+
+
+{% block body %}
+
+
+
+
+
+
+
+    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+
+    <div class="test2">
+        <form name="action_test2" class="action_test2">
+
+            <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+                <div class="col-lg-4">
+                    <h2 class="fo">Stock , Depot  </h2>
+                    {#{ wo_render_breadcrumbs() }#}
+                </div>
+
+
+                <div class="col-lg-8">
+                    <div class="title-action">
+
+
+                        {# {% for key ,  operation in operations  %}
+                            {% if  operation.horizontale %}
+                                <a {% if operation.route is not null  %}  href="{{ path(operation.route) }}" {%  endif %}  id="{{operation.prefix}}" class="btn btn-white btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+                            {% endif %}
+                        {% endfor %}
+                         #}
+                        <!--  <button type="submit" style="display: none;" class="dt-button btn btn-flat btn-restaurer btn-xs btn-xs-table btn_val2">Enregistrer</button>-->   
+                        
+
+                    </div>
+                </div>
+                <div class="border-b"></div>
+                <div class="col-lg-12">
+                    {{ wo_render_breadcrumbs() }}
+                </div>
+            </div>
+            <br/><br/>
+            <div class="row pt-20">
+                <div class="col-lg-12 ">
+
+                    <div class="ibox-content" style="padding-top: 0px"> 
+                        <div class="row">
+                            <div class="col-md-2">
+                                <p class="msty">
+                                    Antennes
+                                </p>
+
+                                <select id="form_dossier" name="form[dossier]" class="select2_demo_antenne sel2 form-control ">
+                                    <option value="null">Choix antenne</option>
+                                    {% if app.session.get('dossiers') is defined  %}
+                                        {% for key , cb in antennes %}
+                                            <option value="{{ cb.code }}">{{ cb.designation|upper }}</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-responsive ">
+                            <div class="row" >
+                                <div class="col-2 list_actions_bloc" style="position: fixed ; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+
+                                    {#<select class="select2_demo _3 form-control _multiple_actions">
+                                        <option value="">Action</option>
+                                        {% for key , operation in  operations  %}
+                                            {% if operation.multiple %}
+                                            <option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+                                       {% endif %}
+                                            {% endfor %}
+                                    </select>#}
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <table class="table  display table-striped table-bordered table-hover dataTables-example " id="grid7" style="width: 100%" >
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Antenne</th>  
+                                        <th>Défaut</th>  
+                                        <th>Article</th>  
+                                        <th>Quantity</th>  
+                                        <th>Prix</th>  
+                                        <th>Depot</th>
+                                    </tr>
+                                </thead>
+
+                                <tfoot>
+                               
+
+                                </tfoot>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</form>
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('udepot') }}
+{% endblock %}

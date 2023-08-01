@@ -1,0 +1,58 @@
+<div
+    id="wrapper">
+    <!-- Sidebar -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                {% include './inc/sidebar_header.html.twig' %}
+
+
+                {% if app.session.get('modules')['_univ']['dossiers']['_default_univ']   is defined  %}
+
+
+                    {% for key , sousModule in app.session.get('modules')['_univ']['dossiers']['_default_univ']['sousModules'] |sort((a, b) => a.ordr <=> b.ordr)  %}
+                        {% set active = '' %}
+                        {% if sousModule.activeLink in app.request.getPathInfo %}
+                            {% set active  = 'active' %}
+                        {% endif %}
+
+                        <li class="{{active}} colp" ordre="{{sousModule.ordr}}">
+
+                            {% if sousModule.linkDirect == 1 and sousModule.operations   is defined %}
+                                <a href="{% if sousModule.route is not null  %} {{ path(sousModule.route) }} {%  endif %}">
+                                    <i class="fa {{sousModule.icon}}"></i>
+                                    <span class="nav-label">{{ sousModule.titre|capitalize }}</span>  
+                                </a>
+
+                            {% else %} 
+
+
+                                <a class="ah" href="{% if sousModule.route is not null %} {{ path(sousModule.route) }} {% endif %}">
+                                    <i class=" ah fa {{sousModule.icon}}"></i>
+                                    <span class="ah nav-label">{{ sousModule.titre|capitalize }}</span>
+                                </a>
+
+                                <ul class="nav nav-second-level collapse">
+                                    {% if sousModule.operations   is defined  %}
+                                        {%  for key , operation in sousModule.operations | sort((a, b) => a.ordr <=> b.ordr)  %}
+                                            {% if  operation.verticale %}
+                                                <li class="colp">
+                                                    <a href="{% if operation.route is not null %} {{ path(operation.route) }} {% endif %}">
+                                                        <i class="fa {{operation.icon}}"></i>
+                                                        <span class="nav-label">{{ operation.titre|capitalize }}</span>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </ul>
+                            {% endif %}
+                        </li>
+
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- End Sidebar -->

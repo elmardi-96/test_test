@@ -1,0 +1,632 @@
+<div class="sidebar-container new">
+
+	<div class="ibox-tools"></div>
+
+	<div class="tab-content ">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+				</h3>
+				<small>
+					{% if  u_p_partenaire.id > 0 %}
+						Modifier
+					{% else %}
+						Ajouter
+					{% endif %}
+				</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<table class="table small m-b-xs">
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="ibox ">
+					<div class="ibox-content">
+
+
+						{% if  u_p_partenaire.id > 0 %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_edit'}}) }}
+						{% else %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+						{% endif  %}
+
+
+						<div class="row">
+
+
+							<div class="col-md-12 b-r">
+
+								{% if  u_p_partenaire.id > 0 %}
+									<div id="test" data-partenaire-id="{{ u_p_partenaire.id|json_encode }}"></div>
+
+								{% endif  %}
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.typePartenaire ,'Type (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>	
+											<div class="col-md-8">
+												{{ form_widget(form.typePartenaire,{'attr':{'class':'form-control select2 form-control-sm','placeholder':'Type (*)'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.typePartenaire) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.societe ,'Societe (*) ', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.societe,{'attr':{'class':'form-control  form-control-sm','placeholder':'Societe (*)'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.societe) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.lettrageAdonix ,'lettrage Adonix ', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.lettrageAdonix,{'attr':{'class':'form-control  form-control-sm','placeholder':'LETTRAGE ADONIX'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.lettrageAdonix) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6 dossier">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.swift ,'swift', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.swift,{'attr':{'class':'form-control col-sm-12 select2 form-control-sm','placeholder':'swift
+												'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.swift) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.nom ,'Nom (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.nom,{'attr':{'class':'form-control  form-control-sm','placeholder':'Nom (*)'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.nom) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.prenom ,'Prenom (*) ', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.prenom,{'attr':{'class':'form-control  form-control-sm','placeholder':'Prenom (*)'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.prenom) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.ville ,'Ville', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.ville,{'attr':{'class':'form-control  form-control-sm','placeholder':'Ville'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.ville) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.pays ,'Pays ', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.pays,{'attr':{'class':'form-control  form-control-sm','placeholder':'Pays'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.pays) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.banque ,'Banque', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.banque,{'attr':{'class':'form-control  form-control-sm','placeholder':'Banque'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.banque) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.tel1 ,'Tel 1 ', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.tel1,{'attr':{'class':'form-control  form-control-sm','placeholder':'Tel 1'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.tel1) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.tel2 ,'Tel 2', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.tel2,{'attr':{'class':'form-control  form-control-sm','placeholder':'Tel 2'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.tel2) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.tel3 ,'Tel 3 ', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.tel3,{'attr':{'class':'form-control  form-control-sm','placeholder':'Tel 3'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.tel3) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.fax1 ,'Fax 1', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.fax1,{'attr':{'class':'form-control  form-control-sm','placeholder':'Fax 1'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.fax1) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.fax2 ,'Fax 2 ', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.fax2,{'attr':{'class':'form-control  form-control-sm','placeholder':'Fax 2'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.fax2) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.mail1 ,'Email', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.mail1,{'attr':{'class':'form-control  form-control-sm','placeholder':'Email'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.mail1) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.mail2 ,'Email 2 ', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.mail2,{'attr':{'class':'form-control  form-control-sm','placeholder':'Email 2'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.mail2) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.rib ,'RIB', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.rib,{'attr':{'class':'form-control  form-control-sm','placeholder':'RIB'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.rib) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.iff ,'IFF ', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.iff,{'attr':{'class':'form-control  form-control-sm','placeholder':'IFF'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.iff) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.rc ,'RC', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.rc,{'attr':{'class':'form-control  form-control-sm','placeholder':'RC'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.rc) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.ice ,'ICE ', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.ice,{'attr':{'class':'form-control  form-control-sm','placeholder':'ICE'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.ice) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.modepaiement ,'Paiement', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.modepaiement,{'attr':{'class':'form-control select2 form-control-sm','placeholder':'Paiement'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.modepaiement) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.patente ,'Patente ', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.patente,{'attr':{'class':'form-control  form-control-sm','placeholder':'Patente'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.patente) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.categorie ,'categorie', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.categorie,{'attr':{'class':' categorie form-control select2 form-control-sm ','placeholder':'categorie
+												'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.categorie) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6 dossier"
+										{% if u_p_partenaire.id > 0 %}  
+											{% if u_p_partenaire.dossier %} 
+											{% else %} 
+												style="display: none;"
+											{% endif %}
+										{% else %} 
+											style="display: none;"
+										
+										{% endif %}>
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.dossier ,'dossier', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.dossier,{'attr':{'class':'form-control col-sm-12 select2 form-control-sm','placeholder':'dossier
+												'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.dossier) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.categorieTiers ,'Categorie Tiers', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.categorieTiers,{'attr':{'class':' categorieTiers form-control select2 form-control-sm ','placeholder':'Categorie Tiers
+												'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.categorieTiers) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6 ">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.iban ,'Iban', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.iban,{'attr':{'class':'form-control col-sm-12 select2 form-control-sm','placeholder':'Iban
+												'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.iban) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.taxable ,'Taxable', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.taxable,{'attr':{'class':'form-control select2 form-control-sm','placeholder':'Taxable'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.taxable) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.active ,'Active ', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.active) }}
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="bloc_choix" {% if u_p_partenaire.taxable %} {% if u_p_partenaire.taxable == true %} style="display: block" {% endif %} {% endif %}>
+
+									<div class="hr-line-dashed paddi"></div>
+									<div class="form-group row">
+										<div class="col-md-2">
+											{{ form_label(form.tva ,'Tva ', {'label_attr':{'class':'col-sm-12'}}) }}
+										</div>
+										<div class="col-sm-4">
+											{{ form_widget(form.tva,{'attr':{'class':'form-control form-control-sm tva' ,'placeholder':'Tva'}}) }}
+										</div>
+									</div>
+								</div>
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-2">
+												{{ form_label(form.adresse ,'Adresse', {'label_attr':{'class':'col-sm-12'}}) }}
+											</div>
+											<div class="col-md-8">
+												{{ form_widget(form.adresse,{'attr':{'class':'form-control  form-control-sm','placeholder':'Adresse'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.adresse) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+
+								{% if  u_p_partenaire.id > 0 %}
+									<div class="form-group row">
+										<div class="col-sm-6">
+											<button class="btn btn-primary btn-block btn-xs  button-edit-partenaire">
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Modifier') }}</button>
+
+										</div>
+										<div class="col-sm-6">
+											{% for operation in operations|filter(operation => operation.prefix == '_delete') %}
+
+												<a {% if operation.route is not null %} data-id="{{u_p_partenaire.id}}" data-token="{{ csrf_token('delete' ~ u_p_partenaire.id) }}" href="#{# {{ path(operation.route) }} #}" {% endif %} id="{{operation.prefix}}" class="btn btn-block btn-xs btn-danger _delete{{operation.classCs}}">
+													<i class="fa {{ operation.icon }}" style="color: white !important;"></i>
+													{{ operation.titre|capitalize }}</a>
+
+											{% endfor %}
+											{# <a href="#" data-id="{{u_p_partenaire.id}}" data-token="{{ csrf_token('delete' ~ u_p_partenaire.id) }}" class="btn btn-block btn-xs btn-danger _delete " id="_delete">
+												<i class="fa fa-trash" style="color: white !important;"></i>
+												Supprimer</a> #}
+										</div>
+
+
+									</div>
+								{% else %}
+									<div class="form-group row pl-4 pr-4">
+
+										<div class="col-md-6 pl-4 pr-4">
+											<button class="btn btn-primary btn-block btn-xs expand-left ladda-button button-save-partenaire" data-style="expand-left" type="submit">
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Enregistrer') }}</button>
+
+										</div>
+										<div class="col-md-6 pl-4 pr-4">
+											<button class="btn btn-primary btn-block btn-xs expand-left ladda-button button-save-add-partenaire" data-style="expand-left" type="submit">
+												<i class="fa fa-save"></i>
+												&nbsp;Enregistrer et Ajouter</button>
+
+
+											
+
+										</div>
+									</div>
+								{% endif  %}
+
+
+							</div>
+
+						</div>
+
+						{{form_widget(form._token)}}
+						{{ form_end(form,{'render_rest': false}) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

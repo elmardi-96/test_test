@@ -1,0 +1,459 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+	<div class="col-lg-4">
+		{% include './parametrage/uarticle/inc/workflow_breadcumb.html.twig' %}
+		{#{ wo_render_breadcrumbs() }#}
+	</div>
+	<div class="col-lg-8">
+
+		<div class="title-action">
+			<button class="btn btn-primary btn-xs btn-lg" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}</button>
+
+		</div>
+	</div>
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+		{% include './parametrage/uarticle/inc/workflow.html.twig' %}
+	</div>
+</div>
+<br/><br/>
+
+<div class="row pt-20">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+
+			<div class="ibox-content">
+				<div class="panel-body">
+					<div class="message-success"></div>
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										{%  include './parametrage/uarticle/inc/navigation_article.html.twig' %}
+
+									</div>
+								</div>
+
+								<div class="panel-body">
+									<div class="col-md-12">
+										<div class="tab-content">
+											<div class="tab-pane active" id="tab-1">
+												<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+													<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+														<i class="fa fa-drivers-license-o"></i>
+														Informations de Base</a>
+													<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+														<i class="fa fa-level-up"></i>
+														Niveau</a>
+													<a class="nav-link" id="v-pills-achat-tab" data-toggle="pill" href="#v-pills-achat" role="tab" aria-controls="v-pills-achat" aria-selected="false">
+														<i class="fa fa-cart-arrow-down"></i>
+														Achat & Vente</a>
+													<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+														<i class="fa fa-star-half-empty"></i>
+														divers</a>
+												</div>
+												<div class="tab-content" id="v-pills-tabContent">
+													<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+														<div class="row">
+															<div class="col-md-6 b-r">
+
+																<h3 class="m-t-none m-b">Informations</h3>
+
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.code ,'Rererence [code] (*)', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-3">
+																		{{ form_widget(form.code,{'attr':{'class':'form-control form-control-sm libelle' ,'placeholder':'Rererence'}}) }}
+																	</div>
+																</div>
+
+																<div class="hr-line-dashed"></div>
+
+																<div class="form-group row">
+																	{{ form_label(form.titre ,'Titre (*)', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.titre,{'attr':{'class':'form-control form-control-sm libelle' ,'placeholder':'Libelle'}}) }}
+																	</div>
+																</div>
+
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.depot ,'Depot (*)', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.depot,{'attr':{'class':'form-control form-control-sm form-control-select' ,'placeholder':'Depot'}}) }}
+																	</div>
+																</div>
+
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.codeArticleFournisseur ,'Code fournisseur', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-3">
+																		{{ form_widget(form.codeArticleFournisseur,{'attr':{'class':'form-control form-control-sm libelle' ,'placeholder':'Code fournisseur'}}) }}
+																	</div>
+																</div>
+
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.categories ,'Categorie', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.categories,{'attr':{'class':'js-example-basic-single form-control form-control-sm form-control-select' ,'data-placeholder':'Categorie','multiple':'multiple'}}) }}
+																	</div>
+																</div>
+
+
+																<div class="hr-line-dashed"></div>
+
+
+																<div class="form-group row">
+																	{{ form_label(form.description ,'Description', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.description,{'attr':{'class':'form-control  description' ,'placeholder':'Description'}}) }}
+																	</div>
+																</div>
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.defaultUnite ,'Unite', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-2">
+																		{{ form_widget(form.defaultUnite,{'attr':{'class':'form-control form-control-sm'}}) }}
+																	</div>
+																</div>
+
+																<div class="hr-line-dashed"></div>
+
+																<div class="form-group row">
+																	{{ form_label(form.etatVente ,'Disponible en (Vente)', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-2">
+																		{{ form_widget(form.etatVente,{'attr':{'class':'form-control form-control-sm form-control-select'}}) }}
+																	</div>
+																</div>
+
+
+																<div class="hr-line-dashed"></div>
+
+																<div class="form-group row">
+																	{{ form_label(form.etatAchat ,'Disponible en (Achat)', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-2">
+																		{{ form_widget(form.etatAchat,{'attr':{'class':'form-control form-control-sm form-control-select'}}) }}
+																	</div>
+																</div>
+
+															</div>
+
+
+															<div class="col-md-6">
+
+																<div class="form-group row">
+																	{{ form_label(form.gererEnStock ,'gerer en stock', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-2">
+																		{{ form_widget(form.gererEnStock,{'attr':{'class':'form-control form-control-sm form-control-select'}}) }}
+																	</div>
+																</div>
+
+																<div class="hr-line-dashed"></div>
+
+																<div class="form-group row">
+																	{{ form_label(form.verificationStock ,'verification du stock', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-2">
+																		{{ form_widget(form.verificationStock,{'attr':{'class':'form-control form-control-sm form-control-select'}}) }}
+																	</div>
+																</div>
+
+
+																<div class="hr-line-dashed"></div>
+
+																<div class="form-group row">
+																	{{ form_label(form.nature ,'Nature Produit(*)', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-4">
+																		{{ form_widget(form.nature,{'attr':{'class':'form-control form-control-sm form-control-select' ,'placeholder':'Stock de Base'}}) }}
+																	</div>
+																</div>
+
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.url ,'Url', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-8">
+																		{{ form_widget(form.url,{'attr':{'class':'form-control form-control-sm url' ,'placeholder':'Url'}}) }}
+																	</div>
+																</div>
+
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.codeBarre ,'Code Barre ', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-4">
+																		{{ form_widget(form.codeBarre,{'attr':{'class':'form-control form-control-sm url' ,'placeholder':'Code Barre '}}) }}
+																	</div>
+																</div>
+
+
+															
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.codeComptableVente ,'Code comptable (vente)', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-4">
+																		{{ form_widget(form.codeComptableVente,{'attr':{'class':'form-control form-control-sm url' ,'placeholder':'Code comptable (vente)'}}) }}
+																	</div>
+																</div>
+
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	{{ form_label(form.codeComptableVenteExport ,'Code comptable (vente a l\'export)', {'label_attr':{'class':'col-sm-4'}}) }}
+																	<div class="col-sm-4">
+																		{{ form_widget(form.codeComptableVenteExport,{'attr':{'class':'form-control form-control-sm url' ,'placeholder':'Code comptable (vente a l\'export)'}}) }}
+																</div>
+															</div>
+
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.codeComptableAchat ,'Code comptable (achat)', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-4">
+																	{{ form_widget(form.codeComptableAchat,{'attr':{'class':'form-control form-control-sm url' ,'placeholder':'Code comptable (achat)'}}) }}
+																</div>
+															</div>
+
+
+														</div>
+
+													</div>
+												</div>
+												<div class="tab-pane fade " id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+													<div class="row">
+														<div class="col-md-12">
+															<h3 class="m-t-none m-b">Niveaux</h3>
+															<div class="hr-line-dashed"></div>
+
+
+															<div class="form-group row">
+																{{ form_label(form.niveau1 ,'Niveau 1', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.niveau1,{'attr':{'class':'form-control form-control-sm prixVente niveau1' ,'placeholder':'Niveau 1'}}) }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.niveau2 ,'Niveau 2', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.niveau2,{'attr':{'class':'form-control form-control-sm prixVente niveau2' ,'placeholder':'Niveau 2'}}) }}
+																</div>
+															</div>
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.niveau3 ,'Niveau 3', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.niveau3,{'attr':{'class':'form-control form-control-sm prixVente niveau3' ,'placeholder':'Niveau 3'}}) }}
+																</div>
+															</div>
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.niveau4 ,'Niveau 4', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.niveau4,{'attr':{'class':'form-control form-control-sm prixVente niveau4' ,'placeholder':'Niveau 4'}}) }}
+																</div>
+															</div>
+
+
+														</div>
+													</div>
+												</div>
+
+												<div class="tab-pane fade " id="v-pills-achat" role="tabpanel" aria-labelledby="v-pills-achat-tab">
+													<div class="row">
+														<div class="col-md-6 b-r">
+															<h3 class="m-t-none m-b">Prix Achat & Vente</h3>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.prixVente ,'Prix de Vente', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.prixVente,{'attr':{'class':'form-control form-control-sm prixVente' ,'placeholder':'Prix de Vente'}}) }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.prixVenteMin ,'Prix de Vente Min', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.prixVenteMin,{'attr':{'class':'form-control form-control-sm prixVenteMin' ,'placeholder':'Prix de Vente Min'}}) }}
+																</div>
+															</div>
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.prixAchat ,'Prix de Achat', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.prixAchat,{'attr':{'class':'form-control form-control-sm prixAchat' ,'placeholder':'Prix de Achat'}}) }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.prixAchatMin ,'Prix de Achat Min', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.prixAchatMin,{'attr':{'class':'form-control form-control-sm prixAchatMin' ,'placeholder':'Prix de Achat Min'}}) }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.prixReference ,'Prix reference', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.prixReference,{'attr':{'class':'form-control form-control-sm prixReference' ,'placeholder':'Prix reference'}}) }}
+																</div>
+															</div>
+															
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.tva ,'Tva', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.tva,{'attr':{'class':'form-control form-control-sm prixAchatMin' ,'placeholder':'Tva'}}) }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.remise ,'Remise', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-3">
+																	{{ form_widget(form.remise,{'attr':{'class':'form-control form-control-sm prixAchatMin' ,'placeholder':'Remise'}}) }}
+																</div>
+															</div>
+															
+														</div>
+														<div class="col-md-6">
+
+															<h3 class="m-t-none m-b">Dimensions & unites</h3>
+
+															<div class="hr-line-dashed"></div>
+
+
+															<div class="form-group row">
+																{{ form_label(form.poid ,'Poids (*)', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-2">
+																	{{ form_widget(form.poid,{'attr':{'class':'form-control form-control-sm ' ,'placeholder':'Poids'}}) }}
+																</div>
+																<label>x</label>
+																<div class="col-sm-2">
+																	{{ form_widget(form.poidUnite,{'attr':{'class':'form-control form-control-sm form-control-select' ,'placeholder':'Poids'}}) }}
+																</div>
+															</div>
+
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4">
+																	Longueur x Largeur x Hauteur</label>
+
+																<div class="col-sm-2">
+																	{{ form_widget(form.longeur,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Longeur'}}) }}
+																</div>
+																<label>x</label>
+																<div class="col-sm-2">
+																	{{ form_widget(form.largeur,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Largeur'}}) }}
+																</div>
+
+																<label>x</label>
+																<div class="col-sm-2">
+																	{{ form_widget(form.hauteur,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Heuteur'}}) }}
+																</div>
+
+																<label>x</label>
+																<div class="col-sm-1">
+																	{{ form_widget(form.longLargHautUnite,{'attr':{'style':'width: 58px !important' ,'class':'form-control form-control-sm form-control-select' ,'placeholder':'Unite'}}) }}
+																</div>
+															</div>
+
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.surface ,'Surface', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-2">
+																	{{ form_widget(form.surface,{'attr':{'class':'form-control form-control-sm ' ,'placeholder':'Surface'}}) }}
+																</div>
+																<label>x</label>
+																<div class="col-sm-2">
+																	{{ form_widget(form.surfaceUnite,{'attr':{'class':'form-control form-control-sm form-control-select'}}) }}
+																</div>
+															</div>
+
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.volume ,'Volume', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-2">
+																	{{ form_widget(form.volume,{'attr':{'class':'form-control form-control-sm ' ,'placeholder':'Volume'}}) }}
+																</div>
+																<label>x</label>
+																<div class="col-sm-2">
+																	{{ form_widget(form.volumeUnite,{'attr':{'class':'form-control form-control-sm form-control-select'}}) }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
+																<div class="col-sm-10">
+																	{{ form_widget(form.active) }}
+																</div>
+															</div>
+															
+
+														</div>
+													</div>
+												</div>
+
+												<div class="tab-pane fade " id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+													<div class="row">
+														<div class="col-md-12">
+															<h3 class="m-t-none m-b">Autres Informations</h3>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.descriptionDetail ,'Description detail ', {'label_attr':{'class':'col-sm-4 col-form-label'}}) }}
+																<div class="col-sm-4">
+																	{{ form_widget(form.descriptionDetail,{'attr':{'class':'form-control form-control-sm','placeholder':'Description detail '}}) }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																{{ form_label(form.autreInformation ,'Autre Informations ', {'label_attr':{'class':'col-sm-4 col-form-label'}}) }}
+																<div class="col-sm-4">
+																	{{ form_widget(form.autreInformation,{'attr':{'class':'form-control form-control-sm','placeholder':'Autre Informations '}}) }}
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+<div class="hr-line-dashed"></div></div>{% if u_article is defined %}
+<input type="hidden" name="_id" value="{{ u_article.id }}"/>{% endif %}{{ form_end(form,{'render_rest': false}) }}

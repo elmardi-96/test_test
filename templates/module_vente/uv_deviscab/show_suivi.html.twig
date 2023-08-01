@@ -1,0 +1,210 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}Vente , Devis Client , consulter suivi des operations | Achat{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-6">
+				{% include './module_vente/uv_deviscab/inc/workflow_breadcumb.html.twig' %}
+        </div>
+        {#<div class="col-lg-8">
+            <div class="title-action">
+                <div class="title-action">
+                    {% include './module_achat/commandefrs/inc/workflow.html.twig' %}
+                </div>   
+            </div>
+        </div>#}
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {% include './module_vente/uv_deviscab/inc/workflow.html.twig' %}
+        </div>   
+        {#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+        #}
+
+    </div>
+    <br/><br/>
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    {#{% include './module_achat/commandefrs/inc/workflow_breadcumb.html.twig' %}#}
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {% include './module_vente/uv_deviscab/inc/navigation.html.twig' %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        {% if devis.userUpdated %}
+                                                            <h4>Dernière modification</h4>
+                                                            <div class="feed-element">
+                                                                {% set url = asset('images/user/profil/profil.png') %}
+                                                                {% if devis.userUpdated.imageName is not null  %}
+                                                                    {% set url = asset('images/user/profil/' ~ devis.userUpdated.imageName)  %}
+                                                                {% endif %}
+                                                                <a class="float-left" href="">
+                                                                    <img alt="image" class="rounded-circle" src="{{ url }}">
+                                                                </a>
+                                                                <div class="media-body ">
+
+                                                                    <span class="label label-creer float-right label-archive"><i class="fa fa-clock-o" style="font-size: 12.5px;padding: 0px 4px 0px 0px;"></i>Dernière modification</span>
+                                                                    <a class="text-info" href="#">@{{ devis.userUpdated.username }}</a> <strong>{{ devis.userUpdated.nomComplet|capitalize }}</strong> <br>
+                                                                    <small class="text-muted">{{ devis.updated ? devis.updated |date('d-m-Y H:i:s') : '' }}</small>
+                                                                </div>
+                                                            </div>
+                                                            <hr/>
+                                                        {% endif %}
+                                                        <h4>Le suivi des operations</h4>
+                                                        {% if devis.userCreated %}
+                                                            <div class="feed-element">
+                                                                {% set url = asset('images/user/profil/profil.png') %}
+                                                                {% if devis.userCreated.imageName is not null  %}
+                                                                    {% set url = asset('images/user/profil/' ~ devis.userCreated.imageName)  %}
+                                                                {% endif %}
+                                                                <a class="float-left" href="">
+                                                                    <img alt="image" class="rounded-circle" src="{{ url }}">
+                                                                </a>
+                                                                <div class="media-body ">
+
+                                                                    <span class="label label-creer float-right label-creer">Cree</span>
+                                                                    <a class="text-info" href="#">@{{ devis.userCreated.username }}</a> <strong>{{ devis.userCreated.nomComplet|capitalize }}</strong> <br>
+                                                                    <small class="text-muted">{{ devis.created ? devis.created |date('d-m-Y H:i:s') : '' }}</small>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+
+                                                        {% if devis.userEncours %}
+                                                            <div class="feed-element">
+                                                                {% set url = asset('images/user/profil/profil.png') %}
+                                                                {% if devis.userEncours.imageName is not null  %}
+                                                                    {% set url = asset('images/user/profil/' ~ devis.userEncours.imageName)  %}
+                                                                {% endif %}
+                                                                <a class="float-left" href="">
+                                                                    <img alt="image" class="rounded-circle" src="{{ url }}">
+                                                                </a>
+                                                                <div class="media-body ">
+
+                                                                    <span class="label label-creer float-right label-encours">En cours</span>
+                                                                    <a class="text-info" href="#">@{{ devis.userEncours.username }}</a> <strong>{{ devis.userEncours.nomComplet|capitalize }}</strong> <br>
+                                                                    <small class="text-muted">{{ devis.dateEncours ? devis.dateEncours |date('d-m-Y H:i:s') : '' }}</small>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+
+
+                                                        {% if devis.userAnnuler %}
+                                                            <div class="feed-element">
+                                                                {% set url = asset('images/user/profil/profil.png') %}
+                                                                {% if devis.userAnnuler.imageName is not null  %}
+                                                                    {% set url = asset('images/user/profil/' ~ devis.userAnnuler.imageName)  %}
+                                                                {% endif %}
+                                                                <a class="float-left" href="">
+                                                                    <img alt="image" class="rounded-circle" src="{{ url }}">
+                                                                </a>
+                                                                <div class="media-body ">
+
+                                                                    <span class="label label-creer float-right label-annule">Annule</span>
+                                                                    <a class="text-info" href="#">@{{ devis.userAnnuler.username }}</a> <strong>{{ devis.userAnnuler.nomComplet|capitalize }}</strong> <br>
+                                                                    <small class="text-muted">{{ devis.dateAnnuler ? devis.dateAnnuler |date('d-m-Y H:i:s') : '' }}</small>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+
+
+                                                        {% if devis.userArchiver %}
+                                                            <div class="feed-element">
+                                                                {% set url = asset('images/user/profil/profil.png') %}
+                                                                {% if devis.userArchiver.imageName is not null  %}
+                                                                    {% set url = asset('images/user/profil/' ~ devis.userArchiver.imageName)  %}
+                                                                {% endif %}
+                                                                <a class="float-left" href="">
+                                                                    <img alt="image" class="rounded-circle" src="{{ url }}">
+                                                                </a>
+                                                                <div class="media-body ">
+                                                                    <span class="label label-creer float-right label-archive">Archive</span>
+                                                                    <a class="text-info" href="#">@{{ devis.userArchiver.username }}</a> <strong>{{ devis.userArchiver.nomComplet|capitalize }}</strong> <br>
+                                                                    <small class="text-muted">{{ devis.dateArchiver ? devis.dateArchiver |date('d-m-Y H:i:s') : '' }}</small>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+
+
+                                                        {% if devis.userValider %}
+                                                            <div class="feed-element">
+                                                                {% set url = asset('images/user/profil/profil.png') %}
+                                                                {% if devis.userValider.imageName is not null  %}
+                                                                    {% set url = asset('images/user/profil/' ~ devis.userValider.imageName)  %}
+                                                                {% endif %}
+                                                                <a class="float-left" href="">
+                                                                    <img alt="image" class="rounded-circle" src="{{ url }}">
+                                                                </a>
+                                                                <div class="media-body ">
+                                                                    <span class="label label-creer float-right label-valide">Valide</span>
+                                                                    <a class="text-info" href="#">@{{ devis.userValider.username }}</a> <strong>{{ devis.userValider.nomComplet|capitalize }}</strong> <br>
+                                                                    <small class="text-muted">{{ devis.dateValider ? devis.dateValider |date('d-m-Y H:i:s') : '' }}</small>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+
+
+                                                        {% if devis.userCommander %}
+                                                            <div class="feed-element">
+                                                                {% set url = asset('images/user/profil/profil.png') %}
+                                                                {% if devis.userCommander.imageName is not null  %}
+                                                                    {% set url = asset('images/user/profil/' ~ devis.userCommander.imageName)  %}
+                                                                {% endif %}
+                                                                <a class="float-left" href="">
+                                                                    <img alt="image" class="rounded-circle" src="{{ url }}">
+                                                                </a>
+                                                                <div class="media-body ">
+                                                                    <span class="label label-creer float-right label-genere">Commande</span>
+                                                                    <a class="text-info" href="#">@{{ devis.userCommander.username }}</a> <strong>{{ devis.userCommander.nomComplet|capitalize }}</strong> <br>
+                                                                    <small class="text-muted">{{ devis.dateCommander ? devis.dateCommander |date('d-m-Y H:i:s') : '' }}</small>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('uventedevis') }}
+
+
+
+{% endblock %}

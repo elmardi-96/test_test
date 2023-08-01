@@ -1,0 +1,216 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Réglement Facture
+{% endblock %}
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-6">
+            {% include './module_vente/uv_reglementcab/inc/workflow_breadcumb.html.twig' %}
+            {#{ wo_render_breadcrumbs() }#}
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="title-action">
+                
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {% include './module_vente/uv_reglementcab/inc/workflow.html.twig' %}
+            
+        </div>
+
+    </div>
+
+
+    <br/>
+    <br/>
+    <div class="row pt-20">
+        <div class="col-lg-12 ">
+            <div class="ibox">
+                <div class="ibox-content">
+
+                    <div class="message-success"></div>
+
+                 
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {% include './module_vente/uv_reglementcab/inc/navigation.html.twig' %}
+                                    </div>
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="col-md-12">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-1">
+
+
+                                                <div class="row">
+                                                    <div class="col-md-12 b-r">
+
+                                                        <h3 class="m-t-none m-b">Informations Réglement facture
+                                                        </h3>
+
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 required">
+                                                                Code Réglement	 :</label>
+
+                                                            <div class="col-sm-8">
+                                                                {{ t_reglementfrs.code }}
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="from-group row">
+
+                                                            <label class="col-sm-4 required">
+                                                                Date Réglement	 :</label>
+                                                            <div class="col-sm-8">
+                                                                {{t_reglementfrs.datereglement|date("d/m/Y")}}
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div class="hr-line-dashed"></div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 required">Client:</label>
+
+                                                            <div class="col-sm-8">
+                                                                {{t_reglementfrs.factureClient.client ? t_reglementfrs.factureClient.client.societe}}
+
+
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 required">Code Facture	 :</label>
+                                                            <div class="col-sm-8">
+                                                                {{t_reglementfrs.factureClient.code}}
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 required">Date de facture	:</label>
+
+                                                            <div class="col-sm-8">
+                                                                {{t_reglementfrs.factureClient.datefacture|date("d/m/Y") }}
+
+
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+
+                                                            <label class="col-sm-4 required">Libelle	 :</label>
+                                                            <div class="col-sm-8">
+                                                                {{t_reglementfrs.factureClient.observation}}
+
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 required">Montant Réglement		:</label>
+
+                                                            <div class="col-sm-8">
+                                                                {{t_reglementfrs.mtreglement|number_format(2)}}
+                                                              
+
+
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+
+                                                            <label class="col-sm-4 required">Montant Facture		 :</label>
+                                                            <div class="col-sm-8">
+                                                                {{mtht|number_format(2)}}
+
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 required">Mode paiement			:</label>
+
+                                                            <div class="col-sm-8">
+                                                                {{t_reglementfrs.modepaiement ? t_reglementfrs.modepaiement.designation }}
+
+
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 required">Banque		 :</label>
+                                                            <div class="col-sm-8">
+                                                                {{t_reglementfrs.banque ? t_reglementfrs.banque.designation }}
+
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+
+                                                            <label class="col-sm-4 required">Référence		 :</label>
+                                                            <div class="col-sm-8">
+                                                                {{t_reglementfrs.numcheque }}
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div id="test" data-reglement-id="{{ t_reglementfrs.id|json_encode }}"></div>
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% set commande = [] %}
+	{% set facture = t_reglementfrs.factureClient %}
+	{% for livraison in t_reglementfrs.factureClient.livraisons  %}
+		{% set commande = livraison.commande %}
+	{% endfor %}
+	{{ include('./module_vente/inc/t_deviscab.html.twig' ,{'commande': commande,'position':'reglement'}) }}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('treglementfrscabVente') }}
+{% endblock %}

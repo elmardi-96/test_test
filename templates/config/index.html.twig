@@ -1,0 +1,123 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Configurations{% endblock %}
+
+{% block body %}
+
+
+
+    
+
+
+    
+
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-4">
+
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+        <div class="col-lg-8">
+            <div class="title-action">
+                {#<button class="btn btn-primary btn-xs btn-lg" type="submit"><i class="fa fa-save"></i> Enregistrer</button>#}
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+    <br/><br/><br/>
+
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <div class="profile-image">
+                <img src="{{ asset('img/modules/configuration.png') }}" class="rounded-circle circle-border m-b-md" alt="profile">
+            </div>
+
+
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            Configurations
+                        </h2>
+
+                        <small>
+                            L'espace configuration permet de réaliser le paramétrage initial afin de pouvoir commencer à utiliser l'application.Les paramètres d'installation ne peuvent être remplis que par les utilisateurs administrateurs uniquement
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+
+
+            <div class="profile-image">
+                {# <img src="/img/icon1.png" class="rounded-circle circle-border m-b-md" alt="profile">#}
+            </div>
+
+
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        
+                        <h4>Configuration / Société/Organisation</h4>
+                        <small>
+                        Paramètres basiques pour personnaliser le comportement par défaut du logiciel (comportement lié au pays par exemple). 
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-12">
+
+
+            <div class="profile-image">
+                {# <img src="/img/icon1.png" class="rounded-circle circle-border m-b-md" alt="profile">#}
+            </div>
+
+
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        
+                        <h4>Configuration / Modules/Applications</h4>
+                        <small>
+                         Ce logiciel est un ensemble de plusieurs modules/applications, tous plus ou moins indépendants. Les fonctionnalités en rapport avec vos besoins doivent être activées et configurées. De nouvelles entrées/options seront ajoutés aux menus avec l'activation d'un module.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+{% endblock %}

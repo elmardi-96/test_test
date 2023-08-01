@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="fr">
+		<title>Commande fournisseur</title>
+	</head>
+	<style>
+
+
+		@page {
+			margin: 180px 20px 210px 20px !important;
+			padding: 0 !important;
+		}
+
+		@page :first .footer {
+    	display: none;
+		}
+		body {
+			font-family: 'Courier';
+			font-size: 13px;
+		}
+
+		.header {
+			position: fixed;
+			top: -180px;
+			left: 0;
+			right: 0;
+		}
+
+
+		.logo {
+			max-width: 250px;
+			max-height: 100px;
+			text-align: right;
+		}
+
+		.footer {
+			/*border-top: 2px solid #555555;*/
+			margin-top: 10px;
+			font-size: 9px;
+			text-align: center;
+			position: fixed;
+			bottom: 3px;
+			left: 0;
+			right: 0;
+		}
+
+
+		* {
+			font-family: Courier, sans-serif;
+			text-transform : uppercase;
+		}
+
+		main {
+			margin-top: 0;
+		}
+		@font-face {
+		font-family:'Signaturex' ;
+		src:url("./font/SignaturexDemoRegular.ttf") ;
+		}
+	</style>
+
+	<body>
+		{% if cab.statutsig == 0 and cab.client and cab.client.categorie.id == 56  %}
+    <div class="content" style=" position: absolute; opacity: 0.2; font-size: 155px; transform: rotate(-55deg); text-align:center; align-items: center; padding: 40mm -40mm;">
+        <b>non signé </b>
+    </div>
+{% endif %}
+            {# ------------- HEADER ---------------------- #}
+
+            <div class="header">
+            <table
+                style="width: 100%; margin: 20px 0px"
+                align="center"
+                cellspacing="0"
+            >
+                <tr>
+                <td style="width: 35%; text-align: left">
+                    <div style="line-height: 15px">
+                    <span
+                        style="
+                        font-size: 11px;
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        "
+                    >
+                        {{ cab.dossier.titre|upper }} </span
+                    ><br />
+                    <span style="font-size: 9px">{{ cab.dossier.adresse}}</span><br />
+                    <span style="font-size: 9px">Tel :{{ cab.dossier.tel}}</span
+                    ><br />
+                    <span style="font-size: 9px">Fax :{{ cab.dossier.tel}}</span
+                    ><br />
+                    </div>
+                </td>
+                <td style="width: 65%; text-align: right">
+                    <img src="{{ asset(image)[1:] }}" width = "{{ cab.dossier.WidthLogo }}" height="{{ cab.dossier.HeightLogo }}" class="logo" alt="Logo" />
+                </td>
+                </tr>
+            </table>
+
+            <table style=" width: 100%; text-align: center; " >
+                <tr>
+                <td style="width: 80%">
+                    <table style="width: 100%; text-align: start;margin-top:-38px;">
+					<td style="width: 80%;font-size: 30px;font-weight: bold;">
+                    Commande Client
+                </td>
+				
+					 
+                    </table>
+                </td>
+                <td style="width: 40%;font-size: 16px;font-weight: bold;{#  #}border-bottom: none;border-top: none;">
+                    {# FACTURE FOURNISSEUR #}
+                </td>
+                <td>
+                    <table style="">
+					 <tr>
+                        <th >
+                     	{{barcode|raw}} 
+                        </th>
+                    </tr>
+					 <tr>
+                        <td style="width: 100%; font-size: 11px;">
+                  <b>REF&nbsp; : </b>     {{ cab.code|upper }} 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                        style=" width: 100%"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100%; font-size: 11px;">
+                  <b>DATE  :  </b>    {{ cab.dateDevis ? cab.dateDevis|date("d/m/Y")  }}
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+                </tr>
+            </table>
+            <div>
+                {# -------------------------END HEADER --------------------------- #} {#
+                -------------------------FOOTER --------------------------- #}
+
+                <div class="footer">
+				
+                <br />
+                <div
+                    style="
+                    position: relative;
+                    left: 5%;
+                    width: 90%;
+                    border-top: 0.3px solid #000;
+                    padding: 5px;
+                    text-align: center;
+                    font-size: 11px;
+					margin-top: 60%;
+                    "
+                >
+                    {% if cab.dossier %} 
+					{% if cab.dossier.adresse %} 
+					{{ cab.dossier.adresse|upper }} &nbsp;&nbsp;	
+					{% endif %}
+					{% if cab.dossier.ice %} 
+					ICE : {{ cab.dossier.ice|upper }}  &nbsp;&nbsp;	
+					{% endif %}
+					{% if cab.dossier.rc %} 
+					RC : {{ cab.dossier.rc|upper }} <br> 
+					{% endif %}
+					{% if cab.dossier.iff %} 
+					IFF : {{ cab.dossier.iff|upper }}  &nbsp;&nbsp;	
+					{% endif %}
+					{% if cab.dossier.cnss %} 
+					CNSS : {{ cab.dossier.cnss|upper }}  &nbsp;&nbsp;	
+					{% endif %}
+					{% endif %}
+                </div>
+                </div>
+            </div>
+            </div>
+            {# -------------------------FOOTER --------------------------- #}
+
+
+		<main>
+	
+			
+
+			<br>
+			<!--II-  Informations Fournisseur-->
+			<table cellspacing="0" style="width: 100%; text-align: left; font-size: 12px">
+				
+				<tr>
+					<td style="padding: 10px 4px  ; text-transform: uppercase;font-weight: bold;font-size: 13px">INFORMATIONS CLIENT</td>
+				</tr>
+			</table>
+			<table style="width: 100%; text-align: left; font-size: 9px;">
+				<tr style="width: 50%">
+					<td style="width: 100% ;">
+						<table style="width: 100% ;">
+							<tr>
+								<td style="width: 35% ;font-weight: bold; font-size:11px ">
+									<table style="width: 100% ; ">
+										<tr>
+											<td style="width: 100%">Client :</td>
+										</tr>
+									</table>
+								</td>
+								<td style="width: 65%">
+									<table style="width: 100%; font-size:11px  ;">
+										<tr>
+											<td style="width: 100%">{{ cab.client  ? cab.client.societe  }}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 35% ; ">
+									<table style="width: 100%; font-size:11px  ; ">
+										<tr>
+											<td style="width: 100%">Adresse :</td>
+										</tr>
+									</table>
+								</td>
+								<td style="width: 65%;">
+									<table style="width: 100%; font-size:11px  ;">
+										<tr>
+											<td style="width: 100%"> {{ cab.client  ? cab.client.adresse  }}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 35% ;">
+									<table style="width: 100%; font-size:11px  ; ">
+										<tr>
+											<td style="width: 100%">Ville/Pays :</td>
+										</tr>
+									</table>
+								</td>
+								<td style="width: 65%;">
+									<table style="width: 100%; font-size:11px  ;">
+										<tr>
+											<td style="width: 100%">
+													{{ cab.client  ? cab.client.ville ~'/'~ cab.client.pays  }}
+												
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+				
+						</table>
+					</td>
+
+
+                    <td style="width: 100% ;">
+						<table style="width: 100% ;">
+							<tr>
+								<td style="width: 35% ;">
+									<table style="width: 100%; font-size:11px  ; ">
+										<tr>
+											<td style="width: 100%">Télé :</td>
+										</tr>
+									</table>
+								</td>
+								<td style="width: 65%;">
+									<table style="width: 100%; font-size:11px  ;">
+										<tr>
+											<td style="width: 100%">{{ cab.client  ? cab.client.tel1 ~ ' / '~  cab.client.tel2 }}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+								<tr>
+								<td style="width: 35% ;">
+									<table style="width: 100%; font-size:11px  ; ">
+										<tr>
+											<td style="width: 100%">Mail :</td>
+										</tr>
+									</table>
+								</td>
+
+								<td style="width: 65%;">
+									<table style="width: 100%; font-size:11px  ;">
+										<tr>
+											<td style="width: 50%">{{ cab.client  ? cab.client.mail1  }}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr style="visibility: hidden;">
+								<td style="width: 35% ;">
+									<table style="width: 100% ; ">
+										<tr>
+											<td style="width: 100%">hidden</td>
+										</tr>
+									</table>
+								</td>
+
+								<td style="width: 65%;">
+									<table style="width: 100% ;">
+										<tr>
+											<td style="width: 50%">hidden</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+
+
+				</tr>
+				
+			</table>
+
+			<!--End II-  Informations Fournisseur-->
+			<table cellspacing="0" style="width: 100%; text-align: left; font-size: 12px">
+				<tr>
+					<td>
+						<h5 style="padding: 6px 4px  ; text-transform: uppercase;font-weight: bold;font-size: 13px">Objet : {{cab.observation}}
+						</h5>
+					</td>
+				</tr>
+			</table>
+
+
+			
+
+
+			<table class="" style="width: 100% ;" cellspacing="0">
+				<thead>
+					<tr style="background-color: #BEBEBE; color:black; font-size: 9px;">
+						<th style="width: 5%;padding: 3px">ORD</th>
+						<th style="width: 10%;padding: 3px">REFERENCE</th>
+						<th style="width: 50%;padding: 3px">DESIGNATION</th>
+						<th style="width: 5%;padding: 3px">UNITE</th>
+						<th style="width: 5%;padding: 3px;text-align: center;">QNT</th>
+						<th style="width: 5%;padding: 3px;text-align: center;">TVA</th>
+
+						<th style="width: 10%;padding: 3px;text-align: center;">PRIX H.T</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+				    {% set prixTotHT = 0 %}
+                    {% set prixTotNet = 0 %}
+                    {% set TotTva = 0 %}
+                    {% set baseTVA = 0 %}
+
+					  {% for key , detail in cab.details   %}
+                    {% set  key = key + 1  %}
+
+
+							<tr>
+		                	  <table class="" style="width: 100% ;" cellspacing="0">
+  
+							  	  <td style="width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: left;">{{key}}</td>
+							  	  <td style="width: 10%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: left;">{{ detail.article.code|upper }}</td>
+							  	  <td style="width: 50%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: left;">{{ detail.article.titre|upper }}</td>
+							  	  <td style="width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align:center;">{{ detail.unite ? detail.unite.abreviation|upper : null}}</td>
+							  	  <td style="width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: center;">{{ detail.quantite|number_format(2, ',', ' ')  }}</td>
+							  	  <td style="width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: center;">{{ detail.tva }}</td>
+							  
+							  	  <td style="width: 10%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: right;">{{ detail.prixunitaire|number_format(2, ',', ' ') }}</td>
+							  </table>
+		                	  <table style="width:100%">
+                                    <tbody>
+                                            
+                                    {% for devisdt in uvdev.details %}
+
+                                       {% if detail.article.id == devisdt.article.id %}
+
+                                           {% for uv_cab in devisdt.devisTechniqueCabs %}
+
+
+                                                     {% for uv_det in uv_cab.getDevisTechniqueDets %}
+                                                         <tr>
+								                 
+								                  		<td style="width: 5%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: left;"></td>
+								                  		<td style="width: 10%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: left;"></td>
+								                  		<td style="width: 50%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: left;padding-left: 2em;word-wrap: break-word">{{ uv_det.article }} </td>
+								                  		<td style="width: 5%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: center;"></td>
+								                  		<td style="width: 5%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: center;">{{ uv_det.qte|number_format(0) }}</td>
+								                  		<td style="width: 5%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: center;">{{uv_det.tva|upper }}</td>
+								                  		
+														<td style="width: 10%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: right;">{{ uv_det.prixUntaire|number_format(2, ',', ' ') }}</td>
+
+								                  
+									                    </tr>
+
+
+						                
+						                          {% endfor %}
+                                            
+                                            
+
+						                 {% endfor %}
+
+                                         {% endif %}
+						          {% endfor %}
+                                
+                                    </tbody>
+                               </table>
+
+							</tr>
+
+						{% set prixTotHT = prixTotHT + (detail.prixunitaire * detail.quantite) %}
+						{% set prixTotNet = prixTotNet + ((detail.prixunitaire * detail.quantite) * ( 1 + (detail.tva)/100 )) %}
+                            	{% endfor %}
+						{% set TotTva = prixTotNet - prixTotHT %}
+
+				</tbody>
+
+			</table>
+
+			<br>
+			<br>
+			<br>
+			<table cellspacing="0" style="width: 100%;">
+				<tr>
+                    <td style="width: 100% "></td>
+					<td style="width: 100% ">
+						<table style="width: 100% ; background: #FFFFFF;font-size: 10px;margin:0px;" cellspacing="0">
+							<tr>
+								<td style="background-color:rgb(170, 170, 170);padding: 5px;">TOTAL HT :</td>
+								<td style="width: 0.1%; "></td>
+								<td style="width:20%;text-align:right">{{prixTotHT|number_format(2, ',', ' ')|default('0') }}</td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(170, 170, 170);padding: 5px;">REMISE :
+								</td>
+								<td></td>
+								<td style="width:20%;text-align:right">{{cab.prixremise|number_format(2, ',', ' ')|default('0')}}</td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(170, 170, 170);padding: 5px;">NET HT :
+								</td>
+								<td style="width: 0.1%; "></td>
+								<td style="width:20%;text-align:right">{{prixTotHT|number_format(2, '.', ',')|default('0') }}</td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(170, 170, 170);padding: 5px;">TVA :
+								</td>
+								<td style="width: 0.1%; "></td>
+								<td style="width:20%;text-align:right">{{TotTva|number_format(2, ',', ' ')|default('0') }}</td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(170, 170, 170);padding: 5px;">TOTAL TTC :
+								</td>
+								<td></td>
+								<td style="width:20%;text-align:right">{{prixTotNet|number_format(2, ',', ' ')|default('0')}}</td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(170, 170, 170);color:rgb(69, 69, 69);font-weight : bold; width: 30%;padding: 5px;">NET A PAYER () :
+								</td>
+								<td></td>
+								<td style="width:20%;font-weight : bold;text-align:right">{{(prixTotNet - cab.prixremise)|number_format(2, ',', ' ')}}</td>
+							</tr>
+						</table>
+					</td>
+                    <td style="width: 0%"></td>
+				</tr>
+			</table>
+
+			<p style="font-size: 10px;">Arrêté le présent bon de commande à la somme de : <b>{{text}}</b>
+				<b></b>
+				</p>
+
+	<div style="height:60%;position: absolute;top:101%" class="sign"> 
+                <table
+                    style="width: 100%; margin-left: auto; margin-right: auto;"
+                    align="center"
+                    cellspacing="2"
+                >
+                   <thead>
+                <tr style="background-color: #BEBEBE; color:black; font-size: 9px; ">
+                    <th style="width: 50%;padding: 3px;text-align: center; "colspan="2" >TRAITEMENT</th>
+                    {# <th style="width: 30%;padding: 3px;text-align: center; ">CONTROLE</th> #}
+                    <th style="width:50%;padding: 3px;text-align: center;"colspan="2">VALIDATION</th>
+                </tr>
+            </thead>
+             <tbody>
+
+                <tr>
+
+                    <td style="font-size: 10px; width:20%;">
+                        <div style="width:100%;text-align: center;background-color:#e5e5e5;">RESPONSABLE DE SITE</div>
+                        <div style="width:100%;text-align: center; height:45px;margin-top:-25px" class="sig">
+						{% if signature1 != "" %}
+							{% if signature1.signature is null %}
+									<p style="padding-top:5px !important; padding-bottom:0px !important">{{signature1.user.nom}} {{signature1.user.prenom}}</p>
+										<div style="margin-top:-80px !important">
+										<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; ">{{signature1.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+										</div>
+										{% else %}
+										<img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature1.signature}}" alt="sig">
+									{% endif %}
+								{% else %}
+										<p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+										<div style="margin-top:-80px !important">
+											<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+										</div>
+						{% endif %}
+						</div>
+
+                    </td>
+                    
+                    <td style="font-size: 10px;width:20%;">
+                        <div style="width:100%;text-align: center;background-color:#e5e5e5;">RESPONSABLE FACTURATION FCZ</div>
+                        <div style="width:100%;text-align: center; height:45px;margin-top:-25px" class="sig">
+						{% if signature2 != "" %}
+							{% if signature2.signature is null %}
+								<p style="padding-top:5px !important; padding-bottom:0px !important">{{signature2.user.nom}} {{signature2.user.prenom}}</p>
+										<div style="margin-top:-80px !important">
+										<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; ">{{signature2.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+										</div>
+										{% else %}
+										<img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature2.signature}}" alt="sig">
+									{% endif %}
+								{% else %}
+										<p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+										<div style="margin-top:-80px !important">
+											<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+										</div>
+						{% endif %}
+						</div>
+
+                    </td>
+                    <td style="font-size: 10px;width:20%;">
+                        <div style="width:100%;text-align: center;background-color:#e5e5e5;">DAS</div>
+                        <div style="width:100%;text-align: center; height:45px;margin-top:-25px" class="sig">
+						{% if signature3 != "" %}
+							{% if signature3.signature is null %}
+								<p style="padding-top:5px !important; padding-bottom:0px !important">{{signature3.user.nom}} {{signature3.user.prenom}}</p>
+										<div style="margin-top:-80px !important">
+										<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; ">{{signature3.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+										</div>
+										{% else %}
+										<img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature3.signature}}" alt="sig">
+									{% endif %}
+								{% else %}
+										<p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+										<div style="margin-top:-80px !important">
+											<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+										</div>
+						{% endif %}
+						</div>
+
+                    </td>
+					 <td style="font-size: 10px;width:20%;">
+                        <div style="width:100%;text-align: center;background-color:#e5e5e5;">DIRECTION DELEGUEE</div>
+                        <div style="width:100%;text-align: center; height:45px;margin-top:-25px" class="sig">
+						{% if signature4 != "" %}
+							{% if signature4.signature is null %}
+									<p style="padding-top:5px !important; padding-bottom:0px !important">{{signature4.user.nom}} {{signature4.user.prenom}}</p>
+										<div style="margin-top:-80px !important">
+										<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; ">{{signature4.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+										</div>
+										{% else %}
+										<img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature4.signature}}" alt="sig">
+									{% endif %}
+								{% else %}
+										<p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+										<div style="margin-top:-80px !important">
+											<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+										</div>
+						{% endif %}
+						</div>
+
+                    </td>
+                    
+                </tr>
+
+            </tbody>
+                </table>
+				</div>
+
+
+		</main>
+	</body>
+
+</html>

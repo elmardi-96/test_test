@@ -1,0 +1,154 @@
+vich_uploader:
+    db_driver: orm
+    #module stock fichiers article
+    mappings:
+        articleFichiers:
+            uri_prefix: /images/aticles/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/aticles/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+        #profil imges utilisateur 
+        userProfil:
+            uri_prefix: /images/user/profil
+            upload_destination: '%kernel.project_dir%/public/images/user/profil'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true 
+            
+            
+        moduleAchatCommandeFichier:
+            uri_prefix: /images/module_achat/commandefrs/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/module_achat/commandefrs/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+
+
+        moduleArchiveFichier:
+            uri_prefix: /images/module_archive/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/module_archive/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+
+        sousModuleConfigFichier:
+            uri_prefix: /img/sousModules
+            upload_destination: '%kernel.project_dir%/public/img/sousModules'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true           
+
+        dossierConfigFichier:
+            uri_prefix: /images/parametrage/dossiers
+            upload_destination: '%kernel.project_dir%/public/images/parametrage/dossiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+
+        compagnieFichier:
+            uri_prefix: /images/compagnie
+            upload_destination: '%kernel.project_dir%/public/images/compagnie'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+
+
+        moduleConfigFichier:
+            uri_prefix: /img/modules
+            upload_destination: '%kernel.project_dir%/public/img/modules'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+
+
+        moduleAchatLivraisonFichier:
+            uri_prefix: /images/module_achat/livraisonfrs/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/module_achat/livraisonfrs/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true 
+
+
+        moduleAchatFactureFichier:
+            uri_prefix: /images/module_achat/facturefrs/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/module_achat/facturefrs/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true 
+
+        ugouvAchatdemandeFichier:
+            uri_prefix: /images/ugouv/achat/demandeAchat/demandeachat/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/ugouv/achat/demandeAchat/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true 
+
+
+        ugouvAchatcomandeFichier:
+            uri_prefix: /images/ugouv/achat/commandeAchat/commandeachat/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/ugouv/achat/commandeAchat/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true    
+
+        ugouvVenteDevisFichier:
+            uri_prefix: /images/ugouv/achat/Ventedevis/devisvente/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/ugouv/vente/devisvente/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        ugouvVenteCommandeFichier:
+            uri_prefix: /images/ugouv/achat/Ventecommande/commandevente/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/ugouv/vente/commandevente/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true    
+            
+            
+        univPreinscriptionFichier:
+            uri_prefix: /images/univ/preinscription/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/univ/preinscription/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true    
+
+
+        stockArticleFichier:
+            uri_prefix: /images/stock/article/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/stock/article/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true     
+
+
+        paramArticleFichier:
+            uri_prefix: /images/ugouv/param/articleParam/articleparam/fichiers
+            upload_destination: '%kernel.project_dir%/public/images/ugouv/param/articleParam/fichiers'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true     
+

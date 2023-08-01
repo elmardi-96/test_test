@@ -1,0 +1,17 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Produit nouveau | Stock{% endblock %}
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+    <div class="new">
+       {{ include('./parametrage/uarticle/_form.html.twig') }}
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('uarticle') }}
+{% endblock %}

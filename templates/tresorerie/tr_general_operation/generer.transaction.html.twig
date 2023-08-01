@@ -1,0 +1,150 @@
+<div class="sidebar-container">
+
+	<div class="ibox-tools">
+		<a class="close-link close-me" href="">
+			<i class="fa fa-times"></i>
+		</a>
+	</div>
+
+	<div class="tab-content">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+				</h3>
+				<small>
+					Informations sur generer transaction  .</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<div class="ibox">
+					<div class="ibox-content">
+						<div class="row">
+							<div
+								class="col-md-12">
+								{#<h3>Expression de Besoin Document </h3>#}
+
+								{{ form_start(form ,{ 'attr':{'novalidate': 'novalidate' ,'class':'form save_form_transaction'}}) }}
+
+								<div class="form-group row">
+									{{ form_label(form.compte ,'Compte ', {'label_attr':{'class':'col-sm-12 '}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.compte,{'attr':{'class':'sel2 form-control form-control-sm paiement','placeholder': 'Compte : '}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.compte) }}
+										</span>
+									</div>
+								</div>
+								<div class="hr-line-dashed"></div>
+								<div class="form-group row">
+									{{ form_label(form.modepaiement ,'mode paiement  ', {'label_attr':{'class':'col-sm-12 '}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.modepaiement,{'attr':{'class':'sel2 form-control form-control-sm paiement','placeholder': 'modepaiement '}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.modepaiement) }}
+										</span>
+									</div>
+								</div>
+
+								<div class="bloc_cheque" style="display: none;">
+									<div class="hr-line-dashed"></div>
+									<div class="form-group row">
+										{{ form_label(form.numcheque ,'Reference	', {'label_attr':{'class':'col-sm-12'}}) }}
+										<div class="col-sm-12">
+											{{ form_widget(form.numcheque,{'attr':{'class':'form-control','placeholder':'Reference'}  }) }}
+
+
+										</div>
+
+									</div>
+								</div>
+								<div class="bloc_cheque" style="display: none;">
+
+									<div class="hr-line-dashed"></div>
+									<div class="form-group row">
+										{{ form_label(form.dateecheance ,'date d\'echeance	', {'label_attr':{'class':'col-sm-12'}}) }}
+                                            <div class="col-sm-12">
+                                                {{ form_widget(form.dateecheance,{'attr':{'class':'form-control'}  }) }}
+                                            </div>
+
+                                    </div>
+                                </div>
+								<div class="hr-line-dashed"></div>
+                                <div class="form-group">
+									{{ form_label(form.parvenue ,'parvenue ', {'label_attr':{'class':'row col-sm-12 '}}) }}
+									{{ form_widget(form.parvenue,{'attr':{'class':'form-control form-control-sm col-sm-11 parvenue'}}) }}
+								</div>
+								<br />
+								<br  />
+                                <div class="hr-line-dashed dateDoc"></div>
+                                <div class="form-group dateDoc">
+								<div class="row">
+									{{ form_label(form.dateDocAsso ,'date DocAsso ', {'label_attr':{'class':'col-sm-12 '}}) }}
+									<div class="col-sm-11">
+										{{ form_widget(form.dateDocAsso,{'attr':{'class':'form-control form-control-sm '}}) }}
+									</div>
+									</div>
+								</div>
+                                <div class="hr-line-dashed refDoc"></div>
+                                <div class="form-group refDoc">
+								<div class="row">
+									{{ form_label(form.refDocAsso ,'ref DocAsso ', {'label_attr':{'class':' col-sm-12 '}}) }}
+									<div class="col-sm-11">
+									{{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control-sm '}}) }}
+									</div>
+									</div>
+								</div>
+								
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+										{#<label class="col-md-12">Montant : <b>{{montant}}</b></label>#}
+									{{ form_label(form.montant ,'Montant ', {'label_attr':{'class':'row col-sm-12 '}}) }}
+									{{ form_widget(form.montant,{'attr':{'class':'form-control form-control-sm col-sm-11'}}) }}
+										
+
+								</div>
+								<div class="hr-line-dashed"></div>
+								<div class="form-group row tooltip-demo">
+                                                        <label class="col-sm-12 col-form-label required">
+                                                      
+                                                            Modification <i class="fa fa-info-circle ho" data-toggle="popover" data-placement="bottom" title="Information sur modifaction" data-trigger="click | hover | focus" data-content="Si vous avez coche operation ou facture fournisseur celà va changer doc associe et date associe de l'operation ou de facture par celà ."></i> : 
+                                                        </label>
+														<label class="col-sm-3 col-form-label required">
+                                                            Operation
+                                                        </label>
+														<div class="col-sm-1">
+															<input type="checkbox" class="ck" name="transaction[initOperation]" checked />
+														</div>
+                                                        <label class="col-sm-4 col-form-label required">
+                                                            Facture fournisseur
+                                                        </label>
+														<div class="col-sm-2">
+															<input type="checkbox" class="ck" name="transaction[initFacture]" checked />
+														</div>
+													</div>
+
+
+									<br/><br/>
+
+
+									{#{ form_widget(form.id) }#}
+									<button type="submit" class="btn btn-white btn-block btn-xs my-button2">
+										<i class="fa fa-save"></i>
+										&nbsp;{{ button_label|default('Enregistrer') }}</button>
+									{{ form_end(form,{'render_rest': false}) }}
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-lg-12">
+        <dl class="row mb-0">
+            <div class="col-sm-3 text-sm-right"><dt>Statut:</dt> </div>
+            <div class="col-sm-8 text-sm-left"><dd class="mb-1"><span class="label label-primary">Active</span></dd></div>
+        </dl>
+
+        <dl class="row mb-0">
+            <div class="col-sm-3 text-sm-right">
+                <dt>Dernière modification:</dt>
+            </div>
+            <div class="col-sm-8 text-sm-left"> 
+
+
+                <dd class="mb-1">{{ app.user.updated ? app.user.updated|date('d-m-Y H:i:s')}}</dd>
+            </div>
+        </dl>
+        <dl class="row mb-0" {% if app.user.ProfilPorcentage.pourcentage >= 100 %} style="display: none" {% endif %}>
+            <div class="col-sm-3 text-sm-right">
+                <dt>Complétez votre profil:</dt>
+            </div>
+            
+            <div class="col-sm-8 text-sm-left" >
+                <dd>
+                    <div class="progress m-b-1">
+                        <div style="width: {{ app.user.ProfilPorcentage.pourcentage~'%' }};" class="progress-bar progress-bar-striped progress-bar-animated {{ 'bg-'~app.user.ProfilPorcentage.background }}"></div>
+                    </div>
+                    <small>{{ app.user.ProfilPorcentage.text| raw }}</small>
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Utilisateurs-groupes{% endblock %}
+
+{% block body %}
+
+
+    <div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+
+
+    {% include './config/inc/navigation.html.twig' %}
+
+<form action="{{path('config_pdf')}}" method="post" class="update_pdf">
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-4">
+
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+    <div class="col-lg-8">
+        <div class="title-action">
+            <button class="btn btn-default btn-xs btn-lg" type="submit"><i class="fa fa-save"></i> {{ button_label|default('Modifier') }}</button>
+            
+        </div>
+    </div>
+
+
+
+    </div>
+
+
+
+
+    <br/><br/><br/>
+
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <h5>Options globales sur la génération des PDF</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                {% for t in type %} 
+                                    <p class="text-primary">{{ t.description|e }}</p>
+                                    <table class="table table-bordered tab-pdf">
+                                        <thead>
+                                            <tr>
+                                                <th>Paramètre</th>
+                                                <th width="200px">Valeur</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for p in parametres %} 
+                                            {% if p.ConfPdfType.id == t.id %}
+                                                <tr>
+                                                    <td>{{ p.parametre|e }}</td>
+                                                    <td>
+                                                        
+                                                        {% if p.valeurType == "checkbox" %}
+                                                            <div class="i-checks" ><label> <input class="chkToggle" name="{{p.id}}" type="checkbox" {{ p.valeur|e }} /> <i></i></label></div>
+                                                        {% elseif p.valeurType == "select"  %}
+                                                            <select class="form-control" name="{{p.id}}" >
+                                                                {% for f in formatPapier %} 
+                                                                    {% if p.nomTable == f.nomTable %}
+                                                                        <option value="{{f.item}}" {% if f.item == p.valeur %} selected {% endif %}>{{f.valeur|e}}</option>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </select>
+                                                        {% else %}
+                                                            <input class="form-control form-control-sm" name="{{p.id}}" value="{{ p.valeur|e }}" type="{{ p.valeurType|e }}" />
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endfor %}
+
+
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</div>   
+
+</form>
+
+
+{% endblock %}
+
+
+
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('pdf') }}
+    {% endblock %}

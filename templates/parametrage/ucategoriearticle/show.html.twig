@@ -1,0 +1,132 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Categorie
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+		<div class="col-lg-4">
+			{% include './parametrage/ucategoriearticle/inc/workflow_breadcumb.html.twig' %}
+			{#{ wo_render_breadcrumbs() }#}
+		</div>
+		<div class="col-lg-8">
+			{#<div class="title-action">
+				
+
+				<a id="_delete" class="btn btn-white btn-xs my-button">
+					<i class="fa fa-trash"></i>
+					Suprimer</a>
+
+			</div>#}
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './parametrage/ucategoriearticle/inc/workflow.html.twig' %}
+		</div>
+	</div>
+	<br><br>
+
+	<div class="row pt-20">
+		<div class="col-lg-12 ">
+			<div class="ibox">
+
+				<div class="ibox-content">
+
+					<div class="message-success"></div>
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+
+										
+										{%  include './parametrage/ucategoriearticle/inc/navigation_article.html.twig' %}
+
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="panel-body">
+
+										<div class="tab-content">
+											<div class="tab-pane active" id="tab-1">
+												<div class="row">
+													<div class="col-md-6 b-r">
+
+														<h3 class="m-t-none m-b">Informations</h3>
+
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Rererence [code] (*)</label>
+															<div class="col-sm-3">
+																<p class="form-control-static">{{ u_category.code }}</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Titre (*)</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ u_category.titre }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Abreviation (*)</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ u_category.abreviation }}</p>
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Description</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ u_category.description }}</p>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+													</div>
+
+
+
+												</div>
+
+
+											</div>
+
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="test" data-article-id="{{ u_category.id|json_encode }}"></div>
+	{% if Uarticle is defined %}
+
+		<input type="hidden" name="_id" value="{{ u_category.id }}"/>
+	{% endif %}
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('ucategoriearticle') }}
+{% endblock %}

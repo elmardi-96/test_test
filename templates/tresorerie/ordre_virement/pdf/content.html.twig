@@ -1,0 +1,102 @@
+<table class="table1" style="width: 81% ;margin-left:auto;margin-right:auto; padding-top:20px;padding-bottom:-20px;page-break-inside:avoid" align="center" cellspacing="0">
+
+
+	<tr style="background-color: #f2f2f2; color:black; font-size: 10px; width:100%;text-align:center ">
+		<th style="width:40%;padding: 5px;margin:10px;">BÉNÉFICIAIRE</th>
+		<th style="width:40%;padding: 5px">RIB</th>
+		<th style="width:25%;padding: 5px">MONTANT</th>
+	</tr>
+	<tr>
+		<td style="padding-bottom: 5px"></td>
+		<td></td>
+		<td></td>
+	</tr>
+
+	{% if TrTransactionOne.operation.pPiece.id == 47 %}
+		{% set item = TrTransactionOne.operation.operations[0].compteDestinataire %}
+		<tr style="color:black; font-size: 10px; width:100%; text-align:center; ">
+			<td style="width:40%;padding: 3px;font-size: 10px;text-align:left">
+				{{item.description}} 
+			</td>
+			<td style="width:46%;padding: 3px;font-size: 10px;text-align:center">{{ item.rib  [:3] }}
+				{{ item.rib  [3:3] }}
+				{{ item.rib  [6:3] }}
+				{{ item.rib  [9:3] }}
+				{{ item.rib  [12:3] }}
+				{{ item.rib  [15:3] }}
+				{{ item.rib  [18:3] }}
+				{{ item.rib  [21:3] }}</td>
+			<td style="width:25%;padding: 3px;font-size: 10px;text-align:right">{{TrTransactionOne.montant|trim('-')|number_format(2, ',', ' ')
+                                                }}</td>
+		</tr>
+	{% else %}
+		{% for item in TrTransactions | slice(0, 30) %}
+			{% if item.montant != 0 %}
+
+				<tr style="color:black; font-size: 10px; width:100%; text-align:center; ">
+
+					<td style="width:40%;padding: 3px;font-size: 10px;text-align:left">
+						{% if TrTransactionOne.operation.pPiece.id ==  32 and  item.designation  %}
+							{{item.designation}}
+						{% else %}
+							{{item.nom}}
+						{% endif %}
+						
+					</td>
+					<td style="width:46%;padding: 3px;font-size: 10px;text-align:center">{{ item.rib  [:3] }}
+						{{ item.rib  [3:3] }}
+						{{ item.rib  [6:3] }}
+						{{ item.rib  [9:3] }}
+						{{ item.rib  [12:3] }}
+						{{ item.rib  [15:3] }}
+						{{ item.rib  [18:3] }}
+						{{ item.rib  [21:3] }}</td>
+					<td style="width:25%;padding: 3px;font-size: 10px;text-align:right">
+                        {{item.montant|trim('-')|number_format(2, ',', ' ')}} 
+                    </td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+		{% if TrTransactions | length > 30 %}
+		    </table>
+		    <div style="page-break-after: always;"></div>
+	    	<table class="table1" style="width: 81% ;margin-left:auto;margin-right:auto; padding-top:20px;padding-bottom:-20px;page-break-inside:avoid" align="center" cellspacing="0">
+                <tr style="background-color: #f2f2f2; color:black; font-size: 10px; width:100%;text-align:center ">
+                    <th style="width:40%;padding: 5px;margin:10px;">BÉNÉFICIAIRE</th>
+                    <th style="width:40%;padding: 5px">RIB</th>
+                    <th style="width:25%;padding: 5px">MONTANT</th>
+                </tr>
+                {% for item in TrTransactions | slice(30) %}
+                    {% if item.montant != 0 %}
+                        <tr style="color:black; font-size: 10px; width:100%; text-align:center; ">
+
+                            <td style="width:40%;padding: 3px;font-size: 10px;text-align:left">
+                                {% if TrTransactionOne.operation.pPiece.id ==  32 and  item.designation  %}
+                                    {{item.designation}}
+                                {% else %}
+                                    {{item.nom}}
+                                {% endif %}
+								
+                            </td>
+                            <td style="width:46%;padding: 3px;font-size: 10px;text-align:center">{{ item.rib  [:3] }}
+                                {{ item.rib  [3:3] }}
+                                {{ item.rib  [6:3] }}
+                                {{ item.rib  [9:3] }}
+                                {{ item.rib  [12:3] }}
+                                {{ item.rib  [15:3] }}
+                                {{ item.rib  [18:3] }}
+                                {{ item.rib  [21:3] }}</td>
+                            <td style="width:25%;padding: 3px;font-size: 10px;text-align:right">
+{{ item.montant|trim('-')|number_format(2, ',', ' ') }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+	    	</table>
+	    {% endif %}
+    {% endif %}
+</table>
+<br><br><br><br>
+<div style="padding-right:15px;padding-left : 15px; padding:6px; width: 130px;background-color: #f2f2f2;position:relative;right:2.5%;text-align: right; left:71.5%">
+    {{somme|number_format(2, ',', ' ') }}
+    </div>

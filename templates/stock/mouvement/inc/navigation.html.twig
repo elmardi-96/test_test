@@ -1,0 +1,50 @@
+{#% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+{#{{ Udepot }}# }
+<ul class="nav nav-tabs">    
+    {% set path = path('stock_depot_new') %}
+    {% if Udepot.id is defined %}
+        {% set path = path('stock_depot_edit',{'id':Udepot.id}) %}
+    {% endif %}
+    <li>
+        <a class="nav-link {% if current_path in ['stock_depot_new' , 'stock_depot_edit']  %} active {% endif %} {#{% if "edit" in app.request.getPathInfo or   "new" in app.request.getPathInfo  %} active {%endif%}# }" href="{{ path }}">informations de base
+        </a>
+    </li>
+    {#% if Udepot.id is defined %}
+        <li>
+            <a class="nav-link {% if "stock_mouvementstock_articles_depot" in current_path %} active {%endif%}" href="{{ path('stock_mouvementstock_articles_depot' ,{'id':Udepot.id}) }}" >Mouvements</a>
+        </li>
+    {% endif %# }
+</ul>
+#}
+
+
+
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+<ul class="nav nav-tabs">
+    {% if u_depot is defined  %}
+    {% for operation in operations|sort((a, b) => a.ordr <=> b.ordr)%}
+	
+    {% if operation.horizontale  %}
+    {% if operation.route is not null  %}
+        <li>
+           
+           
+            <a class="nav-link {% if  operation.route   in current_path  %} active {%endif%}" href="{{ path(operation.route , {id:u_depot.id}) }}">
+                <i class="fa {{ operation.icon }}"></i>
+                {{ operation.titre|capitalize }}   </a>
+        </li>
+        
+     
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+
+    {% else %}
+        <li> <a class="nav-link active"  ><i class="fa fa-info-circle"></i> Informations</a></li>
+        {% endif %}
+</ul>

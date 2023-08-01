@@ -1,0 +1,420 @@
+
+{% extends 'base_ugouv.html.twig' %}
+
+
+
+{% block title %}Eci index | Tresorerie
+{% endblock %}
+
+{% block body %}
+    <div class="actions modal fade right" id="ajouter" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel">GENERER TRANSACTION</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="_facture">
+						{# <div class="text-center spr">
+							<br/>
+							<div class="spinner-border" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+						</div> #}
+						<div class="bod">
+							<div class="sidebar-container">
+
+								<div class="ibox-tools">
+									<a class="close-link close-me" href="">
+										<i class="fa fa-times"></i>
+									</a>
+								</div>
+							
+								<div class="tab-content">
+							
+							
+									<div id="tab-1" class="tab-pane active">
+										<div class="right-sidebar-content">
+											<div class="ibox">
+												<div class="ibox-content">
+							
+												<form class="save_eci">
+													
+													<div class="form-group row">
+														<div class="col-md-12">
+															<label for="client">Client </label>
+															<select class="form-control" id="client" name="client">
+																<option value="">Choix client</option>
+																{% for partenaire in partenaires %}
+																	<option value="{{partenaire.id}}">{{partenaire.nom}} {{partenaire.prenom}} ({{partenaire.code}})</option>
+																{% endfor %}
+															</select>
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-md-12">
+															<label for="montant">Montant </label>
+															<input class="form-control" id="montant" name="montant" type="number" step="0.01">
+															
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-md-12">
+															<label for="encaissement">Date encaissement </label>
+															<input class="form-control" id="encaissement" name="encaissement" type="date">
+															
+														</div>
+													</div>
+				
+													<div class="form-group row mt-2">
+														<label class="col-sm-12 required">
+															<button class="save_new btn-register btn btn-white btn-block my-button  upper btn-xs my-button2" data-style="expand-left" type="submit">
+																<i class="fa fa-save "></i>
+																ENREGISTRER
+															</button>
+														</label>
+												
+													
+												
+													</div>
+												</form>
+							
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+{#middle#}
+    <div class="actions modal fade right" id="lettrage" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog modal-full-height modal-small modal-right " style="max-width: 30% !important; width:30% !important" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel1"> Lettrage Facture
+                    </h5>
+					<button type="button" class="close close_lettrage" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="text-center spr1">
+						<br/>
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod1" style="display: none;">
+						<div class="form-group mt-2">
+							<div class="">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-3">
+											<label for="montant">Montant à lettré: </label>
+										</div>
+										<div class="col-md-8">
+											<input class="form-control" value="" id="montant" name="montant" type="text" readonly>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-3">
+											<label for="reste">le reste: </label>
+										</div>
+										<div class="col-md-8">
+											<input class="form-control" value="0" id="reste" name="reste" type="text" readonly>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group facture_area">
+							<div class="">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-3">
+											<label for="facture">Code Facture </label>
+										</div>
+										<div class="col-md-8">
+											<input class="form-control" id="facture" name="facture" type="text">
+										</div>
+										<div class="col-md-1 pl-0">
+											<i class="fa fa-plus add_facture" style="cursor: pointer;"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group mt-2">
+							<div class="">
+								<div class="col-md-12">
+									<table class="table facture_table_lettre table-striped table-bordered text-center">
+										<thead>
+											<tr>
+												<th>Code</th>
+												<th>Client</th>
+												<th>Montant</th>
+												<th>#</th>
+											</tr>
+										</thead>
+										<tbody class="data">
+											
+										</tbody>
+										<tfoot>
+											<tr>
+												<td></td>
+												<td style="font-weight:bold">Total</td>
+												<td class="montant_final" style="font-weight:bold">0</td>
+												<th></th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group text-right mt-2">
+							<label class="col-sm-4 required">
+								<button class="save_lettrage btn-register btn btn-white btn-block my-button  upper btn-xs my-button2" data-style="expand-left" type="submit">
+									<i class="fa fa-save "></i>
+									ENREGISTRER
+								</button>
+							</label>
+					
+						
+					
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	{# --- client --- #}
+
+	
+
+    <div class="actions modal fade right" id="maj_client" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+
+        <div class="modal-dialog modal-full-height modal-small modal-right " style="max-width: 25% !important; width:30% !important" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalPreviewLabel1"> MAJ
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bo-0">
+                    <div class="text-center spr1"  style="display: none;">
+                        <br/>
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="bod1" style="display:block;">
+
+                        <form class="maj_form">
+                            <div class="form-group mt-2">
+                            
+                                <div class="">
+                                    <div class="col-md-12">
+
+                                      
+                                        {# --- cleint --- #}
+                                        
+                                        <div class="row mb-3 mt-4">
+                                            <div class="col-md-3">
+                                                <label for="dossier_transfer">Client </label>
+
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control sel2 " id="client_remboursement" name="client">
+                                                    <option value="">Choix Client</option>
+                                                        {% for partenaire in partenaires %}
+                                                                    <option value="{{partenaire.id}}">{{partenaire.nom}} {{partenaire.prenom}}</option>
+                                                        {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        {# --- cleint --- #}
+
+
+
+
+
+
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-4">
+                                <label class="ml-1">
+                                    <button class="btn-register maj_button btn btn-white btn-block my-button upper btn-xs my-button2" data-style="expand-left" type="submit">
+                                        <i class="fa fa-save "></i>
+                                        ENREGISTRER
+                                    </button>
+                                </label>
+                        
+                            
+                        
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+	{# --- client --- #}
+    <div id="right-sidebar" class="actions animated"></div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-12">
+			{% include './tresorerie/eci/inc/workflow_breadcumb.html.twig' %}
+		</div>
+
+
+        <div class="col-lg-6">
+            <div class="title-action">
+
+
+                {% for key ,  operation in operations %}
+                    {% if operation.verticale and  operation.prefix== '_new'%}
+                        <a {% if operation.route is not null  %}  href="{{ path(operation.route) }}" {%  endif %}  id="{{operation.prefix}}" class="op-hor btn btn-white btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+                    {% endif %}
+                {% endfor %}
+
+
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+    </div>
+
+
+    <br/>
+    <br/>
+
+	
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-content">
+                    <div class="table-responsive" style="overflow-x: auto;">
+                        <div class="row">
+                            <div class="col-2 list_actions_bloc" style="position: fixed ; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+
+                                <select class="select2_demo _3 form-control list_actions sel2">
+                                    <option value="">Action</option>
+                                    {% for key , operation in  operations  %}
+                                        {% if operation.multiple %}
+                                            <option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+
+
+                            </div>
+
+
+                        </div>
+                        <!--color : <span style="color:#ff6a6a">ddd</span>-->
+
+						<div class="form-check form-check-inline" >
+								<input class="form-check-input client" type="radio" name="client" id="9954" checked>
+								<label class="form-check-label" for="client1">
+									MAJ CLIENT
+								</label>
+						</div>
+						<div class="form-check form-check-inline ">
+								<input class="form-check-input client" type="radio" name="client" id="tout" >
+								<label class="form-check-label" for="client2">
+									LET ENC
+								</label>
+						</div>
+
+                        <table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%">
+                            <thead>
+
+                                <tr>
+
+								 	<th>id</th>
+                                    <th>Code</th>
+                                    <th>Piece</th>
+                                    <th>client</th>
+                                    <th>Code Facture</th>
+                                    <th>montant</th>
+                                    <th> MAJ </th>
+                                    <th> LETTRAGE </th>
+                                    {# <th>info</th> #}
+
+                                </tr>
+
+                            </thead>
+<tbody></tbody>
+
+                            <tfoot>
+                                <tr>                                
+									<th>id</th>
+                                    <th>Code</th>
+                                    <th>Piece</th>
+                                    <th>client</th>
+                                    <th>Code Facture</th>
+                                    <th>montant</th>
+                                    <th>MAJ</th>
+                                    <th>LETTRAGE</th>
+                                    {# <th>info</th> #}
+
+                                </tr>
+                            </tfoot>
+
+
+                        </table>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('eci') }}
+{% endblock %}

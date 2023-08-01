@@ -1,0 +1,391 @@
+<style type="text/Css">
+    body{
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    .titre-reb{
+        width: 100%;
+        background: #1f4f7a;
+        font-size: 9px ;
+        padding:3px 10px;
+        color: #f1f1f1;
+        font-weight: bold
+    }
+    div.zone_over
+    {
+        display: block;
+        width: 40%;
+        word-wrap:break-word !important;
+    }
+
+    h3 {
+        text-align: center ; 
+        font-size: 13px  ;
+    }
+
+
+    .footer_style {
+        position: relative;left: 5%;width:90%;border-top:1px solid #000;padding:5px;text-align: center;font-size: 11px;line-height:14px
+    }
+    .titre-reb{
+        width: 100%;
+        background: #1f4f7a;
+        font-size: 9px ;
+        padding:3px 10px;
+        color: #f1f1f1;
+        font-weight: bold
+    }
+    div.zone_over
+    {
+        display: block;
+        width: 40%;
+        word-wrap:break-word !important;
+    }
+    .slh tr td {
+        border-bottom: 1px solid #292929;
+    }
+    .head-file {
+        width: 100% ; 
+
+    }
+
+
+
+
+    .head-file p{
+        font-size: 10px;
+        width: 100%;
+        margin: 3px 0px 3px 5px;
+    }
+    .head-file b{
+
+    }
+    h2{
+        font-size: 15px; 
+        margin: 5px
+    }
+
+    .brd td{
+        border: 0.1px solid #555 ;   
+    }
+
+
+
+    .slh thead tr th {
+        padding: 8px 10px  ;
+        text-align: center ; 
+    }
+
+    .slh tbody tr {
+        padding: 8px ;
+
+    }
+
+    .slh tbody tr td {
+        padding: 3px ;
+        text-align: center ;
+        border-bottom: 1px solid #292929;
+    }
+    .slh-footer {
+        background: #000;
+    }
+
+    .slh-footer td{
+        color : #fff;
+    }
+
+
+
+</style>
+
+<!--backtop="30mm"-->
+<page  backbottom="15mm" footer="page">
+<!--    <page_header >-->
+
+    <table style="width: 100%;" align="center" cellspacing="0">
+        <tr>
+
+            <td style="width: 100%">
+                <img style=" margin-right: auto;margin-left:auto; float: left ; width: 12%;" src="img/Logo_UIASS.png" alt="Logo">
+
+                <h3 >Université Internationale Abulcasis des Sciences de la Santé <br/>Etat de préalables au concours commun</h3>
+                <h3></h3>
+            </td>
+        </tr>
+    </table>
+    <!--    </page_header>-->
+
+    <br/> <p style="text-align:  right; margin: 15px"> {# <?php echo date('d/m/Y'); ?> #}</p>
+
+
+
+
+
+
+    <h2> I - ETAT DES CANDIDATURES PAR TYPE ET ETABLISSEMENT </h2>
+
+    <br/>
+
+
+
+
+    <table style="width: 100% ; background: #FFFFFF;font-size: 10px" cellspacing="0" class="slh">
+        <thead>
+            <tr style="background-color: #000 ;color:white;font-size: 8.5px;">
+                <th style="background: #fff"></th>
+               {#  <?php
+                foreach ($data_etablissement as $key => $value): echo " #}<th>{# " . $value->abreviation . " #}</th>{# ";
+                endforeach;
+                ?> #}
+
+                <th style="">TOTAL</th> 
+            </tr>
+        </thead>
+        <tbody>{# 
+            <?php
+            $total_candidatures = 0;
+            $totatl_par_etablissement = array();
+            foreach ($data_nature_demande as $key => $value) {
+                ?>   #}
+                <tr>
+                    <td  style="width: 20%;text-align: left">{{nature_demande.designation}}</td>
+                   {#  <?php
+                    $total_count = 0;
+                    foreach ($data_etablissement as $key => $value2):
+                        $data_rapport = $obj->selectTotalCandidatByNatureDemandeAndEtablissement($date_creation_deubt_traitement, $value2->code, $value->code, null, null);
+                        echo " #}<td style='width:12%'>{# " . $data_rapport['total'] . " #}</td>{# ";
+                        $total_count += $data_rapport['total'];
+
+                        if (isset($totatl_par_etablissement[$value2->id_etablissement])) {
+                            $totatl_par_etablissement[$value2->id_etablissement] += $data_rapport['total'];
+                        } else {
+                            $totatl_par_etablissement[$value2->id_etablissement] = $data_rapport['total'];
+                        }
+
+                    endforeach;
+                    ?> #}
+                    <td style="">{# <?php echo $total_count; ?> #}</td>
+                </tr>
+
+
+            
+
+            <tr class="slh-footer">
+                <td></td>
+                {# <?php
+                foreach ($data_etablissement as $key => $value): echo " #}<td>{# " . $totatl_par_etablissement[$value->id_etablissement] . " #}</td>{# ";
+                    $total_candidatures += $totatl_par_etablissement[$value->id_etablissement];
+                endforeach;
+                ?> #}
+                <td>{# <?php echo $total_candidatures; ?> #}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+    <br/><br/>
+    <h2>  II - ETAT DES MOYENNES PAR PALIERS </h2>
+
+    <br/>
+{# 
+    <?php
+    $moyenne_candidats = array(
+        array('text' => 'MOYENNE CANDIDAT  >=   19', 'note_min' => 19, 'note_max' => 20),
+        array('text' => '19 > MOYENNE CANDIDAT >=  18', 'note_min' => 18, 'note_max' => 18.99),
+        array('text' => '18 > MOYENNE CANDIDAT >=  17', 'note_min' => 17, 'note_max' => 17.99),
+        array('text' => '17 > MOYENNE CANDIDAT >=  16', 'note_min' => 16, 'note_max' => 16.99),
+        array('text' => '16 > MOYENNE CANDIDAT >=  15', 'note_min' => 15, 'note_max' => 15.99),
+        array('text' => '15 > MOYENNE CANDIDAT >=  14', 'note_min' => 14, 'note_max' => 14.99),
+        array('text' => 'MOYENNE CANDIDAT inférieur 14', 'note_min' => 10.00, 'note_max' => 13.99),
+            )
+    ?>
+
+
+
+    <?php // var_dump($totatl_par_etablissement);  ?> #}
+
+    <table style="width: 100% ; background: #FFFFFF;font-size: 10px" cellspacing="0" class="slh">
+        <thead>
+            <tr style="background-color: #000 ;color:white;font-size: 8.5px;">
+                <th style="background: #fff"></th>
+                {# <?php
+                foreach ($data_etablissement as $key => $value): echo " #}<th>{{nature_demande.abreviation}}</th>{# ";
+                endforeach;
+                ?> #}
+
+                <th style="">TOTAL</th> 
+            </tr>
+        </thead>
+        <tbody>{# 
+            <?php
+            $totatl_document = array();
+            foreach ($moyenne_candidats as $key => $moyenne_candidat) {
+                echo " #}<tr style='color:#fff  ; background: #777'><td style='text-align: left'>{# " . $moyenne_candidat['text'] . " #}</td> {# $etablissements_list_td_html #}<td></td></tr>{# ";
+
+                $totatl_par_etablissement = array();
+
+                foreach ($data_nature_demande as $key => $value) {
+                    ?>  #}
+                    <tr>
+                        <td  style="width: 20%;text-align: left">{{nature_demande.designation}}</td>
+                      {#   <?php
+                        $total_count = 0;
+                        $total_candidatures = 0;
+                        foreach ($data_etablissement as $key => $value2):
+                            $data_rapport = $obj->selectTotalCandidatByNatureDemandeAndEtablissement($date_creation_deubt_traitement, $value2->code, $value->code, $moyenne_candidat['note_min'], $moyenne_candidat['note_max']);
+                            echo " #}<td style='width:12%'>{# " . $data_rapport['total'] . " #}</td>{# ";
+                            $total_count += $data_rapport['total'];
+
+                            if (isset($totatl_par_etablissement[$value2->id_etablissement])) {
+                                $totatl_par_etablissement[$value2->id_etablissement] += $data_rapport['total'];
+                            } else {
+                                $totatl_par_etablissement[$value2->id_etablissement] = $data_rapport['total'];
+                            }
+
+
+                            if (isset($totatl_document[$value2->id_etablissement])) {
+                                $totatl_document[$value2->id_etablissement] += $data_rapport['total'];
+                            } else {
+                                $totatl_document[$value2->id_etablissement] = $data_rapport['total'];
+                            }
+
+                        endforeach;
+                        ?> #}
+                        <td style="">{# <?php echo $total_count; ?> #}</td>
+                    </tr>
+                <tr style="color:#fff  ; background: #777">
+                    <td>TOTAL</td>{# 
+                    <?php
+                    foreach ($data_etablissement as $key => $value): echo " #}<td>{# " . $totatl_par_etablissement[$value->id_etablissement] . " #}</td>{# ";
+                        $total_candidatures += $totatl_par_etablissement[$value->id_etablissement];
+
+                    endforeach;
+                    ?> #}
+                    <td>{# <?php echo $total_candidatures;
+                    ?> #}</td>
+                </tr>
+
+
+
+
+            <tr style="height: 30px ;color:#fff  ; background: #000">
+                <td></td>{# 
+<?php
+$total_cocument_count = 0;
+foreach ($data_etablissement as $key => $value): echo " #}<td>{# " . $totatl_document[$value->id_etablissement] . " #}</td>{# ";
+    $total_cocument_count += $totatl_document[$value->id_etablissement];
+
+endforeach;
+?> #}
+                <td>{#< ?php echo $total_cocument_count;
+?> #}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <br/><br/>
+    <h2>  III - SCENARIOS CONCOURS </h2>
+
+
+
+    <table style="width: 100% ; background: #FFFFFF;font-size: 10px" cellspacing="0" class="slh">
+        <thead>
+            <tr style="background-color: #000 ;color:white;font-size: 8.5px;">
+                <th style="background: #fff"></th>
+{# <?php
+foreach ($data_etablissement as $key => $value): echo " #}<th>{{nature_demande.abreviation}}</th>{# ";
+endforeach;
+?>
+ #}
+                <th style="">TOTAL</th> 
+            </tr>
+        </thead>
+        <tbody>
+               {#  <?php
+                $scenarios_concours = array(
+                    array('text' => 'Seuil 14/20 pour tout type de bac', 'condition' => " and  pre.moyenne_bac >=14"),
+                    array('text' => 'Seuil mission 14/20 et autres types 15/20', 'condition' => " and (( pre.moyenne_bac >=14 and bac.code = 'T000003') or (pre.moyenne_bac >=15))"),
+                    array('text' => 'Seuil mission 15/20 et autres types 16/20', 'condition' => " and (( pre.moyenne_bac >=15 and bac.code = 'T000003') or (pre.moyenne_bac >=16))"),
+                    array('text' => 'Seuil 16/20 pour tout type de bac', 'condition' => ' and  pre.moyenne_bac >=16'),
+                );
+
+
+
+                foreach ($scenarios_concours as $key => $scenario_concours) {
+                    ?>   #}
+                <tr>
+                    <td  style="width: 20%;text-align: left">{# <?php echo $scenario_concours['text'] ?> #}</td>
+            {#     <?php
+                $total_count = 0;
+                foreach ($data_etablissement as $key => $value2):
+                    $data_rapport = $obj->selectTotalBySeuil($date_creation_deubt_traitement, $value2->code, $scenario_concours['condition']);
+                    echo " #}<td style='width:12%'>{# " . $data_rapport['total'] . " #}</td>";
+                 {#    $total_count += $data_rapport['total'];
+                endforeach;
+                ?> #}
+                    <td style="">{# <?php echo $total_count; ?> #}</td>
+                </tr>
+        </tbody>
+    </table>
+
+
+<br/><br/>
+    <table style="font-size: 10px">
+        <tr>
+            <td style="width: 200px">Scénario concours idéal :	</td>
+            <td style="width: 150px;font-weight: bold">----</td>
+        </tr>
+    </table>
+
+
+
+    <table style="font-size: 10px">
+        <tr>
+            <td style="width: 200px">Total dossiers déposés :	</td>
+            <td style="width: 150px;font-weight: bold">{# <?php  $result_count=$obj->CountPreInscription($date_creation_deubt_traitement);            echo $result_count['total'];?>  #}	</td>
+        </tr>
+    </table>
+
+
+
+
+
+
+    <page_footer>
+        <div class="footer_style"><p>B.P. 6533, Avenue Allal El Fassi,Madinat Al Irfane,  Rabat 10 000. Maroc - Web : www.uiass.ma - Contact : contact@uiass.ma        <br/>Tel : +212 5 37 68 70 20 / 21 / 22 - Fax : +212 5 37 77 01 06</p>
+        </div>
+    </page_footer>
+
+
+</page>

@@ -1,0 +1,14 @@
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+
+<ul class="nav nav-tabs">
+    
+    
+
+    <li>
+        <a class="nav-link active {#{% if "edit" in app.request.getPathInfo or   "new" in app.request.getPathInfo  %} active {%endif%}#}" href="#">Informations de base
+        </a>
+    </li>
+  
+</ul>

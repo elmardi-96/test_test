@@ -1,0 +1,50 @@
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+
+{#<ul class="nav nav-tabs">
+
+
+    {% set path = path('stock_produit_new') %}
+    {% if Uarticle.id is defined %}
+        {% set path = path('stock_produit_edit',{'id':Uarticle.id}) %}
+    {% endif %}
+    <li>
+        <a class="nav-link {% if current_path in ['stock_produit_new' , 'stock_produit_edit']  %} active {% endif %}" href="{{ path }}">Informations de base
+        </a>
+    </li>
+    {% if Uarticle.id is defined %}
+
+
+
+        <li>
+            <a class="nav-link {% if "stock_produit_update_prix_achat" in current_path %} active {%endif%}" href="{{ path('stock_produit_update_prix_achat' ,{'id':Uarticle.id}) }}" >Modifier prix d'achat</a>
+        </li>
+
+
+        <li>
+            <a class="nav-link {% if "stock_produit_update_prix_vente" in current_path %} active {%endif%}" href="{{ path('stock_produit_update_prix_vente' ,{'id':Uarticle.id}) }}" >Modifier prix de vente</a>
+        </li>
+
+        <li>
+            <a class="nav-link {% if "stock_produit_add_stock" in current_path %} active {%endif%}" href="{{ path('stock_produit_add_stock' ,{'id':Uarticle.id}) }}" >Allimentation Stock</a>
+        </li>
+
+
+        <li>
+            <a class="nav-link {% if "stock_produit_fichiers"  in current_path  %} active {%endif%}" href="{{ path('stock_produit_fichiers' ,{'id':Uarticle.id}) }}" >Fichiers</a>
+        </li>
+    {% endif %}
+</ul>#}
+
+
+
+<ul class="nav nav-tabs">
+    
+    <li> <a class="nav-link {% if "user_profil_index"  in current_path  %} active {%endif%}" href="{{ path('user_profil_index')}}" >Mes Informations</a></li>
+    <li><a class="nav-link {% if "user_profil_theme"  in current_path  %} active {%endif%}" href="{{ path('user_profil_theme')}}" >Mon Thème </a></li>
+       <li><a class="nav-link {% if "user_profil_permission"  in current_path  %} active {%endif%}" href="{{ path('user_profil_permission')}}" >Mes Permissions </a></li>
+       <li><a class="nav-link {% if "user_profil_password_change"  in current_path  %} active {%endif%}" href="{{ path('user_profil_password_change')}}" >Changer mot de passe </a></li>
+  
+   
+</ul>

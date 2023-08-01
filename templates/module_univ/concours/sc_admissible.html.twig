@@ -1,0 +1,133 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Concours | Univ
+{% endblock %}
+{% block body %}
+     {{ render(controller('App\\Controller\\moduleUniv\\concours\\UnivConcoursController:infosConcours',{ 'id': concours.id})) }}
+
+    <input type="hidden" value="{{ concours.id }}" class="concours_id"/>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Formations sans concours 
+            </h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+                <input type="hidden" value="{{ concours.id }}" class="concours_id"/>   
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row pt-20">
+        
+        <div class="col-md-12 paddin">
+            <div class="ibox">
+
+                <div class="ibox-content">
+                    <div class="panel blank-panel">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                                {% include './module_univ/concours/inc/sc_navigation.html.twig' %}
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab-1">
+                                        <div class="row">
+
+                                            <div class="col-3">
+                                                <select class="form-control _multiple_actions" style="display: none">
+                                                    <option value="">Action</option>
+                                                    <option value="_genener_admission">Générer admission</option>
+                                                </select>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <div class="col-md-12 search-postion tab-postion ">
+                                                    <h5 class="m-left">Etudiants admissibles</h5>
+                                                    <table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable datatable-show1">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Choix</th>
+                                                                <th>Code Etudiant</th>
+                                                                <th>Code pré-inscription</th>
+                                                                <th>Nom</th>
+                                                                <th>Prénom</th>
+                                                                <th>Nature demande</th>
+                                                                <th>Type bac</th>
+                                                                <th>Moyenne bac</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            {% for key , etudiant in etudiants %}
+
+                                                                <tr>
+                                                                    <td>
+
+                                                                        {% if  etudiant.mentionner_admissible == 1   %}
+                                                                            {% if  etudiant.exist_admission is null %}
+                                                                                <a class="mentionner_non_admissible" data-preinscription ="{{ etudiant.id_preinscription }}" title="mentionner non admissible"><span class="fa fa-undo"></span></a>
+                                                                                {% endif %}
+                                                                            <span><i class="fa fa-circle" style="color : #ffbd75"></i></span>
+                                                                            {% else  %}
+                                                                            <span><i class="fa fa-circle" style="color : #1c84c6 "></i></span>
+                                                                            {% endif %}
+                                                                            {{ key+1 }}
+                                                                    </td>
+
+                                                                    <td style="text-align:center;">
+                                                                        {% if etudiant.exist_admission is null %}
+                                                                            <input type="checkbox"  class="action" name="_action" value="{{etudiant.id_preinscription}}">
+                                                                        {% else %}
+                                                                            -
+                                                                        {% endif %}
+
+                                                                    </td>
+                                                                    <td>{{ etudiant.code_etudiant }}</td>
+                                                                    <td>{{ etudiant.code_preinscription }}</td>
+                                                                    <td>{{ etudiant.prenom }}</td>
+                                                                    <td>{{ etudiant.nom}}</td>
+
+                                                                    <td>{{ etudiant.nature_demande}}</td>
+                                                                    <td>{{ etudiant.type_bac}}</td>
+                                                                    <td>{{ etudiant.moyenne_bac}}</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+
+                                                    <h5>Statuts : </h5>
+                                                    <p class="small font-bold">
+                                                        <span><i class="fa fa-circle" style="color: #1c84c6"></i> selectionné a partir de grille concours </span>&nbsp; &nbsp; &nbsp;  
+                                                        <span><i class="fa fa-circle" style="color: #ffbd75"></i> selectionné aprés mentionné admissible</span>&nbsp; &nbsp; &nbsp;  
+
+                                                    </p>
+
+                                                </div>                                                                                                                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('univ_concours') }}
+{% endblock %}

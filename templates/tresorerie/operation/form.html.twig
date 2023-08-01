@@ -1,0 +1,240 @@
+<div class="sidebar-container new">
+
+	<div class="ibox-tools"></div>
+
+	<div class="tab-content ">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+				</h3>
+				<small>
+
+
+					Ajouter
+
+				</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<table class="table small m-b-xs">
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="ibox ">
+					<div class="ibox-content">
+
+						{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+						{% for id in ids %}
+							<input type="hidden" name="_action[]" value="{{id}}">
+						{% endfor %}
+						<div class="row">
+
+
+							<div class="col-md-12 b-r">
+
+
+								<div class="hr-line-dashed paddi"></div>
+
+
+								<div class="row">
+
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.compte  ,' compte (*) ', {'label_attr':{'class':'col-sm-12 col-form-label'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.compte,{'attr':{'class':'form-control form-control-sm','placeholder': 'compte '}}) }}
+												<span class="form-error-message">
+													{{ form_errors(form.compte) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+
+
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.montant  ,'montant (*) ', {'label_attr':{'class':'col-sm-12 col-form-label'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.montant,{'attr':{'class':'form-control form-control-sm','placeholder': 'montant '}}) }}
+												<span class="form-error-message">
+													{{ form_errors(form.montant) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.designation  ,'Designation (*) ', {'label_attr':{'class':'col-sm-12 col-form-label'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.designation,{'attr':{'class':'form-control form-control-sm','placeholder': 'Designation '}}) }}
+												<span class="form-error-message">
+													{{ form_errors(form.designation) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.date  ,'date (*) ', {'label_attr':{'class':'col-sm-12 col-form-label'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.date,{'attr':{'class':'form-control form-control-sm','placeholder': 'date '}}) }}
+												<span class="form-error-message">
+													{{ form_errors(form.date) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.refDocAsso  ,' refDocAsso (*) ', {'label_attr':{'class':'col-sm-12 col-form-label'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control-sm','placeholder': 'refDocAsso '}}) }}
+												<span class="form-error-message">
+													{{ form_errors(form.refDocAsso) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.dateDocAsso  ,'date DocAsso (*) ', {'label_attr':{'class':'col-sm-12 col-form-label'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.dateDocAsso,{'attr':{'class':'form-control form-control-sm','placeholder': 'dateDocAsso '}}) }}
+												<span class="form-error-message">
+													{{ form_errors(form.dateDocAsso) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.modepaiement  ,'mode paiement  ', {'label_attr':{'class':'col-sm-12 col-form-label '}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.modepaiement,{'attr':{'class':'form-control form-control-sm paiement','placeholder': 'modepaiement '}}) }}
+												<span class="form-error-message">
+													{{ form_errors(form.modepaiement) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								
+
+
+								</div>
+								<div class="" style="display: none;">
+								<div class="col-md-6">
+									<div class="form-group row">
+										{{ form_label(form.fournisseur  ,'fournisseur  ', {'label_attr':{'class':'col-sm-12 col-form-label'}}) }}
+										<div class="col-sm-12">
+											{{ form_widget(form.fournisseur,{'attr':{'class':'form-control form-control-sm','placeholder': 'fournisseur '}}) }}
+											<span class="form-error-message">
+												{{ form_errors(form.fournisseur) }}
+											</span>
+										</div>
+
+									</div>
+								</div>
+							</div>
+								<div class="bloc_cheque" style="display: none;">
+									<div class="hr-line-dashed paddi"></div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group row">
+												{{ form_label(form.numCheque  ,'num Cheque ', {'label_attr':{'class':'col-sm-12 col-form-label'}}) }}
+												<div class="col-sm-12">
+													{{ form_widget(form.numCheque,{'attr':{'class':'form-control form-control-sm','placeholder': 'num Cheque '}}) }}
+													<span class="form-error-message">
+														{{ form_errors(form.numCheque) }}
+													</span>
+												</div>
+
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group row">
+												{{ form_label(form.dateEcheance  ,'date Echeance  ', {'label_attr':{'class':'col-sm-12 col-form-label'}}) }}
+												<div class="col-sm-12">
+													{{ form_widget(form.dateEcheance,{'attr':{'class':'form-control form-control-sm','placeholder': 'date Echeance '}}) }}
+													<span class="form-error-message">
+														{{ form_errors(form.dateEcheance) }}
+													</span>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+					
+
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.autreInformation  ,'autre Information  ', {'label_attr':{'class':'col-sm-12 col-form-label'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.autreInformation,{'attr':{'class':'form-control form-control-sm','placeholder': 'autre Information'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.autreInformation) }}
+										</span>
+									</div>
+
+								</div>
+								<br>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+
+									<div class="col-sm-5">
+										<button class="btn btn-white btn-block btn-xs  button-save-charge">
+											<i class="fa fa-save"></i>
+											&nbsp;{{ button_label|default('Enregistrer') }}</button>
+
+									</div>
+
+								</div>
+
+
+							</div>
+
+						</div>
+
+						{{form_widget(form._token)}}
+						{{ form_end(form,{'render_rest': false}) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

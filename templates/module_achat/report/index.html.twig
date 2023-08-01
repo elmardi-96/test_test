@@ -1,0 +1,546 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Report , consulter Report | Achat
+{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+    <div class="actions modal fade right" id="ModalDocumentDynamique" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+        <div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalPreviewLabel">DOCUMENT</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bo-0">
+                    <div class="text-center spr">
+                        <br/>
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="bod"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Achat , Documents
+            </h2>
+        </div>
+        <div class="col-lg-8">
+            <div
+                class="title-action">{#% include './module_achat/facturefrs/inc/workflow.html.twig' %#}
+
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+        {#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+                                                                                                                                                                                                        #}
+
+    </div>
+    <br/><br/>
+
+    {#<div class="row pt-20">
+            <div class="col-lg-12">
+
+                    <div class="ibox">
+                            <div class="ibox-title rSerTitle">
+                                    <h5>Paramètre de Rechercher</h5>
+                            </div>
+                            <div class="ibox-content rSerContent">
+
+                                    <div class="row">
+                                            <div class="col-md-4">
+                                                    <p class="msty">
+                                                            Documents
+                                                    </p>
+
+                                                    <select id="form_lien" name="form[lien]" class="form-control select2_demo_8 ">
+                                                            <option></option>
+                                                            <optgroup label="COMMANDES DOCUMENT">
+                                                                    <option value="commandes">COMMANDES</option>
+                                                                    <option value="commandesReceptionnees">COMMANDES RECEPTIONNEES</option>
+                                                                    <option value="commandesNonReceptionnees">COMMANDES NON RECEPTIONNEES</option>
+                                                                    <option value="commandesFacturees">COMMANDES FACTUREES</option>
+                                                                    <option value="commandesNonFacturees">COMMANDES NON FACTUREES</option>
+                                                                    {#<option value="reglement">Réglements</option># }
+                                                            </optgroup>
+                                                            <optgroup label="FACTURES DOCUMENT">
+                                                                    <option value="factures">FACTURES</option>
+                                                                    <option value="facturesRegles">FACTURES REGLEES</option>
+                                                                    <option value="facturesNonRegles">FACTURES NON REGLEES</option>
+                                                                    <option value="facturesAcompte">FACURES D'ACOMPTE</option>
+                                                                    <option value="facturesAvoir">FACTURES D'AVOIR</option>
+                                                            </optgroup>
+                                                            <optgroup label="FOURNISSEUR DOCUMENT">
+                                                                    <option value="stFournisseur">SITUATION FOURNISSEUR</option>
+                                                            </optgroup>
+
+                                                    </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                    <p class="msty">
+                                                            Fournisseur
+                                                    </p>
+
+                                                    <select id="form_fournisseur" name="form[fournisseur]" class="form-control select2_demo_7 " multiple="multiple">
+                                                            <option></option>
+                                                            {% for f in fournisseur %}
+                                                                    <option value="{{f.id}}">{{f.societe}}</option>
+                                                            {% endfor %}
+
+                                                    </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                    <p class="msty">
+                                                            Dossier
+                                                    </p>
+
+                                                    <select id="form_dossier" name="form[dossier]" class="select2_demo_4 form-control " multiple="multiple">
+                                                            <option></option>
+                                                            {% if app.session.get('dossiers') is defined  %}
+                                                                    {% for key , dossier in app.session.get('dossiers') %}
+                                                                            <option value="{{ dossier.id }}" {% if dossier.id == DossierCourant.id %} selected="selected" {% endif %}>{{ dossier.abreviation|upper }}</option>
+                                                                    {% endfor %}
+                                                            {% endif %}
+                                                    </select>
+                                            </div>
+                                            <hr
+                                            class="h-r"/>
+                                            {#<div class="col-md-4">
+                                                                                                                                                    <p class="msty">
+                                                                                                                                                            Type
+                                                                                                                                                    </p>
+                                                                                            
+                                                                                                                                                    <select id="form_type2" name="form[type]" class="select2_demo_5 form-control ">
+                                                                                                                                                            <option></option>
+                                                                                                                                                            <option value="projet">Projet</option>
+                                                                                                                                                            <option value="marche">Marché</option>
+                                                                                            
+                                                                                                                                                    </select>
+                                                                                                                                            </div># }
+
+                                            <div class="col-md-4">
+                                                    <p class="msty">
+                                                            Date début
+                                                    </p>
+
+                                                    <input type="date" id="t_achatdemandeinternecab_dateDemande" name="t_achatdemandeinternecab[dateDemande]" required="required" class="form-control form-control-sm col-md-9" value="{{dateDebut}}">
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                    <p class="msty">
+                                                            Date fin
+                                                    </p>
+
+                                                    <input type="date" id="t_achatdemandeinternecab_dateDemande" name="t_achatdemandeinternecab[dateDemande]" required="required" class="form-control form-control-sm col-md-9" value="{{dateFin}}">
+                                            </div>
+
+                                            <hr class="h-r"/>
+
+                                            <div class="col-md-4">
+                                                    <p class="msty">
+                                                            Projet
+                                                    </p>
+
+                                                    <select id="form_projet" name="form[projet]" class="select2_demo_3 form-control" multiple="multiple">
+                                                            <option>Choix projet</option>
+                                                            {% if projet is defined  %}
+                                                                    {% for key , p in projet  %}
+                                                                            <option value="{{p.id}}">{{p.abreviation}}</option>
+                                                                    {% endfor %}
+                                                            {% endif %}
+                                                    </select>
+                                            </div>
+
+                                            {#<div class="col-md-3 projet">
+                                                                                                                                                    <p class="msty">
+                                                                                                                                                            Sous Projet
+                                                                                                                                                    </p>
+                                                                                            
+                                                                                                                                                    <select id="form_sous_projet" name="form[sousProjet]" class="select2_demo_6 form-control" multiple="multiple">
+                                                                                                                                                            <option></option>
+                                                                                            
+                                                                                                                                                    </select>
+                                                                                                                                            </div># }
+
+                                            {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , "autocomplete":"off", 'class':'form frme'}}) }}
+                                            <div class="col-md-4">
+                                                    <p class="msty">
+                                                            Marché
+                                                    </p>
+
+                                                    {{ form_widget(form.marche,{'attr':{'class':'form-control form-control-sm marches sel2','multiple':"multiple"}}) }}
+                                            </div>
+
+                                            {#<div class="col-md-3 souMarche">
+                                                                                                                                                    <p class="msty">
+                                                                                                                                                            Sous Marché
+                                                                                                                                                    </p>
+                                                                                            
+                                                                                                                                                    {{ form_widget(form.marchesous,{'attr':{'class':'form-control form-control-sm sousmarche sel2'}}) }}
+                                                                                                                                            </div># }
+                                            {{ form_end(form,{'render_rest': false}) }}
+
+                                            <hr class="h-r"/>
+
+                                            <div class="col-md-4">
+                                                    <br>
+                                                    <button type="button" class="btn btn-outline btn-primary mbr search3 waves-effect waves-light tDownload">
+                                                            <i class="fa fa-download"></i>
+                                                            Télécharger
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline btn-primary mbr rsearch waves-effect waves-light tDownload">
+                                                            <i class="fa fa-refresh"></i>
+                                                            Annuler
+                                                    </button>
+                                            </div>
+                                    </div>
+                            </div>
+                    </div>
+
+            </div>
+    </div>#}
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div
+                    class="ibox-content">
+
+                    {#{% include './module_achat/facturefrs/inc/workflow_breadcumb.html.twig' %}#}
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        <ul class="nav nav-tabs">
+                                            <li>
+                                                <a class="nav-link active show" href="#tab-1" data-toggle="tab">Reporting</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+                                                <div class="row">
+                                                    <div class="col-md-12 b-r">
+                                                        <h3 class="m-t-none m-b">Paramètre de Rechercher
+                                                        </h3>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <p class="msty">
+                                                            Documents
+                                                        </p>
+
+                                                        <select id="form_lien" name="form[lien]" class="form-control select2_demo_8 ">
+                                                            <option></option>
+                                                            <optgroup label="COMMANDES DOCUMENT" type="commande">
+                                                                <option value="commandes">COMMANDES</option>
+                                                                <option value="commandesReceptionnees">COMMANDES RECEPTIONNEES</option>
+                                                                <option value="commandesNonReceptionnees">COMMANDES NON RECEPTIONNEES</option>
+                                                                <option value="commandesFacturees">COMMANDES FACTUREES</option>
+                                                                <option value="commandesNonFacturees">COMMANDES NON FACTUREES</option>
+                                                                {#<option value="reglement">Réglements</option>#}
+                                                            </optgroup>
+                                                            <optgroup label="FACTURES DOCUMENT" type="facture">
+                                                                <option value="factures">FACTURES</option>
+                                                                <option value="facturesRegles">FACTURES REGLEES</option>
+                                                                <option value="facturesNonRegles">FACTURES NON REGLEES</option>
+                                                                <option value="facturesAcompte">FACURES D'ACOMPTE</option>
+                                                                <option value="facturesAvoir">FACTURES D'AVOIR</option>
+                                                            </optgroup>
+                                                            <optgroup label="FOURNISSEUR DOCUMENT" type="situationFournisseur">
+                                                                <option value="stFournisseur">SITUATION FOURNISSEUR</option>
+                                                            </optgroup>
+
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <p class="msty">
+                                                            Fournisseur
+                                                        </p>
+
+                                                        <select id="form_fournisseur" name="form[fournisseur]" class="form-control select2_demo_7 " multiple="multiple">
+                                                            <option></option>
+                                                            {% for f in fournisseur %}
+                                                                <option value="{{f.id}}" societe="{{f.societe}}">{{f.societe}}</option>
+                                                            {% endfor %}
+
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <p class="msty">
+                                                            Dossier
+                                                        </p>
+
+                                                        <select id="form_dossier" name="form[dossier]" class="select2_demo_4 form-control " multiple="multiple">
+                                                            <option></option>
+                                                            {% if app.session.get('dossiers') is defined  %}
+                                                                {% for key , dossier in app.session.get('dossiers') %}
+                                                                    <option value="{{ dossier.id }}" {% if dossier.id == DossierCourant.id %} selected="selected" {% endif %}>{{ dossier.abreviation|upper }}</option>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        </select>
+                                                    </div>
+                                                    <hr
+                                                        class="h-r"/>
+                                                    {#<div class="col-md-4">
+                                                                                                                                                            <p class="msty">
+                                                                                                                                                                    Type
+                                                                                                                                                            </p>
+                                                                                                    
+                                                                                                                                                            <select id="form_type2" name="form[type]" class="select2_demo_5 form-control ">
+                                                                                                                                                                    <option></option>
+                                                                                                                                                                    <option value="projet">Projet</option>
+                                                                                                                                                                    <option value="marche">Marché</option>
+                                                                                                    
+                                                                                                                                                            </select>
+                                                                                                                                                    </div>#}
+
+                                                    <div class="col-md-4">
+                                                        <p class="msty">
+                                                            Date début
+                                                        </p>
+
+                                                        <input type="date" id="dateDebut" name="t_achatdemandeinternecab[dateDebut]" required="required" class="dateDebut form-control form-control-sm col-md-9" value="{{dateDebut}}">
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <p class="msty">
+                                                            Date fin
+                                                        </p>
+
+                                                        <input type="date" id="dateFin" name="t_achatdemandeinternecab[dateFin]" required="required" class="dateFin form-control form-control-sm col-md-9" value="{{dateFin}}">
+                                                    </div>
+
+                                                    <hr class="h-r"/>
+
+                                                    <div class="col-md-4">
+                                                        <p class="msty">
+                                                            Projet
+                                                        </p>
+
+                                                        <select id="form_projet" name="form[projet]" class="select2_demo_3 form-control" multiple="multiple">
+                                                            <option>Choix projet</option>
+                                                            {% if projet is defined  %}
+                                                                {% for key , p in projet  %}
+                                                                    <option value="{{p.id}}">{{p.abreviation}}</option>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        </select>
+                                                    </div>
+
+                                                    {#<div class="col-md-3 projet">
+                                                                                                                                                            <p class="msty">
+                                                                                                                                                                    Sous Projet
+                                                                                                                                                            </p>
+                                                                                                    
+                                                                                                                                                            <select id="form_sous_projet" name="form[sousProjet]" class="select2_demo_6 form-control" multiple="multiple">
+                                                                                                                                                                    <option></option>
+                                                                                                    
+                                                                                                                                                            </select>
+                                                                                                                                                    </div>#}
+
+
+                                                    <div class="col-md-4">
+                                                        <p class="msty">
+                                                            Marché
+                                                        </p>
+
+                                                        <select id="form_marche" name="form[marche]" class="select2_demo_9 marches form-control" multiple="multiple">
+                                                            <option>Choix marché</option>
+                                                            {% if projet is defined  %}
+                                                                {% for key , m in marche  %}
+                                                                    <option value="{{m.id}}">{{m.designation}}</option>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        </select>
+                                                    </div>
+
+                                                    {#<div class="col-md-3 souMarche">
+                                                                                                                                                            <p class="msty">
+                                                                                                                                                                    Sous Marché
+                                                                                                                                                            </p>
+                                                                                                    
+                                                                                                                                                            {{ form_widget(form.marchesous,{'attr':{'class':'form-control form-control-sm sousmarche sel2'}}) }}
+                                                                                                                                                    </div>#}
+
+
+                                                    <hr class="h-r"/>
+
+                                                    <div class="col-md-4">
+                                                        <br>
+                                                        <button type="button" class="btn btn-outline btn-primary mbr search3 waves-effect waves-light tDownload">
+                                                            <i class="fa fa-download"></i>
+                                                            Télécharger
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline btn-primary mbr rsearch waves-effect waves-light tDownload">
+                                                            <i class="fa fa-refresh"></i>
+                                                            Annuler
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{#
+
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div
+                    class="ibox-content">
+
+                    
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        <ul class="nav nav-tabs">
+                                            <li>
+                                                <a class="nav-link active show" href="#tab-1" data-toggle="tab">Informations</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+                                                <div class="row">
+                                                    <div class="col-md-4 b-r">
+                                                        <h3 class="m-t-none m-b">Informations
+                                                        </h3>
+
+                                                        <table class="table table-hover margin bottom table-mourad">
+                                                            <thead>
+                                                                <tr class="bor-t">
+                                                                    <th style="width: 50%;" class="">Information</th>
+                                                                    <th style="width: 50%;">Lien</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>SYNTHESE PRÉ-COMMANDE</td>
+                                                                    <td>
+                                                                        <a href="{{ path('report_synthese_expression_besoin')}}" target="_blank" class="label label-primary buto">
+                                                                            <i class="fa fa-file-excel-o "></i>
+                                                                            Télécharger</a>
+                                                                    </td>
+
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>SYNTHESE COMMANDE</td>
+                                                                    <td>
+                                                                        <a href="{{ path('report_synthese_commande')}}" target="_blank" class="label label-primary buto">
+                                                                            <i class="fa fa-file-excel-o "></i>
+                                                                            Télécharger</a>
+                                                                    </td>
+
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>SYNTHESE PRÉ-COMMANDE, COMMANDE , LIVRAISON , FACTURE , REGLEMENT
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{ path('report_synthese_all')}}" target="_blank" class="label label-primary buto">
+                                                                            <i class="fa fa-file-excel-o "></i>
+                                                                            Télécharger</a>
+                                                                    </td>
+
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        COMMANDE , LIVRAISON , FACTURE , REGLEMENT
+                                                                    </td>
+                                                                    <td>
+                                                                        <a class="label label-primary buto dynamique_document">
+                                                                            <i class="fa fa-file-excel-o "></i>
+                                                                            Télécharger</a>
+                                                                    </td>
+
+
+                                                                </tr>
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="m-t-none m-b">Télécharger par fournisseur
+                                                        </h3>
+                                                        <form class="tele-frs">
+                                                            <div class="hr-line-dashed"></div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 required" for="t_achatdemandeinternecab_dateDemande">Fournisseur :</label>
+                                                                <div class="col-sm-4">
+                                                                    <select class="sele-frs form-control form-control-sm sel2">
+                                                                        <option value="">Choix Fournisseur</option>
+                                                                        {% for frs in fournisseur %}
+                                                                            <option value="{{ frs.id }}">{{ frs.societe }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="hr-line-dashed"></div>
+                                                            <button class="btn btn-white btn-xs btn-lg my-button  waves-effect waves-light" type="submit">
+                                                                <i class="fa fa-save"></i>
+                                                                Télécharger
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                                                                        
+                                                                        #}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('reporting') }}
+{% endblock %}

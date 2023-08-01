@@ -1,0 +1,32 @@
+{% set current_path = app.request.get('_route') %}
+
+
+<ul class="nav nav-tabs">
+	{% if cb_fabrication.id is defined  %}
+		{% for operation in operations|sort((a, b) => a.ordr <=> b.ordr)%}
+
+			{% if operation.horizontale  %}
+				{% if operation.route is not null  %}
+					<li>
+
+
+						<a class="nav-link {% if  operation.route   in current_path  %} active {%endif%}" href="{{ path(operation.route , {id:cb_fabrication.id}) }}">
+							<i class="fa {{ operation.icon }}"></i>
+							{{ operation.titre|capitalize }}
+						</a>
+					</li>
+
+
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+
+
+	{% else %}
+		<li>
+			<a class="nav-link active">
+				<i class="fa fa-info-circle"></i>
+				Informations</a>
+		</li>
+	{% endif %}
+</ul>

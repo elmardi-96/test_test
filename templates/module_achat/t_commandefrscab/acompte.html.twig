@@ -1,0 +1,266 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Acompte  | Bon commande fournisseur | Ugouv achat
+{% endblock %}
+
+
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="acompte">
+
+
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+			<div class="col-lg-6">
+				{% include './module_achat/t_commandefrscab/inc/workflow_breadcumb.html.twig' %}
+			</div>
+			<div class="col-lg-6">
+				<div
+					class="title-action">
+
+
+					{#% include './ugouv/achat/t_commandefrscab/inc/workflow.html.twig' %#}
+					{% if workflow_has_marked_place(commande, 'valider') %}
+
+						{% if commande.livraisons|length <1  %}
+							<button class="btn btn-white btn-xs btn-lg my-button2" type="submit">
+								<i class="fa fa-save"></i>
+								{{ button_label|default('Enregistrer') }}
+
+							</button>
+						{% endif  %}
+					{% endif %}
+
+				</div>
+			</div>
+
+			<div class="border-b"></div>
+
+			<div class="col-lg-12">
+				{% include './module_achat/t_commandefrscab/inc/workflow.html.twig' %}
+			</div>
+
+
+		</div>
+		<br/><br/>
+		<div class="row pt-20">
+			<div class="col-lg-12 ">
+				<div class="ibox">
+
+					<div class="ibox-content">
+
+						<div class="message-success"></div>
+
+
+						<div class="row m-t-sm">
+							<div class="col-lg-12">
+								<div class="panel blank-panel">
+									<div class="panel-heading">
+										<div class="panel-options">
+											{% include './module_achat/t_commandefrscab/inc/navigation.html.twig' %}
+
+
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="panel-body">
+
+											<div class="tab-content">
+												<div class="tab-pane active" id="tab-1">
+
+
+													<div class="row">
+														<div class="col-md-12">
+															{#% if workflow_has_marked_place(commande, 'valider') %#}
+
+
+																{%   if acompte is defined and acompte.idAcompte is empty %}
+																	<div class="forum-item animated bounce">
+																		<div class="row">
+																			<div class="col-md-9">
+																				<div class="forum-icon">
+																					<i class="fa fa-warning"></i>
+																				</div>
+																				<a class="forum-item-title">Important</a>
+																				<div class="forum-sub-title">
+																					Aucun acompte existe pour la commande {{commande.code}} ,veuillez cliquer sur ce lien pour ajouter un nouveau acompte (<a href="{{path('ua_t_commandefrscab_acompte_new',{'id':commande.id})}}">avance</a>) .
+
+
+																				</div>
+																			</div>
+
+																		</div>
+																	</div>
+																{% else %}
+																	{#{dump(acompte)}#}
+																	<div class="row">
+																		<div class="col-md-12">
+																			<h3 class="m-t-none m-b">Informations Acompte
+																			</h3>
+
+								
+																			<div class="hr-line-dashed hr-line-dashed-co"></div>
+																			<div class="form-group row ph">
+																				<label class="col-sm-3 required font-weight-bold">Code :</label>
+
+																				<div class="col-sm-8">
+																					<p class="form-control-static"><a href="{{path('ua_t_facturefrscab_consulte_acompte',{'id':acompte.idAcompte})}}">{{ acompte.acompteRef }}</a></p>
+																				</div>
+
+																			</div>
+																			<div class="hr-line-dashed hr-line-dashed-co"></div>
+																			<div class="form-group row ph">
+																				<label class="col-sm-3 required font-weight-bold">DATE ACOMPTE :</label>
+
+																				<div class="col-sm-8">
+																					<p class="form-control-static">{{acompte.datefacture|date("d/m/Y") }}</p>
+																				</div>
+
+																			</div>
+																			<div class="hr-line-dashed hr-line-dashed-co"></div>
+																			<div class="form-group row ph">
+																				<label class="col-sm-3 required font-weight-bold">Mt  ACOMPTE   :</label>
+
+																				<div class="col-sm-8">
+																					<p class="form-control-static">{{ acompte.montantAcompte|number_format(2) }}</p>
+																				</div>
+
+																			</div>
+																			<div class="hr-line-dashed hr-line-dashed-co"></div>
+																			<div class="form-group row ph">
+																				<label class="col-sm-3 required font-weight-bold">Fournisseur   :</label>
+
+																				<div class="col-sm-8">
+																					<p class="form-control-static">{{acompte.fournisseur}}</p>
+																				</div>
+
+																			</div>
+													
+                  
+																			
+																		</div>
+																	</div>
+
+																{% endif %}
+
+
+															{#% else  %}
+																<div class="forum-item animated bounce">
+																	<div class="row">
+																		<div class="col-md-9">
+																			<div class="forum-icon">
+																				<i class="fa fa-warning"></i>
+																			</div>
+																			<a class="forum-item-title">Important</a>
+																			<div class="forum-sub-title">
+																				Pour ajouter un acompte , il faut tout d'abord valider ce bon de commande
+																				<a href="{{ path('t_commandefrscab_show' , {id:commande.id})}}">{{ commande.code }}</a>
+																			</div>
+																		</div>
+
+																	</div>
+																</div>
+															{% endif %#}
+														</div>
+
+
+													</div>
+
+
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		{#% if workflow_has_marked_place(commande, 'valider') %}
+			<div class="row justify-content-md-center">
+				<div class="col-lg-12 ">
+					<div class="ibox ">
+						<div class="ibox-title m-min"></div>
+						<div class="ibox-content">
+							<div class="table-responsive">
+								<div class="col-md-12 m-mar-t">
+									<h5 class="m-left">HISTORIQUE D'ACOMPTES</h5>
+									<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="">
+
+										<thead>
+											<tr>
+
+												<th>#</th>
+												<th>Date</th>
+												<th>Mode.p</th>
+												<th>Banque</th>
+												<th>Devise</th>
+												<th>Ref</th>
+												<th>Date echeance</th>
+												<th>Description</th>
+												<th>Pourc %</th>
+												<th>Montant</th>
+												<th>Imprimer</th>
+												<th>Sup</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											{% set total = 0 %}
+											{% for key , acompte in commande.acomptes  %}
+												{% set total = total + acompte.montant %}
+												<tr>
+													<td>{{key +1 }}</td>
+
+													<td>{{acompte.date ? acompte.date|date("d/m/Y")}}</td>
+													<td>{{acompte.modepaiement ? acompte.modepaiement.designation }}</td>
+													<td>{{acompte.banque ? acompte.banque.designation }}</td>
+													<td>{{acompte.devise ? acompte.devise.designation }}</td>
+													<td>{{acompte.numcheque}}</td>
+													<td>{{acompte.dateecheance ? acompte.dateecheance|date("d/m/Y") }}</td>
+													<td>
+														{{acompte.description}}
+													</td>
+													<td>{{acompte.pourcentage~'%'}}</td>
+													<td>{{acompte.montant|number_format(2)}}</td>
+
+													<td>
+														<a class="btn btn-xs btn-white btn-outline" target="_blank" href="{{ path('t_commandefrscab_document_acompte_pdf',{id:acompte.id})}}">
+															<i class="fa fa-print "></i>&nbsp;</a>
+													</td>
+													<td>
+														<a style="float:right" data-id="{{acompte.id}}" data-token="{{ csrf_token('delete' ~ acompte.id) }}" class="_delete_acompte fa fa-trash-o"></a>
+
+													</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+										<tfoot>
+											<tr>
+												<th colspan="9" style="text-align:right">Total</th>
+												<th>{{total|number_format(2)}}</th>
+
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %#}
+	</div><br><br>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}{{ encore_entry_script_tags('tcommandefrscab') }}
+{% endblock %}

@@ -1,0 +1,26 @@
+<table class="table   tb display table-striped table-bordered table-hover dataTables-example cmd" id="gridAF3" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 20%;">#</th>
+            <th style="width: 20%;">ID</th>
+
+            <th style="width: 50%;">Article</th>
+            <th style="width: 30%;">Quantité</th>
+        </tr>
+    </thead>
+
+    <tbody class="Affectation">
+    {% for article in articles %}
+        <tr id="{{article.id}}">
+            <td class='art' >{{ loop.index }}</td>
+            <td class='id' >{{ article.id }}</td>
+
+            <td class='qte' >{{ article.titre }}</td>
+            <td class='prix' >{{ article.quantite }}</td>
+        </tr>
+    {% endfor %}
+        
+    </tbody>
+
+   
+</table>

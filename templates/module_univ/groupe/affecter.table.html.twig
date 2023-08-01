@@ -1,0 +1,28 @@
+<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable datatable-show3" id="datatable-show3">
+	<thead>
+		<tr>
+
+			<th width="20%">Etablissement</th>
+			<th width="15%">Formation</th>
+			<th width="15%">Promotion</th>
+			<th width="15%">Groupe</th>
+			<th width="15%">date création</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		{% for detail in groupeAffecter %}
+			<tr>
+
+				<td>{{detail.promotion ? detail.promotion.formation.etablissement.designation : ''}}</td>
+				<td>{{detail.promotion ? detail.promotion.formation.designation : ''}}</td>
+				<td>{{detail.promotion ? detail.promotion.designation : ''}}</td>
+				<td>{{detail.divisionGroupeDetail.divisionGroupe ? detail.divisionGroupeDetail.divisionGroupe.designation : ''}}</td>
+				<td>{{detail.created|date("m/d/Y")}}</td>
+
+			</tr>
+		{% endfor %}
+
+	</tbody>
+
+</table>

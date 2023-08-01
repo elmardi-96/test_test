@@ -1,0 +1,352 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Consulter | Charge
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="show">
+
+
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+			<div class="col-lg-6">
+				{% include './tresorerie/tr_charge/inc/workflow_breadcumb.html.twig' %}
+			</div>
+
+			<div class="col-lg-6">
+				<div class="title-action"></div>
+			</div>
+
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+				{% include './tresorerie/tr_charge/inc/workflow.html.twig' %}
+			</div>
+		</div>
+		<br/><br/>
+
+		<div class="row pt-20">
+			<div class="col-lg-12 ">
+				<div class="ibox">
+
+					<div class="ibox-content">
+
+						<div class="message-success"></div>
+
+
+						<div class="row m-t-sm">
+							<div class="col-lg-12">
+								<div class="panel blank-panel">
+									<div class="panel-heading">
+										<div class="panel-options">
+											{% include './tresorerie/tr_charge/inc/navigation.html.twig' %}
+										</div>
+									</div>
+
+									<div class="panel-body">
+										<div class="col-md-12">
+											<div class="tab-content">
+												<div class="tab-pane active" id="tab-1">
+
+
+													<div class="row">
+														<div class="col-md-12 b-r">
+															<h3 class="m-t-none m-b">Informations Charge
+															</h3>
+														</div>
+													</div>
+													<div class="row">
+
+
+														<div class="hr-line-dashed paddi"></div>
+														<div class="col-md-6 b-r">
+
+
+															<div class="form-group row">
+																<label class="col-sm-4 ">compte  </label>
+
+																<div class="col-sm-4">
+
+																	{{charge.compte ? charge.compte.designation}}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">designation  </label>
+
+																<div class="col-sm-4">
+
+
+																	{{ charge.designation }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">ref DocAsso </label>
+
+																<div class="col-sm-4">
+
+																	{{charge.refDocAsso}}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">fournisseur  </label>
+
+																<div class="col-sm-4">
+
+																	{{charge.fournisseur ? charge.fournisseur.societe}}
+																</div>
+															</div>
+															
+															{% if charge.modepaiement ? charge.modepaiement.designation == 'Cheque' %}
+															<div class="hr-line-dashed"></div>
+															
+																<div class="form-group row">
+																	<label class="col-sm-4 ">num Cheque  </label>
+
+																	<div class="col-sm-4">
+
+																		{{charge.numCheque }}
+																	</div>
+																</div>
+
+														
+                                                              
+
+															{% endif %}
+														
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">piece  </label>
+
+																<div class="col-sm-4">
+
+																	{{charge.piece ? charge.piece.code}}
+																</div>
+															</div>
+
+														
+
+														</div>
+
+
+														<div class="hr-line-dashed paddi"></div>
+
+														<div class="col-md-6">
+														
+															<div class="form-group row">
+																<label class="col-sm-4 ">montant  </label>
+
+																<div class="col-sm-4">
+
+
+																	{{ charge.montant|number_format(2) }}
+																</div>
+															</div>
+															
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">date  </label>
+
+																<div class="col-sm-4">
+
+
+																	{{ charge.date|date("d/m/Y") }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">date DocAsso </label>
+
+																<div class="col-sm-4">
+
+
+																	{{ charge.dateDocAsso|date("d/m/Y") }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															
+															<div class="form-group row">
+																<label class="col-sm-4 ">mode paiement  </label>
+
+																<div class="col-sm-4">
+
+																	{{charge.modepaiement ? charge.modepaiement.designation}}
+																</div>
+															</div>
+															{% if charge.modepaiement ? charge.modepaiement.designation == 'Cheque' %}
+
+													
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	<label class="col-sm-4 ">date Echeance  </label>
+
+																	<div class="col-sm-4">
+
+
+																		{{ charge.dateEcheance|date("d/m/Y") }}
+																	</div>
+																</div>
+                                                              
+
+															{% endif %}
+															
+														
+
+														
+
+
+														
+
+														</div>
+
+														<div class="col-md-6">
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">autre Information </label>
+
+																<div class="col-sm-8">
+
+
+																	{{ charge.autreInformation }}
+																</div>
+															</div>
+
+															<br>
+															
+														</div>
+
+
+													</div>
+
+
+												</div>
+
+
+												{% if charge is defined %}
+													<input type="hidden" name="_id" id="_id" value="{{ charge.id }}"/>
+												{% endif %}
+
+
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+
+
+		{% if charge.details|length >0 %}
+
+		<div class="row">
+			<div class="col-lg-12 ">
+				<div class="ibox ">
+					<div class="ibox-content">
+
+
+						<div class="table-responsive table-responsive-2">
+							<div class="col-md-12 m-mar-t">
+								<h5 class="m-left">La liste des articles</h5>
+								<table class="m-add t-m table table-striped table-bordered table-hover dataTables-example table-detail">
+									<thead>
+										<tr>
+
+											<th style="width: 3%">#
+											</th>
+											<th style="width: 33%">Compte
+											</th>
+											<th style="width: 7%">Unite </th>
+											<th style="width: 7%">Qantite
+											</th>
+											<th style="width: 7%">P.U</th>
+											<th style="width: 7%">TVA % </th>
+
+
+											<th style="width: 10%">TTC </th>
+
+											
+										</tr>
+									</thead>
+									<tbody>
+
+										{% for detail in charge.details %}
+											<tr>
+
+
+												<td style="width: 3%"></td>
+												<td style="width: 33%">
+													{{ detail.compte.designation }}
+												</td>
+
+												<td style="width: 7%">
+
+													{{ detail.unite is not defined  or (detail.unite and detail.unite.__isInitialized() is defined and detail.unite.__isInitialized__ == false) ? null : detail.unite.abreviation }}
+												</td>
+												<td style="width: 7%">
+
+													{{ detail.quantite }}
+												</td>
+												<td style="width: 7%">
+													{{ detail.prixunitaire |number_format(2, '.', ',') }}
+												</td>
+												<td style="width: 7%">
+													{% if detail.tva is not empty %}
+														{{ detail.tva }}%
+													{% else %}
+														-
+													{% endif %}
+												</td>
+
+												<td style="width: 7%">
+
+
+													{{ detail.prixttc |number_format(2, '.', ',') }}
+												</td>
+											
+											</tr>
+										{% endfor %}
+
+	
+									</tbody>
+
+									<tfoot>
+										<tr>
+											<th colspan="7" style="text-align:right ;width: 7% ">Total
+												{{ charge.montant|number_format(2, '.', ',') }}	</th>
+
+										</tr>
+									</tfoot>
+								
+								</table>
+								
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+      {% endif %}
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('charge') }}
+{% endblock %}

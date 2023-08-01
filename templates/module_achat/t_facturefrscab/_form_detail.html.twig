@@ -1,0 +1,66 @@
+{% set ma_class =   class|default('detail_form') %}
+{{ form_start(form_det ,{'attr':{'novalidate': 'novalidate' , 'class': ma_class~' form-inline '}}) }} 
+<div class="table-responsive">
+    <table class="t-m table table-striped table-bordered table-hover dataTables-example"> 
+        {#<thead>
+            <tr>
+
+                <th># </th>
+                <th>Article </th>
+                <th>Quantite  </th>
+                <th>Prix Unitaire </th>
+                <th>TVA par default(20%) :</th>
+                <th>Observation :</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody >#}
+
+            <tr> 
+                <td>
+
+                </td>
+                <td>
+                    <div class="form-group">
+                        {{ form_widget(form_det.article,{'attr':{'placeholder':'Article','class':'form-control sel2 form-control-sm article',  'autofocus':'autofocus'}}) }} 
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        {{ form_widget(form_det.quantite,{'attr':{'class':'form-control form-control-sm' , 'placeholder':'Quantite'}}) }} 
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        {{ form_widget(form_det.prixunitaire,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Prix Unitaire'}}) }} 
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        {{ form_widget(form_det.tva,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'TVA 20%'}}) }} 
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        {{ form_widget(form_det.unite,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Unite'}}) }} 
+                    </div>
+                </td>
+                <td>
+                    {% if t_commandefrscab is defined %}
+                        <input type="hidden" name="_id" value="{{ t_commandefrscab.id }}" />
+                    {% endif %}
+                  
+                    {% if t_commandefrscab is defined %}
+                        <input type="hidden" name="_id_cab" value="{{ t_commandefrscab.id }}" />
+                    {% endif %}
+                    
+                    <button class="btn btn-primary btn-xs" type="submit">{{ button_label|default('Modifier') }}</button>
+                </td>
+            </tr>
+
+      {#  </tbody>#}
+    </table>
+</div>
+{{ form_end(form_det) }}
+
+

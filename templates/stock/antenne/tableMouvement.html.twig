@@ -1,0 +1,52 @@
+<table class="table  tb display table-striped table-bordered table-hover dataTables-example cmd" id="gridMouvements" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 10%;">#</th>
+            <th style="width: 50%;">Article</th>
+            <th style="width: 20%;">AjoSup</th>
+            <th style="width: 30%;">Source</th>
+        </tr>
+    </thead>
+
+    <tbody class="Affectation">
+    {% for mouvement in mouvements %}
+        <tr id="{{mouvement.id}}">
+            <td class='art' >{{ loop.index }}</td>
+            <td class='qte' >{{ mouvement.article.titre }}</td>
+            <td class='prix' >{{ mouvement.ajosup }}</td>
+            <td class='prix' >{% if mouvement.source %} {{ mouvement.source.designation }} {% endif %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{# // href="{{path('lextraction_Entree', {'antenne':antenne})}}" target="_blank" #}
+{# href="{{path('lextraction_Sortie', {'antenne':antenne})}}" target="_blank" #}
+    <a class="btn btn-primary" href="{{path('lextraction_stock', {'antenne':antenne})}}" target="_blank">Stock</a>
+    {# <a class="btn btn-primary">Entree</a> #}
+    {# <a class="btn btn-primary" >Sortie</a> #}
+                <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exporter">
+            Exporter
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exporter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input  class="form-control picker__input" type="date" name="" id="exp_date" data-id="{{antenne}}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="exp_entrer" class="btn btn-primary">Entrer</button>
+                    <button type="button" id="exp_sortie" class="btn btn-primary">Sortie</button>
+                </div>
+                </div>
+            </div>
+            </div>
+      

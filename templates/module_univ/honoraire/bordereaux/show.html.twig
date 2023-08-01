@@ -1,0 +1,194 @@
+
+
+
+{% extends 'base_univ.html.twig' %}
+{% block title %}Consulter bordereaux | Honoraires | UNIV
+{% endblock %}
+{% block body %}
+
+<div class="form-validation-msg" style="display:none">
+    {# message flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div data-toastr="{{ label }}" class="toastr-msg">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {# form global errors  #}
+    <div class="form-errors"></div>
+</div>
+
+
+
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+	
+		<div class="col-lg-12">
+            {% include './module_univ/honoraire/bordereaux/inc/workflow_breadcumb.html.twig' %}
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './module_univ/honoraire/bordereaux/inc/workflow.html.twig' %}
+
+        </div>
+		
+		
+		{#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+																				#}
+
+	</div>
+	<br/><br/>
+
+
+	<div class="row pt-20">
+		<div class="col-lg-12 ">
+			<div class="ibox">
+	
+				<div class="ibox-content">
+	
+					<div class="message-success"></div>
+	
+	
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										{% include './module_univ/honoraire/bordereaux/inc/navigation.html.twig' %}
+
+										{#% include './module_univ/concours/p_concourscab/ins/navigation.html.twig' %#}
+									</div>
+								</div>
+	
+								<div class="panel-body">
+									<div class="col-md-12">
+										<div class="tab-content">
+											<div class="tab-pane active" id="tab-1">
+	
+	
+												<div class="row">
+												
+													<div class="col-md-12 b-r">
+														<h3 class="m-t-none m-b">INFORMATIONS</h3>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ bordereaux.id }}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Code
+															</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">{{ bordereaux.code }}</p>
+															</div>
+
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+
+															<div class="col-sm-8">
+
+																<p class="form-control-static">{{ bordereaux.promotion.formation.etablissement ? bordereaux.promotion.formation.etablissement.designation }}</p>
+
+															</div>
+
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Formation</label>
+
+															<div class="col-sm-8">
+
+																<p class="form-control-static">{{ bordereaux.promotion.formation ? bordereaux.promotion.formation.designation }}</p>
+
+															</div>
+
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Promotion</label>
+
+															<div class="col-sm-8">
+
+																<p class="form-control-static">{{ bordereaux.promotion ? bordereaux.promotion.designation }}</p>
+
+															</div>
+
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Date
+															</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">
+																	{{ bordereaux.date|date('d/m/Y')  }}</a>
+																</p>
+															</div>
+
+														</div>
+			
+						
+
+					
+
+														
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Description
+															</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">
+																	{{ bordereaux.observation  }}</a>
+																</p>
+															</div>
+
+														</div>
+					
+													
+									
+													
+
+													</div>
+												
+												</div>
+	
+	
+											</div>
+										</div>
+									</div>
+	
+								</div>
+							</div>
+						</div>
+	
+	
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+
+
+	{#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_honoraire_bordereaux') }}
+{% endblock %}

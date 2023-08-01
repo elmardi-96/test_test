@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="{{asset('/img/icon.png')}}"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"> #}
+        {# <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"> #}
+  
+
+        <title>
+            {% block title %}
+                U3S-EPR
+            {% endblock %}
+        </title>
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+    </head>
+
+    <body class="top-navigation profil upper {{app.user.theme}} gray-bg">
+
+        <div id="wrapper">
+            <div id="page-wrapper" class="gray-bg">
+                <div class="row border-bottom white-bg">
+                    <nav class="navbar navbar-expand-lg navbar-static-top" role="navigation">
+
+
+                        <div class="navbar-collapse collapse show mt-2 mb-2" id="navbar">
+    
+                                        <a class="btn btn-primary" href="{{ path('app') }}" role="button" aria-disabled="true">Home</a>
+                                        <a class="btn btn-warning" href="{{ path('Verifier_index') }}" role="button" aria-disabled="true">Demands</a>
+                                        <a class="btn btn-danger" href="{{path('logout')}}" role="button" aria-disabled="true">Deconnexion</a>
+
+                              
+                        </div>
+                    </nav>
+                </div>
+                {% block body  %}{% endblock %}
+                    <div class="footer" style="width: unset !important">
+                        <div>
+                              <strong>Copyright</strong> Universal , scientific system & software &copy; {{ "now"|date("Y") }}
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+
+        {% endblock %}
+
+    </body>
+
+</html>

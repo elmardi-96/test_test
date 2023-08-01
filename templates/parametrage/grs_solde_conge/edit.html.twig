@@ -1,0 +1,22 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Edit GrsSoldeConge{% endblock %}
+
+{% block body %}
+<div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+     <div class="edit">
+    {% include './config/inc/navigation.html.twig' %}
+    {{ include('./parametrage/grs_solde_conge/_form.html.twig') }}
+
+
+    </div>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('grs_solde_conge') }}
+{% endblock %}

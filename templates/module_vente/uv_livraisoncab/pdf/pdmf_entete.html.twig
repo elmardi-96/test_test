@@ -1,0 +1,37 @@
+<table class="" style="position:absolute;top:55px;left:400px;width:250px;">
+	<tr>
+		<td style="font-size:10px;font-family: 'courierbold';"><b>Numéro </b></td>
+		<td> : </td>
+		<td style="font-size:9px;font-family: 'courierbold';">{{ UvLivraisoncab.code  }}</td>
+		
+		
+	</tr>
+	<tr>
+		<td style="font-size:10px;font-family: 'courierbold';"><b>Date </b></td>
+		<td> : </td>
+		<td style="font-size:9px;font-family: 'courierbold';">{{ UvLivraisoncab.datelivraison ? UvLivraisoncab.datelivraison|date("d/m/Y") : "now"|date("m/d/Y") }}</td>
+	</tr>
+	<tr>
+		<td style="font-size:10px;font-family: 'courierbold';"><b>Client </b></td>
+		<td> : </td>
+		<td style="font-size:9px;white-space:normal;font-family: 'courierbold';">{{ UvLivraisoncab.client ? UvLivraisoncab.client.societe : null }}  </td>
+		
+	</tr>
+	<tr>
+		<td style="font-size:10px;font-family: 'courierbold';"><b>ICE </b></td>
+		<td> : </td>
+		<td style="font-size:9px;font-family: 'courierbold';">{{ UvLivraisoncab.client ? UvLivraisoncab.client.ice : null }}</td>
+	</tr>
+	<tr>
+		
+		<td style="font-size:10px;font-family: 'courierbold';"><b>Adresse </b></td>
+		<td> : </td>
+		<td style="font-size:9px;font-family: 'courierbold';">{{ UvLivraisoncab.client ? UvLivraisoncab.client.adresse : null }}</td>
+	</tr>
+</table>
+
+
+
+<div class='titreFacture' style="position:absolute;top:-40px;left:330px;font-size: 24px;">BON DE LIVRAISON</div>
+
+<div style="display:block;border-bottom:1px solid #eee; width:100%;position:absolute;top:215px;"></div>

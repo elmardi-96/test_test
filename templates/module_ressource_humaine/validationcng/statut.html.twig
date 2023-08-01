@@ -1,0 +1,105 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i> Informations sur la demande .</small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Code :</strong> {{ grs_conge.code }}
+                            </td>
+
+
+                        </tr> 
+
+                        <tr>
+                            <td>
+                                <strong>Demander par  :</strong> {{ grs_conge.userDemande ? grs_conge.userDemande.username}}
+                            </td>
+
+                        </tr> 
+
+                        <tr>
+                            <td>
+                                <strong>Type :</strong>  {{grs_conge.type ? grs_conge.type.titre}}
+                            </td>
+
+                        </tr> 
+                        <tr>
+                            <td>
+                                <strong>Date début  :</strong> {{ grs_conge.dateDebut ? grs_conge.dateDebut|date('Y-m-d H:i:s') : '' }}
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Date fin  :</strong> {{ grs_conge.dateFin ? grs_conge.dateFin|date('Y-m-d H:i:s') : '' }}
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="ibox">
+                    <div class="ibox-content">
+
+
+                        <h3> Statut :</h3>
+                    	{% for transition in workflow_transitions(grs_conge) %}
+	{#{{ dump(workflow_marked_places(grs_conge)) }}#}
+	{% set url = "" %}
+		{% if workflow_metadata(grs_conge, 'function', transition) %}
+	{%  set  url= path(workflow_metadata(grs_conge, 'function', transition), {id: grs_conge.id}) %}
+	{% endif %}
+		<form style="display: inline-block" {#action="{{ url }}"#} id="{{ workflow_metadata(grs_conge, 'function', transition) }}" {#method="post"#}> <input type="hidden" name="_id" value="{{ grs_conge.id }}"/>
+		<input type="hidden" name="transition" value="{{ transition.name }}"/>
+		<button class="btn btn-xs {{ workflow_metadata(grs_conge, 'class', transition) }}  btn-outline" type="submit" type="submit">
+			<i class="fa {{ workflow_metadata(grs_conge, 'icon', transition) }}"></i>
+			{#&nbsp;{{ transition.name }}|#}
+			{{ workflow_metadata(grs_conge, 'title', transition) }}</button>
+	</form><br><br>
+
+
+{% endfor %}
+
+		{% if workflow_has_marked_place(grs_conge, "accepter") %}
+            Le conge sous le référence
+			{{ grs_conge.code }}
+			a été bien accepter .
+		{% endif %}
+		{% if workflow_has_marked_place(grs_conge, "refuser") %}
+			Le conge sous le référence
+			{{ grs_conge.code }}
+			a été refuser .
+		{% endif %}
+                        {% if grs_conge is defined %}
+                            <input type="hidden" name="_id" value="{{ grs_conge.id }}" />
+                        {% endif %}
+
+
+
+
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

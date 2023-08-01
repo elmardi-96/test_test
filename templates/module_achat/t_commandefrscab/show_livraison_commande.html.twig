@@ -1,0 +1,114 @@
+<form class="_generer_form" autocomplete="off">
+
+
+	<div class="col-md-12">
+		<div class="panel-body">
+			<div class="tab-content">
+				<div class="tab-pane active show" id="tab-1">
+					{% if workflow_has_marked_place(commande, 'valider') %}
+						<div class="row">
+
+
+						
+								<h3>Saisie Receptions</h3>
+
+
+								<div class="hr-line-dashed"></div>
+
+								<div class="form-group row">
+									<div class="col-sm-12">
+										<label>Type </label>
+									</div>
+									<div class="col-sm-12">
+										<input type="text" disabled  value='{{ commande.type ? commande.type.v }}' name="type" class="form-control form-control-sm">
+									</div>
+								</div>
+							
+									<div class="form-group row">
+										<div class="col-sm-12">
+											<label>Date Rcp (*) </label>
+										</div>
+										<div class="col-sm-12">
+											<input type="date" value='{{'now'|date('Y-m-d')}}' name="dateDocAsso" class="form-control form-control-sm">
+										</div>
+									</div>
+							
+								<div class="hr-line-dashed"></div>
+							
+									<div class="form-group row">
+										<div class="col-sm-12">
+											<label>Reference (*) </label>
+										</div>
+										<div class="col-sm-12">
+
+											<input type="text" name="refDocAsso" placeholder="Reference" class="form-control form-control-sm" value="REF-{{commande.code  }}">
+										</div>
+									</div>
+
+							
+								<div class="hr-line-dashed"></div>
+							
+									<div class="form-group row">
+										<div class="col-sm-12">
+											<label>Description </label>
+										</div>
+										<div class="col-sm-12">
+											<textarea name="description" placeholder="Description" class="form-control form-control-sm"></textarea>
+
+										</div>
+									</div>
+
+							
+
+
+								<input type="hidden" name="_id" value="{{ commande.id }}">
+
+							
+
+
+						
+						
+
+
+
+
+						</div>
+						<div class="row">
+							<div class="col-lg-12 btn-bottom-position">
+								<div class="title-action">
+
+
+									{% if workflow_has_marked_place(commande, 'valider') %}
+										<button class="btn btn-sm btn-white btn-white  btn-primary  my-button2 mbt btn-register font-size-11" type="submit">
+											<i class="fa fa-save"></i>
+											{{ button_label|default('Enregistrer') }}</button>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+
+				{% else  %}
+					<div class="forum-item animated length">
+						<div class="row">
+							<div class="col-md-9">
+								<div class="forum-icon">
+									<i class="fa fa-warning"></i>
+								</div>
+								<a class="forum-item-title">Important</a>
+								<div class="forum-sub-title">
+									Pour passer une livraison , il faut tout d'abord valider ce bon de commande.
+									<a href="{{ path('t_commandefrscab_show' , {id:commande.id})}}">{{ commande.code }}</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				{% endif %}
+
+
+			</div>
+		</div>
+	</div>
+
+</form><br><br>

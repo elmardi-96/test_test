@@ -1,0 +1,54 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Etudinat , consulter Facture | Univ
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-4">
+			<h2 class="fo">Univ , Information étudiant
+			</h2>
+		</div>
+		<div class="col-lg-8">
+			<div class="title-action">
+				<button class="btn btn-white btn-xs btn-lg my-button admissible" data-style="expand-left" type="submit">
+					<i class="fa fa-save"></i>
+					{{ button_label|default('Enregistrer') }}</button>
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+		{#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+																																														#}
+
+	</div>
+	<br/><br/>
+	<div class="row pt-20">
+		<div class="col-md-12">
+			<div class="ibox">
+				<div class="ibox-content full-height-scroll">
+					<div class="row ">
+						<div class="col-md-12">
+							<div class="tab-content">
+								configuration concours
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+	{% if concours is defined and concours is not empty %}
+		<input type="hidden" name="_id" value="{{ concours.id }}" id="_id"/>
+	{% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_concours') }}
+{% endblock %}

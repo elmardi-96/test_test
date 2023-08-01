@@ -1,0 +1,24 @@
+{% extends 'base_config.html.twig' %}
+
+
+
+
+{% block body %}
+    
+    <div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+
+<div class="new">
+ {% include './config/inc/navigation.html.twig' %}
+
+    
+        {{ include('./parametrage/us_operation/_form.html.twig') }}
+        
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('us_operation') }}
+{% endblock %}

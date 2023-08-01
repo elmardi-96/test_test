@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="fr">
+<title>Chéque</title>
+
+	</head>
+	<style>
+
+{# @page { size: 360pt 360pt; } #}
+
+		@page {
+			margin: 180px 20px 0 20px !important;
+			padding: 0px 0px 0px 0px !important;
+		}
+
+		body {
+		     
+       	 font-family: 'Courier New';
+            color: black;             
+		
+
+		}
+
+         .header {
+        position: fixed;
+        font-size: 13px;
+        top: -145px;
+        left: 0px;
+        right: 0px;
+        }
+   
+
+		.logo {
+			max-width: 250px;
+			max-height: 100px;
+			text-align: right;
+		}
+	
+		.footer {
+			/*border-top: 2px solid #555555;*/
+			margin-top: 10px;
+			font-size: 12px;
+			text-align: center;
+			position: fixed;
+			bottom: 0px;
+            left: 0px;
+            right: 0px;
+
+
+		}
+	
+		*,body {
+            font-family: Courier, sans-serif;
+           text-transform: uppercase ;
+
+		}
+
+
+		main {
+			margin-top: 0;
+		}
+        .page_break {page-break-inside: auto;}
+
+
+        main {
+            margin-top:0px;
+        }
+        .sig img{
+            max-width: 150px;
+                    max-height: 50px;
+        }
+        @font-face {
+		font-family:'Signaturex' ;
+		src:url("./font/SignaturexDemoRegular.ttf") ;
+		}
+	</style>
+
+
+
+	<body>
+{% if TrTransactionOne.executer == 1 %}
+    <div class="content" style=" position: absolute; opacity: 0.2; font-size: 155px; transform: rotate(-55deg); text-align:center; align-items: center; padding: 30mm -40mm;">
+        <b>DEJA REGLE</b>
+    </div>
+{% endif %}
+
+<div class="header">
+    <table style="padding:50px 60% 0 0">
+        <tr>
+            <th>
+                {{barcode|raw}}
+            </th>
+        </tr>
+        
+    </table>
+   <div style="margin-top: 90px">
+        <p style="text-align: left; padding-top:4px;  margin-left:143px;">{{TrTransactionOne.DateBq |date("d/m/Y")}}</p>
+        <br><br>
+        <p style="text-align: left; margin-left: 160px;">
+            {{TrTransactionOne.CodeBq }}
+            <br>
+        </p>
+</div>
+
+      
+</div>
+<div class="footer" style="height: {{app.session.get('height')}};">
+
+ 
+   <div style="position:relative">
+    <div style="position:absolute;text-align:justify;margin-top: 1px;">
+
+
+        <table style="width: 100%;" text-align="center" cellspacing="0">
+            <tr>
+                <td style="width: 60%; text-align: left;"></td>
+                <td style="width: 20%; text-align: right;padding:0 85px 0 -20px;">{{ somme |number_format(2, ',', ' ') }}</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div style="text-align:center;margin-bottom: 10px;padding:0 0 0 170px;background:re55d;">
+
+        <table style="width: 100%; margin-left:15px;margin-right: 110px;" text-align="center" cellspacing="0">
+
+            <tr>
+                <td style="font-size:11px;text-indent:25px;word-wrap: break-word;overflow-wrap: break-word;position:relative;width: 60%; text-align: left;  line-height: 2.3;padding-top:13px;padding-left:48px;">
+                    
+                    {{ text }}
+                    {# CENT QUATRE-VINGT-QUINZE MILLE DEUX CENT SOIXANTE- #}
+                    {# QUATRE DIRHAMS ET TRENTE CENTIMES #}
+                    
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div style="position:absolute;text-align:justify;margin-left:120px;top:22px; ">
+
+        <table style="width: 100%;margin-top:50px;" text-align="center" cellspacing="0" >
+
+            <tr>
+                <td style="width: 10%; text-align: left;"></td>
+                <td style="width: 50%; text-align: left;padding-left:70px;">
+                    {% if type is not null %}
+                        {{uatehcniquedetail}}
+                    {% else %}
+                        {{TrTransactionOne.Fournisseur.nom}}
+                    {% endif %}
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+    <div style="position:absolute;text-align:justify;top:99px;padding:0 70px 0 0">
+
+        <table style="width: 100%;" text-align="center" cellspacing="0">
+
+            <tr>
+                <td style="width: 80%;padding-left:420px;">Rabat</td>
+                <td style="width: 80%;padding-left:150px;">{{TrTransactionOne.DateBq |date("d/m/Y")}}</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+   </div>
+
+
+
+</div>
+
+<body>
+<div style="padding:15px; margin-top: 60px ">
+
+        <br><br><br><br><br><br>
+        <br><br><br><br><br>
+
+        <div style="text-align:justify;">
+
+
+            <table style="width:90%; text-align= center; cellspacing=0;margin-left: 90px;">
+
+
+                <thead style="width: 70%; ">
+                    <tr>
+                        <td style="text-align:center;width: 250%;padding:0 50px 0px -20px;word-wrap: break-word">
+						    <b>{{ cab.ObservationBq }}</b>
+                        </td>
+                        <td style="text-align:right;width: 120%;padding:20px ">
+                            <b>{{somme |number_format(2, ',', ' ') }}  </b>
+                        </td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+
+                        </td>
+                        <td>
+
+
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+
+    </div>
+    
+<div style ='margin-bottom: 1px' ></div>
+
+</body>
+
+
+
+

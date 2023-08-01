@@ -1,0 +1,133 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i> Informations sur le Congé  .</small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Code :</strong> {{ grs_conge.code }}
+                            </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Date Debut  :</strong> {{ grs_conge.dateDebut ? grs_conge.dateDebut|date('Y-m-d H:i:s') : '' }}
+                            </td>
+
+                        </tr> 
+                        <tr>
+                            <td>
+                                <strong>Date Fin  :</strong> {{ grs_conge.dateFin ? grs_conge.dateFin|date('Y-m-d H:i:s') : '' }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Description :</strong>  {{grs_conge.description}}
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Statut :</strong>  {{grs_conge.statut}}
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="ibox">
+                    <div class="ibox-content style-left-popup">
+
+
+
+                       {# {% if t_achatdemandeinternecab.grs_conges|length > 0 %}
+
+                            <div class="alert alert-warning">
+                                cette demande d'achat dispose déjà d'un bon de grs_conge .
+                                <br/>
+                                {% for key , grs_conge in t_achatdemandeinternecab.grs_conges %}
+                                     <b>Reference :  {{ grs_conge.code }}</b>
+                                {% endfor %}
+                            </div>
+                        {% else %}#}
+                            <h3>Commande Fournisseur </h3>
+                            <b>Générer une livraison </b>
+
+                            <div class="errors_list"></div>
+                            <div class="hr-line-dashed"></div>
+
+                            {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_generer'}}) }}
+                            {#<div class="form-group">
+                                {{ form_label(form.fournisseur ,'Fournisseur (*):', {'label_attr':{'class':'col-sm-12'}}) }} 
+                                {{ form_widget(form.fournisseur,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.dateDemande ,'Date demande (*):', {'label_attr':{'class':'col-sm-12'}}) }} 
+                                {{ form_widget(form.dateDemande,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.refDocAsso ,'Référence (*):', {'label_attr':{'class':'col-sm-12'}}) }} 
+                                {{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                            </div>#}
+
+                            <div class="form-group">
+                                {{ form_label(form.dateLivraisonAprev ,'Date LVR Prévu (*):', {'label_attr':{'class':'col-sm-12'}}) }} 
+                                {{ form_widget(form.dateLivraisonAprev,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                            </div>
+
+
+                            <br/>
+                            {% if grs_conge is defined %}
+                                <input type="hidden" name="_id" value="{{ grs_conge.id }}" />
+                            {% endif %}
+                            <button class="btn btn-white btn-block btn-xs"><i class="fa fa-save"></i> {{ button_label|default('Enregistrer') }}</button>
+                            {{ form_end(form,{'render_rest': false}) }}
+
+                        {#{% endif %}#}
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

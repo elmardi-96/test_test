@@ -1,0 +1,245 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Modifier | Charge
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="edit">
+
+
+		{{ include('./tresorerie/tr_charge/_form.html.twig',{'button_label': 'Modifier'}) }}
+
+
+		<div class="row">
+			<div class="col-lg-12 ">
+				<div class="ibox ">
+					<div class="ibox-content">
+
+
+						<div class="table-responsive table-responsive-2">
+							<div class="col-md-12 m-mar-t">
+								<h5 class="m-left">La liste des articles</h5>
+								<table class="m-add t-m table table-striped table-bordered table-hover dataTables-example table-detail">
+									<thead>
+										<tr>
+
+											<th style="width: 3%">#
+											</th>
+											<th style="width: 33%">Compte
+											</th>
+											<th style="width: 7%">Unite  </th>
+											<th style="width: 7%">Qantite
+											</th>
+											<th style="width: 7%">P.U</th>
+											<th style="width: 7%">TVA % </th>
+
+
+											<th style="width: 10%">TTC </th>
+
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										{% for detail in charge.details %}
+											<tr>
+
+
+												<td style="width: 3%"></td>
+												<td style="width: 33%">
+													{{ detail.compte ? detail.compte.designation }}
+												</td>
+
+												<td style="width: 7%">
+
+													{{ detail.unite is not defined  or (detail.unite and detail.unite.__isInitialized() is defined and detail.unite.__isInitialized__ == false) ? null : detail.unite.abreviation }}
+												</td>
+												<td style="width: 7%">
+
+													{{ detail.quantite }}
+												</td>
+												<td style="width: 7%">
+													{{ detail.prixunitaire |number_format(2, '.', ',') }}
+												</td>
+												<td style="width: 7%">
+													{% if detail.tva is not empty %}
+														{{ detail.tva }}%
+													{% else %}
+														-
+													{% endif %}
+												</td>
+
+												<td style="width: 7%">
+
+
+													{{ detail.prixttc |number_format(2, '.', ',') }}
+												</td>
+												<td>
+
+													<form method="POST" class="detail_edit float-left">
+
+														<input type="hidden" name="_id" value="{{ detail.id }}">
+														<input type="hidden" name="cab_id" value="{{ charge.id }}">
+
+														<button class="btn btn-white fa fa-pencil"></button>
+													</form>
+													{#<a class="delete_element" id="{{ detail.id }}"><i class="fa fa-trash text-navy"></i></a>#}
+													{#<a class="detail_edit" id="{{ detail.id }}"><i class="fa fa-pencil text-navy"></i></a>#}
+
+													<form method="delete" class="detail_form_delete">
+														<input type="hidden" name="_id" value="{{ detail.id }}">
+														<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ detail.id) }}">
+														<button class="btn btn-white fa fa-trash "></button>
+													</form>
+
+													{#<button class="btn btn-primary btn-xs">{{ button_label|default('Ajouter a la liste') }}</button>#}
+												</td>
+											</tr>
+										{% endfor %}
+
+										{#<tr>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <td colspan="9">
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <form name="t_achatdemandeinternedet" method="post" novalidate="novalidate" class="detail_form form-inline " > 
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <table style="width: 100%">
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <tbody>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <tr>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <td style="width: 3%">
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </td>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <td style="width: 30%">
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <select id="t_achatdemandeinternedet_article" name="t_achatdemandeinternedet[article]" required="required" placeholder="Article" class="form-control form-control-sm  data.article article" autofocus="autofocus"><option value="">Choix article</option><option value="13">blanditiis</option><option value="14">perferendis</option><option value="15">et</option><option value="16">aspernatur</option><option value="17">quia</option><option value="18" selected="selected">aliquid</option><option value="19">iste</option><option value="20">amet</option><option value="21">fugiat</option><option value="22">sit</option><option value="23">labore</option><option value="24">nulla</option></select> 
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </td>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <td style="width: 7%">
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <input type="text" id="t_achatdemandeinternedet_quantite" name="t_achatdemandeinternedet[quantite]" required="required" class="form-control form-control-sm data.quantite" placeholder="Qnt" value="1"> 
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </td>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <td style="width: 7%">
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <input type="text" id="t_achatdemandeinternedet_prixunitaire" name="t_achatdemandeinternedet[prixunitaire]" required="required" class="form-control form-control-sm data.prixunitaire" placeholder="P.U" value="5"> 
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </td>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <td style="width: 7%">
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <input type="text" id="t_achatdemandeinternedet_tva" name="t_achatdemandeinternedet[tva]" required="required" class="form-control form-control-sm" placeholder="TVA" value="1"> 
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </td>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <td style="width: 7%">-</td>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <td style="width: 20%">
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <textarea id="t_achatdemandeinternedet_observation" name="t_achatdemandeinternedet[observation]" required="required" class="form-control form-control-sm" placeholder="Observation">m2</textarea> 
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </td>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <td>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <input type="hidden" name="_id" value="15">
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <button style="padding: 7px " class="btn btn-white btn-xs" type="submit">Modifier</button>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </td>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </tr>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </tbody></table>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <input type="hidden" id="t_achatdemandeinternedet__token" name="t_achatdemandeinternedet[_token]" value="6vAtLOMx0Aao-EOnuLRjEYlgalV0gV-8MkyvnmwL39k"></form>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </td>
+										                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </tr>#}
+									</tbody>
+
+
+									<tfoot>
+										<tr style="display: none" class="edit-new-compte">
+											<td colspan="10">
+												{{ include('./tresorerie/tr_charge/_form_detail.html.twig' , {'class': 'detail_form_add_article','button_label': 'Ajouter a la liste '}) }}
+											</td>
+										</tr>
+									</tfoot>
+								</table>
+								<button class="new-compte-btn btn btn-xs btn-white" type="button">
+									<i class="fa fa-arrows"></i>&nbsp; Nouveau Compte</button>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+{#{dump(charge.details)}#}
+
+		{% if charge.reglements|length >0 %}
+			<div class="row justify-content-md-center">
+				<div class="col-lg-12 ">
+					<div class="ibox ">
+						<div class="ibox-title m-min"></div>
+						<div class="ibox-content">
+							<div class="table-responsive">
+								<div class="col-md-12 m-mar-t">
+									<h5 class="m-left" style="text-transform: uppercase;">reglement fournisseur</h5>
+									<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable bod" id="datatable-show2">
+										<thead>
+											<tr>
+
+												<th>#</th>
+												<th>Fournisseur</th>
+												<th>Date Demande Paiement	 :</th>
+
+												<th>Montant Paiement :</th>
+												<th>Sup</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											{% set totale = 0 %}
+											{% set c = 0 %}
+											{% for t_reglementfr1 in charge.reglements %}
+												{% set c = c + 1 %}
+												{% set totale =  totale + t_reglementfr1.mtreglement %}
+												<tr>
+													<td>{{c}}</td>
+
+													<td>{{t_reglementfr1.factureFournisseur.fournisseur ? t_reglementfr1.factureFournisseur.fournisseur.societe}}</td>
+													<td>{{ t_reglementfr1.datereglement ? t_reglementfr1.datereglement|date('d-m-Y') : '' }}</td>
+
+													<td>{{ t_reglementfr1.mtreglement|number_format(2) }}</td>
+													<td>
+														<a href="#" data-id="{{t_reglementfr1.id}}" data-token="{{ csrf_token('delete' ~ t_reglementfr1.id) }}" data-charge="{{charge.id}}" class=" _delete " id="_delete">
+															<i class="fa fa-trash" style="color: red !important;"></i>
+														</a>
+
+													</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+										<tfoot>
+											<tr>
+												<th colspan="5" style="text-align:right">Total:
+													{{totale}}</th>
+
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('charge') }}
+{% endblock %}

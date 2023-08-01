@@ -1,0 +1,141 @@
+{% extends 'base_empty.html.twig' %}
+
+
+
+{% block stylesheets %}
+      {{ parent() }}
+    {{ encore_entry_link_tags('profil') }}
+    
+{% endblock %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+    <div class="wrapper wrapper-content">
+        <div class="container">
+
+
+            {# {% include './user/inc/profil_image.html.twig' %}#}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5><i class="fa fa-user"></i> Mon profil </h5>
+                        </div>
+                        <div class="ibox-content">
+
+
+
+                            {% include './user/profil/inc/profil_statut.html.twig' %}
+
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                    <div class="panel blank-panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-options">
+
+                                                {% include './user/profil/inc/navigation.html.twig' %}
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-body">
+
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active">
+
+
+                                                    <div class="row">
+
+                                                        <div class="col-md-12">
+                                                            <h2 class="user-profil-titre">Mes permissions</h2>
+                                                            <br/>
+                                                            <div class="hr-line-dashed"></div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+
+
+                                                            <div id="container" style="display: block">
+
+                                                                <ul>
+                                                                    <li data-jstree='{"icon":"fa fa-users"}' class="jstree-open">{{ app.user.groupe ? app.user.groupe.designation }}
+                                                                        <ul>
+
+
+
+
+                                                                            {#{% for key , module in app.session.get('modules')  %}
+                                                                                {{ dump(module)  }}
+                                                                            {% endfor %}#}
+
+
+
+                                                                            {% for key , module in app.session.get('modules')  %}
+                                                                                <li data-jstree='{"icon":"fa fa-cube"}'  class="jstree-open"><a>{{ module.titre }}</a>
+                                                                                    <ul>
+                                                                                        {% if module.dossiers is defined%}
+                                                                                            {% for key , dossier in  module.dossiers %}
+                                                                                                <li data-jstree='{"icon":"fa fa-folder"}'><a>{{ dossier.abreviation }}</a>
+                                                                                                    <ul>
+                                                                                                        {% if dossier.sousModules is defined %}
+                                                                                                            {% for key , sousModule in  dossier.sousModules %}
+                                                                                                                <li data-jstree='{"icon":"fa fa-cubes"}'class="jstree-open">{{ sousModule.titre }}
+                                                                                                                    <ul>
+                                                                                                                        {% if sousModule.operations is defined%}
+                                                                                                                            {% for key , operation in  sousModule.operations %}
+                                                                                                                                <li  data-jstree='{"icon":"fa fa-check-square-o"}'  >{{ operation.titre }}</li>
+                                                                                                                                {% endfor %}
+                                                                                                                            {% endif %}
+                                                                                                                    </ul> 
+
+                                                                                                                </li>
+                                                                                                            {% endfor %}
+                                                                                                        {% endif %}
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                            {% endfor %}
+                                                                                        {% endif %}
+                                                                                    </ul>
+                                                                                </li>
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                    </li>
+
+                                                                </ul>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--statistique inc -->    
+
+        </div>
+
+    </div>
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('profil') }}
+{% endblock %}
+
+

@@ -1,0 +1,15 @@
+FROM eu.gcr.io/fcz-project/fcz-symfony:1.1
+
+COPY ./ /var/www/project/
+
+RUN mkdir -p /var/www/project/var/cache/prod
+RUN mkdir -p /var/www/project/var/cache/dev
+RUN mkdir -p /var/www/project/var/session
+RUN mkdir -p /var/www/project/var/log
+
+RUN chmod -R 777 /var/www/project/
+
+# To resolve this issue : Invalid command ‘Header’, perhaps misspelled or defined by a module not included in the server configuration
+RUN a2enmod headers
+
+WORKDIR /var/www/

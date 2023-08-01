@@ -1,0 +1,119 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Utilisateurs-groupes{% endblock %}
+
+{% block body %}
+
+
+
+    <div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+
+
+    {% include './config/inc/navigation.html.twig' %}
+
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-4">
+
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+        <div class="col-lg-8">
+            <div class="title-action">
+                {#<button class="btn btn-primary btn-xs btn-lg" type="submit"><i class="fa fa-save"></i> Enregistrer</button>#}
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+    <br/><br/><br/>
+
+
+
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="text-center m-t-lg">
+                                    <div class="nopad text-center">
+                                        <label class="image-radio" theme="no-skin">
+                                            <img class="img-responsive im-radio-box" src="{{asset('/img/theme/default.png')}}" />
+                                            <input type="radio" name="image_radio" value="1" />
+                                            <i class="glyphicon glyphicon-ok hidden"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="text-center m-t-lg">
+                                    <div class="nopad text-center">
+                                        <label class="image-radio" theme="skin-1">
+                                            <img class="img-responsive im-radio-box" src="{{asset('/img/theme/blue_light.png')}}" />
+                                            <input type="radio" name="image_radio" value="1" />
+                                            <i class="glyphicon glyphicon-ok hidden"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="text-center m-t-lg">
+                                    <div class="nopad text-center">
+                                        <label class="image-radio" theme="skin-3">
+                                            <img class="img-responsive im-radio-box" src="{{asset('/img/theme/yellow.png')}}" />
+                                            <input type="radio" name="image_radio" value="1" />
+                                            <i class="glyphicon glyphicon-ok hidden"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="text-center m-t-lg">
+                                    <div class="nopad text-center">
+                                        <label class="image-radio" theme="md-skin">
+                                            <img class="img-responsive im-radio-box" src="{{asset('/img/theme/matireal.png')}}" />
+                                            <input type="radio" name="image_radio" value="1" />
+                                            <i class="glyphicon glyphicon-ok hidden"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                           
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="btn-group btn-breadcrumb btn-breadcrumb2">
+        <a href="#" class="btn btn-default">
+            <b>CNSS
+
+            </b>
+        </a>
+        {% if  paie is defined and paie is not empty and paie.id is not empty %}
+            {% set count = 0 %}
+            {% set count2 = 0 %}
+            {% for key , place  in {"creer":"Crée" , "valider":"Validé", "generer":"Génerer" }  %}
+                {% if count >= 0 %}
+
+                    <a href="#" class="btn btn-default
+                       {% if workflow_has_marked_place(paie, key)  %}
+                           btn-breadcrumb2-active
+                       {% endif %}
+                       {% if count2 == 0  %}{{ workflow_metadata(paie, 'class_css', key)}}{% else %} hide-btn-workflow {% endif %}
+                       ">{{ place }}
+                    </a>
+                    {% set count = count + 1%}
+                    {% if workflow_has_marked_place(paie, key)  %}
+                        {% set count2 = count2 + 1 %}
+                    {% endif %}
+                    
+                    
+                    
+                {% endif %}
+
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i> Informations sur commande client.</small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Code :</strong> {{ commande.code }}
+                            </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Date  :</strong> {{ commande.dateDevis ? commande.dateDevis|date('Y-m-d H:i:s') : '' }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Description :</strong>  {{commande.observation}}
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Statut :</strong>  {{commande.statut.statut}}
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="ibox">
+                    <div class="ibox-content style-left-popup">
+
+                        {% if commande.livraison|length > 0 %}
+
+                            <div class="alert alert-warning">
+                                cette demande dispose dejà d'un bon de commande .
+                                <br/>
+                                {% for key , livraison in commande.livraison %}
+                                     <b>Reference :  {{ livraison.code }}</b>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+
+
+                            <h3>Devis Client </h3>
+                            <b>Generer Livraison Client</b>
+
+                            <div class="errors_list"></div>
+                            <div class="hr-line-dashed"></div>
+
+                            {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_generer'}}) }}
+
+                            <div class="form-group">
+                                {{ form_label(form.dateLivprv ,'Date LVR Prevu (*):', {'label_attr':{'class':'col-sm-12'}}) }} 
+                                {{ form_widget(form.dateLivprv,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                            </div>
+
+
+                            <br/>
+                            {% if commande is defined %}
+                                <input type="hidden" name="_id" value="{{ commande.id }}" />
+                            {% endif %}
+                            <button class="btn btn-white btn-block btn-xs"><i class="fa fa-save"></i> {{ button_label|default('Enregistrer') }}</button>
+                            {{ form_end(form,{'render_rest': false}) }}
+
+                    
+                         {% endif %}
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

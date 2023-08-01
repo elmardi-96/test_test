@@ -1,0 +1,373 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+	<div class="col-lg-6">
+		<h2 class="fo">Parametrage Sous module
+			<span>(us_sous_module)</span>
+		</h2>
+	</div>
+
+
+	<div class="col-lg-6">
+		<div class="title-action">
+			<button class="btn btn-primary btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}</button>
+			{% if  us_sous_module.id > 0 %}
+				<a href="#" class="btn btn-xs btn-danger btn-outline" id="_delete">
+					<i class="fa fa-trash"></i>
+					Supprimer</a>
+				<div id="test" data-etablissement-id="{{ us_sous_module.id|json_encode }}"></div>
+
+			{% endif  %}
+		</div>
+	</div>
+
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+
+		{{ wo_render_breadcrumbs() }}
+	</div>
+</div>
+
+
+<br/><br/>
+
+
+<div class="row pt-20 scroll_content">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+							<div class="panel-heading">
+								<div class="panel-options">                        
+{# 									{% include './parametrage/us_sous_module/inc/navigation_pre_tabs.html.twig' %}
+ #}								</div>
+							</div>
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+
+											<div class="row">
+
+
+												<div class="col-md-6 b-r">
+												
+													<div class="form-group row">
+														{{ form_label(form.module  ,'Module ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.module,{'attr':{'class':'form-control form-control-sm','placeholder': 'Module'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.module) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+                                                
+													<div class="form-group row">
+														{{ form_label(form.titre  ,'Titre ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.titre,{'attr':{'class':'form-control form-control-sm','placeholder': 'Titre '}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.titre) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.description  ,'Description ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.description,{'attr':{'class':'form-control form-control-sm','placeholder': 'Description '}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.description) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.abreviation  ,'Abreviation ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.abreviation,{'attr':{'class':'form-control form-control-sm','placeholder': 'Abreviation'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.abreviation) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.classCs  ,'Class ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.classCs,{'attr':{'class':'form-control form-control-sm','placeholder': 'Class'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.classCs) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.idCs  ,'Id cs ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.idCs,{'attr':{'class':'form-control form-control-sm','placeholder': 'Id cs'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.idCs) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.image  ,'Image ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.image,{'attr':{'class':'form-control form-control-sm','placeholder': 'Image'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.image) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.icon  ,'Icon ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.icon,{'attr':{'class':'form-control form-control-sm','placeholder': 'Icon'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.icon) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.route  ,'Route ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.route,{'attr':{'class':'form-control form-control-sm','placeholder': 'Route'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.route) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.activeLink  ,'Active link ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.activeLink,{'attr':{'class':'form-control form-control-sm','placeholder': 'Active link'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.activeLink) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.routeInfo  ,'Route Info ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.routeInfo,{'attr':{'class':'form-control form-control-sm','placeholder': 'Route Info'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.routeInfo) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.linkDirect  ,'Link direct ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.linkDirect) }}
+															<span class="form-error-message">
+																{{ form_errors(form.linkDirect) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.prefix  ,'Prefix ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.prefix,{'attr':{'class':'form-control form-control-sm','placeholder': 'Prefix'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.prefix) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.active ,'Active ', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.active) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+
+												</div>
+												{% if us_sous_module.id > 0 %}
+													<div class="col-md-6 br">
+
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Id</label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.id }}
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed"></div>
+
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Module </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.module ? us_sous_module.module.titre }}
+															</div>
+														</div>
+
+														<div class="hr-line-dashed"></div>
+
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Titre </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.titre }}
+															</div>
+														</div>
+
+														<div class="hr-line-dashed"></div>
+
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Description </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.description }}
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Abreviation </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.abreviation }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Class </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.classCs }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">idCs </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.idCs }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">image </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.image }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Icon </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.icon }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Route </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.route }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Active link </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.activeLink }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Route Info </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.routeInfo }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Link direct </label>
+															<div class="col-sm-9 col-form-label">
+																{% if us_sous_module.linkDirect == true %}
+																	Oui
+																{% else %}
+																	Non
+																{% endif %}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Prefix </label>
+															<div class="col-sm-9 col-form-label">
+																{{ us_sous_module.prefix }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Active</label>
+															<div class="col-sm-9 col-form-label">
+																{% if us_sous_module.active == true %}
+																	Active
+																{% else %}
+																	Desactive
+																{% endif %}
+															</div>
+														</div>
+													</div>
+												{% endif %}
+
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	{{form_widget(form._token)}}
+	{{ form_end(form,{'render_rest': false}) }}
+

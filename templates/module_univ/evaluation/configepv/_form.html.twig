@@ -1,0 +1,220 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+<div
+    class="form-validation-msg" style="display:none">
+    {# message flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div data-toastr="{{ label }}" class="toastr-msg">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {# form global errors  #}
+    <div class="form-errors">{{form_errors(form)}}</div>
+</div>
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+    <div class="col-lg-6">
+        {% include './module_univ/evaluation/configepv/inc/workflow_breadcumb.html.twig' %}
+    </div>
+
+    <div class="col-lg-6">
+        <div class="title-action">
+            {% if workflow_has_marked_place(epreuve, 'valider') %}
+            {% else %}
+                <button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+                    <i class="fa fa-save"></i>
+                    {{ button_label|default('Enregistrer') }}
+                </button>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="border-b"></div>
+    <div class="col-lg-12">
+        {% include './module_univ/evaluation/configepv/inc/workflow.html.twig' %}
+    </div>
+</div>
+<br/><br/>
+
+<div class="row pt-20">
+    <div class="col-lg-12 ">
+        <div class="ibox">
+
+            <div class="ibox-content">
+
+                <div class="message-success"></div>
+
+
+                <div class="row m-t-sm">
+                    <div class="col-lg-12">
+                        <div class="panel blank-panel padding-style">
+                            <div class="panel-heading">
+                                <div class="panel-options">
+                                    {% include './module_univ/evaluation/configepv/inc/navigation.html.twig' %}
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 scroll_content">
+                                <div class="panel-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active show" id="tab-1">
+                                            {% if workflow_has_marked_place(epreuve, 'valider') or workflow_has_marked_place(epreuve, 'cloturer') %}
+                                                <div class="forum-item animated bounce">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <div class="forum-icon">
+                                                                <i class="fa fa-warning"></i>
+                                                            </div>
+                                                            <a class="forum-item-title">Important</a>
+                                                            <div class="forum-sub-title">
+                                                                Vous ne pouvez pas modifier une évaluation aprés la validation ,
+                                                                <br/>veuillez consulter ce lien pour plus d'informations sur cette évaluation
+                                                                <a href="{{ path('module_univ_evaluation_epreuves_show' , {id:epreuve.id})}}">{{ epreuve.code }}</a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            {% else %}
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h3 class="m-t-none m-b">INFORMATIONS</h3>
+                                                        {#<div class="form-group row " style="display:none;">
+                                                                {{ form_label(form.code ,'Désignation :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                <div class="col-sm-2">
+                                                                        {{ form_widget(form.code,{'attr':{'class':'form-control  form-control-sm','placeholder':'Désignation'}}) }}
+
+                                                                        <div class="form-error {% if form_errors(form.code)|length > 0 %}error-class-tab{% endif %}">
+                                                                                {{ form_errors(form.code) }}
+                                                                        </div>
+                                                                </div>
+                                                        </div>#}
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ">
+                                                            {{ form_label(form.dateEpreuve ,'Date Epreuve :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                            <div class="col-sm-2">
+                                                                {{ form_widget(form.dateEpreuve,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date Epreuve'}}) }}
+
+                                                                <div class="form-error {% if form_errors(form.dateEpreuve)|length > 0 %}error-class-tab{% endif %}">
+                                                                    {{ form_errors(form.dateEpreuve) }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {#<div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ">
+                                                                {{ form_label(form.designation ,'Désignation :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                <div class="col-sm-2">
+                                                                        {{ form_widget(form.designation,{'attr':{'class':'form-control  form-control-sm','placeholder':'Désignation'}}) }}
+
+                                                                        <div class="form-error {% if form_errors(form.designation)|length > 0 %}error-class-tab{% endif %}">
+                                                                                {{ form_errors(form.designation) }}
+                                                                        </div>
+                                                                </div>
+                                                        </div>#}
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ">
+                                                            {{ form_label(form.nature ,'Nature :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                            <div class="col-sm-1">
+                                                                {{ form_widget(form.nature,{'attr':{'class':'form-control  form-control-sm','placeholder':'Nature'}}) }}
+
+                                                                <div class="form-error {% if form_errors(form.nature)|length > 0 %}error-class-tab{% endif %}">
+                                                                    {{ form_errors(form.nature) }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ">
+                                                            {{ form_label(form.coefficient ,'Coeficient', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                            <div class="col-sm-1">
+                                                                {{ form_widget(form.coefficient,{'attr':{'class':'form-control  form-control-sm','placeholder':'Coeficient'}}) }}
+
+                                                                <div class="form-error {% if form_errors(form.coefficient)|length > 0 %}error-class-tab{% endif %}">
+                                                                    {{ form_errors(form.coefficient) }}
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="hr-line-dashed paddi"></div>
+                                                        <div class="form-group row ">
+                                                            {{ form_label(form.anonymat ,'Anonymat', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                            <div class="col-sm-2">
+                                                                {{ form_widget(form.anonymat,{'attr':{'class':'form-control  form-control-sm anonymat','placeholder':'Anonymat'}}) }}
+
+                                                                <div class="form-error {% if form_errors(form.anonymat)|length > 0 %}error-class-tab{% endif %}">
+                                                                    {{ form_errors(form.anonymat) }}
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed paddi tog {% if form.anonymat.vars.value == 2  %}none{% endif %}"></div>
+                                                        <div class="form-group row tog {% if form.anonymat.vars.value == 2  %}none{% endif %}">
+
+                                                            {{ form_label(form.natureAnonymat ,'Nature anonymat', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                            <div class="col-sm-2">
+                                                                {{ form_widget(form.natureAnonymat,{'attr':{'class':'form-control  form-control-sm','placeholder':'Nature anonymat'}}) }}
+
+                                                                <div class="form-error {% if form_errors(form.natureAnonymat)|length > 0 %}error-class-tab{% endif %}">
+                                                                    {{ form_errors(form.natureAnonymat) }}
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed paddi"></div>
+                                                        <div class="form-group row ">
+                                                            {{ form_label(form.enseignant ,'Enseignant :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                            <div class="col-sm-2">
+                                                                {{ form_widget(form.enseignant,{'attr':{'class':'sel2 form-control  form-control-sm','placeholder':'Enseignant'}}) }}
+
+                                                                <div class="form-error {% if form_errors(form.enseignant)|length > 0 %}error-class-tab{% endif %}">
+                                                                    {{ form_errors(form.enseignant) }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="hr-line-dashed ph"></div>
+
+                                                        <div class="form-group row ">
+                                                            {{ form_label(form.observation ,'Observation :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                            <div class="col-sm-3">
+                                                                {{ form_widget(form.observation,{'attr':{'class':'form-control  form-control-sm','placeholder':'Observation'}}) }}
+
+                                                                <div class="form-error {% if form_errors(form.observation)|length > 0 %}error-class-tab{% endif %}">
+                                                                    {{ form_errors(form.observation) }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="m-t-none m-b"><br>
+                                                        </h3>
+
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{{form_widget(form._token)}}
+{{ form_end(form,{'render_rest': false}) }}

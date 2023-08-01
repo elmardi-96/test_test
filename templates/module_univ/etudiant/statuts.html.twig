@@ -1,0 +1,74 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i>  </small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+               
+
+                <div class="ibox">
+                    <div class="ibox-content">
+
+                        <h3>Etudiants Statut </h3>
+                        <form novalidate="novalidate" name="form_statut" class="form_statut" >
+                      
+                        <div class="form-group">
+                            
+                            <label class:'col-sm-4' >Statut (*) :</label>
+                            <select class="form-control " name="statut" >
+                                <option value="">Statut</option>
+                                {% for statut in statuts %}
+                                <option value="{{statut.id}}">{{ statut.designation }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            
+                            {% for etu in etudiants %}
+                            
+                            <input type="hidden"  class="etudiantt" name="_etudiantt[]" value="{{etu}}">
+                            {% endfor %}
+                        </div>
+                       
+                        <br/>
+                      
+                        <button type="submit" class="btn btn-white btn-block btn-xs my-button"><i class="fa fa-save"></i> Enregistrer</button>
+                    </form>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

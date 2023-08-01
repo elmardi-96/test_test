@@ -1,0 +1,103 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i> Informations sur la demande .</small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Date Commande :</strong> {{ ua_t_commandefrscab.datecommande ? ua_t_commandefrscab.datecommande|date('Y-m-d') : ''  }}
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Reference :</strong> {{ ua_t_commandefrscab.refdocasso }}
+                            </td>
+
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <strong>Description  :</strong> {{ ua_t_commandefrscab.observation }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Statut :</strong>  {{ua_t_commandefrscab.statut ? ua_t_commandefrscab.statut.statut}}
+                            </td>
+
+                        </tr> 
+                    </tbody>
+                </table>
+
+                <div class="ibox">
+                    <div class="ibox-content">
+
+                        <h3>Expression de Besoin Statut </h3>
+                        {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_check'}}) }}
+                        <div class="form-group">
+                            {{ form_label(form.cdc ,'cdc :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                            {{ form_widget(form.cdc) }} 
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.cdv ,'cdv :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                            {{ form_widget(form.cdv) }} 
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.bec ,'bec :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                            {{ form_widget(form.bec) }} 
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.bev ,'bev :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                            {{ form_widget(form.bev) }} 
+                        </div>
+                        <br/>
+                      
+                        <button class="btn btn-white btn-block btn-xs"><i class="fa fa-save"></i> {{ button_label|default('Enregistrer') }}</button>
+                        {{ form_end(form,{'render_rest': false}) }}
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

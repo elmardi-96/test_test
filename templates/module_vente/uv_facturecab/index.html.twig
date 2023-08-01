@@ -1,0 +1,244 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}
+	Factures index | Vente
+{% endblock %}
+
+{% block body %}
+<div class="actions modal fade right" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+	<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalPreviewLabel">GeNeRER </h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body bo-0">
+				<div class="text-center spr">
+					<br/>
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
+				<div class="bod"></div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+ <div class="actions modal fade right" id="MyModalRefModifier" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel">Modifier</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+	
+					<div class="bod">
+                        <form class="save_modify">
+													
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="client">Document ref associe </label>
+                                    <input class="form-control" id="document_ref" name="document_ref" type="string" >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="montant">Date document </label>
+                                    <input class="form-control" id="date_document" name="date_document" type="date">
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="encaissement">Date facture </label>
+                                    <input class="form-control" id="date_valider" name="date_valider" type="date">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-2">
+                                <label class="col-sm-12 required">
+                                    <button class="save_new btn-register btn btn-white btn-block my-button  upper btn-xs my-button2" data-style="expand-left" type="submit">
+                                        <i class="fa fa-save "></i>
+                                        ENREGISTRER
+                                    </button>
+                                </label>
+                        
+                            
+                        
+                            </div>
+                        </form>
+                    </div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+<div class="actions modal fade right" id="ModalDocumentDynamiqueValider" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalPreviewLabel1"> Facture Proforma
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body bo-0">
+				<div class="text-center spr_valider">
+					<br/>
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
+				<div class="bod_valider"></div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+		<div class="col-lg-6">
+			{% include './module_vente/uv_facturecab/inc/workflow_breadcumb.html.twig' %}
+			{#{ wo_render_breadcrumbs() }#}
+		</div>
+
+
+		<div class="col-lg-6">
+			<div
+				class="title-action">{#% for key ,  operation in operations %}
+					                    {% if operation.horizontale  %}
+					                        <a {% if operation.route is not null  %}  href="{{ path(operation.route) }}" {%  endif %}  id="{{operation.prefix}}" class="btn btn-white btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+					                   {% endif %}
+					                        {% endfor %#}
+
+			</div>
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+
+	</div>
+
+
+	<br/>
+	<br/>
+	<div class="row border-bottom white-bg dashboard-header mt-20">
+		<div class="col-lg-12">
+
+			<div class="ibox ">
+				<div class="ibox-content" style="padding-top: 0px">
+					<div class="" style="overflow-x: scroll;">
+						<div class="row">
+							<div class="col-2 list_actions_bloc" style="position: fixed ; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+
+								<select class="select2_demo _3 form-control _multiple_actions" id="generer">
+									<option value="">Action</option>
+									{% for key , operation in  operations  %}
+										{% if operation.multiple %}
+											<option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+										{% endif %}
+									{% endfor %}
+									<option value="3">Facture Proforma</option>
+
+								</select>
+
+							</div>
+
+
+						</div>
+						<form name="action_test" class="action_test">
+						<table class="table cmd display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%">
+							<thead>
+
+
+								<tr>
+									<th>#</th>
+									<th>Code</th>
+									<th>Datefacture</th>
+
+									<th>Description</th>
+									<th>Clt</th>
+
+									<th>Ref CMD</th>
+									<th>Mt.Ht</th>
+									<th>Mt.Tva</th>
+									<th>Mt.Remise</th>
+									<th>Mt.TTC</th>
+									<th>Mt.Règ</th>
+									<th>Nbr.Reg</th>
+									<th>Nbr.op</th>
+									<th>signature</th>
+									<th>Statut</th>
+									<th>Opr</th>
+
+								</tr>
+							</thead>
+
+							<tbody class="commande"></tbody>
+
+							<tfoot>
+								<tr>
+									<th><input type="checkbox" id='allactions' name="allactions"></th>
+									<th>Code</th>
+									<th>Datefacture</th>
+
+									<th>Description</th>
+									<th>Clt</th>
+
+									<th>Ref CMD</th>
+									<th>Mt.Ht</th>
+									<th>Mt.Tva</th>
+									<th>Mt.Remise</th>
+									<th>Mt.TTC</th>
+									<th>Mt.Règ</th>
+									<th>Nbr.Reg</th>
+									<th>Nbr.op</th>
+									<th>signature</th>
+									<th>Statut</th>
+									<th>Opr</th>
+
+								</tr>
+							</tfoot>
+
+
+						</table>
+						</form>
+
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('Vtfacturefrscab') }}
+{% endblock %}

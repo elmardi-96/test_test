@@ -1,0 +1,223 @@
+<div class="row justify-content-md-center">
+	<div class="col-lg-11 ">
+		<div class="ibox">
+			<div class="ibox-title">
+				<h5>COMMANDE FOURNISSEUR
+					<small>COMMANDE FOURNISSEUR                                    .</small>
+				</h5>
+
+				<div class="ibox-tools">
+					<a class="collapse-link">
+						<i class="fa fa-chevron-up"></i>
+					</a>
+
+
+				</div>
+
+
+			</div>
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+							<div class="panel-heading">
+								<div class="panel-options">
+									<ul class="nav nav-tabs">
+										<li>
+											<a class="nav-link active" href="#tab-1" data-toggle="tab">informations de base
+											</a>
+										</li>
+										<li>
+											<a class="nav-link" href="#tab-2" data-toggle="tab">informations supplémentaires</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+
+											{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+
+											<div class="row">
+												<div class="col-md-6 b-r">
+
+													<h3 class="m-t-none m-b">Informations
+													</h3>
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.idClient ,'Fournisseur :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.idClient,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.pourcompte ,'Pour le compte de	 :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.pourcompte,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.datecommande ,'Date Cmd :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.datecommande,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.refdocasso ,' Réf DV Frs	 :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.refdocasso,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.mtremise ,' Remise :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.mtremise,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.devise ,' Date Lvr Prév	 :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.devise,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.datelivprv ,' Devise :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.datelivprv,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.referenceBci ,' Référence BCI :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.referenceBci,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+
+												</div>
+
+
+												<div class="col-md-6">
+
+													<h3 class="m-t-none m-b">Informations client & compte</h3>
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														<label class="col-sm-4 required">Classe :</label>
+														<div class="col-sm-8">
+															<select class="form-control code_compte_masse" name="Classe" style="width: 100%">
+																<option value="">Choix Classe</option>
+																<option value="ACH-CSM">Achat</option>
+															</select>
+														</div>
+													</div>
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														<label class="col-sm-4 required">Rubrique :</label>
+														<div class="col-sm-8">
+															<select class="form-control code_compte_rubrique" name="Rubrique" style="width: 100%">
+																<option value="">Choix Rubrique</option>
+																<option value="ACH-CH-CSM">Charges</option>
+																<option value="ACH-FCT-CSM">Fonctionnement</option>
+																<option value="ACH-IM-CSM">Immobilisation</option>
+															</select>
+														</div>
+													</div>
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														<label class="col-sm-4 required">Famille :</label>
+														<div class="col-sm-8">
+															<select class="form-control code_compte_poste" name="Famille" style="width: 100%">
+																<option value="">Choix Famille</option>
+																<option value="ACH-CNS-CSM">Achat Consomme</option>
+																<option value="ACH-HSP-RVD-CSM">Achat Hospitalier revendu
+																</option>
+																<option value="ACH-UN-RVD-CSM">Achat Universitaire revendu
+																</option>
+																<option value="ACH-PRS-CSM">Charges Personnel</option>
+															</select>
+														</div>
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.comptePoste ,' Réf DV Frs	 :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.comptePoste,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+
+												</div>
+
+
+											</div>
+
+
+										</div>
+										<div class="tab-pane" id="tab-2">
+
+											<div class="hr-line-dashed"></div>
+
+											<div class="form-group row">
+												{{ form_label(form.observation ,'Autre Informations  :', {'label_attr':{'class':'col-sm-3'}}) }}
+												<div class="col-sm-8">
+													{{ form_widget(form.observation,{'attr':{'class':'form-check-inline form-control form-control-sm'}}) }}
+												</div>
+											</div>
+
+											<div class="hr-line-dashed"></div>
+
+										</div>
+
+
+										<div class="hr-line-dashed"></div>
+
+										{#% if t_achatdemandeinternecab is defined %}
+																			                                                                                                                                                                                                                                    <input type="hidden" name="_id" value="{{ t_achatdemandeinternecab.id }}" />
+																			                                                                                                                                                                                                                                {% endif %}
+																			                                                                                                                                                                                        
+																			                                                                                                                                                                                                                            {{ form_widget(form.detail) }#}
+										<button class="btn btn-primary btn-sm" type="submit">{{ button_label|default('Enregistrer') }}
+										</button>
+										{{ form_end(form) }}
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+	</div>
+</div>

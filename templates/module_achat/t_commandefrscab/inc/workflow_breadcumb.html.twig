@@ -1,0 +1,136 @@
+
+
+<div class="row">
+	<div class="col-6">
+		<h4>
+			Bon commande Fournisseur</h4>
+
+
+		{% if  commande is defined and commande is not empty  and commande.id is not empty %}
+
+			{% set count = 0 %}
+			{% set count2 = 0 %}
+			{#% for key , place  in {"creer":"Cree" , "valider":"Valide" ,"livrer":"livre"  ,"cloturer":"cloturee" }  %}
+			                {% if count >= 0 %}
+			                    {% if workflow_has_marked_place(commande, key)  %}
+			                        {% set count2 = count2 + 1 %}
+			                    {% endif %}
+			                    <a href="#" class="btn btn-default
+			                       {% if workflow_has_marked_place(commande, key)  %}
+			                           btn-breadcrumb2-active
+			                       {% endif %}
+			                       
+			                       {% if count2 == 0 or count2 == 1 %}
+			                       
+			                       {{ workflow_metadata(commande, 'class_css', key)}}
+			                       
+			                       {% else %} 
+			                       
+			                       
+			                       
+			                       {% endif %}
+			                       ">{{ place }}</a>
+			                    {% set count = count + 1%}
+			                    {% if workflow_has_marked_place(commande, key)  %}
+			                        {% set count2 = count2 + 1 %}
+			                    {% endif %}
+			                {% endif %}
+			                </button>
+			            {% endfor %#}
+		{% endif %}
+	</div>
+    <div class="col-6">
+        {% if commande is defined and commande is not empty and commande.id is not empty   %}
+
+			{% if workflow_has_marked_place(commande, "creer") or workflow_has_marked_place(commande, "valider")   %}
+
+                <div class="dropdown dropdown-inline text-end"> 
+                    <a href="javascript:;" class="" data-toggle="dropdown">
+                        <span class="svg-icon svg-icon-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewbox="0 0 24 24" version="1.1" class="svg-top svg-color">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <circle fill="#000000" cx="12" cy="5" r="2"/>
+                                    <circle fill="#000000" cx="12" cy="12" r="2"/>
+                                    <circle fill="#000000" cx="12" cy="19" r="2"/>
+                                </g>
+                            </svg>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                        <ul class="dropdown-menu show drp-list" x-placement="bottom-start">
+
+
+                            {% for key ,  operation in operations  %}
+
+                                {% if workflow_has_marked_place(commande, "creer") %}
+                                    {%  if  operation.prefix == '_delete_commande' %}
+                                        <li>
+                                            <a id="{{operation.prefix}}" data-id="{{commande.id}}" data-token="{{ csrf_token('delete' ~ commande.id) }}" class='dropdown-item btn-danger btn-outline  {{operation.classCs}}'>
+                                                <i class="fa {{ operation.icon }}"></i>
+                                                {{ operation.titre|capitalize }}</a>
+                                        </li>
+                                    {% endif %}
+
+
+                                    {%  if  operation.prefix == '_desactiver_commande' or  operation.prefix == '_duppliquer'   %}
+                                        <li>
+                                            <a id="{{operation.prefix}}" data-id="{{commande.id}}" class='dropdown-item btn-white btn-outline  {{operation.classCs}}'>
+                                                <i class="fa {{ operation.icon }}"></i>
+                                                {{ operation.titre|capitalize }}</a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if page_actuel is defined   and page_actuel == "edit" %}
+                                        {% if  operation.prefix == '_edit' %}
+                                            <li>
+                                                <a href="{{ path('t_commandefrscab_show' , {id:commande.id})}}" class='dropdown-item btn-white btn-outline'>
+                                                    <i class="fa {{ operations['_show'].icon }}"></i>
+                                                    {{ operations['_show'].titre|capitalize }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    {% if page_actuel is defined and  page_actuel =='show' %}
+
+                                        {% if  operation.prefix == '_edit'  %}
+                                            <li>
+                                                <a href="{{ path('t_commandefrscab_edit' , {id:commande.id})}}" class='dropdown-item btn-white btn-outline'>
+                                                    <i class="fa {{ operation.icon }}"></i>
+                                                    {{ operation.titre|capitalize }}</a>
+                                            </li>
+                                        {% endif %}
+
+                                    {% endif %}
+
+                                {% endif %}
+                                {%  if  operation.prefix == '_cloturer_commande'  %}
+                                    <li>
+                                        <a id="{{operation.prefix}}" data-id="{{commande.id}}" class='dropdown-item btn-danger btn-outline   {{operation.classCs}}'>
+                                            <i class="fa {{ operation.icon }}"></i>
+                                            {{ operation.titre|capitalize }}</a>
+                                    </li>
+                                {% endif %}
+                                {%  if  operation.prefix == "_avance_commande"  %}
+                                    <li>
+                                        <a id="{{operation.prefix}}" data-id="{{commande.id}}" class='dropdown-item btn-white btn-outline   {{operation.classCs}}'>
+                                            <i class="fa {{ operation.icon }}"></i>
+                                            {{ operation.titre|capitalize }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+
+			{% endif %}
+
+
+			<div id="test" data-commande-id="{{ commande.id|json_encode }}"></div>
+
+
+		{% endif %}
+    </div>
+</div>
+

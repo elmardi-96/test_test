@@ -1,0 +1,43 @@
+doctrine:
+    dbal:
+        
+        # configuration mysql
+        driver: 'pdo_mysql'
+        server_version: '5.7'
+        charset: utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+
+        url: '%env(resolve:DATABASE_URL)%'
+        options:
+            1002: 'SET sql_mode=(SELECT REPLACE(@@sql_mode, "ONLY_FULL_GROUP_BY", ""))'
+        
+
+        # configuration sqlserver
+#        driver: pdo_sqlsrv
+#        host: 'JIZA-1\SQLEXPRESS'
+#        port: ''
+#        dbname: 'u3serpdb'
+#        user: 'myuser'
+#        password: '123456789'
+#        charset: UTF8
+#        server_version : '14.0.1000'
+
+        
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
+        
+        dql:
+            string_functions:
+                MONTH: DoctrineExtensions\Query\Mysql\Month
+                YEAR: DoctrineExtensions\Query\Mysql\Year

@@ -1,0 +1,124 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Achat , Factures fournisseur , consulter articles | Achat{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Achat  ,Factures fournisseur            </h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+                <div class="title-action">
+                    {#% include './ugouv/achat/t_commandefrscab/inc/workflow.html.twig' %#}
+                </div>   
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    {#    {{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+   #} 
+    </div>
+    <br/><br/><br/>
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content" style="padding-top: 4px ;">
+                    {#{% include './module_achat/commandefrs/inc/workflow_breadcumb.html.twig' %}#}
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {% include './module_achat/t_facturefrscab/inc/navigation.html.twig' %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="padding: 4%; padding-top: 0%;">
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+                                                <table class="table table-striped ">
+                                                    <thead>
+                                                        <tr>
+                    
+                                                            <th>#
+                                                            </th>
+                                                            <th>Code</th>
+                                                                
+                    
+                                                            <th>Designation :
+                                                            </th>
+                                                            <th>QNT :</th>
+                                                            <th>UNITE:</th>
+                                                            <th>TVA	:</th>
+                                                            <th>PRIX H.T:</th>
+                                                            <th>TTC:</th>
+                    
+                                                        </tr>
+                                                    </thead>
+                    
+                                                    <tbody>
+                    
+                                                        {% set prixTotHT = 0 %}
+                                                        {% set prixTotNet = 0 %}
+                                                        {% set TotTva = 0 %}
+                                                        {% set baseTVA = 0 %}
+                                                        {% set c = 0 %}
+                                                        {% for det in facture.details %}
+                                                            {% set c = c + 1 %}
+                                                            
+                                                            <tr class="edit-new-article">
+                                                                <td>{{det.id }}</td>
+                                                                <td>{{det.article.code }}</td>
+                                                                <td>{{det.article.titre }}</td>
+                                                                <td>{{det.quantite }}</td>
+                                                                <td>{{det.unite }}
+                                                                </td>
+                                                                <td>{{det.tva }}</td>
+                                                                <td>
+                                                                    {{ det.prixunitaire|number_format(2) }}
+                                                                </td>
+                                                                <td>{{ (det.quantite *( det.prixunitaire *(1 + (det.tva) / 100) ) )|number_format(2) }}</td>
+                                                            </tr>
+                    
+                                                        {% else %}
+                                                            <tr>
+                                                                <td colspan="20">no records found</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                    <tfoot></tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ render(controller('App\\Controller\\ModuleAchat\\UaTFacturefrscabController:showhistorique',{ 'facture': facture.id})) }}
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('tfacturefrscab') }}
+
+<!--<script src="{#{ asset('build/runtime.js') }#}"></script>
+<script src="{#{ asset('build/tcommandefrscab.js') }#}"></script>-->
+
+{% endblock %}

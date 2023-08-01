@@ -1,0 +1,171 @@
+{#<a class="right-sidebar-toggle btn btn-white btn-xs btn-lg" style="
+   position: fixed;
+   right: 17px;
+   top: 70px;
+   z-index: 9999;
+   padding: 0px 7px 0px 6px;
+   font-size: 11px;">
+    <i class="fa fa-info-circle"></i> Infos
+</a>
+
+
+
+
+<div id="right-sidebar" class="animated">
+    <div class="sidebar-container">
+
+        <ul class="nav nav-tabs navs-3">
+            <li>
+                <a class="nav-link active" data-toggle="tab" href="#tab-1"> Informations  </a>
+            </li>
+            <li>
+                <a class="nav-link" data-toggle="tab" href="#tab-2"> Grille </a>
+            </li>
+            
+
+        </ul>
+
+        <div class="tab-content">
+
+
+            <div id="tab-1" class="tab-pane active">
+
+                <div class="sidebar-title">
+                    <h3> <i class="fa fa-check-square-o"></i> Concours</h3>
+                    <small>{{ concours.designation }}.</small>
+                </div>
+
+
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Code :</strong> {{ concours.code }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Statut :</strong> {% if  concours.avecConcours == true  %} Avec  {% else %} Sans  {% endif %} Concours
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <strong>Designation :</strong>  {{concours.designation}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Abreviation :</strong>  {{concours.abreviation}}
+                            </td>
+                        </tr>
+
+                        {% if  concours.avecConcours == true  %}
+                            <tr>
+                                <td>
+                                    <strong>Date  :</strong>  {{ concours.date ? concours.date|date('d/m/y') }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Heure :</strong>  {{ concours.heure ? concours.heure|date('H:i:s') }}
+                                </td>
+                            </tr>
+
+                        {% endif %}
+
+
+                    </tbody>
+                </table>
+
+
+                {% if  concours.avecConcours == true  %}
+                    <div class="sidebar-title">
+                        <h3> <i class="fa fa-check-square-o"></i> Matières</h3>
+                        <small>Matières concours.</small>
+                    </div>
+
+
+                    <table class="table small m-b-xs">
+                        <tbody>
+                            {% for key , matiere in concours.matieres %}
+                                <tr>
+                                    <td>
+                                        <strong>Matière {{ key +1  }} :</strong> {{ matiere.designation }}
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                {% endif %}
+
+
+            </div>
+
+            <div id="tab-2" class="tab-pane">
+
+
+
+                <div class="sidebar-title">
+                    <h3> <i class="fa fa-check-square-o"></i> Formations & grille</h3>
+                    <small>informations Formations & Grille de concours selon la natude de demande et le type de bac .</small>
+                </div>
+
+
+                <table class="table small m-b-xs">
+                    <tbody>
+                        {% for key , detail in concours.details %}
+                            <tr>
+                                <td>
+                                    <h4>Formation {{ key +1  }}</h4>
+                                    <strong>Etablissement :</strong>
+                                    {{ detail.formation.etablissement ? detail.formation.etablissement.designation  }} ({{ detail.formation.etablissement ? detail.formation.etablissement.abreviation  }})
+                                    <br/>
+                                    <strong>Formation :</strong>
+                                    {{ detail.formation ? detail.formation.designation }} ({{ detail.formation ? detail.formation.abreviation }})
+                                    <br/><br/>
+                                    <table>
+                                        {% for key , grille in detail.grilles %}
+                                            <tr>
+                                                <td>
+                                                    <strong>Nature demande :</strong> {{ grille.natureDemande ?  grille.natureDemande.designation}}
+                                                </td>
+
+                                                <td>
+                                                    <strong>Type bac :</strong> {{ grille.typeBac ?  grille.typeBac.designation}}
+                                                </td>
+
+                                                <td>
+                                                    <strong>Seuil:</strong> {{ grille.seuil|number_format(2)}}
+                                                </td>
+                                            </tr>
+
+                                        {% endfor %}
+                                    </table>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>  
+
+
+
+            </div>
+
+            <div id="tab-3" class="tab-pane">
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+#}

@@ -1,0 +1,23 @@
+
+
+
+
+<div class="mail-body text-right tooltip-demo buttons_foot">
+
+	{% if transaction is defined and transaction is not empty and transaction.id is not empty   %}
+
+	
+
+	{% endif %}
+
+	{% if page_actuel is defined and page_actuel =='new'  %}
+
+        <button id="create_alimentation" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left" type="submit">
+            <i class="fa fa-save"></i>
+            {{ button_label|default('Enregistrer') }}
+        </button>
+
+    {% endif %}
+
+</div>
+

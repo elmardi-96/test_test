@@ -1,0 +1,146 @@
+{% extends 'base_stk.html.twig' %}
+{% set current_path = app.request.get('_route') %}
+{% block title %}Demande  stock | Stock
+{% endblock %}
+{% block body %}
+<style>
+table td {
+  font-size: 1.1em;
+}
+
+table tr td {
+  font-size: 1.1em;
+}
+.buttons_foot_1 {
+    bottom: 0px;
+    left: 0;
+    padding: 10px 20px 43px 20px;
+    position: fixed;
+    right: 0;
+    margin-left: auto;
+    z-index: 999;
+    min-height: 85px;
+}
+</style>
+	<form id="stock_transfer" class="mt-5">
+            <div id="right-sidebar" class="actions animated"></div>
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <br><br>
+                            <h5 style="margin-bottom: 0"></h5>
+                        </div>
+                            {# =================== start Popup ====================== #}
+                            <div class="col-2">
+                                    <br>
+                                <input type="text" class="form-control input-group-lg myInput" data-id="{{DemandStockCab.id}}" style="font-size: 14px; border: 2px solid black;" placeholder="Scan Code">
+                                </div>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" style="top: 15px; transform: translate(0, 0); margin: 0 auto;" role="document">
+                                        <div class="modal-content">
+                                            <div id="content_produit"></div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-warning class_pop" data-id="{{DemandStockCab.id}}" data-dismiss="modal">Close</button>
+                                                <button type="button" id="btn_save_qty_liv" class="btn btn-primary" data-id="{{DemandStockCab.id}}" data-dismiss="modal">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            {# =================== End Popup ====================== #}
+
+                    </div>
+
+                    <br/>
+                    <div id="tab-1" class="tab-pane active full-height-scroll-show" style="height: 400px !important">
+                        <div class="full-height-scroll full-height-scroll-show">
+                            <div class="table-responsive">
+                                <table class="m-add t-m table table-striped table-bordered table-hover dataTables-example table-detail">
+                                    <thead style="font-size: 1em">
+                                        <tr>
+                                            <th style="width: 5%;text-align: center">code</th>
+                                            <th style="width: 5%;text-align: start; ">ARTICLE</th>
+                                            <th style="width: 5%;text-align: center; ">quantité</th>
+                                            <th style="width: 5%;text-align: center; ">Prix</th>
+                                            <th style="width: 7%;text-align: center; ">livrée</th>
+                                            <th style="width: 7%;text-align: center; ">reste a livrée</th>
+                                            <th style="width: 7%;text-align: center; ">Stock</th>
+                                            <th style="width: 7%;text-align: center; ">Conditionnement</th>
+                                            {# <th style="width: 1%; display: inline-flex">observation</th> #}
+                                        </tr>
+                                    </thead>
+                                    <tbody class="article_disponible">
+                                        {% for i, demandDet in DemandStockCab.DemandeStockDets %}
+                                            <tr class="{{demandDet.Id}}">
+                                                <td style="width: 5%;text-align: center">{{demandDet.Uarticle.code}}</td>
+                                                <td style="width: 15%;position: relative;text-align: start">
+                                                    {{demandDet.Uarticle.titre}}
+                                                </td>
+                                                <td style="width: 5%;text-align: center;" class="quantiteDisponible">
+                                                    {{demandDet.Qte}}
+                                                </td>
+                                                <td style="width: 5%;text-align: center">
+                                                    {{demandDet.Prix}}
+                                                </td>
+                                                <td style="width: 5%;text-align: center;">
+                                                    {{demandDet.Qt_livre}}
+                                                </td>
+                                                <td style="width: 5%;text-align: center">
+                                                    <input style="outline:none;border-color:white;box-shadow: 0.2px 0.5px;" class="detInputQtlivre decimal_places" id="{{demandDet.Id}}" type="number" {% if demandDet.Qt_livre == demandDet.qte or demandDet.Qt_livre >= demandDet.qte %} value="0" disabled {% else %} value="{{demandDet.qte - demandDet.Qt_livre}}" {% endif %}/>
+                                                </td>
+                                                {% if dc.Role_STK == 'RC' %}
+                                                    {% if demandDet.Qte < artsum[i] %}
+                                                        <td style="width: 5%;text-align: center;background-color: #AACB73; color: black;">
+                                                            {{artsum[i]|number_format(2, '.', '') }}
+                                                        </td>
+                                                    {% elseif demandDet.Qte > artsum[i]%}
+                                                        <td style="width: 5%;text-align: center;background-color: #F37878; color: black;">
+                                                            {{artsum[i]|number_format(2, '.', '') }}
+                                                        </td>
+                                                    {% else %}
+                                                        <td style="width: 5%;text-align: center;;background-color: #F6FFA4; color: black;">
+                                                            {{artsum[i]|number_format(2, '.', '') }}
+                                                        </td>
+                                                    {% endif %}
+                                                {% endif %}
+                                                <td style="width: 5%;text-align: center;">
+                                                    {{demandDet.Conditionnement}}
+                                                </td>
+                                                {# <td style="width: 5%;text-align: center;">
+                                                    {{demandDet.observation}}
+                                                </td> #}
+                                            </tbody>
+                                        </tbody>
+                                    </tbody>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        {# <tfoot>
+                            <tr style="display: none" class="edit-new-mouvement"></tr>
+                        </tfoot>
+                    </table> #}
+                    <div class="mail-body text-right tooltip-demo buttons_foot_1">
+                    	{% if DemandStockCab.Status.id == 10  %}
+                            <button id="anuller_demande" data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white btn-warning btn-outline waves-effect waves-light" data-style="expand-left">
+                                <i class="fa fa-close"></i>
+                                Anuller
+                            </button>
+					    {% endif %}
+                            <button id="Livraison_Partielle_demande_details" data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+                                <i class="fa fa-arrow-right"></i>
+                                Livraison partielle
+                            </button>
+                            <button id="Livraison_Complete_demande_details" data-id="{{DemandStockCab.id}}" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+                                <i class="fa fa-arrow-right"></i>
+                                Livraison Complète
+                            </button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('demande') }}
+{% endblock %}

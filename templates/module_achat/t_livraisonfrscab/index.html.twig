@@ -1,0 +1,294 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Livraison fournisseur
+{% endblock %}
+
+
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="modal fade right" id="facturePopUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalPreviewLabel">Generer Facture</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body bo">
+					<div class="text-center spr" style="display: none;">
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod" style=""></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="actions modal fade right" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel">DOCUMENT</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="text-center spr">
+						<br/>
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+		<div class="col-lg-6">
+			{% include './module_achat/t_livraisonfrscab/inc/workflow_breadcumb.html.twig' %}
+		</div>
+		 <div class="col-lg-12">
+			{% include './module_achat/t_livraisonfrscab/inc/sideBareFaf.html.twig' %}
+		</div>
+	
+			{# ========================================================================================== #}
+						{# ===================================  START =============================================== #}
+						
+						{# ==================   Start Modal ===================== #}
+							<div class="actions modal fade right pt-2" style="z-index: 9999998 !important;" id="facture_BRC" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+								<div class="modal-dialog modal-full-height modal-right modal-md" role="document">
+									<div class="modal-content">
+										<div class="modal-header" style="margin-top: 11px;">
+										<br>
+											<h5 class="modal-title" id="exampleModalPreviewLabel1"> Facture globale
+											</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body bo-0">
+										
+											<div class="bod_valider" style=""><div class="sidebar-container">
+
+												<div class="ibox-tools">
+													<a class="close-link close-me" href="">
+														<i class="fa fa-times"></i>
+													</a>
+												</div>
+
+												<div class="tab-content">
+
+
+													<div id="tab-1" class="tab-pane active">
+<br>
+														<div class="right-sidebar-content">
+
+
+															<div class="ibox">
+																<div class="ibox-content">
+																	<div class="row">
+																		<div class="col-md-12">
+																		<style>
+																		input.is-invalid {
+																				border-color: red !important;
+																			}
+																			</style>
+																	<form id="myform" method="POST" action="{{ path('handle_form_faf_globale') }}">
+																			<div class="form-group row">
+																				<div class="col-md-12">
+																					<label for="code">Code commande</label>
+																					<input class="form-control" id="code_commande_frs" name="code_commande_frs" type="text"  placeholder="Entree Code Commande ...">
+																				</div>
+																			</div>
+																			<br>
+																				<div class="form-group row">
+																					<label class="col-sm-12 required">
+																						Date facture (*)
+																					</label>
+																					<div class="col-sm-12">
+																						<input type="date" class="form-control form-control-sm col-sm-12" name="dateFacture" id="dateFacture">
+																					</div>
+																				</div>
+																				<br>
+																				<div class="form-group row">
+																					<label class="col-sm-12 required">
+																						Observation (*)
+																					</label>
+																					<div class="col-sm-12">
+																						<input type="text" class="form-control form-control-sm col-sm-12" name="Observation" id="Observation" placeholder="Observation">
+																					</div>
+																				</div>
+																				<br>
+																				<div class="form-group row">
+																					<label class="col-sm-12 required">
+																						Reference docAsso (*)
+																					</label>
+																					<div class="col-sm-12">
+																						<input type="text" class="form-control form-control-sm col-sm-12" name="refDocAsso" id="refDocAsso" placeholder="Reference">
+																					</div>
+																				</div>
+																				<br>
+																				<div class="form-group row">
+																					<label class="col-sm-12 required">
+																						Date docAsso (*)
+																					</label>
+																					<div class="col-sm-12">
+																						<input type="date" class="form-control form-control-sm col-sm-12" name="dateDocAsso" id="dateDocAsso">
+																					</div>
+																				</div>
+																				<br>
+																				<table class="table table-bordered">
+																					<thead>
+																						<tr>
+																							<th style="text-align: center;">Id</th>
+																							<th style="text-align: center;">Code</th>                                                                
+																							<th style="text-align: center;">Montant</th>                                                                
+																						</tr>
+																					</thead>
+																					<tbody class="bodycommand" >
+																					</tbody>
+																				</table>
+																				<button type="submit" id="Enregistrer_faf" class="btn btn-white btn-register btn-block btn-xs my-button2 mt-4 w-50">
+																					<i class="fa fa-save"></i>
+																					&nbsp;Enregistrer
+																				</button>
+																			</form>
+
+
+
+																		</div>
+																	</div>
+
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											</div>
+											
+										</div>
+
+									</div>
+								</div>
+							</div>
+						{# ==================   End Modal ===================== #}
+				{# ===================================  END =============================================== #}
+				{# ========================================================================================== #}
+		
+		<div class="col-lg-6">
+			<div class="title-action">
+				<div
+					class="title-action">
+				</div>
+			</div>
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+	</div>
+	<br/>
+	<br/>
+
+	<div class="row border-bottom white-bg dashboard-header mt-20">
+		<div class="col-lg-12">
+
+			<div class="ibox ">
+				<div class="ibox-content" style="padding-top: 0px">
+					<div class="" style="overflow-x:scroll">
+						<div
+							class="row">
+							{#<div class="col-3">
+															<select class="form-control _multiple_actions" style="display: none">
+																<option value="">Action</option>
+																<option value="_genener_factures">
+																	Generer Facture
+																</option>
+															</select>
+														</div>#}
+							<div class="col-2 list_actions_bloc" style="position: absolute; top:0;left:0; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+								<select class="select2_demo _3 form-control list_actions sel2">
+									<option value="">Action</option>
+									{% for key , operation in  operations  %}
+										{% if operation.multiple %}
+											<option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+										{% endif %}
+									{% endfor %}
+								</select>
+
+							</div>
+
+
+						</div>
+						<table class="table tb cmd display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%">
+
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Code</th>
+									<th>Date</th>
+									<th>Reference</th>
+									<th>description</th>
+									<th>Fournisseur</th>
+									<th>Mt.HT</th>
+									<th>Mt.TVA</th>
+									<th>MT.TTC</th>
+									<th>commande</th>
+									<th>facture</th>
+									<th>FA</th>
+									<th>RG</th>
+									<th>signature</th>
+									<th>statut</th>
+									<th>Opr</th>
+									{#<th>FA</th>
+																											                                    <th>RG</th>#}
+								</tr>
+							</thead>
+							<tbody class="commande"></tbody>
+							{# <tfoot>
+								<tr>
+									<th>#</th>
+									<th>Code</th>
+									<th>Date</th>
+									<th>Reference</th>
+									<th>description</th>
+									<th>Fournisseur</th>
+									<th>Mt.HT</th>
+									<th>Mt.TVA</th>
+									<th>MT.TTC</th>
+									<th>commande</th>
+									<th>facture</th>
+									<th>FA</th>
+									<th>RG</th>
+									<th>signature</th>
+									<th>statut</th>
+									<th>Opr</th>
+								</tr>
+							</tfoot> #}
+						</table>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('tlivraisonfrscab') }}
+{% endblock %}

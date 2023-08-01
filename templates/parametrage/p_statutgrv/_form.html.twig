@@ -1,0 +1,342 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+	<div class="col-lg-6">
+		<h2 class="fo">Parametrage Statutgrv
+			<span>(p_statutgrv)</span>
+		</h2>
+	</div>
+
+
+	<div class="col-lg-6">
+		<div class="title-action">
+			<button class="btn btn-primary btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}</button>
+			{% if  p_statutgrv.id > 0 %}
+				<a href="#" class="btn btn-xs btn-danger btn-outline" id="_delete">
+					<i class="fa fa-trash"></i>
+					Supprimer</a>
+				<div id="test" data-etablissement-id="{{ p_statutgrv.id|json_encode }}"></div>
+
+			{% endif  %}
+		</div>
+	</div>
+
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+
+		{{ wo_render_breadcrumbs() }}
+	</div>
+</div>
+
+
+<br/><br/>
+
+
+<div class="row pt-20 scroll_content">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+							<div class="panel-heading">
+								<div class="panel-options">
+									<ul class="nav nav-tabs">
+										<li>
+											<a class="nav-link active" href="#tab-1" data-toggle="tab">informations
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+
+											<div class="row">
+
+
+												<div class="col-md-6 b-r">
+
+
+													<div class="form-group row">
+														{{ form_label(form.module ,'Module', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.module,{'attr':{'class':'form-control form-control-sm','placeholder': 'Module'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.module) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+                                                    
+													<div class="form-group row">
+														{{ form_label(form.fonction ,'Fonction', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.fonction,{'attr':{'class':'form-control form-control-sm','placeholder': 'Fonction'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.fonction) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+                                                    
+													<div class="form-group row">
+														{{ form_label(form.statut ,'Statut', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.statut,{'attr':{'class':'form-control form-control-sm','placeholder': 'Statut'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.statut) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+                                                    
+													<div class="form-group row">
+														{{ form_label(form.abreviation ,'Abreviation', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.abreviation,{'attr':{'class':'form-control form-control-sm','placeholder': 'Abreviation'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.abreviation) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+                                                    
+													<div class="form-group row">
+														{{ form_label(form.affectable ,'Affectable', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.affectable,{'attr':{'class':'form-control form-control-sm','placeholder': 'Affectable'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.affectable) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+                                                    
+													<div class="form-group row">
+														{{ form_label(form.next ,'Next', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.next,{'attr':{'class':'form-control form-control-sm','placeholder': 'Next'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.next) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+                                                    
+													<div class="form-group row">
+														{{ form_label(form.defaulte ,'Default', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.defaulte,{'attr':{'class':'form-control form-control-sm','placeholder': 'Default'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.defaulte) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+                                                    
+													<div class="form-group row">
+														{{ form_label(form.total ,'Total', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.total,{'attr':{'class':'form-control form-control-sm','placeholder': 'Total'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.total) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+                                                    
+													<div class="form-group row">
+														{{ form_label(form.partiel ,'Partiel', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.partiel,{'attr':{'class':'form-control form-control-sm','placeholder': 'Partiel'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.partiel) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+                                                    
+													<div class="form-group row">
+														{{ form_label(form.couleur ,'Couleur', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.couleur,{'attr':{'class':'form-control form-control-sm','placeholder': 'Couleur'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.couleur) }}
+															</span>
+														</div>
+
+													</div>
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-3 col-form-label'}}) }}
+														<div class="col-sm-9">
+															{{ form_widget(form.active) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+
+												</div>
+												{% if p_statutgrv.id > 0 %}
+													<div class="col-md-6 br">
+
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Id</label>
+															<div class="col-sm-9 col-form-label">
+																{{ p_statutgrv.id }}
+															</div>
+														</div>
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Module</label>
+															<div class="col-sm-9 col-form-label">
+																{{ p_statutgrv.module }}
+															</div>
+														</div>
+
+
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Fonction</label>
+															<div class="col-sm-9 col-form-label">
+																{{ p_statutgrv.fonction }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Statut</label>
+															<div class="col-sm-9 col-form-label">
+																{{ p_statutgrv.statut }}
+															</div>
+														</div>
+
+
+													
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Abreviation</label>
+															<div class="col-sm-9 col-form-label">
+																{{ p_statutgrv.abreviation }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Affectable</label>
+															<div class="col-sm-9 col-form-label">
+																{{ p_statutgrv.affectable }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Next</label>
+															<div class="col-sm-9 col-form-label">
+																{{ p_statutgrv.next }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Default</label>
+															<div class="col-sm-9 col-form-label">
+																{{ p_statutgrv.defaulte }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Total</label>
+															<div class="col-sm-9 col-form-label">
+																{{ p_statutgrv.total }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Partiel</label>
+															<div class="col-sm-9 col-form-label">
+																{{ p_statutgrv.partiel }}
+															</div>
+														</div>
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Couleur</label>
+															<div class="col-sm-9 col-form-label">
+																{{ p_statutgrv.couleur }}
+															</div>
+														</div>
+
+														<div class="hr-line-dashed"></div>
+
+														<div class="form-group row">
+															<label class="col-sm-3 col-form-label">Active</label>
+															<div class="col-sm-9 col-form-label">
+																{% if p_statutgrv.active == true %}
+																	Active
+																{% else %}
+																	Desactive
+																{% endif %}
+															</div>
+														</div>
+													</div>
+												{% endif %}
+
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	{{form_widget(form._token)}}
+	{{ form_end(form,{'render_rest': false}) }}
+

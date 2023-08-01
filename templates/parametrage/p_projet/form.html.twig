@@ -1,0 +1,292 @@
+<div class="sidebar-container new">
+
+	<div class="ibox-tools"></div>
+
+	<div class="tab-content ">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+					
+				</h3>
+				<small>
+					{% if  p_projet.id > 0 %}
+						Modifier
+					{% else %}
+						Ajouter
+					{% endif %}
+				</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<table class="table small m-b-xs">
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="ibox ">
+					<div class="ibox-content">
+
+
+						{% if  p_projet.id > 0 %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_edit'}}) }}
+						{% else %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+						{% endif  %}
+
+
+						<div class="row">
+
+
+							<div class="col-md-12 b-r">
+
+								{% if  p_projet.id > 0 %}
+									<div id="test" data-projet-id="{{ p_projet.id|json_encode }}"></div>
+
+								{% endif  %}
+
+								{% if  p_projet.id > 0 %}
+								<div class="form-group row mar-bot">
+									<div class="col-top">
+										<label class="imp-doc">Imprimer</label> <a target="_blank" href="{{ path('p_projet_pdf', { 'id': p_projet.id })}}" class="btn btn-white btn-block btn-xs btn-float-right"style="font-size: 9px;">
+												<i class="fa fa-print"></i>
+												Imprimer</a>
+									</div>
+									
+
+								</div>
+								{% endif  %}
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.designation ,'Designation (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.designation,{'attr':{'class':'form-control  form-control-sm','placeholder':'Designation (*)'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.designation) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.abreviation ,'Abreviation (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.abreviation,{'attr':{'class':'form-control  form-control-sm','placeholder':'Abreviation (*)'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.abreviation) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.intitule ,'Intitule (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.intitule,{'attr':{'class':'form-control  form-control-sm','placeholder':'Intitule (*)'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.intitule) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.dossiers ,'Dossier', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.dossiers,{'attr':{'class':'form-control select2 form-control-sm','placeholder':'Dossier'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.dossiers) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.description ,'Description', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.description,{'attr':{'class':'form-control  form-control-sm','placeholder':'Description'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.description) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.descriptionDetail ,'Description Detail', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.descriptionDetail,{'attr':{'class':'form-control  form-control-sm','placeholder':'Description Detail'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.descriptionDetail) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.dateFin ,'Date fin', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.dateFin,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date fin'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.dateFin) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.dateDebut ,'Date debut', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.dateDebut,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date debut'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.dateDebut) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.responsable ,'Responsable', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.responsable,{'attr':{'class':'form-control select2 form-control-sm','placeholder':'Responsable'}}) }}
+
+												<span class="form-error-message">
+													{{ form_errors(form.responsable) }}
+												</span>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.cloturer ,'Cloturer', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.cloturer) }}
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.facturer ,'Facturer', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.facturer) }}
+
+											</div>
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											{{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-12'}}) }}
+											<div class="col-sm-12">
+												{{ form_widget(form.active) }}
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+
+								{% if  p_projet.id > 0 %}
+									<div class="form-group row">
+										<div class="col-sm-3">
+											<button class="btn btn-primary btn-block btn-xs  button-edit-projet" >
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Modifier') }}</button>
+
+										</div>
+										
+										<div class="col-sm-3">
+											{% for operation in operations|filter(operation => operation.prefix == '_delete') %}
+												
+													<a {% if operation.route is not null %} data-id="{{p_projet.id}}" data-token="{{ csrf_token('delete' ~ p_projet.id) }}" href="#{# {{ path(operation.route) }} #}" {% endif %} id="{{operation.prefix}}" class="btn btn-block btn-xs btn-danger _delete{{operation.classCs}}">
+														<i class="fa {{ operation.icon }}"style="color: white !important;"></i>
+														{{ operation.titre|capitalize }}</a>
+												
+											{% endfor %}
+											{# <a href="#" data-id="{{p_projet.id}}" data-token="{{ csrf_token('delete' ~ p_projet.id) }}"  class="btn btn-block btn-xs btn-danger _delete " id="_delete">
+												<i class="fa fa-trash" style="color: white !important;"></i>
+												Supprimer</a> #}
+										</div>
+
+
+									</div>
+								{% else %}
+									<div class="form-group row">
+
+										<div class="col-sm-3">
+											<button class="btn btn-primary btn-block btn-xs  button-save-projet">
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Enregistrer') }}</button>
+
+										</div>
+										<div class="col-sm-3">
+											<button class="btn btn-primary btn-block btn-xs  button-save-add-projet">
+												<i class="fa fa-save"></i>
+												&nbsp;Enregistrer et Ajouter</button>
+
+										</div>
+									</div>
+								{% endif  %}
+
+
+							</div>
+
+						</div>
+
+						{{form_widget(form._token)}}
+						{{ form_end(form,{'render_rest': false}) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

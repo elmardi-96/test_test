@@ -1,0 +1,151 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %} Liste | Pré-inscriptions grille | UNIV
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('univ_preinscription_grille') }}
+{% endblock %}
+{% block body %}
+	<div class="hide-promotion">
+		<div class="modal fade right" id="exampleModalPreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true" data-backdrop='false'>
+			<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title" id="exampleModalPreviewLabel"></h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body bo-0">
+						<div class="show-promotion"></div>
+						<div class="text-center spr" style="display:none;">
+							<div class="spinner-border" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+						</div>
+						<div id="resultats_import"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-12">
+			{% include './module_univ/preinscription_grille/inc/workflow_breadcumb.html.twig' %}
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './module_univ/preinscription_grille/inc/workflow.html.twig' %}
+		</div>
+	</div>
+	{#<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-4">
+			<h2 class="fo">Univ ,  Pré-inscription Grille
+			</h2>
+		</div>
+		<div class="col-lg-8">
+			<div
+				class="title-action"><button class="btn btn-white btn-xs btn-lg dupliquer"><i class="fa fa-clone"></i> Dupliquer</button>
+														<button class="btn btn-white btn-xs btn-lg refresh"><i class="fa fa-refresh"></i> Rafraîchir calendrier </button>
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+		{#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+	</div>#}
+	<br/><br/>
+
+
+	<div class="row pt-20">
+		<div class="col-md-12">
+			<div class="panel-container">
+				<div class="panel-left">
+					<div class="ibox">
+						<div class="ibox-content full-height-scroll ">
+							<div class="row ">
+								<div class="col-md-12">
+									<div class="tab-content">
+
+										<h3 class="m-t-none m-b-5">Informations formation
+										</h3>
+										<div class="hr-line-dashed"></div>
+										<div id='external-events'>
+											<div id="using_json"></div>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="splitter"></div>
+				<div class="panel-right">
+					<div class="ibox">
+						<div class="ibox-content full-height-scroll ">
+							<div class="row ">
+								<div class="col-md-12">
+									<div class="tab-content">
+
+
+										<h3 class="m-t-none m-b-5">Les Grilles</h3>
+										<div class="hr-line-dashed hr-line-dashed-co"></div>
+										<div class="col-md-12">
+											<table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%" >
+												<thead>
+													<tr>
+														<th>#</th>
+													 
+														<th>code</th>
+														<th>Etablissement</th>
+													   
+														<th>Formation</th>
+														<th>Annee</th>
+														<th>Moyenne</th>
+														<th>Sup</th>
+													   
+													 
+													</tr>
+												</thead>
+												<tfoot>
+													<tr> 
+														<th>#</th>
+													 
+														<th>code</th>
+														<th>Etablissement</th>
+													   
+														<th>Formation</th>
+														<th>Annee</th>
+														<th>Moyenne</th>
+														<th>Sup</th>
+														
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_preinscription_grille') }}
+{% endblock %}

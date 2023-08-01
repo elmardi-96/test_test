@@ -1,0 +1,68 @@
+{% extends 'base_stk.html.twig' %}
+
+{% block title %}Verifier stock | Stock
+{% endblock %}
+
+{% block body %}
+<style>
+table.dataTable td {
+  font-size: 1.1em;
+  text-align: center;
+
+}
+
+table.dataTable tr.dtrg-level-0 td {
+  font-size: 1.2em;
+}
+</style>
+	<div class="row border-bottom white-bg dashboard-header mt-5">
+		<div class="col-lg-12">
+			<input type="hidden" value="{{dc.Role_STK}}" id="role_stk"/>
+			<div class="ibox">
+				<div class="ibox-content">
+					<div class="">
+						<div class="form-check d-inline-block mr-3">
+							<input class="form-check-input type_demnade" type="radio" value="" name="status" id="checkDemande" checked>
+							<label class="form-check-label" for="flexRadioDefault1">
+								Demande
+							</label>
+						</div>
+						<div class="form-check d-inline-block">
+							<input class="form-check-input type_demnade" type="radio" value="" name="status" id="checkRetour">
+							<label class="form-check-label" for="flexRadioDefault2">
+								Retour
+							</label>
+						</div>
+            <br><br>
+						<div class="form-check form-check-inline" style="">
+							{% for ant in antenne %}
+								<input type="checkbox" class="form-check-input check_antenne" id="{{ant.id}}" name="type[]" value="{{ant.id}}">
+								<label class="form-check-label mr-3" for="{{ant.id}}">{{ant.designation}}</label>
+							{% endfor %}
+						</div>
+
+            </div>
+						<table class="table tb display table-striped table-bordered table-hover dataTables-example cmd" id="Stoock_Verifier" style="width: 100%">
+							<thead>
+								<tr>
+									<th>Code</th>
+									<th>Client</th>
+									<th>Date</th>
+									<th>Jours</th>
+									<th>Statut</th>
+									<th>préparation</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('demande') }}
+{% endblock %}

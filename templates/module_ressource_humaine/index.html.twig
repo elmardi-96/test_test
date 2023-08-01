@@ -1,0 +1,107 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}index | GRS{% endblock %}
+
+{% block body %}
+    {% include './ugouv/contentIndexModule.html.twig' with {'module': app.session.get('dossiers')[app.session.get('dossierCourant').prefix].modules['_module_grs']} %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+
+
+{#<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<title>Ressource humaine-SYS</title>
+		<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'/>
+		<link rel="shortcut icon" href="{{asset('/img/icon.png')}}"/>
+
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+
+	</head>
+	<body class="fixed-nav fixed-nav-basic {% if app.user.theme is defined  %} {{app.user.theme}} {%endif%}">
+
+
+		{% block sidebar %}
+			{% include './module_ressource_humaine/inc/sidebar.html.twig' %}
+		{% endblock %}
+
+
+		{% block header %}
+			{% include './module_ressource_humaine/inc/header.html.twig' %}
+		{% endblock %}
+
+
+		{% block body %}
+			<div class="wrapper wrapper-content wrapper-content-list">
+
+
+				{% set values = ['#1c84c6', '#23c6c8', '#1ab394', '#e88f08', '#e019da']%}
+				{% for key1 , dossiers in app.session.get('modules')['_grs']['dossiers'] %}
+					{% if dossiers.id == dossier.id %}
+						<div class="row m-2">
+							{% for key , module in dossiers.sousModules %}
+								<div class="col-lg-3 my-dashboard-style">
+									<div class="ibox">
+										<div class="ibox-title">
+											<span class="label  float-right" >
+												<i class="fa {{ module.icon}}"></i>
+											</span>
+											<h5>{{ module.titre|capitalize}}</h5>
+
+										</div>
+										<div class="ibox-content">
+											<h1 class="no-margins" style="font-size: 20px">
+												<i style="font-size: 25px" class="fa {{ module.icon}}"></i>
+												{{ module.titre|capitalize}}
+											</h1>
+											<div class="hr-line-dashed"></div>
+
+
+											<div class="file-manager">
+												{% if module.operations   is defined  %}
+													{%  for key , operation in module.operations  %}
+														{% if  operation.verticale %}
+															<a href="{% if operation.route is not null %} {{ path(operation.route) }} {% endif %}" class="file-control">
+																<i class="fa {{operation.icon}}"></i>
+																{{ operation.titre|capitalize }}</a>
+														{% endif %}
+													{% endfor %}
+												{% endif  %}
+											</div>
+
+
+											<div class="hr-line-dashed"></div>
+											<small>{{ module.description}}</small>
+
+
+										</div>
+									</div>
+								</div>
+
+
+							{% endfor %}
+						</div>
+					{% endif %}
+				{% endfor %}
+
+			</div>
+
+		{% endblock %}
+
+
+		{% block footer %}
+			{% include './inc/footer.html.twig' %}
+		{% endblock %}
+	</body>
+</html></div></div>{% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}</body></html>#}
+

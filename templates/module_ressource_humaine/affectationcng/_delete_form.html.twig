@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('module_grs_demande_conge_delete', {'id': grs_conge.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ grs_conge.id) }}">
+    <button class="btn btn-xs btn-danger btn-outline">
+		<i class="fa fa-trash"></i>&nbsp;Supprimer</button>
+</form>

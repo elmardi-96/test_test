@@ -1,0 +1,8 @@
+{% set current_path = app.request.get('_route') %}
+<ul class="nav nav-tabs">
+    <li> <a class="nav-link {% if "module_univ_concours_ac_show"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_ac_show' , {id:concours.id})}}" ><i class="fa fa-info-circle"></i>Information</a></li>    
+    <li> <a class="nav-link {% if "module_univ_concours_p_concourscab_edit"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_p_concourscab_edit' , {id:concours.id})}}" ><i class="fa fa-pencil"></i>Modifier (concours)</a></li>    
+    <li> <a class="nav-link {% if "module_univ_concours_show_sansconcours_admissible"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_show_sansconcours_admissible' , {id:concours.id})}}" ><i class="fa fa fa-check-square"></i>Etudiants admissibles</a></li>
+    <li> <a class="nav-link {% if "module_univ_concours_show_sansconcours_non_admissible"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_show_sansconcours_non_admissible' , {id:concours.id})}}" > <i class="fa fa-minus-square"></i> Etudiants non admissibles</a></li>
+
+</ul>

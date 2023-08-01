@@ -1,0 +1,18 @@
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+    
+    <li> <a class="nav-link {% if "module_univ_admission_show"  in current_path  %} active {%endif%}" href="{{ path('module_univ_admission_show' , {id:admission.id})}}" ><i class="fa fa-info-circle"></i> Information</a></li>
+    
+    <li><a class="nav-link {% if "module_univ_admission_document"  in current_path  %} active {%endif%}" href="{{ path('module_univ_admission_document' , {id:admission.id})}}" ><i class="fa fa-file-text"></i> Document Admission </a></li>
+    <li><a class="nav-link {% if "module_univ_admission_frais"  in current_path  %} active {%endif%}" href="{{ path('module_univ_admission_frais' , {id:admission.id})}}" ><i class="fa fa-money"></i> Frais Admission </a></li>
+    <li><a class="nav-link {% if "module_univ_admission_generer_preinscription"  in current_path  %} active {%endif%}" href="{{ path('module_univ_admission_generer_preinscription' , {id:admission.id})}}" ><i class="fa fa-window-restore"></i> Générer inscription </a></li>
+    
+    
+</ul>

@@ -1,0 +1,191 @@
+{% extends 'base_conge.html.twig' %}
+
+
+
+{% block title %}GRS, Gestion Ressource Humaines{% endblock %}
+
+
+
+
+
+{% block body %}
+
+
+    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">GRS, Gestion Ressource Humaines </h2>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="title-action">
+                <div class="title-action">
+
+
+
+
+                    {% include './module_ressource_humaine/demmandecng/workflow/workflow.html.twig' %}
+
+
+
+
+                </div>   
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+    <br/><br/><br/>
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content" style="padding-top: 4px ;">
+
+
+
+
+
+
+
+
+                    <div class="row">
+
+
+                        <div class="btn-group btn-breadcrumb btn-breadcrumb2">
+                            {% set count = 0 %}
+                            {% for key , place  in {"envoyer":"Envoyé" , "annuler":"Annulé" , "creer":"Crée" , "encours":"En cours " ,("accepter" or "refuser"):"Accepté / Refusé" }  %}
+                                {#{{ dump(key) }}  {{ dump(place) }}#}
+                                {% if workflow_has_marked_place(grs_conge, key) or count > 0 %}
+
+                                    <a href="#" class="btn btn-default
+                                       {% if count==0  %}
+                                           btn-breadcrumb2-active
+                                       {% endif %}
+                                       ">{{ place }}</a>
+
+                                    {% set count = count + 1%}
+                                {% endif %}
+                                </button>
+                            {% endfor %}   
+                        </div> 
+                    </div>
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        <ul class="nav nav-tabs">
+                                            <li><a class="nav-link active show" href="#" data-toggle="tab">Informations</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="padding: 4%; padding-top: 0%;">
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+                                                <div class="row">
+                                                    <div class="col-md-6 b-r">
+                                                        <h3 class="m-t-none m-b">Informations </h3>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{ grs_conge.id }}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Référence</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{ grs_conge.code }}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Date début</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{ grs_conge.dateDebut ? grs_conge.dateDebut|date('d-m-Y')  }}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Date fin</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{ grs_conge.dateFin ? grs_conge.dateFin|date('d-m-Y') }}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+
+
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="m-t-none m-b"><br></h3>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div> 
+                                                        <div class="form-group row ph"><label class="col-sm-4 required font-weight-bold">Type :</label>
+
+                                                            <div class="col-sm-8"><p class="form-control-static" >{{ grs_conge.type ? grs_conge.type.titre }}</p>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>                                               
+                                                        <div class="form-group row ph"><label class="col-sm-4 required font-weight-bold">Description :</label>
+
+                                                            <div class="col-sm-8"><p class="form-control-static" >{{ grs_conge.description }}</p>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>{# 
+                    {% include './module_ressource_humaine/demandecng/workflow/workflow_historique.html.twig' %} #}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('grs_conge') }}
+{% endblock %}

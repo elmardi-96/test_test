@@ -1,0 +1,123 @@
+<div class="sidebar-container">
+
+	<div class="ibox-tools">
+		<a class="close-link close-me" href="">
+			<i class="fa fa-times"></i>
+		</a>
+	</div>
+
+	<div class="tab-content">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					FACTURE
+				</h3>
+				<small>
+					Generer factures fournisseur .</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<table class="table small m-b-xs">
+					<tbody>
+						<tr>
+							<td>
+								<strong>Code :</strong>
+								{{ facture.code }}
+							</td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="ibox">
+					<div
+						class="ibox-content">
+
+						{#<h3>Expression de Besoin Document </h3>#}
+						{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'save_facture_generer', "autocomplete":"off"}}) }}
+						<div id="id" value="{{facture.id}}"></div>
+						{#<div class="form-group">
+						                            {{ form_label(form.statut ,'Statut :', {'label_attr':{'class':'col-sm-4'}}) }} 
+						                            {{ form_widget(form.statut,{'attr':{'class':'form-control form-control-sm'}}) }} 
+						                        </div>#}
+
+
+												<div class="hr-line-dashed"></div>
+						<div class="form-group row">
+							<label class="col-sm-12 required">
+								Facture parvenue (*) :</label>
+
+							<div class="col-sm-8">
+								{{ form_widget(form.parvenue,{'attr':{'class':'form-control form-control-sm col-sm-12 parvenue' ,'placeholder':'Reference'}}) }}
+
+
+							</div>
+
+						</div>
+					
+						<div class="hr-line-dashed refDoc"></div>
+						<div class="form-group row refDoc">
+							<label class="col-sm-12 required">
+								Reference docAsso (*):</label>
+
+							<div class="col-sm-8">
+								{{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control-sm col-sm-12' ,'placeholder':'Reference'}}) }}
+
+
+							</div>
+
+						</div>
+
+						<div class="hr-line-dashed dateDoc"></div>
+						<div class="form-group row dateDoc">
+							<label class="col-sm-12 required">
+								Date docAsso (*):</label>
+
+							<div class="col-sm-8">
+								{{ form_widget(form.dateDocAsso,{'attr':{'class':'form-control form-control-sm col-sm-12'}}) }}
+
+
+							</div>
+
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group row">
+							<label class="col-sm-12 required">
+								Autre information (*):</label>
+
+							<div class="col-sm-12">
+								{{ form_widget(form.autre,{'attr':{'class':'form-control form-control-sm col-sm-12' ,'placeholder':'Autre information'}}) }}
+
+
+							</div>
+
+						</div>
+						<div class="hr-line-dashed"></div>
+<BR>
+	<div class="form-group row">
+		<label class="col-sm-12 required">
+			<button class="btn-register btn btn-white btn-block my-button  upper btn-xs my-button2" data-style="expand-left" type="submit">
+				<i class="fa fa-save " ></i>
+				{{ button_label|default('ENREGISTRER') }}
+			</button>
+		</label>
+
+	
+
+	</div>
+					
+						{{ form_end(form,{'render_rest': false}) }}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

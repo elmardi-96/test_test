@@ -1,0 +1,86 @@
+{#{{ dump(data) }}
+{{ dossierId }}
+{{ moduleId }}
+{{ dump(groupe) }}#}
+
+<div class="ibox selected">
+
+
+	<div class="ibox-content">
+
+
+		<div class="client-detail">
+			<div class="full-height-scroll full-width-scroll">
+				<h3 class="m-t-none m-b">Opérations  du groupe ,
+					<small>{{ groupe.designation }}</small>
+				</h3>
+				<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+				<div id='external-events'>
+					<div class="using_json2 m-l-15"></div>
+				</div>
+				{#<div id="container">
+				                   
+				                    <ul>
+				                        <li data-jstree='{"icon":"fa fa-users"}' class="jstree-open">{{ groupe.designation }}
+				                            <ul>
+				                                {% for key , module in data  %}
+				                                    <li data-jstree='{"icon":"fa fa-cube"}'  class="jstree-open"><a>{{ module.titre }}</a>
+				                                        <ul>
+				                                            {% for key , dossier in  module.dossiers %}
+				                                                <li data-jstree='{"icon":"fa fa-folder"}' {% if moduleId==module.id and   dossierId == dossier.id %} class="jstree-open" {% endif %} ><a>{{ dossier.abreviation }}</a>
+				                                                    <ul>
+				                                                        {% for key , sousModule in  dossier.sousModules %}
+				                                                            <li data-jstree='{"icon":"fa fa-cubes"}'  {% if moduleId==module.id and   dossierId == dossier.id %} class="jstree-open" {% endif %} >{{ sousModule.titre }}
+				                                                                <ul>
+				                                                                    {% for key , operation in  sousModule.operations %}
+				                                                                        <li  data-jstree='{"icon":"fa fa-check-square-o"}'   >{{ operation.titre }}</li>
+				                                                                        {% endfor %}
+				                                                                </ul> 
+				
+				                                                            </li>
+				                                                        {% endfor %}
+				                                                    </ul>
+				                                                </li>
+				                                            {% endfor %}
+				                                        </ul>
+				                                    </li>
+				                                {% endfor %}
+				                            </ul>
+				                        </li>
+				
+				                    </ul>
+				                </div>#}
+
+
+				{# <div id="container">
+				                     <ul>
+				                         <li >{{ groupe.designation }}
+				                             <ul>
+				                                 {% for key , module in data  %}
+				                                     <li><a>{{ module.titre }}</a></li>
+				 
+				                                     <ul>
+				                                         {% for key , dossier in  module.dossiers %}
+				                                             <li class="jstree-open"><a>{{ dossier.description }}</a></li>
+				                                         {% endfor %}
+				                                     </ul>
+				                                 {% endfor %}
+				                             </ul>
+				                         </li>
+				                     </ul>
+				                 </div> 
+				 #}
+
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+{% if groupe is defined  %}
+
+		<input type="hidden" id="_id" data-token="{{ csrf_token('permission' ~ groupe.id) }}" value="{{groupe.id}}"/>
+
+	{% endif %}

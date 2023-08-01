@@ -1,0 +1,210 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Informations | Marche | Ugouv Marche
+{% endblock %}
+
+
+{% block body %}
+
+
+
+    {{ parent() }}
+   
+
+
+
+    <div id="right-sidebar" class="actions animated"></div>
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-12">
+            {{ include('./module_marche/marche/inc/workflow_breadcumb.html.twig',{'page_actuel': 'show'})}}
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12" style="font-weight:100 !important;">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+    <br/>
+    <br/>
+
+
+
+
+    {# {{ dump(operations) }}#}
+    <div class="wrapper wrapper-content  animated fadeInRight p-r-l-0">
+        <div class="row">
+            <div class="col-12 no-pad-right no-pad-left">
+                <div class="ibox">
+                    {# <div class="ibox-title ibox-title2">#}
+
+                    {#</div>#}
+                    <div class="ibox-content p-b-0">
+
+                        <h4>informations generales  </h4>
+                        <div class="row m-t-sm">
+                            <div class="col-lg-12">
+                                <div class="panel blank-panel">
+
+
+                                    <div class="col-md-12 p-t-0">
+                                        <div class="panel-body">
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active show" id="tab1-1">
+
+
+                                                    <div class="row">
+
+                                                        <div class="col-md-6 b-r">
+
+
+
+
+                                                            <div class="form-group row ph ">
+                                                                <label class="col-sm-4 required font-weight-bold font-weight-bold ">Code </label>
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">{{ marche.code }}</p>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group row ph">
+                                                                <label class="col-sm-4 required font-weight-bold">Reference </label>
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">{{ marche.reference }}</p>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                                <div class="form-group row ph">
+                                                                    <label class="col-sm-4 required font-weight-bold">Designation </label>
+                                                                    <div class="col-sm-8">
+                                                                        <p class="form-control-static">{{ marche.designation  }}</p>
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                        </div>
+                                                        <div class="col-md-6">
+
+                                                             <div class="form-group row ph">
+                                                                <label class="col-sm-4 required font-weight-bold">Description </label>
+
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">{{ marche.description  }}</p>
+                                                                </div>
+
+                                                            </div>
+
+
+
+                                                            <div class="form-group row ph">
+                                                                <label class="col-sm-4 required font-weight-bold">Date Debut </label>
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">{{ marche.dateDebut |date("m/d/Y") }}</p>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group row ph">
+                                                                <label class="col-sm-4 required font-weight-bold">Date Fin </label>
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">{{ marche.dateFin|date("m/d/Y") }}</p>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group row ph">
+                                                                <label class="col-sm-4 required font-weight-bold">Montant </label>
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">{{ marche.montant }}</p>
+                                                                </div>
+
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="ibox">
+                    <div class="ibox-content" >
+
+                        <h4 class="m-b-0">Details</h4>
+
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="full-height-scroll">
+                                <div class="table-responsive">
+
+                                    <table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable">
+                                        <thead  class="f-9">
+                                            <tr>
+                                                <th style="width:3%;" class="center">#</th>
+                                                <th style="width:14%;" class="center">Article</th>
+                                                <th style="width:14%;" class="center">Quantite</th>
+                                                <th style="width:14%;" class="center">Quantite Reste</th>
+                                                <th style="width:14%;" class="center">Prix Unitaire</th>
+                                                <th style="width:19%;" class="center">Tva</th>
+                                                <th style="width:20%;" class="center">Observation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for detail  in  marche.pMarcheDets %}
+                                                <tr>
+                                                    <td style="width:3%;" class="center"></td>
+                                                    <td style="width:19%;" class="center">{{ detail.article.titre }}</td>
+                                                    <td style="width:14%;" class="center">{{ detail.qt }}</td>
+                                                    <td style="width:14%;" class="center">{{ detail.qtReste }}</td>
+                                                    <td style="width:14%;" class="center">{{ detail.prixUnitaire }}</td>
+                                                    <td style="width:14%;" class="center">{{ detail.tva }}</td>
+                                                    <td style="width:20%;" class="center">{{ detail.observation }}</td>
+                                                    
+                                                </tr>
+                                            {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    {# {{ include('./module_achat/t_achatdemandeinternecab/inc/workflow.html.twig',{'page_actuel': 'show'}) }} #}
+
+    <br><br>
+
+
+    {# {{ render(controller('App\\Controller\\ModuleAchat\\PreCommandeController:showhistorique',{ 'demande': demande.id})) }} #}
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('tachatdemandeinternecab') }}
+{% endblock %}
+
+
+
+

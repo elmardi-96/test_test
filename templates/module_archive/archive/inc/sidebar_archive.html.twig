@@ -1,0 +1,32 @@
+<div id="wrapper">
+	<!-- Sidebar -->
+	<nav class="navbar-default navbar-static-side" role="navigation">
+		<div class="sidebar-collapse">
+			<ul class="nav metismenu" id="side-menu">
+				<li class="nav-header">
+					<div class="dropdown profile-element">
+						<img alt="image" class="rounded-circle" src="{{asset('/img/profile_small.jpg')}}"/>
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+							<span class="block m-t-xs font-bold">{{ app.user.nom }}
+								{{ app.user.prenom }}
+								<b class="caret"></b>
+							</span>
+
+						</a>
+						<ul class="dropdown-menu animated fadeInRight m-t-xs">
+							<li>
+								<a class="dropdown-item" href="{{path('logout')}}">Logout</a>
+							</li>
+						</ul>
+					</div>
+					<div class="logo-element">
+						UGOUV
+					</div>
+				</li>
+				<li class="scrollClass">
+					<div href="#" class=" nav nav-list " js-tree="vm.treeConfig" should-apply="vm.applyModelChanges()" ng-model="vm.treeData" tree="vm.treeInstance" tree-events="ready:vm.readyCB;create_node:vm.createCB;rename_node:vm.renameCB;delete_node:vm.deleteCB;click:vm.clickCB;paste:vm.paste;copy:vm.copy;cut:vm.cut;"></div>
+				</li>
+
+			</div>
+		</nav>

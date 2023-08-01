@@ -1,0 +1,207 @@
+<form class="_generer_form" autocomplete="off">
+
+<style>
+#livraisonPopUp{
+	overflow-x: hidden;
+    overflow-y: hidden !important;
+}
+</style>
+	<div class="panel-body">
+		<div class="tab-content">
+
+
+			<div class="tab-pane active show" id="tab-1">
+
+				<div class="row">
+					{% if workflow_has_marked_place(commande, 'valider') %}
+						<div class="col-md-12">
+							<h3>Saisie Livraison</h3>
+							<div class="hr-line-dashed"></div>
+							<div class="col-md-12">
+								<div class="form-group row">
+									<div class="col-sm-4">
+										<label>
+											Date Livraison (*) </label>
+									</div>
+									<div class="col-sm-2">
+										<input type="date" name="dateDocAsso" value='{{'now'|date('Y-m-d')}}' class="form-control form-control-sm">
+									</div>
+								</div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="col-md-12 ">
+								<div class="form-group row">
+									<div class="col-sm-4">
+										<label>Reference (*) </label>
+									</div>
+									<div class="col-sm-3">
+
+										<input type="text" name="refDocAsso" placeholder="Reference" class="form-control form-control-sm" value="REF-{{commande.code  }}">
+									</div>
+								</div>
+
+							</div>
+
+							<div class="hr-line-dashed"></div>
+							<div class="col-md-12 ">
+								<div class="form-group row">
+									<div class="col-sm-4">
+										<label>Description </label>
+									</div>
+									<div class="col-sm-4">
+										<textarea name="description" placeholder="Description" class="form-control form-control-sm">{{commande.description  }}</textarea>
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+						<input type="hidden" name="_id" value="{{ commande.id }}">
+						<input type="hidden" name="token" value="{{ csrf_token('_csrf_token') }}">
+						<input type="hidden" name="dataSerialize" value="{{data|json_encode(constant('JSON_PRETTY_PRINT')) }}">
+
+		<div class="col-lg-12">
+			<div class="ibox ">
+				<div class="ibox-content">
+					<div class="" style="overflow-y: scroll;height: 400px;overflow-x: hidden;  scrollbar-width: thin;">
+							<table class="table  display table-striped table-bordered table-hover  table-hover dataTables-example dataTable grid-reception" id="datatable-show3">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Reference</th>
+										<th>Article</th>
+										<th>G.S</th>
+										<th>P.U</th>
+										<th>TVA</th>
+										<th>Remise</th>
+										<th>QNT vente</th>
+										<th>QNT Achat</th>
+										<th>QNT stock</th>
+										<th>QNT Cmd</th>
+										<th>QNT livree</th>
+                                        <th style="width:20px">Reste a Livrer</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									{% for key , article in data %}
+										<tr>
+											<td>{{ article.id }}</td>
+											<td>{{ article.code }}</td>
+											<td>{{ article.titre }}</td>
+
+											<td>{{ article.gerer}}</td>
+											<td>{{ article.prixUnitaire |number_format(2, '.', ',')}}</td>
+											<td>{{ article.tva |number_format(2, '.', ',') }}
+												%</td>
+											<td>{{ article.remise |number_format(2, '.', ',') }}
+												%
+											</td>
+											<td>{{ article.quantiteEncoursVente |number_format(2, '.', ',') }}</td>
+											<td>{{ article.quantiteEncoursAchat |number_format(2, '.', ',')}}</td>
+											<td>
+												{% if  article.somme <0 %}
+													<span>
+														<i class="fa fa-circle" style="color: #ff0e00"></i>
+														{{ article.somme |number_format(2, '.', ',')}}
+													</span>
+												{% else %}
+													{{ article.somme |number_format(2, '.', ',')}}
+													<i class="fa fa-circle" style="color: #1ab394"></i>
+												{% endif %}
+											</td>
+
+											<td>{{ article.quantite |number_format(2, '.', ',')}}</td>
+											<td>{{ article.quantiteLivre |number_format(2, '.', ',')}}</td>
+											<td>
+												<input name="reste[{{ article.id }}]" type="number" value="{{ article.reste }}" class="form-control form-control-sm  decimal_places"/></td>
+										</tr>
+									{% endfor %}
+								</tbody>
+										<tfoot>
+									<tr>
+										<th colspan="10" style="text-align:right">
+											<table class="table-subtotal">
+												<tr>
+													<td>Total HT
+													</td>
+													<td>{{ prixHtReste }}</td>
+												</tr>
+
+												<tr class="subtotal-top-border">
+													<td>TVA
+													</td>
+													<td>{{prixTvaReste}}</td>
+												</tr>
+												{% if prixRemiseReste is not empty %}
+													<tr class="subtotal-top-border">
+														<td>Remise
+														</td>
+														<td>{{prixRemiseReste}}</td>
+													</tr>
+												{% endif %}
+
+												<tr class="subtotal-top-border">
+													<td>Total TTC
+													</td>
+													<td>{{prixTotalTtcReste}}</td>
+												</tr>
+											</table>
+										</th>
+
+									</tr>
+								</tfoot>
+
+								
+							</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+						</div>
+						<div class="row">
+							<div class="col-lg-12 btn-bottom-position">
+								<div class="title-action">
+
+
+									{% if workflow_has_marked_place(commande, 'valider') %}
+										<button class="btn btn-sm btn-white btn-white  btn-primary  my-button2 mbt btn-register font-size-11" type="submit">
+											<i class="fa fa-save"></i>
+											{{ button_label|default('Enregistrer') }}</button>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					{% else %}
+						<div class="col-md-12 ">
+							<div class="forum-item animated bounce">
+								<div class="row">
+									<div class="col-md-9">
+										<div class="forum-icon">
+											<i class="fa fa-warning"></i>
+										</div>
+										<a class="forum-item-title">Important</a>
+										<div class="forum-sub-title">
+											Pour passer une livraison , il faut tout d'abord valider cette Commande client
+											<br/>
+											<a href="{{path('uv_deviscab_show',{'id':commande.id})}}">{{ commande.code }}</a>
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				</div>
+
+
+			</div>
+
+
+		</div>
+	</div>
+</form>

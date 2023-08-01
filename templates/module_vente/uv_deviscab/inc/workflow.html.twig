@@ -1,0 +1,68 @@
+{#{{ dump(operations) }}#}
+
+<div class="mail-body text-right tooltip-demo buttons_foot">
+	{% if devis is defined and devis is not empty and devis.id is not empty and operations['_workflow'] is  defined and   page_actuel =='show'  %}
+
+
+		{% for transition in workflow_transitions(devis) %}
+
+			{% set url = "" %}
+			{% if workflow_metadata(devis, 'function', transition) %}
+				{%  set  url= path(workflow_metadata(devis, 'function', transition), {id: devis.id}) %}
+			{% endif %}
+
+
+			<a class="{{ workflow_metadata(devis, 'function', transition) }} btn btn-sm btn-white {{ workflow_metadata(devis, 'class', transition) }} btn-outline" data-id="{{ devis.id }}" data-title="{{ workflow_metadata(devis, 'title', transition) }}" data-transition="{{ transition.name }}">
+				<i class="fa {{ workflow_metadata(devis, 'icon', transition) }}"></i>
+				&nbsp;{{ workflow_metadata(devis, 'title', transition) }}
+			</a>
+
+		{% endfor %}
+	{% endif %}
+	{% if devis is defined and devis is not empty and devis.id is not empty%}
+
+		{% if workflow_has_marked_place(devis, "creer")  %}
+
+			{% if page_actuel is defined and  page_actuel =='edit' %}
+				{% if devis.demande is not empty and workflow_has_marked_place(devis.demande ? devis.demande :devis, 'valider') or workflow_has_marked_place(devis.demande ? devis.demande :devis, 'commander') %}
+
+					{% else %}
+					<button id="edit_devis" class="btn btn-sm  btn-primary  my-button  btn-register  upper  waves-effect waves-light" data-style="expand-left" type="submit">
+						<i class="fa fa-save"></i>
+						{{ button_label|default('Enregistrer') }}
+					</button>
+				{% endif %}
+
+
+			{% endif %}
+			
+
+
+		{% endif %}
+
+
+		<div id="test" data-devis-id="{{ devis.id|json_encode }}"></div>
+
+
+	{% endif %}
+
+	{% if page_actuel is defined and page_actuel =='new'  %}
+
+	<button id="create_devis" class="disabled btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left" type="submit">
+		<i class="fa fa-save"></i>
+		{{ button_label|default('Enregistrer') }}
+	</button>
+
+	{% endif %}
+</div>
+
+{#
+{{ wo_render_breadcrumbs() }}
+#}
+
+
+{#   <div class="mail-body text-right tooltip-demo buttons_foot">
+        <a href="mailbox.html" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send" aria-describedby="tooltip439841"><i class="fa fa-reply"></i> Send</a>
+        <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+        <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+    </div>#}

@@ -1,0 +1,140 @@
+{% extends 'base_ugouv.html.twig' %} {% set current_path = app.request.get('_route') %} {% block title %}Depot Mouvement stock encours | Stock{% endblock %} {% block body %}
+
+
+
+
+
+
+
+<div id="right-sidebar" class="actions animated">
+
+</div>
+
+<div class="test2">
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-4">
+            <h2 class="fo">Stock , Depot, Antennes </h2>
+            {#{ wo_render_breadcrumbs() }#}
+        </div>
+
+
+        <div class="col-lg-8">
+            <div class="title-action">
+
+
+                {# <div class="dropdown dropdown-inline right mt-1 mr-3" > 
+                <a class=""style ="color:#676A6C; font-size:15px; "  href="javascript:;" class="" data-toggle="dropdown" > 	
+                  <i class="fa fa-ellipsis-v text-black " style="" > </i>	
+                </a> 
+                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right " x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-111px, 26px, 0px);"> 	
+                    <ul class="dropdown-menu show drp-list" x-placement="bottom-start"> 
+                        <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">Choisir operation :</li>
+                        <a  class="op-hor btn  btn-xs _detail"><i class="fa fa fa-forward"></i> DETAIL</a>
+                                    
+                        
+                    </ul>
+                </div> 	 #}
+            </div>
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row pt-20">
+        <div class="col-lg-12 ">
+                {% for depot in depots  %}
+                            <div class="col-lg-12">
+                                <div class="ibox ">
+                                    <div class="ibox-title collapse-link2 collapsed-dossier color-pan" >
+                                        <h5>{{depot.titre}} - {{depot.dossier.titre}}</h5>
+                                        <div class="ibox-tools">
+                                            <a class="">
+                                                <i class="fa fa-plus" style ="font-size:16px;"></i>
+                                            </a>
+
+                                        </div>
+                                    </div>
+
+                                    {# {{ dump(depot.antennes ) }} #}
+                                    <div class="ibox-content no-padding" style="display: none;">
+                                        {% if depot.antennes is defined %}
+                                            <ul class="list-group">
+                                                {% for  antenne in depot.antennes %}
+                                                    <li class="list-group-item" style="padding:0px; border-top:none !important">
+
+                                                        <div class="ibox" style="border-bottom:0px !important">
+                                                            <div id="{{antenne.id}}" class="ibox-title  collapse-link2 collapsed-dossier wf-color-dossier header_antenne" style="border:none !important ; ">
+
+
+                                                                <a href="{#{{ path('app',{'id':d.id}) }}#}" class="box-app float-left  " data-id="{{antenne.id}}" style=" color:#000000 !important;">
+                                                                    <h5 ><strong class="str ">
+                                                                            {{ antenne.designation }}
+                                                                        </strong>
+                                                                    </h5>
+                                                                </a>
+
+                                                                
+                                                                    <div class="ibox-tools ">
+                                                                        <a  class="btn btn-xs _detail" style="color:#676a6c !important;" id="{{antenne.id}}"> DETAIL</a>
+                                                                        <a class="" >
+                                                                            <i class="fa fa-plus" style="color:#676a6c !important"></i>
+                                                                        </a>
+                                                                    </div>
+
+                                                                
+                                                            </div>
+                                                            <div class="ibox-content no-padding" style="display: none;">
+                                                                {{ render(controller(
+                                                                    'App\\Controller\\stock\\AntenneController::getStockDisponibsleByAntenne', {antenne: antenne }
+                                                                )) }}
+                                                            </div>
+
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                    
+                    {% endfor %}  
+                    </div> 
+
+                            
+        </div>
+    </div>
+ 
+</div>
+<div class="actions modal fade right" id="detail_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+	<div class="modal-dialog modal-full-height modal-right modal-sm" role="document" style="width: 950px; max-width: 950px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalPreviewLabel">Antenne Suivi</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="text-center spr">
+					<br/>
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
+				<div class="bod"></div>
+			</div>
+
+		</div>
+	</div>
+</div>
+{% endblock %} 
+{% block javascripts %} 
+{{ parent() }} 
+{{ encore_entry_script_tags('udepot') }} 
+{% endblock %}

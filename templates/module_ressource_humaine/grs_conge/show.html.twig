@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GrsConge{% endblock %}
+
+{% block body %}
+    <h1>GrsConge</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ grs_conge.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ grs_conge.type }}</td>
+            </tr>
+            <tr>
+                <th>DateDebut</th>
+                <td>{{ grs_conge.dateDebut ? grs_conge.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateFin</th>
+                <td>{{ grs_conge.dateFin ? grs_conge.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('grs_conge_index') }}">back to list</a>
+
+    <a href="{{ path('grs_conge_edit', {'id': grs_conge.id}) }}">edit</a>
+
+    {{ include('grs_conge/_delete_form.html.twig') }}
+{% endblock %}

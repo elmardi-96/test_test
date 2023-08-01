@@ -1,0 +1,215 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' ,"autocomplete":"off", 'class':'form_generer'}}) }}
+<div class="col-md-12">
+	<div class="panel-body">
+		<div class="tab-content">
+			<div class="tab-pane active show" id="tab-1">
+				<div class="row">
+
+
+				
+						<h3>Saisie COMMANDE</h3>
+
+
+						<div class="hr-line-dashed"></div>
+					
+							<div class="form-group row">
+							
+								<label class="col-sm-12 ">Code</label>
+								<div class="col-sm-12">
+
+									<a href="{{ path('t_achatdemandeinternecab_show' , {id:demande.id})}}">
+										{{ demande.code }}</a>
+								</div>
+							</div>
+						
+
+						<div class="hr-line-dashed"></div>
+						<hr>
+							<div class="form-group row">
+								<label class="col-sm-12 ">Date demande</label>
+							
+								<div class="col-sm-12">
+									{{ demande.dateDemande ? demande.dateDemande|date('d/m/Y') : '' }}
+								</div>
+							</div>
+						
+						<div class="hr-line-dashed"></div>
+					
+							<div class="form-group row">
+								<label class="col-sm-12 ">Description	</label>
+							
+								
+								<div class="col-sm-12">
+									{{demande.description}}
+								</div>
+							</div>
+					
+							<div class="hr-line-dashed"></div>				
+
+					
+							<div class="form-group row">
+								{{ form_label(form.fournisseur ,'Fournisseur (*)  ', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.fournisseur,{'attr':{'class':'form-control form-control-sm sel2 min-wind col-sm-12'}}) }}
+								</div>
+							</div>
+						
+						<div class="hr-line-dashed"></div>
+						
+							<div class="form-group row">
+								{{ form_label(form.dateDemande ,'Date commande (*) ', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.dateDemande,{'attr':{'class':'form-control form-control-sm'}}) }}
+								</div>
+							</div>
+						
+
+						<div class="hr-line-dashed"></div>
+						
+							<div class="form-group row">
+								{{ form_label(form.dateLivprv ,'Date LVR Prevue ', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.dateLivprv,{'attr':{'class':'form-control form-control-sm'}}) }}
+								</div>
+							</div>
+						
+						<div class="hr-line-dashed"></div>
+						
+							<div class="form-group row">
+								{{ form_label(form.refDocAsso ,'Ref devis frs ', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control-sm','placeholder':'Reference'}}) }}
+								</div>
+							</div>
+						
+						<br/>
+						<div class="hr-line-dashed"></div>
+					
+						{#	<input type="hidden" name="token" value="{{ csrf_token('_csrf_token') }}">
+						<input type="hidden" name="dataSerialize" value="{{data|json_encode(constant('JSON_PRETTY_PRINT')) }}">
+					<div class="col-md-12 table-responsive res">
+							<table class="t-m table table-striped table-bordered table-hover grid-reception" id="grid-reception">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th title="Reference">Ref</th>
+										<th title="Article">Article</th>
+										<th title="Gerer en stock">G.S</th>
+									
+										<th title="P.U">P.U</th>
+										<th title="TVA">TVA</th>
+										<th title="TVA">Remise</th>
+										<th title="Quantite Commande">QNT DEMANDE</th>
+										<th title="Quantite receptionnee">QNT CMD</th>
+										<th title="Reste a receptionner">Reste a <BR>CMD</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									{% set total = 0 %}
+									{% for key , article in data %}
+
+										{% set total = total +  article.prixTtcReste %}
+										<tr>
+											<td>{{ loop.index}}</td>
+											<td>{{ article.code }}</td>
+											<td>{{ article.titre }}</td>
+
+											<td>{{ article.gerer }}</td>
+										
+
+										
+
+											<td>{{ article.prixUnitaire |number_format(2, '.', ',') }}</td>
+
+
+											<td>
+												{% if article.tva is not empty %}
+													{{ article.tva|number_format(2, '.', ',') }}
+													%
+													{% else %}-
+												{% endif %}
+											</td>
+											<td>
+												{% if article.remise is not empty %}
+													{{ article.remise|number_format(2, '.', ',') }}
+													%
+													{% else %}-
+												{% endif %}
+											</td>
+
+											<td>{{ article.quantite |number_format(2, '.', ',') }}</td>
+											<td>{{ article.quantiteCommander |number_format(2, '.', ',') }}</td>
+											<td>
+												<input data-prixunitaire="{{ article.prixUnitaire }}" data-tva="{{ article.tva }}" name="reste[{{ article.id }}]" class="wt-60 aLivrer {% if article.reste == 0 %} disable {% endif %}" type="text" value="{{ article.reste }}"/>
+											</td>
+										</tr>
+
+									{% endfor %}
+
+
+								</tbody>
+								<tfoot>
+									<tr>
+										<th colspan="10" style="text-align:right">
+											<table class="table-subtotal">
+												<tr>
+													<td>Total HT
+													</td>
+													<td>{{ prixHtReste }}</td>
+												</tr>
+
+												<tr class="subtotal-top-border">
+													<td>TVA
+													</td>
+													<td>{{prixTvaReste}}</td>
+												</tr>
+												{% if prixRemiseReste is not empty %}
+													<tr class="subtotal-top-border">
+														<td>Remise
+														</td>
+														<td>{{prixRemiseReste}}</td>
+													</tr>
+												{% endif %}
+
+												<tr class="subtotal-top-border">
+													<td>Total TTC
+													</td>
+													<td>{{prixTotalTtcReste}}</td>
+												</tr>
+											</table>
+										</th>
+
+									</tr>
+								</tfoot>
+							</table>
+
+						</div>
+					#}
+
+				
+
+				</div>
+				<div class="row">
+					<div class="col-lg-12 btn-bottom-position">
+						<div class="title-action">
+
+
+							<button class="btn btn-sm btn-white btn-white  btn-primary  my-button mbt btn-register upper btn-xs my-button2 font-size-11" type="submit">
+								<i class="fa fa-save"></i>
+								{{ button_label|default('Enregistrer') }}</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br/>
+{% if demande is defined %}
+	<input type="hidden" name="_id" value="{{ demande.id }}"/>
+	<input type="hidden" name="_transitions" value="apres_valider_commander"/>
+{% endif %}
+{{ form_end(form,{'render_rest': false}) }}

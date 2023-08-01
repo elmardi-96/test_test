@@ -1,0 +1,449 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\PCompte;
+use App\Entity\PMarche;
+use App\Entity\UPDevise;
+use App\Entity\UvCommandecab;
+use App\Entity\PComptemasse;
+use App\Entity\PCompteposte;
+use App\Entity\UPPartenaire;
+use App\Entity\PCompterubrique;
+use App\Entity\PMarcheSous;
+use App\Entity\UPCommandeTy;
+use App\Entity\UPProjet;
+use App\Entity\PProjetSous;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Entity\PGlobalParamDet; 
+
+
+class UvCommandecabType extends AbstractType
+{
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $dossier = $options['dossier'];
+        $projets=$options['projets'];
+        $marches=$options['marches'];
+        $builder
+            //->add('codedevis')
+            ->add('client', EntityType::class, [
+                    'class' => UPPartenaire::class,
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('a')
+                        ->innerJoin('a.typePartenaire', 't')
+                        ->where('a.active=1')        
+                        ->andWhere('t.k = :type')
+                        ->orWhere('t.k = :type2')
+                        ->setParameter('type', 'client')
+                        ->setParameter('type2', 'client et fournisseur')
+                        ->orderBy('a.societe', 'ASC');
+                    },
+                    'choice_label' => 'societe',
+                    'placeholder' => 'Choix client',
+                ])
+            ->add('description', TextType::class)
+            ->add('type', EntityType::class, [
+                'class' => UPCommandeTy::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('a')
+                        ->where('a.active=1')
+                        ->orderBy('a.designation', 'ASC');
+                },
+                'choice_label' => 'designation',
+                'placeholder' => 'Choix Type',
+                'choice_attr' => function (?UPCommandeTy $type) {
+                    return $type ? ['data-type' => $type->getCode()] : [];
+                },
+            ])
+            ->add('notePublic', TextareaType::class)
+            ->add('notePrive', TextareaType::class)
+       
+            ->add('compteMasse', EntityType::class, [
+                'class' => PComptemasse::class,
+                'placeholder' => 'Compte Masse ',
+                'query_builder' => function (EntityRepository $er) use ($dossier) {
+                    //dump($dossier);die();
+                    return $er->createQueryBuilder('a')
+                        ->where('a.dossier = :obj')
+                        ->andwhere('a.active=1')
+                        ->setParameter('obj', $dossier)
+                        ->orderBy('a.designation', 'ASC');
+                },
+                'choice_label' => 'designation',
+            ])
+            ->add('devise', EntityType::class, [
+                'class' =>  UPDevise::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('a')
+                        ->where('a.active=1')
+                        ->orderBy('a.id', 'ASC');
+                },
+                'choice_label' => 'designation',
+            ])
+            ->add('nature')
+            ->add('responsable')
+            ->add('dateDevis', DateType::class, [
+                // renders it as a single text box
+                'widget' => 'single_text',
+            ])
+            ->add('remise')
+            ->add('dateRemise')
+            ->add('mtRemise')
+            ->add('budget')
+            ->add('depenser')
+            ->add('observation')
+         
+                
+            ->add('marche', EntityType::class, [
+                'class' => PMarche::class,
+                'query_builder' => function (EntityRepository $er ) use ($marches) {
+                    return $er->createQueryBuilder('a')
+                            ->where('a.active=1')
+                            ->andWhere('a.cloturer=0')
+                            ->andWhere('a.id in (:obj)')
+                           
+                            ->setParameter('obj', $marches)
+                            ->orderBy('a.designation', 'ASC');
+                },
+                'choice_label' => 'designation',
+                'empty_data' => '',
+                'placeholder' => 'Choix marché',
+            ])    
+
+
+
+
+
+            ->add('projet', EntityType::class, [
+                'class' => UPProjet::class,
+                'query_builder' => function (EntityRepository $er ) use ($projets) {
+                    return $er->createQueryBuilder('a')
+                            ->where('a.active=1')
+                            ->andWhere('a.cloturer=0')
+                            ->andWhere('a.id in (:obj)')
+                           
+                            ->setParameter('obj', $projets)
+                            ->orderBy('a.designation', 'ASC');
+                },
+                'choice_label' => 'designation',
+                'empty_data' => '',
+                'placeholder' => 'Choix Projet',
+            ])
+
+
+        
+
+
+            //->add('idStatut')
+          
+           
+            ->add('utilisateur')
+            ->add('statut')
+         
+            ->add('stLiv')
+            ->add('stFac')
+            ->add('stReg')
+            ->add('detail', HiddenType::class, ['mapped' => false])
+            ->add('compteMasse', EntityType::class, [
+                'class' => PComptemasse::class,
+                'placeholder' => 'Compte Masse ',
+                'query_builder' => function (EntityRepository $er) use ($dossier) {
+                    return $er->createQueryBuilder('a')
+                        ->where('a.dossier = :obj')
+                        ->andwhere('a.sens=1')
+                        ->andwhere('a.active=1')
+                        ->setParameter('obj', $dossier)
+                        ->orderBy('a.designation', 'ASC');
+                },
+                'choice_label' => 'designation',
+            ])
+            ->add('dateCommande', DateType::class, ['mapped' => true, 'widget' => 'single_text'])
+
+                    ->add('refCommande', TextType::class, ['mapped' => true])
+
+                    ->add('typecmd', EntityType::class, [
+                        'class' => PGlobalParamDet::class,
+                        'query_builder' => function (EntityRepository $er)  {
+                            return $er->createQueryBuilder('a')
+                            ->innerJoin('a.cab', 't')
+                         
+                                ->where('t.prefix = :type')
+                                ->setParameter('type', 't_cmd')
+                                ->orderBy('a.id', 'ASC');
+                        },
+                        'choice_label' => 'v',
+                        'placeholder' => 'Choix type'
+                    ])  
+                    
+          /*  ->add('devisClient', EntityType::class, [
+                'class' => \App\Entity\UvDeviscab::class,
+                'query_builder' => function (EntityRepository $er) use ($dossier) {
+                    return $er->createQueryBuilder('a')
+                        ->where('a.dossier=:dossier')
+                        ->setParameter('dossier', $dossier)
+                        ->orderBy('a.code', 'ASC');
+                },
+                'choice_label' => 'code',
+                'placeholder' => 'Choix devis Client',
+            ])*/;
+
+
+
+
+        $builder->get('compteMasse')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+                if ($form->getData()) {
+                    $this->AddCompteRubrique($form->getParent(), $form->getData());
+                }
+            }
+        );
+
+
+        $builder->get('marche')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                // dump($data);
+
+                $form = $event->getForm();
+                //dump($form->getParent());
+                // dump($form->getData());
+                if ($form->getData()) {
+                    $this->AddSousMarche($form->getParent(), $form->getData());
+                }
+            }
+        );
+
+
+        $builder->get('projet')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function(FormEvent $event) {
+        // dump($data);
+
+        $form = $event->getForm();
+        //dump($form->getParent());
+        // dump($form->getData());
+        if ($form->getData()) {
+            $this->AddSousprojet($form->getParent(), $form->getData());
+        }
+    });
+
+        $builder->addEventListener(
+            FormEvents::POST_SET_DATA,
+            function (FormEvent $event) {
+
+                $data = $event->getData();
+
+                if ($data->getMarche()) {
+                    $this->AddSousMarche($event->getForm(), $data->getMarche());
+                } else {
+                    $this->AddSousMarche($event->getForm(), null);
+                }
+
+                if ($data->getProjet()) {
+                    $this->AddSousProjet($event->getForm(), $data->getProjet());
+                } else {
+                    $this->AddSousProjet($event->getForm(), null);
+                }
+
+                if ($data->getCompteMasse()) {
+                    $this->AddCompteRubrique($event->getForm(), $data->getCompteMasse());
+                } else {
+                    $this->AddCompteRubrique($event->getForm(), null);
+                }
+                if ($data->getCompteRubrique()) {
+                    $this->AddComptePoste($event->getForm(), $data->getCompteRubrique());
+                } else {
+                    $this->AddComptePoste($event->getForm(), null);
+                }
+
+
+                if ($data->getComptePoste()) {
+                    $this->AddCompte($event->getForm(), $data->getComptePoste());
+                } else {
+                    $this->AddCompte($event->getForm(), null);
+                }
+            }
+        );
+    }
+
+    private function AddCompteRubrique(\Symfony\Component\Form\FormInterface $form, ?PComptemasse $PComptemasse)
+    {
+        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
+            'compteRubrique',
+            EntityType::class,
+            null,
+            [
+                'class' => PCompterubrique::class,
+                'query_builder' => function (EntityRepository $er) use ($PComptemasse) {
+                    return $er->createQueryBuilder('a')
+                        ->where('a.compteMasse = :obj')
+                        ->andwhere('a.sens=1')
+                        ->andwhere('a.active=1')
+                        ->setParameter('obj', $PComptemasse)
+                        ->orderBy('a.designation', 'ASC');
+                },
+                'choice_label' => 'designation',
+                'placeholder' => 'Compte Rubrique ',
+                'auto_initialize' => false,
+            ]
+        );
+
+
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+                if ($form->getData()) {
+                    $this->AddComptePoste($form->getParent(), $form->getData());
+                }
+            }
+        );
+        $form->add($builder->getForm());
+    }
+
+    private function AddComptePoste(\Symfony\Component\Form\FormInterface $form, ?PCompterubrique $PCompterubrique)
+    {
+
+        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
+            'comptePoste',
+            EntityType::class,
+            null,
+            [
+                'class' => PCompteposte::class,
+                'query_builder' => function (EntityRepository $er) use ($PCompterubrique) {
+                    return $er->createQueryBuilder('a')
+                        ->where('a.compteRubrique = :obj')
+                        ->andwhere('a.sens=1')
+                        ->andwhere('a.active=1')
+                        ->setParameter('obj', $PCompterubrique)
+                        ->orderBy('a.designation', 'ASC');
+                },
+                'choice_label' => 'designation',
+                'placeholder' => 'Compte poste ',
+                'auto_initialize' => false,
+            ]
+        );
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+                if ($form->getData()) {
+                    $this->AddCompte($form->getParent(), $form->getData());
+                }
+            }
+        );
+        $form->add($builder->getForm());
+    }
+
+    private function AddCompte(\Symfony\Component\Form\FormInterface $form, ?PCompteposte $PCompteposte)
+    {
+        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
+            'compte',
+            EntityType::class,
+            null,
+            [
+                'class' => PCompte::class,
+                'query_builder' => function (EntityRepository $er) use ($PCompteposte) {
+                    return $er->createQueryBuilder('a')
+                        ->where('a.comptePoste = :obj')
+                        ->andwhere('a.sens=1')
+                        ->andwhere('a.active=1')
+                        ->setParameter('obj', $PCompteposte)
+                        ->orderBy('a.designation', 'ASC');
+                },
+                'choice_label' => 'designation',
+                'placeholder' => 'Compte',
+                'auto_initialize' => false
+            ]
+        );
+
+        $form->add($builder->getForm());
+    }
+
+    private function AddSousMarche(\Symfony\Component\Form\FormInterface $form, ?PMarche $marchesous)
+    {
+        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
+            'marchesous',
+            EntityType::class,
+            null,
+            [
+                'class' => PMarcheSous::class,
+                'query_builder' => function (EntityRepository $er) use ($marchesous) {
+                    return ($er->createQueryBuilder('a')
+                        ->where('a.marche IN (:obj)')
+                        ->setParameter('obj', $marchesous)
+                        ->orderBy('a.id', 'ASC'));
+                },
+                'choice_label' => 'description',
+                'placeholder' => 'Sous marche ',
+                'auto_initialize' => false,
+            ]
+        );
+
+
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+            }
+        );
+        $form->add($builder->getForm());
+    }
+
+
+    private function AddSousprojet(\Symfony\Component\Form\FormInterface $form, ?UPProjet $projet)
+    {
+        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
+            'sousprojet',
+            EntityType::class,
+            null,
+            [
+                'class' => PProjetSous::class,
+                'query_builder' => function (EntityRepository $er) use ($projet) {
+                    return ($er->createQueryBuilder('a')
+                        ->where('a.projet IN (:obj)')
+                        ->andwhere('a.active=1')
+                        ->setParameter('obj', $projet)
+                        ->orderBy('a.id', 'ASC'));
+                },
+                'choice_label' => 'description',
+                'placeholder' => 'Sous Projet ',
+                'auto_initialize' => false,
+            ]
+        );
+
+
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+            }
+        );
+        $form->add($builder->getForm());
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => UvCommandecab::class,
+            'dossier' => '',
+            'projets'=>'',
+            'marches'=>''
+        ]);
+    }
+}

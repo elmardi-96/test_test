@@ -1,0 +1,164 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Préinscription | Etudiant | UNIV
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+{% block body %}
+	{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'_preinscription'}}) }}
+
+	<div id="right-sidebar" class="actions animated">
+
+	</div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-6">
+			{% include './module_univ/etudiant/inc/workflow_breadcumb.html.twig' %}
+		</div>
+    <div class="col-lg-6">
+        <div class="title-action">
+            <button class="btn btn-white btn-xs btn-lg my-button " data-style="expand-left" type="submit">
+                <i class="fa fa-save"></i>
+                {{ button_label|default('Enregistrer') }}</button>
+
+        </div>
+    </div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './module_univ/etudiant/inc/workflow.html.twig' %}
+		</div>
+	</div>
+	{# <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-4">
+			<h2 class="fo">Univ , Préinscription
+			</h2>
+		</div>
+		<div class="col-lg-8">
+			<div class="title-action">
+
+				<button class="btn btn-white btn-xs btn-lg my-button " data-style="expand-left" type="submit">
+						<i class="fa fa-save"></i>
+						{{ button_label|default('Enregistrer') }}</button>
+
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+
+	</div> #}
+	<br/><br/>
+	<div class="row pt-20">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div class="ibox-content">
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div
+										class="panel-options">
+										{#<ul class="nav nav-tabs">
+										                                                                                                                            <li><a class="nav-link active show" href="#tab-1" data-toggle="tab">Informations</a></li>
+										                                                                                                                            <li><a class="nav-link" href="#tab-2" data-toggle="tab">Articles</a></li>
+										                                                                                
+										                                                                                                                            <li><a class="nav-link" href="#tab-3" data-toggle="tab">Le suivi des opérations </a></li>
+										                                                                                
+										                                                                                                                        </ul>#}
+										{% include './module_univ/etudiant/inc/navigation.autre1.html.twig' %}
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="panel-body">
+
+										<div class="tab-content">
+											<div class="tab-pane active show" id="tab-1">
+												<div class="row">
+													<div class="col-md-4 b-r">
+														<h3 class="m-t-none m-b">Informations pré-inscription
+														</h3>
+
+														<div class="hr-line-dashed"></div>
+
+
+														<div class="row">
+															<div class="col-md-12">
+																{#<select class="form-control _multiple_actions show-frais">
+																	<option value="">Choix de préinscription</option>
+																	<option value="_genener_admission" class="">Générer avec frais</option>
+																</select>#}
+																
+																<div id="using_json"></div>
+															</div>
+														</div>
+
+													</div>
+													<div class="col-md-8 etu">
+														<h3 class="m-t-none m-b">Liste pré-inscriptions
+														</h3>
+														<div class="hr-line-dashed"></div>
+														<table class="t-m table table-striped table-bordered table-hover w-m dataTable datatable-default" id="datatable-show3">
+															<thead>
+																<tr>
+																	<th>#</th>
+																	<th>Code</th>
+																	<th>Etablissement</th>
+																	<th>Formation</th>
+																	<th>Crée par</th>
+																	<th>date création</th>
+																	<th>sup</th>
+
+																</tr>
+															</thead>
+															<tbody>
+																{% for key ,  preinsciption in UnivTPreinscriptionall %}
+																	<tr>
+																		<td>{{key +1 }}</td>
+																		<td>
+																			<a href="{{path('module_univ_preinscription_show', {'id' : preinsciption.id})}}" class='cd_op'>{{preinsciption.code}}</a>
+																		</td>
+																		<td>{{preinsciption.formation ? preinsciption.formation.etablissement ? preinsciption.formation.etablissement.designation}}</td>
+																		<td>{{preinsciption.formation ? preinsciption.formation.designation}}</td>
+																		<td>{{preinsciption.UserCreated ? preinsciption.UserCreated.nom}}</td>
+																		<td>{{preinsciption.Created|date("m/d/Y")}}</td>
+																		<td>
+																			<a style="float:right" id="{{ preinsciption.id }}" class="_delete_preinscription fa fa-trash-o"></a>
+																		</td>
+																	</tr>
+																{% endfor %}
+
+															</tbody>
+
+														</table>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% if etudiant is defined %}
+		<input type="hidden" name="_id" value="{{ etudiant.id }}" id="_id"/>
+	{% endif %}
+
+	{{ form_end(form, {'render_rest': false}) }}
+{% endblock %}
+
+
+{% block javascripts %}
+
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_etudiant') }}
+
+
+{% endblock %}

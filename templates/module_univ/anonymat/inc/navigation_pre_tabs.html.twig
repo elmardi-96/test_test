@@ -1,0 +1,23 @@
+{% set current_path = app.request.get('_route') %}
+<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+	<a class="nav-link {% if "module_univ_anonymat_index"  in current_path  %} active {% endif %}" href="{{ path('module_univ_anonymat_index')}}">
+		<i class="fa fa-minus-square"></i>
+		IMPRESSION
+	</a>
+	<a class="nav-link {% if "module_univ_anonymat_controle"  in current_path  %} active {% endif %}" href="{{ path('module_univ_anonymat_controle')}}">
+		<i class="fa fa-minus-square"></i>
+		CONTROLE
+	</a>
+
+	<a class="nav-link {% if "module_univ_anonymat_impression_claire"  in current_path  %} active {% endif %}" href="{{ path('module_univ_anonymat_impression_claire')}}">
+		<i class="fa fa-minus-square"></i>
+		IMPRESSION CLAIRE
+	</a>
+
+
+	
+
+	
+
+</div>

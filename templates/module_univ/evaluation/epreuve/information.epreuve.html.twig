@@ -1,0 +1,463 @@
+<div class="ibox">
+    <div class="ibox-content  border-padding-none">
+
+        <div class="">
+            <div>
+
+                {#<div class="row">
+                                                                                                                                        <div class="alert alert-primary inform" role="alert">
+                                                                                                                                                <i class="fa fa-info-circle"></i>
+                                                                                                                                                Vous pouvez accéder à la page nature d'épreuve par lien ceci (
+                                                                                                                                                <a class="cd_op" href="{{path('module_univ_evaluation_moyenne_epreuve_fun',{id:epreuve.id})}}">{{epreuve.natureEpreuve.code}}</a>
+                                                                                                                                                ) !
+                                                                                                                                        </div>
+                                                                                                                                </div>#}
+
+                <div class="col-lg-12 animated fadeInRight border-padding-none">
+                    <div class="card-ribbon card-ribbon-epreuve evaluation-epreuve">
+                        <span>
+                            <div class="style-position">épreuve</div>
+                        </span>
+                    </div>
+                    <div class="mail-box-header header-mail-show">
+
+                        <h2 class="header-show header-title">
+                            épreuve :
+                            {{epreuve.natureEpreuve.designation}}
+                            <span class="float-right font-normal">
+                                <a href="{{path('module_univ_evaluation_moyenne_epreuve_fun',{id:epreuve.id})}}" class="href-btn-show btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Print email">
+                                    <i class="fa fa-calculator"></i>
+                                    Calculer moyenne
+                                </a>
+
+                            </span>
+                        </h2>
+                        <div class="mail-tools tooltip-demo m-t-md">
+                            <h5 class="padding-0-show">
+
+
+                                <div class="row">
+                                    <div class="col-md-12 padding-show">
+                                        <h3 class="m-t-none margin-bottom">INFORMATIONS <button class="promotion btn btn-white btn-sm href-btn-show link-style"  ><i class="fa fa-info"></i> Informations</button></h3>
+                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                        <div class="form-group row ph">
+                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+                                            <div class="col-sm-8">
+                                                <p class="form-control-static">{{epreuve.id}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                        <div class="form-group row ph">
+                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Type</label>
+                                            <div class="col-sm-8">
+                                                <p class="form-control-static">{{epreuve.type}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                        <div class="form-group row ph">
+                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Description
+                                            </label>
+
+                                            <div class="col-sm-8">
+                                                <p class="form-control-static">{{epreuve.Description}}</p>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                        <div class="form-group row ph">
+                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Narure d'épreuve
+                                            </label>
+
+                                            <div class="col-sm-8">
+                                                <p class="form-control-static">
+                                                    {{epreuve.natureEpreuve.designation}}
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                        <div class="form-group row ph">
+                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Crée par
+                                            </label>
+
+                                            <div class="col-sm-8">
+                                                <p class="form-control-static">
+                                                    {{epreuve.userCreated.username}}
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                        <div class="form-group row ph">
+                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Utilisateur
+                                            </label>
+
+                                            <div class="col-sm-8">
+                                                <p class="form-control-static">
+                                                    {{epreuve.userCreated.username}}
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                        <div class="form-group row ph">
+                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Position actuel</label>
+
+                                            <div class="col-sm-8">
+                                                <p class="form-control-static">
+                                                    {% if epreuve.positionActuel is defined and epreuve.positionActuel is not empty %}
+                                                        {% for key, pos in epreuve.positionActuel %}
+                                                            {{key}}
+                                                        {% endfor %}
+                                                    {% else %}Créer
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="mail-box">
+
+
+                        <div class="mail-body" style="display:none;">
+                            <div class="row">
+                                <div class="col-md-6 b-r">
+                                    <h3 class="m-t-none m-b">INFORMATIONS</h3>
+                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                    <div class="form-group row ph">
+                                        <label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static">{{epreuve.id}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                    <div class="form-group row ph">
+                                        <label class="col-sm-4 required font-weight-bold font-weight-bold">Description
+                                        </label>
+
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static">{{epreuve.Description}}</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                    <div class="form-group row ph">
+                                        <label class="col-sm-4 required font-weight-bold font-weight-bold">Narure d'épreuve
+                                        </label>
+
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static">
+                                                {{epreuve.natureEpreuve.designation}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                    <div class="form-group row ph">
+                                        <label class="col-sm-4 required font-weight-bold font-weight-bold">Position actuel</label>
+
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static">
+                                                {% if epreuve.positionActuel is defined and epreuve.positionActuel is not empty %}
+                                                    {% for key, pos in epreuve.positionActuel %}
+                                                        {{key}}
+                                                    {% endfor %}
+                                                {% else %}Créer
+                                                {% endif %}
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <h3 class="m-t-none m-b">INFORMATIONS FORMATION</h3>
+                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                    <div class="form-group row ph">
+                                        <label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+
+                                        <div class="col-sm-8">
+
+                                            <p class="form-control-static">{{epreuve.controleElement.element.module.semestre.promotion.formation.etablissement.designation}}</p>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                    <div class="form-group row ph">
+                                        <label class="col-sm-4 required font-weight-bold font-weight-bold">Formation</label>
+
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static">{{epreuve.controleElement.element.module.semestre.promotion.formation.designation}}</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                    <div class="form-group row ph">
+                                        <label class="col-sm-4 required font-weight-bold font-weight-bold">Promotion</label>
+
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static">{{epreuve.controleElement.element.module.semestre.promotion.designation}}</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                    <div class="form-group row ph">
+                                        <label class="col-sm-4 required font-weight-bold font-weight-bold">Semestre</label>
+
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static">{{epreuve.controleElement.element.module.semestre.designation}}</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                    <div class="form-group row ph">
+                                        <label class="col-sm-4 required font-weight-bold font-weight-bold">Module</label>
+
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static">{{epreuve.controleElement.element.module.designation}}</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                    <div class="form-group row ph">
+                                        <label class="col-sm-4 required font-weight-bold font-weight-bold">Element</label>
+
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static">{{epreuve.controleElement.element.designation}}</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                    <div class="form-group row ph">
+                                        <label class="col-sm-4 required font-weight-bold font-weight-bold">Année</label>
+
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static">{{epreuve.controleElement.controleModule.controleSemestre.controlePromotion.annee.designation}}</p>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="m-t-none m-b"><br>
+                                    </h3>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mail-attachment padding-attachement">
+
+
+                            <h3 class="m-t-none margin-bottom">EPREUVES</h3>
+
+                            <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                            <div class="panel-group" id="accordion">
+                                {% for key , epr in epreuve.epreuves %}
+                                    <div class="panel panel-default">
+
+
+                                        <div class="panel-heading heading-show">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{key}}">
+                                                    {{ epr.natureEpreuve.designation }}
+                                                    (<a href="{{path('module_univ_evaluation_epreuves_show',{id:epr.id})}}" class="link-show">{{epr.code}}</a>)
+                                                    <span style="float:right">
+                                                        Date :
+                                                        {{ epr.dateEpreuve|date("d/m/Y") }}
+                                                        |
+                                                        Postion :
+                                                        {% for key,value in epr.positionActuel %}
+                                                            {{ key }}
+                                                        {% endfor %}
+                                                    </span>
+                                                </a>
+
+                                            </h4>
+                                        </div>
+                                        <div id="collapse{{key}}" class="panel-collapse collapse in">
+                                            <div
+                                                class="panel-body body-show">
+                                                {#<p style="padding-left: 15px;margin: 0;">
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        {{epr.designation}}</p>#}
+                                                <div class="row">
+                                                    <div class="col-md-6 b-r">
+                                                        <ul class="list-group clear-list" style="font-size: 9px;">
+
+                                                            <li class="list-group-item fist-item">
+                                                                <span class="float-right">
+                                                                    {{epr.nature}}
+                                                                </span>
+                                                                <i class="fa fa-circle circle-o"></i>
+                                                                Nature
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                <span class="float-right">
+                                                                    {{epr.coefficient}}
+                                                                </span>
+                                                                <i class="fa fa-circle circle-o"></i>
+                                                                Coefficient
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                <span class="float-right">
+                                                                    {{epr.natureAnonymat}}
+                                                                </span>
+                                                                <i class="fa fa-circle circle-o"></i>
+                                                                Nature Anonymat
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                <span class="float-right">
+                                                                    {% for key,value in epr.positionActuel %}
+                                                                        {{ key }}
+                                                                    {% endfor %}
+                                                                </span>
+                                                                <i class="fa fa-circle circle-o"></i>
+                                                                statut
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                <span class="float-right">
+                                                                    {{epr.observation}}
+                                                                </span>
+                                                                <i class="fa fa-circle circle-o"></i>
+                                                                Observation
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <ul class="list-group clear-list" style="font-size: 9px;">
+                                                            <li class="list-group-item fist-item">
+                                                                <span class="float-right">
+                                                                    {{ informationEtudiants[epr.id].absent }}
+                                                                </span>
+                                                                <i class="fa fa-circle circle-o"></i>
+                                                                Nombre des étudiants absent
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                <span class="float-right">
+                                                                    {{ informationEtudiants[epr.id].note }}
+                                                                </span>
+                                                                <i class="fa fa-circle circle-o"></i>
+                                                                Nombre des étudiants qui ils ont des notes
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                <span class="float-right">
+                                                                    {{ informationEtudiants[epr.id].sansNote }}
+                                                                </span>
+                                                                <i class="fa fa-circle circle-o"></i>
+                                                                Nombre des étudiants qui ils n'ont pas des notes</li>
+                                                            <li class="list-group-item">
+                                                                <span class="float-right">
+                                                                    {{ informationEtudiants[epr.id].etudiants }}
+                                                                </span>
+                                                                <i class="fa fa-circle circle-o"></i>
+                                                                Nombre des étudiants
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {#
+                                                                                                                                                                                                        <div class="panel-footer" style="display: flow-root;padding: 3px 15px;">
+                                                                                                                                                                                                        <span style="float:left">Status :
+                                                                                                                                                                                                        {% for key,value in epr.positionActuel %}
+                                                                                                                                                                                                        {{ key }}
+                                                                                                                                                                                                        {% endfor %}
+                                                                                                                                                                                                        </span>
+                                                                                                                                                                                                        {#<span style="float:right">
+                                                                                                                                                                                                        Nombre épreuves :
+                                                                                                                                                                                                        {{ epreuve.epreuves | length }}
+                                                                                                                                                                                                        </span>}
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                        #}
+                                        </div>
+
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            {#<div class="attachment">
+                                                                                                                                                                                                        {% for eps in epreuve.epreuves %}
+                                                                                                                                                                                                        <div class="file-box">
+                                                                                                                                                                                                        <div class="file">
+                                                                                                                                                                                                        <a href="{{path('module_univ_evaluation_epreuves_show',{id:eps.id})}}">
+                                                                                                                                                                                                        <span class="corner"></span>
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        <div class="icon">
+                                                                                                                                                                                                        <i class="fa fa-file"></i>
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                        <div class="file-name">
+                                                                                                                                                                                                        <h4>{{eps.code}}</h4>
+                                                                                                                                                                                                        {{eps.designation}}
+                                                                                                                                                                                                        <br>
+                                                                                                                                                                                                        <small>
+                                                                                                                                                                                                        <i class="fa fa-clock-o"></i>
+                                                                                                                                                                                                        Date Epreuve:
+                                                                                                                                                                                                        {{eps.dateEpreuve|date("Y/m/d")}}</small>
+                                                                                                                                                                                                        <br/>
+                                                                                                                                                                                                        <small>
+                                                                                                                                                                                                        <i class="fa fa-street-view"></i>
+                                                                                                                                                                                                        Status:
+                                                                                                                                                                                                        {% if eps.positionActuel is defined and eps.positionActuel is not empty %}
+                                                                                                                                                                                                        {% for key, pos in eps.positionActuel %}
+                                                                                                                                                                                                        {{key}}
+                                                                                                                                                                                                        {% endfor %}
+                                                                                                                                                                                                        {% else %}Créer
+                                                                                                                                                                                                        {% endif %}
+                                                                                                                                                                                                        </small>
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                        </a>
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                        {% endfor %}
+                                                                                                                                                                                                        <div class="clearfix"></div>
+                                                                                                                                                                                                        </div>#}
+                        </div>
+
+
+                        <div class="clearfix"></div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ render(controller('App\\Controller\\moduleUniv\\evaluation\\EvaluationAnneeController:ChoixPromotion',{ 'id': epreuve.controleElement.controleModule.controleSemestre.controlePromotion ,'type':'epreuve','active':epreuve.id}))}}

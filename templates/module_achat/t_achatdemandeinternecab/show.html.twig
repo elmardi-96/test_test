@@ -1,0 +1,668 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Informations | demande d'achat | Ugouv achat
+{% endblock %}
+
+
+{% block body %}
+
+
+
+    {{ parent() }}
+    <div class="actions modal fade right" id="ModalDocumentDynamique1"  role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+        <div class="modal-dialog  modal-full-height modal-middle modal-right modal-sm " style="max-width:400 px;" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalPreviewLabel">Ajouter fichier/DOCUMENT/IMAGE</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bo-0">
+                    <div class="text-center spr1">
+                        <br/>
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="bod1"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade right" id="ModalDocumentDynamique"  role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+        <div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalPreviewLabel">Generer COMMANDE</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body bo">
+                    <div class="text-center spr" style="display: none;">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="bod" style=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade right" id="ModalAddICE" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+        <div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalPreviewLabel">ICE Tiers</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="sidebar-title"style=" background: #f2f2f2; padding: 5px 8px; margin-bottom: 8px;" >
+                    <i class="fa fa-info-circle"></i> <b> NOTE</b>
+                    <p>DANS LE CADRE DE LA FIABILISATION DES FOURNISSEURS, 
+                    VEUILLEZ RENSEIGNER L'ICE CORRESPONDANT AU FOURNISSEUR SÉLECTIONNÉ</p>
+                </div>
+                {# <div class="modal-body bo"> #}
+                <div class="">
+                    <div class="text-center spr" style="display: none;">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bod" style="">
+                    
+                        <div class="col-md-12">
+                            <div class="form-group row">
+								<label class="col-sm-12 ">Tiers</label>
+							    <div class="hr-line-dashed"></div>
+								<div class="col-sm-12 " id="nom_tiers" >
+									{# <input type="text" id="nom_tiers" name="nom_tiers" disabled class="form-control form-control-sm" > #}
+								</div>
+							</div>
+						    <div class="hr-line-dashed"></div>
+                            
+                            <div class="form-group row">
+								<label class="col-sm-12 ">ice (*)</label>
+							    <div class="hr-line-dashed"></div>
+								<div class="col-sm-12">
+                                    <input  type="text" id="ice-tiers" name="ice-tiers"  class="form-control form-control-sm" placeholder="ICE">
+								</div>
+                                <div class=" col-sm-12 text-danger ice_tiers error-custom mt-2" role="alert" style="display: none;">
+                                </div>
+							</div>
+						    <div class="hr-line-dashed"></div>
+                            
+                            <div class="form-group row">
+								<label class="col-sm-12 ">Nom responsable (*)</label>
+							    <div class="hr-line-dashed"></div>
+								<div class="col-sm-12">
+                                    <input  type="text" id="nom-tiers" name="nom-tiers"  class="form-control form-control-sm" placeholder="Nom">
+								</div>
+                                <div class=" col-sm-12 text-danger nom_tiers error-custom mt-2" role="alert" style="display: none;">
+                                </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+								<label class="col-sm-12 ">Téléphone (*)</label>
+							    <div class="hr-line-dashed"></div>
+								<div class="col-sm-12">
+                                    <input  type="text" id="tel-tiers" name="tel-tiers"  class="form-control form-control-sm" placeholder="Téléphone">
+								</div>
+                                <div class=" col-sm-12 text-danger tel_tiers error-custom mt-2" role="alert" style="display: none;">
+                                </div>
+							</div>
+                            <br/>
+                            <div class="form-group row">
+                                <div class="col-sm-8">        
+                                    <button class="btn btn-sm btn-white btn-white  btn-primary  my-button mbt btn-register  upper btn-xs my-button2 font-size-11 btn-maj-ice col-sm-12" type="button">
+                                        &nbsp;Mise à jour
+                                    </button>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="right-sidebar" class="actions animated"></div>
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-12">
+            {{ include('./module_achat/t_achatdemandeinternecab/inc/workflow_breadcumb.html.twig',{'page_actuel': 'show'})}}
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12" style="font-weight:100 !important;">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+    <br/>
+    <br/>
+
+
+    {# {{ dump(operations) }}#}
+    <div class="wrapper wrapper-content  animated fadeInRight p-r-l-0">
+        <div class="row">
+            <div class="col-10 no-pad-right no-pad-left">
+                <div class="ibox">
+                    {# <div class="ibox-title ibox-title2">#}
+
+                    {#</div>#}
+                    <div class="ibox-content p-b-0">
+
+                        <h4>informations generales 
+
+
+                            {#<i class="fa fa-circle wf-color wf-color-creer"></i>
+                                 <i class="fa fa-circle wf-color wf-color-valider"></i>
+                                 <i class="fa fa-circle wf-color wf-color-commander"></i>
+                              --------------#}
+                              <span class="f-r hint--bottom-left" aria-label="{{ demande.positionActuel }}" > <i  class=" f-r fa fa-circle wf-color wf-color-{{ demande.positionActuel }} "></i></span>
+                           
+
+                        </h4>
+                        <div class="row m-t-sm">
+                            <div class="col-lg-12">
+                                <div class="panel blank-panel">
+
+
+                                    <div class="col-md-12 p-t-0">
+                                        <div class="panel-body">
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active show" id="tab1-1">
+
+
+                                                    <div class="row">
+
+                                                        <div class="col-md-6 b-r">
+
+
+
+
+                                                            <div class="form-group row ph">
+                                                                <label class="col-sm-4 required font-weight-bold font-weight-bold">Code </label>
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">{{ demande.code }}</p>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group row ph">
+                                                                <label class="col-sm-4 required font-weight-bold">Nature </label>
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">{{ demande.type ? demande.type.designation }}</p>
+                                                                </div>
+                                                            </div>
+
+
+                                                                {#{% if demande.devisClient is defined and demande.devisClient is not null %}
+
+                                                                    <div class="form-group row ph">
+                                                                        <label class="col-sm-4 required font-weight-bold">Reference devis client </label>
+                                                                        <div class="col-sm-8">
+                                                                            <p class="form-control-static">{{ demande.devisClient ? demande.devisClient.code }}</p>
+                                                                        </div>
+
+                                                                    </div>
+                                                                {% endif %}#}
+
+                                                                {#                                                            {% if demande.marche is defined and demande.marche is not null %}
+                                                                    <br>
+                                                                    <div class="form-group row ph">
+                                                                        <label class="col-sm-4 required font-weight-bold">Marche </label>
+                                                                        <div class="col-sm-8">
+                                                                            <p class="form-control-static">{{ demande.marche ? demande.marche.designation }}</p>
+                                                                        </div>
+
+                                                                    </div>
+                                                                {% endif %}
+                                                                {% if demande.marchesous is defined and demande.marchesous is not null %}
+                                                                    <hr/>
+                                                                    <div class="form-group row ph">
+                                                                        <label class="col-sm-4 required font-weight-bold">PROJET </label>
+                                                                        <div class="col-sm-8">
+                                                                            <p class="form-control-static">{{ demande.marchesous ? demande.marchesous.designation }}</p>
+                                                                        </div>
+
+                                                                    </div>
+                                                                {% endif %}#}
+
+
+                                                                <div class="form-group row ph">
+                                                                    <label class="col-sm-4 required font-weight-bold">Projet </label>
+                                                                    <div class="col-sm-8">
+                                                                        <p class="form-control-static">{{ demande.projet ? demande.projet.designation : '-' }}</p>
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                                <div class="form-group row ph">
+                                                                    <label class="col-sm-4 required font-weight-bold">Type </label>
+                                                                    <div class="col-sm-8">
+                                                                        <p class="form-control-static">{{ demande.sousprojet ? demande.sousprojet.designation : '-' }}</p>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                 <div class="form-group row ph">
+                                                                    <label class="col-sm-4 required font-weight-bold">Type </label>
+                                                                    <div class="col-sm-8">
+                                                                        <p class="form-control-static">{{ demande.devise ? demande.devise.designation : '-' }}</p>
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                            {#                                                           {% if demande.investissementDescription is defined and demande.investissementDescription is not null %}
+                                                                                                                           <br>
+                                                                                                                           <div class="form-group row ph">
+                                                                                                                               <label class="col-sm-4 required font-weight-bold">investissement Description </label>
+                                                                                                                               <div class="col-sm-8">
+                                                                                                                                   <p class="form-control-static">{{ demande.investissementDescription}}</p>
+                                                                                                                               </div>
+                                                           
+                                                                                                                           </div>
+                                                                                                                       {% endif %}#}
+
+
+                                                            {#                                                            <br>
+                                                            
+                                                                                                                        <div class="form-group row ph">
+                                                                                                                            <label class="col-sm-4 required font-weight-bold">Fournisseur </label>
+                                                            
+                                                                                                                            <div class="col-sm-8">
+                                                                                                                                <p class="form-control-static">{{ demande.fournisseur ? demande.fournisseur.nom }}</p>
+                                                                                                                            </div>
+                                                            
+                                                                                                                        </div>#}
+
+
+
+
+
+                                                            {#                                                            <br>
+                                                                                                                        <div class="form-group row ph">
+                                                                                                                            <label class="col-sm-4 required font-weight-bold">Devise </label>
+                                                            
+                                                                                                                            <div class="col-sm-8">
+                                                                                                                                <p class="form-control-static">{{ demande.devise ? demande.devise.designation }}</p>
+                                                                                                                            </div>
+                                                            
+                                                                                                                        </div>#}
+
+                                                            {#                                     <br>
+                                                                                                 <div class="form-group row ph">
+                                                                                                     <label class="col-sm-4 required font-weight-bold">Ref devis frs </label>
+                                     
+                                                                                                     <div class="col-sm-8">
+                                                                                                         <p class="form-control-static">{{ demande.refdocasso}}</p>
+                                                                                                     </div>
+                                     
+                                                                                                 </div>#}
+
+
+                                                        </div>
+                                                        <div class="col-md-6">
+
+                                                             <div class="form-group row ph">
+                                                                <label class="col-sm-4 required font-weight-bold">Site Demandeur </label>
+
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">{{ demande.service ? demande.service.abreviation }}</p>
+                                                                </div>
+
+                                                            </div>
+
+                                                            {#                                                  <div class="form-group row ph">
+                                                                                                                  <label class="col-sm-6 required font-weight-bold">Client </label>
+                                                  
+                                                                                                                  <div class="col-sm-6">
+                                                                                                                      <p class="form-control-static">{{ demande.client ? demande.client.societe }}</p>
+                                                                                                                  </div>
+                                                  
+                                                                                                              </div>
+                                                  
+                                                  
+                                                  
+                                                                                                              <br>
+                                                                                                              <div class="form-group row ph">
+                                                                                                                  <label class="col-sm-6 required font-weight-bold">Estimation Financiere </label>
+                                                  
+                                                                                                                  <div class="col-sm-6">
+                                                                                                                      <p class="form-control-static">{{ demande.montant }}</p>
+                                                                                                                  </div>
+                                                  
+                                                                                                              </div>#}
+
+
+                                                            <div class="form-group row ph">
+                                                                <label class="col-sm-4 required font-weight-bold">Description </label>
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">{{ demande.description }}</p>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group row ph">
+                                                                <label class="col-sm-4 required font-weight-bold">Desc.Detail </label>
+                                                                <div class="col-sm-8">
+                                                                    <p class="form-control-static">{{ demande.descriptionDetail }}</p>
+                                                                </div>
+
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="ibox">
+                    <div class="ibox-content" >
+
+                        <h4 class="m-b-0">Details</h4>
+
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="full-height-scroll">
+                                <div class="table-responsive">
+
+                                    <table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable">
+                                        <thead  class="f-9">
+                                            <tr>
+                                                <th style="width:2%;" class="center">#</th>
+                                                <th style="width:5%;" class="center">Reference</th>
+                                                <th style="width:40%;" class="center">Article</th>
+                                                <th style="width:3%;" class="center">U</th>
+                                                <th style="width:5%;" class="center">Quantité</th>
+                                                <th style="width:7%;" class="center">Prix unitaire</th>
+                                                <th style="width:3%;" class="center">TVA%</th>
+                                                <th style="width:8%;" class="center">Montant TVA</th>
+                                                <th style="width:5%;" class="center">REMISE%</th>
+                                                <th style="width:9%;" class="center">Montant REMISE</th>
+                                                <th style="width:5%;" class="center">TOTAL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for detail  in  demande.details %}
+                                                <tr>
+                                                    <td>{{ loop.index }}</td>
+                                                    <td>{{detail.article ? detail.article.code :''}}</td>
+                                                    <td>
+                                                        {{ detail.article ? detail.article.titre:''}}
+                                                        {% if detail.observation %}
+                                                            <br/><b>Informations complementaires : {{ detail.observation}}</b>
+                                                        {% endif %}
+
+                                                    </td>
+                                                    <td class="center">{{ detail.unite ? detail.unite.abreviation:''}}</td>
+                                                    <td class="center">{{ detail.quantiteformat}}</td>
+                                                    <td class="text-end">{{ detail.prixunitairefomat }}</td>
+                                                    <td class="center">{{detail.tvafomat|number_format(0, '.', ',') }}</td>
+                                                    <td class="text-end">{{ detail.prixtvaformat }}</td>
+                                                    <td class="text-end">{{ detail.remisefomat }}
+                                                    </td>
+                                                    <td class="text-end">{{ detail.prixremiseformat }}
+                                                    </td>
+                                                    <td class="text-end-padding">{{detail.prixttcformat }}</td>
+                                                </tr>
+                                            {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 no-pad-left pdr-5">
+                <div class="ibox">
+
+
+                    <div class="ibox-content prix_bloc">
+                        <div class="ibox-heading">
+                            <h3>Total HT
+                                <div class="stat-percent">{{ demande.prixht|number_format(2, ',', ' ') }}
+                                    {{demande.devise ? demande.devise.designation}}
+                                </div>
+                            </h3>
+                        </div>
+                        <hr/>
+                        <div class="ibox-heading">
+                            <h3>TOTAL TAXES
+                                <div class="stat-percent">{{ demande.prixtva|number_format(2, ',', ' ') }}
+                                    {{demande.devise ? demande.devise.designation}}</div>
+                            </h3>
+                        </div>
+                        {% if demande.prixremise > 0 %}
+                            <hr/>
+                            <div class="ibox-heading">
+                                <h3>TOTAL REMISE
+                                    <div class="stat-percent">{{ demande.prixremise|number_format(2, ',', ' ') }}
+                                        {{demande.devise ? demande.devise.designation}}</div>
+                                </h3>
+                            </div>
+                        {% endif %}
+
+                        <hr/>
+                        <div class="ibox-heading">
+                            <h1>Total T.T.C
+                                <div class="stat-percent">{{ demande.prixttc|number_format(2, ',', ' ') }}
+                                    {{demande.devise ? demande.devise.designation}}</div>
+                            </h1>
+                        </div>
+                        <hr/>
+
+
+                    </div>
+                </div>
+                <div class="ibox selected">
+                    {# <div class="ibox-title ibox-title2">
+                         <h5>INFORMATIONS</h5>
+                     </div>#}
+                    <div class="ibox-content pd-0">
+                        <div class="tab-content">
+                            <div id="contact-1" class="tab-pane active">
+                                <div class="client-detail-">
+                                    <div class="full-height-scroll">
+
+
+                                        <ul class="list-group clear-list">
+                                            {% for key ,  operation in operations  %}
+                                                {%  if  operation.prefix == '_documents' %}
+                                                    <li class="list-group-item fist-item">
+                                                        <div class="panel-default">
+                                                            <div class="div-panel-header">
+                                                                <h5 class="panel-title p-title-style">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+                                                                        <i class="fa fa-file-pdf-o"></i>
+                                                                    Impressions associé</a>
+                                                                </h5>
+                                                            </div>
+
+                                                            <div id="collapseOne" class="panel-collapse in collapse">
+                                                                <div class="panel-body">
+                                                                    <ul class="folder-list m-b-md pd-0-10">
+                                                                        <li>
+                                                                            <a href="{{ path('t_achatdemandeinternecab_document_pdf' , {id:demande.id,sans:0})}}" data-valide="{{demande.statutsig}}" {% if demande.fournisseur and demande.fournisseur.categorie.k != "externe" %}class="imprime_document" {% endif %} target="_blank">
+                                                                                <i class="fa fa-file-pdf-o"></i>
+                                                                                Pre-commande ({{ demande.code }})</a>
+                                                                        </li>
+                                                                        
+                                                                        <li>
+                                                                            <a href="{{ path('t_achatdemandeinternecab_DT_document_pdf' , {id:demande.id,sans:0})}}" data-valide="{{demande.statutsig}}" {% if demande.fournisseur and demande.fournisseur.categorie.k != "externe" %}class="imprime_document" {% endif %} target="_blank">
+                                                                                <i class="fa fa-file-pdf-o"></i>
+                                                                                Pre-commande-DT ({{ demande.code }})</a>
+                                                                        </li>
+                                                                        {# <li>
+                                                                            <a href="{{ path('t_achatdemandeinternecab_document_pdf' , {id:demande.id,sans:1})}}" target="_blank">
+                                                                                <i class="fa fa-file-pdf-o"></i>
+                                                                                Pre-commande ({{ demande.code }}, sans prix)</a>
+                                                                        </li> #}
+                                                                        {# <li>
+                                                                            <a href="" class="dynamique_document" data-id="{{ demande.id }}">
+                                                                                <i class="fa fa-file-pdf-o"></i>
+                                                                                Document Dynamique ({{ demande.code }})</a>
+                                                                        </li> #}
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </li>
+                                                {% endif %}
+
+
+
+                                                {%  if  operation.prefix == '_fichiers' %}
+                                                    <li class="list-group-item fist-item">
+                                                        <div class="panel-default">
+                                                            <div class="div-panel-header">
+                                                                <h5 class="panel-title p-title-style">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" class="collapsed">
+                                                                        <i class="fa fa-folder-o"></i>
+                                                                        Fichiers associé</a>
+                                                                </h5>
+                                                            </div>
+
+                                                            <div id="collapseTwo" class="panel-collapse in collapse">
+                                                                <div class="panel-body">
+
+                                                                    {% if demande.fichiers is not empty  %}
+                                                                        <ul class="list-unstyled file-list">
+                                                                            {% for fichier in demande.fichiers %}
+                                                                                {% set icon = "fa fa-paperclip" %}
+                                                                                {% set extension = fichier.imageName|split('.') %}
+                                                                                {% if extension[1] is defined  %}
+                                                                                    {% if extension[1] in ['png' , 'jpg' , 'jpeg' , 'icon' , 'svg']  %}
+                                                                                        {% set icon = "fa fa-file-image-o" %}
+                                                                                    {% elseif extension[1] in ['pdf']  %}
+                                                                                        {% set icon = "fa fa-file-pdf-o" %}
+                                                                                    {% elseif extension[1] in ['xls' ,'xlsx']  %}
+                                                                                        {% set icon = "fa fa-file-excel-o" %}
+                                                                                    {% elseif extension[1] in ['doc' ,'docs']  %}
+                                                                                        {% set icon = "fa fa-file-word-o" %}
+                                                                                    {% elseif extension[1] in ['zip' ,'rar']  %}
+                                                                                        {% set icon = "fa fa-file-archive-o" %}
+                                                                                    {% endif  %}
+                                                                                {% endif  %}
+                                                                                <li>
+
+                                                                                    <a href="{{ asset('/images/ugouv/achat/demandeAchat/fichiers/' ~ fichier.imageName) }}">
+                                                                                        <i class="{{ icon }}"></i>
+                                                                                        {{ fichier.originalName }}<b class="f-8">
+                                                                                            <i class="fa fa-clock-o" class="f-p"></i>
+                                                                                            {{ fichier.created ? fichier.created|date('Y-m-d')}}</b>
+                                                                                    </a>
+                                                                                    <a class="_delete_fichier" style="float: right; color: red;" id="{{ fichier.id }}">
+                                                                                        <i class="fa fa-trash"></i>
+
+                                                                                    </a>
+
+
+                                                                                </li>
+
+
+                                                                            {% endfor %}
+
+                                                                        </ul>
+
+                                                                    {% endif %}
+                                                                    <a class="btn btn-white btn-outline btn-xs ajout" id="{{demande.id}}">
+                                                                        <i class="fa fa-plus"></i>
+                                                                        ajouter
+                                                                    </a>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+
+
+                                            <li class="list-group-item fist-item">
+                                                <div class="panel-default">
+                                                    <div class="div-panel-header">
+                                                        <h5 class="panel-title p-title-style">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="false" class="collapsed">
+                                                                <i class="fa fa-clipboard"></i>
+                                                                LIENS ASSOCIé</a>
+                                                        </h5>
+                                                    </div>
+
+                                                    <div id="collapseTree" class="panel-collapse in collapse">
+                                                        <div class="panel-body">
+                                                            {% set commande   = null  %}
+                                                            {% if  demande.commandes is not empty %}
+                                                                {% set  commande = demande.commandes[0] %}
+                                                            {% endif  %}
+                                                            {{ include('./module_achat/inc/flux_demande.html.twig',{'demande': demande ,'commande' : commande , 'active_demande':true}) }}
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+
+
+                                        </ul>
+                                        <br/>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+    {{ include('./module_achat/t_achatdemandeinternecab/inc/workflow.html.twig',{'page_actuel': 'show'}) }}
+
+    <br><br>
+
+
+    {{ render(controller('App\\Controller\\ModuleAchat\\PreCommandeController:showhistorique',{ 'demande': demande.id})) }}
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('tachatdemandeinternecab') }}
+{% endblock %}
+
+
+
+

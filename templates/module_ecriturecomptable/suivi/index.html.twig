@@ -1,0 +1,276 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+
+
+{% block title %}index | charge{% endblock %}
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+
+        <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+            <div class="col-lg-6">
+                {% include './module_ecriturecomptable/operation/inc/workflow_breadcumb.html.twig' %}
+            </div>
+
+            <div class="border-b"></div>
+                <div class="col-lg-12">
+                    {{ wo_render_breadcrumbs() }}
+                </div>
+            </div>
+            <br/>
+            <br/>
+
+            <div class="row border-bottom white-bg dashboard-header mt-10">
+                <div class="col-lg-12">
+                    <div class="ibox mt-2">
+                        <div class="ibox-content">
+                            <div class="message-success"></div>
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                    <div class="panel blank-panel">
+                                        <div class="panel-body">
+                                            <div>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="tab-1">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-8">
+                                                                        <select name="tableselected" id="tableselected">
+                                                                            <option value="0">charge</option>
+                                                                            <option value="1">chifre d'affaire</option>
+                                                                            <option value="2">operation banque</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="ibox ">
+                        <div class="ibox-content">
+                            <div class="table-responsive" style="overflow-x:scroll">
+                                <table class="table tb cmd  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%">
+                                    <!-- <table class="table display"  id='grid'  style="font-size: 10px;"  width="100%">-->
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Code</th>
+                                            <th>Partenaire</th>
+                                            <th>Dossier</th>
+                                            <th>date</th>
+                                            <th>observation</th>
+                                            <th>BRD</th>
+                                            <th>montant</th>
+                                            <th>pc</th>
+                                            <th>v</th>
+                                            <th>r</th>
+                                            <th>motif</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="factures"></tbody>    
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="mail-body text-right buttons_foot">	</div>
+<div class="actions modal right" id="ModalDocumentDynamiqueValider" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="padding-right: 17px;">
+
+    <div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalPreviewLabel1"> Rejete operation
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body bo-0">
+				
+                <div class="bod_valider" style="">
+                    <div class="sidebar-container">
+
+                        <div class="ibox-tools">
+                            <a class="close-link close-me" href="">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+
+                        <div class="tab-content">
+
+
+                            <div id="tab-1" class="tab-pane active">
+
+                            <div class="sidebar-title">
+                                <h3>
+                                    <i class="fa fa-info-circle"></i>
+                                    INFORMATIONS
+                                </h3>
+                                <small>
+                                VALIDER.</small>
+                            </div>
+
+                            <div class="right-sidebar-content">
+
+
+                                <div class="ibox">
+                                    <div class="ibox-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            
+                                                <div class="form-group">
+                                                    <label class="row col-sm-12 required" for="form_observation_bq">Observation </label>
+
+                                                    <input type="text" id="observation_rejeter" n required="required" class="form-control form-control-sm col-sm-12">
+                                                </div>
+
+                                                <br><br>
+
+                                                <button  class="btn btn-white btn-block btn-xs my-button2" id="observation_rejeter_valider">
+                                                    <i class="fa fa-save"></i>
+                                                    Enregistrer
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+<div class="actions modal right" id="ModalDocumentDynamiqueShow" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="padding-right: 17px;z-index: 9999 !important;">
+
+    <div class="modal-dialog modal-full-height modal-lg modal-right " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalPreviewLabel1"> Ecriture comptable
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body bo-0">
+				
+                <div class="bod_valider" style="">
+                    <div class="sidebar-container">
+
+                        <div class="ibox-tools">
+                            <a class="close-link close-me" href="">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+
+                        <div class="tab-content">
+                            
+
+                            <div id="tab-1" class="tab-pane active">
+
+                            <div class="p-2">
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <h3>
+                                            <i class="fa fa-info-circle"></i>
+                                            INFORMATIONS
+                                        </h3>
+                                    </div>
+                                    <div class="col-md-1 text-right">
+                                        <div class="dropdown dropdown-inline right mt-1 mr-3" > 
+                                            <a class=""style ="color:#676A6C; font-size:15px; "  href="javascript:;" class="" data-toggle="dropdown" > 	
+                                            <i class="fa fa-ellipsis-v text-black " style="" > </i>	
+                                            </a> 
+                                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right " x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-111px, 26px, 0px);"> 	
+                                                <ul class="dropdown-menu show drp-list" x-placement="bottom-start"> 
+                                                    <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">Choisir operation :</li>
+                                                
+                                                    {% for operation in operations %}
+                                                        {% if   operation.horizontale == 1 and operation.eachRow == 1 %}
+                                                            <a   id="{{operation.idCs}}" class="{{operation.classCs}}" style="
+                                                            width: 100%;
+                                                            text-align: left;
+                                                        "><i class="fa {{operation.icon}}"></i> {{ operation.titre|capitalize }}</a>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    
+                                                </ul>
+                                            </div> 	
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="right-sidebar-content">
+
+
+                                <div class="ibox">
+                                    <div class="ibox-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            
+                                                <div id="content">
+                                                
+                                                </div>
+
+                                                <br><br>
+
+                                                {# <button  class="btn btn-white btn-block btn-xs my-button2" id="observation_rejeter_valider">
+                                                    <i class="fa fa-save"></i>
+                                                    Enregistrer
+                                                </button> #}
+                                                <div class="text-right">
+                                                    {% for operation in operations %}
+                                                        {% if   operation.horizontale == 0 and operation.eachRow == 1 %}
+                                                            {# <button id="valider" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+                                                                <i class="fa fa-save"></i>
+                                                                
+                                                                Valider
+                                                            </button> #}
+                                                            <button id="{{operation.idCs}}" class="{{operation.classCs}}" data-style="expand-left">
+                                                                <i class="fa {{operation.icon}}"></i>
+                                                                
+                                                                {{ operation.titre|capitalize }}
+                                                            </button>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('ecriturecomptable_suivi') }}
+{% endblock %}

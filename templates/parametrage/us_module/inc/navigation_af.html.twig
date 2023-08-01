@@ -1,0 +1,24 @@
+{% set current_path = app.request.get('_route') %}
+<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+	<a class="nav-link  {% if "p_dossier_achat_affecter"  in current_path  %} active {% endif %}" href="{{ path('p_dossier_achat_affecter')}}">
+		<i class="fa fa-minus-square"></i>
+		 Module Ugouv Achat
+	</a>
+
+{# 
+	<a class="nav-link ">
+		<i class="fa fa-bar-chart-o"></i>
+		 Module Ugouv Achat
+	</a>
+
+	<a class="nav-link {% if "univ_t_preinscription_grille_non_valide"  in current_path  %} active {% endif %}" href="{{ path('univ_t_preinscription_grille_non_valide')}}">
+		<i class="fa fa-bar-chart-o"></i>
+		 Module Ugouv Vente
+	</a> #}
+
+
+
+
+
+</div>

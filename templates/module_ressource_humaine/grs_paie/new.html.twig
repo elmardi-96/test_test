@@ -1,0 +1,27 @@
+
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Ajouter | Paie{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="new">
+
+
+        {{ include('./module_ressource_humaine/grs_paie/_form.html.twig',{'button_label': 'Enregistrer'}) }}
+
+    
+
+    </div>
+
+
+
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('grs_paie') }}
+{% endblock %}

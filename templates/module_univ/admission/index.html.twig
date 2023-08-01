@@ -1,0 +1,137 @@
+{% extends 'base_univ.html.twig' %}
+
+
+
+{% block title %}Liste | Admission | UNIV{% endblock %}
+
+
+{% block body %}
+
+
+
+
+
+
+
+    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+
+
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-4">
+            <h2 class="fo">Univ , Admission </h2>
+            {#{ wo_render_breadcrumbs() }#}
+        </div>
+
+
+        <div class="col-lg-8">
+            <div class="title-action">
+                <div class="title-action">
+                   {# {% for key ,  operation in operations  %}
+                        {% if  operation.horizontale %}
+                            <a {% if operation.route is not null  %}  href="{{ path(operation.route) }}" {%  endif %}  id="{{operation.prefix}}" class="btn btn-white btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+                        {% endif %}
+                    {% endfor %}#}
+                </div>   
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+        
+            <div class="col-lg-12">
+
+                <div class="ibox ">
+                  
+                    <div class="ibox-content" style="padding-top: 0px"> 
+                        <div class="table-responsive">
+                            <div class="row" >
+                                <div class="col-3">
+                                    <select class="form-control _multiple_actions" style="display: none">
+                                        <option value="">Action</option>
+                                        
+                                        <option value="_genener_status">  Statut</option>
+                                    </select>
+                                </div>
+                                <div class="col-2 list_actions_bloc" style="position: fixed ; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+
+                                  {#  <select class="select2_demo _3 form-control _multiple_actions">
+                                        <option value="">Action</option>
+                                        {% for key , operation in  operations  %}
+                                            {% if operation.multiple %}
+                                            <option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+                                       {% endif %}
+                                            {% endfor %}
+                                    </select>#}
+                                </div>
+                            </div>
+
+                            <table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%" >
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                     
+                                        <th>C.Adm </th>
+                                        <th>C.pré</th>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Etablissement</th>
+                                        <th>Formation</th>
+                                        <th>CA</th>
+                                        <th>Ins</th>
+                                        <th>Status</th>
+                                    
+                                     
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr> 
+                                        <th>#</th>
+                                     
+                                        <th>C.Adm </th>
+                                        <th>C.pré</th>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Etablissement</th>
+                                        <th>Formation</th>
+                                        <th>CA</th>
+                                        <th>Ins</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        
+                    <h5>Statut Réglement: </h5>
+                    <p class="small font-bold">
+                        <span><i class="fa fa-circle Reglé" ></i> Réglé</span>&nbsp; &nbsp; &nbsp;  
+                       
+                        <span><i class="fa fa-circle N_Facturé"></i> N.Facturé</span>&nbsp; &nbsp; &nbsp;  
+
+                    </p>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('univ_admission') }}
+{% endblock %}

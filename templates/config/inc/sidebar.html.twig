@@ -1,0 +1,112 @@
+<div id="wrapper">
+	<!-- Sidebar -->
+	<nav class="navbar-default navbar-static-side" role="navigation">
+		<div class="sidebar-collapse">
+			<ul class="nav metismenu" id="side-menu">
+				{% include './inc/sidebar_header.html.twig' %}
+
+
+				<li class="active">
+					<a>
+						<i class="fa fa-users"></i>
+						<span class="nav-label">Utilisateurs</span>
+						<span class="fa arrow"></span>
+					</a>
+					<ul class="nav nav-second-level collapse">
+						<li>
+							<a href="{{ path('user_new') }}">
+							<i class="fa fa-plus"></i>
+							<span class="nav-label">Nouveau utilisateur</span>
+							</a>
+						</li>
+						<li>
+							<a href="{{ path('user_index') }}">
+							<i class="fa fa-list"></i>
+							<span class="nav-label">Liste des utilisateurs</span>
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="active">
+					<a>
+						<i class="fa fa-users"></i>
+						<span class="nav-label">Groupes</span>
+						<span class="fa arrow"></span>
+					</a>
+					<ul class="nav nav-second-level collapse">
+						<li>
+							<a href="{{ path('us_groupe_new') }}">
+							<i class="fa fa-plus"></i>
+							<span class="nav-label">Nouveau groupe</span>
+							</a>
+						</li>
+						<li>
+							<a href="{{ path('us_groupe_index') }}"> 
+							<i class="fa fa-list"></i>
+							<span class="nav-label">Liste des groupes</span>
+							</a>
+						</li>
+
+					</ul>
+				</li>
+				{# 
+								                        <li class="active">
+								                            <a ><i class="fa fa-angle-double-right"></i> <span class="nav-label">Groupes</span>  <span class="fa arrow"></span></a>
+								                            <ul class="nav nav-third-level">
+								                                <li>
+								                                    <a href="{{ path('us_groupe_new') }}">- Nouveau groupe </a>
+								                                </li>
+								                                <li>
+								                                    <a href="{{ path('us_groupe_index') }}">- Liste des groupes </a>
+								                                </li>
+								                                
+								                                
+								                            </ul>
+								                        </li> #}
+
+
+				{#<li class="active">
+								                    <a href="{{path('config_index')}}"><i class="fa fa-wrench"></i> <span class="nav-label">Configuration </span>  </a>
+								                </li>#}
+
+				<li class="active">
+					<a>
+						<i class="fa fa-wrench"></i>
+						<span class="nav-label">Configuration</span>
+						<span class="fa arrow"></span>
+					</a>
+					<ul class="nav nav-second-level collapse">
+						<li>
+							<a href="{{path('config_index')}}">Configuration</a>
+						</li>
+						{% if is_granted('ROLE_SUPER_ADMIN') %} 
+						<li>
+							<a href="{{path('config_module')}}">Configuration Modules</a>
+						</li>
+						{% endif %}
+						{#<li>
+							<a href="{{path('parametrage_ugouv')}}">Paramètrage</a>
+						</li>#}
+						<li>
+							<a href="{{path('config_theme')}}">Thème</a>
+						</li>
+						<li>
+							<a href="{{path('compagnie_new')}}">Société  / Entreprise
+							</a>
+						</li>
+						
+						<li>
+							<a href="{{path('config_pdf')}}">PDF</a>
+						</li>
+						
+					</ul>
+				</li>
+
+
+			</ul>
+		</div>
+	</nav>
+
+
+	<!-- End Sidebar -->
+

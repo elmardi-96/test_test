@@ -1,0 +1,156 @@
+{% extends 'base_conge.html.twig' %}
+
+
+{% block title %}Gestion Ressource Humaines , index | Congé
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div id="right-sidebar" class="actions animated"></div>
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-4">
+            <h2 class="fo">GRS, Gestion Ressource Humaines </h2>
+            {#{ wo_render_breadcrumbs() }#}
+        </div>
+    <div class="col-lg-8">
+        <div class="title-action">
+            <button class="btn btn-white btn-xs btn-lg" type="submit">
+                <i class="fa fa-save"></i>
+                {{ button_label|default('Enregistrer') }}</button>
+
+        </div>
+    </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+    </div>
+
+	<br/><br/><br/>
+
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="ibox">
+					<div class="ibox-title">
+						<h5>Paramètre de Rechercher</h5>
+					</div>
+					<div class="ibox-content">
+						{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+						<div class="row">
+							<div class="col-md-2">
+								<p class="msty">
+									Année
+								</p>
+								{#{ form_label(form.dateDebut ,'Date Début :', {'label_attr':{'class':'col-sm-6'}}) }#}
+								{{ form_widget(form.annee,{'attr':{'class':'select2_demo_3 form-control ','style':'display: block;width: 100%;'}}) }}
+                                <span class="form-error-message">
+                                    {{ form_errors(form.annee) }}
+                                </span>
+							</div>
+
+							<div class="col-md-3">
+								<p class="msty">
+									Poste
+								</p>
+								{{ form_widget(form.poste,{'attr':{'class':'select2_demo_3 form-control ','style':'display: block;width: 100%;'}}) }}
+
+							</div>
+							<div class="col-md-2">
+								<p class="msty">
+									Type
+								</p>
+
+								{{ form_widget(form.type,{'attr':{'class':'select2_demo_3 form-control ','style':'display: block;width: 100%;'}}) }}
+
+							</div>
+							<div class="col-md-3">
+								<br/>
+								{# 
+								                                <button type="button" class="btn btn-outline btn-primary mbr search">
+								                                        <i class="fa fa-search"></i>
+								                                </button>                    
+								
+								                                <button type="button" class="btn btn-outline btn-primary mbr rsearch">
+								                                        <i class="fa fa-refresh"></i>
+								                                </button> #}
+								{{ form_widget(form.submit) }}
+
+
+							</div>
+						</div>
+						{{ form_end(form) }}
+						{% if app.request.method =="POST" %}
+
+							<form class="affecter_conge" method="post">
+
+								<button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+									<i class="fa fa-save"></i>Enregistrer</button>
+								<input type='hidden' name='_poste' id='poste' value='{{ app.request.get('form')['poste'] }}'>
+								<input type='hidden' name='_type' id='type' value='{{app.request.get('form')['type']}}'>
+								<input type='hidden' name='_annee' id='annee' value='{{app.request.get('form')['annee']}}'>
+
+
+								{% if users |length == 0 %}
+									<h1>aucun resultat</h1>
+								{% else %}
+									<br>
+									<h5>resultat</h5>
+									<table class="table table-striped" id="example">
+										<thead>
+											<tr>
+
+												<th></th>
+												<th>Username
+												</th>
+												<th>Nom
+												</th>
+												<th>Prénom
+												</th>
+
+											</tr>
+										</thead>
+										<tbody class="users_list">
+											{% for user in users %}
+												<tr data-user="{{user.id}}">
+													<td>
+														<input type='checkbox' name='_users[]' class='action' value='{{user.id}}'>
+
+													</td>
+													<td>{{user.username}}</td>
+													<td>{{user.nom}}</td>
+													<td>{{user.prenom}}</td>
+
+												</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								{% endif %}
+
+
+							</form>
+						{% endif %}
+
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('affectation_conge') }}
+{% endblock %}
+

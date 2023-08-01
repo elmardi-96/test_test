@@ -1,0 +1,55 @@
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<div class="line"></div>
+<br/><br/><br/><br/><br/><br/>
+<div class="dateFac" style="font-weight: 800 ;">DATE FACTURE</div>
+<table class="head_date" style="position:absolute;top:212px;left:43px">
+	<tr style='width:50%;'>
+		<td style="width:80%">{{ UvLivraisoncab.datelivraison ? UvLivraisoncab.datelivraison|date("d/m/Y") : "now"|date("d/m/Y")  }}</td>
+		<td style="width:20%;position:relative;left:5px;"></td>
+	</tr>
+</table>
+<table class="head_date" style=" position:absolute;top:195px;">
+	<tr style='width:50%;'>
+		<td style="width:26%"></td>
+		<td class="bol" style="width:55%;position:relative;left:5px;font-size:25px;">BON DE LIVRAISON</td>
+	</tr>
+</table>
+<div class="nFac">N° FACTURE</div>
+<table class="head_date" style="position:absolute;top:212px;left:40px">
+	<tr style='width:50%;'>
+		<td style="width:75%"></td>
+		<td style="width:25%;position:relative;left:5px;">{{ UvLivraisoncab.code   }}</td>
+	</tr>
+</table>
+<div class="line"></div>
+<div style="position:absolute;top:260px;left:20px">Nom :</div>
+<table class="head_date" style="position:absolute;top:260px;left:90px">
+	<tr style='width:50%;'>
+		<td style="width:40%;font-size:9px;padding-left:2px;background:#CCCC99;padding:3px;">{{ UvLivraisoncab.client ? UvLivraisoncab.client.societe : null  }}</td>
+		<td style="width:60%;position:relative;left:5px;"></td>
+	</tr>
+</table>
+<div style="position:absolute;top:260px;left:400px">CP/Ville :</div>
+<table class="head_date" style="position:absolute;top:260px;left:490px">
+	<tr style='width:50%;'>
+		<td style="width:40%;font-size:9px;">{{ UvLivraisoncab.client ? UvLivraisoncab.client.ville : null  }}</td>
+		<td style="width:60%;position:relative;left:5px;"></td>
+	</tr>
+</table>
+
+<div style="position:absolute;top:284px;left:20px">Adresse :</div>
+<table class="head_date" style="position:absolute;top:284px;left:90px">
+	<tr style='width:50%;'>
+		<td style="width:40%;font-size:9px;font-weight:200;">{{ UvLivraisoncab.client ? UvLivraisoncab.client.adresse : null  }}</td>
+		<td style="width:60%;position:relative;left:5px;"></td>
+	</tr>
+</table>
+<div style="position:absolute;top:284px;left:400px">Tél/Email :</div>
+<table class="head_date" style="position:absolute;top:286px;left:490px">
+	<tr style='width:50%;'>
+		<td style="width:40%;font-size:9px;">{{ UvLivraisoncab.client ? UvLivraisoncab.client.tel1 : null  }} / {{ UvLivraisoncab.client ? UvLivraisoncab.client.mail1 : null  }}</td>
+		<td style="width:60%;position:relative;left:5px;"></td>
+	</tr>
+</table><br/><br/><br/><br/><br/><br/><br/><br/>
+
+

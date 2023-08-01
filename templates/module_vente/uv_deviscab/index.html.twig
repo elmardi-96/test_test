@@ -1,0 +1,145 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}Devis index | Vente{% endblock %}
+
+{% block body %}
+<div class="actions modal fade right" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+    <div class="modal-dialog  modal-full-height modal-middle modal-right modal-sm " style="max-width:400 px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalPreviewLabel">generer Commande</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bo-0">
+                <div class="text-center spr">
+                    <br/>
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <div class="bod"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <div id="right-sidebar" class="actions animated"></div>
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-6">
+            {% include './module_vente/uv_deviscab/inc/workflow_breadcumb.html.twig' %}
+        </div>
+        <div class="col-lg-6">
+            <div class="title-action">
+                {% for key ,  operation in operations %}
+                {% if operation.verticale and  operation.prefix== '_new'%}
+                    <a {% if operation.route is not null %} href="{{ path(operation.route) }}" {% endif %} id="{{operation.prefix}}" class="op-hor btn btn-sm btn-white  {{operation.classCs}} btn-register">
+                        <i class="fa {{ operation.icon }}"></i>
+
+                   
+
+
+                        {{ operation.titre|capitalize }}</a>
+                     
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+    </div>
+    <br/>
+    <br/>
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-content">
+                    <div  style="overflow-x: scroll;">
+                        <div class="row">
+                            <div class="col-2 list_actions_bloc" style="position: fixed ; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+
+                                <select class="select2_demo_3 form-control _multiple_actions">
+                                    <option value="">Action</option>
+                                    {% for key , operation in  operations  %}
+                                        {% if operation.multiple %}
+                                            <option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+                        <table class="table  display table-striped table-bordered table-hover dataTables-example cmd" id="grid" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Code</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>code Achat</th>
+                                    <th>Client</th>
+                                    <th>Mt HT</th>
+                                    <th>Mt TVA</th>
+                                    <th>Mt TTC</th>
+                                    <th>Budget</th>
+                                    <th>Depense</th>
+                                    <th>CD</th>
+                                    <th>BR</th>
+                                    <th>FA</th>
+                                    <th>RG</th>
+                                   <th>signature</th>
+                                    <th>Statut</th>
+                                    <th>Opr</th>
+                                </tr>
+                            </thead>
+                            <tbody class="commande"></tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Code</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Client</th>
+                                    <th>Mt HT</th>
+                                    <th>Mt TVA</th>
+                                    <th>Mt TTC</th>
+                                    <th>Budget</th>
+                                    <th>Depense</th>
+                                    <th>CD</th>
+                                    <th>BR</th>
+                                    <th>FA</th>
+                                    <th>RG</th>
+                                    <th>signature</th>
+                                    <th>Statut</th>
+                                    <th>Opr</th>
+                                </tr>
+                            </tfoot>
+
+
+                        </table>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('uventedevis') }}
+{% endblock %}

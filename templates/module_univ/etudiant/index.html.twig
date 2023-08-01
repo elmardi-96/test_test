@@ -1,0 +1,183 @@
+
+{% extends 'base_univ.html.twig' %}
+
+
+{% block title %}Index | Etudiant | UNIV
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div id="right-sidebar" class="actions animated"></div>
+
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+		<div class="col-lg-6">
+			<div class="row">
+				<div class="btn-group btn-breadcrumb btn-breadcrumb2">
+					<a href="#" class="btn btn-default">
+						<b>Univ , Etudiant
+						</b>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<div class="title-action" style="margin-top: 5px; margin-bottom:5px;">
+				{% for key ,  operation in operations  %}
+					{% if operation.prefix == '_import' or operation.prefix == '_new' %}
+						<a {% if operation.route is not null %} href="{{ path(operation.route) }}" {% else %} data-toggle="modal" data-target="#exampleModalPreview" {% endif %} class='btn btn-white btn-xs {{operation.classCs}}'>
+							<i class="fa {{ operation.icon }}"></i>
+							{{ operation.titre|capitalize }}</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+
+
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+
+
+	</div>
+	{# <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+	
+			<div class="col-lg-4">
+				<h2 class="fo">Univ , Etudiant
+				</h2>
+			</div>
+	
+	
+			<div class="col-lg-8">
+				<div
+					class="title-action">
+					<a href="{{path('module_univ_etudiant_new')}}" class="btn btn-white btn-xs" id="new_action">
+						<i class="fa fa-pencil"></i>
+						Ajouter
+					</a>
+					<a id="modalActivate" type="button" class="btn btn-white btn-xs" data-toggle="modal" data-target="#exampleModalPreview">
+						<i class="fa fa-cloud-upload"></i>
+						Importer
+					</a>
+				</div>
+			</div>
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+				{{ wo_render_breadcrumbs() }}
+			</div>
+		</div> #}
+	<br/><br/>
+	<div class="row border-bottom white-bg dashboard-header mt-20">
+		<div class="col-lg-12">
+
+			<div class="ibox ">
+				<div class="ibox-content" style="padding-top: 0px">
+					<div class="table-responsive">
+						<div class="row">
+							<div class="col-2">
+								<select class="form-control _multiple_actions" style="display: none">
+									<option value="">Action</option>
+									<option value="_genener_statut">Statut Téléphone</option>
+								</select>
+							</div>
+
+						</div>
+
+						<table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Code</th>
+									<th>Nom</th>
+									<th>Prénom</th>
+									<th>Catégorie</th>
+									<th>Type de bac</th>
+									<th>Note</th>
+									<th>Tél 1</th>
+									<th>Tél 2</th>
+									<th>Valider</th>
+									<th>Statut</th>
+									<th>St.Tel</th>
+									<th>Nbr.tel</th>
+									<th>Rég</th>
+									<th>Obs</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>#</th>
+									<th>Code</th>
+									<th>Nom</th>
+									<th>Prénom</th>
+									<th>Catégorie</th>
+									<th>Type de bac</th>
+									<th>Note</th>
+									<th>Tél 1</th>
+									<th>Tél 2</th>
+									<th>Valider</th>
+									<th>Statut</th>
+									<th>St.Tel</th>
+									<th>Nbr.tel</th>
+									<th>Rég</th>
+									<th>Obs</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<form id="_import" method="post" enctype="multipart/form-data">
+		<div class="modal fade right" id="exampleModalPreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true" data-backdrop='false'>
+			<div class="modal-dialog modal-full-height modal-top modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title" id="exampleModalPreviewLabel">IMPORTATION DES FICHIERS
+						</h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body bo2">
+						<div class="subimport">
+							<button class="btn btn-white btn-xs btn-lg my-button  waves-effect waves-light" data-style="expand-left" type="submit">
+								<i class="fa fa-save"></i>
+								Enregistrer</button>
+						</div>
+						<div class="center typ-files-styles">
+							<h4>Importer les étudiants</h4>
+							<p class="m-b-p">choisir seulement les fichiers csv
+							</p>
+							<input type="file" id="file" name="etudiants_file"/>
+							<label for="file" class="btn-2">
+								<i class="fa fa-cloud-upload"></i>
+								Charger</label>
+						</div>
+						<div class="text-center spr" style="display:none;">
+							<div class="spinner-border" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+						</div>
+						<div id="resultats_import"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- Modal -->
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_etudiant') }}
+{% endblock %}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="fr">
+		{# <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"> #}
+		<title>QUITTANCE - PDF</title>
+
+	</head>
+	<style>
+
+		*,
+		body {
+			font-family: 'Source Sans Pro', sans-serif;
+		}
+		@page {
+			margin: 0 12px 0 24px !important;
+			padding: 0 !important;
+		}
+
+		.titre-reb {
+			background: #1f4f7a;
+			font-size: 9px;
+			color: #f1f1f1;
+			font-weight: bold
+		}
+		div.zone_over {
+			display: block;
+			width: 30%;
+			word-wrap: break-word !important;
+		}
+		.slh tr td {
+			border-bottom: 1px solid #292929;
+		}
+	</style>
+	<body>
+		<br>
+
+
+		<table cellspacing="0" style="width: 100%;">
+
+			<tbody>
+				<td>
+					<img style="width:80px;margin:0 0 5px 0;" src="{{ asset(image)[1:] }}" alt="logo">
+				</td>
+				<td style="width:1%;"></td>
+				<td>
+					<p style=" width:100%;font-weight:bold;margin:0 0 0 -260px;">{{operation.dossier}}</p>
+				</td>
+			</tbody>
+		</table>
+		<table style="width: 100% ;text-align: center;border: 1px solid #292929; border-bottom: none;" cellspacing="0">
+			<tr>
+				<td style="width: 30% ; border-bottom: 1px solid #292929 ;">
+					<table style="width: 100% ; background: #FFFFFF; text-align: center" cellspacing="0">
+						<tr>
+							<th style="width: 100% ; font-size: 11px;font-weight: 200;font-weight: bold;padding:2px;">DATE</th>
+						</tr>
+						<tr>
+							<td style="border-bottom: 1px solid  #292929 ;width: 100%"></td>
+						</tr>
+
+						<tr>
+							<td style="width: 100% ; font-size: 11px;padding:2px;">{{ operation.created|date("d-m-Y") }}</td>
+						</tr>
+					</table>
+				</td>
+				<td style="width: 40% ;font-size: 20px;font-weight: bold ; border-left: 1px solid #292929 ;border-right: 1px solid #292929; border-bottom: 1px solid #292929 ;">QUITTANCE
+				</td>
+				<td style="width: 30% ;border-bottom: 1px solid #292929 ;">
+					<table style="width: 100% ; background: #FFFFFF; text-align: center" cellspacing="0">
+						<tr>
+							<th style="width: 100% ; font-size: 11px;font-weight: 200;font-weight: bold;padding:2px;">CODE REGLEMENT</th>
+						</tr>
+						<tr>
+							<td style="border-bottom: 1px solid  #292929 ;width: 100%"></td>
+						</tr>
+
+						<tr>
+							<td style="width: 100% ; font-size: 11px;padding:2px;">{{operation.code}}</td>
+						</tr>
+					</table>
+				</td>
+
+			</tr>
+
+
+		</table>
+		<table style="width: 100%;border-top: 1px solid#292929">
+			<tr>
+				<td style="width: 100% ; height: 10px;"></td>
+			</tr>
+		</table>
+
+		<table style="width: 100%;">
+			{% set infoEtudiant = operation.factureClient.details[0].observation|split("-") %}
+			
+			<tr>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:2px;font-size: 10px">ETABLISSEMENT</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:16%;border:1px solid #ddd;background:white;padding:2px;font-size: 10px">
+					{{infoEtudiant[2]}}
+					
+				</td>
+				<td style="width:0.67%;"></td>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:2px;font-size: 10px">FORMATION</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:16%;border:1px solid #ddd;background:white;padding:2px;font-size: 10px">
+					{# {{operationcab.preinscription.annee.formation.designation}} #}
+					-
+				</td>
+				<td style="width:0.67%;"></td>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:2px;font-size: 10px">NIVEAU</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:16.67%;border:1px solid #ddd;background:white;padding:2px;font-size: 10px">
+					{# {{promotion}} #}
+					-
+				</td>
+
+			</tr>
+
+
+		</table>
+
+		<table style="width: 100%;margin-top:.5px;">
+			<tr>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px">CODE CANDIDAT</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:16%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">
+										{{infoEtudiant[1]}}
+
+				</td>
+				<td style="width:0.67%;"></td>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px">CODE PRE INSCRIPTION</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:16%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">
+					{# {{operationcab.preinscription.code}} #}
+					-
+				</td>
+				<td style="width:0.67%;"></td>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px">CODE INSCRIPTION</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:16.67%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">
+					{# {{inscription}} #}
+					-
+				</td>
+
+			</tr>
+
+		</table>
+
+
+		<table style="width: 100%;margin-top:.5px;">
+			<tr>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px">NOM et PRENOM</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:16%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">
+					{{infoEtudiant[0]}}
+				</td>
+				<td style="width:0.67%;"></td>
+
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px;text-transform: Uppercase;">ANNÉE UNIVERSITAIRE</td>
+				<td style="width:0.67%;"></td>
+				<td style="width:16.67%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">{{infoEtudiant[3]}}
+				</td>
+				<td style="width:16%;font-weight: bold;padding:5px;font-size: 10px"></td>
+				<td style="width:0.67%;"></td>
+				<td style="width:16%;padding:5px;font-size: 10px">
+					
+				</td>
+				<td style="width:0.67%;"></td>
+			</tr>
+
+		</table>
+
+		<table style="width: 100%;margin-top:.5px;">
+			<tr>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px">REFERENCE FACTURE</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:83.33%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">
+					{{operation.factureClient.code}}  
+					
+				</td>
+
+			</tr>
+
+		</table>
+
+
+		<table style="width: 100%;margin-top:.5px;">
+			<tr>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px">DATE DE REGLEMENT</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:83.33%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">
+					{# {{reglement.DateReglement|date("d/m/Y")}} #}
+					{{operation.created|date("d/m/Y") }}
+				</td>
+
+			</tr>
+
+		</table>
+		<table style="width: 100%;margin-top:.5px;">
+			<tr>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px">TYPE DE PAIEMENT</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:83.33%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">
+					{# {{operation.factureClient.devise.designation}} #}
+					{# {{transaction.modepaiement.designation}} #}
+					
+
+				</td>
+
+			</tr>
+
+		</table>
+		<table style="width: 100%;margin-top:.5px;">
+			<tr>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px">BANQUE</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:83.33%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">
+					{# {{reglement.banque.designation}} #}
+					-
+				</td>
+
+			</tr>
+
+		</table>
+		<table style="width: 100%;margin-top:.5px;">
+			<tr>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px">MONTANT A PAYER</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:83.33%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">
+					{{operation.factureClient.montant}}  
+					
+				</td>
+
+			</tr>
+
+		</table>
+		<table style="width: 100%;margin-top:.5px;">
+			<tr>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px">MONTANT REGLE</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:83.33%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">
+{{operation.montant}}  	
+				
+
+				</td>
+
+			</tr>
+
+		</table>
+		<table style="width: 100%;margin-top:.5px;">
+			<tr>
+				<td style="width:16%;border:1px solid #ddd;background:#eee;font-weight: bold;padding:5px;font-size: 10px">REFERENCE DE CHEQUE</td>
+				<td style="width:0.67%;"></td>
+				<td
+					style="width:83.33%;border:1px solid #ddd;background:white;padding:5px;font-size: 10px">
+						{# {{transaction.numCheque}}  	 #}
+
+				</td>
+
+			</tr>
+
+		</table>
+
+		<table style="width: 100%;margin-top:.5px;">
+			<tr>
+				<td style="width:100%;border:1px solid #ddd;background:white;padding:5px;font-size:10px;text-align:justify;font-weight:bold">
+					NB:ll est à noter que les frais engagés ne sont pas remboursables.
+				</td>
+
+			</tr>
+
+		</table>
+		<br><br>
+	</body>
+</html>

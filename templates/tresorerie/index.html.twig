@@ -1,0 +1,14 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Tresorerie index{% endblock %}
+
+{% block body %}
+
+{% include './ugouv/contentIndexModule.html.twig' with {'module': app.session.get('dossiers')[app.session.get('dossierCourant').prefix].modules['_module_tresorerie']} %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}  

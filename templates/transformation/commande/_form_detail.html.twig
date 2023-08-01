@@ -1,0 +1,74 @@
+{% set ma_class =   class|default('detail_form') %}
+
+
+{{ form_start(form_det ,{'attr':{'novalidate': 'novalidate'  , 'class': ma_class ~' form-inline test'}}) }}
+<table style="width: 100%" class="m-add t-m table table-striped table-bordered table-hover dataTables-example det_for">
+	<tr>
+		<td style="width: 3%"></td>
+
+		<td style="width: 15%" class='ellast'>
+			{{ form_widget(form_det.article,{ 'attr':{ 'placeholder':'Article','class':'style-detail-form form-control form-control-sm sel2 data.article article',  'autofocus':'autofocus'}}) }} 
+		
+		</td>
+		<td style="width: 20%">
+
+			{{ form_widget(form_det.observation,{'attr':{'class':'style-detail-form form-control form-control-sm' ,'placeholder':'Observation'}}) }}
+
+		</td>
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.quantite,{'attr':{ 'class':'style-detail-form form-control form-control-sm data.quantite' , 'placeholder':'Qnt'}}) }}
+
+		</td>
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.prixunitaire,{'attr':{'class':'style-detail-form form-control form-control-sm data.prixunitaire' ,'placeholder':'P.U'}}) }}
+
+		</td>
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.tva,{'attr':{'class':'style-detail-form form-control form-control-sm' ,'placeholder':'TVA'}}) }}
+
+		</td>
+		<td style="width: 7%">-</td>
+
+		<td>
+			{% if TrCommandedet is defined %}
+				<input type="hidden" name="_id" value="{{ TrCommandedet.id }}"/>
+			{% endif %}
+
+			{% if TrCommandecab is defined %}
+				<input type="hidden" name="_id_cab" value="{{ TrCommandecab.id }}"/>
+			{% endif %}
+
+
+			<button style="padding: 7px " class="btn btn-white btn-xs my-button2" type="submit">{{ button_label|default('Modifier') }}</button>
+		</td>
+
+
+	</tr>
+</table>
+{{ form_end(form_det,{'render_rest': false}) }}
+
+
+<div class="modal fade right" id="exampleModalPreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true" data-backdrop='true'>
+	<div class="modal-dialog modal-full-height modal-top modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalPreviewLabel">Page de recherche</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body bo">
+				<div class="text-center spr">
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
+				<div class="bod">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

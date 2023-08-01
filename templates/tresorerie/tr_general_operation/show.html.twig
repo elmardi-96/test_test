@@ -1,0 +1,392 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Informations | General operation 
+{% endblock %}
+
+
+{% block body %}
+
+ 
+
+    {{ parent() }}
+    <div class="modal fade right" id="ModalDocumentDynamique" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+        <div class="modal-dialog modal-full-height modal-right modal-lg" style="max-width: 50% !important;" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalPreviewLabel">Generer reglement</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body bo">
+                    <div class="text-center spr" style="display: none;">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="bod" style=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="right-sidebar" class="actions animated"></div>
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-12">
+        	{% include './tresorerie/tr_general_operation/inc/workflow_breadcumb.html.twig' %}
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+    <br/>
+    <br/>
+
+
+    {# {{ dump(operations) }}#}
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="ibox">
+                    <div class="ibox-title ibox-title2">
+                        <h5>informations generales</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row m-t-sm">
+                            <div class="col-lg-12">
+                                <div class="panel blank-panel">
+
+
+                                    <div class="col-md-12" style=" padding-top: 0%;">
+                                        <div class="panel-body">
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active show" id="tab1-1">
+
+                                                    <div class="row">
+
+
+														<div class="hr-line-dashed paddi"></div>
+														<div class="col-md-6 b-r">
+
+															<div class="form-group row">
+																<label class="col-sm-4 ">Facture fournisseur  </label>
+
+																<div class="col-sm-8">
+
+																	{{operationn.factureFournisseur ? operationn.factureFournisseur.refDocAsso}}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-2 ">Compte  </label>
+
+																<div class="col-sm-10">
+
+																	{{operationn.compte ? operationn.compte.designation}}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-2 ">Designation  </label>
+
+																<div class="col-sm-10">
+
+
+																	{{ operationn.designation }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">Ref DocAsso </label>
+
+																<div class="col-sm-4">
+
+																	{{operationn.refDocAsso}}
+																</div>
+															</div>
+
+
+															{% if operationn.modepaiement ? operationn.modepaiement.designation == 'Cheque' %}
+																<div class="hr-line-dashed"></div>
+
+																<div class="form-group row">
+																	<label class="col-sm-4 ">num Cheque  </label>
+
+																	<div class="col-sm-4">
+
+																		{{operationn.numCheque }}
+																	</div>
+																</div>
+
+
+															{% endif %}
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">Piece  </label>
+
+																<div class="col-sm-4">
+
+																	{{operationn.piece ? operationn.piece.code}}
+																</div>
+															</div>
+
+
+														</div>
+
+
+														<div class="hr-line-dashed paddi"></div>
+
+														<div class="col-md-6">
+
+														
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">Date  </label>
+
+																<div class="col-sm-4">
+
+
+																	{{ operationn.date|date("d/m/Y") }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">Date DocAsso </label>
+
+																<div class="col-sm-4">
+
+
+																	{{ operationn.dateDocAsso|date("d/m/Y") }}
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																<label class="col-sm-4 ">Mode paiement  </label>
+
+																<div class="col-sm-4">
+
+																	{{operationn.modepaiement ? operationn.modepaiement.designation}}
+																</div>
+															</div>
+															{% if operationn.modepaiement ? operationn.modepaiement.designation == 'Cheque' %}
+
+
+																<div class="hr-line-dashed"></div>
+																<div class="form-group row">
+																	<label class="col-sm-4 ">Date Echeance  </label>
+
+																	<div class="col-sm-4">
+
+
+																		{{ operationn.dateEcheance|date("d/m/Y") }}
+																	</div>
+																</div>
+
+
+															{% endif %}
+
+
+														</div>
+                                                        {% if operationn is defined %}
+                                                        <input type="hidden" name="_id" id="_id" value="{{ operationn.id }}"/>
+                                                    {% endif %}
+
+														<div class="col-md-6">
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-4 ">Autre Information </label>
+																<div class="col-sm-8">
+																	{{ operationn.autreInformation }}
+																</div>
+															</div>
+														</div>
+													</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+								</div>
+                            </div>
+                        </div>
+                        <div class="clients-list">
+                            <h5 style="font-size: 12px;">reglements</h5>
+                            {# <hr/> #}
+                            <div id="tab-1" class="tab-pane active" >
+                                <div class="full-height-scroll" >
+                                    <div class="table-responsive" style='overflow-x: scroll'>
+
+                                    	<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show2" >
+                                            <thead>
+                                                <tr>
+    
+                                                    <th style="width: 10%">#</th>
+                                                    <th style="width: 10%">Code</th>
+                                                    <th style="width: 10%">Date</th>
+                                                    <th style="width: 100%">SRC.ReG</th>
+                                                    <th style="width: 10%">Mode.p</th>
+                                                    <th style="width: 10%">Ref</th>
+                                                    <th style="width: 10%">echeance</th>
+                                                    <th style="width: 10%">N°_Fac_frs</th>
+                                                    <th style="width: 10%">Date_Fac_frs</th>
+                                                    <th style="width: 10%">Description</th>
+                                                    <th style="width: 10%">Montant</th>
+                                                    
+    
+    
+                                                </tr>
+                                            </thead>
+    
+                                            <tbody>
+                                                {% set totale = 0 %}
+                                                {% set c = 0 %}
+    
+    
+                                                {% for t_reglementfr1 in operationn.transactions %}
+                                                    {% set c = c + 1 %}
+                                                    {% set totale =  totale + t_reglementfr1.montant %}
+                                                    <tr>
+                                                        <td>{{c}}</td>
+    
+                                                        <td>
+                                                            {#<a class="active-link" href="{{ path("tr_operation_show" , {id:operationn.id} ) }}">#}
+                                                            {{ t_reglementfr1.code }}
+                                                            {#</a>#}
+                                                        </td>
+                                                        <td>{{ t_reglementfr1.date ? t_reglementfr1.date|date('d/m/Y') : '' }}</td>
+    
+                                                        <td>{{t_reglementfr1.compte ? t_reglementfr1.compte.designation }}</td>
+    
+                                                        <td>{{t_reglementfr1.modepaiement ? t_reglementfr1.modepaiement.designation }}</td>
+                                                        {#<td>{operationn.banque ? operationn.banque.designation }</td>#}
+                                                        {#<td>{{t_reglementfr1.devise ? t_reglementfr1.devise.designation }}</td>#}
+                                                        <td>{{t_reglementfr1.numcheque}}</td>
+                                                        <td>{{t_reglementfr1.dateecheance ? t_reglementfr1.dateecheance|date("d/m/Y") }}</td>
+    
+    
+                                                        <td>
+                                                            {{t_reglementfr1.refdocasso}}
+                                                        </td>
+    
+                                                        <td>
+    
+                                                            {{ t_reglementfr1.datedocasso ? t_reglementfr1.datedocasso|date('d/m/Y') : '' }}
+                                                        </td>
+                                                        <td>
+                                                            {{t_reglementfr1.designation}}
+                                                        </td>
+    
+                                                        <td>{{ t_reglementfr1.montant|number_format(2) }}
+                                                        </td>
+
+    
+    
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+    
+                                       
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="ibox">
+
+
+                    <div class="ibox-content prix_bloc">
+                        <div class="ibox-heading">
+							<div class="ibox-heading">
+								<h3>MONTANT FACTURE
+									<div class="stat-percent">{{ totale|number_format(2, ',', ' ') }}
+									   DH </div>
+								</h3>
+							</div>
+					 
+	
+							<hr/>
+                            <h3>RESTE
+                                <div class="stat-percent">	{{ (operationn.montant - totale)|number_format(2, ',', ' ') }}
+                                 DH
+                                </div>
+                            </h3>
+                        </div>
+                        <hr/>
+                   
+                        <div class="ibox-heading">
+                            <h1>Total OP
+                                <div class="stat-percent">{{ operationn.montant|number_format(2) }}
+                                   DH</div>
+                            </h1>
+                        </div>
+                        <hr/>
+
+
+                    </div>
+                </div>
+
+                <div class="ibox selected">
+                    <div class="ibox-title ibox-title2">
+                        <h5>INFORMATIONS</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="tab-content">
+                            <div id="contact-1" class="tab-pane active">
+                                <div class="client-detail">
+                                    <div class="full-height-scroll">
+                                        {# {% if operationn.dossier.id == 16 %}
+                                        
+                                            <a href="{{path('tr_operation_print_facture',{'id':operationn.id})}}"
+                                               target='_blank' 
+                                               data-valide="{{operationn.statutsig}}"
+                                                    {% if operationn.fournisseur
+                                                        and operationn.fournisseur.categorie.k != "externe" 
+                                                        and operationn.operation.pPiece.id != 32 
+                                                        and operationn.operation.pPiece.id != 33  %}
+                                                        class="imprime_document"  
+                                                    {% endif %}
+                                               data-id="{{operationn.id}}">
+												<i class="fa fa-file-pdf-o"></i> Quittance  - {{operationn.code}} </a>		 #}
+                                        {# {% endif %} #}
+                                    
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div> 
+
+            </div>
+        </div>
+
+    </div>
+
+	{{ include('./tresorerie/tr_general_operation/inc/workflow.html.twig',{'page_actuel': 'show'}) }}
+
+    <br><br>
+
+
+  
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('general_operation') }}
+{% endblock %}
+
+
+
+

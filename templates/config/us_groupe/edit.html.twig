@@ -1,0 +1,18 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Edit UsGroupe{% endblock %}
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+    <div class="edit">
+         {% include './config/inc/navigation.html.twig' %}
+         {{ include('./config/us_groupe/_form.html.twig') }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('us_groupe') }}
+{% endblock %}

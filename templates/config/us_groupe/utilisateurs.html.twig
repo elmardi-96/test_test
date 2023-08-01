@@ -1,0 +1,195 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Utilisateurs-groupes
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('us_groupe') }}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'_users_groupe'}}) }}
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-6">
+            <h2 class="fo">Configuration Utilisateur
+                <span>(utilisateur)</span>
+            </h2>
+        </div>
+        <div class="col-lg-6">
+            <div class="title-action">
+                <button class="btn btn-white btn-xs my-button add_user_to_groupe" type="submit">
+                    <i class="fa fa-save"></i>
+                    Enregistrer</button>
+
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+    </div>
+
+
+    <br/>
+    <br/>
+
+
+
+    <div class="row pt-20 scroll_content">
+        <div class="col-lg-12 ">
+            <div class="ibox">
+
+                <div class="ibox-content">
+
+                    <div class="message-success"></div>
+
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {% include './config/us_groupe/inc/navigation.html.twig' %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 scroll_content">
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+
+                                                <div class="row">
+                                                    {#<div class="col-md-3 b-r">
+                                                        {{ render(controller('App\\Controller\\UsGroupeController:tree',{ 'groupe_id': us_groupe.id ,'dossier_id':null ,'module_id':null})) }}
+                                                    </div>#}
+                                                    <div class="col-md-12">
+                                                        {#
+                                                                                                                    <h3 class="m-t-none m-b">Utilisateurs &amp; groupes ,
+                                                                                                                            <small>Utilisateurs du groupe.</small>
+                                                                                                                    </h3>
+    
+                                                                                                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        #}
+                                                        {{ form_widget(form._groupe,{'attr':{'class':''}}) }}
+                                                        <div class="form-group row">
+                                                            {{ form_label(form.user ,'Utilisateur (*):', {'label_attr':{'class':'col-sm-4 col-form-label'}}) }}
+                                                            <div class="col-md-6">
+                                                                {{ form_widget(form.user,{'attr':{'class':' select2_users form-control add_user_to_groupe_select' }}) }}
+                                                            </div>
+
+                                                            {#<button class="btn btn-white add_user_to_groupe col-md-3 usM" type="submit">
+                                                                                                                                                                                            <i class="fa fa-plus"></i>Affecter un utilisateur au groupe</button>#}
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        {#<div class="form-group row">
+                                                                <label class="col-sm-4 required font-weight-bold font-weight-bold">Désignation du groupe :</label>
+                                                                <div class="col-sm-8">
+                                                                        <p class="form-control-static">{{ us_groupe.description|upper }}</p>
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ">
+                                                                <label class="col-sm-4 required font-weight-bold font-weight-bold">description du groupe :</label>
+                                                                <div class="col-sm-8">
+                                                                        <p class="form-control-static">{{ us_groupe.description}}</p>
+                                                                </div>
+                                                        </div>#}
+
+
+                                                        <table class="t-m table table-striped table-bordered table-hover w-m dataTable" id="grid2">
+
+                                                            <thead>
+                                                                <tr>
+
+
+                                                                    <th>Img
+                                                                    </th>
+                                                                    <th>Nom</th>
+                                                                    <th>Prénom</th>
+                                                                    <th class="contact-type">
+                                                                        <i class="fa fa-envelope"></i>
+                                                                    </th>
+                                                                    <th class="contact-type">Email
+                                                                    </th>
+                                                                    <th class="client-status text-center">Active/désactivé</th>
+                                                                    <th class="client-status text-right">supprimer</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+
+                                                                {% for key , user in  us_groupe.users  %}
+                                                                    <tr>
+                                                                        {% set url = asset('images/user/profil/profil.png') %}
+                                                                        {% if app.user.imageName is not null  %}
+                                                                            {% set url = asset('images/user/profil/' ~ app.user.imageName)  %}
+                                                                        {% endif %}
+
+                                                                        <td class="client-avatar"><img alt="image" src="{{url}}">
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="#contact-1" class="client-link">{{ user.nom }}</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ user.prenom }}</td>
+                                                                        <td class="contact-type">
+                                                                            <i class="fa fa-envelope"></i>
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ user.email }}</td>
+                                                                        <td class="text-center">
+
+                                                                            {% if user.isActive==1 %}
+                                                                                <i title="compte active" class="text-primary2  fa fa-unlock"></i>
+                                                                            {% else %}
+                                                                                <i title="compte désactivé" class="text-danger fa fa-unlock-alt"></i>
+
+                                                                            {% endif %}
+
+
+                                                                        </td>
+                                                                        <td class="text-right">
+                                                                            <a class="_user_groupe_delete" id="{{user.id}}">
+                                                                                <i title="supprimer cet utilisateur de ce groupe " class=" text-danger fa fa-trash"></i>
+                                                                        </td>
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endfor %}
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form,{'render_rest': false}) }}
+    <div id="test" data-groupe-id="{{ us_groupe.id|json_encode }}"></div>
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('us_groupe') }}
+{% endblock %}

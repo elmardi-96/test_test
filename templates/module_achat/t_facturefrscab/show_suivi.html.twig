@@ -1,0 +1,153 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Suivi des operations | Facture fournisseur | Ugouv achat
+{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-12">
+            {% include './module_achat/t_facturefrscab/inc/workflow_breadcumb.html.twig' %}
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {% include './module_achat/t_facturefrscab/inc/workflow.html.twig' %}
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    {#{% include './module_achat/commandefrs/inc/workflow_breadcumb.html.twig' %}#}
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {% include './module_achat/t_facturefrscab/inc/navigation.html.twig' %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+
+                                            <div class="tab-pane active show" id="tab-1">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        {% if facture.userUpdated %}
+                                                            <h4>Dernière modification</h4>
+                                                            <div class="feed-element">
+                                                                {% set url = asset('images/user/profil/profil.png') %}
+                                                                {% if facture.userUpdated.imageName is not null  %}
+                                                                    {% set url = asset('images/user/profil/' ~ facture.userUpdated.imageName)  %}
+                                                                {% endif %}
+                                                                <a class="float-left" href="">
+                                                                    <img alt="image" class="rounded-circle" src="{{ url }}">
+                                                                </a>
+                                                                <div class="media-body ">
+
+                                                                    <span class="label label-creer float-right label-archive"><i class="fa fa-clock-o" style="font-size: 12.5px;padding: 0px 4px 0px 0px;"></i>Dernière modification</span>
+                                                                    <a class="text-info" href="#">@{{ facture.userUpdated.username }}</a> <strong>{{ facture.userUpdated.nomComplet|capitalize }}</strong> <br>
+                                                                    <small class="text-muted">{{ facture.updated ? facture.updated |date('d-m-Y H:i:s') : '' }}</small>
+                                                                </div>
+                                                            </div>
+                                                            <hr/>
+                                                        {% endif %}
+                                                        <h4>Le suivi des operations</h4>
+                                                        {% if facture.userCreated %}
+                                                            <div class="feed-element">
+                                                                {% set url = asset('images/user/profil/profil.png') %}
+                                                                {% if facture.userCreated.imageName is not null  %}
+                                                                    {% set url = asset('images/user/profil/' ~ facture.userCreated.imageName)  %}
+                                                                {% endif %}
+                                                                <a class="float-left" href="">
+                                                                    <img alt="image" class="rounded-circle" src="{{ url }}">
+                                                                </a>
+                                                                <div class="media-body ">
+
+                                                                    <span class="label label-creer float-right label-creer">Cree</span>
+                                                                    <a class="text-info" href="#">@{{ facture.userCreated.username }}</a> <strong>{{ facture.userCreated.nomComplet|capitalize }}</strong> <br>
+                                                                    <small class="text-muted">{{ facture.created ? facture.created |date('d-m-Y H:i:s') : '' }}</small>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+
+                                                        {% if facture.userEncours %}
+                                                            <div class="feed-element">
+                                                                {% set url = asset('images/user/profil/profil.png') %}
+                                                                {% if facture.userEncours.imageName is not null  %}
+                                                                    {% set url = asset('images/user/profil/' ~ facture.userEncours.imageName)  %}
+                                                                {% endif %}
+                                                                <a class="float-left" href="">
+                                                                    <img alt="image" class="rounded-circle" src="{{ url }}">
+                                                                </a>
+                                                                <div class="media-body ">
+
+                                                                    <span class="label label-creer float-right label-encours">En cours</span>
+                                                                    <a class="text-info" href="#">@{{ facture.userEncours.username }}</a> <strong>{{ facture.userEncours.nomComplet|capitalize }}</strong> <br>
+                                                                    <small class="text-muted">{{ facture.dateEncours ? facture.dateEncours |date('d-m-Y H:i:s') : '' }}</small>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+
+
+
+
+
+
+                                                        {% if facture.userValider %}
+                                                            <div class="feed-element">
+                                                                {% set url = asset('images/user/profil/profil.png') %}
+                                                                {% if facture.userValider.imageName is not null  %}
+                                                                    {% set url = asset('images/user/profil/' ~ facture.userValider.imageName)  %}
+                                                                {% endif %}
+                                                                <a class="float-left" href="">
+                                                                    <img alt="image" class="rounded-circle" src="{{ url }}">
+                                                                </a>
+                                                                <div class="media-body ">
+                                                                    <span class="label label-creer float-right label-valide">Valide</span>
+                                                                    <a class="text-info" href="#">@{{ facture.userValider.username }}</a> <strong>{{ facture.userValider.nomComplet|capitalize }}</strong> <br>
+                                                                    <small class="text-muted">{{ facture.dateValider ? facture.dateValider |date('d-m-Y H:i:s') : '' }}</small>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+
+
+
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+{% endblock %}
+
+
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('tfacturefrscab') }}
+
+
+
+{% endblock %}

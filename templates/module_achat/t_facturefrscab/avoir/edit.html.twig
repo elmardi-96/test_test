@@ -1,0 +1,161 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Modifier   | Facture à voir | Ugouv achat
+{% endblock %}
+
+
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+
+	<div class="edit">
+		{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+		{{ include('./module_achat/t_facturefrscab/avoir/_form.html.twig',{'button_label': 'Enregistrer'}) }}
+		{{ form_end(form,{'render_rest': false}) }}
+
+		{% if workflow_has_marked_place(facture, 'valider') or workflow_has_marked_place(facture, 'generer') %}
+
+			{% else %}
+
+				<div class="row">
+					<div class="col-lg-12 col-marg-bott">
+						<div class="ibox ">
+							<div class="ibox-content">
+
+
+								<div class="table-responsive table-responsive-2">
+									<div class="col-md-12 m-mar-t">
+										<h5 class="m-left">La liste des articles</h5>
+										<table class="m-add t-m table table-striped table-bordered table-hover dataTables-example table-detail">
+											<thead>
+												<tr>
+
+													<th style="width: 3%">#
+													</th>
+													<th style="width: 33%">Article
+													</th>
+													<th style="width: 7%">Unite :</th>
+													<th style="width: 7%">Qantite
+													</th>
+													<th style="width: 7%">P.U</th>
+													<th style="width: 7%">TVA % :</th>
+
+													<th style="width: 7%">Remise % :</th>
+													<th style="width: 7%">Montant Remise :</th>
+													<th style="width: 10%">TTC :</th>
+
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+
+												{% for detail in facture.details %}
+													<tr>
+
+														<td style="width: 3%"></td>
+
+
+														<td style="width: 33%">
+															{{ detail.article.titre }}
+
+														</td>
+
+														<td style="width: 7%">
+
+															{{ detail.unite ? detail.unite.abreviation : null }}
+														</td>
+														<td style="width: 7%">
+
+															{{ detail.quantite }}
+														</td>
+														<td style="width: 7%">
+
+
+															{{ detail.prixunitaire |number_format(2, '.', ',') }}
+														</td>
+														<td style="width: 7%">
+															{% if detail.tva is not empty %}
+																{{ detail.tva }}%
+															{% else %}
+																-
+															{% endif %}
+														</td>
+														<td style="width: 7%">
+															{% if detail.remise is not empty %}
+																{{ (detail.prixunitaire * detail.quantite) * (detail.remise) / 100}}%
+															{% else %}
+																-
+															{% endif %}
+														</td>
+														<td style="width: 7%">
+															{% if detail.remise is not empty %}
+																{{ detail.tva }}%
+															{% else %}
+																-
+															{% endif %}
+														</td>
+														<td style="width: 7%">
+
+
+															{{ detail.prixttc |number_format(2, '.', ',') }}
+														</td>
+
+														<td>
+
+															<form method="POST" class="detail_edit float-left">
+
+																<input type="hidden" name="_id" value="{{ detail.id }}">
+
+																<button class="btn btn-white fa fa-pencil"></button>
+															</form>
+															{#<a class="delete_element" id="{{ detail.id }}"><i class="fa fa-trash text-navy"></i></a>#}
+															{#<a class="detail_edit" id="{{ detail.id }}"><i class="fa fa-pencil text-navy"></i></a>#}
+
+															<form method="delete" class="detail_form_delete">
+																<input type="hidden" name="_id" value="{{ detail.id }}">
+																<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ detail.id) }}">
+																<button class="btn btn-white fa fa-trash "></button>
+															</form>
+
+															{#<button class="btn btn-primary btn-xs">{{ button_label|default('Ajouter a la liste') }}</button>#}
+														</td>
+													</tr>
+												{% endfor %}
+
+
+											</tbody>
+
+
+											<tfoot>
+												<tr style="display: none" class="edit-new-article">
+													<td colspan="10">
+
+														{{ include('./module_achat/t_facturefrscab/avoir/_form_detail.html.twig' , {'class': 'detail_form_add_article','button_label': 'Ajouter a la liste '}) }}
+													</td>
+												</tr>
+											</tfoot>
+										</table>
+										<button class="new-article-btn btn btn-xs btn-white" type="button">
+											<i class="fa fa-arrows"></i>&nbsp; Nouveau Article
+										</button>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+		{% endif %}
+
+
+		<br/><br/>
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('tfacturefrscabavoir') }}
+{% endblock %}

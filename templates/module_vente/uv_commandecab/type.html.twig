@@ -1,0 +1,66 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small><i class="fa fa-tim"></i> Informations sur la commande .</small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+
+                <div class="ibox">
+                    <div class="ibox-content">
+                 
+                      
+                        {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_type'}}) }}
+                      
+
+                        <div class="form-group row">
+                            {{ form_label(form.typecmd ,'type', {'label_attr':{'class':'col-sm-12'}}) }}
+                            <div class="col-sm-12">
+                                {{ form_widget(form.typecmd,{'attr':{'class':' form-control form-control-sm sel2'}}) }}
+                            </div>
+                        </div>
+
+                     <br/>
+                        {% if commande is defined %}
+                            <input type="hidden" name="_id" value="{{ commande.id }}" />
+                        {% endif %}
+                        <button class="btn-register btn btn-white btn-block my-button  upper btn-xs my-button2"><i class="fa fa-save"></i> {{ button_label|default('Enregistrer') }}</button>
+                        {{ form_end(form,{'render_rest': false}) }}
+
+             
+
+                   
+
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

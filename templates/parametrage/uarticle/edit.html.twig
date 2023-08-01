@@ -1,0 +1,17 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Produit modifier | Stock
+{% endblock %}
+
+{% block body %}
+	<div class="edit">
+		{{ include('./parametrage/uarticle/_form.html.twig') }}
+
+	</div>
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('uarticle') }}
+{% endblock %}

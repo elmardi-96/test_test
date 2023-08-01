@@ -1,0 +1,82 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form _promotion'}}) }}
+<div class="sidebar-container">
+
+
+	<div class="tab-content bod">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					Année active :
+					{{annee.designation}}
+				</h3>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<div class="ibox">
+					<div class="ibox-content">
+						<div class="">
+							<div class="form-group row">
+
+
+								<label class="col-sm-12 required"><i class="fa fa-info-circle"></i> Information sur les groupes</label>
+								<div class="panel-group payments-method col-md-12" id="accordion">
+								{% for grp in form.divisionGroupe.vars.choices %}
+									<div class="panel panel-default m-b-2">
+										<div class="panel-heading">
+											<h5 class="panel-title">
+												<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{loop.index}}" class="collapsed" aria-expanded="false">{{grp.data.designation}}</a>
+											</h5>
+										</div>
+										<div id="collapseOne{{loop.index}}" class="panel-collapse collapse" style="">
+											<div class="panel-body">
+
+												<div class="row">
+													<div class="col-md-10">
+
+														<p class="pad">
+															{{grp.data.description}}
+														</p>
+
+													</div>
+
+												</div>
+
+
+											</div>
+										</div>
+									</div>
+									
+								{% endfor %}
+								</div>
+
+								{{ form_label(form.divisionGroupe ,'Groupe', {'label_attr':{'class':'col-sm-12 m-t-2'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.divisionGroupe,{'attr':{'class':'form-control  form-control-sm sel2','placeholder':'Promotion'}}) }}
+
+									<div class="form-error {% if form_errors(form.divisionGroupe)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.divisionGroupe) }}
+									</div>
+								</div>
+							</div>
+						</div>
+						<br/>
+						<button class="btn btn-white btn-xs btn-lg my-button btn-block waves-effect waves-light" data-style="expand-left" type="submit">
+							<i class="fa fa-save"></i>
+							Enregistrer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="text-center spr" style="display:none;">
+	<div class="spinner-border" role="status">
+		<span class="sr-only">Loading...</span>
+	</div>
+</div></div>{{form_widget(form._token)}}{{ form_end(form,{'render_rest': false}) }}{#{dump(form)}#}

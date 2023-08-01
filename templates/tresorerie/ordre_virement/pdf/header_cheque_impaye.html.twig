@@ -1,0 +1,93 @@
+<table style="width: 100%; padding-top:40px;" text-align="center" cellspacing="0">
+	<thead>
+		<tr>
+			<th style="width: 30%; text-align: left;"></th>
+			<th style="width: 30%; text-align: left;"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			{% if TrTransactionOne.dossier.ordr == 1 %}
+				<td style="width: 40%; text-align: left;padding-left: 15px;"></td>
+				<td style="width: 60%;padding-right: 25px; text-align: right;">
+					<img src="{{ asset(logoright)[1:] }}" width="59px" height="59px" class="logo" alt="Logo"/>
+
+				</td>
+
+
+			{% elseif TrTransactionOne.dossier.ordr == 2 %}
+				<td style="width: 40%; text-align: left;padding-left: 15px;">
+					{% if TrTransactionOne.operation.pPiece.id ==  33  %}
+						<img src="{{ asset(logoleft)[1:] }}" width="59px" height="59px" class="logo" alt="Logo"/>
+					{% else %}
+						<img src="{{ asset(logoleft)[1:] }}" width="{{ TrTransactionOne.dossier.WidthLogo }}" height="{{ TrTransactionOne.dossier.HeightLogo }}" class="logo" alt="Logo"/>
+					{% endif %}
+
+
+				</td>
+			{% else %}
+				<td style="width: 40%; text-align: left;padding-left: 15px;">
+					<img src="{{ asset(logoleft)[1:] }}" width="{{ TrTransactionOne.dossier.WidthLogo }}" height="{{ TrTransactionOne.dossier.HeightLogo }}" class="logo" alt="Logo"/>
+				</td>
+
+
+				<td style="width: 60%;padding-right: 25px; text-align: right;">
+					<img src="{{ asset(logoright)[1:] }}" width="59px" height="59px" class="logo" alt="Logo"/>
+
+				</td>
+			{% endif %}
+		</tr>
+	</tbody>
+</table>
+
+<br><br>
+
+<div style="padding-right : 15px; font-size:12px; margin-left:40px; margin-right:10px;
+				      font-family: 'Courier New';">
+	<table style=" width: 100%; text-align: center; ">
+
+		<tr>
+			<td style="width: 40%">
+				<table style="width: 100%; text-align: start">
+                    <tr>
+						<td style="width: 100%; font-size: 11px;">
+							<b>REF:</b>
+							{{TrTransactionOne.codeImpaye }}
+						</td>
+					</tr>
+					<tr>
+						<td style=" width: 100%"></td>
+					</tr>
+					<tr>
+						<td style="width: 100%; font-size: 11px;">
+							<b>DATE:</b>
+							
+							{{TrTransactionOne.DateBq |date("d/m/Y")}}
+						</td>
+					</tr>
+					
+				</table>
+			</td>
+			<td style="width: 30% ;">
+				<table style="width: 100% ; ">
+					<tr>
+						<td style="width: 100%"></td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<table style="padding-right:15px">
+					<tr>
+						<th style="float: right;">
+							{{barcode|raw}}
+						</th>
+					</tr>
+					
+				</table>
+			</td>
+		</tr>
+	</table>
+
+</div>
+
+<br>

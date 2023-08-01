@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="btn-group btn-breadcrumb btn-breadcrumb2">
+		<a href="#" class="btn btn-default">
+			<b>Code Barre
+
+			</b>
+		</a>
+		{% if  demande is defined and demande is not empty and demande.id is not empty %}
+			{% set count = 0 %}
+			{% set count2 = 0 %}
+			{% for key , place  in {"archiver":"Archivé" , "annuler":"Annulé" , "creer":"Crée" , "encours":"Encours" , "valider":"Validé"}  %}
+				{% if count >= 0 %}
+
+					<a href="#" class="btn btn-default
+																														                       {% if workflow_has_marked_place(demande, key)  %}
+																														                           btn-breadcrumb2-active
+																														                       {% endif %}
+																														                        {% if count2 == 0  %}{{ workflow_metadata(demande, 'class_css', key)}}{% else %} hide-btn-workflow {% endif %}
+																														                       ">{{ place }}</a>
+					{% set count = count + 1%}
+					{% if workflow_has_marked_place(demande, key)  %}
+						{% set count2 = count2 + 1 %}
+					{% endif %}
+				{% endif %}
+
+			{% endfor %}
+		{% endif %}
+	</div>
+</div>

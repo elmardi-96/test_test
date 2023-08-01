@@ -1,0 +1,158 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Etudiant , Appel | Univ{% endblock %}
+{% block body %}
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'_preinscription'}}) }}
+
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Univ , Etudiants </h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+                <div class="title-action">
+                    {#% include './module_achat/facturefrs/inc/workflow.html.twig' %#}
+                    <button class="btn btn-white btn-xs btn-lg my-button " data-style="expand-left"  type="submit"> <i class="fa fa-save"></i> {{ button_label|default('Enregistrer') }}</button>
+                </div>   
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+        {#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+#} 
+
+    </div>
+    <br/><br/><br/>
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content" style="padding-top: 4px ;">
+
+                    {#{% include './module_achat/facturefrs/inc/workflow_breadcumb.html.twig' %}#}
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {#<ul class="nav nav-tabs">
+                                            <li><a class="nav-link active show" href="#tab-1" data-toggle="tab">Informations</a></li>
+                                            <li><a class="nav-link" href="#tab-2" data-toggle="tab">Articles</a></li>
+
+                                            <li><a class="nav-link" href="#tab-3" data-toggle="tab">Le suivi des opérations </a></li>
+
+                                        </ul>#}
+                                        {% include './module_univ/etudiant/inc/navigation.html.twig' %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+                                                <div class="row">
+                                                    <div class="col-md-4 b-r">
+                                                        <h3 class="m-t-none m-b">Informations </h3>
+                                                      
+
+
+                               
+
+                                                      
+
+
+                                                        
+
+                                
+                                                        
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 required "> {{ form_label(form.etablissement ,'Etablissement ', {'label_attr':{'class':'col-sm-12'}}) }}</label> 
+                                                            <div class="col-sm-8 ">
+                                                                {{ form_widget(form.etablissement,{'attr':{'class':'etablissement form-control form-control-sm'}}) }}
+                                                              
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 required "> {{ form_label(form.formation ,'formation ', {'label_attr':{'class':'col-sm-12'}}) }}</label> 
+                                                            <div class="col-sm-8 ">
+                                                                {{ form_widget(form.formation,{'attr':{'class':'formation form-control form-control-sm'}}) }}
+                                                              
+                                                            </div>
+                                                        </div>
+                                                        
+
+
+
+
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <h3 class="m-t-none m-b">Appels Etudiant </h3>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div> 
+                                                        <table class="table table-striped fichier-liste-style">
+                                                            <thead>
+                                                                <tr>
+                                                                  
+                                                                    <th width="20%">Designation</th>
+                                                                    <th width="15%">Date Appel</th>
+                                                                    <th width="15%">Crée par</th>
+                                                                    <th width="15%">date création</th>
+                                                                    <th width="5%">sup</th>
+                                                                   
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {#% for appel in etudiant.appels %}
+                                                                <tr>
+                                                                   
+                                                                   <th>{{appel.designation}}</th>    
+                                                                   <th>{{appel.date|date("m/d/Y")}}</th>    
+                                                                   <th>{{appel.UserCreated.nom}}</th>    
+                                                                   <th>{{appel.Created|date("m/d/Y")}}</th>    
+                                                                   <th><a style="float: right;" id = "{{ appel.id }}" class="_delete_appel fa fa-trash-o"></a></th>         
+                                                                </tr>
+                                                                {% endfor %#}
+
+                                                            </tbody>
+
+                                                            </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if etudiant is defined %}
+    <input type="hidden" name="_id" value="{{ etudiant.id }}" />
+{% endif %}
+
+    {#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+    {{ form_end(form) }}
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('univ_etudiant') }}
+{% endblock %}

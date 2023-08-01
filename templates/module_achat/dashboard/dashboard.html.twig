@@ -1,0 +1,287 @@
+{% extends 'base_achat_ugouv.html.twig' %}
+
+
+{% block title %} Tableau de bord{% endblock %}
+
+
+
+{% block body %} 
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-12">
+            <h2 class="fo">Achat , Tableau de bord </h2>
+            {#{ wo_render_breadcrumbs() }#}
+        </div>
+
+
+
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+    </div>
+
+    <br/><br/><br/>
+    <div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+                <div class="col-lg-12">
+
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Paramètre de Rechercher</h5>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <p class="msty">
+                                        Année 
+                                    </p>
+                                    {#{ form_label(form.dateDebut ,'Date Début :', {'label_attr':{'class':'col-sm-6'}}) }#} 
+                                    {{ form_widget(form.annee,{'attr':{'class':'select2_demo_3 form-control select2-hidden-accessible','style':'display: block;width: 100%;'}}) }} 
+                                </div>
+
+                                <div class="col-md-3">
+                                    <p class="msty">
+                                        Fournisseurs
+                                    </p>
+                                    {{ form_widget(form.fournisseur,{'attr':{'class':'select2_demo_3 form-control select2-hidden-accessible','style':'display: block;width: 100%;'}}) }}
+
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="msty">
+                                        Statut
+                                    </p>
+
+                                    {{ form_widget(form.statut,{'attr':{'class':'select2_demo_3 form-control select2-hidden-accessible','style':'display: block;width: 100%;'}}) }}
+
+                                </div>
+                                <div class="col-md-3">
+                                    <br/>
+                                    <button type="button" class="btn btn-outline btn-primary mbr search"><i class="fa fa-search"></i></button>
+                                    <button type="button" class="btn btn-outline btn-primary mbr rsearch"><i class="fa fa-refresh"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <div class="row">
+
+            <div class="col-lg-2 col-mourad-3 my-dashboard-style">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <span class="label label-success float-right">Annuel</span>
+                        <h5>Total Prix expressions besoin</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins _expression_besoin_prixtotal">-</h1>
+                        <div class="stat-percent font-bold text-success _expression_besoin"></div>
+                        <small>Nombre expressions besoin active</small>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-mourad-3 my-dashboard-style">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <span class="label label-info float-right">Annuel</span>
+                        <h5>Total Prix commandes</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins _bc_fournisseur_prixtotal">-</h1>
+                        <div class="stat-percent font-bold text-info _bc_fournisseur"></div>
+                        <small>Nombre commandes fournisseurs active</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-mourad-3 my-dashboard-style">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <span class="label label-primary float-right">Annuel</span>
+                        <h5>Total Prix Livraisons</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins _br_fournisseur_prixtotal">-</h1>
+                        <div class="stat-percent font-bold text-navy _br_fournisseur"></div>
+                        <small>Nombre livraisons fournisseurs active</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-mourad-3 my-dashboard-style">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <span class="label label-orange float-right">Annuel</span>
+                        <h5>Total Prix factures</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins _fac_fournisseur_prixtotal">-</h1>
+                        <div class="stat-percent font-bold text-orange _fac_fournisseur"></div>
+                        <small>Nombre factures fournisseurs active</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-mourad-3 my-dashboard-style">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <span class="label label-violet float-right">Annuel</span>
+                        <h5>Total Prix réglements</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins _reg_fournisseur_prixtotal">-</h1>
+                        <div class="stat-percent font-bold text-violet _reg_fournisseur"></div>
+                        <small>Nombre réglements fournisseurs active</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row {#justify-content-md-center#}">
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Pré-commande</h5>
+                        <div class="ibox-tools">
+                            <button aria-label="Bar Chart" class="btn btn-secondary fa fa-bar-chart-o o_graph_button active top-8" data-mode="bar" title="" data-original-title="Graphique en Barres"></button>
+                            <!--<button aria-label="Pie Chart" class="btn btn-secondary fa fa-pie-chart o_graph_button top-8" data-mode="pie" title="" data-original-title="Diagramme"></button>-->
+                        </div>
+
+
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <canvas id="barChart"></canvas>
+                                <small>
+                                    <strong>prix total commandes par fournisseur :</strong>
+
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Bon commande fournisseur</h5>
+                        <div class="ibox-tools">
+                            <button aria-label="Bar Chart" class="btn btn-secondary fa fa-bar-chart-o o_graph_button active top-8" data-mode="bar" title="" data-original-title="Graphique en Barres"></button>
+                            <!--<button aria-label="Pie Chart" class="btn btn-secondary fa fa-pie-chart o_graph_button top-8" data-mode="pie" title="" data-original-title="Diagramme"></button>-->
+                        </div>
+
+
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <canvas id="barChart2"></canvas>
+                                <small>
+                                    <strong>prix total commandes par fournisseur :</strong>
+
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Réception bc fournisseur</h5>
+                        <div class="ibox-tools">
+                            <button aria-label="Bar Chart" class="btn btn-secondary fa fa-bar-chart-o o_graph_button active top-8" data-mode="bar" title="" data-original-title="Graphique en Barres"></button>
+                            <!--<button aria-label="Pie Chart" class="btn btn-secondary fa fa-pie-chart o_graph_button top-8" data-mode="pie" title="" data-original-title="Diagramme"></button>-->
+                        </div>
+
+
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <canvas id="barChart3"></canvas>
+                                <small>
+                                    <strong>prix total commandes par fournisseur :</strong>
+
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Factures fournisseur</h5>
+                        <div class="ibox-tools">
+                            <button aria-label="Bar Chart" class="btn btn-secondary fa fa-bar-chart-o o_graph_button active top-8" data-mode="bar" title="" data-original-title="Graphique en Barres"></button>
+                            <!--<button aria-label="Pie Chart" class="btn btn-secondary fa fa-pie-chart o_graph_button top-8" data-mode="pie" title="" data-original-title="Diagramme"></button>-->
+                        </div>
+
+
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <canvas id="barChart4"></canvas>
+                                <small>
+                                    <strong>prix total commandes par fournisseur :</strong>
+
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Règlement fournisseur</h5>
+                        <div class="ibox-tools">
+                            <button aria-label="Bar Chart" class="btn btn-secondary fa fa-bar-chart-o o_graph_button active top-8" data-mode="bar" title="" data-original-title="Graphique en Barres"></button>
+                            <!--<button aria-label="Pie Chart" class="btn btn-secondary fa fa-pie-chart o_graph_button top-8" data-mode="pie" title="" data-original-title="Diagramme"></button>-->
+                        </div>
+
+
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <canvas id="barChart5"></canvas>
+                                <small>
+                                    <strong>prix total commandes par fournisseur :</strong>
+
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}  
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('dashboard') }}
+{% endblock %}

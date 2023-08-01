@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>
+            {% block title %}Authentification{% endblock %}
+        </title>
+        <link rel="shortcut icon" href="{{asset('/img/icon.png')}}" />
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+
+    </head>
+    <body class="gray-bg">
+
+        <div class="loginColumns animated fadeInDown">
+            <div class="row">
+
+                <div class="col-md-6"><br><br><br><br><br><br>
+                    <h2 class="font-bold">U3S-ERP</h2>
+                    <div style="color:#949494;font-size:14px !important">
+                    <p style="color:#949494;font-size:14px !important">
+                        U3S-ERP est un progiciel de gestion intégré (PGI, ERP en anglais)  développé pour les petites et moyennes entreprises, les indépendants, auto-entrepreneurs ou les associations.
+                    </p> 
+
+                    <p style="color:#949494;font-size:14px !important">
+                        À savoir la gestion des clients, fournisseurs, devis, commandes, factures, stocks, comptabilité. L’architecture d’U3S-ERP  est modulaire. Il se positionne sur la facilité d'installation et la simplicité d'utilisation.
+                    </p>
+
+                    <p style="color:#949494;font-size:14px !important">
+                        U3S-ERP  fonctionne par activation de modules. Vous n'activez et ne voyez que les fonctionnalités (modules) dont vous avez besoin. 
+                    </p>
+                    </div>
+
+                </div>
+                <div class="col-md-6" style="font-size:15px">
+                    <centre><img src="/img/logo.png" alt="image" class="feed-photo" style="width: 80%; margin-left: 10%;"></centre>
+                    <div class="ibox-content">
+
+    
+
+
+                        <form method="post" style="padding:10px">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+
+                            {% if app.user %}
+                                <div class="mb-3">
+                                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                </div>
+                            {% endif %}
+
+                            {#<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>#}
+                            {#<label for="inputLogin" class="sr-only">Login</label>#}
+                            <div class="form-group">
+                                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocusv style="padding:6px;margin-bottom:10px">
+                            </div>
+
+                            <div class="form-group">
+                                {#<label for="inputPassword" class="sr-only">Password</label>#}
+                                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required style="padding:6px">
+                            </div>
+                            <br/>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                            {#
+                                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                                See https://symfony.com/doc/current/security/remember_me.html
+                        
+                                <div class="checkbox mb-3">
+                                    <label>
+                                        <input type="checkbox" name="_remember_me"> Remember me
+                                    </label>
+                                </div>
+                            #}
+
+                            <button class="btn btn-primary block full-width m-b" type="submit">
+                                Connexion
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-6">
+                    Universal , scientific system & software
+                </div>
+                <div class="col-md-6 text-right">
+                    <small>© {{ "now"|date("Y") }}</small>
+                </div>
+            </div>
+
+    </body>
+    {# 
+       <body class="gray-bg" style="background-image:url('{{ asset('/img/back.jpg')}}');height: 100%;">
+    
+    
+            <div class="lock-word animated fadeInDown" style="left:67%">
+                <span class="first-word"style="color:#888b8e">UG</span><span style="color:#888b8e">UV</span>
+            </div>
+            <div class="middle-box text-center lockscreen animated fadeInDown">
+                <div>
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            <ul class="list-unstyled mb-0">
+                                <li><span class="initialism form-error-icon badge badge-danger">Error</span> 
+                                    <span class="form-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <div class="m-b-md">
+                        <img alt="image" class="rounded-circle circle-border" src="{{ asset('/img/128.jpg')}}">
+                    </div>
+                    <h3>Bienvenue sur Ugouv</h3>
+                    <p>Se connecter</p>
+                    {{ form_start(form, { 'attr': {'class': 'm-t'} }) }}
+    
+                    <div class="form-group">
+                        {{ form_widget(form._username, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form._password, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+    
+                    {{ form_widget(form.ok, { 'attr': {'class': 'btn btn-primary block full-width'} }) }}
+    
+                    {{ form_end(form) }}
+                </div>
+            </div>
+    
+        </body> #}
+</html>
+
+
+
+
+
+
+
+
+
+

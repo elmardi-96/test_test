@@ -1,0 +1,106 @@
+
+
+<div class="alert alert-success ua_success" role="alert">
+	Bien ajouté !
+</div>
+
+{{ form_start(form_technique_det ) }}
+<table style="width: 100%" id="ua_technique_table" class="m-add t-m table table-striped table-bordered table-hover dataTables-example det_for">
+	<thead>
+		<tr>
+			<th style="width: 13%;text-align:center">ARTICLE</th>
+			<th style="width: 2%;text-align:center">quantité</th>
+			<th style="width: 5%;text-align:center">Prix unitaire</th>
+			<th style="width: 2%;text-align:center">TVA %</th>
+			<th style="width: 2%;text-align:center">Remise</th>
+			<th style="width: 10%;text-align:center">Montant</th>
+			<th style="width: 10%;text-align:center">Iban</th>
+			<th style="width: 10%;text-align:center">Swift</th>
+			<th style="width: 10%;text-align:center">Banque</th>
+			<th style="width: 10%;text-align:center">Addresse</th>
+			<th style="width: 2%;text-align:center">Actions</th>
+
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<tr id="ua_technique_form">
+
+			<td style="width: 13%">
+
+				{{ form_widget(form_technique_det.article,{'attr':{'class':'style-detail-form form-control form-control-sm data.article article' }}) }}
+
+			</td>
+			<td style="width: 10%">
+
+				{{ form_widget(form_technique_det.qte,{'attr':{ 'class':'style-detail-form form-control form-control-sm data.qte quantite' }}) }}
+
+			</td>
+			<td style="width: 10%">
+
+				{{ form_widget(form_technique_det.prixUntaire,{'attr':{'class':'style-detail-form form-control form-control-sm prixunitaire' }}) }}
+
+			</td>
+			<td style="width: 10%">
+
+				{{ form_widget(form_technique_det.tva,{'attr':{'class':'style-detail-form form-control form-control-sm tva' }}) }}
+
+			</td>
+			<td style="width: 10%">
+
+				{{ form_widget(form_technique_det.remise,{'attr':{'type':'number','class':'style-detail-form form-control form-control-sm remise'}}) }}
+
+			</td>
+			<td style="width: 10%">
+
+				{{ form_widget(form_technique_det.remise,{'attr':{'type':'number','class':'style-detail-form form-control form-control-sm remise'}}) }}
+
+			</td>
+			<td style="width: 10%">
+
+				{{ form_widget(form_technique_det.iban,{'attr':{'class':'style-detail-form form-control form-control-sm iban'}}) }}
+
+			</td>
+			<td style="width: 10%">
+
+				{{ form_widget(form_technique_det.swift,{'attr':{'class':'style-detail-form form-control form-control-sm swift'}}) }}
+
+			</td>
+			<td style="width: 10%">
+
+				{{ form_widget(form_technique_det.banque,{'attr':{'class':'style-detail-form form-control form-control-sm banque'}}) }}
+
+			</td>
+			<td style="width: 10%">
+
+				{{ form_widget(form_technique_det.adresse,{'attr':{'class':'style-detail-form form-control form-control-sm adresse'}}) }}
+
+			</td>
+
+			<td class="text-center ua_technique">
+				<a style="padding: 7px ; " class="btn-icon-detail btn btn-white btn-primary btn-outline  btn-xs add_form_ua">
+					<i class=" fa  fa-plus "></i>
+				</a>
+			</td>
+			<td style="width: 10%"></td>
+
+
+		</tr>
+	</tbody>
+
+</table>
+{{ form_end(form_technique_det,{'render_rest': false}) }}
+
+<div class="alert alert-danger ua_alert_danger mt-1" role="alert">
+	This is a danger alert—check it out!
+</div>
+
+<div class="pt-2 text-right ua_confirmer_annuler">
+	<button type="button" class="btn btn-success ua_confirmer">
+		Confirmer</button>
+	<button type="button" class="btn btn-warning  ua_supprimer_article">
+		Annuler</button>
+	{# <i class="fa fa-check-square"></i>
+	    <i class="fa fa-window-close"></i> #}
+</div>

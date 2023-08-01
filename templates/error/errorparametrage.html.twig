@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<title>
+			{% block title %}U3S-EPR | 403 Error | Univ
+			{% endblock %}
+		</title>
+		<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'/>
+		<link rel="shortcut icon" href="{{asset('/img/icon.png')}}"/>
+
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+
+	</head>
+	<body class="fixed-nav fixed-nav-basic {% if app.user.theme is defined  %} {{app.user.theme}} {%endif%}">
+
+		<div class="pos-a t-0 l-0 bgc-white w-100 h-100 d-f fxd-r fxw-w ai-c jc-c pos-r p-30">
+			<div class="mR-60"><img alt="#" src="http://127.0.0.1:8000/img/logo-background.png" style="width: 210px;"></div>
+			<div class="d-f jc-c fxd-c">
+				<h1 class="mB-30 fw-900 lh-1 c-red-500" style="font-size:60px">403</h1>
+				<h3 class="mB-10 fsz-lg c-grey-900 tt-c">Oops Page n'est pas autorisé</h3>
+				<p class="mB-30 fsz-def c-grey-700">la page que vous voulez accèder vous n'avez pas le droit de l'accèder.</p>
+
+				<div class="form-group row">
+					<div class="col-sm-3">
+						<a href="{{path('user_profil_permission')}}" type="primary" class="btn btn-primary">Mes permissions</a>
+
+
+					</div>
+					<div class="col-sm-3"></div>
+					<div class="col-sm-3">
+
+
+
+						{% if delete == 1 %}
+							<a href="#" data-id="{{object.id}}" data-token="{{ csrf_token('delete' ~ object.id) }}" class="btn btn-danger _delete " id="_delete" style="width: 110px;">
+								<i class="fa fa-trash" style="color: white !important;"></i>
+								Supprimer</a>
+						{% endif %}
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>

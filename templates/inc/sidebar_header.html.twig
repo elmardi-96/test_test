@@ -1,0 +1,71 @@
+{#
+{% set url = asset('images/user/profil/profil.png') %}
+{% if app.user.imageName is not null  %}
+    {% set url = asset('images/user/profil/' ~ app.user.imageName)  %}
+{% endif %}#}
+<li class="nav-header">
+	<div class="dropdown profile-element">
+		<ul class="sidebar-app-url">
+			<li>
+				<a href="{{ path('module_univ_index') }}" class="site_title" style="
+						                   text-overflow: ellipsis;
+						                   overflow: hidden;
+						                   font-weight: 400;
+						                   font-size: 22px;
+						                   width: 100%;
+						                   color: #ECF0F1 !important;
+						                   margin-left: 0 !important;
+						                   line-height: 73px;
+						                   display: block;
+						                   height: 85px;
+						                   margin: 0;
+						                   padding-left: 52px;
+						                   border-color: #e7eaec47;
+						                   font-weight: bold;
+						                   ">
+					<i class="fa fa-paw" style="
+						                     background: url(/img/logo-blackwhite.png) left 50% no-repeat;
+						                     text-indent: -999em;
+						                     position: absolute;
+						                     height: 34px;
+						                     width: 190px;
+						                     left: 10px;
+						                     top: 40%;
+						                     margin-top: -17px;
+						                     overflow: hidden;
+						                     width: 37px;
+						                     "></i>
+					<span>U3S-ERP</span>
+				</a>
+				<p style="
+					                   position: absolute;
+					                   top: 46px;
+					                   left: 53px;
+					                   font-size: 15px;
+					                   font-weight: 600;
+					                   color: #1ab394;
+					                   ">UIASS
+				</p>
+				<div>
+					<input id="search_keywords2" type="text" class="form-control search_keywords2 input-search" placeholder="Rechercher ...">
+					<i class="fa fa-search input-search-i"></i>
+				</div>
+			</li>
+		</ul>
+
+		{# <img alt="image" class="rounded-circle" src="{{asset('/img/profile_small.jpg')}}"/>#}
+		{#
+		        <img alt="image" class="rounded-circle" src="{{ url }}" style="width: 48px ;height: 48px "/>
+		        <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
+		            <span class="block m-t-xs font-bold">{{ app.user.nom }} {{ app.user.prenom }}</span>
+		            <span class="text-muted text-xs block">Utilisateur <b class="caret"></b></span>
+		        </a>
+		        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+		            <li><a class="dropdown-item" href="{{path('user_profil_index')}}">Mon profil</a></li>
+		
+		            <li class="dropdown-divider"></li>
+		            <li><a class="dropdown-item" href="{{path('logout')}}">Deconnexion</a></li>
+		        </ul>
+		        #}
+	</div>
+</li>

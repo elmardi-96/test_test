@@ -1,0 +1,26 @@
+{% set current_path = app.request.get('_route') %}
+<div
+	id="wrapper">
+	<!-- Sidebar -->
+	<nav class="navbar-default navbar-static-side" role="navigation" >
+		<div class="sidebar-collapse-parametrage">
+			<ul class="nav metismenu" id="side-menu">
+				{% include './inc/sidebar_header.html.twig' %}
+
+
+				<li class="colp {% if "univ_ac_etablissement_index"  in current_path or "univ_ac_formation_index"  in current_path or "univ_ac_promotion_index"  in current_path or "univ_ac_semestre_index"  in current_path  or "univ_ac_module_index"  in current_path or "univ_ac_element_index"  in current_path  %} active {%endif%}">
+					<a href="# ">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">
+							informations académique</span>
+					</a>
+				
+				</li>
+		
+
+
+			</ul>
+		</div>
+	</nav>
+
+	<!-- End Sidebar -->

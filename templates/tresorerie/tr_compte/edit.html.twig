@@ -1,0 +1,31 @@
+{% extends 'base_tresorerie.html.twig' %}
+
+{% block title %}Modifier   | Compte Banquaire  {% endblock %}
+
+
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+
+
+    <div class="edit">
+
+        {{ include('./tresorerie/tr_compte/_form.html.twig',{'button_label': 'Modifier'}) }}
+
+
+
+        
+
+                                        
+
+
+        <br/><br/>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('tr_compte') }}
+{% endblock %}

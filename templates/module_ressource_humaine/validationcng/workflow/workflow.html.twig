@@ -1,0 +1,85 @@
+{# places active pour cet workflow #}
+{#{{ dump(workflow_marked_places(grs_conge)) }}
+
+
+
+{{ dump(workflow_transitions(grs_conge)) }}#}
+
+
+{#{{ dump(workflow_transitions(grs_conge)) }}#}
+
+
+{#{% for place in workflow_marked_places(grs_conge) %}
+    <li>
+        {{ place }}:
+        <code>{{ workflow_metadata(grs_conge, 'function', place) ?: 'Unlimited'}}</code>
+    </li>
+{% endfor %}#}
+{#<div class="btn-group">
+                                <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                            </div> #}
+
+
+{#"valider","annuler" , "encours" ,"generer" , "archiver"#}
+
+
+	{% for transition in workflow_transitions(grs_conge) %}
+	{#{{ dump(workflow_marked_places(grs_conge)) }}#}
+	{% set url = "" %}
+		{% if workflow_metadata(grs_conge, 'function', transition) %}
+	{%  set  url= path(workflow_metadata(grs_conge, 'function', transition), {id: grs_conge.id}) %}
+	{% endif %}
+		<form style="display: inline-block" {#action="{{ url }}"#} id="{{ workflow_metadata(grs_conge, 'function', transition) }}" {#method="post"#}> <input type="hidden" name="_id" value="{{ grs_conge.id }}"/>
+		<input type="hidden" name="transition" value="{{ transition.name }}"/>
+		<button class="btn btn-xs {{ workflow_metadata(grs_conge, 'class', transition) }}  btn-outline" type="submit" type="submit">
+			<i class="fa {{ workflow_metadata(grs_conge, 'icon', transition) }}"></i>
+			{#&nbsp;{{ transition.name }}|#}
+			{{ workflow_metadata(grs_conge, 'title', transition) }}</button>
+	</form>
+
+
+{% endfor %}
+
+		{% if workflow_has_marked_place(grs_conge, "envoyer") %}
+			Le conge sous le référence
+			{{ grs_conge.code }}
+			a été bien envoyer .
+		{% endif %}
+		{% if workflow_has_marked_place(grs_conge, "annuler") %}
+			Le conge sous le référence
+			{{ grs_conge.code }}
+			a été annuler .
+		{% endif %}
+		{% if workflow_has_marked_place(grs_conge, "accepter") %}
+			Le conge sous le référence
+			{{ grs_conge.code }}
+			a été bien accepter .
+		{% endif %}
+		{% if workflow_has_marked_place(grs_conge, "refuser") %}
+			Le conge sous le référence
+			{{ grs_conge.code }}
+			a été refuser .
+            <button class="btn btn-xs btn-danger btn-outline" type="submit">
+		<i class="fa fa-trash"></i>&nbsp;Supprimer</button>
+		{% endif %}
+		{% if workflow_has_marked_place(grs_conge, "encours") %}
+			Le conge sous le référence
+			{{ grs_conge.code }}
+			est encours de traitement.
+		{% endif %}
+
+{% if workflow_has_marked_place(grs_conge, "creer") %}
+	<a class="btn btn-xs btn-white btn-outline" href="{{ path('module_grs_demande_conge_edit',{id:grs_conge.id})}}">
+		<i class="fa fa-pencil"></i>&nbsp;Modifier</a>
+{% endif %}
+
+{% if workflow_has_marked_place(grs_conge, "creer") or workflow_has_marked_place(grs_conge, "annuler") %}
+	<button class="btn btn-xs btn-danger btn-outline" type="submit">
+		<i class="fa fa-trash"></i>&nbsp;Supprimer</button>
+{% endif %}
+

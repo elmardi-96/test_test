@@ -1,0 +1,104 @@
+{% if exis is not empty %}
+<div class="card">
+	<h4 class="card-header text-center font-weight-bold text-uppercase py-4">Tableau des étudiants existe</h4>
+	<div class="card-body">
+		<div id="table" class="table-editable">
+			<div
+				class='table-responsive'>
+				<!--Table-->
+
+				<table id="kt_table_1" class="table table-bordered table-responsive-md table-striped text-cente kt_table_1" width="100%">
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th>Prenom</th>
+                            <th>Cin</th>
+                            <th>Cne</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for detail  in  exis %}
+							<tr>
+
+								<td>
+									<a href="{{path('module_univ_etudiant_show',{id:detail.id})}}" class="cd_op" target="_blank">{{ detail.nom }}</a>
+								</td>
+								<td>
+									{{ detail.prenom }}
+								</td>
+                                <td>
+									{{ detail.cin }}
+								</td>
+                                <td>
+									{{ detail.cne }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+
+					<tfoot>
+						<tr>
+							<th>Nom</th>
+							<th>Prenom</th>
+                            <th>Cin</th>
+                            <th>Cne</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% if ne is not empty %}
+<div class="card">
+	<h4 class="card-header text-center font-weight-bold text-uppercase py-4">Tableau des nouveau étudiants</h4>
+	<div class="card-body">
+		<div id="table" class="table-editable">
+			<div
+				class='table-responsive'>
+				<!--Table-->
+                
+				<table id="kt_table_1" class="table table-bordered table-responsive-md table-striped text-cente kt_table_1" width="100%">
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th>Prenom</th>
+                            <th>Cin</th>
+                            <th>Cne</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for detail  in  ne %}
+							<tr>
+
+								<td>
+									<a href="{{path('module_univ_etudiant_show',{id:detail.id})}}" class="cd_op" target="_blank">{{ detail.nom }}</a>
+								</td>
+								<td>
+									{{ detail.prenom }}
+								</td>
+                                <td>
+									{{ detail.cin }}
+								</td>
+                                <td>
+									{{ detail.cne }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+
+					<tfoot>
+						<tr>
+							<th>Nom</th>
+							<th>Prenom</th>
+                            <th>Cin</th>
+                            <th>Cne</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}

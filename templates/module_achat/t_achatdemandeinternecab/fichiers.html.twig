@@ -1,0 +1,161 @@
+
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Fichiers | demande d'achat  | Ugouv achat {% endblock %}
+{% block body %}
+    {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'_fichiers'}}) }}
+
+    <div id="right-sidebar" class="actions animated"></div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-6">
+            {% include './module_achat/t_achatdemandeinternecab/inc/workflow_breadcumb.html.twig' %}
+        </div>
+        <div class="col-lg-6">
+            <div class="title-action">
+
+                <button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+                    <i class="fa fa-save"></i>
+                    {{ button_label|default('Enregistrer') }}
+                </button>
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {% include './module_achat/t_achatdemandeinternecab/inc/workflow.html.twig' %}
+        </div>
+    </div>
+    <br/><br/>
+
+    <div class="row pt-20">
+        <div class="col-lg-12 ">
+            <div class="ibox">
+
+                <div
+                    class="ibox-content">
+                    {#{% include './module_achat/commandefrs/inc/workflow_breadcumb.html.twig' %}#}
+
+                    <div class="message-success"></div>
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {% include './module_achat/t_achatdemandeinternecab/inc/navigation.html.twig' %}
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-1">
+                                                <div class="row">
+                                                    <div class="col-md-6 b-r">
+
+                                                        <h3 class="m-t-none m-b">
+                                                            Ajouter un nouveau fichier/document/image</h3>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 required ">charger votre Fichier(*) :</label>
+                                                            <div class="col-sm-8 custom-file">
+                                                                {{ form_widget(form.imageFile.file, { 'attr': {'class': 'custom-file-input'} }) }}
+                                                                <label for="logo" class="custom-file-label">fichier ,document , image ...</label>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        {# {{ dump(commande.fichiers) }}#}
+                                                        {% if demande.fichiers is not empty  %}
+                                                            <h5>
+                                                                <i class="fa fa-folder-o"></i>
+                                                                Fichiers et documents joints
+                                                            </h5>
+                                                            <table class="table table-striped fichier-liste-style">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th width="40%">Fichier
+                                                                        </th>
+                                                                        <th width="25%">Date de creation</th>
+                                                                        <th width="20%">Cree par</th>
+                                                                        <th width="5%">supprimer</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    {% for fichier in demande.fichiers %}
+                                                                        <tr>
+                                                                            <td class="">
+                                                                                <a href="{{ asset('/images/ugouv/achat/demandeAchat/fichiers/' ~ fichier.imageName) }}">
+                                                                                    {% set icon = "fa fa-paperclip" %}
+                                                                                    {% set extension = fichier.imageName|split('.') %}
+                                                                                    {% if extension[1] is defined  %}
+                                                                                        {% if extension[1] in ['png' , 'jpg' , 'jpeg' , 'icon' , 'svg']  %}
+                                                                                            {% set icon = "fa fa-file-image-o" %}
+                                                                                        {% elseif extension[1] in ['pdf']  %}
+                                                                                            {% set icon = "fa fa-file-pdf-o" %}
+                                                                                        {% elseif extension[1] in ['xls' ,'xlsx']  %}
+                                                                                            {% set icon = "fa fa-file-excel-o" %}
+                                                                                        {% elseif extension[1] in ['doc' ,'docs']  %}
+                                                                                            {% set icon = "fa fa-file-word-o" %}
+                                                                                        {% elseif extension[1] in ['zip' ,'rar']  %}
+                                                                                            {% set icon = "fa fa-file-archive-o" %}
+                                                                                        {% endif  %}
+                                                                                    {% endif  %}
+
+                                                                                    <i class="{{ icon }}"></i>
+
+                                                                                    {{ fichier.originalName }}
+                                                                                </a>
+                                                                            </td>
+
+                                                                            <td>{{ fichier.created ? fichier.created|date('Y-m-d H:i:s')}}</td>
+                                                                            <td>
+                                                                                <span class="fa fa-user"></span>
+                                                                                {{ fichier.userCreated ? fichier.userCreated.nom~' '~fichier.userCreated.prenom   }}</td>
+                                                                            <td>
+                                                                                <a style="float: right;" id="{{ fichier.id }}" class="_delete_fichier fa fa-trash-o"></a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        {% endif %}
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% if demande is defined %}
+        <input type="hidden" name="_id" value="{{ demande.id }}"/>
+    {% endif %}
+
+    {{ form_end(form,{'render_rest': false}) }}
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('tachatdemandeinternecab') }}
+{% endblock %}

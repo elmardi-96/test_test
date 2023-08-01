@@ -1,0 +1,14 @@
+{% for d in allDossier %}
+    <div class="col-md-3 mb-2 clickdossier" data-id="{{d.id}}">
+        <a href="#" class="box-app float-left clickdossier" data-id="{{d.id}}">
+            {% if d.logo == null %}
+                <img alt="image" class="rounded-circle" src="{{asset('/img/images.png')}}">
+            {% else %}
+                <img alt="image" class="rounded-circle" src="{{asset('/img/'~d.logo~'')}}">
+            {% endif %}
+        </a>
+        <div class="media-body vertical-center clickdossier" data-id="{{d.id}}">
+            <strong>{{d.nom_dossier}}</strong>
+        </div>
+    </div>
+{% endfor %}

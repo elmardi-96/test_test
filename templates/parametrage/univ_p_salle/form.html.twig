@@ -1,0 +1,185 @@
+<div class="sidebar-container new">
+
+	<div class="ibox-tools"></div>
+
+	<div class="tab-content ">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+				</h3>
+				<small>
+					{% if  univ_p_salle.id > 0 %}
+						Modifier
+					{% else %}
+						Ajouter
+					{% endif %}
+				</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<table class="table small m-b-xs">
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="ibox ">
+					<div class="ibox-content">
+
+
+						{% if  univ_p_salle.id > 0 %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form_edit'}}) }}
+						{% else %}
+							{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+						{% endif  %}
+
+
+						<div class="row">
+
+
+							<div class="col-md-12 b-r">
+
+								{% if  univ_p_salle.id > 0 %}
+									<div id="test" data-salle-id="{{ univ_p_salle.id|json_encode }}"></div>
+
+								{% endif  %}
+
+								<div class="form-group row">
+									{{ form_label(form.etage ,'Etage', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.etage,{'attr':{'class':'form-control form-control-sm','placeholder': 'Etage'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.etage) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.designation ,'Designation (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.designation,{'attr':{'class':'form-control form-control-sm','placeholder': 'Designation (*)'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.designation) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.abreviation ,'Abreviation (*)', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.abreviation,{'attr':{'class':'form-control form-control-sm','placeholder': 'Abreviation (*)'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.abreviation) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.attente ,'Attente', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.attente,{'attr':{'class':'form-control form-control-sm','placeholder': 'attente'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.attente) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.xip ,'XIP', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.xip,{'attr':{'class':'form-control form-control-sm','placeholder': 'XIP'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.xip) }}
+										</span>
+									</div>
+
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+								<div class="form-group row">
+									{{ form_label(form.groupe ,'Groupe', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.groupe,{'attr':{'class':'form-control form-control-sm','placeholder': 'Groupe'}}) }}
+										<span class="form-error-message">
+											{{ form_errors(form.groupe) }}
+										</span>
+									</div>
+
+								</div>
+
+								<div class="hr-line-dashed paddi"></div>
+
+								<div class="form-group row">
+									{{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-12'}}) }}
+									<div class="col-sm-12">
+										{{ form_widget(form.active) }}
+									</div>
+								</div>
+								<div class="hr-line-dashed paddi"></div>
+
+								{% if  univ_p_salle.id > 0 %}
+									<div class="form-group row">
+										<div class="col-sm-6">
+											<button class="btn btn-primary btn-block btn-xs  button-edit-salle">
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Modifier') }}</button>
+
+										</div>
+										<div class="col-sm-6">
+											{% for operation in operations|filter(operation => operation.prefix == '_delete') %}
+
+												<a {% if operation.route is not null %} data-id="{{univ_p_salle.id}}" data-token="{{ csrf_token('delete' ~ univ_p_salle.id) }}" href="#{# {{ path(operation.route) }} #}" {% endif %} id="{{operation.prefix}}" class="btn btn-block btn-xs btn-danger _delete{{operation.classCs}}">
+													<i class="fa {{ operation.icon }}" style="color: white !important;"></i>
+													{{ operation.titre|capitalize }}</a>
+
+											{% endfor %}
+										</div>
+
+
+									</div>
+								{% else %}
+									<div class="form-group row">
+
+										<div class="col-sm-5">
+											<button class="btn btn-primary btn-block btn-xs  button-save-salle">
+												<i class="fa fa-save"></i>
+												&nbsp;{{ button_label|default('Enregistrer') }}</button>
+
+										</div>
+										<div class="col-sm-7">
+											<button class="btn btn-primary btn-block btn-xs  button-save-add-salle">
+												<i class="fa fa-save"></i>
+												&nbsp;Enregistrer et Ajouter</button>
+
+										</div>
+									</div>
+								{% endif  %}
+
+
+							</div>
+
+						</div>
+
+						{{form_widget(form._token)}}
+						{{ form_end(form,{'render_rest': false}) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

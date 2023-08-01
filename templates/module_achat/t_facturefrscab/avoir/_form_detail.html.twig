@@ -1,0 +1,92 @@
+{% set ma_class =   class|default('detail_form') %}
+
+
+{{ form_start(form_det ,{'attr':{'novalidate': 'novalidate'  , "autocomplete":"off",'class': ma_class~' form-inline test'}}) }}
+<table style="width: 100%" class="m-add t-m table table-striped table-bordered table-hover dataTables-example det_for">
+	<tr>
+		<td style="width: 3%"></td>
+
+		<td style="width: 33%" class='ellast'>
+			{#<select id="t_achatdemandeinternedet_article" name="t_achatdemandeinternedet[article]" required="required" placeholder="Article" class="style-detail-form form-control form-control-sm data.article article"></select>#}
+			{#{ form_widget(form_det.article,{ 'attr':{ 'placeholder':'Article','class':'style-detail-form form-control form-control-sm data.article article js-data-example-ajax',  'autofocus':'autofocus'}}) }#}
+			<select id="{{form_det.article.vars.id}}" data-entity="uarticle" data-column="etat_achat" data-placeholder="Choisir les articles" if-selected="{{form_det.article.vars.data ? form_det.article.vars.data.id }}" name="{{form_det.article.vars.full_name}}" class="style-detail-form form-control articles form-control-sm selected ">
+				{#% for item in form_det.article.vars.choices |slice(1, 10) %}
+					<option value="{{item.value}}">{{item.label}}</option>
+				{% endfor %#}
+			</select>
+			<!--<i class="fa fa-search rs" id=""></i>-->
+			<i id="modalActivate" type="button" class="modalActivate fa fa-search rs2" data-toggle="modal" data-target="#exampleModalPreview"></i>
+
+		</td>
+		{#<td style="width: 20%">
+
+			{{ form_widget(form_det.observation,{'attr':{'class':'style-detail-form form-control form-control-sm' ,'placeholder':'Observation'}}) }}
+
+		</td>#}
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.unite,{'attr':{'class':'style-detail-form form-control form-control-sm data.unite select2_unite' ,'placeholder':'Unite'}}) }}
+
+		</td>
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.quantite,{'attr':{ 'class':'style-detail-form form-control form-control-sm data.quantite' , 'placeholder':'Qnt'}}) }}
+
+		</td>
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.prixunitaire,{'attr':{'class':'style-detail-form form-control form-control-sm prixunitaire' ,'placeholder':'P.U'}}) }}
+
+		</td>
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.tva,{'attr':{'class':'style-detail-form form-control form-control-sm tva' ,'placeholder':'TVA'}}) }}
+
+		</td>
+		<td style="width: 7%">
+
+			{{ form_widget(form_det.remise,{'attr':{'class':'style-detail-form form-control form-control-sm remise' ,'placeholder':'Remise'}}) }}
+
+		</td>
+		<td style="width: 7%">-</td>
+		<td style="width: 10%">-</td>
+
+		<td>
+			{% if UaTFacturefrsdet is defined %}
+				<input type="hidden" name="_id" value="{{ UaTFacturefrsdet.id }}"/>
+			{% endif %}
+
+			{% if t_achatdemandeinternecab is defined %}
+				<input type="hidden" name="_id_cab" value="{{ t_achatdemandeinternecab.id }}"/>
+			{% endif %}
+
+
+			<button style="padding: 7px " class="btn btn-white btn-xs my-button2" type="submit">{{ button_label|default('Modifier') }}</button>
+		</td>
+
+
+	</tr>
+</table>
+{{ form_end(form_det,{'render_rest': false}) }}
+
+
+<div class="modal fade right" id="exampleModalPreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+	<div class="modal-dialog modal-full-height modal-top modal-middle-articles" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalPreviewLabel">ARTICLES</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body bo">
+				<div class="text-center spr">
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
+				<div class="bod"></div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Ugouv-SYS</title>
+        <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
+        <link rel="shortcut icon" href="{{asset('/img/icon.png')}}" />
+
+        {% block stylesheets %}
+            {# 'app' must match the first argument to addEntry() in webpack.config.js #}
+            {{ encore_entry_link_tags('app') }}
+
+            <!-- Renders a link tag (if your module requires any CSS)
+                 <link rel="stylesheet" href="/build/app.css"> -->
+        {% endblock %}
+
+
+    </head>
+    <body class="fixed-nav fixed-nav-basic {{app.user.theme}}">
+        
+
+            {% block sidebar %} 
+                {% include './inc/sidebar.html.twig' %}
+            {% endblock %}
+
+
+
+
+
+
+
+
+
+            
+
+                {% block header %} 
+                    {% include './inc/header.html.twig' %}
+                {% endblock %}
+
+                {# Breadcumb here  #}
+
+                
+                    {% block body %} 
+
+                    {% endblock %} 
+                
+
+                {% block footer %} 
+                    {% include './inc/footer.html.twig' %}
+                {% endblock %}
+
+
+            </div>
+        </div>  
+        {% block javascripts %}
+
+            {{ encore_entry_script_tags('app') }}
+            
+            <!-- Renders app.js & a webpack runtime.js file
+                <script src="/build/runtime.js"></script>
+                <script src="/build/app.js"></script> -->
+        {% endblock %}
+    </body>
+</html>

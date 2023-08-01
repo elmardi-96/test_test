@@ -1,0 +1,38 @@
+{% if paie is defined and paie is not empty and paie.id is not empty and operations['_workflow'] is  defined  %}
+
+	<div class="wrf-positions">
+		{% for transition in workflow_transitions(paie) %}
+			{#{{ dump(workflow_marked_places(commande)) }}#}
+			{% set url = "" %}
+			{% if workflow_metadata(paie, 'function', transition) %}
+				{%  set  url= path(workflow_metadata(paie, 'function', transition), {id: paie.id}) %}
+			{% endif %}
+		
+
+
+			<a class="{{ workflow_metadata(paie, 'function', transition) }} btn-wrf btn btn-xs {{ workflow_metadata(paie, 'class', transition) }} btn-outline" data-id="{{ paie.id }}" data-title="{{ workflow_metadata(paie, 'title', transition) }}" data-transition="{{ transition.name }}">
+				<i class="fa {{ workflow_metadata(paie, 'icon', transition) }}"></i>
+				&nbsp;{{ workflow_metadata(paie, 'title', transition) }}
+			</a>
+
+		{% endfor %}
+
+
+		{% if workflow_has_marked_place(paie, "creer")  %}
+
+			{% for key ,  operation in operations  %}
+				{%  if  operation.prefix == '_delete' %}
+					<a id="{{operation.prefix}}" data-id="{{paie.id}}" data-token="{{ csrf_token('delete' ~ paie.id) }}" class='btn-wrf btn btn-xs btn-danger btn-outline  {{operation.classCs}}'>
+						<i class="fa {{ operation.icon }}"></i>
+						{{ operation.titre|capitalize }}</a>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		<div id="test" data-paie-id="{{ paie.id|json_encode }}"></div>
+	</div>
+
+
+{% endif %}
+
+
+{{ wo_render_breadcrumbs() }}

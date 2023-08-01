@@ -1,0 +1,27 @@
+
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}Ajouter | gestion de caisse{% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="new">
+
+
+        {{ include('./module_gestion_comptes/gestion_caisse/_form.html.twig') }}
+
+    
+    </div>
+
+
+    {{ include('./module_gestion_comptes/gestion_caisse/inc/workflow.html.twig',{'page_actuel': 'new'}) }}
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('gestionCaisse') }}
+{% endblock %}

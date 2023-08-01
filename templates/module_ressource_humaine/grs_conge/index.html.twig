@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GrsConge index{% endblock %}
+
+{% block body %}
+    <h1>GrsConge index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>DateDebut</th>
+                <th>DateFin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for grs_conge in grs_conges %}
+            <tr>
+                <td>{{ grs_conge.id }}</td>
+                <td>{{ grs_conge.type }}</td>
+                <td>{{ grs_conge.dateDebut ? grs_conge.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ grs_conge.dateFin ? grs_conge.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('grs_conge_show', {'id': grs_conge.id}) }}">show</a>
+                    <a href="{{ path('grs_conge_edit', {'id': grs_conge.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('grs_conge_new') }}">Create new</a>
+{% endblock %}

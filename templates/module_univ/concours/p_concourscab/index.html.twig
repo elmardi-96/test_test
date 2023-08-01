@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UnivPConcourscab index{% endblock %}
+
+{% block body %}
+    <h1>UnivPConcourscab index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Designation</th>
+                <th>Abreviation</th>
+                <th>Annee</th>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>HeureFin</th>
+                <th>AvecConcours</th>
+                <th>Active</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for univ_p_concourscab in univ_p_concourscabs %}
+            <tr>
+                <td>{{ univ_p_concourscab.id }}</td>
+                <td>{{ univ_p_concourscab.code }}</td>
+                <td>{{ univ_p_concourscab.designation }}</td>
+                <td>{{ univ_p_concourscab.abreviation }}</td>
+                <td>{{ univ_p_concourscab.annee }}</td>
+                <td>{{ univ_p_concourscab.date ? univ_p_concourscab.date|date('Y-m-d') : '' }}</td>
+                <td>{{ univ_p_concourscab.heure ? univ_p_concourscab.heure|date('H:i:s') : '' }}</td>
+                <td>{{ univ_p_concourscab.heureFin ? univ_p_concourscab.heureFin|date('H:i:s') : '' }}</td>
+                <td>{{ univ_p_concourscab.avecConcours ? 'Yes' : 'No' }}</td>
+                <td>{{ univ_p_concourscab.active ? 'Yes' : 'No' }}</td>
+                <td>{{ univ_p_concourscab.created ? univ_p_concourscab.created|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ univ_p_concourscab.updated ? univ_p_concourscab.updated|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('univ_p_concourscab_show', {'id': univ_p_concourscab.id}) }}">show</a>
+                    <a href="{{ path('univ_p_concourscab_edit', {'id': univ_p_concourscab.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('univ_p_concourscab_new') }}">Create new</a>
+{% endblock %}

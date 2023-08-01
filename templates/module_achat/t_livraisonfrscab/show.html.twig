@@ -1,0 +1,411 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Reception bc fournisseur
+{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+	<div id="right-sidebar" class="actions animated"></div>
+	<div class="modal fade right" id="facturePopUp" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+		<div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalPreviewLabel">Generer Facture</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body bo">
+					<div class="text-center spr" style="display: none;">
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod" style=""></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="new">
+
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+			<div class="col-lg-12">
+				{{ include('./module_achat/t_livraisonfrscab/inc/workflow_breadcumb.html.twig',{'page_actuel': 'show'})}}
+			</div>
+
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+				{{ wo_render_breadcrumbs() }}
+			</div>
+		</div>
+		<br/><br/>
+		<div class="wrapper wrapper-content  animated fadeInRight p-r-l-0">
+			<div class="row">
+				<div class="col-10 no-pad-right no-pad-left">
+					<div class="ibox">
+						<div class="ibox-content p-b-0">
+							<h4>informations generales
+
+
+								{#<i class="fa fa-circle wf-color wf-color-creer"></i>
+																																								                                 <i class="fa fa-circle wf-color wf-color-valider"></i>
+																																								                                 <i class="fa fa-circle wf-color wf-color-commander"></i>
+																																								                              --------------#}
+								<span class="f-r hint--bottom-left" aria-label="{{ livraison.positionActuel }}">
+									<i class=" f-r fa fa-circle wf-color wf-color-{{ livraison.positionActuel }} "></i>
+								</span>
+
+
+							</h4>
+							<div class="message-success"></div>
+
+
+							<div class="row m-t-sm">
+								<div class="col-md-12">
+									<div class="panel blank-panel">
+										<div class="col-md-12 p-t-0">
+											<div class="panel-body">
+
+												<div class="tab-content">
+													<div class="tab-pane active show" id="tab-1">
+
+
+														<div class="row">
+															<div class="col-md-6 b-r">
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">
+																		N° ReCEPTION
+																	</label>
+
+																	<p class="form-control-static">
+																		{{livraison.code}}
+																	</p>
+
+																</div>
+
+																{% set prixtc = 0 %}
+																{% set ht2 = 0 %}
+																{% set tva = 0 %}
+
+
+																{% set remise = 0 %}
+
+																{% for detail  in  livraison.details %}
+
+																	{% set ht2 = ht2 + detail.getPrixHt() %}
+																	{% set tva = tva + detail.getPrixTva() %}
+
+																	{% set prixtc = prixtc + detail.getPrixTtc() %}
+
+																	{% set remise = remise +  detail.getPrixRemise %}
+																{% endfor %}
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">
+																		TOTAL HT
+																	</label>
+
+																	<p class="form-control-static">
+																		{{ ht2|number_format(2, '.', ',') }}
+																		{{livraison.devise ? livraison.devise.designation}}
+																	</p>
+
+																</div>
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">
+																		TVA
+																	</label>
+
+																	<p class="form-control-static">
+																		{{ tva|number_format(2, '.', ',') }}
+																		{{livraison.devise ? livraison.devise.designation}}
+																	</p>
+
+																</div>
+
+
+																{% if remise !=0%}
+
+																	<div class="form-group row ph">
+																		<label class="col-sm-4 required font-weight-bold font-weight-bold">
+																			REMISE
+																		</label>
+
+																		<p class="form-control-static">
+																			{{ remise|number_format(2, '.', ',') }}
+																			{{livraison.devise ? livraison.devise.designation}}
+																		</p>
+
+																	</div>
+																{% endif %}
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">
+																		TOTAL TTC
+																	</label>
+
+																	<p class="form-control-static">
+																		{{ prixtc|number_format(2, '.', ',') }}
+																		{{livraison.devise ? livraison.devise.designation}}
+																	</p>
+
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">
+																		ReFeRENCE
+																	</label>
+
+																	<p class="form-control-static">
+																		{{livraison.refDocAsso }}
+																	</p>
+
+
+																</div>
+
+																<div class="form-group row ph">
+
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">
+																		Fournisseur
+																	</label>
+																	<p class="form-control-static">
+																		{{ livraison.fournisseur ? livraison.fournisseur.nom}}
+																	</p>
+																</div>
+																<div id="test" data-facture-id="{{ livraison.id|json_encode }}"></div>
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">DATE RCP
+																	</label>
+
+																	<p class="form-control-static">
+																		{{livraison.dateDocAsso|date("d/m/Y") }}
+
+
+																	</p>
+
+
+																</div>
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Description
+																	</label>
+
+																	<div class="col-sm-8">
+																		<p class="form-control-static">
+																			{{livraison.description }}
+																		</p>
+
+
+																	</div>
+
+
+																</div>
+															</div>
+														</div>
+
+
+													</div>
+
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="ibox">
+						<div class="ibox-content">
+							<h4 class="m-b-0">Details</h4>
+							<div id="tab-1" class="tab-pane active">
+								<div class="full-height-scroll">
+									<div class="table-responsive">
+
+										<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable">
+											<thead class="f-9">
+												<tr>
+													<th style="width:2%;" class="center">#</th>
+													<th style="width:5%;" class="center">Reference</th>
+													<th style="width:40%;" class="center">Article</th>
+													<th style="width:3%;" class="center">U</th>
+													<th style="width:5%;" class="center">Quantité</th>
+													<th style="width:7%;" class="center">Prix unitaire</th>
+													<th style="width:3%;" class="center">TVA%</th>
+													<th style="width:8%;" class="center">Montant TVA</th>
+													<th style="width:5%;" class="center">REMISE%</th>
+													<th style="width:9%;" class="center">Montant REMISE</th>
+													<th style="width:5%;" class="center">TOTAL</th>
+												</tr>
+											</thead>
+											<tbody>
+
+												{% for detail  in  livraison.details %}
+													<tr>
+														<td>{{ loop.index }}</td>
+														<td>{{detail.article ? detail.article.code :''}}</td>
+														<td>
+															{{ detail.article ? detail.article.titre:''}}
+															{% if detail.observation %}
+																<br/><b>Informations complementaires :
+																	{{ detail.observation}}</b>
+															{% endif %}
+
+														</td>
+														<td class="center">{{ detail.unite ? detail.unite.abreviation:''}}</td>
+														<td class="center">{{ detail.quantite|number_format(2, '.', ',')  }}</td>
+														<td class="text-end">{{ detail.prixunitairefomat }}</td>
+														<td class="center">{{detail.tvafomat|number_format(0, '.', ',') }}</td>
+														<td class="text-end">{{ detail.prixtvaformat }}</td>
+														<td class="text-end">{{ detail.remisefomat }}
+														</td>
+														<td class="text-end">{{ detail.prixremiseformat }}
+														</td>
+														<td class="text-end-padding">{{detail.prixttcformat }}</td>
+													</tr>
+												{% endfor %}
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-2 no-pad-left pdr-5">
+					<div class="ibox">
+
+
+						<div class="ibox-content prix_bloc">
+							<div class="ibox-heading">
+								<h3>Total HT
+									<div class="stat-percent">{{ livraison.prixht|number_format(2, ',', ' ') }}
+										{{livraison.devise ? livraison.devise.designation}}
+									</div>
+								</h3>
+							</div>
+							<hr/>
+							<div class="ibox-heading">
+								<h3>TOTAL TAXES
+									<div class="stat-percent">{{ livraison.prixtva|number_format(2, ',', ' ') }}
+										{{livraison.devise ? livraison.devise.designation}}</div>
+								</h3>
+							</div>
+							{% if livraison.prixremise > 0 %}
+								<hr/>
+								<div class="ibox-heading">
+									<h3>TOTAL REMISE
+										<div class="stat-percent">{{ livraison.prixremise|number_format(2, ',', ' ') }}
+											{{livraison.devise ? livraison.devise.designation}}</div>
+									</h3>
+								</div>
+							{% endif %}
+
+							<hr/>
+							<div class="ibox-heading">
+								<h1>Total T.T.C
+									<div class="stat-percent">{{ livraison.prixttc|number_format(2, ',', ' ') }}
+										{{livraison.devise ? livraison.devise.designation}}</div>
+								</h1>
+							</div>
+							<hr/>
+
+
+						</div>
+					</div>
+					<div class="ibox selected">
+						<div class="ibox-content pd-0">
+							<div class="tab-content">
+								<div id="contact-1" class="tab-pane active">
+									<div class="client-detail-">
+										<div class="full-height-scroll">
+
+
+											<ul class="list-group clear-list">
+												{% for key ,  operation in operations  %}
+													{%  if  operation.prefix == '_documents' %}
+														<li class="list-group-item fist-item">
+															<div class="panel-default">
+																<div class="div-panel-header">
+																	<h5 class="panel-title p-title-style">
+																		<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+																			<i class="fa fa-file-pdf-o"></i>
+																			Impressions associé</a>
+																	</h5>
+																</div>
+																<div id="collapseOne" class="panel-collapse in collapse">
+																	<div class="panel-body">
+																		<ul class="folder-list m-b-md" style="padding: 0px 10px;">
+																			<li>
+																				<a href="{{ path('t_UaTLivraisonfrscab_document_pdf' , {id:livraison.id})}}" data-valide="{{livraison.statutsig}}" {% if livraison.fournisseur and livraison.fournisseur.categorie.k != "externe" %}class="imprime_document" {% endif %} target="_blank">
+																					<i class="fa fa-file-pdf-o"></i>
+																					Livraison Fournisseur ({{ livraison.code }})</a>
+																			</li>
+																		</ul>
+																	</div>
+																</div>
+															</div>
+														</li>
+
+													{% endif %}
+												{% endfor %}
+												<li class="list-group-item fist-item">
+													<div class="panel-default">
+														<div class="div-panel-header">
+															<h5 class="panel-title p-title-style">
+																<a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="false" class="collapsed">
+																	<i class="fa fa-clipboard"></i>
+																	LIENS ASSOCIé</a>
+															</h5>
+														</div>
+
+														<div id="collapseTree" class="panel-collapse in collapse">
+															<div class="panel-body">
+																{{ include('./module_achat/inc/flux_demande.html.twig',{'demande': livraison.commande.referenceBci   ,'commande' : livraison.commande ,  'active_reception':true , 'active_reception_id':livraison.id}) }}
+
+															</div>
+														</div>
+
+													</div>
+												</li>
+											</ul>
+											<br/>
+											
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		{{ include('./module_achat/t_livraisonfrscab/inc/workflow.html.twig' ,{'page_actuel': 'show'}) }}
+
+	{% endblock %}
+	{% block javascripts %}
+		{{ parent() }}
+		{{ encore_entry_script_tags('tlivraisonfrscab') }}
+	{% endblock %}

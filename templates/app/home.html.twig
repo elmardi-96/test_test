@@ -1,0 +1,89 @@
+{% extends 'base_dash.html.twig' %}
+
+
+{% block title %}U3S-EPR | Apps
+{% endblock %}
+
+
+{% block body %}
+	<script src="https://kit.fontawesome.com/f8496f65dc.js" crossorigin="anonymous"></script>
+	<style>
+		.card img {
+			margin-top: 20px;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 100px;
+			color: #666;
+		}
+		.card h5 {
+			text-align: center;
+			color: #233645;
+		}
+		.card .card-title i {
+			font-size: 100px;
+			color: #233645;
+		}
+
+		a {
+			text-decoration: none !important;
+		}
+		.dash {
+			left: -82px;
+			position: fixed;
+			display: inline-block;
+			transform: rotate(-90deg);
+			-webkit-transform-origin-y: bottom;
+			font-size: 92px;
+			color: #c5c5c5;
+			-moz-transform-origin: bottom;
+			top: 180px;
+			left: -10px;
+			text-transform: uppercase;
+			letter-spacing: 8px;
+			font-weight: 700;
+		}
+	</style>
+
+	<div class="dash">
+		dashboard
+	</div>
+	<div class="row" style="margin:3% auto 0; width:70%">
+		<a href="{{ path('app') }}" class="card col-5  mb-5 ml-5 text-decoration-none">
+			<div class="card-body">
+				<h5 class="card-title">
+					<i class="fa-solid fa-folder-open"></i>
+				</h5>
+				<h5 class="card-title">TRAITEMENT</h5>
+			</div>
+		</a>
+		<a href="{{path('app_signature')}}" class="card col-5  mb-5 ml-5">
+			<div class="card-body">
+				<h5 class="card-title">
+					<i class="fa-solid fa-check"></i>
+				</h5>
+				<h5 class="card-title">APPROBATION</h5>
+			</div>
+		</a>
+		<a href="#" class="card col-5  ml-5">
+		{# <a href="{{path('app_extraction')}}" class="card col-5  ml-5"> #}
+			<div class="card-body">
+				<h5 class="card-title">
+					<i class="fa-solid fa-file-arrow-down"></i>
+				</h5>
+				<h5 class="card-title">
+					REPORTING
+				</h5>
+			</div>
+		</a>
+		<a href="#" class="card col-5   ml-5">
+			<div class="card-body">
+				<h5 class="card-title">
+					<i class="fa-solid fa-sliders"></i>
+				</h5>
+				<h5 class="card-title" style=""></h5>
+			</div>
+		</a>
+
+	</div>
+{% endblock %}

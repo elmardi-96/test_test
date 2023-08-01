@@ -1,0 +1,159 @@
+
+@font-face {
+    font-family: 'Oswald';
+    src:
+         url('../fonts/oswold/Oswald-Regular.ttf') format('truetype');
+  }
+/*********************** UGOUV - ACHAT *************************/
+
+/*** --- DM : ACHAT --- ***/
+
+.add-achat {
+    background-color: #ffffff00;
+}
+
+.achat-info {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.details-achat {
+    margin-top: 15px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.achat-note {
+    margin-top: 12px;
+    border-radius: 5px;
+    margin-right: 0px;
+}
+
+.achat-note-box {
+    padding: 0px;
+}
+
+.add-achat-box {
+    padding: 0px;
+}
+
+
+
+/*** --- BON DE COMMANDE --- ***/
+.bc-add-achat {
+    padding: 0px;
+    padding-top: 11px;
+}
+
+.bc-achat-note-box {
+    padding: 0px 10px 0px 0px;
+
+}
+
+.bc-achat-note {
+    margin-top: 6px;
+    border-radius: 5px;
+    margin-right: 0px;
+}
+
+/** select2 ***/ 
+.select2-dropdown--below {
+    top: -25px;
+  }
+  
+
+  
+/******** dataTable  *******/
+
+.td-desciption {
+    max-width: 38ch;
+    overflow: hidden;
+    /* white-space: nowrap; */
+    /* text-overflow: ellipsis; */
+}
+.td-check {
+    text-align: center;
+}
+.td-type {
+    max-width: 10ch;
+    overflow: hidden;
+    /* white-space: nowrap; */
+}
+.td-ht {
+    text-align: right;
+    font-variant-numeric: slashed-zero;
+}
+.td-tva {
+    text-align: right;
+    font-variant-numeric: slashed-zero;
+}
+.td-ttc {
+    text-align: right;
+    font-variant-numeric: slashed-zero;
+}
+.td-statut {
+    text-align: center;
+}
+.td-ord {
+    text-align: center;
+}
+
+/******** dataTable - CMD *******/
+.td-code-cmd {
+    max-width: 20ch;
+    white-space: nowrap;
+    /* overflow: hidden;
+    /* text-overflow: ellipsis; */
+}
+.td-observation-cmd {
+    max-width: 30ch;
+    overflow: hidden;
+    white-space: nowrap;
+    /* text-overflow: ellipsis; */
+}
+.td-check-cmd {
+    text-align: center;
+}
+
+/*********** achat facture *******/
+
+.td-number{
+    text-align: right;
+}
+.td-check {
+    text-align: center;
+
+}
+
+.td-codeliv {
+    white-space: nowrap; 
+} 
+
+
+* {
+    font-family: 'Oswald', sans-serif;
+    /* font-family: Helvetica, sans-serif; */
+}
+
+
+.pd-achat {
+    padding-top: 8px !important;
+}
+.pd-cmd {
+    padding-top: 8px !important;
+}
+.pd-liv {
+    padding-top: 8px !important;
+}
+.pd-fac {
+    padding-top: 8px !important;
+}
+
+
+.collapse-link2 {
+    cursor: pointer;
+}
+
+.ibox-content .row {
+    position: relative;
+}

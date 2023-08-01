@@ -1,0 +1,32 @@
+{% set current_path = app.request.get('_route') %}
+
+
+
+<ul class="nav nav-tabs">
+    {% if commande.id  %}
+        <li> 
+            <a class="nav-link {% if "t_transformationt_commande_show"  in current_path  %} active {%endif%}" href="{{ path('t_transformationt_commande_show' , {id:commande.id})}}" >
+                <i class="fa fa-info-circle"></i>
+                Informations
+            </a>
+        </li>
+        <li> 
+
+            <a class="nav-link {% if "t_transformationt_commande_edit"  in current_path  %} active {%endif%}" href="{{ path('t_transformationt_commande_edit',{id:commande.id})}}">
+                <i class="fa fa-pencil"></i>
+                Modifier (Commande)
+            </a>
+        </li>
+        <li> 
+
+            <a class="nav-link {% if "t_transformationt_commandecab_affectation"  in current_path  %} active {%endif%}" href="{{ path('t_transformationt_commandecab_affectation',{id:commande.id})}}">
+                <i class="fa fa-check-square"></i>
+               Affectation
+            </a>
+        </li>
+        <li><a class="nav-link {% if "t_transformationt_commandecab_documents"  in current_path  %} active {%endif%}" href="{{ path('t_transformationt_commandecab_documents' , {id:commande.id})}}" ><i class="fa fa-file-text"></i> Docs/Impression</a></li> 
+
+    {% else %}
+        <li> <a class="nav-link active"  ><i class="fa fa-info-circle"></i> Informations</a></li>
+        {% endif %}
+</ul>

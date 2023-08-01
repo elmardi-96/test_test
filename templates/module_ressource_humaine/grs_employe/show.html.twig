@@ -1,0 +1,481 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Informations | Employé | Ressource Humaines
+{% endblock %}
+
+
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-6">
+			{% include './module_ressource_humaine/grs_employe/inc/workflow_breadcumb.html.twig' %}
+		</div>
+		<div class="col-lg-6">
+			<div class="title-action">
+				<button class="btn btn-white btn-xs btn-lg my-button " data-style="expand-left" type="submit">
+					<i class="fa fa-save"></i>
+					{{ button_label|default('Enregistrer') }}</button>
+
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{% include './module_ressource_humaine/grs_employe/inc/workflow.html.twig' %}
+		</div>
+	</div>
+	<br/><br/>
+
+
+	<div class="row pt-20">
+		<div class="col-lg-12 ">
+			<div class="ibox">
+
+				<div class="ibox-content">
+
+					<div class="message-success"></div>
+
+
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div class="panel-options">
+										{% if grs_employe is defined %}
+											{% include './module_ressource_humaine/grs_employe/inc/navigation.html.twig' %}
+										{% else %}
+											<ul class="nav nav-tabs">
+												<li>
+													<a class="nav-link active" href="#tab-1" data-toggle="tab">
+														<i class="fa fa-info-circle"></i>
+														Employe
+													</a>
+												</li>
+											</ul>
+										{% endif %}
+
+									</div>
+								</div>
+
+								<div class="panel-body">
+									<div class="col-md-12">
+										<div class="tab-content">
+
+											<div class="tab-pane active" id="tab-1">
+												<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+													<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+														<i class="fa fa-drivers-license-o"></i>
+														Informations sur l'employé</a>
+													<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+														<i class="fa fa-laptop"></i>
+														Informations Poste/Contract</a>
+													<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+														<i class="fa fa-institution"></i>
+														informations Banque</a>
+													<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+														<i class="fa fa-money"></i>
+														informations Paiement</a>
+													<a class="nav-link" id="v-pills-contact-tab" data-toggle="pill" href="#v-pills-contact" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+														<i class="fa fa-ambulance"></i>
+														Contact d'urgence</a>
+												</div>
+												<div class="tab-content" id="v-pills-tabContent">
+													<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+														<div class="row m-2">
+															<div class="col-md-6 b-r">
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Id :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.id }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Nom :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.nom }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Prénom :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.prenom }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Email :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.email }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Sexe :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.sexe }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">C.I.N :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.cin }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">C.N.S.S :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.cnss }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Statut :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.statut }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Situation Familiale :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.familiale ? grs_employe.familiale.v  }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Enfants :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.enfants }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																{% if grs_employe.user == true %}
+																	<div class="form-group row ph">
+																		<label class="col-sm-4 required font-weight-bold font-weight-bold">Username :</label>
+																		<div class="col-sm-8">
+																			<p class="form-control-static">{{ grs_employe.compte ? grs_employe.compte.username }}</p>
+																		</div>
+																	</div>
+
+																	<div class="hr-line-dashed hr-line-dashed-co"></div>
+																		
+																{% endif %}
+																
+
+
+															</div>
+
+
+															<div class="col-md-6">
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Téléphone 1 :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.telePersonnel1 }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Téléphone 2 :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.telePersonnel2 }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Tel entreprise :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.teleEntreprise }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Adresse :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.adresse }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Ville :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.ville ? grs_employe.ville.ville }}</p>
+																	</div>
+																</div>
+
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Date de naissance :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.dateNaissance|date("m/d/Y")  }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+															</div>
+
+
+														</div>
+													</div>
+													<div class="tab-pane fade" id="v-pills-contact" role="tabpanel" aria-labelledby="v-pills-contact-tab">
+														<div class="row m-2">
+															<div class="col-md-6 b-r">
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Nom urgence :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.nomUrgence }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">tele urgence :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.teleUrgence }}</p>
+																	</div>
+																</div>
+
+															</div>
+
+
+															<div class="col-md-6"></div>
+
+
+														</div>
+													</div>
+													<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+														<div class="row m-2">
+															<div class="col-md-6 b-r">
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Département :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.departement ? grs_employe.departement.designation }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Fonction :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.fonction }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Type de contrat :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.typeContrat ? grs_employe.typeContrat.v }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Date d'entré :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.dateEntre|date("m/d/Y")  }}</p>
+																	</div>
+																</div>
+															
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Date de sortir :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.dateSortie|date("m/d/Y")  }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+															</div>
+															<div class="col-md-6">
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Public :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.public }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Salaire de base:</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.salaireBase }} dh</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Cout d'heure :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.coutHeure }} dh</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Responsable :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.responsable ? grs_employe.responsable.prenom ~grs_employe.responsable.nom }}</p>
+																	</div>
+																</div>
+															
+															
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+														<div class="row m-2">
+															<div class="col-md-6 b-r">
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Banque :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.banque ? grs_employe.banque.designation }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">RIB :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.rib }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+															</div>
+															<div class="col-md-6">
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Num de compte :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.numCompte }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Adresse du banque :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.adresseBanque }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+															</div>
+														</div>
+
+
+													</div>
+													<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+														<div class="row m-2">
+															<div class="col-md-6 b-r">
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Date Début :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.dateDebutPai|date("m/d/Y")  }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Date Fin :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.dateFinPai|date("m/d/Y")  }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Date d'embauche :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.DateEmbauche|date("m/d/Y")  }}</p>
+																	</div>
+																</div>
+															
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Déductions & retenues :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.deductionRetenue }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Situation familiale :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.stFamilialePai }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Enfants à charge :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.enfantCharge }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+															</div>
+															<div class="col-md-6">
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Taux CIMR :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.tauxCimr }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-6 required font-weight-bold font-weight-bold">Taux Assurance maladie :</label>
+																	<div class="col-sm-6">
+																		<p class="form-control-static">{{ grs_employe.TauxAssuranceMaladie }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-6 required font-weight-bold font-weight-bold">Intérêts crédit logement :</label>
+																	<div class="col-sm-6">
+																		<p class="form-control-static">{{ grs_employe.InteretCreditLogement }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Retenue prêt :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.retenuePret }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required font-weight-bold font-weight-bold">Primes :</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">{{ grs_employe.Prime }}</p>
+																	</div>
+																</div>
+																<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+
+															</div>
+														</div>
+
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<br><br>
+
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('grs_employe') }}
+{% endblock %}
+

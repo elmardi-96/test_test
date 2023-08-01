@@ -1,0 +1,417 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , "autocomplete":"off", 'class':'form'}}) }}
+
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+	<div class="col-lg-12">
+		{% include './tresorerie/tr_alimentation/inc/workflow_breadcumb.html.twig' %}
+	</div>
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+		{{ wo_render_breadcrumbs() }}
+	</div>
+
+</div>
+<br/><br/>
+
+<div class="row pt-20">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+			<div class="ibox-title ibox-title2">
+				<h5>informations generales</h5>
+			</div>
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div
+							class="panel blank-panel">
+							{#<div class="panel-heading">
+																																																																																																																																																																																																																																																					                                <div class="panel-options">
+																																																																																																																																																																																																																																																					                                    {% include './tresorerie/tr_transaction/inc/navigation.html.twig' %}
+																																																																																																																																																																																																																																																					                                </div>
+																																																																																																																																																																																																																																																					                            </div>#}
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+
+											<div class="row">
+												<div class="hr-line-dashed paddi"></div>
+												<div class="col-md-6 b-r">
+
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.date ,'date  ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-4">
+															{{ form_widget(form.date,{'attr':{'class':'form-control form-control-sm'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.date) }}
+															</span>
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{# {{ form_label(form.compte ,'Source Reglement (*) ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-4">
+															{{ form_widget(form.compte,{'attr':{'class':'sel2 form-control form-control-sm sel2'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.compte) }}
+															</span>
+														</div> #}
+														<label class='col-sm-4'>Source Reglement (*) </label>
+														{# {{ form_label(form.compte ,'Source Reglement (*) ', {'label_attr':{'class':'col-sm-4'}}) }} #}
+														<div class="col-sm-4">
+															{# {{ form_widget(form.compte,{'attr':{'class':'sel2 form-control form-control-sm'}}) }} #}
+															<select name="tr_transaction[compte]" class="sel2 form-control form-control-sm compte_transaction">
+																<option value="">CHOIX COMPTE</option>	
+																{% for compte in comptes %}
+																	<option value="{{compte.id}}">{{compte.designation}}</option>	
+																{% endfor %}
+																{# <option value="ps">Paiement Spécifique</option>	 #}
+															</select>
+															{# <span class="form-error-message">
+																{{ form_errors(form.compte) }}
+															</span> #}
+														</div>
+
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.piece ,'piece', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-4">
+															{{ form_widget(form.piece,{'attr':{'class':'form-control form-control-sm sel2'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.piece) }}
+															</span>
+														</div>
+													</div>
+
+
+													{% if transaction.fournisseur is not null %}
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.fournisseur ,'Fournisseur ', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-4">
+																{{ form_widget(form.fournisseur,{'attr':{'class':'form-control form-control-sm sel2'}}) }}
+																<span class="form-error-message">
+																	{{ form_errors(form.fournisseur) }}
+																</span>
+															</div>
+														</div>
+
+
+													{% endif %}
+
+
+													{% if transaction.client is not null %}
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.client ,'client ', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-4">
+																{{ form_widget(form.client,{'attr':{'class':'form-control form-control-sm sel2'}}) }}
+																<span class="form-error-message">
+																	{{ form_errors(form.client) }}
+																</span>
+															</div>
+														</div>
+
+
+													{% endif %}
+
+
+													{% if transaction.employe is not null %}
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.employe ,'employe ', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-4">
+																{{ form_widget(form.employe,{'attr':{'class':'form-control form-control-sm sel2'}}) }}
+																<span class="form-error-message">
+																	{{ form_errors(form.employe) }}
+																</span>
+															</div>
+														</div>
+
+
+													{% endif %}
+
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.montant ,'Montant (*) ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.montant,{'attr':{'class':'form-control form-control-sm','placeholder':'montant'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.montant) }}
+															</span>
+														</div>
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.designation ,'designation ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.designation,{'attr':{'class':'form-control form-control-sm','placeholder': 'designation'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.designation) }}
+															</span>
+														</div>
+													</div>
+
+												</div>
+
+
+												<div class="hr-line-dashed paddi"></div>
+												<div class="col-md-6">
+
+
+													<div class="form-group row">
+														{{ form_label(form.modepaiement ,'mode paiement  ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-4">
+															{{ form_widget(form.modepaiement,{'attr':{'class':'sel2 form-control form-control-sm paiement','placeholder': 'modepaiement '}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.modepaiement) }}
+															</span>
+														</div>
+													</div>
+													<div class="bloc_cheque" style="display: none;">
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.dateecheance ,'date Echeance', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-4">
+																{{ form_widget(form.dateecheance,{'attr':{'class':'form-control form-control-sm'}}) }}
+																<span class="form-error-message">
+																	{{ form_errors(form.dateecheance) }}
+																</span>
+															</div>
+														</div>
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.numcheque ,'num Cheque  ', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-4">
+																{{ form_widget(form.numcheque,{'attr':{'class':'form-control form-control-sm','placeholder': 'num Cheque '}}) }}
+																<span class="form-error-message">
+																	{{ form_errors(form.numcheque) }}
+																</span>
+															</div>
+														</div>
+													</div>
+													<div class="hr-line-dashed "></div>
+													<div class="form-group row">
+														{{ form_label(form.parvenue ,'Parvenue ', {'label_attr':{'class':'col-sm-4'}}) }}
+
+														<div class="col-sm-4">
+															{{ form_widget(form.parvenue,{'attr':{'class':'form-control form-control-sm col-sm-12 parvenue'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed dateDoc"></div>
+													<div class="form-group row dateDoc">
+														{{ form_label(form.dateDocAsso ,'date DocAsso  ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-4">
+															{{ form_widget(form.dateDocAsso,{'attr':{'class':'form-control form-control-sm','placeholder': 'date DocAsso'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.dateDocAsso) }}
+															</span>
+														</div>
+													</div>
+
+
+													<div class="hr-line-dashed refDoc"></div>
+													<div class="form-group row refDoc">
+														{{ form_label(form.refDocAsso ,'ref DocAsso  ', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-4">
+															{{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control-sm','placeholder': 'ref DocAsso '}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.refDocAsso) }}
+															</span>
+														</div>
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.active ,'Active ', {'label_attr':{'class':'col-sm-4 col-form-label'}}) }}
+														<div class="col-sm-4">
+															{{ form_widget(form.active) }}
+														</div>
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.IsValider ,'Valide ', {'label_attr':{'class':'col-sm-4 col-form-label'}}) }}
+														<div class="col-sm-4">
+															{{ form_widget(form.IsValider) }}
+														</div>
+													</div>
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row tooltip-demo">
+														<label class="col-sm-4 col-form-label required">
+
+															Modification
+															<i class="fa fa-info-circle ho" data-toggle="popover" data-placement="bottom" title="Information sur modifaction" data-trigger="click | hover | focus" data-content="Si vous avez coche operation ou facture fournisseur celà va changer doc associe et date associe de l'operation ou de facture par celà ."></i>
+															:
+														</label>
+														<label class="col-sm-2 col-form-label required">
+															Operation
+														</label>
+														<div class="col-sm-1">
+															<input type="checkbox" class="ck" name="tr_transaction[initOperation]" checked/>
+														</div>
+														<label class="col-sm-3 col-form-label required">
+															Facture fournisseur
+														</label>
+														<div class="col-sm-2">
+															<input type="checkbox" class="ck" name="tr_transaction[initFacture]" checked/>
+														</div>
+													</div>
+
+
+													{# <div class="hr-line-dashed"></div> #}
+
+
+													<!--<div class="hr-line-dashed"></div>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																							
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				<div class="form-group row">
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					<label class="col-sm-4 col-form-label required">
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																							                                                            Reintialise les autres transactions
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																							                                                        </label>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					<div class="col-sm-4">
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						<input type="checkbox" name="tr_transaction[initTransaction]" />
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					</div>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				</div>-->
+
+
+												</div>
+
+												<div class="col-md-6">
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.autreInformation  ,'autre Information  ', {'label_attr':{'class':'col-sm-12 col-form-label'}}) }}
+														<div class="col-sm-12">
+															{{ form_widget(form.autreInformation,{'attr':{'class':'form-control form-control-sm','placeholder': 'autre Information'}}) }}
+															<span class="form-error-message">
+																{{ form_errors(form.autreInformation) }}
+															</span>
+														</div>
+
+													</div>
+													<br>
+
+												</div>
+
+
+												<div class="col-md-6">
+													<div class="hr-line-dashed"></div>
+
+
+													<div class="div-panel-header mt-3">
+														<h5 class="panel-title p-title-style">
+															<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+																Impressions associé</a>
+														</h5>
+													</div>
+
+
+													<div id="collapseOne" class="panel-collapse in collapse">
+
+														<div class="panel-body">
+															<ul class="folder-list m-b-md" style="padding: 0px 10px;">
+																{% set pieces = [28,30,32,33,49,48,47,46,45,44, 38, 67]%}
+																<li>
+																	<a class="imp_operation" {% if transaction.operation.pPiece.id not in pieces   %} data-valide="{{transaction.statutsig}}" data-info="{{transaction.fournisseur ? transaction.fournisseur.categorie.k : ''}}" {% endif %}  data-id="{{transaction.id}}">
+																		<i class="fa fa-file-pdf-o"></i>
+																		operation -
+																		{{transaction.code}}
+																	</a>
+
+																</li>
+																{% if transaction.multiple %}
+																<li>
+																	<a class="imp_operation" {% if transaction.operation.pPiece.id not in pieces %} data-info="{{transaction.fournisseur.categorie.k}}" data-valide="{{transaction.statutsig}}" {% else %} data-valide="1" {% endif %}   data-multiple="1" data-id="{{transaction.id}}">
+																		<i class="fa fa-file-pdf-o"></i>
+																		operation -
+																		{{transaction.code}} (multiple)
+																	</a>
+
+																</li>
+																{% endif %}
+																{% if transaction.dossier.id ==16 %}
+
+
+																	<li>
+																		<a href="{{path('tr_transaction_print_facture',{'id':transaction.id})}}" target='_blank'  data-valide="{{transaction.statutsig}}" {% if transaction.fournisseur and transaction.fournisseur.categorie.k != "externe" and transaction.operation.pPiece.id != 32 and transaction.operation.pPiece.id != 33  %} class="imprime_document" {% endif %} data-id="{{transaction.id}}">
+																			<i class="fa fa-file-pdf-o"></i>
+																			Quittance  -
+																			{{transaction.code}}
+																		</a>
+																	</li>
+																{% endif %}
+
+
+															</ul>
+														</div>
+
+
+													</div>
+
+												</div>
+
+
+											</div>
+
+
+										</div>
+
+
+										{% if transaction is defined %}
+											<input type="hidden" name="_id" id="_id" value="{{ transaction.id }}"/>
+										{% endif %}
+
+
+										{% if tr_alimentation is defined %}
+											<input type="hidden" name="_id" id="_id" value="{{ tr_alimentation.id }}"/>
+										{% endif %}
+
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+
+		</div>
+
+	</div>
+</div>
+
+{{ form_end(form,{'render_rest': false}) }}

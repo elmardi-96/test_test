@@ -1,0 +1,224 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Consulter | Groupe & étudiant | UNIV
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper white-bg page-heading fixed-top-navigation-button">
+		<div class="col-lg-4">
+			<h2 class="fo">Étudiant
+			</h2>
+		</div>
+		<div class="col-lg-8">
+			<div class="title-action">
+				<div
+					class="title-action">{#<a id="_delete" data-id="{{epreuve.id}}" data-token="{{ csrf_token('delete' ~ epreuve.id) }}" class="btn btn-white btn-xs">
+												<i class="fa fa-trash"></i>
+												Supprimer
+											</a>#}
+
+				</div>
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+		{#{{
+									render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{
+									'commande': commande.id})) }}
+									#}
+
+	</div>
+	<br/><br/>
+	<div class="row pt-20">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div class="ibox-content" style="padding-top: 4px ;">
+
+
+					<div class="row m-t-sm">
+						<div class="col-lg-12">
+							<div class="panel blank-panel">
+								<div class="panel-heading">
+									<div
+										class="panel-options">
+										{% include './module_univ/groupe/inc/navigation.detail.html.twig' %}
+									</div>
+								</div>
+								<div class="col-md-12 scroll_content">
+									<div class="panel-body">
+										<div class="tab-content">
+											<div class="tab-pane active show" id="tab-1">
+												<div class="row">
+													<div class="col-md-6 b-r">
+														<h3 class="m-t-none m-b">INFORMATIONS</h3>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+															<div class="col-sm-8">
+																<p class="form-control-static">{{detail.id}}</p>
+															</div>
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Code
+															</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">{{detail.code}}</p>
+															</div>
+
+														</div>
+
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Désignation
+															</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">
+																	{{detail.designation}}
+																</p>
+															</div>
+
+														</div>
+
+
+													</div>
+													<div class="col-md-6">
+
+														<h3 class="m-t-none m-b">INFORMATIONS FORMATION</h3>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+
+															<div class="col-sm-8">
+
+																<p class="form-control-static">{{detail.promotion.formation.etablissement ? detail.promotion.formation.etablissement.designation : "" }}</p>
+
+															</div>
+
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Formation</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">{{detail.promotion.formation ? detail.promotion.formation.designation : "" }}</p>
+															</div>
+
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+														<div class="form-group row ph">
+															<label class="col-sm-4 required font-weight-bold font-weight-bold">Promotion</label>
+
+															<div class="col-sm-8">
+																<p class="form-control-static">{{detail.promotion ? detail.promotion.designation : "" }}</p>
+															</div>
+
+														</div>
+														<div class="hr-line-dashed hr-line-dashed-co"></div>
+
+
+													</div>
+													<div class="col-md-6">
+														<h3 class="m-t-none m-b"><br>
+														</h3>
+
+													</div>
+												</div>
+
+
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox">
+				<div
+					class="ibox-title m-min">
+				</div>
+				<div class="ibox-content">
+					<div class="table-responsive">
+						<div class="col-md-12 m-mar-t">
+							<h5 class="m-left">La Liste des Étudiant</h5>
+							<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show-2">
+                                <thead>
+                                    <tr>
+                                        <th style="width:5%">#</th>
+                                        <th style="width:10%">Code</th>
+                                        <th style="width:35%">Nom
+                                        </th>
+                                        <th style="width:20%">Prénom</th>
+                                        <th style="width:5%">Cin
+                                        </th>
+                                        <th style="width:5%">Ville
+                                        </th>
+                                        <th style="width:5%">Email</th>
+                                        <th style="width:5%">Téléphone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for etu  in  etudiant %}
+                                        <tr>
+                                            <td>
+                                                {{ loop.index }}
+                                            </td>
+                                            <td>{{etu.inscription.code}}</td>
+                                            <td>
+                                                {{ etu.inscription.admission.preinscription.etudiant.nom }}
+                                            </td>
+                                            <td>
+                                                {{ etu.inscription.admission.preinscription.etudiant.prenom }}
+                                            </td>
+                                            <td>
+                                                {{ etu.inscription.admission.preinscription.etudiant.cin }}
+                                            </td>
+                                            <td>
+                                                {{ etu.inscription.admission.preinscription.etudiant.ville }}
+                                            </td>
+                                            <td>
+                                                {{etu.inscription.admission.preinscription.etudiant.mail1}}
+                                            </td>
+                                            <td>
+												{{etu.inscription.admission.preinscription.etudiant.tel1}}
+											</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {# {% endif %} #}
+                                </tbody>
+                            </table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_groupe') }}
+{% endblock %}

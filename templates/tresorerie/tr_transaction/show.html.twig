@@ -1,0 +1,289 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Show | Transaction
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="show">
+
+
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+			<div class="col-lg-12">
+				{{ include('./tresorerie/tr_transaction/inc/workflow_breadcumb.html.twig',{'page_actuel': 'show'})}}
+			</div>
+
+
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+				{{ wo_render_breadcrumbs() }}
+			</div>
+		</div>
+		<br/><br/>
+		<div class="wrapper wrapper-content  animated fadeInRight p-r-l-0">
+			<div class="row">
+				<div class="col-lg-12 no-pad-right no-pad-left pdr-5">
+					<div class="ibox">
+
+						<div class="ibox-content p-b-0">
+							<h4>informations generales
+
+
+								{#<i class="fa fa-circle wf-color wf-color-creer"></i>
+																                                 <i class="fa fa-circle wf-color wf-color-valider"></i>
+																                                 <i class="fa fa-circle wf-color wf-color-commander"></i>
+																                              --------------#}
+
+
+							</h4>
+							<div class="message-success"></div>
+
+
+							<div class="row m-t-sm">
+								<div class="col-lg-12">
+									<div class="panel blank-panel">
+										<div class="col-md-12 p-t-0">
+											<div class="panel-body">
+
+												<div class="tab-content">
+													<div class="tab-pane active" id="tab-1">
+
+
+														<div class="row">
+															<div class="hr-line-dashed paddi"></div>
+															<div class="col-md-6 b-r">
+
+
+																<div class="form-group row ph">
+
+																	<label class="col-sm-4 required ">date
+																	</label>
+
+																	<div class="col-sm-4">
+																		<p class="form-control-static">
+																			{{transaction.date|date('Y-m-d')}}
+																		</p>
+
+																	</div>
+																</div>
+
+
+																<div class="form-group row  ph">
+																	<label class="col-sm-4 required">Source Reglement
+																	</label>
+																	<div class="col-sm-4">
+																		<p class="form-control-static">
+																			{{transaction.compte ?  transaction.compte.designation}}
+																		</p>
+
+																	</div>
+																</div>
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required">piece
+																	</label>
+																	<div class="col-sm-4">
+																		<p class="form-control-static">
+																			{{transaction.piece ?  transaction.piece.code}}
+																		</p>
+
+																	</div>
+																</div>
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required">Fournisseur
+																	</label>
+																	<div class="col-sm-4">
+																		<p class="form-control-static">
+																			{{transaction.fournisseur ?  transaction.fournisseur.societe}}
+																		</p>
+
+																	</div>
+																</div>
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required">Montant
+																	</label>
+																	<div class="col-sm-4">
+																		<p class="form-control-static">
+																			{{transaction.montant ?  transaction.montant|number_format(2, '.', ',')}}
+																		</p>
+
+																	</div>
+																</div>
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required">designation
+																	</label>
+																	<div class="col-sm-8">
+																		<p class="form-control-static">
+																			{{transaction.designation }}
+																		</p>
+
+																	</div>
+																</div>
+
+
+															</div>
+
+
+															<div class="hr-line-dashed paddi"></div>
+															<div class="col-md-6">
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required">mode paiement
+																	</label>
+																	<div class="col-sm-4">
+																		<p class="form-control-static">
+																			{{transaction.modepaiement ?  transaction.modepaiement.designation}}
+																		</p>
+
+																	</div>
+																</div>
+
+																{% if transaction.modepaiement %}
+
+																	{% if transaction.modepaiement.designation =='Chèque'%}
+
+
+																		<div class="form-group row ph">
+																			<label class="col-sm-4 required">date Echeance
+																			</label>
+																			<div class="col-sm-4">
+																				<p class="form-control-static">
+																					{{transaction.dateecheance ?  transaction.dateecheance|date('Y-m-d')}}
+																				</p>
+
+																			</div>
+																		</div>
+
+
+																		<div class="form-group row ph">
+																			<label class="col-sm-4 required">NUM CHEQUE
+																			</label>
+																			<div class="col-sm-4">
+																				<p class="form-control-static">
+																					{{transaction.numcheque}}
+																				</p>
+
+																			</div>
+																		</div>
+
+																	{% endif %}
+
+																{% endif %}
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required">date DocAsso
+																	</label>
+																	<div class="col-sm-4">
+																		<p class="form-control-static">
+																			{{transaction.dateDocAsso ?  transaction.dateDocAsso|date('Y-m-d')}}
+																		</p>
+
+																	</div>
+																</div>
+
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required">ref DocAsso
+																	</label>
+																	<div class="col-sm-4">
+																		<p class="form-control-static">
+																			{{transaction.refDocAsso}}
+																		</p>
+
+																	</div>
+																</div>
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required">Active
+																	</label>
+																	<div class="col-sm-4">
+																		<p class="form-control-static">
+																			{% if transaction.active == true %}
+																				OUI
+																			{% else %}
+																				NON
+																			{% endif %}
+																		</p>
+
+
+																	</div>
+																</div>
+
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required">Valide
+																	</label>
+																	<div class="col-sm-4">
+																		<p class="form-control-static">
+																			{% if transaction.IsValider == true %}
+																				OUI
+																			{% else %}
+																				NON
+																			{% endif %}
+																		</p>
+
+
+																	</div>
+																</div>
+
+
+															</div>
+
+															<div class="col-md-6">
+
+
+																<div class="form-group row ph h-0">
+																	<label class="col-sm-12 required">autre Information
+																	</label>
+																<div class="col-sm-12">
+																	<p class="form-control-static">
+																		{{transaction.autreInformation}}
+																	</p>
+
+																</div>
+															</div>
+
+															<br>
+
+														</div>
+
+
+													</div>
+
+
+												</div>
+
+
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+{{ include('./tresorerie/tr_transaction/inc/workflow.html.twig',{'page_actuel': 'show'}) }}{% endblock %}{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('transaction') }}{% endblock %}

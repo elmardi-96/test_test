@@ -1,0 +1,177 @@
+<div id="wrapper">
+<!-- Sidebar -->
+<nav class="navbar-default" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                       <img alt="image" class="rounded-circle" src="{{asset('/img/profile_small.jpg')}}"/>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+						
+                            <span class="block m-t-xs font-bold">{{ app.user.nom }} {{ app.user.prenom }} <b class="caret"></b></span>
+                            
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a class="dropdown-item" href="{{path('logout')}}">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        UGOUV
+                    </div>
+                </li>
+                <li>
+                    <a href="index.html"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Operation achat</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{path('t_achatdemandeinternecab_dashboard')}}">Tableau de bord</a></li>
+                        <li><a href="{{path('t_achatdemandeinternecab_index')}}">Pre-commande</a></li>
+                        <li><a href="{{ path('ua_t_commandefrscab_index') }}">Bon commande fournisseur</a></li>
+                        <li><a href="dashboard_3.html">Reception BC fournisseur</a></li>
+                        <li><a href="dashboard_4_1.html">Facture fournisseur</a></li>
+                        <li><a href="dashboard_5.html">Reglement FRS </a></li>
+                        <li><a href="dashboard_5.html">Facture fournisseur annuler </a></li>
+                    </ul>
+                </li>
+                {#<li>
+                    <a href="index.html"><i class="fa fa-tag"></i> <span class="nav-label">Operation Vente</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="index.html">Devis client</a></li>
+                        <li><a href="dashboard_2.html">Livraison client</a></li>
+                        <li><a href="dashboard_3.html">Facture client</a></li>
+                        <li><a href="dashboard_4_1.html">Reglement facture</a></li>
+                        <li><a href="dashboard_5.html">Facture annuler </a></li>
+                    </ul>
+                </li>#}
+
+        </div>
+    </nav>
+	{#	
+		<div class="sidebar sidebar-style-2">			
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+					<div class="user">
+						<div class="avatar-sm float-left mr-2">
+							<img src="{{ asset('assets/img/profile.jpg')}}" alt="..." class="avatar-img rounded-circle">
+						</div>
+						<div class="info">
+							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									Hizrian
+									<span class="user-level">Administrator</span>
+									<span class="caret"></span>
+								</span>
+							</a>
+							<div class="clearfix"></div>
+
+							<div class="collapse in" id="collapseExample">
+								<ul class="nav">
+									<li>
+										<a href="#profile">
+											<span class="link-collapse">My Profile</span>
+										</a>
+									</li>
+									<li>
+										<a href="#edit">
+											<span class="link-collapse">Edit Profile</span>
+										</a>
+									</li>
+									<li>
+										<a href="#settings">
+											<span class="link-collapse">Settings</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<ul class="nav nav-primary">
+
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section">Components</h4>
+						</li>
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#base">
+								<i class="fas fa-layer-group"></i>
+								<p>Operation Achat</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="base">
+								<ul class="nav nav-collapse">
+									<li>
+
+										<a href="{{path('t_achatdemandeinternecab_index')}}">
+
+											<span class="sub-item">Pre-commande</span>
+										</a>
+									</li>
+									<li>
+										<a href="/t/commandefrscab">
+											<span class="sub-item">Bon commande fournisseur</span>
+										</a>
+									</li>
+									<li>
+										<a href="components/gridsystem.html">
+											<span class="sub-item">Reception BC fournisseur</span>
+										</a>
+									</li>
+									<li>
+										<a href="components/panels.html">
+											<span class="sub-item">Facture fournisseur</span>
+										</a>
+									</li>
+									<li>
+										<a href="components/notifications.html">
+											<span class="sub-item">Reglement FRS</span>
+										</a>
+									</li>
+									<li>
+										<a href="components/notifications.html">
+											<span class="sub-item">Facture fournisseur annuler</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#vente">
+								<i class="fas fa-layer-group"></i>
+								<p>Operation Vente</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="vente">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="components/avatars.html">
+											<span class="sub-item">Devis client</span>
+										</a>
+									</li>
+									<li>
+										<a href="components/buttons.html">
+											<span class="sub-item">Livraison client</span>
+										</a>
+									</li>
+									<li>
+										<a href="components/gridsystem.html">
+											<span class="sub-item">Facture client</span>
+										</a>
+									</li>
+									<li>
+										<a href="components/panels.html">
+											<span class="sub-item">Reglement facture</span>
+										</a>
+									</li>
+									<li>
+										<a href="components/notifications.html">
+											<span class="sub-item">Facture annuler</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>#}
+		<!-- End Sidebar -->

@@ -1,0 +1,537 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Utilisateurs-groupes{% endblock %}
+
+{% block body %}
+
+
+
+    <div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+
+    <div class="new">
+        {% include './config/inc/navigation.html.twig' %}
+
+
+
+
+
+
+
+
+        <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+            <div class="col-lg-4">
+
+                {{ wo_render_breadcrumbs() }}
+            </div>
+
+
+            <div class="col-lg-8">
+                <div class="title-action">
+                    <button class="btn btn-primary btn-xs btn-lg" type="submit"><i class="fa fa-save"></i> Enregistrer</button>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+        <br/><br/><br/>
+        <div class="row justify-content-md-center">
+            <div class="col-lg-11 ">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Utilisateurs & groupe</h5 >
+
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="message-success"> </div>
+
+
+
+                        <div class="col-lg-12">
+                            <div class="ibox ">
+                                <div class="ibox-content">
+                                    <div class="file-manager">
+                                        
+                                        <a href="#" class="file-control active">Ale</a>
+                                        <a href="#" class="file-control">Documents</a>
+                                        <a href="#" class="file-control">Audio</a>
+                                        <a href="#" class="file-control">Images</a>
+                                        <div class="hr-line-dashed"></div>
+                                       
+                                        
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row m-t-sm">
+                            <div class="col-lg-12">
+                                <div class="panel blank-panel">
+                                    <div class="panel-heading">
+                                        <div class="panel-options">
+                                            <ul class="nav nav-tabs">
+                                                <li><a class="nav-link active" href="#tab-1" data-toggle="tab">informations de base </a></li>
+                                                <li><a class="nav-link" href="#tab-2" data-toggle="tab">informations supplémentaires</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-1">
+
+
+
+
+
+
+
+
+
+                                                <div class="row">
+                                                    
+                                                    <div class="col-lg-12 animated fadeInRight">
+                                                        <div class="mail-box-header">
+
+                                                            <form method="get" action="index.html" class="float-right mail-search">
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control form-control-sm" name="search" placeholder="Search email">
+                                                                    <div class="input-group-btn">
+                                                                        <button type="submit" class="btn btn-sm btn-primary">
+                                                                            Search
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <h2>
+                                                                Inbox (16)
+                                                            </h2>
+                                                            <div class="mail-tools tooltip-demo m-t-md">
+                                                                <div class="btn-group float-right">
+                                                                    <button class="btn btn-white btn-sm"><i class="fa fa-arrow-left"></i></button>
+                                                                    <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i></button>
+
+                                                                </div>
+                                                                <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="Refresh inbox"><i class="fa fa-refresh"></i> Refresh</button>
+                                                                <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mark as read"><i class="fa fa-eye"></i> </button>
+                                                                <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mark as important"><i class="fa fa-exclamation"></i> </button>
+                                                                <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="mail-box">
+
+                                                            <table class="table table-hover table-mail">
+                                                                <tbody>
+                                                                    <tr class="unread">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Anna Smith</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Lorem ipsum dolor noretek imit set.</a></td>
+                                                                        <td class=""><i class="fa fa-paperclip"></i></td>
+                                                                        <td class="text-right mail-date">6.10 AM</td>
+                                                                    </tr>
+                                                                    <tr class="unread">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks" checked>
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Jack Nowak</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Aldus PageMaker including versions of Lorem Ipsum.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">8.22 PM</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Facebook</a> <span class="label label-warning float-right">Clients</span> </td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Many desktop publishing packages and web page editors.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">Jan 16</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Mailchip</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">There are many variations of passages of Lorem Ipsum.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">Mar 22</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Alex T.</a> <span class="label label-danger float-right">Documents</span></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Lorem ipsum dolor noretek imit set.</a></td>
+                                                                        <td class=""><i class="fa fa-paperclip"></i></td>
+                                                                        <td class="text-right mail-date">December 22</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Monica Ryther</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">The standard chunk of Lorem Ipsum used.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">Jun 12</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Sandra Derick</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Contrary to popular belief.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">May 28</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Patrick Pertners</a> <span class="label label-info float-right">Adv</span></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">If you are going to use a passage of Lorem </a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">May 28</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Michael Fox</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Humour, or non-characteristic words etc.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">Dec 9</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Damien Ritz</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Oor Lorem Ipsum is that it has a more-or-less normal.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">Jun 11</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Anna Smith</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Lorem ipsum dolor noretek imit set.</a></td>
+                                                                        <td class=""><i class="fa fa-paperclip"></i></td>
+                                                                        <td class="text-right mail-date">6.10 AM</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Jack Nowak</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Aldus PageMaker including versions of Lorem Ipsum.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">8.22 PM</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Mailchip</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">There are many variations of passages of Lorem Ipsum.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">Mar 22</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Alex T.</a> <span class="label label-warning float-right">Clients</span></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Lorem ipsum dolor noretek imit set.</a></td>
+                                                                        <td class=""><i class="fa fa-paperclip"></i></td>
+                                                                        <td class="text-right mail-date">December 22</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Monica Ryther</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">The standard chunk of Lorem Ipsum used.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">Jun 12</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Sandra Derick</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Contrary to popular belief.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">May 28</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Patrick Pertners</a> </td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">If you are going to use a passage of Lorem </a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">May 28</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Michael Fox</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Humour, or non-characteristic words etc.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">Dec 9</td>
+                                                                    </tr>
+                                                                    <tr class="read">
+                                                                        <td class="check-mail">
+                                                                            <input type="checkbox" class="i-checks">
+                                                                        </td>
+                                                                        <td class="mail-ontact"><a href="mail_detail.html">Damien Ritz</a></td>
+                                                                        <td class="mail-subject"><a href="mail_detail.html">Oor Lorem Ipsum is that it has a more-or-less normal.</a></td>
+                                                                        <td class=""></td>
+                                                                        <td class="text-right mail-date">Jun 11</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                {# <div class="row">
+                                                     <div class="col-md-6 b-r">
+         
+                                                         <h3 class="m-t-none m-b">Informations </h3>
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.affaire ,'Affaire :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-8 input-group">
+                                                                 {{ form_widget(form.affaire,{'attr':{'class':'affaire form-control form-control-sm'}}) }} 
+         
+                                                                 <span class="input-group-btn">
+                                                                     <a title="Ajouter une affaire" class="_t_affaire_quick btn btn-white btn-bitbucket"> <i class="fa fa-plus-circle"></i></a> 
+                                                                 </span>
+                                                             </div>
+         
+         
+         
+         
+                                                         </div>
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.service ,'Service Demandeur :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-8">
+                                                                 {{ form_widget(form.service,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                                                             </div>
+                                                         </div>
+                                                         <div class="hr-line-dashed"></div>
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.description ,'Description Demande :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-8">
+                                                                 {{ form_widget(form.description,{'attr':{'class':'form-control form-control-sm t_achatdemandeinternecab_description'}}) }}  
+                                                             </div>
+                                                         </div>
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.montant ,'Estimation Financière :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-3">
+                                                                 {{ form_widget(form.montant,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                                                             </div>
+                                                         </div>
+         
+         
+         
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.type ,'Type  :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-8">
+                                                                 {{ form_widget(form.type,{'attr':{'class':'form-check-inline  form-control-sm'}}) }} 
+                                                             </div>
+                                                         </div>
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+                                                         <div class="form-group row ">
+                                                             {{ form_label(form.refMarche ,'Référence Marché  :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-3">
+                                                                 {{ form_widget(form.refMarche,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                                                             </div>
+                                                         </div>
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.mtMarche ,'Montant Marché  :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-3">
+                                                                 {{ form_widget(form.mtMarche,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                                                             </div>
+                                                         </div>
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.fournisseur ,'Fournisseur  :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-8">
+                                                                 {{ form_widget(form.fournisseur,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                                                             </div>
+                                                         </div>
+         
+                                                     </div>
+         
+         
+                                                     <div class="col-md-6">
+         
+                                                         <h3 class="m-t-none m-b">Informations client & compte</h3>
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.partenaire ,'Client :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-8">
+                                                                 {{ form_widget(form.partenaire,{'attr':{'class':'form-control form-control-sm'}}) }} 
+                                                             </div>
+                                                         </div>
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.compteMasse ,'Compte Masse :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-8">
+                                                                 {{ form_widget(form.compteMasse,{'attr':{'class':'compteMasse form-control form-control-sm'}}) }} 
+                                                             </div>
+                                                         </div>
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.compteRubrique ,'Compte Rubrique :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-8">
+                                                                 {{ form_widget(form.compteRubrique,{'attr':{'class':'compteRubrique form-control form-control-sm'}}) }} 
+                                                             </div>
+                                                         </div>
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.comptePoste ,'Compte Poste :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-8">
+                                                                 {{ form_widget(form.comptePoste,{'attr':{'class':'comptePoste form-control form-control-sm'}}) }} 
+                                                             </div>
+                                                         </div>
+         
+                                                         <div class="hr-line-dashed"></div>
+         
+         
+                                                         <div class="form-group row">
+                                                             {{ form_label(form.compte ,'Compte  :', {'label_attr':{'class':'col-sm-4'}}) }} 
+                                                             <div class="col-sm-8">
+                                                                 {{ form_widget(form.compte,{'attr':{'class':'compte form-control form-control-sm'}}) }} 
+                                                             </div>
+                                                         </div>
+         
+         
+         
+         
+         
+         
+         
+         
+                                                     </div>
+         
+         
+                                                 </div>#}
+
+
+
+
+
+
+                                            </div>
+                                            <div class="tab-pane" id="tab-2">
+
+                                                <div class="hr-line-dashed"></div>
+
+                                                {# <div class="form-group row">
+                                                     {{ form_label(form.autreInformation ,'Autre Informations  :', {'label_attr':{'class':'col-sm-3'}}) }} 
+                                                     <div class="col-sm-8">
+                                                         {{ form_widget(form.autreInformation,{'attr':{'class':'form-check-inline form-control form-control-sm'}}) }} 
+                                                     </div>
+                                                 </div>#}
+
+                                                <div class="hr-line-dashed"></div>
+
+                                            </div>
+
+
+
+                                            <div class="hr-line-dashed"></div>
+
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+{% endblock %}

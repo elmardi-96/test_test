@@ -1,0 +1,131 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}UsGroupe index{% endblock %}
+
+{% block body %}
+
+<div class="form-validation-msg" style="display:none">
+    {# message flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div data-toastr="{{ label }}" class="toastr-msg">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {# form global errors  #}
+    <div class="form-errors"></div>
+</div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        
+
+        <div class="col-lg-6">
+            <h2 class="fo">Groupes 
+                <span> Groupe </span>
+            </h2>
+        </div>
+
+
+        <div class="col-lg-6">
+           
+                <div class="title-action">
+                    
+                    <a style="margin-top: 5px; " href="{{path('us_groupe_new')}}" class="btn btn-white btn-xs" id="new_action"><i class="fa fa-pencil"></i> Ajouter </a>
+              
+              
+              
+                </div>   
+            
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <br/> 
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="ibox ">{# 
+                    <div class="ibox-title">
+                        <h5>Utilisateurs & groupes  , Groupe </h5>
+
+                    </div> #}
+                    <div class="row border-bottom white-bg dashboard-header mt-20"> 
+
+
+
+
+                        <div class="table-responsive">
+
+
+                            <table class="table cmd tb  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%" >
+                                <thead>
+
+
+
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Code</th>
+                                        <th>désignation</th>
+                                        <th>abreviation</th>
+                                        <th>Description du groupe </th>
+
+                                    </tr>
+                                </thead>
+
+                                
+
+
+                                <tfoot>
+                                    <tr> 
+                                        <th>Action</th>
+                                        <th>Code</th>
+                                        <th>désignation</th>
+                                        <th>abreviation</th>
+                                        <th>Description du groupe </th>
+                                    </tr>
+                                </tfoot>
+
+
+                            </table>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('us_groupe') }}
+{% endblock %}

@@ -1,0 +1,249 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Paramètrage index{% endblock %}
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+   <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+        <div class="col-lg-6">
+            <h2 class="fo">Paramètrage<span>(ugouv)</span></h2>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+    </div>
+    <br/><br/>
+
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+            <div class="col-lg-12">
+
+								<div class="panel-heading">
+									<div class="panel-options">																																																																																	                                        </ul>#}
+										{% include './parametrage/inc/navigation.html.twig' %}
+									</div>
+								</div>
+                <div class="ibox ">
+                    <div class="ibox-content"> 
+                        <div class="table-responsive">
+                            <table class="table display table-striped table-bordered table-hover" id="grid-parametres" style="width: 100%" >
+                                <thead>
+                                    <tr>
+
+                                        <th></th> 
+                                        <th>Table </th>
+                                        <th>Description </th>
+                                        <th>Lien</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set i = 0 %}
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+
+                                        <td><a class="cd_op" href="{{path('u_p_partenaire_index')}}">UPPartenaire</a></td>
+
+                                        <td>table de partenaire</td>
+                                        <td>u_p_partenaire</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('u_p_devise_index')}}">UPDevise</a></td>
+                                        <td>table de updevise</td>
+                                        <td>u_p_devise</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+
+                                        <td><a class="cd_op" href="{{path('u_p_affaire_index')}}">UPAffaire</a></td>
+
+                                        <td>table de upaffaire</td>
+                                        <td>u_p_affaire</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('p_statutgrv_index')}}">PStatutgrv</a></td>
+                                        <td>table de pstatutgrv</td>
+                                        <td>p_statutgrv</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('u_p_service_index')}}">UPService</a></td>
+                                        <td>table de upservice</td>
+                                        <td>u_p_service</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('p_dossier_index')}}">PDossier</a></td>
+                                        <td>table de pdossier</td>
+                                        <td>p_dossier</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('p_modepaiement_index')}}">PModepaiement</a></td>
+                                        <td>table de pmodepaiement</td>
+                                        <td>p_modepaiement</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('p_comptemasse_index')}}">PComptemasse</a></td>
+                                        <td>table de pcomptemasse</td>
+                                        <td>p_comptemasse</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('p_compterubrique_index')}}">PCompterubrique</a></td>
+                                        <td>table de pcompterubrique</td>
+                                        <td>p_compterubrique</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+
+                                        <td><a class="cd_op" href="{{path('p_compte_poste_index')}}">PCompteposte</a></td>
+
+                                        <td>table de pcompteposte</td>
+                                        <td>p_compteposte</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('p_compte_index')}}">PCompte</a></td>
+                                        <td>table de pcompte</td>
+                                        <td>p_compte</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('uarticle_nature_index')}}">UArticleNature</a></td>
+                                        <td>table de uarticle_nature</td>
+                                        <td>uarticle_nature</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('p_unite_index')}}">PUnite</a></td>
+                                        <td>table de p_unite</td>
+                                        <td>p_unite</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('u_x_banque_index')}}">UXBanque</a></td>
+                                        <td>table de u_x_banque</td>
+                                        <td>u_x_banque</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('p_poste_index')}}">UserPoste</a></td>
+                                        <td>table de p_poste</td>
+                                        <td>p_poste</td>
+                                    </tr>
+                                    {# <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('def_banque_index')}}">DefBanque</a></td>
+                                        <td>table de def_banque</td>
+                                        <td>def_banque</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('def_devise_index')}}">DefDevise</a></td>
+                                        <td>table de def_devise</td>
+                                        <td>def_devise</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('def_modepaiement_index')}}">DefModepaiement</a></td>
+                                        <td>table de def_modepaiement</td>
+                                        <td>def_modepaiement</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('def_partenaire_index')}}">DefPartenaire</a></td>
+                                        <td>table de def_partenaire</td>
+                                        <td>def_partenaire</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('def_partenaire_ty_index')}}">DefPartenaireTy</a></td>
+                                        <td>table de def_partenaire_ty</td>
+                                        <td>def_partenaire_ty</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('def_statut_index')}}">DefStatut</a></td>
+                                        <td>table de def_statut</td>
+                                        <td>def_statut</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('def_type_conge_index')}}">DefTypeConge</a></td>
+                                        <td>table de def_type_conge</td>
+                                        <td>def_type_conge</td>
+                                    </tr> #}
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('grs_grille_conge_index')}}">GrsGrilleConge</a></td>
+                                        <td>table de grs_grille_conge</td>
+                                        <td>grs_grille_conge</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('p_marche_index')}}">Marche</a></td>
+                                        <td>table de p_marche</td>
+                                        <td>p_marche</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('p_marche_sous_index')}}">Sous marche</a></td>
+                                        <td>table sous Marche </td>
+                                        <td>p_marche_sous</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+                                        <td><a class="cd_op" href="{{path('p_projet_index')}}">UProjet</a></td>
+                                        <td>table de projet</td>
+                                        <td>u_p_projet</td>
+                                    </tr>
+                                    
+                                    
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+
+                                        <th></th> 
+                                        <th>Table </th>
+                                        <th>Description </th>
+                                        <th>Lien</th>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#    <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js') }}"></script>
+        <script src="{{ asset('https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#grid').DataTable();
+            });
+        </script>#}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('config') }}
+{% endblock %}  

@@ -1,0 +1,58 @@
+{% set ma_class =   class|default('detail_form') %}
+
+
+
+{{ form_start(form_det ,{'attr':{'novalidate': 'novalidate'  , 'class': ma_class~' form-inline '}}) }} 
+<table style="width: 100%">
+    <tr>
+        <td style="width: 3%">
+
+        </td>
+        <td style="width: 30%">
+
+            {{ form_widget(form_det.article,{ 'attr':{ 'placeholder':'Article','class':'style-detail-form form-control form-control-sm  data.article article',  'autofocus':'autofocus'}}) }} 
+
+        </td>
+        <td style="width: 7%">
+
+            {{ form_widget(form_det.quantite,{'attr':{ 'class':'style-detail-form form-control form-control-sm data.quantite' , 'placeholder':'Qnt'}}) }} 
+
+        </td>
+        <td style="width: 7%">
+
+            {{ form_widget(form_det.prixunitaire,{'attr':{'class':'style-detail-form form-control form-control-sm data.prixunitaire' ,'placeholder':'P.U'}}) }} 
+
+        </td>
+        <td style="width: 7%">
+
+            {{ form_widget(form_det.tva,{'attr':{'class':'style-detail-form form-control form-control-sm' ,'placeholder':'TVA'}}) }} 
+
+        </td>
+        <td style="width: 7%">-</td>
+        <td style="width: 20%">
+
+            {{ form_widget(form_det.observation,{'attr':{'class':'style-detail-form form-control form-control-sm' ,'placeholder':'Observation'}}) }} 
+
+        </td>
+        <td >
+            {% if detail is defined %}
+                <input type="hidden" name="_id"  value="{{ detail.id }}" />
+            {% endif %}
+
+            {% if commande is defined %}
+                <input type="hidden" name="_id_cab"   value="{{ commande.id }}" />
+            {% endif %}
+ 
+
+      
+
+            <button style="padding: 7px " class="btn btn-white btn-xs"  type="submit">{{ button_label|default('Modifier') }}</button>
+        </td>
+
+
+    </tr>
+</table>
+{{ form_end(form_det,{'render_rest': false}) }}
+
+
+

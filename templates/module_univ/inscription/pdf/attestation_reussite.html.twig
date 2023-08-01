@@ -1,0 +1,361 @@
+{% set t = 3 %}
+{% set margin_left = "" %}
+{% set margin_right = "" %}
+{% set margin_top = "" %}
+{% set margin_bottom = "" %}
+{% set position_logo = "" %}
+{% set ajouter_info_pied_page = false %}
+{% for para in parametre %}
+    {% if para.abriviation == "marge_L" %}
+        {% set margin_left = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "marge_R" %}
+        {% set margin_right = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "marge_T" %}
+        {% set margin_top = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "marge_B" %}
+        {% set margin_bottom = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "position_logo" %}
+        {% set position_logo = para.valeur %}
+    {% endif %}
+    {% if para.abriviation == "ajouter_info_pied_page" %}
+        {% if para.valeur == "checked" %}
+            {% set ajouter_info_pied_page = true %}
+        {% endif %}
+    {% endif %}
+
+{% endfor %}
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+
+<style type="text/Css">
+    footer {
+        position: fixed; 
+        bottom: -90px; 
+        left: 0px; 
+        right: 0px;
+        height: 100px;                 
+    }
+    body{
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    .titre-reb{
+        width: 100%;
+        background: #1f4f7a;
+        font-size: 9px ;
+        padding:3px 10px;
+        color: #f1f1f1;
+        font-weight: bold
+    }
+    div.zone_over
+    {
+        display: block;
+        width: 40%;
+        word-wrap:break-word !important;
+    }
+    .slh tr td {
+        border-bottom: 1px solid #292929;
+    }
+
+    .txt {
+        width: 100%;
+        text-align: left;
+        line-height: 30px; 
+        padding-top: 0px ;  
+        padding-bottom: 0px ;
+        padding-left: 30px ;
+        padding-right:  30px ;
+        text-align: justify; 
+        font-size : 14px;
+        
+        font-weight: normal ;
+    }
+    .txt span {
+        font-size:12px;
+        font-weight: bold;
+        color:black;
+        margin-left: 5px ; 
+        margin-right: 5px ; 
+    }
+    .table1{
+       width: 100%;
+
+    }
+    .th1{
+        width: 30%; text-align: left;
+    }
+    .td1{
+        width: 100%; text-align: center;
+    }
+    .img{ margin-right: auto;margin-left:auto; width: 40%;}
+    .logo{
+        width:250px;height:100px;
+        position: center;
+    }
+    .p1{
+        font-family: 'Courier';text-align:center;font-size:20px;font-weight: bold;color:black;
+    }
+    .table2{width: 100%;font-size:12px;}
+    .td2{width: 10%; text-align: left;line-height: 12px}
+    .td3{width: 60%; text-align: left;line-height: 12px}
+    .td4{width: 30%; text-align: left;line-height: 12px}
+    .span1{font-size:12px;font-weight: bold;color:black;}
+    .td5{width: 89%; text-align: right;}
+    .footer{font-family: 'Courier';position: relative;left: 5%;width:90%;border-top:1px solid #000;padding:5px;text-align: center;font-size: 9px;line-height:14px}
+</style>
+
+
+<header>
+
+    <table class="table1" align="center" cellspacing="0">
+        <thead>
+            <tr>
+               
+                <th class="th1"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+
+              {% if inscription.promotion.formation.etablissement.code == 'ETA00000023'%}
+              <td class="td1">
+                <br/><br/>
+              <center>  <img class=" logo"  src="{{ asset('img/Logo ifcp.png')[1:] }}" alt="Logo"></center>
+
+            </td>
+              {% else %}
+              <td class="td1">
+                <br/><br/>
+              <center>  <img class=" logo"  src="{{ asset('img/Logo UIASS_bkack.png')[1:] }}" alt="Logo"></center>
+
+            </td>
+            {% endif %}                
+                    
+                   
+             
+
+
+
+            </tr>
+        </tbody>
+
+    </table>
+
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="p1">ATTESTATION DE REUSSITE </p>
+<br/>
+
+<br/>
+
+
+
+
+
+
+
+<table class="table1"  cellspacing="0">
+
+    <tbody>
+
+        <tr>
+
+            <td class="txt">
+                L’Université Internationale Abulcasis des Sciences de la Santé sise à Madinat Al Irfane, Bâtiment B, avenue Allal El Fassi, Rabat, atteste par la présente que :
+
+            </td>
+
+        </tr>
+    </tbody>
+
+</table>
+
+
+
+<table class="table2"  cellspacing="0">
+
+<br/><br/>
+<br/>
+
+
+
+    <tbody>
+        
+         
+
+         <tr>
+            <td class="td2">
+               
+            </td>
+
+            <td class="td3">
+                <span class="span1">L’étudiant(e)</span> :  {{inscription.admission.preinscription.etudiant ? inscription.admission.preinscription.etudiant.nom ~ inscription.admission.preinscription.etudiant.prenom }}
+            </td>
+            <td class="td4">
+                <span class="span1"> </span>
+            </td> 
+        </tr>
+        
+        <tr>
+             <td class="td2">
+               
+            </td>
+            <td class="td3">
+                <span class="span1"> </span> 
+            </td>
+            <td class="td4">
+                <span class="span1"> </span>
+            </td> 
+        </tr>
+
+      
+        
+        <tr>
+             <td class="td2">
+               
+            </td>
+            <td class="td3">
+                <span class="span1"> </span> 
+            </td>
+            <td class="td4">
+                <span class="span1"> </span>
+            </td> 
+        </tr>
+        <tr>
+             <td class="td2">
+               
+            </td>
+            <td class="td3">
+                <span class="span1">Né(e) le </span> : {{inscription.admission.preinscription.etudiant ? inscription.admission.preinscription.etudiant.dateNaissance|date("m/d/Y")}}
+            </td>
+            <td class="td4">
+                
+            </td>
+        </tr>
+                <tr>
+                     <td class="td2">
+               
+            </td>
+            <td class="td3">
+                <span class="span1"> </span> 
+            </td>
+            <td class="td4">
+                <span class="span1"> </span>
+            </td> 
+        </tr>
+        <tr>
+             <td class="td2">
+               
+            </td>
+            <td class="td3">
+                <span class="span1">CIN/Passeport  </span> : {{inscription.admission.preinscription.etudiant ? inscription.admission.preinscription.etudiant.cin}}
+            </td>
+            <td class="td4">
+                <span class="span1"> </span>
+            </td>
+        </tr>
+                <tr>
+                     <td class="td2">
+               
+            </td>
+            <td class="td3">
+                <span class="span1"> </span> 
+            </td>
+            <td class="td4">
+                <span class="span1"> </span>
+            </td> 
+        </tr>
+       
+    </tbody>
+
+</table>
+<br/><br/>
+<br/><br/>
+<table class="table1" cellspacing="0">
+
+    <tbody>
+
+        <tr>
+
+            <td class="txt">
+                Est inscrit(e) {% if inscription.promotion.formation.etablissement.code == 'ETA00000025' %} à la {% else %} au {% endif %}<b >{{inscription.promotion.formation.etablissement.designation}} </b>
+                sous le N°  <b >{{inscription.code }}</b> en <b> {{inscription.promotion.formation ? inscription.promotion.formation.designation }} </b>  , et a réussi avec succès les examens du
+                {% for semestre in semestres %}
+              
+                {{semestre.designation}}
+                {% if semestres|length > 1 %}
+                {% if loop.index == 1 %}
+                et
+                {% endif %}
+                {% endif %}
+                
+                {% endfor %}
+                au titre de l’année universitaire <b>{{inscription.annee ? inscription.annee.designation }}</b> .
+                <br/><br/><br/>
+
+                Cette attestation est délivrée à l'intéressé(e) pour servir et valoir ce que de droit.
+            </td>
+
+        </tr>
+    </tbody>
+
+</table>
+
+
+
+<table class="table1" align="center" cellspacing="0">
+    <thead>
+        <tr>
+            <th class="th1"></th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+
+            <td class="td5">
+                <br><br>
+                <span class="span1"> Fait à Rabat, le {{ "now"|date("m/d/Y") }}</span>
+
+            </td>
+
+        </tr>
+    </tbody>
+
+</table>
+
+
+
+
+
+
+<footer>
+   
+           
+                <div class="footer"><p>B.P. 6533, Avenue Allal El Fassi,Madinat Al Irfane,  Rabat 10 000. Maroc - Web : www.uiass.ma - Contact : contact@uiass.ma        <br/>Tel : +212 5 37 68 70 20 / 21 / 22 - Fax : +212 5 37 77 01 06</p>
+                </div>
+          
+        
+        
+    </footer>
+
+
+

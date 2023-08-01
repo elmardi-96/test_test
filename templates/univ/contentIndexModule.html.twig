@@ -1,0 +1,52 @@
+<div class="row baseIndex">
+	<div class="col-lg-12">
+		<div class="ibox ">
+			<div class="ibox-content mailbox-content">
+				<div class="file-manager">
+
+					<div class="forum-title">
+						<div class="float-right forum-desc">
+							<samll></samll>
+						</div>
+						<h3>
+							<a class="color-gray-theme" href="{{ path(module.route) }}">{{ module.titre }}</a>
+						</h3>
+						<span class="line"></span>
+					</div>
+					<div class="row bCol">
+						{% for key , sousModule in  module['sousModules'] |sort((a, b) => a.ordr <=> b.ordr) %}
+
+							<div class="col-md-3">
+								<h5>
+									<a class="color-green-theme" {% if sousModule.route != '' %} href="{{ path(sousModule.route) }}" {% endif %}>
+										<i class="fa fright {{sousModule.icon}} "></i>
+										{{ sousModule.titre }}</a>
+								</h5>
+
+                                {% if sousModule['operations'] is defined and sousModule['operations'] is not empty %}
+								<ul class="folder-list m-b-md pad2 over" style="padding: 0">
+									<li></li>
+
+									{% for key ,operation in sousModule['operations'] |sort((a, b) => a.ordr <=> b.ordr) %}
+										{% if operation.verticale %}
+                                        <li>
+											<a href="{% if operation.route != '' %} {{ path(operation.route) }}{% else %}#{% endif %}">
+												<i class="fa {{operation.icon}} "></i>
+												{{operation.titre}}
+											</a>
+										</li>
+                                        {% endif %}
+									{% endfor %}
+
+								</ul>
+                                {% endif %}
+							</div>
+
+						{% endfor %}
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

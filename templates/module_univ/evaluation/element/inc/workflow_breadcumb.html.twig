@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="btn-group btn-breadcrumb btn-breadcrumb2">
+        <a href="#" class="btn btn-default"><b>Element </b> </a>
+        {% set count = 0 %}
+        {% for key , place  in {"creer" :"Crée" , "s1":"S1" , "s2":"S2" , "rachat":"Rachat","cloturer":"Cloturé"}  %}
+            {% if count >= 0 %}
+                <a href="#" class="btn btn-default
+                   {% if workflow_has_marked_place(element, key)  %}
+                       btn-breadcrumb2-active
+                   {% endif %}
+                   ">{{ place }}</a>
+                {% set count = count + 1%}
+            {% endif %}
+            </button>
+        {% endfor %}   
+    </div> 
+</div>

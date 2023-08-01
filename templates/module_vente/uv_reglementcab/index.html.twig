@@ -1,0 +1,221 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}Réglement index | Vente
+{% endblock %}
+
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+		<div class="col-lg-6">
+			{% include './module_vente/uv_reglementcab/inc/workflow_breadcumb.html.twig' %}
+		</div>
+
+
+		<div class="col-lg-6">
+			<div class="title-action">
+				<div
+					class="title-action">
+
+
+				</div>
+			</div>
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+
+			{% include './module_vente/uv_reglementcab/inc/workflow.html.twig' %}
+		</div>
+
+
+	</div>
+
+
+	<br/>
+	<br/>
+	<div class="row border-bottom white-bg dashboard-header mt-20">
+		<div class="col-lg-12">
+
+			<div class="ibox ">
+				<div class="ibox-content" style="padding-top: 0px">
+					<div class="table-responsive">
+						<div class="row">
+							<div class="col-2 list_actions_bloc" style="position: fixed ; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+
+								<select class="select2_demo _3 form-control _multiple_actions">
+									<option value="">Action</option>
+									{% for key , operation in  operations %}
+										{% if operation.multiple %}
+											<option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+										{% endif %}
+									{% endfor %}
+								</select>
+
+							</div>
+
+
+						</div>
+						<table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%">
+							<thead>
+
+
+								<tr>
+									<th>Action</th>
+									<th>Code</th>
+									<th>Date</th>
+									
+									<th>Client</th>
+									<th>Code Facture</th>
+									<th>Date facture</th>
+									<th>Libelle</th>
+									<th>Mt Rég</th>
+									<th>Mt Fac</th>
+									<th>M.Paie</th>
+									<th>Banque</th>
+									<th>Réf</th>
+								</tr>
+							</thead>
+
+
+							<tfoot>
+								<tr>
+									<th>
+
+
+										<div class="form-group">
+											Action
+											<input type="checkbox" class="action_head">
+
+
+										</div>
+									</th>
+									<th>
+										<div class="form-group">
+
+											<div class="input-group date">
+												<input type="text" class="form-control search_column1">
+												<span class="input-group-addon search_column1_clear">
+													<i class="fa fa-undo"></i>
+												</span>
+											</div>
+										</div>
+									</th>
+									<th>
+										<div class="form-group">
+
+											<input type="text" placeholder="Code" class="search_column2 form-control">
+										</div>
+									</th>
+									<th>
+
+										<div class="form-group">
+
+											<select class="search_column3 form-control">
+												<option value="">Choix pour Client</option>
+
+												{% for u_p_partenaire in u_p_partenaires %}
+													<option value="{{ u_p_partenaire.societe }}">{{ u_p_partenaire.societe }}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</th>
+									<th>
+										<div class="form-group">
+
+											<input type="text" placeholder="Code Fac" class="search_column4 form-control">
+										</div>
+									</th>
+									<th>
+										<div class="form-group">
+
+											<div class="input-group date">
+												<input type="text" class="form-control search_column11">
+												<span class="input-group-addon search_column11_clear">
+													<i class="fa fa-undo"></i>
+												</span>
+											</div>
+										</div>
+									</th>
+									<th>
+										<div class="form-group">
+
+											<input type="text" placeholder="Libelle" class="search_column6 form-control">
+										</div>
+									</th>
+
+									<th>
+
+										<div class="form-group">
+
+											<input type="text" placeholder="Mt Rég" class="search_column7 form-control">
+										</div>
+									</th>
+									<th>
+
+										<div class="form-group">
+
+											<input type="text" placeholder="Mt Fac" class="search_column8 form-control">
+										</div>
+									</th>
+									<th>
+
+
+										<div class="form-group">
+
+											<select class="search_column9 form-control">
+												<option value="">Choix Banque</option>
+
+												{% for modepaiement in modepaiements %}
+													<option value="{{ modepaiement.designation }}">{{ modepaiement.designation }}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</th>
+
+									<th>
+
+										<div class="form-group">
+
+											<select class="search_column10 form-control">
+												<option value="">Choix Banque</option>
+
+												{% for banque in banques %}
+													<option value="{{ banque.designation }}">{{ banque.designation }}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</th>
+									<th>
+
+										<div class="form-group">
+
+											<input type="text" placeholder="Réf" class="search_column12 form-control">
+										</div>
+									</th>
+
+
+								</tr>
+							</tfoot>
+
+
+						</table>
+
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('treglementfrscabVente') }}
+{% endblock %}

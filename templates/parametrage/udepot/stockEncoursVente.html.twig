@@ -1,0 +1,114 @@
+{% extends 'base_ugouv.html.twig' %}
+{% set current_path = app.request.get('_route') %}
+
+{% block title %}Depot Mouvement stock encours | Stock
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div id="right-sidebar" class="actions animated"></div>
+
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+		<div class="col-lg-4">
+			<h2 class="fo">Stock , depot
+			</h2>
+			{#{ wo_render_breadcrumbs() }#}
+		</div>
+
+
+		<div class="col-lg-8">
+			<div class="title-action">
+				{#% for key ,  operation in operations  %}
+												                        {% if  operation.horizontale %}
+												                            <a {% if operation.route is not null  %}  href="{{ path(operation.route) }}" {%  endif %}  id="{{operation.prefix}}" class="btn btn-white btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+												                        {% endif %}
+												                    {% endfor %#}
+				
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+	</div>
+	<br/><br/>
+
+		<div class="row pt-20">
+			<div class="col-lg-12">
+
+				<div class="ibox ">
+                                    <div class="ibox-content">
+					<div class="panel blank-panel">
+						<div class="panel-heading">
+							<div class="panel-options">
+								<ul class="nav nav-tabs">    
+
+								  
+										<li><a class="nav-link {% if "stock_depot_mouvementstock"  in current_path  %} active {%endif%}" href="{{ path('stock_depot_mouvementstock' )}}" >Mouvements stock </a></li>
+										<li><a class="nav-link {% if "mouvement_stock_encours_vente_index"  in current_path  %} active {%endif%}" href="{{ path('mouvement_stock_encours_vente_index' )}}" >mouvements ventes (en cours) </a></li>
+										<li><a class="nav-link {% if "mouvement_stock_encours_achat_index"  in current_path  %} active {%endif%}" href="{{ path('mouvement_stock_encours_achat_index' )}}" >mouvements achats (en cours) </a></li>
+										<li><a class="nav-link {% if "mouvement_stock_encours_affectation_index"  in current_path  %} active {%endif%}" href="{{ path('mouvement_stock_encours_affectation_index' )}}" >mouvements Transformation (en cours) </a></li>
+										
+								   
+
+								</ul>
+							</div>
+						</div>
+					<div class="ibox-content test" style="padding-top: 0px">
+						<div class="table-responsive val">
+							<select class=" form-control" id="valid" style="width: 10%; display:none;">
+								<option value="">Action</option>
+								<option value="1">Valider</option>
+		
+							</select>
+						
+							<form name="action_test" class="action_test">
+								<br>
+							
+								<table class="table  display table-striped table-bordered table-hover dataTables-example grid" id="grid2" style="width: 100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Date livraison</th>
+											<th>Ref dvCl </th>
+											<th>Ref devis </th>
+											<th>Ref livraison </th>
+											<th>Ref depot </th>
+											<th>Ref article </th>
+											<th>Titre article</th>
+											
+										
+											<th>QNT</th>
+											<th>P.U</th>
+											<th>TVA</th>
+											<!--<th>TTC</th>-->
+
+										</tr>
+									</thead>
+									<tfoot>
+										<th><input type="checkbox" id='allactions' name="allactions"></th>
+
+									</tfoot>
+
+								</table>
+
+							</form>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('udepot') }}
+{% endblock %}

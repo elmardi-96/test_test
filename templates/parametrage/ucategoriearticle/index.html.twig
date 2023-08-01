@@ -1,0 +1,118 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+
+{% block title %}Categorie index | Stock{% endblock %}
+
+
+{% block body %}
+
+
+
+
+
+
+
+    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+
+
+
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+	<div class="col-lg-4">
+		{% include './parametrage/ucategoriearticle/inc/workflow_breadcumb.html.twig' %}
+		{#{ wo_render_breadcrumbs() }#}
+	</div>
+	<div
+		class="col-lg-8">
+		{#<div class="title-action">
+						
+		
+						<a id="_delete" class="btn btn-white btn-xs my-button">
+							<i class="fa fa-trash"></i>
+							Suprimer</a>
+		
+					</div>#}
+		<div class="title-action">
+			{#<button class="btn btn-white btn-xs btn-lg my-button" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}</button>#}
+                {% for key ,  operation in operations %}
+					{% if operation.isIndex == 1 and  operation.prefix== '_new_categorie'%}
+						<a {% if operation.route is not null %} href="{{ path(operation.route) }}" {% endif %} id="{{operation.prefix}}" class="op-hor btn btn-white btn-xs add{{operation.classCs}}">
+							<i class="fa {{ operation.icon }}"></i>
+							{{ operation.titre|capitalize }}</a>
+					{% endif %}
+				{% endfor %}
+                {# <a href="{{path('stock_categorie_new')}}"  id="_new" class="op-hor btn btn-white btn-xs "><i class="fa fa-plus"></i> Ajouter</a> #}
+
+		</div>
+	</div>
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+		{% include './parametrage/ucategoriearticle/inc/workflow.html.twig' %}
+	</div>
+</div>
+    <br/><br/>
+
+        <div class="row border-bottom white-bg dashboard-header mt-20">
+            <div class="col-lg-12">
+
+                <div class="ibox ">
+                    <div class="ibox-content" style="padding-top: 0px"> 
+                        <div class="table-responsive">
+                            <div class="row" >
+                                <div class="col-2 list_actions_bloc" style="position: fixed ; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+
+                                    <select class="select2_demo _3 form-control _multiple_actions">
+                                        <option value="">Action</option>
+                                        {% for key , operation in  operations  %}
+                                            {% if operation.multiple %}
+                                            <option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+                                       {% endif %}
+                                            {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%" >
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Code</th>
+                                        <th>titre</th>
+                                        <th>Abreviation</th> 
+                                        <th>Description</th> 
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr> 
+                                        <th>Action</th>
+                                        <th>Code</th>
+                                        <th>titre</th>
+                                        <th>Abreviation</th> 
+                                        <th>Description</th> 
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+     {{ parent() }}
+    {{ encore_entry_script_tags('ucategoriearticle') }}
+{% endblock %}

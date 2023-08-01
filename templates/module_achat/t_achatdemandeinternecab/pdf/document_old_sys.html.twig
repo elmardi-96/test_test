@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+    <head><meta charset="euc-kr">
+        <title>Pré commande</title>
+    </head>
+    <style>
+        @page {
+            margin: 5px 20px !important;
+            /*padding: 0px 0px 0px 0px !important;*/
+        }
+        body{
+            font-family: 'Courier New';
+            font-size: 13px;
+        }
+        .logo{
+            max-width:250px;
+            max-height:100px;
+        }
+
+        .table-header{
+            width:100% ; 
+            text-transform: uppercase; 
+
+
+        }
+        .table-content thead tr th{
+            text-align: center;
+        }
+
+        .table-header label {
+            font-size: 12px;
+            font-weight: 200;
+        }
+
+        .th1{
+            width:250px;height:100px;
+        }
+        .th2{
+            width:100px;height:100px;
+        }
+
+        h3{   
+            margin : 0 ; 
+            padding: 8px 0px ; 
+            text-align: center;
+            background:#e7e6e6;
+            text-transform: uppercase; 
+        }
+
+        h4{  
+            margin : 4px 0px  ; 
+            padding: 8px 0px ; 
+            text-align: center;
+            border: 1px solid  #555555 ; 
+        }
+
+
+
+
+        .table-content{
+            width:100%; 
+            font-size: 10px;
+            border:1px solid #555555;
+            border-collapse: collapse;
+
+        }
+
+        .table-content tr {
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+        }
+
+
+
+        .table-content  td{
+            padding: 4px ;
+            border-left: 1px solid #555555;
+            border-right: 1px solid #555555;
+
+        }
+        .table-content thead{
+            background: #555555;
+            color: #fff;
+            text-align: center;
+
+        }
+
+        .table-content thead th{
+            font-size: 11px;
+            padding: 4px 2px
+        }
+
+
+        .table-content tbody tr td:nth-child(n+4) {
+            text-align: right; 
+        }
+
+        .table-ttc {
+            font-size: 11.5px;
+            width: 40%; float: right;
+            font-weight: bold ; 
+
+        }
+
+        .table-ttc tr td  {
+            border: 1px solid #555555 ; 
+            padding: 1px 3px ; 
+        }
+
+        .table-ttc tr td:nth-child(2) {
+            text-align: right; 
+        }
+
+
+
+        .footer {
+            border-top: 2px solid #555555;
+            margin-top:10px;
+            font-size: 9px ;
+            text-align: center; 
+            position: fixed; 
+            bottom: 60px ;
+        }
+        .footer label{
+            padding-left: 10px;
+        }
+
+
+
+    </style>
+    <body>
+        <header>
+            <table class="table-header">
+                <tr>
+                    <th> 
+                        <img src="{{ asset(image)[1:] }}" class="logo" alt="Logo"> 
+                    </th>
+                    <th class="th2"><br></th>
+
+                    <th class="th3">
+                        <div style="margin-left: 5px; border: 0.5px solid black;">
+                            <div style=" margin: 10px;">
+                                Date : <label>{{ cab.dateDemande ? cab.dateDemande|date("d/m/Y")}} </label><br>
+                                RAISON SOCIAL :
+                                <label>{{ cab.fournisseur  ? cab.fournisseur.societe|upper   }}</label><br>
+                                ADRESSE :
+                                <label>{{ cab.fournisseur  ? cab.fournisseur.adresse|upper   }}</label><br>
+                                TEL :
+                                <label>{{ cab.fournisseur  ? cab.fournisseur.tel1 ~ ' / '~  cab.fournisseur.tel2 }}</label><br>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+
+            </table>
+        </header>
+
+
+         <footer>
+            <div class="footer">
+
+                <p>
+                    {% if cab.dossier  %}
+                        {{ cab.dossier.titre|upper }}
+
+                        {% if  cab.dossier.rc %} <label>RC :</label>{{ cab.dossier.rc|upper  }} {% endif %}
+                        {% if  cab.dossier.ice %}<label>ICE :</label>{{ cab.dossier.ice|upper  }} {% endif %}
+                        {% if  cab.dossier.iff %}<label>IF :</label>{{ cab.dossier.iff|upper  }} {% endif %}
+                        {% if  cab.dossier.cnss %}<label>CNSS :</label>{{ cab.dossier.cnss|upper  }} {% endif %}
+                        {% if  cab.dossier.patente %} <label>PATENTE :</label>{{ cab.dossier.patente|upper  }} {% endif %}
+                    {% endif %}
+                </p>
+            </div>
+        </footer>
+
+
+
+
+        <h3>Pré commande</h3>
+
+
+
+
+        <table class="table-sub-title">
+
+            <tr>
+                <td> 
+                    DEMANDE N° :
+                </td>
+                <td>
+                    {{ cab.code|upper  }}
+                </td>
+            </tr>
+
+
+            <tr>
+                <td> 
+                    NATURE / REFERENCE :
+                </td>
+                <td>
+                    {{ cab.type ? cab.type.designation|upper  }}
+
+
+                </td>
+            </tr>
+
+
+            {% if cab.type %}
+
+
+                {% if cab.type.code == 'CMD' %}
+                    <tr>
+                        <td> 
+                            REFERENCE COMMANDE :
+                        </td>
+                        <td>
+                            {{ cab.devisClient ? cab.devisClient.code|upper   }}
+                        </td>
+                    </tr>
+
+                {% endif %}
+
+
+
+
+                {% if cab.type.code == 'MR' %}
+                    <tr>
+                        <td> 
+                            MARCHE :
+                        </td>
+                        <td>
+
+                            {{ cab.marche ? cab.marche.designation|upper   }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            LOT :
+                        </td>
+                        <td>
+
+                            {{ cab.marchesous ? cab.marchesous.designation|upper   }}
+                        </td>
+                    </tr>
+                {% endif %}
+
+                {% if cab.type.code == 'PRJ' %}
+                    <tr>
+                        <td> 
+                            PROJET :
+                        </td>
+                        <td>
+
+                            {{ cab.projet ? cab.projet.designation|upper   }}
+                        </td>
+                    </tr>
+                {% endif %}
+
+
+
+            {% endif %}
+
+
+
+            <tr>
+                <td> 
+                    REF DEVIS FRS :
+                </td>
+                <td>
+                    {{ cab.refdocasso|upper  }}
+                </td>
+            </tr>
+        </table>
+
+
+
+
+
+        <h4>{{ cab.description|upper  }} </h4>
+        {% set c = 0 %}
+        {% for key , detail in cab.details   %}
+
+            {% set c = c + detail.remise %}
+
+        {% endfor %}
+        <table class="table-content">
+            <thead>
+                <tr>
+                    <th style="width: 80px">REFERENCE</th>
+                    <th>DESIGNATION</th>
+                    <th style="width: 40px">UNITE</th>
+                    <th style="width: 60px">QNT</th>
+
+                    {% if sans == 0 %}
+                        <th style="width: 60px">PU HT</th>
+                            {% if c != 0 %}
+                            <th style="width: 60px">Remise</th>
+                            {% endif %}
+                        <th style="width: 60px">PT HT</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {#% set totalHt  =  0  %}
+                {% set totalTva  =  0  %#} 
+                {% set totalHt  =  0  %}
+                {% set totalTtc  =  0  %}
+
+                {% for key , detail in details   %}
+                    {% set  key = key + 1  %}
+                    {% set  totalHt = totalHt + (detail.quantite*detail.prixunitaire)  %}
+                    {% set  totalTtc = totalTtc + detail.prixttc  %}
+                    {#% set  key = key + 1  %}
+                    {% set  totalHt = totalHt + (detail.quantite*detail.prixunitaire)  %}
+                    {% set  totalTva = totalTva + (detail.quantite*detail.prixunitaire*detail.tva/100)  %#}
+                    <tr>
+                        <td>{#{ detail.article ? detail.article|upper  }#} {{key}}</td>
+                        <td>{{ detail.article ? detail.article|upper  }}</td>
+                        <td>{{ detail.unite ? detail.unite|upper }}</td>
+                        <td>{{ detail.quantite|number_format(2, ',', ' ')  }}</td>
+
+                        {% if sans == 0 %}
+                            <td>{{ detail.prixunitaire|number_format(2, ',', ' ') }}</td>
+                            {% if c != 0 %}
+                                <td>{{ detail.remise ? detail.remise ~ " %" : "-" }}</td>
+                            {% endif %}
+                            <td>{{ detail.prixttc|number_format(2, ',', ' ') }}</td>
+                        {% endif %}
+                    </tr>
+
+                    {#% if cab.details|length == key and cab.details|length <= 22 %}
+                        {% for i in cab.details|length .. 22 %}
+                            <tr>
+                                <td  style="color: #fff">.</td>
+                                <td></td>
+                                <td></td>
+                                {% if c != 0 %}<td></td>{% endif %}
+                                {% if sans == 0 %}
+                                <td></td>
+                                <td></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+
+                    {% endif %#}
+
+                    {% if details|length == key and details|length <= 22 %}
+                        {% for i in details|length .. 22 %}
+                            <tr>
+                                <td  style="color: #fff">.</td>
+                                <td></td>
+                                <td></td>
+                                {% if c != 0 %}<td></td>{% endif %}
+                                
+                                {% if sans == 0 %}
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+
+            </tbody>
+        </table><br>
+
+
+
+
+        {% if sans == 0 %}
+            <table class="table-ttc">
+                {#<tr>
+                    <td>TOTAL HT</td>
+                    <td>{{ ht }}</td>
+                </tr>
+                {% if cab.remise != 0 %}
+                    <tr>
+                        <td>REMISE %</td>
+                        <td>{{ cab.remise }} %</td>
+                    </tr>
+                    <tr>
+                        <td>MT.REMISE </td>
+                        <td>{{ totalRemise  }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td>TVA</td>
+                    <td>{{ totalTva }}</td>
+                </tr>#}
+                <tr>
+                    <td>TOTAL TTC</td>
+                    <td>{{ totalTtc|number_format(2) }} </td>
+                </tr>
+            </table>
+        {% endif %}
+
+
+   </body>    
+
+</html>

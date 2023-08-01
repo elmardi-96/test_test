@@ -1,0 +1,55 @@
+{% extends 'base_empty.html.twig' %}
+{% block title %}U3S-EPR | Apps
+{% endblock %}
+{% block body %}
+      {#{{ dump(app.session.get('dossiers')[app.session.get('dossierCourant').prefix]) }}
+                                            {{dump( app.session.get('dossierCourant').prefix) }}#}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-content mailbox-content">
+                    <div class="file-manager">
+                        {% for key , solution in  app.session.get('dossiers')[app.session.get('dossierCourant').prefix].solutions %}
+                            <div class="forum-title">
+                                <div class="float-right forum-desc">
+                                    <samll></samll>
+                                </div>
+                                <h3>
+                                    <a class="color-gray-theme" href="{{ path(solution.route) }}">{{ solution.titre }}</a>
+                                </h3>
+                                <span class="line"></span>
+                            </div>
+                            <div class="row bCol">
+                                {% for key , module in  app.session.get('dossiers')[app.session.get('dossierCourant').prefix].modules |sort((a, b) => a.ord <=> b.ord) %}
+                                    {% if solution.id == module.solution_id %}
+                                        <div class="col-md-3">
+                                            <h5>
+                                                <a class="color-green-theme" {% if module.route != '' %} href="{{ path(module.route) }}"{% endif %}>
+                                                    <i class="fa fright {{module.icon}} "></i>
+                                                    {{ module.titre }}</a>
+                                            </h5>
+                                            <ul class="folder-list m-b-md pad2 over" style="padding: 0">
+                                                <li></li>
+                                                {% if module.sousModules is defined %}
+                                                {% for key ,sousModule in module.sousModules |sort((a, b) => a.ordr <=> b.ordr) %}
+                                                    <li>
+                                                        <a href="{% if sousModule.route != '' %} {{ path(sousModule.route) }}{% else %}#{% endif %}">
+                                                            <i class="fa {{sousModule.icon}} "></i>
+                                                            {{sousModule.titre}}
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#{dump(app.session.get('dossiers')[app.session.get('dossierCourant').prefix].solutions)}#}
+{% endblock %}

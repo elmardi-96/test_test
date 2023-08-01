@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Livraison client</title>
+
+        <style>
+
+
+            {% if app.request.query.get('form').entete is defined %}
+                @page {
+                    margin-top: 35px;
+                    /*padding: 0px 0px 0px 0px !important;*/
+                    font-size: 11px;
+
+
+                }
+
+            {% else %}
+                @page {
+                    margin: 5px 20px !important;
+                    /*padding: 0px 0px 0px 0px !important;*/
+                }
+            {% endif %}
+            .table-content {
+                font-size: 9px;
+                /*padding-right:60px*/
+
+            }
+            .table-content tr {
+                /*border-left: 1px solid #000;
+        border-right: 1px solid #000;*/
+                border-bottom: 1px solid red;
+            }
+
+            .table-content thead tr th {
+                text-align: center;
+                font-size: 9px;
+                font-family: "courierbold";
+            }
+            .table-content td {
+                padding: 4px;
+                font-size: 8px;
+                /*border-left: 1px solid #000;
+        border-right: 1px solid #000;*/
+                border-bottom: 1px solid #eee;
+
+            }
+            .table-content thead {
+                color: black;
+                background: #ababab;
+
+
+            }
+
+            .table-content thead th {
+                padding: 4px 2px;
+                font-size: 7px;
+                width: 10px;
+            }
+
+
+            .table-content tbody tr td:nth-child(n + 3) {
+                text-align: right;
+            }
+            .table-content thead tr th:nth-child(n + 3) {
+                text-align: right;
+            }
+            /*.table-ttc tr{
+                border: 1px solid #eee;
+    }
+    .table-ttc tr td{
+            border: 1px solid #eee;
+    }*/
+
+            .table-ttc {
+                font-size: 9.5px;
+                display: block;
+                float: right;
+                width: 100%;
+            }
+            .titreFacture {
+                position: absolute;
+                margin-top: 60px;
+                margin-bottom: 40px;
+                width: 100%;
+                text-align: center;
+                font-size: 18px;
+                font-weight: bold;
+                font-size: 25px;
+                font-family: "courierbold";
+            }
+
+            .table-content {
+                width: 100%;
+                font-size: 10px;
+                /*border: 1px solid black;*/
+                border-collapse: collapse;
+
+
+            }
+            .head {
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 30px;
+            }
+            .head td {
+                font-weight: bold;
+                font-size: 11px;
+                text-transform: uppercase;
+
+            }
+            .head_date {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            .head_date td {
+
+                font-size: 11px;
+                text-transform: uppercase;
+
+            }
+            .table-ttc {
+
+                border-collapse: collapse;
+                display: table;
+                margin-left: 0;
+                width: 50%;
+            }
+
+            .table-ttc tr td:nth-child(1) {
+
+                padding: 1px 3px;
+                width: 100px;
+                background: #eee;
+                margin-left: 50%;
+                width: 50%;
+            }
+
+            .table-ttc tr td:nth-child(2) {
+                text-align: right;
+                width: 50%;
+                /*background:red;*/
+
+
+            }
+            .footer {
+                border-top: 2px solid #555555;
+                margin-top: 10px;
+                font-size: 9px;
+                text-align: center;
+                position: fixed;
+                bottom: 0;
+            }
+            .footer label {
+
+                padding-left: 10px;
+
+            }
+            .table-header {
+                width: 100%;
+                text-transform: uppercase;
+
+
+            }
+            .table-header label {
+                font-size: 12px;
+                font-weight: 200;
+            }
+
+            .th1 {
+                width: 250px;
+                height: 100px;
+            }
+            .th2 {
+                width: 100px;
+                height: 100px;
+            }
+            .logo {
+                max-width: 250px;
+                max-height: 100px;
+            }
+
+            .table-header {
+                width: 100%;
+                text-transform: uppercase;
+
+
+            }
+
+            .table-sub-title {
+                font-size: 12px;
+                border: 1px solid #555555;
+                margin-bottom: 5px;
+            }
+            h3 {
+                padding: 15px 0;
+                text-align: center;
+                background: #e7e6e6;
+                text-transform: uppercase;
+                font-size: 15px;
+            }
+
+            h4 {
+                padding: 15px 0;
+                text-align: center;
+                border: 1px solid #555555;
+            }
+            .line {
+                display: block;
+                border-bottom: 1px solid #eee;
+                width: 100%;
+            }
+            .line3 {
+                display: block;
+                border-bottom: 1px solid #eee;
+                width: 100%;
+                position: absolute;
+                top: 33%;
+            }
+            .line2 {
+                display: block;
+                border-bottom: 1px solid black;
+                width: 50%;
+                z-index: 999999;
+                opacity: 0.2;
+            }
+            .dateFac {
+                position: absolute;
+                top: 190px;
+                background: #CCCC99;
+                width: 24%;
+                text-align: center;
+                padding: 2px;
+                font-weight: bold;
+                font-family: "courierbold";
+            }
+            .nFac {
+                position: absolute;
+                top: 190px;
+                left: 530px;
+                background: #CCCC99;
+                width: 24%;
+                text-align: center;
+                padding: 2px;
+                font-family: "courierbold";
+
+
+            }
+
+            /*  @font-face {
+                    font-family: 'Open Sans';
+                    font-style: normal;
+                    font-weight: normal;
+                    src: url('./../../assets/fonts/cour.ttf') format('truetype');
+            }
+            @font-face {
+                    font-family: 'Open SansBold';
+                    font-style: bold;
+                    font-weight: bold;
+                    src: url('./../../assets/fonts/courier-prime.bold.ttf') format('truetype');
+            }
+            body {
+                    font-family: "Open Sans";
+            }
+            .bol{
+                    font-family: "Open SansBold";
+                    
+            }*/
+
+            .bol {
+                font-family: "courierbold";
+
+            }
+            body {
+                font-family: "brush script mt";
+
+            }
+            {% if cab.dossier is defined and cab.dossier.abreviation == "PDMF" %}
+            @page {
+				margin-top:240px;
+                margin-bottom:50px;
+			}
+            			header {
+    position: fixed;
+    top: -250px;
+    left: 0;
+    right: 0;
+
+
+}
+            {% else %}
+            @page {
+				margin-top:390px;
+                margin-bottom:80px;
+			}
+            			header {
+    position: fixed;
+    top: -390px;
+    left: 0;
+    right: 0;
+
+
+}
+            {% endif %}
+            footer {
+                position: fixed;
+                margin-left: 650px;
+                right: 2px;
+                bottom: 0;
+                height: 50px;
+
+                margin-bottom: -30px;
+            }
+            footer:after { content: counter(page); position:absolute;left:5000px;z-index:0;}
+
+.page_break { page-break-before: always; }
+
+        </style>
+
+
+    </head>
+
+    <body>
+
+        <header class="{%if cab.dossier is defined and cab.dossier.abreviation == "PDMF"%} pdmf {% endif %} ">
+			{% if app.request.query.get('form').entete is not defined %}
+                {% include './module_vente/uv_livraisoncab/pdf/default_entete.html.twig' %}
+
+            {% elseif cab.dossier is defined and cab.dossier.abreviation == "MTRS"  %}
+                {% include './module_vente/uv_livraisoncab/pdf/mtrs_entete.html.twig' %}
+
+
+            {% elseif cab.dossier is defined and cab.dossier.abreviation == "A2MF"  %}
+                {% include './module_vente/uv_livraisoncab/pdf/a2mf_entete.html.twig' %}
+                <div class="line3"></div>
+            {% elseif cab.dossier is defined and cab.dossier.abreviation == "PDMF"  %}
+                {% include './module_vente/uv_livraisoncab/pdf/pdmf_entete.html.twig' %}
+            {% endif %}
+            {% set add_rows = 0  %}
+		</header>
+        <footer></footer>
+        <main class="">
+            
+
+
+            <table class="table-content">
+                <thead>
+                    <tr>
+                        {% if app.request.query.get('form').ordre is defined %}
+                            {% set add_rows = add_rows +1  %}
+                            <th style="width: 3%;font-size:9px">ORDRE</th>
+                        {% endif %}
+                        {% if app.request.query.get('form').code is defined %}
+                            {% set add_rows = add_rows +1  %}
+                            <th style="width: 10%;text-align:center;font-size:9px">REFERANCE</th>
+                        {% endif %}
+
+                        {% if app.request.query.get('form').titre is defined %}
+                            {% set add_rows = add_rows +1  %}
+                            <th style="width: 55%;text-align:center;font-size:9px">DESIGNATION</th>
+                        {% endif %}
+
+                        {% if app.request.query.get('form').imageName is defined %}
+                            {% set add_rows = add_rows +1  %}
+                            <th style="width: 5%;font-size:8px">IMG</th>
+                        {% endif %}
+
+                        {% if app.request.query.get('form').quantite is defined %}
+                            {% set add_rows = add_rows +1  %}
+                            <th style="width: 9%;text-align:center;font-size:9px">QNT</th>
+                        {% endif %}
+
+
+                        {% if app.request.query.get('form').unite is defined %}
+                            {% set add_rows = add_rows +1  %}
+                            <th style="width: 5%;text-align:center;font-size:9px">UNITE</th>
+                        {% endif %}
+
+
+                        {% if app.request.query.get('form').prixunitaire is defined %}
+                            {% set add_rows = add_rows +1  %}
+                            <th style="width: 15%;text-align:center;font-size:9px">PRIX H.T</th>
+                        {% endif %}
+
+
+                        {% if app.request.query.get('form').remise is defined %}
+                            {% set add_rows = add_rows +1  %}
+                            <th style="width: 5%;text-align:center;font-size:9px">REMISE</th>
+                        {% endif %}
+
+
+                        {% if app.request.query.get('form').prixttc is defined %}
+                            {% set add_rows = add_rows +1  %}
+                            <th style="width: 15%;text-align:center;font-size:9px">MONTANT
+                                <br/>
+                                H.T</th>
+                        {% endif %}
+                        {% if app.request.query.get('form').tva is defined %}
+                            {% set add_rows = add_rows +1  %}
+                            <th style="width: 10%;text-align:center;font-size:9px">TX
+                                <br/>
+                                TVA</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set prixtc = 0 %}
+                    {% set tottva = 0 %}
+                    {% set ht = 0 %}
+                    {% set remise = 0 %}
+					{% set r = 0 %}
+                    {#% set totalHt  =  0  %}
+                                                                                                                                                                                                                                                                                                                                                                                        {% set totalTva  =  0  %#}
+
+                    {% for key , detail in UvLivraisoncab.details   %}
+                        {% set  key = key + 1  %}
+						{% set  r = r + 1  %}
+                        {% set prixtc = prixtc + detail.prixttc %}
+                        {% set ht = ht + detail.getPrixHt %}
+                        {% set tottva = tottva + detail.getPrixTvaN()  %}
+                        {% set tottva = tottva + detail.getPrixTvaN()  %}
+                        {% set remise = remise + ( tottva * UvLivraisoncab.remise / 100) %}
+                        {#% set  totalHt = totalHt + (detail.quantite*detail.prixunitaire)  %}
+                                                                                                                                                                                                                                                                                                                                                                                                                                {% set  totalTva = totalTva + (detail.quantite*detail.prixunitaire*detail.tva/100)  %#}
+                        <tr>
+
+                            {% if app.request.query.get('form').ordre is defined %}
+                                <td style="text-align:center">{{key}}{#{detail.article and detail.article.__isInitialized() is defined and detail.article.__isInitialized__ == false ? null : detail.article ? detail.article.code|upper : null }}{#{ detail.article.code|upper }#}</td>
+                            {% endif %}
+                            {% if app.request.query.get('form').code is defined %}
+                                <td style="text-align:center">
+                                    {% if detail.article is defined %}
+                                        {{detail.article is not defined or (detail.article and detail.article.__isInitialized() and detail.article.__isInitialized__ == false) ? null : detail.article.code|upper }}{#{ detail.article.code|upper }#}{% endif %}
+                                </td>
+                            {% endif %}
+
+                            {% if app.request.query.get('form').titre is defined %}
+                                <td
+                                    style="text-align:left">
+                                    {#{dump(detail.article is defined and detail.article is not empty ? detail.article.isLoaded())}#}
+
+                                    {{ detail.article is not empty ? detail.article.titre|upper : null  }}
+                                    {% if app.request.query.get('form').descriptionDetail is defined %}
+                                        <br/>
+
+
+                                        <p style="margin: 4px 10px;font-weight: bold">
+                                            {{detail.article ? detail.article.descriptionDetail|upper |nl2br : null }}
+                                        </p>
+                                    {% endif %}
+                                </td>
+                            {% endif %}
+
+                            {% if app.request.query.get('form').imageName is defined %}
+
+                                <td>
+                                    {% if articleImage[detail.article.id]['imageName'][1:] %}
+
+
+                                        <img style="max-width: 100px" src="{{asset(articleImage[detail.article.id]['imageName'])[1:]}}" class="logo" alt="Logo">
+
+                                    {% endif %}
+
+                                </td>
+                            {% endif %}
+
+                            {% if app.request.query.get('form').quantite is defined %}
+                                <td style="text-align:center">{{ detail.quantite|number_format(2, '.', ' ') }}</td>
+                            {% endif %}
+                            {% if app.request.query.get('form').unite is defined %}
+
+                                <td style="text-align:center">{{detail.unite  ?  detail.unite.abreviation : null }}{#{ detail.unite is not defined or (detail.unite is defined and detail.unite.__isInitialized() is defined and detail.unite.__isInitialized__ == false) ? null : detail.unite.abreviation|upper }#}</td>
+                            {% endif %}
+
+
+                            {% if app.request.query.get('form').prixunitaire is defined %}
+                                <td style="text-align:center">{{ detail.prixunitaire|number_format(2, '.', ' ') }}</td>
+                            {% endif %}
+
+                            {% if app.request.query.get('form').remise is defined %}
+                                <td style="text-align:center">{{ detail.remise ? detail.remise ~ " %" : null }}</td>
+                            {% endif %}
+
+                            {% if app.request.query.get('form').prixttc is defined %}
+                                <td style="text-align:center">{{ detail.getPrixHt()|number_format(2, '.', ' ') }}</td>
+                            {% endif %}
+                            {% if app.request.query.get('form').tva is defined %}
+                                <td style="text-align:center">{{ detail.tva != 0 ? detail.tva|number_format(2, '.', ' ') }}</td>
+                            {% endif %}
+                        </tr>
+
+                        {% if UvLivraisoncab.details|length == key and UvLivraisoncab.details|length <= 10 %}
+                            {% for i in UvLivraisoncab.details|length .. 16 %}
+                                <tr>
+                                    {% for  j in 0..(add_rows - 1 )%}
+                                        <td style="color: #fff; {% if i == 20%} border-bottom-color: #eee; {%endif%}">{{ j }}
+                                        </td>
+
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+
+                        {% endif %}
+
+					
+
+                    {% endfor %}
+
+
+                </tbody>
+            </table><br>
+
+
+            {#% if app.request.query.get('form').prixttc is defined %}
+                <table class="table-ttc" style="margin-top:20px;page-break-inside: avoid !important;">
+                    <tr>
+                        <td style="padding:3px 2px;">TOTAL HT</td>
+                        <td style="padding:3px 2px;">{{ ht |number_format(2, '.', ' ') }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:3px 2px;font-family: 'courierbold';">NET HT</td>
+                        <td style="padding:3px 2px;font-family: 'courierbold';">{{ ((ht) - ((ht * UvLivraisoncab.remise ) / 100)) |number_format(2, '.', ' ') }}</td>
+                    </tr>
+					<tr>
+                        <td><div style="border-bottom:1px solid #a5a5a5;width:350px;position:relative;left:-3px;"></div></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 2px;">TVA</td>
+                        <td style="padding:3px 2px;">{{ (Tva) |number_format(2, '.', ' ') }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 2px;">TOTAL TTC</td>
+                        <td style="padding:3px 2px;">{{(UvLivraisoncab.getArrayTotalArticleByLivraison(UvLivraisoncab)['totalTtc']) }}
+                        </td>
+                    </tr>
+					<tr>
+                        <td><div style="border-bottom:1px solid #a5a5a5;width:350px;position:relative;left:-3px;"></div></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px 2px;font-family: 'courierbold';">NET A PAYER</td>
+                        <td style="padding:3px 2px;font-family: 'courierbold';">{{(UvLivraisoncab.getArrayTotalArticleByLivraison(UvLivraisoncab)['totalTtc']) }}</td>
+                    </tr>
+                </table>
+				
+            {% endif %}
+            <br><br><br><br><br><br><br><br><br><br>
+			<p style="font-size:9px;width:670px;z-index:8;">Arrêter la présente du bon de livraison à la somme de :
+				
+				{{ UvLivraisoncab.getArrayTotalArticleByLivraison(UvLivraisoncab)['prixTtc2'] > 0 ?  (UvLivraisoncab.float2alpha(UvLivraisoncab.getArrayTotalArticleByLivraison(UvLivraisoncab)['prixTtc2']|abs)) : "moins " ~ (UvLivraisoncab.float2alpha(UvLivraisoncab.getArrayTotalArticleByLivraison(UvLivraisoncab)['prixTtc2']|abs)) }}
+			</p>#}
+
+           
+        
+
+
+            {% if app.request.query.get('form').entete is not defined %}
+                <footer>
+
+                    <div class="footer">
+
+                        <p>
+                            {% if UvLivraisoncab.dossier  %}
+                                {{ UvLivraisoncab.dossier.titre }}
+
+                                {% if  UvLivraisoncab.dossier.rc %}
+                                    <label>RC :</label>
+                                    {{ UvLivraisoncab.dossier.rc }}
+                                {% endif %}
+                                {% if  UvLivraisoncab.dossier.ice %}
+                                    <label>ICE :</label>
+                                    {{ UvLivraisoncab.dossier.ice }}
+                                {% endif %}
+                                {% if  UvLivraisoncab.dossier.iff %}
+                                    <label>IF :</label>
+                                    {{ UvLivraisoncab.dossier.iff }}
+                                {% endif %}
+                                {% if  UvLivraisoncab.dossier.cnss %}
+                                    <label>CNSS :</label>
+                                    {{ UvLivraisoncab.dossier.cnss }}
+                                {% endif %}
+                                {% if  UvLivraisoncab.dossier.patente %}
+                                    <label>PATENTE :</label>
+                                    {{ UvLivraisoncab.dossier.patente }}
+                                {% endif %}
+                            {% endif %}
+                        </p>
+                    </div>
+                </footer>
+            {% endif %}
+
+    
+        </main>
+
+    </body>
+</html>

@@ -1,0 +1,164 @@
+{% extends 'base_empty.html.twig' %}
+
+
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+    <div class="wrapper wrapper-content">
+        <div class="container">
+
+
+            {#{% include './user/inc/profil_image.html.twig' %}#}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5><i class="fa fa-user"></i> Mon profil </h5>
+                        </div>
+                        <div class="ibox-content">
+
+
+
+                            {% include './user/profil/inc/profil_statut.html.twig' %}
+
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                    <div class="panel blank-panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-options">
+
+                                                {% include './user/profil/inc/navigation.html.twig' %}
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-body">
+
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active">
+
+                                                    <form method="post" id="user_theme">
+                                                        
+                                                        
+                                                        
+                                                        <div style="text-align: right">
+                                                            <h2 class="user-profil-titre">Mon thème</h2>
+                                                            <button class="btn btn-white btn-xs btn-lg" type="submit">
+                                                                <i class="fa fa-save"></i>
+                                                                  {{ button_label|default('Modifier mon thème') }}
+                                                            </button>
+                                                        </div>
+                                                            
+                                                            
+                                                       
+                                                        <div class="hr-line-dashed"></div>
+                                                        <!-- The Gallery as inline carousel, can be positioned anywhere on the page -->
+                                                        <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-use-bootstrap-modal="false">
+                                                            <div class="slides"></div>
+                                                            <h3 class="title"></h3>
+                                                            <a class="prev">‹</a>
+                                                            <a class="next">›</a>
+                                                            <a class="close">×</a>
+                                                            <a class="play-pause"></a>
+                                                            <ol class="indicator"></ol>
+                                                        </div>
+
+                                                        <div class="row links"  id="links">
+                                                            <div class="col-md-3">
+                                                                <div class="text-center m-t-lg">
+                                                                    <div class="nopad text-center">
+                                                                        <label>
+                                                                            <a href="{{asset('/img/theme/default.png')}}" title="Thème noir" data-gallery="" data-unique-id="tmp_1">
+                                                                                <img class="img-responsive im-radio-box" src="{{asset('/img/theme/default.png')}}" />
+                                                                            </a>
+                                                                            <h5>Thème noir <small>(par défault)</small> </h5>
+                                                                            <input type="radio" name="theme" value="no-skin" {% if app.user.theme =='no-skin' %} checked {% endif %}/>
+
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div class="col-md-3">
+                                                                <div class="text-center m-t-lg">
+                                                                    <div class="nopad text-center">
+                                                                        <label>
+                                                                            <a href="{{asset('/img/theme/blue_light.png')}}" title="Thème bleu" data-gallery="" data-unique-id="tmp_2">
+                                                                                <img class="img-responsive im-radio-box" src="{{asset('/img/theme/blue_light.png')}}" />
+                                                                            </a>
+                                                                            <h5>Thème bleu  </h5>
+                                                                            <input type="radio" name="theme" value="skin-1" {% if app.user.theme =='skin-1' %} checked {% endif %}/>
+
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <div class="text-center m-t-lg">
+                                                                    <div class="nopad text-center">
+                                                                        <label>
+                                                                            <a href="{{asset('/img/theme/yellow.png')}}" title="Thème maron" data-gallery="" data-unique-id="tmp_3">
+                                                                                <img class="img-responsive im-radio-box" src="{{asset('/img/theme/yellow.png')}}" />
+                                                                            </a>
+                                                                            <h5>Thème maron  </h5>
+                                                                            <input type="radio" class="form-control" name="theme" value="skin-3"  {% if app.user.theme =='skin-3' %} checked {% endif %}/>
+
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <div class="text-center m-t-lg">
+                                                                    <div class="nopad text-center">
+                                                                        <label>
+                                                                            <a href="{{asset('/img/theme/matireal.png')}}" title="Thème vert" data-gallery="" data-unique-id="tmp_4">
+                                                                                <img class="img-responsive im-radio-box" src="{{asset('/img/theme/matireal.png')}}" />
+                                                                            </a>
+                                                                            <h5>Thème vert </h5>
+
+                                                                            <input type="radio" name="theme" value="md-skin" {% if app.user.theme =='md-skin' %} checked {% endif %} />
+
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--statistique inc -->    
+
+        </div>
+
+    </div>
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('profil') }}
+{% endblock %}
+
+

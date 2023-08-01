@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="fr">
+		<title>DEMANDE STOCK</title>
+
+	</head>
+	<style>
+
+
+		@page {
+			margin: 180px 20px 210px !important;
+			padding: 0 !important;
+		}
+
+		body {
+			font-family: 'Courier';
+			font-size: 13px;
+		}
+
+		.header {
+			position: fixed;
+			top: -180px;
+			left: 0;
+			right: 0;
+		}
+
+
+		.logo {
+			max-width: 250px;
+			max-height: 100px;
+			text-align: right;
+		}
+
+		.footer {
+			/*border-top: 2px solid #555555;*/
+			margin-top: 10px;
+			font-size: 9px;
+			text-align: center;
+			position: fixed;
+			bottom: 3px;
+			left: 0;
+			right: 0;
+
+
+		}
+
+		*,
+		body {
+			font-family: Courier, sans-serif;
+			text-transform: uppercase;
+
+		}
+
+
+		main {
+			margin-top: 0;
+		}
+		.page_break {
+			page-break-inside: auto;
+		}
+
+
+		main {
+			margin-top: 0;
+		}
+	</style>
+	<body>
+		<div class="header">
+
+			<table style="width: 100%; margin:20px 0px;" align="center" cellspacing="0">
+				<tr>
+					<td style="width: 35%; text-align: left;">
+						<div style="line-height: 15px;">
+							<span style="font-size: 11px ;width:400px;text-transform: uppercase ; font-weight: bold;">
+								{{ dc.titre|upper }}
+							</span><br/>
+							<span style="font-size: 9px ;">{{ dc.adresse}}</span><br/>
+							<span style="font-size: 9px ;">Tel :{{ dc.tel}}</span><br/>
+							<span style="font-size: 9px ;">Fax :{{ dc.tel}}</span><br/>
+						</div>
+					</td>
+					<td style="width: 65%; text-align: right;">
+
+						<img src="{{ asset(image)[1:] }}" width="{{ cab.demandeur.WidthLogo }}" height="{{ cab.demandeur.HeightLogo }}" class="logo" alt="Logo"/>
+					</td>
+				</tr>
+			</table>
+	
+			{# ============================================ #}
+			<table style=" width: 100%; text-align: center; " >
+                <tr>
+                <td style="width: 80%">
+                    <table style="width: 100%; text-align: start;margin-top:-38px;">
+					<td style="width: 80%;font-size: 30px;font-weight: bold;">
+					{{"DEMANDE STOCK"|upper }}
+	                </td>
+				
+					 
+                    </table>
+                </td>
+                <td style="width: 40%;font-size: 16px;font-weight: bold;border-bottom: none;border-top: none;">
+                </td>
+                <td>
+                    <table style="">
+					 <tr>
+                        <th >
+                     	{{barcode|raw}} 
+                        </th>
+                    </tr>
+					 <tr>
+                        <td style="width: 100%; font-size: 11px;">
+                  <b>REF&nbsp; : </b>     {{ cab.code|upper }} 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                        style=" width: 100%"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100%; font-size: 11px;">
+                  <b>DATE  :  </b>    {{ cab.date ? cab.date|date("d/m/Y")}}
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+                </tr>
+            </table>
+		<br>
+			{# ============================================ #}
+			
+			
+			
+		</div>
+		<div class="footer">
+			<div style="height:60%;">
+				<table style="width: 90% ;  margin-left:auto;margin-right:auto;" align="center" cellspacing="2">
+					<thead>
+						<tr style="background-color: #BEBEBE; font-size: 9px; ">
+							<th style="width: 40%; padding: 3px;text-align: center;" colspan="2">SITE DEMANDEUR</th>
+							<th style="width: 60%;padding: 3px;text-align: center; " colspan="3">SITE LIVREUR</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="font-size: 10px; width:15%;">
+								<div style="width:100%;text-align: center;background-color:#e5e5e5;">NIVEAU.1</div>
+								<div style="width:100%;text-align: center; height:45px;margin-top:2px"></div>
+							</td>
+							<td style="font-size: 10px; width:15%;">
+								<div style="width:100%;text-align: center;background-color:#e5e5e5;">RESP. NIVEAU</div>
+								<div style="width:100%;text-align: center; height:45px;margin-top:2px"></div>
+							</td>
+
+
+							<td style="font-size: 10px; width:20%;">
+								<div style="width:100%;text-align: center;background-color:#e5e5e5;">MAGASINIER</div>
+								<div style="width:100%;text-align: center; height:45px;margin-top:2px"></div>
+
+							</td>
+							<td style="font-size: 10px; width:20%;">
+								<div style="width:100%;text-align: center;background-color:#e5e5e5;">RESP. MAGASIN</div>
+								<div style="width:100%;text-align: center; height:45px;margin-top:2px"></div>
+
+							</td>
+							<td style="font-size: 10px; width:20%;">
+								<div style="width:100%;text-align: center;background-color:#e5e5e5;">RESP. SITE LIVRAISON</div>
+								<div style="width:100%;text-align: center; height:45px;margin-top:2px"></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div style='position: relative; left: 5%; width:90%; border-top:0.3px solid #000; padding:5px; text-align: center; font-size: 11px;'>
+
+				{% if dc  %}
+					{% if  dc.adresse %}
+						{{ dc.adresse|upper  }}
+					{% endif %}
+				{% endif %}
+			</div>
+		</div>
+		<main>
+			<table cellspacing="0" style="width: 100%; text-align: left; font-size: 9px; margin-top: 20px">
+
+				
+
+				<tr style="line-height: 20px;">
+					<td style="width: 100%;">
+
+						<span style="font-weight:bold">
+							DESCIPTION :</span>
+						{{cab.observation}}
+					</td>
+					<td style="width: 0%;"></td>
+					<td
+						style="width: 100%;">
+						<span style="font-weight:bold">demandeur :</span>
+						{{cab.demandeur.nomDossier}}
+
+					</td>
+<br>
+
+					{# {{cab.demandeur.nomDossier}} #}
+
+					<td style="width: 0%;"></td>
+				</tr>
+				<tr>
+					<td style="width: 100%;">
+						<span style="font-weight:bold">
+							Antenne 	&nbsp;&nbsp; :</span>
+						{{cab.Uantenne.designation}}
+					</td>
+					<td style="width: 0%;"></td>
+					<td style="width: 100%;">
+					</td>
+					<td style="width: 0%;"></td>
+				</tr>
+			</table>
+			<table cellspacing="0" style="width: 100%; text-align: left; font-size: 12px">
+				<tr>
+					<td>
+						<h5 style="padding: 0px 4px  ; text-transform: uppercase;font-weight: bold;font-size: 13px">DETAIL :
+							{{ cab.observation|upper  }}</h5>
+					</td>
+				</tr>
+			</table>
+			<div>
+
+
+				<table class="" style="width: 100%;border-collapse: collapse;" cellspacing="0" >
+					<thead>
+						<tr style="background-color: #BEBEBE; color:black; font-size: 9px;">
+							<th style="width: 5%;padding: 3px">#</th>
+							<th style="width: 20%;padding: 3px">Code</th>
+							<th style="width: 65%;padding: 3px">DESIGNATION</th>
+							<th style="width: 20%;padding: 3px">Rayonnage</th>
+							<th style="width: 10%;padding: 3px;text-align: center;">QNT</th>
+							<th style="width: 5%;padding: 3px;text-align: center;">Conditionnement</th>
+							<th style="width: 30%;padding: 3px;text-align: left;">observation</th>
+
+							{# <th style="width: 5%;padding: 3px">UNITE</th> #}
+							<th style="width: 25%;padding: 4px;text-align: right;">PRIX H.T</th>
+							{# <th style="width: 5%;padding: 3px;text-align: center;">TVA</th> #}
+
+						</tr>
+					</thead>
+					<tbody>
+
+						{% set prixTotHT = 0 %}
+						{% set prixTotNet = 0 %}
+						{% set TotTva = 0 %}
+						{% set baseTVA = 0 %}
+
+						{% for key , detail in cab.demandeStockDets  %}
+							{% set  key = key + 1  %}
+
+
+							<tr>
+								<td style="border-bottom: 1px solid #BEBEBE;width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: left;">{{key}}</td>
+								<td style="border-bottom: 1px solid #BEBEBE;width: 10%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: left;">{{ detail.uarticle.code|upper }}</td>
+								<td style="border-bottom: 1px solid #BEBEBE;width: 40%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: left;">{{ detail.uarticle.titre|upper }}</td>
+								<td style="border-bottom: 1px solid #BEBEBE;width: 40%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: left;">{{ detail.uarticle.rayounnage|upper }}</td>
+								<td style="border-bottom: 1px solid #BEBEBE;width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: center;">{{ detail.qte }}</td>
+
+								<td style="border-bottom: 1px solid #BEBEBE;width: 40%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: center;">{{ detail.Conditionnement }}</td>
+								<td style="border-bottom: 1px solid #BEBEBE;width: 40%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: left;">{{ detail.observation }}</td>
+								{# <td style="width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align:center;">{{ detail.unite ? detail.unite.abreviation|upper : null}}</td> #}
+								<td style="border-bottom: 1px solid #BEBEBE;width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: right;">{{ detail.prix|number_format(2, ',', ' ')  }}</td>
+								{# <td style="width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: center;">{{ detail.tva }}</td> #}
+
+							</tr>
+
+							{% set prixTotHT = prixTotHT + (detail.prix * detail.qt_livre) %}
+							{% set prixTotNet = prixTotNet + ((detail.prix * detail.qt_livre) * ( 1 + (detail.uarticle.tva)/100 )) %}
+
+						{% endfor %}
+						{% set TotTva = prixTotNet - prixTotHT %}
+
+
+					</tbody>
+
+				</table>
+
+				<br>
+				<br>
+				<br>
+				<table cellspacing="0" style="width: 100%;">
+					<tr>
+						<td style="width: 100% "></td>
+						<td style="width: 100% ">
+							<table style="width: 100% ; background: #FFFFFF;font-size: 10px;margin:0px;" cellspacing="0">
+								<tr>
+									<td style="background-color:rgb(170, 170, 170);padding: 5px;">TOTAL HT :</td>
+									<td style="width: 0.1%; "></td>
+									<td style="width:20%;text-align:right">{{prixTotHT|number_format(2, ',', ' ') |default('0') }}</td>
+								</tr>
+					            <tr>
+									<td style="background-color:rgb(170, 170, 170);padding: 5px;">TVA :
+									</td>
+									<td style="width: 0.1%; "></td>
+									<td style="width:20%;text-align:right">{{TotTva|number_format(2, ',', ' ')|default('0') }}</td>
+								</tr>
+								<tr>
+									<td style="background-color:rgb(170, 170, 170);padding: 5px;">TOTAL TTC :
+									</td>
+									<td></td>
+									<td style="width:20%;text-align:right">{{prixTotNet|number_format(2, ',', ' ')|default('0')}}</td>
+								</tr>
+								<tr>
+									<td style="background-color:rgb(170, 170, 170);color:rgb(69, 69, 69);font-weight : bold; width: 30%;padding: 5px;">NET A PAYER () :
+									</td>
+									<td></td>
+									<td style="width:20%;font-weight : bold;text-align:right">{{(prixTotNet)|number_format(2, ',', ' ')}}</td>
+								</tr>
+							</table>
+						</td>
+						<td style="width: 0%"></td>
+					</tr>
+				</table>
+
+				<p style="font-size: 10px;">Arrêté le présent de la demande à la somme de :
+					<b>{{ text }}</b>
+					<b></b>
+				</p>
+			</main>
+		</body>
+	</body>
+</html>

@@ -1,0 +1,651 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+{% block title %}Informations | Bon commande fournisseur | Ugouv achat
+{% endblock %}
+
+{% block body %}
+	<div class="actions modal fade right" id="ModalDocumentDynamique" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+		<div class="modal-dialog  modal-full-height modal-middle modal-right modal-sm " style="max-width:400 px;" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalPreviewLabel">Ajouter fichier/DOCUMENT/IMAGE</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body bo-0">
+					<div class="text-center spr">
+						<br/>
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	{{ parent() }}
+	<div class="modal fade right" id="livraisonPopUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+		<div class="modal-dialog modal-full-height modal-right modal-lg" role="document">
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalPreviewLabel">Generer recpetion</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body bo">
+					<div class="text-center spr" style="display: none;">
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod" style=""></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade right" id="avancepop" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+		<div class="modal-dialog modal-full-height  modal-sm" role="document">
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalPreviewLabel">Avance</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body bo">
+					
+					{# <div class="bod" style=""> #}
+						<form class="avance_save">
+							<input type="hidden" value="{{commandefrscab.id}}" name='id' />
+							<div class="form-group mt-2">
+								<div class="">
+									<div class="col-md-12">
+										<div class="row">
+											<div class="col-md-3">
+												<label for="dossier_transfer">Compte(*) </label>
+											</div>
+											<div class="col-md-8">
+												<select class="form-control sel2 " id="compte_avance" name="avance_compte">
+													<option value="">Choix compte</option>
+													{% for compte in comptes %}
+														<option value="{{compte.id}}">{{compte.description}}</option>
+													{% endfor %}
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-group mt-2">
+								<div class="">
+									<div class="col-md-12">
+										<div class="row">
+											<div class="col-md-3">
+												<label for="dossier_transfer">Montant(*) </label>
+											</div>
+											<div class="col-md-8">
+												<input type="number" class="form-control" step="0.01" name="montant_avance" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group mt-4">
+								<label class="ml-1">
+									<button class="btn-register transfer_button btn btn-white btn-block my-button upper btn-xs my-button2" data-style="expand-left" type="submit">
+										<i class="fa fa-save "></i>
+										ENREGISTRER
+									</button>
+								</label>
+						
+							
+						
+							</div>
+						</form>
+					{# </div> #}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade right" id="typePopUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+		<div class="modal-dialog modal-full-height modal-right modal-sm " role="document">
+
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalPreviewLabel">Type commande</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body bo">
+					<div class="text-center spr2" style="display: none;">
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+					<div class="bod2" style=""></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="right-sidebar" class="actions animated"></div>
+
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-12">
+			{{ include('./module_achat/t_commandefrscab/inc/workflow_breadcumb.html.twig',{'page_actuel': 'show'}) }}
+		</div>
+
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+	</div>
+	<br/><br/>
+	<div class="wrapper wrapper-content  animated fadeInRight p-r-l-0">
+		<div class="row">
+			<div class="col-10 no-pad-right no-pad-left ">
+				<div class="ibox">
+					<div class="ibox-content p-b-0">
+						<h4>informations generales
+
+
+							<span class="f-r hint--bottom-left" aria-label="{{ commande.positionActuel }}">
+								<i class=" f-r fa fa-circle wf-color wf-color-{{ commande.positionActuel }} "></i>
+							</span>
+
+
+						</h4>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel blank-panel">
+
+									<div class="col-md-12 p-t-0">
+										<div class="panel-body">
+
+											<div class="tab-content">
+												<div class="tab-pane active show" id="tab-1">
+													<div class="row">
+														<div class="col-md-6 b-r">
+															<div class="form-group row ph">
+																<label class="col-sm-4 required font-weight-bold">Code
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">{{ commande.code }}</p>
+																</div>
+
+															</div>
+															{% set prixtc = 0 %}
+															{% set ht2 = 0 %}
+															{% set tva = 0 %}
+
+
+															{% set remise = 0 %}
+
+															{% for detail  in  commande.details %}
+
+																{% set ht2 = ht2 + detail.getPrixHt() %}
+																{% set tva = tva + detail.getPrixTva() %}
+
+																{% set prixtc = prixtc + detail.getPrixTtc() %}
+
+																{% set remise = remise +  detail.getPrixRemise %}
+															{% endfor %}
+
+															{# 
+																														
+															<div class="form-group row ph">
+																<label class="col-sm-4 required">
+																	Total ht
+																</label>
+
+																<div class="col-sm-8">
+																	{{ ht2|number_format(2, '.', ',') }}
+																	{{commande.devise ? commande.devise.designation}}
+																</div>
+
+															</div> #}
+
+															{# 
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required">
+																	TVA
+																</label>
+
+																<div class="col-sm-8">
+																	{{ tva|number_format(2, '.', ',') }}
+																	{{commande.devise ? commande.devise.designation}}
+																</div>
+
+															</div> #}
+
+
+															{% if remise !=0%}
+																<div class="form-group row ph">
+																	<label class="col-sm-4 required">
+																		Remise
+																	</label>
+
+																	<div class="col-sm-8">
+																		{{ remise|number_format(2, '.', ',') }}
+																		{{commande.devise ? commande.devise.designation}}
+																	</div>
+
+																</div>
+															{% endif %}
+
+															{# 
+																														
+															<div class="form-group row ph">
+																<label class="col-sm-4 required">
+																	Total ttc
+																</label>
+
+																<div class="col-sm-8">
+																	{{ prixtc|number_format(2, '.', ',') }}
+																	{{commande.devise ? commande.devise.designation}}
+																</div>
+
+															</div> #}
+															<div class="form-group row ph">
+																<label class="col-sm-4 required font-weight-bold">Date Cmd
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">{{ commande.datecommande|date("d/m/Y") }}</p>
+																</div>
+
+															</div>
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required font-weight-bold">Fournisseur
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">{{ commande.fournisseur ? commande.fournisseur.societe }}</p>
+																</div>
+
+															</div>
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required font-weight-bold">Date Lvr Prev
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">{{ commande.datelivprv|date("d/m/Y") }}</p>
+																</div>
+
+															</div>
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required font-weight-bold">Description
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">{{ commande.observation }}</p>
+																</div>
+
+															</div>
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required font-weight-bold">Devise</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">{{ commande.devise ? commande.devise.designation }}</p>
+																</div>
+
+															</div>
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required font-weight-bold">Ref DEVIS Frs
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">{{ commande.refdocasso }}</p>
+																</div>
+
+															</div>
+
+														</div>
+														<div
+															class="col-md-6">
+
+															{#  #}
+															<div class="form-group row ph">
+																<label class="col-sm-4 required font-weight-bold">tYPE
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">{{ commande.type ? commande.type.v }}</p>
+																</div>
+
+															</div>
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required font-weight-bold">Pour le compte
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">{{ commande.pourcompte ? commande.pourcompte.nomDossier}}</p>
+																</div>
+
+															</div>
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required font-weight-bold">Reference BCI
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">
+																		{% if commande.referenceBci %}
+																			<a href="{{ path('t_achatdemandeinternecab_show', {'id': commande.referenceBci.id}) }}">{{ commande.referenceBci ? commande.referenceBci.code }}</a>
+																		{% endif %}
+																	</p>
+																</div>
+
+															</div>
+
+
+															<div class="form-group row ph">
+																<label class="col-sm-4 required font-weight-bold">Autre Informations
+																</label>
+
+																<div class="col-sm-8">
+																	<p class="form-control-static">{{ commande.autreInformation }}</p>
+																</div>
+
+															</div>
+
+
+														</div>
+													</div>
+												</div>
+
+
+											</div>
+
+
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+				<div class="ibox">
+					<div class="ibox-content">
+
+						<h4 class="m-b-0">Details</h4>
+						<div id="tab-1" class="tab-pane active" style="height:auto">
+							<div class="full-height-scroll">
+								<div class="table-responsive">
+
+									<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable">
+										<thead class="f-9">
+											<tr>
+												<th style="width:2%;" class="center">#</th>
+                                                <th style="width:5%;" class="center">Reference</th>
+                                                <th style="width:40%;" class="center">Article</th>
+                                                <th style="width:3%;" class="center">U</th>
+                                                <th style="width:5%;" class="center">Quantité</th>
+                                                <th style="width:7%;" class="center">Prix unitaire</th>
+                                                <th style="width:3%;" class="center">TVA%</th>
+                                                <th style="width:8%;" class="center">Montant TVA</th>
+                                                <th style="width:5%;" class="center">REMISE%</th>
+                                                <th style="width:9%;" class="center">Montant REMISE</th>
+                                                <th style="width:5%;" class="center">TOTAL</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for detail  in  commande.details %}
+												<tr>
+													<td>{{ loop.index }}</td>
+													<td>{{detail.article ? detail.article.code :''}}</td>
+													<td>
+														{{ detail.article ? detail.article.titre:''}}
+														{% if detail.observation %}
+															<br/><b>Informations complementaires :
+																{{ detail.observation}}</b>
+														{% endif %}
+													</td>
+													<td class="center">{{ detail.unite ? detail.unite.abreviation:''}}</td>
+													<td class="center">{{ detail.quantiteformat }}</td>
+													<td class="text-end">{{ detail.prixunitairefomat }}</td>
+													<td class="center">{{detail.tvafomat }}</td>
+													<td class="text-end">{{ detail.prixtvaformat }}</td>
+													<td class="text-end">{{ detail.remisefomat }}
+													</td>
+													<td class="text-end">{{ detail.prixremiseformat }}
+													</td>
+													<td class="text-end-padding">{{detail.prixttcformat }}</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-2 no-pad-left pdr-5">
+				<div class="ibox">
+
+
+					<div class="ibox-content prix_bloc">
+						<div class="ibox-heading">
+							<h3>Total HT
+								<div class="stat-percent">{{ commande.prixht|number_format(2, ',', ' ') }}
+									{{commande.devise ? commande.devise.designation}}
+								</div>
+							</h3>
+						</div>
+						<hr/>
+						<div class="ibox-heading">
+							<h3>TOTAL TAXES
+								<div class="stat-percent">{{ commande.prixtva|number_format(2, ',', ' ') }}
+									{{commande.devise ? commande.devise.designation}}</div>
+							</h3>
+						</div>
+						{% if commande.prixremise > 0 %}
+							<hr/>
+							<div class="ibox-heading">
+								<h3>TOTAL REMISE
+									<div class="stat-percent">{{ commande.prixremise|number_format(2, ',', ' ') }}
+										{{commande.devise ? commande.devise.designation}}</div>
+								</h3>
+							</div>
+						{% endif %}
+
+						<hr/>
+						<div class="ibox-heading">
+							<h1>Total T.T.C
+								<div class="stat-percent">{{ commande.prixttc|number_format(2, ',', ' ') }}
+									{{commande.devise ? commande.devise.designation}}</div>
+							</h1>
+						</div>
+						<hr/>
+
+
+					</div>
+				</div>
+				<div class="ibox selected">
+					<div class="ibox-content pd-0">
+						<div class="tab-content">
+							<div id="contact-1" class="tab-pane active">
+								<div class="client-detail-">
+									<div class="full-height-scroll">
+
+
+										<ul class="list-group clear-list">
+											{% for key ,  operation in operations  %}
+												{%  if  operation.prefix == '_documents' %}
+													<li class="list-group-item fist-item">
+														<div class="panel-default">
+															<div class="div-panel-header">
+																<h5 class="panel-title p-title-style">
+																	<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+																		<i class="fa fa-file-pdf-o"></i>
+																		Impressions associé</a>
+																</h5>
+															</div>
+															<div id="collapseOne" class="panel-collapse in collapse">
+																<div class="panel-body">
+																	<ul class="folder-list m-b-md pd-0-10">
+																		{% if commande.referenceBci %}
+																			<li>
+																				<a href="{{ path('t_achatdemandeinternecab_document_pdf' , {id:commande.referenceBci.id,sans:0})}}" data-valide="{{commande.statutsig}}" {% if commande.fournisseur and commande.fournisseur.categorie.k != "externe" %}class="imprime_document" {% endif %} target="_blank">
+																					<i class="fa fa-file-pdf-o"></i>
+																					Pre-commande ({{ commande.referenceBci.code }})</a>
+																			</li>
+																		{% endif %}
+																		<li>
+																			<a href="{{ path('t_commandefrscab_document_pdf' , {id:commande.id})}}" data-valide="{{commande.statutsig}}" {% if commande.fournisseur and commande.fournisseur.categorie.k != "externe" %}class="imprime_document" {% endif %} target="_blank">
+																				<i class="fa fa-file-pdf-o"></i>
+																				commande ({{ commande.code }})</a>
+																		</li>
+																		<li>
+																			<a href="{{ path('t_commandefrscab_document2_pdf' , {id:commande.id})}}" data-valide="{{commande.statutsig}}" {% if commande.fournisseur and commande.fournisseur.categorie.k != "externe" %}class="imprime_document" {% endif %} target="_blank">
+																				<i class="fa fa-file-pdf-o"></i>
+																				commande-DT ({{ commande.code }})</a>
+																		</li>
+																	</ul>
+																</div>
+															</div>
+														</div>
+													</li>
+												{% endif %}
+
+
+												{%  if  operation.prefix == '_fichiers' %}
+													<li class="list-group-item fist-item">
+														<div class="panel-default">
+															<div class="div-panel-header">
+																<h5 class="panel-title p-title-style">
+																	<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" class="collapsed">
+																		<i class="fa fa-folder-o"></i>
+																		Fichiers associé</a>
+																</h5>
+															</div>
+															<div id="collapseTwo" class="panel-collapse in collapse">
+																<div class="panel-body">
+
+																	{% if commande.fichiers is not empty  %}
+																		<ul class="list-unstyled file-list">
+																			{% for fichier in commande.fichiers %}
+																				{% set icon = "fa fa-paperclip" %}
+																				{% set extension = fichier.imageName|split('.') %}
+																				{% if extension[1] is defined  %}
+																					{% if extension[1] in ['png' , 'jpg' , 'jpeg' , 'icon' , 'svg']  %}
+																						{% set icon = "fa fa-file-image-o" %}
+																					{% elseif extension[1] in ['pdf']  %}
+																						{% set icon = "fa fa-file-pdf-o" %}
+																					{% elseif extension[1] in ['xls' ,'xlsx']  %}
+																						{% set icon = "fa fa-file-excel-o" %}
+																					{% elseif extension[1] in ['doc' ,'docs']  %}
+																						{% set icon = "fa fa-file-word-o" %}
+																					{% elseif extension[1] in ['zip' ,'rar']  %}
+																						{% set icon = "fa fa-file-archive-o" %}
+																					{% endif  %}
+																				{% endif  %}
+																				<li>
+																					<a href="{{ asset('/images/ugouv/achat/demandeAchat/fichiers/' ~ fichier.imageName) }}">
+																						<i class="{{ icon }}"></i>
+																						{{ fichier.originalName }}<b style="font-size: 8px ;">
+																							<i class="fa fa-clock-o" style="font-size: 10px; margin: 1px 5px 0px 5px"></i>
+																							{{ fichier.created ? fichier.created|date('Y-m-d')}}</b>
+																					</a>
+																					<a class="_delete_fichier" style="float: right; color: red;" id="{{ fichier.id }}">
+																						<i class="fa fa-trash"></i>
+
+																					</a>
+																				</li>
+
+																			{% endfor %}
+
+																		</ul>
+																	{% endif %}
+																	<a class="btn btn-white btn-outline btn-xs ajout" id="{{commande.id}}">
+																		<i class="fa fa-plus"></i>
+																		ajouter
+																	</a>
+
+																</div>
+															</div>
+														</div>
+													</li>
+												{% endif %}
+											{% endfor %}
+											<li class="list-group-item fist-item">
+                                                <div class="panel-default">
+                                                    <div class="div-panel-header">
+                                                        <h5 class="panel-title p-title-style">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="false" class="collapsed">
+                                                                <i class="fa fa-clipboard"></i>
+                                                                LIENS ASSOCIé</a>
+                                                        </h5>
+                                                    </div>
+
+                                                    <div id="collapseTree" class="panel-collapse in collapse">
+                                                        <div class="panel-body">
+                                                            {{ include('./module_achat/inc/flux_demande.html.twig',{'demande': commande.referenceBci ,'commande' : commande, 'active_commande':true}) }}
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+										</ul>
+										<br/>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	{{ include('./module_achat/t_commandefrscab/inc/workflow.html.twig' ,{'page_actuel': 'show'}) }}
+
+
+	{#{ render(controller('App\\Controller\\ModuleAchat\\UATCommandefrscabController:showhistorique',{ 'commande': commande }))}#}
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('tcommandefrscab') }}
+
+	<!--<script src="{#{ asset('build/runtime.js') }#}"></script>
+						                                                                        <script src="{#{ asset('build/tcommandefrscab.js') }#}"></script>-->
+
+{% endblock %}

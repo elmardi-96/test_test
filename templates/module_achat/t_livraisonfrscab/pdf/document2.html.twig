@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="fr">
+		<title>Livraison fournisseur</title>
+	</head>
+	<style>
+
+
+		@page {
+			margin: 220px 20px 210px 20px !important;
+			padding: 0 !important;
+		}
+		body {
+			font-family: 'Courier';
+			font-size: 13px;
+		}
+
+		.header {
+			position: fixed;
+			top: -215px;
+			left: 0;
+			right: 0;
+		}
+
+
+		.logo {
+			max-width: 250px;
+			max-height: 100px;
+			text-align: right;
+		}
+
+		.footer {
+			/*border-top: 2px solid #555555;*/
+			margin-top: 10px;
+			font-size: 9px;
+			text-align: center;
+			position: fixed;
+			bottom: 3px;
+			left: 0;
+			right: 0;
+
+
+		}
+
+		*,body {
+			font-family: Courier, sans-serif;
+			text-transform:uppercase;
+
+		}
+
+		main {
+			margin-top: 0;
+		}
+	</style>
+
+	<body>
+		{% if cab.statutsig == 0 and cab.fournisseur and cab.fournisseur.categorie.id == 56  %}
+    <div class="content" style=" position: absolute; opacity: 0.2; font-size: 155px; transform: rotate(-55deg); text-align:center; align-items: center; padding: 40mm -40mm;">
+        <b>non signé </b>
+    </div>
+{% endif %}
+            {# ------------- HEADER ---------------------- #}
+
+            <div class="header">
+            <table
+                style="width: 100%; margin: 20px 0px"
+                align="center"
+                cellspacing="0"
+            >
+                <tr>
+                <td style="width: 35%; text-align: left">
+                    <div style="line-height: 15px">
+                    <span
+                        style="
+                        font-size: 11px;
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        "
+                    >
+                    {{ cab.dossier.titre|upper }} </span
+                    ><br />
+                    <span style="font-size: 9px">{{ cab.dossier.adresse|upper  }}</span><br />
+                    <span style="font-size: 9px">Tel :{{ cab.dossier.tel}}</span
+                    ><br />
+                    <span style="font-size: 9px">Fax :{{ cab.dossier.tel}}</span
+                    ><br />
+                    </div>
+                </td>
+                <td style="width: 65%; text-align: right">
+                    <img src="{{ asset(image)[1:] }}" width = "{{ cab.dossier.WidthLogo }}" height="{{ cab.dossier.HeightLogo }}" class="logo" alt="Logo" />
+                </td>
+                </tr>
+            </table>
+
+            {# <table
+                style="
+                width: 100%;
+                text-align: center;
+                border: 0.3px solid #292929;
+                "
+            >
+                <tr>
+                <td style="width: 45%">
+                    <table style="width: 100%; text-align: center">
+                    <tr>
+                        <th style="width: 100%; font-size: 11px; font-weight: 200">
+                        DATE Livraison
+                        </th>
+                    </tr>
+                    <tr>
+                        <td
+                        style="border-bottom: solid 0.3px #292929; width: 100%"
+                        ></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100%; font-size: 11px; font-weight: bold;">
+						{{ cab.created ? cab.created|date("d/m/Y")  }}
+                        </td>
+                    </tr>
+                    </table>
+					  <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <th style="width: 100%; font-size: 8px; font-weight:margin:0px; 200;border-top: solid 0.3px #292929;padding-top:3px">
+                        <span style="font-weight:bold">	Référence Bon de Commande :</span> {{cab.commande ?  cab.commande.code}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <td
+                        style="border-bottom: solid 0.3px #292929; width: 100%"
+                        ></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100%; font-size: 8px;">
+						<span style="font-weight:bold">	Référence Demande d'achat : </span>{{cab.commande ? cab.commande.referenceBci ? cab.commande.referenceBci.code}}
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+                <td
+                    style="
+                    width: 40%;
+                    font-size: 16px;
+                    font-weight: bold;
+                    border: 0.3px solid #292929;
+                    border-bottom: none;
+                    border-top: none;
+                    "
+                >
+                    BON DE Livraison
+                </td>
+                <td style="width: 45%; text-align: center">
+                    <table style="width: 100%; background: #ffffff; text-align: center">
+                    <tr>
+                        <th style="width: 100%; font-size: 11px; font-weight: 200">
+                        N°BON DE Livraison
+                        </th>
+                    </tr>
+                    <tr>
+                        <td
+                        style="border-bottom: solid 0.3px #292929; width: 100%"
+                        ></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100%; font-size: 11px; font-weight: bold">
+						{{ cab.code }}
+                        </td>
+                    </tr>
+                    </table>
+					 <table style="width: 100%; background: #ffffff; text-align: left">
+                    <tr>
+                        <th style="width: 100%; font-size: 8px; font-weight:margin:0px; 200;border-top: solid 0.3px #292929;padding-top:3px">
+                        <span style="font-weight:bold">	Référence Document : </span>{{cab.refDocAsso}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <td
+                        style="border-bottom: solid 0.3px #292929; width: 100%"
+                        ></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100%; font-size: 8px;">
+						<span style="font-weight:bold">	Date Référence Fournisseur : </span> {{ cab.dateDocAsso|date("d/m/Y") }}
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+                </tr>
+            </table> #}
+			<table style=" width: 100%; text-align: center; " >
+                <tr>
+                <td style="width: 80%">
+                    <table style="width: 100%; text-align: start;margin-top:-38px;">
+					<td style="width: 80%;font-size: 30px;font-weight: bold;">
+					{{"bon de reception"|upper }}
+	                </td>
+				
+					 
+                    </table>
+                </td>
+                <td style="width: 40%;font-size: 16px;font-weight: bold;border-bottom: none;border-top: none;">
+                </td>
+                <td>
+                    <table style="">
+					 <tr>
+                        <th >
+                     	{{barcode|raw}} 
+                        </th>
+                    </tr>
+					 <tr>
+                        <td style="width: 100%; font-size: 11px;">
+                  <b>REF&nbsp; : </b>     {{ cab.code|upper }} 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                        style=" width: 100%"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100%; font-size: 11px;">
+                  <b>DATE  :  </b>    {{ cab.created ? cab.created|date("d/m/Y")  }}
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+                </tr>
+            </table>
+            <div>
+                {# -------------------------END HEADER --------------------------- #} {#
+                -------------------------FOOTER --------------------------- #}
+
+                <div class="footer">
+              
+			  <div style="height:60%">
+			    <table
+                    style="width: 100%; margin-left: auto; margin-right: auto"
+                    align="center"
+                    cellspacing="2"
+                >
+                   <thead>
+                <tr style="background-color: #BEBEBE; color:black; font-size: 9px; ">
+                    <th style="width: 50%;padding: 3px;text-align: center; "colspan="2" >RECÉPTION</th>
+                    {# <th style="width: 30%;padding: 3px;text-align: center; ">GESTION PATRIMOINE</th> #}
+                    <th style="width: 50%;padding: 3px;text-align: center;"colspan="2" >VALIDATION</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td style="font-size: 10px; width:20%;color:black;">
+                        <div style="width:100%;text-align: center;background-color:#e5e5e5;">SITE RECEPTION</div>
+                        <div style="width:100%;text-align: center; height:45px;margin-top:-25px" class="sig">
+						{% if signature1 != "" %}
+							{% if signature1.signature is null %}
+								<p style="padding-top:5px !important; padding-bottom:0px !important">{{signature1.user.nom}} {{signature1.user.prenom}}</p>
+										<div style="margin-top:-80px !important">
+										<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; ">{{signature1.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+										</div>
+										{% else %}
+										<img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature1.signature}}" alt="sig">
+									{% endif %}
+								{% else %}
+										<p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+										<div style="margin-top:-80px !important">
+											<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+										</div>
+						{% endif %}
+						</div>
+                    </td>
+
+                    <td style="font-size: 10px; width:13%;">
+                        <div style="width:100%;text-align: center;background-color:#e5e5e5;">TIERS LIVRAISON</div>
+                        <div style="width:100%;text-align: center; height:45px;margin-top:-25px" class="sig">
+						{% if signature2 != "" %}
+							{% if signature2.signature is null %}
+								<p style="padding-top:5px !important; padding-bottom:0px !important">{{signature2.user.nom}} {{signature2.user.prenom}}</p>
+										<div style="margin-top:-80px !important">
+										<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; ">{{signature2.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+										</div>
+										{% else %}
+										<img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature2.signature}}" alt="sig">
+									{% endif %}
+								{% else %}
+										<p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+										<div style="margin-top:-80px !important">
+											<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+										</div>
+						{% endif %}
+						</div>
+
+                    </td>
+
+                    <td style="font-size: 10px;width:25%;">
+                        <div style="width:100%;text-align: center;background-color:#e5e5e5;">DAS</div>
+                        <div style="width:100%;text-align: center; height:45px;margin-top:-25px" class="sig">
+						{% if signature3 != "" %}
+							{% if signature3.signature is null %}
+								<p style="padding-top:5px !important; padding-bottom:0px !important">{{signature3.user.nom}} {{signature3.user.prenom}}</p>
+										<div style="margin-top:-80px !important">
+										<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; ">{{signature3.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+										</div>
+										{% else %}
+										<img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature3.signature}}" alt="sig">
+									{% endif %}
+								{% else %}
+										<p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+										<div style="margin-top:-80px !important">
+											<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+										</div>
+						{% endif %}
+						</div>
+
+                    </td>
+					  <td style="font-size: 10px;width:25%;">
+                        <div style="width:100%;text-align: center;background-color:#e5e5e5;">DIRECTION DELEGUEE</div>
+                        <div style="width:100%;text-align: center; height:45px;margin-top:-25px" class="sig">
+						{% if signature4 != "" %}
+							{% if signature4.signature is null %}
+								<p style="padding-top:5px !important; padding-bottom:0px !important">{{signature4.user.nom}} {{signature4.user.prenom}}</p>
+										<div style="margin-top:-80px !important">
+										<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; ">{{signature4.user.username|replace({'.': "", "-" : "","_":""})|capitalize}}</span>
+										</div>
+										{% else %}
+										<img style="margin-top:20px" src="./images/parametrage/dossiers/{{signature4.signature}}" alt="sig">
+									{% endif %}
+								{% else %}
+										<p style="padding-top:5px !important; padding-bottom:0px !important"></p>
+										<div style="margin-top:-80px !important">
+											<span style="font-family:'Signaturex' !important;font-size:20px;text-transform: capitalize; "></span>
+										</div>
+						{% endif %}
+						</div>
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+		</div>
+                <br>
+                <div
+                    style="
+                    position: relative;
+                    left: 5%;
+                    width: 90%;
+                    border-top: 0.3px solid #000;
+                    padding: 5px;
+                    text-align: center;
+                    font-size: 11px;
+                    "
+                >
+                    {% if cab.dossier %} {% if cab.dossier.adresse %} {{
+                    cab.dossier.adresse|upper }} {% endif %} {% endif %}
+                </div>
+                </div>
+            </div>
+            </div>
+            {# -------------------------FOOTER --------------------------- #}
+
+
+		<main>
+
+					{# <table cellspacing="0" style="width: 100%; text-align: left; font-size: 12px; ">
+					<table  cellspacing="0" style="width: 100%; text-align: left; font-size: 9px;visibility: hidden;">
+							<tr>
+								<td style="width: 100%;">
+								<span style="font-weight:bold">	Référence Bon de Commande :</span> {{cab.commande ?  cab.commande.code}}
+								</td>
+								<td style="width:0%;">							
+								</td>
+								<td style="width: 100% ;">
+								<span style="font-weight:bold">	Référence Demande d'achat : </span>{{cab.commande ? cab.commande.referenceBci ? cab.commande.referenceBci.code}}
+								</td>
+								<td style="width: 0%;">						
+								</td>
+							</tr>
+							
+							<tr style="line-height: 20px;">
+								<td style="width: 100%;">
+								<span style="font-weight:bold"> Référence Document : </span>{{cab.refDocAsso}}
+								</td>
+								<td style="width: 0%;">
+								</td>
+								<td style="width: 100%;">
+								<span style="font-weight:bold">Date Référence Fournisseur : </span> {{ cab.dateDocAsso|date("d/m/Y") }}
+								</td>
+								<td style="width: 0%;">
+								</td>
+							</tr>
+							<tr style="line-height: 20px;">
+								<td style="width: 100%;">
+								<span style="font-weight:bold"> </span>
+								<td style="width: 0%;">
+								</td>
+								<td style="width: 100%;">
+								<span style="font-weight:bold">  </span> 
+								</td>
+								<td style="width: 0%;">
+								</td>
+							</tr>
+				</table> #}
+
+			{# <table cellspacing="0" style="width: 100%; text-align: left; font-size: 12px">
+	
+				<table style="width: 100%; text-align: left; font-size: 9px">
+					<tr style="width: 100%">
+						<td style="width: 50% ;">
+							<table style="width: 100% ;">
+								<tr>
+									<td style="width: 35% ;border: 0.3px solid #292929">
+										<table style="width: 100% ; ">
+											<tr>
+												<td style="width: 100%">Référence Bon de Commande :</td>
+											</tr>
+										</table>
+									</td>
+									<td style="width: 35%;border: 0.3px solid #292929">
+										<table style="width: 100% ;">
+											<tr>
+												<td style="width: 100%">{{cab.commande ?  cab.commande.code}}</td>
+											</tr>
+										</table>
+									</td>
+									<td style="width: 35% ;border: 0.3px solid #292929">
+										<table style="width: 100% ; ">
+											<tr>
+												<td style="width: 100%">Référence Demande d'achat : 
+												</td>
+											</tr>
+										</table>
+									</td>
+
+									<td style="width: 35%;border: 0.3px solid #292929">
+										<table style="width: 100% ;">
+											<tr>
+												<td style="width: 100%">{{cab.commande ? cab.commande.referenceBci ? cab.commande.referenceBci.code}}</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 35% ;border: 0.3px solid #292929">
+										<table style="width: 100% ; ">
+											<tr>
+												<td style="width: 100%">Référence Document :</td>
+											</tr>
+										</table>
+									</td>
+									<td style="width: 35%;border: 0.3px solid #292929">
+										<table style="width: 100% ;">
+											<tr>
+												<td style="width: 100%">	{{cab.refDocAsso}}</td>
+											</tr>
+										</table>
+									</td>
+									<td style="width: 35% ;border: 0.3px solid #292929">
+										<table style="width: 100% ; ">
+											<tr>
+												<td style="width: 100%">Date Référence Fournisseur :
+												</td>
+											</tr>
+										</table>
+									</td>
+
+									<td style="width: 35%;border: 0.3px solid #292929">
+										<table style="width: 100% ;">
+											<tr>
+												<td style="width: 100%">{{ cab.dateDocAsso|date("d/m/Y") }}</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 35% ;border: 0.3px solid #292929">
+										<table style="width: 100% ; ">
+											<tr>
+												<td style="width: 100%">Compte :</td>
+											</tr>
+										</table>
+									</td>
+									<td style="width: 35%;border: 0.3px solid #292929">
+										<table style="width: 100% ;">
+											<tr>
+												<td style="width: 100%">{{ cab.pourcompte ? cab.pourcompte.nomDossier}}</td>
+											</tr>
+										</table>
+									</td>
+									<td style="width: 35%">
+										<table style="width: 100% ; ">
+											<tr>
+												<td style="width: 100%"></td>
+											</tr>
+										</table>
+									</td>
+									<td style="width: 35%">
+										<table style="width: 100% ;">
+											<tr>
+												<td style="width: 100%"></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table> #}
+
+			<!--II-  Informations Fournisseur-->
+			<table cellspacing="0" style="width: 100%; text-align: left; font-size: 12px;margin-top:25px;">
+			
+				<tr>
+					<td style="padding: 10px 4px  ; text-transform: uppercase;font-weight: bold;font-size: 13px">Informations Fournisseur</td>
+				</tr>
+			</table>
+            <table style="width: 100%; text-align: left; font-size: 9px;">
+				<tr style="width: 50%">
+					<td style="width: 100% ;">
+						<table style="width: 100% ;">
+							<tr>
+								<td style="width: 35% ;border: 0.3px solid #292929;font-weight: bold;">
+									<table style="width: 100% ; ">
+										<tr>
+											<td style="width: 100%">fournisseur :</td>
+										</tr>
+									</table>
+								</td>
+								<td style="width: 65%;border: 0.3px solid #292929">
+									<table style="width: 100% ;">
+										<tr>
+											<td style="width: 100%">{{ cab.fournisseur  ? cab.fournisseur.societe|upper  }}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 35% ;border: 0.3px solid #292929 ">
+									<table style="width: 100% ; ">
+										<tr>
+											<td style="width: 100%">Adresse :</td>
+										</tr>
+									</table>
+								</td>
+								<td style="width: 65%;border: 0.3px solid #292929">
+									<table style="width: 100% ;">
+										<tr>
+											<td style="width: 100%">{{ cab.fournisseur  ? cab.fournisseur.adresse|upper  }}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 35% ;border: 0.3px solid #292929">
+									<table style="width: 100% ; ">
+										<tr>
+											<td style="width: 100%">Ville/Pays :</td>
+										</tr>
+									</table>
+								</td>
+								<td style="width: 65%;border: 0.3px solid #292929">
+									<table style="width: 100% ;">
+										<tr>
+											<td style="width: 100%">
+												
+												{{ cab.fournisseur  ? cab.fournisseur.ville ~'/'~ cab.fournisseur.pays  }}
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+				
+						</table>
+					</td>
+
+
+                    <td style="width: 100% ;">
+						<table style="width: 100% ;">
+							<tr>
+								<td style="width: 35% ;border: 0.3px solid #292929">
+									<table style="width: 100% ; ">
+										<tr>
+											<td style="width: 100%">Télé :</td>
+										</tr>
+									</table>
+								</td>
+								<td style="width: 65%;border: 0.3px solid #292929">
+									<table style="width: 100% ;">
+										<tr>
+											<td style="width: 100%">{{ cab.fournisseur  ? cab.fournisseur.tel1 ~' / '~  cab.fournisseur.tel2 }}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+								<tr>
+								<td style="width: 35% ;border: 0.3px solid #292929;">
+									<table style="width: 100% ; ">
+										<tr>
+											<td style="width: 100%">Mail :</td>
+										</tr>
+									</table>
+								</td>
+
+								<td style="width: 65%;border: 0.3px solid #292929">
+									<table style="width: 100% ;">
+										<tr>
+											<td style="width: 50%">{{ cab.fournisseur  ? cab.fournisseur.mail1|upper  }}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr style="visibility: hidden;">
+								<td style="width: 35% ;border: 0.3px solid #292929;">
+									<table style="width: 100% ; ">
+										<tr>
+											<td style="width: 100%">hidden</td>
+										</tr>
+									</table>
+								</td>
+
+								<td style="width: 65%;border: 0.3px solid #292929">
+									<table style="width: 100% ;">
+										<tr>
+											<td style="width: 50%">hidden</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+
+			<!--End II-  Informations Fournisseur-->
+			<table cellspacing="0" style="width: 100%; text-align: left; font-size: 12px">
+				<tr>
+					<td>
+						<h5 style="padding: 6px 4px  ; text-transform: uppercase;font-weight: bold;font-size: 13px">Objet :
+						</h5>
+					</td>
+				</tr>
+			</table>
+
+
+	{% set c = 0 %}
+		{% for key , detail in cab.details   %}
+
+			{% set c = c + detail.remise %}
+
+		{% endfor %}
+
+
+			<table class="" style="width: 100% ;" cellspacing="0">
+				<thead>
+					<tr style="background-color: #BEBEBE; color:black; font-size: 9px;">
+						<th style="width: 5%;padding: 3px">ORD</th>
+						<th style="width: 10%;padding: 3px">REFERENCE</th>
+						<th style="width: 50%;padding: 3px">DESIGNATION</th>
+						<th style="width: 5%;padding: 3px">UNITE</th>
+						<th style="width: 5%;padding: 3px;text-align: center;">QNT</th>
+						{% if c != 0 %}
+						<th style="width: 5%;padding: 3px">REMISE</th>
+						{% endif %}
+	
+					</tr>
+				</thead>
+
+				<tbody>
+					{% set totalHt  =  0  %}
+					{% set totalTva  =  0  %}
+					{% set i = 0 %}
+					{# {% for i in 0..35 %} #}
+					{% for key , detail in cab.details   %}
+					{% set  key = key + 1  %}
+					{% set  totalHt = totalHt + (detail.quantite*detail.prixunitaire)  %}
+					{% set  totalTva = totalTva + (detail.quantite*detail.prixunitaire*detail.tva/100)  %}
+
+
+							<tr>
+		            	<table  style="width: 100% ;" >
+
+								<td style="width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: left;">{{key}}</td>
+								<td style="width: 10%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: left;">{{ detail.article ? detail.article.code }} </td>
+								<td style="width: 50%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: left;">{{ detail.article ? detail.article.titre }}<br>{{ detail.article ? detail.observation }}</td>
+								<td style="width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align:center;">{{ detail.unite ? detail.unite.abreviation }}</td>
+								<td style="width: 5%;text-transform:uppercase;padding: 3px;font-size: 9px;text-align: center;">{{ detail.quantite|number_format(0) }}</td>
+								{% if c != 0 %}
+									<td>{{ detail.remise ? detail.remise ~ " %" : "-" }}</td>
+								{% endif %}
+                        </table>
+		            	<table  style="width: 100% ;" >
+                                <tbody>
+                                            
+                                    {% for achatDT in CabAchat.details %}
+
+                                       {% if detail.article.id == achatDT.article.id %}
+
+                                           {% for ua_cab in achatDT.uaTechniqueCabs %}
+
+
+                                                     {% for ua_det in ua_cab.getUaTechniqueDets %}
+                                                         <tr>
+								                 
+								                  		<td style="width: 5%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: left;"></td>
+								                  		<td style="width: 10%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: left;"></td>
+								                  		<td style="width: 50%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: left;">&nbsp;&nbsp;&nbsp;{{ ua_det.article }} </td>
+								                  		<td style="width: 10%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: center;"></td>
+								                  		<td style="width: 10%;text-transform: uppercase ;padding: 3px;font-size: 9px;text-align: center;">{{ ua_det.qte|number_format(0) }}</td>
+
+								                  
+									                    </tr>
+
+
+						                
+						                          {% endfor %}
+                                            
+                                            
+
+						                 {% endfor %}
+
+                                         {% endif %}
+						          {% endfor %}
+                                
+                                    </tbody>
+                        </table>
+							</tr>
+					{% endfor %}
+				</tbody>
+
+			</table>
+
+			<br>
+
+
+		</main>
+	</body>
+
+</html>

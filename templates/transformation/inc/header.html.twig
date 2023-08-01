@@ -1,0 +1,46 @@
+<div id="page-wrapper" class="gray-bg">
+    <div class="row">
+       
+
+
+
+        <nav class="navbar navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+              <div class="single-mdl">
+                    <img src="{{asset('img/modules/'~app.session.get('moduleCourantTransformation').image)}}" class="rounded-circle circle-border m-b-md" alt="profile"> <h2> {{ app.session.get('moduleCourantTransformation').titre|upper }} </h2>
+                </div>
+
+               
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ path('_transformation_affectation_dossiers_by_module',{'id':app.session.get('moduleCourantTransformation').id}) }}" >
+                        <i class="fa fa-folder"></i>
+                        {% if (app.session.get('modules')[app.session.get('moduleCourantTransformation').prefix]['dossiers'][app.session.get('dossierCourantTransformation').prefix]  is defined) %}
+                            {%   set dossier = app.session.get('modules')[app.session.get('moduleCourantTransformation').prefix]['dossiers'][app.session.get('dossierCourantTransformation').prefix] %}
+                            {{ dossier.titre }} ({{ (dossier.abreviation) }}) 
+                        {% endif %}
+                    </a>
+                </li>
+                {% include './inc/header_app_config_logout.html.twig' %}
+
+
+
+            
+
+
+
+            </ul>
+
+
+
+
+
+        </nav>
+
+
+
+    </div>
+
+

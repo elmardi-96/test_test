@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Ugouv-SYS</title>
+        <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+        <link rel="shortcut icon" href="{{asset('/img/icon.png')}}" />
+
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+
+    </head>
+    <body class="default-back fixed-nav fixed-nav-basic {% if app.user.theme is defined  %} {{app.user.theme}} {%endif%}">
+
+        {{ dump(app.session.get('modules')['_tache']['dossiers']['_default_tache'])}}
+        {% block sidebar %} 
+            {% include './module_tache/inc/sidebar.html.twig' %}
+        {% endblock %}
+
+
+
+
+
+
+
+
+
+        {% block header %} 
+            {% include './module_tache/inc/header.html.twig' %}
+        {% endblock %}
+
+
+
+        {% block body %} 
+ 
+        {% endblock %} 
+
+
+        {% block footer %} 
+            {% include './inc/footer.html.twig' %}
+        {% endblock %}
+
+
+    </div>
+</div>  
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+</body>
+</html>

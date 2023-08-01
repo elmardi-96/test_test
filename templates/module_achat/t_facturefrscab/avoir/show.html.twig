@@ -1,0 +1,449 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Informations | Facture à voir | Ugouv achat
+{% endblock %}
+
+
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="new">
+
+
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+			<div class="col-lg-12">
+				{% include './module_achat/t_facturefrscab/inc/workflow_breadcumb.html.twig' %}
+			</div>
+
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+				{% include './module_achat/t_facturefrscab/inc/workflow.html.twig' %}
+			</div>
+		</div>
+		<br/><br/>
+
+
+		<div class="row pt-20">
+			<div class="col-lg-12 ">
+				<div class="ibox">
+					<div class="ibox-content">
+						<div class="message-success"></div>
+
+
+						<div class="row m-t-sm">
+							<div class="col-lg-12">
+								<div class="panel blank-panel">
+									<div class="panel-heading">
+										<div
+											class="panel-options">
+											{#}	<li>
+																																																																																								                                                <a class="nav-link active" href="#tab-1" data-toggle="tab">informations de base
+																																																																																								                                                </a>
+																																																																																								                                            </li>#}
+
+											{% include './module_achat/t_facturefrscab/inc/navigation.avoir.html.twig' %}
+
+										</div>
+									</div>
+
+									<div class="panel-body">
+										<div class="col-md-12">
+											<div class="tab-content">
+												<div class="tab-pane active" id="tab-1">
+
+
+													<div class="row">
+														<div class="col-md-12">
+
+															<h3 class="m-t-none m-b">Informations facture à voir
+															</h3>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+
+																<label class="col-sm-2 required">N° FACTURE :</label>
+																<div class="col-sm-4">
+																	{{facture.code}}
+
+
+																</div>
+															</div>
+															<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																<label class="col-sm-2 required">DATE FACTURE :</label>
+
+																<div class="col-sm-4">
+																	{{facture.datefacture|date("d/m/Y") }}
+
+
+																</div>
+
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																<label class="col-sm-2 required">
+																	Mt Facture :</label>
+
+																<div class="col-sm-4">
+																	{{ mttc|number_format(2) }}
+																</div>
+
+															</div>
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+
+																<label class="col-sm-2 required">
+																	Fournisseur :</label>
+																<div class="col-sm-4">
+																	{{facture.fournisseur ? facture.fournisseur.nom}}
+																</div>
+															</div>
+
+															<div id="test" data-facture-id="{{ facture.id|json_encode }}"></div>
+
+
+														</div>
+
+
+													</div>
+
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		{% if facture.livraisons is not empty %}
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ibox ">
+						<div
+							class="ibox-title m-min"><!--<h5>La liste des Articles</h5>-->
+						</div>
+						<div class="ibox-content mcol">
+							<div class="table-responsive">
+								<div class="col-md-12 m-mar-t">
+									<div class="row">
+										<div class="col-md-12">
+											<h5 class="m-left">Livraisons</h5>
+										</div>
+									</div>
+									<div class="panel-body">
+										<div class="panel-group" id="accordion">
+
+											{% set commande = [] %}
+											{% for key , livraison  in  facture.livraisons %}
+
+												{% set commande = livraison.commande %}
+												<div class="panel panel-default">
+													<div class="panel-heading">
+														<h5 class="panel-title">
+															<a data-toggle="collapse" data-parent="#accordion" href="#tab{{livraison.id}}">Livraison
+																{{ key +1 }}
+																:
+																{{livraison.code}}</a>
+														</h5>
+													</div>
+													<div id="tab{{livraison.id}}" class="panel-collapse collapse in {% if key == 0 %}show{% endif %}">
+														<div class="panel-body">
+
+															<div class="tab-pane active show" id="tab-2">
+
+																<div class="row">
+																	<div class="col-md-3">
+
+
+																		<div class="form-group row p-l">
+																			<label class="col-sm-4 required">
+																				Code Livraison :
+																			</label>
+																			<div class="col-sm-8">
+																				<a href="{{ path('ua_t_livraisonfrscab_show',{id:livraison.id})}}" class="btn btn-xs btn-white border-none hover-none">
+																					{{livraison.code }}</a>
+																			</div>
+																			<label class="col-sm-4 required">
+																				Imprimer livraison:
+																			</label>
+																			<div class="col-sm-8">
+																				<a target="_blank" href="{{ path('t_UaTLivraisonfrscab_document_pdf',{id:livraison.id})}}" class="btn btn-xs btn-white btn-outline">
+																					<i class="fa fa-print"></i>&nbsp; Imprimer
+																				</a>
+																			</div>
+																		</div>
+
+																		<div class="hr-line-dashed"></div>
+																		<div class="form-group row p-l">
+																			<label class="col-sm-4 required">
+																				Refe DV Frs	:</label>
+																			<div class="col-sm-8">
+																				{{livraison.refDocAsso }}
+																			</div>
+																			<label class="col-sm-4 required">
+																				Fournisseur  :</label>
+																			<div class="col-sm-8">
+																				{{ livraison.fournisseur ? livraison.fournisseur.nom}}
+																			</div>
+																			<br/>
+																			<label class="col-sm-4 required">dateDocAsso :</label>
+																			<div class="col-sm-8">
+
+																				{{livraison.dateDocAsso|date("d/m/Y") }}
+
+																			</div>
+																		</div>
+																		<div class="hr-line-dashed"></div>
+
+
+																	</div>
+																	<br/>
+																	<div class="col-md-9">
+																		<table class="t-m table table-striped table-bordered table-hover dataTables-example dataTable datatable-show4" id="datatable-show4">
+																			<thead>
+																				<tr>
+																					<th>Reference
+																					</th>
+																					<th>Article
+																					</th>
+																					<th>Observation :</th>
+																					<th>Gerer en stock</th>
+																					<th>Quantite
+																					</th>
+																					<th>PU
+																					</th>
+																					<th>TVA :</th>
+																					<th>TTC</th>
+
+																				</tr>
+																			</thead>
+																			<tbody>
+
+																				{% for detail  in  livraison.details %}
+																					<tr>
+																						<td>
+																							{{ detail.article.titre }}
+																						</td>
+																						<td>
+																							{{ detail.article.code }}
+																						</td>
+																						<td>
+																							{{ detail.observation }}
+																						</td>
+																						<td>
+																							{% if detail.article.gererEnStock == 1 %}
+																								OUI
+																							{% else %}
+																								NON
+																							{% endif %}
+
+																						</td>
+																						<td>
+																							{{ detail.quantite }}
+																						</td>
+																						<td>
+																							{{ detail.prixunitaire |number_format(2, '.', ',') }}
+																						</td>
+																						<td>
+																							{% if detail.tva is not empty %}
+																								{{ detail.tva }}
+																								%
+																								{% else %}-
+																							{% endif %}
+																						</td>
+																						<td>{{ detail.prixttc |number_format(2, '.', ',') }}</td>
+
+																					</tr>
+																				{% endfor %}
+
+																				{# {% endif %} #}
+																			</tbody>
+
+																			<tfoot>
+																				<tr>
+																					<th colspan="8" style="text-align:right">
+																						<table class="table-subtotal">
+																							<tr>
+																								<td>Total HT
+																								</td>
+																								<td>{{ totalLivraison[key]["prixHt"] }}</td>
+																							</tr>
+
+																							<tr class="subtotal-top-border">
+																								<td>TVA
+																								</td>
+																								<td>{{totalLivraison[key]["prixTva"]}}</td>
+																							</tr>
+																							{% if totalLivraison[key]["prixRemise"] is not empty %}
+																								<tr class="subtotal-top-border">
+																									<td>Remise
+																									</td>
+																									<td>{{totalLivraison[key]["prixRemise"]}}</td>
+																								</tr>
+																							{% endif %}
+
+																							<tr class="subtotal-top-border">
+																								<td>Total TTC
+																								</td>
+																								<td>{{totalLivraison[key]["totalTtc"]}}</td>
+																							</tr>
+																						</table>
+																					</th>
+
+																				</tr>
+																			</tfoot>
+																		</table>
+																	</div>
+
+																</div>
+
+
+															</div>
+															<br><br>
+
+
+														</div>
+													</div>
+												</div>
+
+
+											{% endfor %}
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		{% endif %}
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox">
+					<div
+						class="ibox-title m-min"><!--<h5>La liste des Articles</h5>-->
+					</div>
+					<div class="ibox-content">
+						<div class="table-responsive">
+							<div class="col-md-12 m-mar-t">
+								<h5 class="m-left">La liste des articles</h5>
+								<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show">
+									<thead>
+										<tr>
+											<th style="width:5%">#</th>
+											<th style="width:10%">Reference</th>
+											<th style="width:35%">Article
+											</th>
+											<th style="width:20%">Observation</th>
+											<th style="width:5%">Qnt
+											</th>
+											<th style="width:5%">PU
+											</th>
+											<th style="width:5%">TVA</th>
+											<th style="width:5%">Remise</th>
+											<th style="width:5%">TTC</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										{% for detail  in  facture.details %}
+											<tr>
+												<td>
+													{{ loop.index }}
+												</td>
+												<td>{{detail.article.code}}</td>
+												<td>
+													{{ detail.article.titre }}
+												</td>
+												<td>
+													{{ detail.observation }}
+												</td>
+												<td>
+													{{ detail.quantite |number_format(2, '.', ',') }}
+												</td>
+												<td>
+													{{ detail.prixunitaire |number_format(2, '.', ',') }}
+												</td>
+												<td>
+
+													{{ detail.tva |number_format(2, '.', ',') }}
+													%
+
+												</td>
+												<td>
+
+													{{ detail.remise |number_format(2, '.', ',') }}
+													%
+
+												</td>
+												<td>{{detail.prixttc |number_format(2, '.', ',')}}</td>
+											</tr>
+										{% endfor %}
+										{# {% endif %} #}
+									</tbody>
+									<tfoot>
+										<tr>
+											<th colspan="9" style="text-align:right">
+												<table class="table-subtotal" data-ht="{{ht}}" data-tva="{{totalTva}}" data-remise="{{totalRemise}}" data-ttc="{{totalTtc}}">
+													<tr>
+														<td>Total HT
+														</td>
+														<td>{{ht}}</td>
+													</tr>
+													<tr class="subtotal-top-border">
+														<td>TVA
+														</td>
+														<td>{{totalTva}}</td>
+													</tr>
+													{% if totalRemise is not empty %}
+														<tr class="subtotal-top-border">
+															<td>Remise
+															</td>
+															<td>{{totalRemise}}</td>
+														</tr>
+													{% endif %}
+
+													<tr class="subtotal-top-border">
+														<td>Total TTC
+														</td>
+														<td>{{totalTtc}}</td>
+													</tr>
+												</table>
+											</th>
+
+										</tr>
+									</tfoot>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+	{#{ include('./ugouv/achat/inc/t_commandefrscab.html.twig' ,{'commandes': commande ,'position':'facture'}) }#}
+	{{ render(controller('App\\Controller\\ModuleAchat\\UaTFacturefrscabController:showhistorique',{ 'facture': facture.id})) }}
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('tfacturefrscabavoir') }}
+{% endblock %}

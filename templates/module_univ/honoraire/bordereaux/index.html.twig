@@ -1,0 +1,140 @@
+
+{% extends 'base_univ.html.twig' %}
+
+
+
+{% block title %} Honoraires Bordereaux  | Honoraires | UNIV{% endblock %}
+
+
+{% block body %}
+
+
+<div class="form-validation-msg" style="display:none">
+    {# message flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div data-toastr="{{ label }}" class="toastr-msg">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {# form global errors  #}
+    <div class="form-errors"></div>
+</div>
+
+
+
+
+    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+
+
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-4">
+            <h2 class="fo">Univ , Honoraires Bordereaux </h2>
+            {#{ wo_render_breadcrumbs() }#}
+        </div>
+
+
+        <div class="col-lg-8">
+            <div class="title-action">
+                <div class="title-action">
+                   {# {% for key ,  operation in operations  %}
+                        {% if  operation.horizontale %}
+                            <a {% if operation.route is not null  %}  href="{{ path(operation.route) }}" {%  endif %}  id="{{operation.prefix}}" class="btn btn-white btn-xs {{operation.classCs}}"><i class="fa {{ operation.icon }}"></i> {{ operation.titre|capitalize }}</a>
+                        {% endif %}
+                    {% endfor %}#}
+                    <a href="{{path('module_univ_h_albhon_new')}}" class="btn btn-white btn-xs" id="new_action"><i class="fa fa-plus"></i> Ajouter </a>
+                </div>   
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+  <!--  <div class="wrapper wrapper-content animated fadeInRight">-->
+       
+            <div class="col-lg-12">
+
+                <div class="ibox ">
+                  
+                    <div class="ibox-content" style="padding-top: 0px"> 
+                        <div class="table-responsive">
+                            <div class="row" >
+
+
+                          
+                                <div class="col-2 list_actions_bloc" style="position: fixed ; display: none;" {#style="position: fixed;align-content: center;right: 50%;display: none;z-index: 9999999"#}>
+
+                                  {#  <select class="select2_demo _3 form-control _multiple_actions">
+                                        <option value="">Action</option>
+                                        {% for key , operation in  operations  %}
+                                            {% if operation.multiple %}
+                                            <option value="{{operation.prefix}}">{{ operation.titre|capitalize }}</option>
+                                       {% endif %}
+                                            {% endfor %}
+                                    </select>#}
+                                </div>
+                            </div>
+
+                            <table class="table  display table-striped table-bordered table-hover dataTables-example" id="grid" style="width: 100%" >
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                     
+                                        <th>code</th>
+                                        <th>Etablissement</th>
+                                        <th>Formation</th>
+                                        <th>Promotion</th>
+                                        <th>Description</th>
+                                        <th>Date</th>
+                                          
+                                        <th>active</th>
+                                       
+                                       
+                                     
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr> 
+                                        <th>#</th>
+                                     
+                                        <th>code</th>
+                                        <th>Etablissement</th>
+                                        <th>Formation</th>
+                                        <th>Promotion</th>
+                                        <th>Description</th>
+                                        <th>Date</th>
+                                          
+                                        <th>active</th>
+                                       
+                                        
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('univ_honoraire_bordereaux') }}
+{% endblock %}

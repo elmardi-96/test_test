@@ -1,0 +1,40 @@
+
+<div
+	class='table-responsive'>
+	<!--Table-->
+	<table id="kt_table_1" class="table display table-striped table-bordered table-hover dataTables-example dataTable" width="100%">
+		<thead>
+			<tr>
+				{# <th width="5%">#</th> #}
+				<th width="5%">ID</th>
+				<th width="10%">Code</th>
+				<th width="65%">Titre</th>
+				<th width="20%">Categorie</th>
+				<th width="65%">Niveau 1</th>
+				<th width="65%">Niveau 2</th>
+				<th width="65%">Niveau 3</th>
+				<th width="65%">Niveau 4</th>
+			</tr>
+		</thead>
+	
+		<tfoot>
+			<tr>
+				{# <th width="5%">#</th> #}
+				<th width="5%">ID</th>
+				<th width="10%">Code</th>
+				<th width="65%">Titre</th>
+				<th width="20%">Categorie</th>
+				<th width="65%">Niveau 1</th>
+				<th width="65%">Niveau 2</th>
+				<th width="65%">Niveau 3</th>
+				<th width="65%">Niveau 4</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+{#}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+	{{ encore_entry_script_tags('tachatdemandeinternecab') }}
+	
+{% endblock %}#}

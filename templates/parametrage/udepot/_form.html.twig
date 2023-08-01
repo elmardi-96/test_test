@@ -1,0 +1,229 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+{#}
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+	<div class="col-lg-4">
+		<h2 class="fo">Stock , depot
+		</h2>
+	</div>
+
+	<div class="col-lg-8">
+		<div class="title-action">
+			<button class="btn btn-primary btn-xs btn-lg" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}</button>
+
+		</div>
+	</div>
+
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+		{{ wo_render_breadcrumbs() }}
+	</div>
+
+</div>
+#}
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+	<div class="col-lg-4">
+		{% include './parametrage/udepot/inc/workflow_breadcumb.html.twig' %}
+		{#{ wo_render_breadcrumbs() }#}
+	</div>
+	<div
+		class="col-lg-8">
+		{#<div class="title-action">
+						
+		
+						<a id="_delete" class="btn btn-primary btn-xs my-button">
+							<i class="fa fa-trash"></i>
+							Suprimer</a>
+		
+					</div>#}
+		<div class="title-action">
+			<button class="btn btn-primary btn-xs btn-lg" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}</button>
+
+		</div>
+	</div>
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+		{% include './parametrage/udepot/inc/workflow.html.twig' %}
+	</div>
+</div>
+<br/><br/>
+
+<div class="row pt-20">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+							<div class="panel-heading">
+								<div class="panel-options">
+									{%  include './parametrage/udepot/inc/navigation.html.twig' %}
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="panel-body">
+
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+											<div class="row">
+												<div class="col-md-6 b-r">
+
+													<h3 class="m-t-none m-b">Informations</h3>
+
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.code ,'Rererence [code] (*)', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.code,{'attr':{'class':'form-control form-control-sm libelle' ,'placeholder':'Rererence'}}) }}
+														</div>
+													</div>
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.titre ,'Titre (*)', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.titre,{'attr':{'class':'form-control form-control-sm libelle' ,'placeholder':'Titre'}}) }}
+														</div>
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+
+
+													<div class="form-group row">
+														{{ form_label(form.description ,'Description', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.description,{'attr':{'class':'form-control  description' ,'placeholder':'Description'}}) }}
+														</div>
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.etat ,'Etat', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.etat,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Etat'}}) }}
+														</div>
+													</div>
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.active ,'Active', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
+														<div class="col-sm-10">
+															{{ form_widget(form.active) }}
+														</div>
+													</div>
+
+
+												</div>
+
+
+												<div class="col-md-6">
+
+
+													<h3 class="m-t-none m-b">Adresse</h3>
+
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.pays ,'Pays', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.pays,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Pays'}}) }}
+														</div>
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.ville ,'Ville', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.ville,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Ville'}}) }}
+														</div>
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.adresse ,'Adresse', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.adresse,{'attr':{'class':'form-control' ,'placeholder':'Adresse'}}) }}
+														</div>
+													</div>
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.codePostal ,'Code postal', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.codePostal,{'attr':{'class':'form-control form-control-sm' ,'placeholder':'Postal'}}) }}
+														</div>
+													</div>
+
+
+												</div>
+												<div class="col-md-12">
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.autreInformation ,'Autre Informations ', {'label_attr':{'class':'col-sm-3'}}) }}
+														<div class="col-sm-12">
+															{{ form_widget(form.autreInformation,{'attr':{'class':'form-check-inline form-control','placeholder':'Autre Informations'}}) }}
+														</div>
+													</div>
+												</div>
+
+
+											</div>
+
+
+										</div>
+										{#<div class="tab-pane" id="tab-2">
+																			
+																			                                        <div class="hr-line-dashed"></div>
+																			
+																			                                        <div class="form-group row">
+																			                                            {{ form_label(form.autreInformation ,'Autre Informations ', {'label_attr':{'class':'col-sm-3'}}) }}
+																			                                            <div class="col-sm-8">
+																			                                                {{ form_widget(form.autreInformation,{'attr':{'class':'form-check-inline form-control'}}) }}
+																			                                            </div>
+																			                                        </div>
+																			
+																			                                    </div>#}
+
+
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+		<div class="hr-line-dashed"></div>
+
+
+	</div>
+	{% if u_depot is defined %}
+		<input type="hidden" name="_id" value="{{ u_depot.id }}"/>
+	{% endif %}
+</div>
+{{ form_end(form,{'render_rest': false}) }}

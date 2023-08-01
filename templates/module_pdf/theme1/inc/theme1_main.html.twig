@@ -1,0 +1,57 @@
+<div class="line"></div>
+
+<div class="dateFac" style="font-weight: 800 ;">DATE FACTURE</div>
+<table class="head_date" style="position:absolute;top:170px;left:43px">
+	<tr style='width:50%;'>
+		<td style="width:80%">{{ cab.datefacture ? cab.datefacture|date("d/m/Y") : "now"|date("d/m/Y")  }}</td>
+		<td style="width:20%;position:relative;left:5px;"></td>
+	</tr>
+</table>
+<table class="head_date" style=" position:absolute;top:10px;">
+	<tr style='width:50%;'>
+		<td style="width:45%"></td>
+		<td class="bol" style="width:55%;position:relative;left:5px;font-size:25px;">FACTURE</td>
+	</tr>
+</table>
+<div class="nFac">N° FACTURE</div>
+<table class="head_date" style="position:absolute;top:170px;left:40px">
+	<tr style='width:50%;'>
+		<td style="width:75%"></td>
+		<td style="width:25%;position:relative;left:5px;">{{ cab.code   }}</td>
+	</tr>
+</table>
+<div class="line" style="position:absolute;top:60px;"></div>
+<div style="position:absolute;top:210px;left:20px">Nom :</div>
+<table class="head_date" style="position:absolute;top:210px;left:90px">
+	<tr style='width:50%;'>
+		<td style="width:40%;font-size:9px;padding-left:2px;background:#CCCC99;padding:3px;">{{ cab.client ? cab.client.societe : null  }}</td>
+		<td style="width:60%;position:relative;left:5px;"></td>
+	</tr>
+</table>
+<div style="position:absolute;top:210px;left:420px">CP/Ville :</div>
+<table class="head_date" style="position:absolute;top:210px;left:510px">
+	<tr style='width:50%;'>
+		<td style="width:40%;font-size:9px;">{{ cab.client ? cab.client.ville : null  }}</td>
+		<td style="width:60%;position:relative;left:5px;"></td>
+	</tr>
+</table>
+
+<div style="position:absolute;top:244px;left:20px">Adresse :</div>
+<table class="head_date" style="position:absolute;top:244px;left:90px">
+	<tr style='width:50%;'>
+		<td style="width:40%;font-size:9px;font-weight:200;">{{ cab.client ? cab.client.adresse : null  }}</td>
+		<td style="width:60%;position:relative;left:5px;"></td>
+	</tr>
+</table>
+<div style="position:absolute;top:244px;left:420px">Tél/Email :</div>
+<table class="head_date" style="position:absolute;top:246px;left:510px">
+	<tr style='width:50%;'>
+		<td style="width:40%;font-size:9px;">{{ cab.client ? cab.client.tel1 : null  }}
+			/
+			{{ cab.client ? cab.client.mail1 : null  }}</td>
+		<td style="width:60%;position:relative;left:5px;"></td>
+	</tr>
+</table>
+<div class="line" style="position:absolute;top:150px;"></div>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<img src="{{ asset(image)[1:] }}" class="logo-a2mf3" alt="Logo">

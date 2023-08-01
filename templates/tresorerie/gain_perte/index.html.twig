@@ -1,0 +1,158 @@
+{% extends 'base_ugouv.html.twig' %}
+
+
+
+
+{% block title %}index | operation{% endblock %}
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-12">
+			{% include './tresorerie/gain_perte/inc/workflow_breadcumb.html.twig' %}
+		</div>
+
+
+        
+
+        <div class="border-b"></div>
+            <div class="col-lg-12">
+                {{ wo_render_breadcrumbs() }}
+                {# test #}
+            </div>
+
+        </div>
+
+    {#  ------------- modal --------------- #}
+    <div class="modal fade right" id="ModaDetailDevise" role="dialog" aria-labelledby="exampleModalPreviewLabel" data-backdrop="false" style="" aria-hidden="true">
+        <div class="modal-dialog modal-full-height modal-right modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalPreviewLabel">detail paiment</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                {# <div class="sidebar-title"style=" background: #f2f2f2; padding: 5px 8px; margin-bottom: 8px;" >
+                    <i class="fa fa-info-circle"></i> <b> NOTE</b>
+                    <p>DANS LE CADRE DE LA FIABILISATION DES FOURNISSEURS, 
+                    VEUILLEZ RENSEIGNER L'ICE CORRESPONDANT AU FOURNISSEUR SÉLECTIONNÉ</p>
+                </div> #}
+                {# <div class="modal-body bo"> #}
+                <div class="">
+                    <div class="text-center spr" style="display: none;">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bod" style="" id="my_div_action">
+
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+     <br/><br/> <br/><br/> <br/><br/>
+        <div class="col-lg-12">
+            <div class="ibox mt-2">
+
+                <div class="ibox-content">
+
+                    <div class="message-success"></div>
+
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-body">
+                                    <div>
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-1">
+
+                                            <div class="row">
+
+                                                <div class="col-sm-3">
+
+                                                    
+                                                    
+                                                </div>
+                                                <div class="col-sm-4">
+
+                                                    <div class="form-group row">
+                                                        <label  class="col-sm-4 mt-1" style="font-size:12px !important;">Ordre de paiement</label>
+                                                        <div class="col-sm-8">
+                                                            <input  type="text"  style="height:28px; font-size:12px !important;"
+                                                                                class="form-control form-control font-weight-bold " id="code_o_paiment">
+                                                        </div>
+
+                                                        <div class="col-sm-2 ">
+                                                           
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                
+
+                                            </div> 
+                                            <br/><br/> <br/><br/>
+                                             
+                                            
+                                            
+                                        
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+
+        <div class="ibox ">
+            <div class="ibox-content">
+                
+                <div id="content">
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<br>
+<div class="mail-body text-right buttons_foot">
+	
+      
+                {# <button id="Enregistrer_mt_devise" class="disabled btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left">
+                    <i class="fa fa-save"></i>
+                    Enregistrer
+                </button> #}
+           
+
+		
+
+</div>
+
+</div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('gainPerte') }}
+{% endblock %}

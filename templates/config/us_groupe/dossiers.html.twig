@@ -1,0 +1,102 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Utilisateurs-groupes{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('us_groupe') }}
+{% endblock %}
+
+{% block body %}
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+        <div class="col-lg-8">
+
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <br/> <br/>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-md-9">
+
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Utilisateurs & groupes  , Groupe </h5>
+
+                    </div>
+                    <div class="ibox-content" style="padding-top: 0px"> 
+
+
+
+
+                        <div class="wrapper wrapper-content">
+                            <div class="row">
+                                {% if module.ModulesDossiers is not empty %}
+                                    {% for key , dossier in module.ModulesDossiers %}
+
+                                        <div class="col-md-4 box-app">
+                                            <div class="feed-element" style="background: #fbfbfbcc">
+                                                <a href="#" class="float-left">
+                                                    {% if dossier.logo == null %}
+                                                        <img alt="image" class="rounded-circle" src="{{asset('/img/images.png')}}">
+                                                    {% else %}
+                                                        <img alt="image" class="rounded-circle" src="{{asset('/img/'~dossier.logo~'')}}">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="media-body ">
+                                                    <strong>{#{{ module.titre|capitalize }}#}</strong> <small>{{ dossier.description|upper }} ({{ dossier.abreviation }})</small>. <br>
+                                                    <p class="text-muted">{{ dossier.description|capitalize }}</p>
+                                                    <div class="actions">
+                                                        <a href="{{ path('us_groupe_permission',{'groupe_id':groupe_id ,'module_id':module.id ,'dossier_id':dossier.id }) }}" class="btn btn-xs btn-white float-left"><i class="fa fa-check-square-o"></i>  Opérations </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <h2>
+                                        Aucun résultat trouvé pour : <span class="text-navy">{{ module.titre }}</span>
+                                    </h2>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                {{ render(controller('App\\Controller\\UsGroupeController:tree',{ 'groupe_id': groupe_id ,'dossier_id':null ,'module_id':module.id})) }}
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('us_groupe') }}
+{% endblock %}

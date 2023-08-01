@@ -1,0 +1,22 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Edit Dossier{% endblock %}
+
+{% block body %}
+<div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+     <div class="edit">
+    {% include './config/inc/navigation.html.twig' %}
+    {{ include('./parametrage/p_dossier/_form.html.twig') }}
+
+
+    </div>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('pdossier') }}
+{% endblock %}

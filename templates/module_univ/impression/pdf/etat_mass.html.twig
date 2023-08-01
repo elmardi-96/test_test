@@ -1,0 +1,5 @@
+{% for etudiant in etudiants %}
+
+{{ render(controller('App\\Controller\\moduleUniv\\impression\\UnivImpressionController:showInscription',{ 'ins':etudiant.id  , 'sem':semestre.id }))}}
+
+{% endfor %}

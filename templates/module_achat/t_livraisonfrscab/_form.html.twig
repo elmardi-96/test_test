@@ -1,0 +1,246 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+	<div class="col-lg-12">
+		<h2 class="fo">Achat , Reception bc fournisseur
+		</h2>
+	</div>
+
+
+	<div class="border-b"></div>
+	<div class="col-lg-6">
+		{{ wo_render_breadcrumbs() }}
+	</div>
+	<div class="col-lg-6">
+		<div class="title-action">
+			<button class="btn btn-white btn-xs btn-lg" type="submit">
+				<i class="fa fa-save"></i>
+				{{ button_label|default('Enregistrer') }}</button>
+
+		</div>
+	</div>
+</div>
+<br/><br/><br/>
+
+{# <div class="row wrapper border-bottom white-bg page-heading fixed-top-navigation-button">
+    <div class="col-sm-4">
+        <h2>FAQ</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Frequently asked questions</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <a href="" class="btn btn-primary btn-sm">Add question</a>
+        </div>
+    </div>
+</div>#}
+
+
+<div class="row pt-20">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+							<div class="panel-heading">
+								<div class="panel-options">
+									<ul class="nav nav-tabs">
+										<li>
+											<a class="nav-link active" href="#tab-1" data-toggle="tab">informations de base
+											</a>
+										</li>
+
+									</ul>
+								</div>
+							</div>
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+
+
+											<div class="row">
+												<div class="col-md-6 b-r">
+
+													<h3 class="m-t-none m-b">Informations
+													</h3>
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.fournisseur ,'Fournisseur  :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.fournisseur,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.observation ,'Description :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.observation,{'attr':{'class':'form-control form-control-sm t_achatdemandeinternecab_description'}}) }}
+														</div>
+													</div>
+
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.datelivraison ,'Date livraison :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.datelivraison,{'attr':{'class':'form-control form-control-sm t_achatdemandeinternecab_description'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.refDocAsso ,'Reference :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control-sm t_achatdemandeinternecab_description'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.dateDocAsso ,'Date Reference :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.dateDocAsso,{'attr':{'class':'form-control form-control-sm t_achatdemandeinternecab_description'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.mtremise ,'Remise :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.mtremise,{'attr':{'class':'form-control form-control-sm t_achatdemandeinternecab_description'}}) }}
+														</div>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.devise ,'Devise :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-3 input-group">
+															{{ form_widget(form.devise,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+
+
+													{#                          <div class="hr-line-dashed"></div>
+																									                          
+																									                                                                          <div class="form-group row">
+																									                                                                              {{ form_label(form.dateDemande ,'Date de Demande :', {'label_attr':{'class':'col-sm-4'}}) }} 
+																									                                                                              <div class="col-sm-8">
+																									                                                                                  {{ form_widget(form.dateDemande,{'attr':{'class':'form-control'}}) }}  
+																									                                                                              </div>
+																									                                                                          </div>#}
+
+
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.pourCompte ,'Pour le compte :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.pourCompte,{'attr':{'class':'form-control form-control-sm'}}) }}
+														</div>
+													</div>
+
+
+													{#	<div class="hr-line-dashed"></div>
+													
+																									<div class="form-group row">
+																										{{ form_label(form.ismultiple ,'Reception  :', {'label_attr':{'class':'col-sm-4'}}) }}
+																										<div class="col-sm-8">
+																											{{ form_widget(form.ismultiple,{'attr':{'class':'form-control form-control-sm'}}) }}
+																										</div>
+																									</div>
+																								#}
+
+												</div>
+
+
+												<div class="col-md-6">
+
+													<h3 class="m-t-none m-b">Informations client & compte</h3>
+
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.compteMasse ,'Compte Masse :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.compteMasse,{'attr':{'class':'compteMasse form-control form-control-sm'}}) }}
+														</div>
+													</div>
+
+													<div class="hr-line-dashed"></div>
+
+
+													<div class="form-group row">
+														{{ form_label(form.compteRubrique ,'Compte Rubrique :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.compteRubrique,{'attr':{'class':'compteRubrique form-control form-control-sm'}}) }}
+														</div>
+													</div>
+
+													<div class="hr-line-dashed"></div>
+
+													<div class="form-group row">
+														{{ form_label(form.comptePoste ,'Compte Poste :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.comptePoste,{'attr':{'class':'comptePoste form-control form-control-sm'}}) }}
+														</div>
+													</div>
+
+													<div class="hr-line-dashed"></div>
+
+
+													<div class="form-group row">
+														{{ form_label(form.compte ,'Compte  :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-8">
+															{{ form_widget(form.compte,{'attr':{'class':'compte form-control form-control-sm'}}) }}
+														</div>
+													</div>
+
+
+												</div>
+
+
+											</div>
+
+
+										</div>
+
+
+										<div class="hr-line-dashed"></div>
+
+										{% if t_livraisonfrscab is defined %}
+											<input type="hidden" name="_id" value="{{ t_livraisonfrscab.id }}"/>
+										{% endif %}
+
+										{{ form_widget(form.detail) }}
+
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+{{ form_end(form) }}

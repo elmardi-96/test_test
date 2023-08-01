@@ -1,0 +1,105 @@
+
+
+<div class="row">
+	<div class="col-6">
+		<h4>
+			Factures Proforma</h4>
+
+
+		{% if  facture is defined and facture is not empty  and facture.id is not empty %}
+
+			{% set count = 0 %}
+			{% set count2 = 0 %}
+			{#% for key , place  in {"creer":"Cree" , "valider":"Valide" ,"livrer":"livre"  ,"cloturer":"cloturee" }  %}
+			                {% if count >= 0 %}
+			                    {% if workflow_has_marked_place(commande, key)  %}
+			                        {% set count2 = count2 + 1 %}
+			                    {% endif %}
+			                    <a href="#" class="btn btn-default
+			                       {% if workflow_has_marked_place(commande, key)  %}
+			                           btn-breadcrumb2-active
+			                       {% endif %}
+			                       
+			                       {% if count2 == 0 or count2 == 1 %}
+			                       
+			                       {{ workflow_metadata(commande, 'class_css', key)}}
+			                       
+			                       {% else %} 
+			                       
+			                       
+			                       
+			                       {% endif %}
+			                       ">{{ place }}</a>
+			                    {% set count = count + 1%}
+			                    {% if workflow_has_marked_place(commande, key)  %}
+			                        {% set count2 = count2 + 1 %}
+			                    {% endif %}
+			                {% endif %}
+			                </button>
+			            {% endfor %#}
+		{% endif %}
+	</div>
+    <div class="col-6">
+        {% if facture is defined and facture is not empty and facture.id is not empty   %}
+
+			{% if workflow_has_marked_place(facture, "creer")  %}
+
+                <div class="dropdown dropdown-inline text-end"> 
+                    <a href="javascript:;" class="" data-toggle="dropdown">
+                        <span class="svg-icon svg-icon-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewbox="0 0 24 24" version="1.1" class="svg-top svg-color">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <circle fill="#000000" cx="12" cy="5" r="2"/>
+                                    <circle fill="#000000" cx="12" cy="12" r="2"/>
+                                    <circle fill="#000000" cx="12" cy="19" r="2"/>
+                                </g>
+                            </svg>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                        <ul class="dropdown-menu show drp-list" x-placement="bottom-start">
+
+                            {% for key ,  operation in operations  %}
+
+                            {%  if  operation.prefix == '_delete' %}
+                             <li>  <a id="{{operation.prefix}}" data-id="{{facture.id}}" data-token="{{ csrf_token('delete' ~ facture.id) }}" class='btn btn-sm btn-danger btn-outline  {{operation.classCs}}'>
+                                    <i class="fa {{ operation.icon }}"></i>
+                                    {{ operation.titre|capitalize }}</a></li> 
+                                {% endif %}
+            
+                                {%  if  operation.prefix == '_desactiver_facture' or  operation.prefix == '_duppliquer' %}
+                             <li>   <a id="{{operation.prefix}}" data-id="{{facture.id}}"  class='btn btn-sm btn-white btn-outline  {{operation.classCs}}'>
+                                    <i class="fa {{ operation.icon }}"></i>
+                                    {{ operation.titre|capitalize }}</a></li>
+                                {% endif %}   
+            
+                                {%  if  operation.prefix == '_generer'  %}
+                                <li>   <a id="{{operation.prefix}}" data-id="{{facture.id}}"  class='btn btn-sm btn-white btn-outline  {{operation.classCs}}'>
+                                       <i class="fa {{ operation.icon }}"></i>
+                                       {{ operation.titre|capitalize }}</a></li>
+                                   {% endif %} 
+                              
+                              
+            
+                        
+                            
+                            
+                            
+            
+            
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+
+			{% endif %}
+
+
+            <div id="test" data-facture-id="{{ facture.id|json_encode }}"></div>
+
+		{% endif %}
+    </div>
+</div>
+

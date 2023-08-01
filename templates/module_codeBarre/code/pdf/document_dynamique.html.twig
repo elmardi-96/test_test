@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html>
+    <head><meta charset="euc-kr">
+        <title>Pré commande</title>
+
+
+    </head>
+    <style>
+        @page {
+            margin: 5px 20px !important;
+            /*padding: 0px 0px 0px 0px !important;*/
+        }
+        body {
+            font-family: 'Courier New';
+            font-size: 13px;
+        }
+        .logo {
+            max-width: 250px;
+            max-height: 100px;
+        }
+
+        .table-header {
+            width: 100%;
+            text-transform: uppercase;
+
+
+        }
+        .table-content thead tr th {
+            text-align: center;
+        }
+
+        .table-header label {
+            font-size: 12px;
+            font-weight: 200;
+        }
+
+        .th1 {
+            width: 250px;
+            height: 100px;
+        }
+        .th2 {
+            width: 100px;
+            height: 100px;
+        }
+
+        h3 {
+            margin: 0;
+            padding: 8px 0;
+            text-align: center;
+            background: #e7e6e6;
+            text-transform: uppercase;
+        }
+
+        h4 {
+            margin: 4px 0;
+            padding: 8px 0;
+            text-align: center;
+            border: 1px solid #555555;
+        }
+
+
+        .table-content {
+            width: 100%;
+            font-size: 10px;
+            border: 1px solid #555555;
+            border-collapse: collapse;
+
+        }
+
+        .table-content tr {
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+        }
+
+
+        .table-content td {
+            padding: 4px;
+            border-left: 1px solid #555555;
+            border-right: 1px solid #555555;
+
+        }
+        .table-content thead {
+            background: #555555;
+            color: #fff;
+            text-align: center;
+
+        }
+
+        .table-content thead th {
+            font-size: 11px;
+            padding: 4px 2px
+        }
+
+
+        .table-content tbody tr td:nth-child(n + 4) {
+            text-align: right;
+        }
+
+        .table-ttc {
+            font-size: 11.5px;
+            width: 40%;
+            float: right;
+            font-weight: bold;
+
+        }
+
+        .table-ttc tr td {
+            border: 1px solid #555555;
+            padding: 1px 3px;
+        }
+
+        .table-ttc tr td:nth-child(2) {
+            text-align: right;
+        }
+
+
+        .footer {
+            border-top: 2px solid #555555;
+            margin-top: 10px;
+            font-size: 9px;
+            text-align: center;
+            position: fixed;
+            bottom: 60px;
+        }
+        .footer label {
+            padding-left: 10px;
+        }
+
+
+
+        {% if app.request.query.get('form').descriptionDetail is defined %} .table-content th,
+            td {
+                border: solid 1px;
+            }
+
+
+        {% endif %}
+
+       
+    </style>
+    <body>
+
+
+        <table class="table-header">
+            <tr>
+                <th>
+                    {#{{ dump(image)  }}#}
+                    <img src="{{ asset(image)[1:] }}" class="logo" alt="Logo">
+                </th>
+                <th class="th2"><br></th>
+
+                <th class="th3">
+                    <div style="margin-left: 5px; border: 0.5px solid black;">
+                        <div style=" margin: 10px;">
+                            Date :
+                            <label>{{ cab.dateDemande ? cab.dateDemande|date("d/m/Y")}}
+                            </label><br>
+                            RAISON SOCIAL :
+                            <label>{{ cab.fournisseur  ? cab.fournisseur.societe  }}</label><br>
+                            ADRESSE :
+                            <label>{{ cab.fournisseur  ? cab.fournisseur.adresse  }}</label><br>
+                            TEL :
+                            <label>{{ cab.fournisseur  ? cab.fournisseur.tel1 ~ ' / '~  cab.fournisseur.tel2 }}</label><br>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+
+        </table>
+
+
+        <h3>Pré commande</h3>
+
+
+        <table class="table-sub-title">
+
+            <tr>
+                <td>
+                    DEMANDE N° :
+                </td>
+                <td>
+                    {{ cab.code }}
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    NATURE / REFERENCE :
+                </td>
+                <td>
+                    {{ cab.type ? cab.type.designation }}
+
+
+                </td>
+            </tr>
+
+
+            {% if cab.type %}
+
+
+                {% if cab.type.code == 'CMD' %}
+                    <tr>
+                        <td>
+                            REFERENCE COMMANDE :
+                        </td>
+                        <td>
+                            {{ cab.devisClient ? cab.devisClient.code  }}
+                        </td>
+                    </tr>
+
+                {% endif %}
+
+
+                {% if cab.type.code == 'MR' %}
+                    <tr>
+                        <td>
+                            MARCHE :
+                        </td>
+                        <td>
+
+                            {{ cab.marche ? cab.marche.designation  }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            LOT :
+                        </td>
+                        <td>
+
+                            {{ cab.marchesous ? cab.marchesous.designation  }}
+                        </td>
+                    </tr>
+                {% endif %}
+
+                {% if cab.type.code == 'PRJ' %}
+                    <tr>
+                        <td>
+                            PROJET :
+                        </td>
+                        <td>
+
+                            {{ cab.projet ? cab.projet.designation  }}
+                        </td>
+                    </tr>
+                {% endif %}
+
+
+            {% endif %}
+        </table>
+
+
+        <h4>{{ cab.description }}
+        </h4>
+
+        {% set add_rows = 0  %}
+        {% set c = 0 %}
+        {% for key , detail in cab.details   %}
+
+            {% set c = c + detail.remise %}
+
+        {% endfor %}
+        {#{{ dump(app.request.query.get('form')) }}#}
+        <table class="table-content">
+            <thead>
+                <tr>
+                    {% if app.request.query.get('form').code is defined %}
+                        {% set add_rows = add_rows +1  %}
+                        <th style="width: 80px">REFERENCE</th>
+                        {% endif %}
+
+                    {% if app.request.query.get('form').titre is defined %}
+                        {% set add_rows = add_rows +1  %}
+                        <th>DESIGNATION</th>
+                        {% endif %}
+
+                    {% if app.request.query.get('form').imageName is defined %}
+                        {% set add_rows = add_rows +1  %}
+                        <th style="width: 150px">IMG</th>
+                        {% endif %}
+
+                    {% if app.request.query.get('form').unite is defined %}
+                        {% set add_rows = add_rows +1  %}
+                        <th style="width: 40px">UNITE</th>
+                        {% endif %}
+
+                    {% if app.request.query.get('form').quantite is defined %}
+                        {% set add_rows = add_rows +1  %}
+                        <th style="width: 60px">QNT</th>
+                        {% endif %}
+
+
+
+                    {% if app.request.query.get('form').prixunitaire is defined %}
+                        {% set add_rows = add_rows +1  %}
+                        <th style="width: 60px">PU HT</th>
+                        {% endif %}
+
+
+
+                    {% if app.request.query.get('form').remise is defined %}
+                        {% set add_rows = add_rows +1  %}
+                        <th style="width: 60px">REMISE</th>
+                        {% endif %}
+
+
+
+
+
+                    {% if app.request.query.get('form').prixttc is defined %}
+                        {% set add_rows = add_rows +1  %}
+                        <th style="width: 60px">PT HT</th>
+                        {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {#% set totalHt  =  0  %}
+                                {% set totalTva  =  0  %#}
+
+                {% for key , detail in cab.details   %}
+                    {% set  key = key + 1  %}
+                    {#% set  totalHt = totalHt + (detail.quantite*detail.prixunitaire)  %}
+                                        {% set  totalTva = totalTva + (detail.quantite*detail.prixunitaire*detail.tva/100)  %#}
+                    <tr>
+                        {% if app.request.query.get('form').code is defined %}
+                            <td>{{ detail.article.code|upper }}</td>
+                        {% endif %}
+
+                        {% if app.request.query.get('form').titre is defined %}
+                            <td>
+                                {{ detail.article.titre|upper  }}
+                                {% if app.request.query.get('form').descriptionDetail is defined %}
+                                    <br/>
+
+
+                                    <p style="margin: 4px 10px;font-weight: bold">
+                                        {{ detail.article.descriptionDetail|upper |nl2br  }}</p>
+                                    {% endif %}
+                            </td>
+                        {% endif %}
+
+                        {% if app.request.query.get('form').imageName is defined %}
+
+                            <td>
+                                {% if articleImage[detail.article.id]['imageName'][1:] %}
+
+
+                                    <img style="max-width: 100px" src="{{asset(articleImage[detail.article.id]['imageName'])[1:]}}" class="logo" alt="Logo">
+
+                                {% endif %}
+
+                            </td>
+                        {% endif %}
+
+
+                        {% if app.request.query.get('form').unite is defined %}
+                            <td>{{ detail.unite.abreviation ? detail.unite.abreviation|upper }}</td>
+                        {% endif %}
+
+                        {% if app.request.query.get('form').quantite is defined %}
+                            <td>{{ detail.quantite|number_format(2) }}</td>
+                        {% endif %}
+
+
+
+                        {% if app.request.query.get('form').prixunitaire is defined %}
+                            <td>{{ detail.prixunitaire|number_format(2) }}</td>
+                        {% endif %}
+
+                        {% if app.request.query.get('form').remise is defined %}
+                            <td>{{ detail.remise ? detail.remise ~ " %" : null }}</td>
+                        {% endif %}
+
+                        {% if app.request.query.get('form').prixttc is defined %}
+                            <td>{{ detail.prixttc|number_format(2) }}</td>
+                        {% endif %}
+                    </tr>
+
+                    {% if cab.details|length == key and cab.details|length <= 22 %}
+                        {% for i in cab.details|length .. 22 %}
+                            <tr>
+                                {% for  j in 0..(add_rows - 1 )%}
+                                    <td style="color: #fff; {% if i == 22%} border-bottom-color: #000; {%endif%}">{{ j }}
+                                    </td>
+
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+            </tbody>
+        </table><br>
+
+
+        {% if app.request.query.get('form').prixttc is defined %}
+            <table class="table-ttc">
+                <tr>
+                    <td>TOTAL HT</td>
+                    <td>{{ ht|number_format(2) }}</td>
+                </tr>
+                {% if cab.remise != 0 %}
+                    <tr>
+                        <td>REMISE %</td>
+                        <td>{{ cab.remise }}
+                            %</td>
+                    </tr>
+                    <tr>
+                        <td>MT.REMISE
+                        </td>
+                        <td>{{ totalRemise |number_format(2) }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td>TVA</td>
+                    <td>{{ totalTva|number_format(2) }}</td>
+                </tr>
+                <tr>
+                    <td>TOTAL TTC</td>
+                    <td>{{ ttc|number_format(2) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>NET A PAYER</td>
+                    <td>{{ totalTtc|number_format(2) }}</td>
+                </tr>
+            </table>
+        {% endif %}
+    </body>
+
+    <footer>
+        <div class="footer">
+
+            <p>
+                {% if cab.dossier  %}
+                    {{ cab.dossier.titre }}
+
+                    {% if  cab.dossier.rc %}
+                        <label>RC :</label>
+                        {{ cab.dossier.rc }}
+                    {% endif %}
+                    {% if  cab.dossier.ice %}
+                        <label>ICE :</label>
+                        {{ cab.dossier.ice }}
+                    {% endif %}
+                    {% if  cab.dossier.iff %}
+                        <label>IF :</label>
+                        {{ cab.dossier.iff }}
+                    {% endif %}
+                    {% if  cab.dossier.cnss %}
+                        <label>CNSS :</label>
+                        {{ cab.dossier.cnss }}
+                    {% endif %}
+                    {% if  cab.dossier.patente %}
+                        <label>PATENTE :</label>
+                        {{ cab.dossier.patente }}
+                    {% endif %}
+                {% endif %}
+            </p>
+        </div>
+    </footer>
+</html>

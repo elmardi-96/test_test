@@ -1,0 +1,71 @@
+<div id="page-wrapper" class="gray-bg">
+	<div class="row">
+
+
+		<nav class="navbar navbar-fixed-top" role="navigation">
+			<div class="navbar-header" style="margin-top: 0px;margin-bottom: -3px;">
+				<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+					<i class="fa fa-bars"></i>
+				</a>
+
+				<ul class="navbar-top-links navbar-top-dossier">
+					<li class="nav-item">
+                                            {#<a class="nav-link" href="{{ path('_ugouv_achat_dossiers_by_module',{'id':app.session.get('moduleCourantUgouvAchat').id}) }}">
+																																																																																																																																																																																																							<i class="fa fa-folder"></i>
+																																																																																																																																																																																																							{% if (app.session.get('modules')[app.session.get('moduleCourantUgouvAchat').prefix]['dossiers'][app.session.get('dossierCourantUgouvAchat').prefix]  is defined) %}
+																																																																																																																																																																																																								{%   set dossier = app.session.get('modules')[app.session.get('moduleCourantUgouvAchat').prefix]['dossiers'][app.session.get('dossierCourantUgouvAchat').prefix] %}
+																																																																																																																																																																																																								{{ dossier.titre }}
+																																																																																																																																																																																																								({{ (dossier.abreviation) }})
+																																																																																																																																																																																																							{% endif %}
+																																																																																																																																																																																																						</a>#}
+						{#<select class="sel2">
+																																																																																																																																																																																																	{% for dos in app.session.get('modules')[app.session.get('moduleCourantUgouvAchat').prefix]['dossiers'] %}
+																																																																																																																																																																																																		<option>
+																																																																																																																																																																																																			<i class="fa fa-folder"></i>
+																																																																																																																																																																																																			{{ dos.titre }}
+																																																																																																																																																																																																			({{ (dos.abreviation) }})</option>
+																																																																																																																																																																																																	{% endfor %}
+																																																																																																																																																																																																</select>#}
+						{%   set dossier = app.session.get('modules')[app.session.get('moduleCourantUgouvAchat').prefix]['dossiers'][app.session.get('dossierCourantUgouvAchat').prefix] %}
+						{#{ dump(app.request.attributes) }#}
+							<div class="btn-group"> <button data-toggle="dropdown" class="btn btn-default btn-xs  drop-down-class" aria-expanded="false">
+								<i class="fa fa-folder"></i>
+								{{ dossier.titre }}
+								({{ (dossier.abreviation) }})
+								{#<i class="fa fa-chevron-down rotate"></i>#}
+							</button>
+							<ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; top: 24px; left: 0px; will-change: top, left;">
+								{% for dos in app.session.get('modules')[app.session.get('moduleCourantUgouvAchat').prefix]['dossiers'] %}
+									{% if dossier.id != dos.id  %}
+										<li>
+											<a class="dropdown-item " style="font-size: 11px;color: #616161 !important;text-transform: uppercase;" href="{{ path('change_dossier_courant',{'nameModule':'moduleCourantUgouvAchat','module_id':app.session.get('moduleCourantUgouvAchat').id,'nameDossier':'dossierCourantUgouvAchat','dossier_id':dos.id},true) }}">
+												<i class="fa fa-folder"></i>
+												{{ dos.titre }}
+												({{ (dos.abreviation) }})</a>
+										</li>
+									{% endif %}
+								{% endfor %}
+
+								<li class="dropdown-divider"></li>
+								<li>
+									<a class="dropdown-item" style="font-size: 11px;color: #616161 !important;text-transform: uppercase;" href="{{ path('_ugouv_achat_dossiers_by_module',{'id':app.session.get('moduleCourantUgouvAchat').id}) }}">
+										<i class="fa fa-folder"></i>
+										Tout les dossiers</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<ul class="nav navbar-top-links navbar-right">
+
+				{% include './inc/header_app_config_logout.html.twig' %}
+
+
+			</ul>
+
+
+		</nav>
+
+
+	</div>

@@ -1,0 +1,76 @@
+<div id="page-wrapper" class="gray-bg">
+    <div class="row">
+       
+
+
+
+        <nav class="navbar navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+             
+
+                <div class="single-mdl">
+
+                    <img src="/img/dossiers-icon/bl.png" class="rounded-circle circle-border m-b-md" alt="profile"> <h2> {#{{ app.session.get('moduleCourantUgouvAchat').titre|upper }}#} </h2>
+                </div>
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+             
+
+                {#<li class="nav-item ">
+                    <a class="nav-link" href="{{ path('_ugouv_achat_dossiers_by_module',{'id':app.session.get('moduleCourantUgouvAchat').id}) }}" >
+                        <i class="fa fa-folder"></i>
+                        {% if (app.session.get('modules')[app.session.get('moduleCourantUgouvAchat').prefix]['dossiers'][app.session.get('dossierCourantUgouvAchat').prefix]  is defined) %}
+                            {%   set dossier = app.session.get('modules')[app.session.get('moduleCourantUgouvAchat').prefix]['dossiers'][app.session.get('dossierCourantUgouvAchat').prefix] %}
+                            {{ dossier.titre }} ({{ (dossier.abreviation) }}) 
+                        {% endif %}
+                    </a>
+                </li>#}
+
+
+                <li class="dropdown"> 
+                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle " data-toggle="dropdown"> <i class="fa fa-list"></i> Applications</a>
+                    <ul role="menu" class="dropdown-menu">
+                        {% for key , module in app.session.get('modules') %}
+                            {% set url = '' %}
+                            {% if module.route is not null   %}
+                                {% set url = "href="~path(module.route , {'id':module.id})~""  %}
+                            {% endif %}
+
+                            <li><a {{ url }}>{{ module.titre|capitalize }}</a></li>
+                            {% endfor %}
+                        <li class="dropdown-divider"></li>
+                        <li><a href="{{ path('app') }}">Toutes les applications</a></li>
+                    </ul>
+                </li>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{asset('config')}}">
+                            <i class="fa fa-wrench"></i>
+                            Configurations
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li>
+                    <a href="{{path('logout')}}">
+                        <i class="fa fa-sign-out"></i> Déconnexion
+                    </a>
+                </li>
+
+
+
+            </ul>
+
+
+
+
+
+        </nav>
+
+
+
+    </div>
+
+

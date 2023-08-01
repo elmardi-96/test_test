@@ -1,0 +1,229 @@
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+	<div class="col-lg-6">
+		{% include './module_achat/t_facturefrscab/inc/workflow_breadcumb.html.twig' %}
+	</div>
+
+	<div class="col-lg-6">
+		<div class="title-action">
+			{% if  workflow_has_marked_place(facture, 'valider')  or workflow_has_marked_place(facture, 'generer')  %}
+				{% else %}
+					<button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+						<i class="fa fa-save"></i>
+						{{ button_label|default('Enregistrer') }}
+					</button>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="border-b"></div>
+	<div class="col-lg-12">
+		{% include './module_achat/t_facturefrscab/inc/workflow.html.twig' %}
+	</div>
+</div>
+<br/><br/>
+
+<div class="row pt-20">
+	<div class="col-lg-12 ">
+		<div class="ibox">
+
+			<div class="ibox-content">
+
+				<div class="message-success"></div>
+
+
+				<div class="row m-t-sm">
+					<div class="col-lg-12">
+						<div class="panel blank-panel">
+							<div class="panel-heading">
+								<div class="panel-options">
+									{% include './module_achat/t_facturefrscab/inc/navigation.acompte.html.twig' %}
+								</div>
+							</div>
+
+							<div class="panel-body">
+								<div class="col-md-12">
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab-1">
+											{% if workflow_has_marked_place(facture, 'valider') or workflow_has_marked_place(facture, 'generer') %}
+
+
+												<div class="forum-item animated bounce">
+													<div class="row">
+														<div class="col-md-9">
+															<div class="forum-icon">
+																<i class="fa fa-warning"></i>
+															</div>
+															<a class="forum-item-title">Important</a>
+															<div class="forum-sub-title">
+																Vous ne pouvez pas modifier une expression de besoin apres la validation ,
+																<br/>veuillez consulter ce lien pour plus d'informations sur cette facture d'acompte
+																<a href="{{ path('ua_t_facturefrscab_consulte_acompte' , {id:facture.id})}}">{{ facture.code }}</a>
+															</div>
+														</div>
+
+													</div>
+												</div>
+
+											{% else  %}
+
+												<div class="row">
+													<div class="col-md-12">
+														<h3 class="m-t-none m-b">Informations facture acompte
+														</h3>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.datefacture ,'Date facture :', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-2">
+																{{ form_widget(form.datefacture,{'attr':{'class':'form-control form-control-sm'}}) }}
+															</div>
+
+														</div>
+
+
+														<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.modepaiement ,'mode Paiement :', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-3">
+																{{ form_widget(form.modepaiement,{'attr':{'class':'sel2 form-control form-control-sm paiement'}}) }}
+															</div>
+
+														</div>
+
+														
+														<div class="bloc_cheque" style="display: none;">
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.numcheque ,'Reference	:', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-4">
+																	{{ form_widget(form.numcheque,{'attr':{'class':'form-control','placeholder':'Reference'}  }) }}
+
+
+																</div>
+
+															</div>
+														</div>
+														<div class="bloc_cheque" style="display: none;">
+
+															<div class="hr-line-dashed"></div>
+															<div class="form-group row">
+																{{ form_label(form.dateecheance ,'date d\'echeance	:', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                        <div class="col-sm-4">
+                                                                            {{ form_widget(form.dateecheance,{'attr':{'class':'form-control'}  }) }}
+
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+
+														
+														
+														
+														
+														
+														</div>
+														<div id="test" data-facture-id="{{ facture.id|json_encode }}"></div>
+
+
+													</div>
+													<div class="hr-line-dashed"></div>
+														<div class="form-group row">
+															{{ form_label(form.montant ,'Montant (*):', {'label_attr':{'class':'col-sm-4'}}) }}
+															<div class="col-sm-1">
+																{{ form_widget(form.montant,{'attr':{'class':'form-control form-control-sm','placeholder':'Montant :'}}) }}
+															</div>
+
+														</div>
+													<div class="hr-line-dashed"></div>
+
+															<div class="form-group row">
+																<label class="col-sm-4 required">
+																	Facture parvenue (*)
+																</label>
+
+																<div class="col-sm-2">
+																	{{ form_widget(form.parvenue,{'attr':{'class':'form-control form-control-sm col-sm-12 parvenue' ,'placeholder':'Reference'}}) }}
+																</div>
+															</div>
+
+															<div class="hr-line-dashed refDoc"></div>
+
+															<div class="form-group row refDoc">
+																<label class="col-sm-4 required">
+																	Reference docAsso (*)
+																</label>
+
+																<div class="col-sm-2">
+																	{{ form_widget(form.refDocAsso,{'attr':{'class':'form-control form-control-sm col-sm-12' ,'placeholder':'Reference'}}) }}
+																</div>
+
+															</div>
+
+															<div class="hr-line-dashed dateDoc"></div>
+
+															<div class="form-group row dateDoc">
+																<label class="col-sm-4 required">
+																	Date docAsso (*)
+																</label>
+
+																<div class="col-sm-2">
+																	{{ form_widget(form.dateDocAsso,{'attr':{'class':'form-control form-control-sm col-sm-12'}}) }}
+
+																</div>
+
+															</div>
+
+												
+
+													
+													<div class="hr-line-dashed"></div>
+													<div class="form-group row">
+														{{ form_label(form.observation ,'Autre information :', {'label_attr':{'class':'col-sm-4'}}) }}
+														<div class="col-sm-3">
+															{{ form_widget(form.observation,{'attr':{'class':'form-control form-control-sm','placeholder':'Autre information :'}}) }}
+														</div>
+
+													</div>
+													
+													
+
+
+												</div>
+											</div>
+
+											{% endif %}
+											
+
+
+										</div>
+                                        {% if facture is defined %}
+                                            <input type="hidden" name="_id" id="_id" value="{{ facture.id }}"/>
+                                        {% endif %}
+										
+										{#{ form_widget(form.detail) }#}
+
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+
+		</div>
+
+	</div>
+</div>

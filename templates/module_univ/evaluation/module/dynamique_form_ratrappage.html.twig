@@ -1,0 +1,81 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+
+
+        <div id="tab-1" class="tab-pane active">
+
+            <div class="sidebar-title">
+                <h3> <i class="fa fa-info-circle"></i> INFORMATIONS </h3>
+                <small> Informations sur le document a imprimer  .</small>
+            </div>
+
+            <div class="right-sidebar-content">
+
+
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                              
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+                <div class="ibox">
+                    <div class="ibox-content">
+
+                     
+
+                        <form name="form" method="get" action="{{ path('module_univ_module_pdf_ratrappage_show',{id:module.id})}}" novalidate="novalidate" target="_blank">
+                            <h3 class="m-t-none m-b"> La Liste Des Elements - MODULE</h3>
+                            <div class="hr-line-dashed"></div>
+                            <br>
+                            
+                            <div class="row">
+                        	<div class="col-sm-12">
+
+                                <select name="element" id="element" class="sel2 form-control form-control-sm ">
+                                    <option  >Choix Element ...</option>
+                                    {% for key , element in module.controleElements   %}
+    
+                                    <option  value="{{element.element.id}}">{{element.element.designation}}</option>
+    
+                                    {% endfor %}
+                                  
+                                  </select>
+                            </div>
+                        </div>
+
+                              <br> 
+                      
+                        <button class="btn btn-white btn-block btn-xs"><i class="fa fa-print"></i> &nbsp;{{ button_label|default('Imprimer') }}</button>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

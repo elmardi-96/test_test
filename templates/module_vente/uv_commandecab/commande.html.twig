@@ -1,0 +1,191 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Commande | Vente
+{% endblock %}
+
+
+{% block body %}
+    <div class="new">
+        {{ form_start(form ,{'attr':{'novalidate': 'novalidate' , "autocomplete":"off",'class':'form_commande'}}) }}
+        <div id="right-sidebar" class="actions animated"></div>
+
+        <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+            <div class="col-lg-6">
+                {% include './module_vente/uv_commandecab/inc/workflow_breadcumb.html.twig' %}
+                </h2>
+            </div>
+            <div class="col-lg-6">
+                <div class="title-action">
+                    {% if valider == 'valider' %}
+
+                        <button class="btn btn-white  btn-xs btn-lg my-button2" type="submit">
+                            <i class="fa fa-save"></i>
+                            {{ button_label|default('Enregistrer') }}</button>
+                        {% endif %}
+                        {#% include './module_vente/uv_deviscab/inc/workflow.html.twig' %#}
+                </div>
+            </div>
+            <div class="border-b"></div>
+            <div class="col-lg-12">
+                {% include './module_vente/uv_commandecab/inc/workflow.html.twig' %}
+            </div>
+        </div>
+        <br/><br/>
+        <div class="row pt-20">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div
+                        class="ibox-content">
+
+                        {#% include './module_vente/uv_deviscab/inc/workflow_breadcumb.html.twig' %#}
+                        <div class="row m-t-sm">
+                            <div class="col-lg-12">
+                                <div class="panel blank-panel">
+                                    <div class="panel-heading">
+                                        <div 
+                                            class="panel-options">
+                                            {#<ul class="nav nav-tabs">
+                                                                                                                                                                                                        <li><a class="nav-link active show" href="#tab-1" data-toggle="tab">Informations</a></li>
+                                                                                                                                                                                                        <li><a class="nav-link" href="#tab-2" data-toggle="tab">Articles</a></li>
+                                                                                                                                                                                                        </ul>#}
+                                            {% include './module_vente/uv_commandecab/inc/navigation.html.twig' %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="panel-body">
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active show" id="tab-1">
+                                                    <div class="row">
+                                                        {% if valider == 'valider' or workflow_has_marked_place(commande, 'commander') %}
+                                                            {% if workflow_has_marked_place(commande, 'commander') %}
+                                                                <div class="col-md-12 ">
+                                                                    <div class="forum-item animated bounce">
+                                                                        <div class="row">
+                                                                            <div class="col-md-9">
+                                                                                <div class="forum-icon">
+                                                                                    <i class="fa fa-warning"></i>
+                                                                                </div>
+                                                                                <a class="forum-item-title">Important</a>
+                                                                                <div class="forum-sub-title">
+                                                                                    ce Commande dispose deja une date  de commande  ,
+                                                                                    <br/>
+                                                                                    <b>Date :
+                                                                                        {{ commande.datecommande|date('Y-m-d ') }}</b>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            {% else %}
+                                                                <div class="col-md-6 b-r">
+                                                                    <h3>Commande devis</h3>
+                                                                    <div class="ibox">
+
+
+                                                                        <div class="ibox-content style-left-popup">
+
+
+                                                                            <div class="hr-line-dashed"></div>
+
+
+                                                                            <div class="form-group row">
+                                                                                {{ form_label(form.refcommande ,'Reference CMD Client :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                                {{ form_widget(form.refcommande,{'attr':{'class':'form-control form-control-sm col-sm-6' , 'value':commande.refcommande}}) }}
+                                                                            </div>
+                                                                            <div class="errors_list"></div>
+                                                                            <div class="hr-line-dashed"></div>
+                                                                            <div class="form-group row">
+                                                                                {{ form_label(form.datecommande ,'Date Commande :', {'label_attr':{'class':'col-sm-4'}}) }}
+                                                                                {{ form_widget(form.datecommande,{'attr':{'class':'form-control form-control-sm col-sm-6' , 'value':commande.datecommande|date('Y-m-d')}}) }}
+                                                                            </div>
+
+
+                                                                            {% if commande is defined %}
+                                                                                <input type="hidden" name="_id" value="{{ commande.id }}"/>
+                                                                            {% endif %}
+
+
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <h3 class="m-t-none m-b">Informations Commande</h3>
+                                                                    <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                                    <table class="table ">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <strong>Code :</strong>
+                                                                                    {{ commande.code }}
+                                                                                </td>
+
+
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <strong>Date  :</strong>
+                                                                                    {{ commande.dateDevis ? commande.dateDevis|date('Y-m-d H:i:s') : '' }}
+                                                                                </td>
+
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <strong>Description :</strong>
+                                                                                    {{commande.observation}}
+                                                                                </td>
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <div class="col-md-12 ">
+                                                                <div class="forum-item animated bounce">
+                                                                    <div class="row">
+                                                                        <div class="col-md-9">
+                                                                            <div class="forum-icon">
+                                                                                <i class="fa fa-warning"></i>
+                                                                            </div>
+                                                                            <a class="forum-item-title">Important</a>
+                                                                            <div class="forum-sub-title">
+                                                                                ce Commande n'est pas valide pour passer a la commande  ,
+
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="test" data-commande-id="{{ commande.id|json_encode }}"></div>
+        {{ form_end(form,{'render_rest': false}) }}</div>{% endblock %}{% block javascripts %}{{ parent() }}{{ encore_entry_script_tags('uventecommande') }}{% endblock %}

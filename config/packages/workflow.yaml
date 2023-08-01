@@ -1,0 +1,2088 @@
+framework:
+
+    
+    workflows:
+        
+        
+        #Module achat version ugouv workflow demande achat #         u_general_operation  
+        t_achatdemandeinternecab:
+            type: 'state_machine' 
+            
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\TAchatdemandeinternecab
+            initial_marking: 
+                - creer 
+            places:
+                creer:
+                    metadata:
+                        title: 'Cree'
+                        class_css: 'color-creer'
+                annuler:
+                    metadata:
+                        title: 'Annuler'
+                        class_css: 'color-annule'
+                        
+                valider:
+                    metadata:
+                        title: 'Validee'
+                        class_css: 'color-valide'
+                     
+                
+                commander:
+                    metadata:
+                        title: 'Commandee'
+                        class_css: 'color-encours'
+                
+            transitions:
+                
+                                    
+#                apres_creer_annuler:
+#                    metadata:
+#                        title: Annuler
+#                        icon : fa-arrow-left
+#                        class: btn-white
+#                        function : t_achatdemandeinternecab_apply_transitions
+#                    from: creer  
+#                    to: annuler   
+
+
+                apres_valider_creer:
+                    metadata:
+                        title: Devalider
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : t_achatdemandeinternecab_apply_transitions
+                    from: valider  
+                    to: creer 
+#                    
+                apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : t_achatdemandeinternecab_apply_transitions
+                    from: creer
+                    to: valider
+                 
+                   
+                apres_valider_commander:
+                    metadata:
+                        title: Commander
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : t_achatdemandeinternecab_apply_transitions
+                    from: valider  
+                    to: commander  
+        
+#        t_achatdemandeinternecab:
+#            type: 'state_machine'
+#            marking_store:
+#                 type: 'method'
+#                 property: 'currentPlace'
+#            supports:
+#                - App\Entity\TAchatdemandeinternecab
+#            initial_marking: start
+#            places:
+#                - start
+#                - coding
+#                - test
+#                - review
+#                - merged
+#                - closed
+#            transitions:
+#                submit:
+#                    from: start
+#                    to: test
+#                update:
+#                    from: [coding, test, review]
+#                    to: test
+#                wait_for_review:
+#                    from: test
+#                    to: review
+#                request_change:
+#                    from: review
+#                    to: coding
+#                accept:
+#                    from: review
+#                    to: merged
+#                reject:
+#                    from: review
+#                    to: closed
+#                reopen:
+#                    from: closed
+#                    to: review
+                    
+                    
+
+
+                    
+                    
+                    
+        #module  ressources humaines gestion des conges #            
+        grs_conge:
+            type: 'workflow' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\GrsConge
+            initial_marking: 
+                - creer
+                
+            places:
+                creer:
+                    metadata:
+                        title: 'Cree'
+                        class_css: 'label-creer'
+                envoyer:
+                    metadata:
+                        title: 'Envoye'
+                        class_css: 'label-envoye'
+                accepter:
+                    metadata:
+                        title: 'Accepte'
+                        class_css: 'label-accepte'
+                encours:
+                    metadata:
+                        title: 'En cours'
+                        class_css: 'label-encours'
+                refuser:
+                    metadata:
+                        title: 'Refuse' 
+                        class_css: 'label-refuse'
+                annuler:
+                    metadata:
+                        title: 'Annule'  
+                        class_css: 'label-annule'
+                 
+            transitions:
+                apres_creer_envoyer:
+                    metadata:
+                        title: Envoyer ma demande conge
+                        icon : fa-arrow-right
+                        class: btn-info
+                        function : module_grs_demande_conge_apply_transitions
+                        statut : en
+                    from: creer
+                    to: envoyer   
+                    
+                apres_creer_annuler:
+                    metadata:
+                        title: Annuler
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : module_grs_demande_conge_apply_transitions
+                        statut : an
+                    from: creer  
+                    to: annuler    
+                    
+                apres_annuler_creer:
+                    metadata:
+                        title: Creer
+                        icon : fa-plus
+                        class: btn-white
+                        function : module_grs_demande_conge_apply_transitions
+                        statut : cr
+                    from: annuler 
+                    to: creer    
+                
+                apres_envoyer_accepter:
+                    metadata:
+                        title: Accepter la demande de conge 
+                        icon : fa-check
+                        class: btn-primary
+                        function : module_grs_demande_conge_apply_transitions
+                        statut : accp
+               #     guard: "is_granted('ROLE_ADMIN')"    
+                    from: envoyer
+                    to: accepter 
+                
+                apres_envoyer_refuser:
+                    metadata:
+                        title: Refuser la demande de conge 
+                        icon : fa-ban
+                        class: btn-danger
+                        function : module_grs_demande_conge_apply_transitions
+                        statut : ref
+                #    guard: "is_granted('ROLE_ADMIN')"
+                    from: envoyer
+                    to: refuser   
+                
+                apres_envoyer_encours:
+                    metadata:
+                        title: Encours de traitement
+                        icon : fa-refresh
+                        class: btn-warning
+                        function : module_grs_demande_conge_apply_transitions
+                        statut : en
+                 #   guard: "is_granted('ROLE_ADMIN')"
+                    from: envoyer
+                    to: encours       
+                
+                apres_encours_accepter:
+                    metadata:
+                        title: Accepter la demande de conge 
+                        icon : fa-check
+                        class: btn-primary
+                        function : module_grs_demande_conge_apply_transitions
+           #         guard: "is_granted('ROLE_ADMIN')"
+                    from: encours
+                    to: accepter         
+                
+                apres_encours_refuser:
+                    metadata:
+                        title: Refuser la demande de conge
+                        icon : fa-ban
+                        class: btn-danger
+                        function : module_grs_demande_conge_apply_transitions
+             #       guard: "is_granted('ROLE_ADMIN')"
+                    from: encours
+                    to: refuser 
+         
+      
+    
+     
+    
+
+        #Module achat version ugouv workflow demande achat #       
+        ua_t_livraisonfrscab:
+            type: 'state_machine' 
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UaTLivraisonfrscab
+            initial_marking: 
+                - creer
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'color-creer'
+                    
+                valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'color-valide'
+                        
+                generer:
+                    metadata:
+                        title: 'Genere' 
+                        class_css: 'color-genere'
+
+#                annuler:
+#                    metadata:
+#                        title: 'Annule'  
+#                        class_css: 'label-annule'        
+                 
+            transitions:
+                apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : ua_t_livraisonfrscab_apply_transitions
+                        
+                    from: creer
+                    to: valider 
+                    
+                    
+                
+                    
+                apres_valider_creer:
+                    metadata:
+                        title: Devalider
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : ua_t_livraisonfrscab_apply_transitions
+                    from: valider  
+                    to: creer  
+                    
+                    
+                apres_generer_valider:
+                    metadata:
+                        title: Annuler la generation
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : ua_t_livraisonfrscab_apply_transitions
+                    from: generer  
+                    to: valider 
+
+                apres_valider_generer:
+                    metadata:
+                        title: Generer
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : ua_t_livraisonfrscab_apply_transitions
+                        
+                    from: valider
+                    to: generer
+              
+#                apres_creer_annuler:
+#                    metadata:
+#                        title: Annuler
+#                        icon : fa-ban
+#                        class: btn-white
+#                        function : ua_t_livraisonfrscab_apply_transitions
+#                    from: creer  
+#                    to: annuler    
+                    
+#                apres_annuler_creer:
+#                    metadata:
+#                        title: Creer
+#                        icon : fa-check
+#                        class: btn-white
+#                        function : ua_t_livraisonfrscab_apply_transitions
+#                    from: annuler  
+#                    to:   creer
+                
+          #Module achat version ugouv workflow demande achat #       
+        ua_t_facturefrscab:
+            type: 'state_machine' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UaTFacturefrscab
+            initial_marking: 
+                - creer
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'color-creer'
+                        
+                valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'color-valider'
+                        
+                generer:
+                    metadata:
+                        title: 'Genere' 
+                        class_css: 'color-genere'
+                annuler:
+                    metadata:
+                        title: 'Annule'  
+                        class_css: 'label-annule'         
+            
+                 
+            transitions:
+                apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-check
+                        class: btn-success
+                        function : ua_t_facturefrscab_apply_transitions                     
+                    from: creer
+                    to: valider 
+                apres_valider_creer:
+                    metadata:
+                        title: Devalider
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : ua_t_facturefrscab_apply_transitions
+                    from: valider  
+                    to: creer 
+                    
+                apres_valider_generer:
+                    metadata:
+                        title: Generer
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : ua_t_facturefrscab_apply_transitions
+                    from: valider
+                    to:   generer
+
+                
+         
+
+            #    apres_generer_valider:
+            #        metadata:
+            #            title: Valider
+            #            icon : fa-check
+            #            class: btn-success
+            #            function : ua_t_facturefrscab_apply_transitions
+            #        from: generer
+            #        to:   valider
+                    
+                    
+                #apres_valider_creer:
+                    #metadata:
+                       # title: Devalider
+                       # icon : fa-arrow-left
+                      #  class: btn-warning
+                     #   function : ua_t_facturefrscab_apply_transitions
+                    #from: valider
+                    #to:   creer  
+                    
+                    
+                
+                    
+              
+                 
+#Module achat version ugouv workflow commande #      
+   #Module achat version ugouv workflow demande achat #           
+        uv_deviscab:
+            type: 'state_machine' 
+            
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UvDeviscab
+            initial_marking: 
+                - creer 
+            places:
+                creer:
+                    metadata:
+                        title: 'Cree'
+                        class_css: 'color-creer'
+#                annuler:
+#                    metadata:
+#                        title: 'Annuler'
+#                        class_css: 'color-annule'
+                        
+                valider:
+                    metadata:
+                        title: 'Validee'
+                        class_css: 'color-valide'
+                     
+                
+                commander:
+                    metadata:
+                        title: 'Commandee'
+                        class_css: 'color-encours'
+                
+            transitions:
+                 
+                    
+#                apres_creer_annuler:
+#                    metadata:
+#                        title: Annuler
+#                        icon : fa-arrow-left
+#                        class: btn-white
+#                        function : uv_devis_apply_transitions
+#                    from: creer  
+#                    to: annuler   
+                apres_valider_creer:
+                    metadata:
+                        title: Devalider
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : uv_devis_apply_transitions
+                    from: valider  
+                    to: creer 
+                apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : uv_devis_apply_transitions
+                    from: creer
+                    to: valider 
+                    
+                    
+
+                apres_valider_commander:
+                    metadata:
+                        title: Commander
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : uv_devis_apply_transitions
+                    from: valider  
+                    to: commander  
+                
+                apres_commander_valider:
+                    metadata:
+                        title: Annuler la commande
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : uv_devis_apply_transitions
+                    from: commander
+                    to: valider     
+             
+      
+       
+
+        
+           #Module achat version ugouv workflow demande achat #  
+           
+           
+        uv_commandecab:
+            type: 'state_machine' 
+            
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UvCommandecab
+            initial_marking: 
+                - creer 
+            places:
+                creer:
+                    metadata:
+                        title: 'Cree'
+                        class_css: 'color-creer'
+                annuler:
+                    metadata:
+                        title: 'Annuler'
+                        class_css: 'color-annule'
+                        
+                valider:
+                    metadata:
+                        title: 'Validee'
+                        class_css: 'color-valide'
+                     
+                
+                livrer:
+                    metadata:
+                        title: 'Livre'
+                        class_css: 'color-valide'
+                
+            transitions:
+                 
+                    
+#                apres_creer_annuler:
+#                    metadata:
+#                        title: Annuler
+#                        icon : fa-arrow-left
+#                        class: btn-white
+#                        function : uv_commande_apply_transitions
+#                    from: creer  
+#                    to: annuler   
+                apres_valider_creer:
+                    metadata:
+                        title: Devalider
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : uv_commande_apply_transitions
+                    from: valider  
+                    to: creer 
+                apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : uv_commande_apply_transitions
+                    from: creer
+                    to: valider 
+                    
+
+                apres_valider_livrer:
+                    metadata:
+                        title: Livrer
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : uv_commande_apply_transitions
+                    from: valider  
+                    to: livrer  
+
+ #Module achat version ugouv workflow demande achat #  
+        uv_livraisoncab:
+            type: 'state_machine' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UvLivraisoncab
+            initial_marking: 
+                - creer
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'color-creer'
+                        
+                valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'color-valide'
+                        
+                generer:
+                    metadata:
+                        title: 'Genere' 
+                        class_css: 'color-genere'
+                
+                annuler:
+                    metadata:
+                        title: 'Annule'
+                        class_css: 'color-annule'        
+
+                 
+            transitions:
+                apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : uv_livraisoncab_apply_transitions
+                        statut : lvr_val
+                    from: creer
+                    to: valider 
+#                apres_creer_valider:
+#                    metadata:
+#                        title: Valider
+#                        icon : fa-check
+#                        class: btn-success
+#                        function : uv_livraisoncab_apply_transitions
+#                        statut : lvr_val
+#                    from: creer
+#                    to: valider 
+
+                apres_valider_creer:
+                    metadata:
+                        title: Devalider
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : uv_livraisoncab_apply_transitions
+                    from: valider
+                    to:   creer   
+                
+                apres_generer_valider:
+                    metadata:
+                        title: Annuler la generation
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : uv_livraisoncab_apply_transitions
+                        statut : an
+                        sousModule : _de_cl
+                    from: generer  
+                    to: valider 
+                
+#                apres_annuler_creer:
+#                    metadata:
+#                        title: Creer
+#                        icon : fa-plus
+#                        class: btn-creer
+#                        function : uv_livraisoncab_apply_transitions
+#                        statut : cr
+#                        sousModule : _de_cl
+#                    from: annuler  
+#                    to: creer  
+                
+                apres_valider_generer:
+                    metadata:
+                        title: Generer
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : uv_livraisoncab_apply_transitions
+                    from: valider
+                    to:   generer    
+              
+        
+             #Module achat version ugouv workflow demande achat #       
+        uv_facturecab:
+            type: 'state_machine' 
+            
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UvFacturecab
+            initial_marking: 
+                - creer
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'color-creer'
+                annuler:
+                    metadata:
+                        title: 'Annule'
+                        class_css: 'color-annule'         
+                        
+                valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'color-valide'
+                        
+                generer:
+                    metadata:
+                        title: 'Genere' 
+                        class_css: 'color-genere'
+
+                 
+            transitions:
+                apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : uv_facturecab_apply_transitions
+                        statut : lvr_val
+                    from: creer
+                    to: valider 
+   
+                apres_valider_creer:
+                    metadata:
+                        title: Devalider
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : uv_facturecab_apply_transitions
+                    from: valider
+                    to:   creer 
+                apres_valider_generer:
+                    metadata:
+                        title: Generer
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : uv_facturecab_apply_transitions
+                    from: valider
+                    to:   generer 
+                    
+                apres_generer_valider:
+                    metadata:
+                        title: Annuler la generation
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : uv_facturecab_apply_transitions
+                    from: generer  
+                    to: valider     
+
+#                apres_creer_annuler:
+#                    metadata:
+#                        title: Annuler
+#                        icon : fa-ban
+#                        class: btn-white
+#                        function : uv_facturecab_apply_transitions
+#                        statut : an
+#                        sousModule : _de_cl
+#                    from: creer  
+#                    to: annuler 
+                
+#                apres_annuler_creer:
+#                    metadata:
+#                        title: Creer
+#                        icon : fa-plus
+#                        class: btn-creer
+#                        function : uv_facturecab_apply_transitions
+#                        statut : cr
+#                        sousModule : _de_cl
+#                    from: annuler  
+#                    to: creer     
+        
+        
+                    
+                        #Module achat version ugouv workflow commande #           
+        univ_t_brdpaiement:
+            type: 'workflow' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UnivTBrdpaiement
+            initial_marking: 
+                - creer
+                
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'label-creer'
+               
+               
+                encours:
+                    metadata:
+                        title: 'En cours'
+                        class_css: 'label-encours'
+
+                valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'label-valide'
+               
+                 
+            transitions:
+                apres_creer_encours:
+                    metadata:
+                        title: En cours
+                        icon : fa-refresh
+                        class: btn-warning
+                        function : module_univ_bordereaux_apply_transitions
+                        statut : en
+                        sousModule : _de_cl
+                    from: creer
+                    to: encours   
+                    
+               
+                
+                apres_encours_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-check
+                        class: btn-success
+                        function : module_univ_bordereaux_apply_transitions
+                        statut : val
+                        sousModule : _de_cl
+              #      guard: "is_granted('ROLE_ADMIN')"
+                    from: encours
+                    to: valider 
+
+        univ_h_albhon:
+            type: 'workflow' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UnivHAlbhon
+            initial_marking: 
+                - creer
+                
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'label-creer'
+               
+               
+                encours:
+                    metadata:
+                        title: 'En cours'
+                        class_css: 'label-encours'
+
+                valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'label-valide'
+               
+                 
+            transitions:
+                apres_creer_encours:
+                    metadata:
+                        title: En cours
+                        icon : fa-refresh
+                        class: btn-warning
+                        function : module_univ_h_albhon_apply_transitions
+                        statut : en
+                        sousModule : _de_cl
+                    from: creer
+                    to: encours   
+                    
+               
+                
+                apres_encours_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-check
+                        class: btn-success
+                        function : module_univ_h_albhon_apply_transitions
+                        statut : val
+                        sousModule : _de_cl
+          #          guard: "is_granted('ROLE_ADMIN')"
+                    from: encours
+                    to: valider 
+                    
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    #Module univ workflow planning #           
+        univ_pl_emptime:
+            type: 'workflow' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UnivPlEmptime
+            initial_marking: 
+                - creer
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'label-creer'
+                valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'label-valide'
+                annuler:
+                    metadata:
+                        title: 'Annule'
+                        class_css: 'label-annule'
+                generer:
+                    metadata:
+                        title: 'Genere' 
+                        class_css: 'label-genere'
+                 
+            transitions:
+                apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-check
+                        class: btn-success
+                        function : module_univ_apply_transitions
+                        statut : va
+                        sousModule : _univ_planning
+                    from: creer
+                    to: valider   
+                    
+                apres_valider_annuler:
+                    metadata:
+                        title: Annuler
+                        icon : fa-ban
+                        class: btn-white
+                        function : module_univ_apply_transitions
+                        statut : an
+                        sousModule : _univ_planning
+                    from: creer  
+                    to: annuler 
+
+                apres_valider_generer:
+                    metadata:
+                        title: Generer
+                        icon : fa-level-down
+                        class: btn-primary
+                        function : module_univ_apply_transitions
+                        statut : an
+                        sousModule : _univ_planning
+                    from: valider  
+                    to: generer  
+
+
+                
+ 
+#Module univ workflow epreuve          
+        univ_ac_epreuve:
+            type: 'workflow' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UnivAcEpreuve
+            initial_marking: 
+                - creer
+            places:
+                
+                archiver:
+                    metadata:
+                        title: 'Archive'
+                        class_css: 'label-archive' 
+                        
+                annuler:
+                    metadata:
+                        title: 'Annule'
+                        class_css: 'label-annule' 
+                        
+                        
+                creer:
+                    metadata:
+                        title: 'Cree'
+                        class_css: 'label-creer'
+                affilier:
+                    metadata:
+                        title: 'Affilie'
+                        class_css: 'label-affilie'
+                        
+                        
+                note:
+                    metadata:
+                        title: 'Note'
+                        class_css: 'label-valide'
+                        
+                cloturer:
+                    metadata:
+                        title: 'Cloture'
+                        class_css: 'label-cloture'
+                        
+                decloturer:
+                    metadata:
+                        title: 'Decloture'
+                        class_css: 'label-cloture'       
+                
+                 
+                 
+                 
+            transitions:
+                 
+                apres_creer_archiver:
+                    metadata:
+                        title: Archiver
+                        icon : fa-archive
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: creer  
+                    to: archiver
+                    
+                apres_creer_annuler:
+                    metadata:
+                        title: Annuler
+                        icon : fa-ban
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: creer  
+                    to: annuler
+                    
+                
+                    
+                
+                apres_annuler_archiver:
+                    metadata:
+                        title: Archiver
+                        icon : fa-archive
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: annuler  
+                    to: archiver 
+                    
+                apres_annuler_creer:
+                    metadata:
+                        title: Creer
+                        icon : fa-check
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: annuler  
+                    to:   creer  
+                    
+                    
+                apres_archiver_creer:
+                    metadata:
+                        title: Creer
+                        icon : fa-check
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: archiver  
+                    to:   creer
+                
+                apres_creer_affilier:
+                    metadata:
+                        title: Affilier
+                        icon : fa-check
+                        class: btn-success
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: creer
+                    to: affilier   
+                
+                apres_affilier_note:
+                    metadata:
+                        title: Note
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: affilier
+                    to: note    
+                
+                
+                
+                
+                    
+                    
+                apres_note_affilier:
+                    metadata:
+                        title: Affilier
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: note
+                    to: affilier 
+                    
+                    
+                
+                    
+                
+                    
+                apres_cloturer_note:
+                    metadata:
+                        title: Decloturer
+                        icon : fa-unlock
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: cloturer
+                    to: note     
+
+                apres_note_cloturer:
+                    metadata:
+                        title: Cloturer
+                        icon : fa-lock
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: note
+                    to: cloturer 
+
+
+
+
+
+
+
+
+#Module univ workflow epreuve element          
+        univ_ex_controle_epreuve:
+            type: 'workflow' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UnivExControleEpreuve
+            initial_marking: 
+                - creer
+            places:
+                
+                archiver:
+                    metadata:
+                        title: 'Archive'
+                        class_css: 'label-archive' 
+                        
+                annuler:
+                    metadata:
+                        title: 'Annule'
+                        class_css: 'label-annule' 
+                        
+                        
+                creer:
+                    metadata:
+                        title: 'Cree'
+                        class_css: 'label-creer'
+                
+                        
+                        
+                valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'label-valide'
+                        
+                cloturer:
+                    metadata:
+                        title: 'Cloture'
+                        class_css: 'label-cloture'
+                        
+                decloturer:
+                    metadata:
+                        title: 'Decloture'
+                        class_css: 'label-cloture'       
+                
+                 
+                 
+                 
+            transitions:
+                 
+                apres_creer_archiver:
+                    metadata:
+                        title: Archiver
+                        icon : fa-archive
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: creer  
+                    to: archiver
+                    
+                
+                    
+                
+                    
+                
+                apres_annuler_archiver:
+                    metadata:
+                        title: Archiver
+                        icon : fa-archive
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: annuler  
+                    to: archiver 
+
+                apres_creer_annuler:
+                    metadata:
+                        title: Annuler
+                        icon : fa-ban
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: creer  
+                    to: annuler    
+                    
+                apres_annuler_creer:
+                    metadata:
+                        title: Creer
+                        icon : fa-check
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: annuler  
+                    to:   creer  
+                    
+                    
+                apres_archiver_creer:
+                    metadata:
+                        title: Creer
+                        icon : fa-check
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: archiver  
+                    to:   creer
+                
+                  
+                
+                apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-check
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: creer
+                    to: valider    
+                
+                apres_valider_cloturer:
+                    metadata:
+                        title: Cloturer
+                        icon : fa-lock
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: valider
+                    to: cloturer 
+                    
+                apres_cloturer_valider:
+                    metadata:
+                        title: Decloturer
+                        icon : fa-unlock
+                        class: btn-white
+                        function : module_univ_evaluaton_epreuve_apply_transitions
+                    from: cloturer
+                    to: valider     
+                    
+                    
+                    
+                    
+          
+                    
+                    
+#       t_achatdemandeinternecab:
+#            type: 'state_machine'
+#            marking_store:
+#                 type: 'method'
+#                 property: 'currentPlace'
+#            supports:
+#                - App\Entity\TAchatdemandeinternecab
+#            initial_marking: start
+#            places:
+#                - start
+#                - coding
+#                - test
+#                - review
+#                - merged
+#                - closed
+#            transitions:
+#                submit:
+#                    from: start
+#                    to: test
+#                update:
+#                    from: [coding, test, review]
+#                    to: test
+#                wait_for_review:
+#                    from: test
+#                    to: review
+#                request_change:
+#                    from: review
+#                    to: coding
+#                accept:
+#                    from: review
+#                    to: merged
+#                reject:
+#                    from: review
+#                    to: closed
+#                reopen:
+#                    from: closed
+#                    to: review       
+                    
+    
+                    
+#Module achat version ugouv workflow commande #           
+        ua_t_commandefrscab:
+            type: 'state_machine' 
+            
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UATCommandefrscab
+            initial_marking: 
+                - creer
+                
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'color-creer'
+                valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'color-valide'
+                
+                livrer:
+                    metadata:
+                        title: 'Livre'
+                        class_css: 'color-valide'
+                cloturer:
+                    metadata:
+                        title: 'Cloturer'  
+                        class_css: 'color-cloturer'        
+                annuler:
+                    metadata:
+                        title: 'Annule'
+                        class_css: 'color-annule'
+
+                archiver:
+                    metadata:
+                        title: 'Archive'  
+                        class_css: 'color-archive'
+                       
+                 
+            transitions:
+                       
+#                apres_creer_annuler:
+#                    metadata:
+#                        title: Annuler
+#                        icon : fa-arrow-left
+#                        class: btn-white
+#                        function : ua_t_commandefrscab_apply_transitions
+#                    from: creer  
+#                    to: annuler   
+                
+                apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : ua_t_commandefrscab_apply_transitions
+               #     guard: "is_granted('ROLE_ADMIN')"
+                    from: creer
+                    to: valider 
+                    
+                    
+                
+#                apres_annuler_creer:
+#                    metadata:
+#                        title: Creer
+#                        icon : fa-plus
+#                        class: btn-creer
+#                        function : ua_t_commandefrscab_apply_transitions
+#                    from: annuler  
+#                    to: creer  
+                
+#                apres_annuler_archiver:
+#                    metadata:
+#                        title: Archiver
+#                        icon : fa-archive
+#                        class: btn-white
+#                        function : ua_t_commandefrscab_apply_transitions
+#                    from: annuler  
+#                    to: archiver  
+                
+#                apres_archiver_creer:
+#                    metadata:
+#                        title: Creer
+#                        icon : fa-plus
+#                        class: btn-creer
+#                        function : ua_t_commandefrscab_apply_transitions
+#                    from: archiver  
+#                    to: creer   
+                    
+                apres_valider_creer:
+                    metadata:
+                        title: Devalider
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : ua_t_commandefrscab_apply_transitions
+                    from: valider  
+                    to: creer 
+                apres_valider_livrer:
+                    metadata:
+                        title: Receptionner
+                        icon : fa-arrow-right
+                        class: btn-success
+                        function : ua_t_commandefrscab_apply_transitions
+                    from: valider  
+                    to: livrer
+                
+                apres_valider_cloturer:
+                    metadata:
+                        title: cloturer
+                        icon : fa-arrow-right
+                        class: btn-danger
+                        function : ua_t_commandefrscab_apply_transitions
+                    from: valider  
+                    to: cloturer    
+                
+                    
+                
+                apres_cloturer_valider:
+                    metadata:
+                        title: Decloturer
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : ua_t_commandefrscab_apply_transitions
+                        guard: "is_granted('ROLE_ADMIN')"
+                    from: cloturer  
+                    to: valider    
+
+
+
+
+
+
+#controle#       
+        univ_ex_controle_element:
+            type: 'workflow' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UnivExControleElement
+            initial_marking: 
+                - s1
+                
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'label-creer'
+                        
+                s1:
+                    metadata:
+                        title: 'S1'
+                        class_css: 'label-s1'
+                s2:
+                    metadata:
+                        title: 'S2'
+                        class_css: 'label-s2'
+                rachat:
+                    metadata:
+                        title: 'Rachat'
+                        class_css: 'label-rachat'
+
+                cloturer:
+                    metadata:
+                        title: 'Cloturer'  
+                        class_css: 'label-cloturer'
+                
+                decloturer:
+                    metadata:
+                        title: 'Decloture'  
+                        class_css: 'label-decloturer'
+                 
+            transitions:
+                
+                apres_creer_s1:
+                    metadata:
+                        title: S1
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_element_apply_transitions
+                    from: creer  
+                    to: s1 
+                    
+                apres_s1_creer:
+                    metadata:
+                        title: S1
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_element_apply_transitions
+                    from: s1
+                    to: creer     
+                    
+                    
+                    
+                apres_rachat_s2:
+                    metadata:
+                        title: S2
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_element_apply_transitions
+                    from: rachat
+                    to: s2
+
+                apres_s2_s1:
+                    metadata:
+                        title: S1
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_element_apply_transitions
+                    from: s2
+                    to: s1
+
+                
+                    
+                apres_s1_s2:
+                    metadata:
+                        title: S2
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_element_apply_transitions
+                    from: s1  
+                    to: s2   
+                
+                apres_s2_rachat:
+                    metadata:
+                        title: Rachat
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_element_apply_transitions
+               #     guard: "is_granted('ROLE_ADMIN')"
+                    from: s2
+                    to: rachat 
+                    
+                apres_rachat_cloturer:
+                    metadata:
+                        title: Cloturer
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_element_apply_transitions
+                    from: rachat
+                    to: cloturer 
+
+                apres_cloturer_rachat:
+                    metadata:
+                        title: Rachat
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_element_apply_transitions
+                    from: cloturer
+                    to: rachat
+                
+ #controleModule#       
+        univ_ex_controle_module:
+            type: 'workflow' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UnivExControleModule
+            initial_marking: 
+                - creer
+                
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'label-creer'
+  
+                avantrachat:
+                    metadata:
+                        title: 'Avant rachat'
+                        class_css: 'label-s1'
+                apresrachat:
+                    metadata:
+                        title: 'Apres rachat'
+                        class_css: 'label-s2'
+
+                cloturer:
+                    metadata:
+                        title: 'Cloturer'  
+                        class_css: 'label-cloturer'
+                        
+                decloturer:
+                    metadata:
+                        title: 'Decloture'  
+                        class_css: 'label-decloturer'
+                        
+            transitions:
+                
+                
+                    
+                  
+                    
+                    
+                    
+                    
+                apres_rachat_a:
+                    metadata:
+                        title: Avant rachat
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_module_apply_transitions
+                    from: apresrachat
+                    to: avantrachat
+                
+                
+                apres_rachat_cloturer:
+                    metadata:
+                        title: Cloturer
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_module_apply_transitions
+                    from: apresrachat
+                    to: cloturer 
+
+                avantrachat_creer:
+                    metadata:
+                        title: Creer
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_module_apply_transitions
+                    from: avantrachat
+                    to: creer
+
+                apres_creer_avantrachat:
+                    metadata:
+                        title: Avant rachat
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_module_apply_transitions
+                    from: creer
+                    to: avantrachat
+                    
+                avantrachat_apresrachat:
+                    metadata:
+                        title: Apres rachat
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_module_apply_transitions
+                    from: avantrachat  
+                    to: apresrachat 
+                    
+                    
+                apres_cloturer_avantrachat:
+                    metadata:
+                        title: Declôturer
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_module_apply_transitions
+                    from: cloturer
+                    to: apresrachat
+                    
+                
+                    
+                
+                
+                 
+ #controleSemestre#       
+        univ_ex_controle_semestre:
+            type: 'workflow' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UnivExControleSemestre
+            initial_marking: 
+                - creer
+                
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'label-creer'
+                avantrachat:
+                    metadata:
+                        title: 'Avant rachat'
+                        class_css: 'label-s1'
+                apresrachat:
+                    metadata:
+                        title: 'Apres rachat'
+                        class_css: 'label-s2'
+                        
+                categorie:
+                    metadata:
+                        title: 'Categorie'
+                        class_css: 'label-categorie'
+
+                cloturer:
+                    metadata:
+                        title: 'Clôturer'  
+                        class_css: 'label-cloturer'
+            transitions:
+                apres_rachat_a:
+                    metadata:
+                        title: Avant rachat
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_semestre_apply_transitions
+                    from: apresrachat
+                    to: avantrachat
+
+                avantrachat_creer:
+                    metadata:
+                        title: Creer
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_semestre_apply_transitions
+                    from: avantrachat
+                    to: creer
+                apres_creer_avantrachat:
+                    metadata:
+                        title: Avant rachat
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_semestre_apply_transitions
+                    from: creer
+                    to: avantrachat   
+                    
+                avantrachat_apresrachat:
+                    metadata:
+                        title: Apres rachat
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_semestre_apply_transitions
+                    from: avantrachat  
+                    to: apresrachat   
+                    
+                apres_rachat_categorie:
+                    metadata:
+                        title: Categorie
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_semestre_apply_transitions
+                    from: apresrachat
+                    to: categorie 
+                
+                categorie_apres_rachat:
+                    metadata:
+                        title: Apres rachat
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_semestre_apply_transitions
+                    from: categorie
+                    to: apresrachat 
+                    
+                    
+                apres_categorie_cloturer:
+                    metadata:
+                        title: Clôturer
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_semestre_apply_transitions
+                    from: categorie
+                    to: cloturer    
+                    
+                apres_cloturer_categorie:
+                    guard: "is_granted('ROLE_ADMIN')"
+                    metadata:
+                        title: Decôturer
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_semestre_apply_transitions
+                    from: cloturer
+                    to: categorie
+                
+
+ #controlePromotion#         
+        univ_ex_controle_promotion:
+            type: 'workflow' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UnivExControlePromotion
+            initial_marking: 
+                - creer
+                
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'label-creer'
+                
+                apresrachat:
+                    metadata:
+                        title: 'Apres rachat'
+                        class_css: 'label-s2'
+
+                cloturer:
+                    metadata:
+                        title: 'Clôturer'  
+                        class_css: 'label-cloturer'
+            transitions:
+                
+                apres_creer_apresrachat:
+                    metadata:
+                        title: Apres rachat
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_promotion_apply_transitions
+                    from: creer
+                    to: apresrachat   
+                    
+                 
+                apres_rachat_creer:
+                    metadata:
+                        title: Creer
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_promotion_apply_transitions
+                    from: apresrachat
+                    to: creer 
+                    
+                apres_rachat_cloturer:
+                    metadata:
+                        title: Clôturer
+                        icon : fa-arrow-right
+                        class: btn-white
+                        function : univ_ex_controle_promotion_apply_transitions
+                    from: apresrachat
+                    to: cloturer 
+                    
+                
+                    
+                    
+                apres_cloturer_apresrachat:
+                    guard: "is_granted('ROLE_ADMIN')"
+                    metadata:
+                        title: Decôturer
+                        icon : fa-arrow-left
+                        class: btn-white
+                        function : univ_ex_controle_promotion_apply_transitions
+                    from: cloturer
+                    to: apresrachat  
+
+
+          #Module achat version ugouv workflow demande achat #       
+        u_general_operation:
+
+            type: 'state_machine' 
+            
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\UGeneralOperation
+            initial_marking: 
+                - creer
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'color-creer'
+                achat_demande_paiement:
+                    metadata:
+                        title: 'demande paiement'
+                        class_css: 'color-creer'
+
+                vente_valider:
+                    metadata:
+                        title: 'Valider'
+                        class_css: 'color-creer'        
+
+                achat_valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'color-valider'
+
+                mouvement_valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'color-valider'        
+                
+                achat_generer:
+                    metadata:
+                        title: 'generer'
+                        class_css: 'color-valider' 
+
+                vente_generer:
+                    metadata:
+                        title: 'generer'
+                        class_css: 'color-valider'
+                
+                mouvement_generer:
+                    metadata:
+                        title: 'generer'
+                        class_css: 'color-valider'         
+
+            
+                 
+            transitions:
+                achat_apres_creer_demande_paiement:
+                    metadata:
+                        title: Demande paiement
+                        icon : fa-check
+                        class: btn-success
+                        function : tr_operation_apply_transitions
+                   
+                    from: creer
+                    to: achat_demande_paiement 
+
+
+                vente_apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-check
+                        class: btn-success
+                        function : tr_operation_apply_transitions
+                      
+                    from: creer
+                    to: vente_valider
+
+                mouvement_apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-check
+                        class: btn-success
+                        function : tr_operation_apply_transitions
+                      
+                    from: creer
+                    to: mouvement_valider    
+                
+                achat_apres_demande_paiement_valider:
+                    metadata:
+                        title: valider demande paiement
+                        icon : fa-check
+                        class: btn-success
+                        function : tr_operation_apply_transitions
+                   
+                    from: achat_demande_paiement
+                    to: achat_valider    
+
+                achat_apres_demande_paiement_generer:
+                    metadata:
+                        title: generer reglement
+                        icon : fa-check
+                        class: btn-success
+                        function : tr_operation_apply_transitions
+                   
+                    from: achat_valider
+                    to: achat_generer        
+                
+                vente_apres_valider_generer:
+                    metadata:
+                        title: generer
+                        icon : fa-check
+                        class: btn-success
+                        function : tr_operation_apply_transitions
+                      
+                    from: vente_valider
+                    to: vente_generer  
+                    
+                mouvement_apres_valider_generer:
+                    metadata:
+                        title: generer
+                        icon : fa-check
+                        class: btn-success
+                        function : tr_operation_apply_transitions
+                      
+                    from: mouvement_valider
+                    to: mouvement_generer    
+
+
+
+
+
+        GrsPaie:
+            type: 'workflow' 
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'positionActuel'
+            supports:
+                - App\Entity\GrsPaie
+            initial_marking: 
+                - creer
+            places:
+                creer:
+                    metadata:
+                        title: 'Creer'
+                        class_css: 'color-creer'
+                    
+                valider:
+                    metadata:
+                        title: 'Valide'
+                        class_css: 'color-valider'
+                        
+                generer:
+                    metadata:
+                        title: 'Genere' 
+                        class_css: 'color-genere'
+
+                 
+            transitions:
+                apres_creer_valider:
+                    metadata:
+                        title: Valider
+                        icon : fa-check
+                        class: btn-success
+                        function : grs_paie_apply_transitions
+                        
+                    from: creer
+                    to: valider 
+                    
+                    
+                
+
+                 
+
+                apres_generer_valider:
+                    metadata:
+                        title: Devalider
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : grs_paie_apply_transitions
+                    from: generer
+                    to:   valider
+                    
+                apres_valider_creer:
+                    metadata:
+                        title: Creer
+                        icon : fa-arrow-left
+                        class: btn-warning
+                        function : grs_paie_apply_transitions
+                        
+                    from: valider
+                    to: creer     
+                    
+                apres_valider_generer:
+                    metadata:
+                        title: Genere
+                        icon : fa-level-down
+                        class: btn-white
+                        function : grs_paie_apply_transitions
+                    from: valider
+                    to:   generer 
+                    
+              
+                 
+                                

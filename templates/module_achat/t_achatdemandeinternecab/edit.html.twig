@@ -1,0 +1,37 @@
+{% extends 'base_ugouv.html.twig' %}
+{% block title %}Modifier   | demande d'achat | Ugouv achat
+{% endblock %}
+
+
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+
+	<div class="edit">
+
+		{{ include('./module_achat/t_achatdemandeinternecab/_form.html.twig',{'button_label': 'Enregistrer', 'page_actuel':'edit'}) }}
+
+
+		{#{% if workflow_has_marked_place(demande, 'valider') %}
+		
+		        {% else %}
+		         
+		
+		        {% endif %}   #}
+
+
+		<br/><br/>
+	</div>
+
+	{#{{ include('./module_achat/t_achatdemandeinternecab/inc/workflow.html.twig',{'page_actuel': 'new'}) }}#}
+
+
+	<div class="errors_details" errors="{{ errors_detail ? errors_detail|json_encode|e('html_attr') }}" name="{{nameDetail ? nameDetail}}"></div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('tachatdemandeinternecab') }}
+{% endblock %}

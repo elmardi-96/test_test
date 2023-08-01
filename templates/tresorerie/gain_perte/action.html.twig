@@ -1,0 +1,142 @@
+{# <div class="row mt-4">
+
+                                              
+    <div class="col-sm-4">
+
+        <div class="row mt-4">
+            <label  class="col-sm-6 mt-1" style="font-size:11px !important;">Ordre de paiement : </label>
+            
+            <label class="col-sm-6 mt-1"  style="font-size:11px !important;">
+                {{transaction.CodeBq }}
+            </label>
+            <div class="col-sm-2 ">
+                
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label  class="col-sm-6 mt-1" style="font-size:11px !important;">fournisseur : </label>
+            
+            <label class="col-sm-6 mt-1"  style="font-size:11px !important;">
+                {{transaction.fournisseur.nom }}
+            </label>
+            <div class="col-sm-2 ">
+                
+            </div>
+        </div>
+        
+        <div class="row mt-1">
+            <label  class="col-sm-6 mt-1" style="font-size:11px !important;">montant devise : </label>
+            
+            <label class="col-sm-6 mt-1"  style="font-size:11px !important;">
+            {{ transaction.montant|number_format(2, ',', ' ') }}
+            </label>
+            <div class="col-sm-2 ">
+                
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label  class="col-sm-6 mt-1" style="font-size:11px !important;">montant MAD : </label>
+            
+            <label class="col-sm-6 mt-1"  style="font-size:11px !important;">
+            {{ transaction.montantMad|number_format(2, ',', ' ') }}
+            </label>
+            <div class="col-sm-2 ">
+                
+            </div>
+        </div>
+
+    </div> 
+        
+
+</div>
+
+<div class="row mt-2">
+
+  
+        <div class="col-sm-4">
+
+            <div class="form-group row">
+                <label  class="col-sm-6 mt-1" style="font-size:11px !important;">montant relve</label>
+                <div class="col-sm-6">
+                    <input  type="text"  style="height:28px; font-size:12px !important;"
+                                        class="form-control form-control  " id="mt_relve" placeholder="Entrer montant relevé ..">
+                </div>
+
+                <div class="col-sm-2 ">
+                    
+                </div>
+            </div>
+
+        </div>
+   
+</div> 
+<div class="row mt-2">
+    <div class="col-sm-4" id="calcul">
+
+    </div> 
+</div> 
+ #}
+
+                    
+                    <div class="bod" style="">
+                    
+                        <div class="col-md-12">
+                            <div class="form-group row">
+								<label class="col-sm-12 ">Ordre de paiement</label>
+							    <div class="hr-line-dashed"></div>
+								<div class="col-sm-12 " id="" >
+                                     {{transaction.CodeBq }}
+								</div>
+							</div>
+						    <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+								<label class="col-sm-12 ">fournisseur</label>
+							    <div class="hr-line-dashed"></div>
+								<div class="col-sm-12 " id="" >
+                                     {{transaction.fournisseur.nom }}
+								</div>
+							</div>
+						    <div class="hr-line-dashed"></div>
+
+                            <div class="form-group row">
+								<label class="col-sm-12 ">montant devise</label>
+							    <div class="hr-line-dashed"></div>
+								<div class="col-sm-12 " id="" >
+                                     {{ transaction.montant|number_format(2, ',', ' ') }}
+								</div>
+							</div>
+						    <div class="hr-line-dashed"></div>
+                            <div class="form-group row">
+								<label class="col-sm-12 ">montant MAD</label>
+							    <div class="hr-line-dashed"></div>
+								<div class="col-sm-12 " id="" >
+                                     {{ transaction.montantMad|number_format(2, ',', ' ') }}
+								</div>
+							</div>
+						    
+						    <div class="hr-line-dashed"></div>
+                            
+                            <div class="form-group row">
+								<label class="col-sm-12 ">montant relve (*)</label>
+							    <div class="hr-line-dashed"></div>
+								<div class="col-sm-12">
+                                    <input  type="text" id="mt_relve" name="mt_relve"  class="form-control form-control-sm" placeholder="montant releve ..">
+								</div>
+							</div>
+						    
+                            <div class="mt-2" id="calcul">
+
+                            </div> 
+                            <br/>
+                            <div class="form-group row">
+                                <div class="col-sm-8">        
+                                    <button class="disabled btn btn-sm btn-white btn-white  btn-primary  my-button mbt btn-register  upper btn-xs my-button2 font-size-11  col-sm-12" id="Enregistrer_mt_devise" type="button">
+                                        &nbsp;Mise à jour
+                                    </button>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    
+                    

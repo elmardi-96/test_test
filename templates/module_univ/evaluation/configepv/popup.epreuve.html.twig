@@ -1,0 +1,132 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form _epreuve'}}) }}
+<div class="sidebar-container">
+
+
+	<div class="tab-content bod">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					Année active :
+					<span class="annee">{{annee.designation}}</span>
+				</h3>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<div class="ibox">
+					<div class="ibox-content">
+						<div class="">
+						
+							<div class="form-group row ">
+								{{ form_label(form.dateEpreuve ,'Date épreuve', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.dateEpreuve,{'attr':{'class':'form-control  form-control-sm','placeholder':'Date épreuve'}}) }}
+
+									<div class="form-error {% if form_errors(form.dateEpreuve)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.dateEpreuve) }}
+									</div>
+								</div>
+
+							</div>
+							<div class="hr-line-dashed paddi"></div>
+							<div class="form-group row">
+								{{ form_label(form.enseignant ,'Enseignant', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.enseignant,{'attr':{'class':'form-control  form-control-sm sel2','placeholder':'Enseignant'}}) }}
+
+									<div class="form-error {% if form_errors(form.enseignant)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.enseignant) }}
+									</div>
+								</div>
+
+							</div>
+							<div class="hr-line-dashed paddi"></div>
+							<div class="form-group row ">
+								{{ form_label(form.coefficient ,'Coeficient', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.coefficient,{'attr':{'class':'form-control  form-control-sm','placeholder':'Coeficient'}}) }}
+
+									<div class="form-error {% if form_errors(form.coefficient)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.coefficient) }}
+									</div>
+								</div>
+
+							</div>
+							
+							<div class="hr-line-dashed paddi"></div>
+							<div class="form-group row ">
+								{{ form_label(form.nature ,'Nature', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.nature,{'attr':{'class':'form-control  form-control-sm','placeholder':'Nature'}}) }}
+
+									<div class="form-error {% if form_errors(form.nature)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.nature) }}
+									</div>
+								</div>
+
+                            </div>
+							<div class="hr-line-dashed paddi"></div>
+							<div class="form-group row ">
+								{{ form_label(form.anonymat ,'Anonymat', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.anonymat,{'attr':{'class':'form-control  form-control-sm anonymat','placeholder':'Anonymat'}}) }}
+
+									<div class="form-error {% if form_errors(form.anonymat)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.anonymat) }}
+									</div>
+								</div>
+
+							</div>
+							<div class="hr-line-dashed paddi none"></div>
+							<div class="form-group row none">
+								{{ form_label(form.natureAnonymat ,'Nature anonymat', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.natureAnonymat,{'attr':{'class':'form-control  form-control-sm','placeholder':'Nature anonymat'}}) }}
+
+									<div class="form-error {% if form_errors(form.natureAnonymat)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.natureAnonymat) }}
+									</div>
+								</div>
+
+							</div>
+							
+							
+							<div class="hr-line-dashed paddi"></div>
+							<div class="form-group row ">
+								{{ form_label(form.observation ,'Observation', {'label_attr':{'class':'col-sm-12'}}) }}
+								<div class="col-sm-12">
+									{{ form_widget(form.observation,{'attr':{'class':'form-control  form-control-sm','placeholder':'Observation'}}) }}
+
+									<div class="form-error {% if form_errors(form.observation)|length > 0 %}error-class-tab{% endif %}">
+										{{ form_errors(form.observation) }}
+									</div>
+								</div>
+
+                            </div>
+                            <br/>
+							<button class="btn btn-white btn-xs btn-lg my-button btn-block waves-effect waves-light" data-style="expand-left" type="submit">
+								<i class="fa fa-save"></i>
+								Enregistrer</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-center spr" style="display:none;">
+		<div class="spinner-border" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+
+
+</div>
+
+{{form_widget(form._token)}}
+{{ form_end(form,{'render_rest': false}) }}
+{#{dump(form)}#}

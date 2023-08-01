@@ -1,0 +1,103 @@
+{% set ma_class =   class|default('') %}
+
+
+{{ form_start(form_det ,{'attr':{'novalidate': 'novalidate'  , "autocomplete":"off",'class': ma_class~' form-inline test'}}) }}
+
+<table style="width: 100%" id="marche_table" class="m-add t-m table table-striped table-bordered table-hover dataTables-example det_for">
+
+	<tr id="marche_form">
+
+		<td style="width:2%"> </td>
+
+		<td style="width:29%" class='ellast'>
+			<select id="{{form_det.article.vars.id}}"
+			data-entity="uarticle" 
+			data-column="etat_achat" 
+			data-placeholder="Choisir les articles" 
+			if-selected="{{form_det.article.vars.data ? form_det.article.vars.data.id }}" 
+			name="{{form_det.article.vars.full_name}}"
+		    class="style-detail-form form-control  sle2 articles form-control-sm selected select2-dropdown--below article"
+		    style="color:black">
+			</select>
+
+			<!--<i class="fa fa-search rs" id=""></i>-->
+			{# <i id="modalActivate" type="button" class="modalActivate fa fa-search rs2" data-toggle="modal" data-target="#exampleModalPreview"></i>
+			<i class="fa fa-info-circle observation-icon" data-toggle="tooltip" data-placement="bottom" title="Informations complementaires" aria-hidden="true"></i> #}
+		</td>
+		
+		
+		<td style="width: 10%">
+
+			{{ form_widget(form_det.qt,{'attr':{ 'class':'style-detail-form form-control form-control-sm data.quantite quantite','placeholder':'0.00'}}) }}
+
+		</td>
+
+		<td style="width: 10%">
+
+			{{ form_widget(form_det.prixUnitaire,{'attr':{'class':'style-detail-form form-control form-control-sm   prixUnitaire','placeholder':'0.00' }}) }}
+
+		</td>
+		<td style="width: 10%">
+
+			{{ form_widget(form_det.tva,{'attr':{'class':'style-detail-form form-control form-control-sm  tva','placeholder':'0.00'}}) }}
+
+		</td>
+		<td style="width: 20%">
+
+			{{ form_widget(form_det.observation,{'attr':{'class':'style-detail-form form-control form-control-sm observation','placeholder':'obervation'}}) }}
+
+		</td>
+		{# <td style="width: 10%">-</td> #}
+
+		<td style="width: 3%" class="marche_btn_plus">
+			{% if tAchatdemandeinternedet is defined %}
+				<input type="hidden" name="_id" value="{{ tAchatdemandeinternedet.id }}"/>
+			{% endif %}
+
+			{% if t_achatdemandeinternecab is defined %}
+				<input type="hidden" name="_id_cab" value="{{ t_achatdemandeinternecab.id }}"/>
+			{% endif %}
+
+
+
+			<a style="padding: 7px ; " class="btn-icon-detail btn btn-white btn-primary btn-outline  btn-xs my-button2 upper add_form_ua">
+				<i class=" fa  fa-plus" aria-hidden="true"></i>
+			</a>
+		</td>
+
+
+	</tr>
+	<tr class="observation hide">
+		<td></td>
+		<td colspan="6">
+			{{ form_widget(form_det.observation,{'attr':{'class':'style-detail-form-observation form-control form-control-sm ' ,'placeholder':'Informations complementaires'}}) }}
+		</td>
+	</tr>
+</table>
+{{ form_end(form_det,{'render_rest': false}) }}
+
+<div class="alert alert-danger ua_alert_danger mt-1" role="alert">
+	This is a danger alert—check it out!
+</div>
+
+
+<div class="modal fade right" id="exampleModalPreview" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="false" data-backdrop='false'>
+	<div class="modal-dialog modal-full-height modal-top modal-middle-articles" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalPreviewLabel">ARTICLES</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body bo">
+				<div class="text-center spr">
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
+				<div class="bod"></div>
+			</div>
+		</div>
+	</div>
+</div>

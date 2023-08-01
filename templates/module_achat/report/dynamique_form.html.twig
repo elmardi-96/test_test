@@ -1,0 +1,131 @@
+<div class="sidebar-container">
+
+	<div class="ibox-tools">
+		<a class="close-link close-me" href="">
+			<i class="fa fa-times"></i>
+		</a>
+	</div>
+
+	<div class="tab-content">
+
+
+		<div id="tab-1" class="tab-pane active">
+
+			<div class="sidebar-title">
+				<h3>
+					<i class="fa fa-info-circle"></i>
+					INFORMATIONS
+				</h3>
+				<small>
+					Informations sur le document a imprimer  .</small>
+			</div>
+
+			<div class="right-sidebar-content">
+
+
+				<div class="ibox">
+					<div class="ibox-content">
+						<form class="form" method="post">
+							<div class="form-group row">
+								<label class="col-sm-5 required" for="t_achatdemandeinternecab_fournisseur">Fournisseur :</label>
+								<div class="col-sm-7">
+									<select id="fournisseur" name="rapport[fournisseur]" required="required" class="form-control form-control-sm sel2 ">
+										<option>Choix fournisseur</option>
+										{% for frs in fournisseurs %}
+											<option value="{{frs.id}}">{{frs.societe}}</option>
+										{% endfor %}
+
+									</select>
+								</div>
+							</div>
+
+							<div class="hr-line-dashed"></div>
+							<div class="form-group row">
+								<label class="col-sm-5 required" for="t_achatdemandeinternecab_fournisseur">Operation :</label>
+								<div class="col-sm-7">
+									<select id="operation" name="rapport[operation]" required="required" class="form-control form-control-sm sel2 ">
+										<option>Choix Operation</option>
+										<option value="cmd">Commande</option>
+										<option value="rec">Réception</option>
+										<option value="fac">Facture</option>
+										<option value="reg">Réglement</option>
+
+									</select>
+								</div>
+							</div>
+							<div class="hr-line-dashed all raport-hide"></div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row reception raport-hide">
+
+										<label
+											class="col-md-5 col-form-label">
+											{#<i class="fa fa-credit-card"></i>#}
+											Réception :
+
+										</label>
+										<div class="col-md-7">
+											<div class="onoffswitch">
+												<input name="rapport[reception]" type="checkbox" checked class="onoffswitch-checkbox" id="example1">
+												<label class="onoffswitch-label" for="example1">
+													<span class="onoffswitch-inner"></span>
+													<span class="onoffswitch-switch"></span>
+												</label>
+											</div>
+										</div>
+
+									</div>
+									<div class="hr-line-dashed reception raport-hide"></div>
+									<div class="row facture raport-hide">
+
+										<label
+											class="col-md-5 col-form-label">
+											{#<i class="fa fa-credit-card"></i>#}
+											Facture :
+
+										</label>
+										<div class="col-md-7">
+											<div class="onoffswitch">
+												<input type="checkbox" name="rapport[facture]" checked class="onoffswitch-checkbox" id="example2">
+												<label class="onoffswitch-label" for="example2">
+													<span class="onoffswitch-inner"></span>
+													<span class="onoffswitch-switch"></span>
+												</label>
+											</div>
+										</div>
+
+									</div>
+									<div class="hr-line-dashed facture raport-hide"></div>
+									<div class="row reglement raport-hide">
+
+										<label
+											class="col-md-5 col-form-label">
+											{#<i class="fa fa-credit-card"></i>#}
+											Réglement :
+
+										</label>
+										<div class="col-md-7">
+											<div class="onoffswitch">
+												<input type="checkbox" name="rapport[reglement]" checked class="onoffswitch-checkbox" id="example3">
+												<label class="onoffswitch-label" for="example3">
+													<span class="onoffswitch-inner"></span>
+													<span class="onoffswitch-switch"></span>
+												</label>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+								<i class="fa fa-download font-btn"></i>
+								Télécharger
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

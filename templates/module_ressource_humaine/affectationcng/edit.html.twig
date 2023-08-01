@@ -1,0 +1,25 @@
+{% extends 'base_conge.html.twig' %}
+
+{% block title %}GRS , Modifier
+{% endblock %}
+
+
+
+
+{% block body %}
+    <div id="right-sidebar" class="actions animated"></div>
+
+
+    <div class="edit">
+
+        {{ include('./module_ressource_humaine/demmandecng/_form.html.twig',{'button_label': 'Modifier'}) }}
+        
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('affectation_conge') }}
+{% endblock %}

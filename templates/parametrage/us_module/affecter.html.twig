@@ -1,0 +1,147 @@
+{% extends 'base_config.html.twig' %}
+
+{% block title %}Affecter Dossier
+{% endblock %}
+
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+	<div class="edit">
+		{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , 'class':'form'}}) }}
+
+
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+			<div class="col-lg-6">
+				<h2 class="fo">Parametrage Module
+					<span>(us_module)</span>
+				</h2>
+			</div>
+
+			<div class="col-lg-6">
+				<div class="title-action">
+					<button class="btn btn-primary btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+						<i class="fa fa-save"></i>
+						{{ button_label|default('Enregistrer') }}</button>
+
+				</div>
+			</div>
+
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+
+				{{ wo_render_breadcrumbs() }}
+			</div>
+		</div>
+
+
+		<br/><br/>
+		<div class="row pt-20 scroll_content">
+			<div class="col-lg-12 ">
+				<div class="ibox">
+					<div class="ibox-content">
+
+						<div class="message-success"></div>
+						<div class="row m-t-sm">
+							<div class="col-lg-12">
+								<div class="panel blank-panel">
+									<div class="panel-heading">
+										<div class="panel-options">
+																			{% include './parametrage/us_module/inc/navigation_pre_tabs.html.twig' %}
+										</div>
+									</div>
+
+
+									<div class="panel-body">
+										<div class="col-md-12">
+											<div class="tab-content">
+												<div class="tab-pane active" id="tab-1">
+
+
+													<div class="row">
+													{# 
+														<div class="col-lg-3">
+																{% include './parametrage/us_module/inc/navigation_af.html.twig' %}
+														</div> #}
+
+														<div class="col-md-6 b-r">
+															<div class="form-group row">
+																{{ form_label(form.ModulesDossiers ,'Choix des dossiers  :', {'label_attr':{'class':'col-sm-4'}}) }}
+																<div class="col-sm-8">
+																	{{ form_widget(form.ModulesDossiers,{'attr':{'class':'form-check-inline form-control select2_dossiers'}}) }}
+																</div>
+															</div>
+
+
+															<div class="hr-line-dashed"></div>
+														</div>
+                            <div class="col-md-6 b-r">
+                                <table class="table  display table-striped table-bordered table-hover dataTables-example" id="table" style="width: 100%" >
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nom</th>
+                                            <th>Abreviation</th>
+                                            <th>Description</th>
+                                           
+                                         
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% set i = 0 %}
+									
+																{% for p_dossier in us_module.ModulesDossiers %}
+																	<tr>
+
+										<td>{{p_dossier.id}}</td>
+										<td>{{p_dossier.nomDossier}}</td>
+										<td>{{p_dossier.abreviation}}</td>
+										<td>{{p_dossier.description}}</td>
+																	</tr>
+																{% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr> 
+                                            <th>#</th>
+                                            <th>Nom</th>
+                                            <th>Abreviation</th>
+                                            <th>Description</th>
+                                            
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+													</div>
+
+
+												</div>
+
+
+											</div>
+
+										</div>
+									</div>
+
+
+								</div>
+
+							</div>
+						</div>
+
+
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+
+	</div>
+	{{ form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}{{ encore_entry_script_tags('usmodule') }}
+{% endblock %}
+

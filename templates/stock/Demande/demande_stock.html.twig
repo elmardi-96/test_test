@@ -1,0 +1,213 @@
+{% extends 'base_ugouv.html.twig' %}
+{% set current_path = app.request.get('_route') %}
+{% block title %}Demande transfert stock | Stock
+{% endblock %}
+{% block body %}
+	{# <form id="stock_transfer"> #}
+	<div id="right-sidebar" class="actions animated"></div>
+
+
+	{# ------- Ajouter par moi ------- #}
+
+
+	{# -------- Ajouter par moi --------- #}
+
+	<div class="new">
+
+		<div class="row wrapper white-bg page-heading fixed-top-navigation-button">
+
+
+			<div class="col-lg-12">
+				<div class="row">
+					<div class="col-6">
+						<h4>Demande Stock</h4>
+					</div>
+				</div>
+			</div>
+			<div class="border-b"></div>
+			<div class="col-lg-12">
+				<div class="col-lg-12">
+					<ol id="wo-breadcrumbs" class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+						<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+							<span itemprop="name">Applications</span><meta itemprop="position" content="1"/><span class="separator">/</span>
+						</li>
+						<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+							<span itemprop="name">module gestion de stock</span><meta itemprop="position" content="2"/><span class="separator">/</span>
+						</li>
+						<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+							<span itemprop="name">Demande</span><meta itemprop="position" content="3"/><span class="separator">/</span>
+						</li>
+
+					</ol>
+				</div>
+
+			</div>
+
+		</div>
+		<br/>
+		<div class="wrapper wrapper-content animated fadeInRight" style="padding-left: 0; padding-right: 0">
+			<div class="row" style="font-size: 9.5px !important">
+				<div class="col-lg-12 no-pad-right no-pad-left">
+					<div class="ibox" style="margin-top: 10px">
+						<div class="ibox-content" style="margin-bottom: 0px">
+							<div class="message-success"></div>
+							<h4 class="m-t-none m-b">informations generales</h4>
+
+							<div class="row m-t-sm">
+								<div class="col-lg-12">
+									<div class="panel blank-panel">
+										<div class="col-md-12" style="padding-top: 0%">
+											<div class="panel-body">
+												<div class="tab-content">
+													<div class="tab-pane active show" id="tab1-1">
+														<div class="row">
+															<div class="col-md-6 b-r">
+																<div class="form-group row">
+																	<div class="col-sm-6 dm-a-dropdown"></div>
+																</div>
+
+
+																<div class="form-group row">
+																	<label class="col-sm-4">Site Demandeur</label>
+																	<div class="col-sm-8">
+																		<select
+																			name="Site_DE" class="form-control Site_DE form-control-sm sel2">
+																			{# <option value="">CHOIX Site</option> #}
+																			<option value="{{sites.Id}}">{{sites.nomDossier}}</option>
+
+																			{# {% for antenne in antennes %}
+																																																																																																																																																																																																																																																																				<option value="{{antenne.id}}">{{antenne.designation}}</option>
+																																																																																																																																																																																																																																																																				{% endfor %} #}
+																		</select>
+																	</div>
+																	<div class="col-sm-3 santenneyerror" style="display:none">
+																		<p style="color:red">Prière de selection Demandeur</p>
+																	</div>
+																</div>
+																<br>
+																<div class="form-group row">
+																	<label class="col-sm-4">Observation</label>
+																	<div class="col-sm-8">
+																		<div class="form-group">
+																			<textarea class="form-control Observ" id="Textarea1" rows="3"></textarea>
+																		</div>
+																	</div>
+																	<div class="col-sm-3 santenneyerror" style="display:none">
+																		<p style="color:red">Prière de notez votre observation</p>
+																	</div>
+																</div>
+															</div>
+
+															<div class="col-md-6">
+																<div class=" ">
+																	<div class="form-group row">
+																		<label class="col-sm-4">Central Dap | Recépteur</label>
+																		<div class="col-sm-8">
+																			<select name="Site_Rc" class="form-control Site_Rc ddl_site form-control-sm sel2">
+																				<option value="">CHOIX STOCK DESTINATION</option>
+																				{% for sit in RCsites %}
+																					<option value="{{sit.id}}">{{sit.nom_dossier}}</option>
+
+																				{% endfor %}
+																			</select>
+																		</div>
+																		<div class="col-sm-3 dantenneyerror" style="display:none">
+																			<p style="color:red">Prière de selection Recépteur</p>
+																		</div>
+																	</div>
+																</div>
+																<br>
+																<div class=" ">
+																	<div class="form-group row">
+																		<label class="col-sm-4">Unite Destinataire</label>
+																		<div class="col-sm-8">
+																			<select
+																				name="Site_Rc" id="ddl_unite" class="form-control ddl_unite form-control-sm sel2">{# <option value="">CHOIX UNITE</option> #}
+
+																			</select>
+																		</div>
+																	</div>
+																</div>
+																<br>
+																<div class=" ">
+																	<div class="form-group row">
+																		<label class="col-sm-4">Type d'operation</label>
+																		<div class="col-sm-8">
+																			<select name="Site_Rc" id="first" class="form-control TypeOp form-control-sm sel2">
+																				<option value="">CHOIX TYPE D'OPERATION</option>
+																				{% for type in typeOp %}
+
+																					<option value="{{type.id}}">{{type.designation}}</option>
+
+																				{% endfor %}
+																			</select>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="form-group row">
+																	<div class="col-sm-8"></div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="tab-pane" id="tab-2">
+														<div class="form-group row">
+															<div class="col-sm-8"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="ibox">
+				<div class="ibox-content">
+					<h5 style="margin-bottom: 0">Details</h5>
+					<br/>
+					<div id="tab-1" class="tab-pane active">
+						<div class="full-height-scroll">
+							<div class="table-responsive">
+								<table class="m-add t-m table table-striped table-bordered table-hover dataTables-example table-detail ">
+									<thead style="font-size: 9.5px">
+										<tr>
+											<th style="width: 3%">#</th>
+											{# <th style="width: 30%; ">id</th> #}
+											<th style="width: 30%; ">ARTICLE</th>
+											<th style="width: 5%; ">quantité</th>
+											<th style="width: 5%; ">prix vente</th>
+											{# <th style="width: 5%; ">Conditionnement</th> #}
+											<th style="width: 5%; ">observation</th>
+											<th style="width: 7%; display: inline-flex"></th>
+										</tr>
+									</thead>
+									<tbody class="article_disponible_Rc"></tbody>
+									<tfoot>
+										<tr style="display: none" class="edit-new-mouvement"></tr>
+									</tfoot>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<div class="mail-body text-right tooltip-demo buttons_foot">
+	<button id="Demand_stock" class="btn btn-sm btn-white my-button   upper btn-register waves-effect waves-light" data-style="expand-left" type="submit">
+		<i class="fa fa-save"></i>
+		Enregistrer
+	</button>
+</div>
+{# </form> #}{% endblock %}{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('demande') }}{% endblock %}

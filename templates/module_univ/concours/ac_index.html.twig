@@ -1,0 +1,152 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Candidats convoqués | Concours | UNIV
+{% endblock %}
+{% block body %}
+
+
+    {{ render(controller('App\\Controller\\moduleUniv\\concours\\UnivConcoursController:infosConcours',{ 'id': concours.id})) }}
+
+
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Univ , Concours
+            </h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+    </div>
+
+
+
+    <input type="hidden" value="{{ concours.id }}" class="concours_id"/>    
+    <br/><br/>
+
+
+    <div class="row pt-20">
+
+        <div class="col-md-12 paddin">
+            <div class="ibox">
+
+                <div class="ibox-content">
+                    <div class="panel blank-panel">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                                {% include './module_univ/concours/inc/ac_navigation.html.twig' %}
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab-1">
+                                        <div class="row">
+
+                                            <div class="col-3">
+                                                <select class="form-control _multiple_actions" style="display: none">
+                                                    <option value="">Action</option>
+                                                    <option value="_ac_inserer_pr_concours">Valider pour passer le concours </option>
+                                                </select>
+                                            </div>
+
+
+                                            <div class="table-responsive">
+                                                <div class="col-md-12 search-postion tab-postion ">
+                                                    <h5 class="m-left">CANDIDATS CONVOQUÉS POUR PASSER LE CONCOURS</h5>
+                                                    <table class="t-m table table-striped table-bordered table-hover w-m ac_grid_condidats_convoque">
+                                                        <thead>
+                                                            <tr>
+                                                              
+                                                                <th>Choix</th>
+                                                                <th>Code Etudiant</th>
+                                                                
+                                                                <th>Nom</th>
+                                                                <th>Prénom</th>
+                                                                <th>Formations</th>
+                                                                <th>Nature demande</th>
+                                                                <th>Type bac</th>
+                                                                <th>Moyenne bac</th>
+                                                            </tr>
+                                                        </thead>
+
+
+                                                        <tfoot>
+                                                            <tr>
+                                                               
+                                                                <th>Choix</th>
+                                                                <th>Code Etudiant</th>
+                                                               
+                                                                <th>Nom</th>
+                                                                <th>Prénom</th>
+                                                                <th>Formations</th>
+                                                                <th>Nature demande</th>
+                                                                <th>Type bac</th>
+                                                                <th>Moyenne bac</th>
+                                                            </tr>
+                                                        </tfoot>
+                                                        
+                                                        <tbody>
+
+                                                            {% for key , etudiant in etudiants %}
+
+                                                                <tr>
+                                                                   
+
+                                                                    <td style="text-align:center;">
+
+                                                                        {% if  etudiant.exist_pr_concours > 0 %}
+                                                                            <a title="Etudiant(e) dèja validé passer le concours">-</a>
+                                                                        {% else %}
+                                                                            <input type="checkbox"  class="action" name="_action" value="{{ etudiant.etudiant_id }}">
+                                                                        {% endif %}
+
+                                                                    </td>
+                                                                    <td>{{ etudiant.code_etudiant }}</td>
+                                                                      <td>{{ etudiant.nom}}</td>
+                                                                    <td>{{ etudiant.prenom }}</td>
+                                                                  
+                                                                    <td>{{ etudiant.formations}}</td>
+                                                                    <td>{{ etudiant.nature_demande}}</td>
+                                                                    <td>{{ etudiant.type_bac}}</td>
+                                                                    <td>{{ etudiant.moyenne_bac}}</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!--<span class="float-right">
+                                                                                                                                                                                                        <b>Total :
+                                                                                                                                                                                                        {"{total}#}</b>
+                                                                                                                                                                                                        </span>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+            {% if concours is defined %}
+                <input type="hidden" name="_id" value="{{ concours.id }}" id="_id"/>
+            {% endif %}
+        {% endblock %}
+
+
+        {% block javascripts %}
+            {{ parent() }}
+            {{ encore_entry_script_tags('univ_concours') }}
+        {% endblock %}

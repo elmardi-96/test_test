@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Livraison Client</title>
+    </head>
+    <style>
+        body{
+            font-family: 'Courier New';
+            font-size: 13px;
+        }
+        .logo{
+            max-width:250px;
+            max-height:100px;
+        }
+
+        .table-header{
+            width:100% ; 
+            text-transform: uppercase; 
+
+
+        }
+        
+        .table-sub-title {
+            font-size: 12px ;
+            border: 1px solid #555555 ; 
+            margin-bottom: 5px ; 
+        }
+
+        .table-header label {
+            font-size: 12px;
+            font-weight: 200;
+        }
+
+        .th1{
+            width:250px;height:100px;
+        }
+        .th2{
+            width:100px;height:100px;
+        }
+
+        h3{   
+            padding: 15px 0px ; 
+            text-align: center;
+            background:#e7e6e6;
+            text-transform: uppercase; 
+            font-size: 15px;
+        }
+
+        h4{   
+            padding: 15px 0px ; 
+            text-align: center;
+            border: 1px solid  #555555 ; 
+        }
+
+
+
+
+        .table-content{
+            width:100%; 
+            font-size: 10px;
+            border:1px solid black;
+            border-collapse: collapse;
+
+        }
+
+        .table-content tr {
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+        }
+
+
+
+        .table-content  td{
+            padding: 4px ;
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+
+        }
+        .table-content thead{
+            background: #555555;
+            color: #fff;
+
+        }
+
+        .table-content thead th{
+            font-size: 11px;
+            padding: 4px 2px
+        }
+
+
+        .table-content tbody tr td:nth-child(n+3) {
+            text-align: right; 
+        }
+        .table-content thead tr th:nth-child(n+3) {
+            text-align: right; 
+        }
+        .table-ttc {
+            font-size: 11.5px;
+            width: 40%; float: right;
+            font-weight: bold ; 
+
+        }
+
+        .table-ttc tr td  {
+            border: 1px solid #555555 ; 
+            padding: 1px 3px ; 
+        }
+
+        .table-ttc tr td:nth-child(2) {
+            text-align: right; 
+        }
+
+
+
+        .footer {
+            border-top: 2px solid #555555;
+            margin-top:10px;
+            font-size: 9px ;
+            text-align: center; 
+            position: fixed; 
+            bottom: 0 ;
+        }
+        .footer label{
+
+            padding-left: 10px;
+
+        }
+
+
+
+    </style>
+    <body>
+        <table class="table-header">
+            <tr>
+                <th> 
+                    <img src="{{ asset(image)[1:] }}" class="logo" alt="Logo"> 
+                </th>
+                <th class="th2"><br></th>
+                <th class="th3"> 
+
+                    RAISON SOCIAL : <label>{{ client  ? client.societe  }}</label><br>
+                    ADRESSE : <label>{{ client  ? client.adresse  }}</label><br>
+                    TEL : <label>{{ client  ? client.tel1 ~ ' / '~  client.tel2 }}</label><br>
+
+
+                </th>
+            </tr>
+
+        </table>
+        <br>
+
+
+
+        <h3>N° DEVIS CLIENT {{ cab.code }}</h3>
+
+
+
+        <p style="float: right"> DATE : {{ cab.created ? cab.created|date("d/m/Y")  }}</p>
+        <table class="table-sub-title">
+            <tr >
+                <td style="border-bottom: 1px solid #555 ; font-weight: bold;text-align:center"  colspan="4"> INFORMATIONS OPERATION </td>
+                
+            
+            </tr>
+            <tr>
+                <td> REF DEVIS FRS :</td>
+                <td>{{ cab.refDocAsso }}</td>
+                <td> REF DEVIS :</td>
+                <td>{{ cab.devis ? cab.devis.code : "" }}</td>
+            </tr>
+
+            <tr>
+             
+                <td>  DATE DEVIS :</td>
+                <td>{{ cab.devis ? cab.devis.datedevis|date("d/m/Y") : "" }}</td>
+            </tr>
+
+            <tr>
+                <td>  DATE LIV CLT :</td>
+                <td>{{ cab.datelivraison ? cab.datelivraison|date("d/m/Y")  }}</td>
+            </tr>
+
+            
+
+        </table>
+
+
+
+
+
+        {# <h4>{{ cab.description }} </h4>#}
+
+
+        <table class="table-content">
+            <thead>
+                <tr>
+                    <th style="width: 80px">REFERENCE</th>
+                    <th>DESIGNATION</th>
+                    <th style="width: 40px">UNITE</th>
+                    <th style="width: 60px">QNT</th>
+                    <th style="width: 60px">PU HT</th>
+                    <th style="width: 60px">PT HT</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set totalHt  =  0  %}
+                {% set totalTva  =  0  %} 
+
+                {% for key , detail in details   %}
+                    {% set  key = key + 1  %}
+                    {% set  totalHt = totalHt + (detail.quantite*detail.prixunitaire)  %}
+                    {% set  totalTva = totalTva + (detail.quantite*detail.prixunitaire*detail.tva/100)  %}
+                    <tr>
+                        <td>{{ detail.article.code }}</td>
+                        <td>{{ detail.article.titre }}</td>
+                        <td>{{ detail.article.defaultUnite ? detail.article.defaultUnite.designation }}</td>
+                        <td>{{ detail.quantite|number_format(2) }}</td>
+                        <td>{{ detail.prixunitaire|number_format(2) }}</td>
+                        <td>{{ detail.prixttc|number_format(2) }}</td>
+                    </tr>
+
+                    {% if details|length == key and details|length <= 22 %}
+                        {% for i in details|length .. 22 %}
+                            <tr>
+                                <td  style="color: #fff">.</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+
+            </tbody>
+        </table><br>
+
+
+
+
+        REMARQUES
+        <div style="width:100%;height:50px;border:1px solid black;display:block;"></div>
+    </body>
+
+    <footer>
+        <div class="footer">
+
+            <p>
+                {% if cab.dossier  %}
+                    {{ cab.dossier.titre }}
+
+                    {% if  cab.dossier.rc %} <label>RC :</label>{{ cab.dossier.rc }} {% endif %}
+                    {% if  cab.dossier.ice %}<label>ICE :</label>{{ cab.dossier.ice }} {% endif %}
+                    {% if  cab.dossier.iff %}<label>IF :</label>{{ cab.dossier.iff }} {% endif %}
+                    {% if  cab.dossier.cnss %}<label>CNSS :</label>{{ cab.dossier.cnss }} {% endif %}
+                    {% if  cab.dossier.patente %} <label>PATENTE :</label>{{ cab.dossier.patente }} {% endif %}
+                {% endif %}
+            </p>
+        </div>
+    </footer>
+
+</html>

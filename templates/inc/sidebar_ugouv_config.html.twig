@@ -1,0 +1,37 @@
+{% set current_path = app.request.get('_route') %}
+<div
+	id="wrapper">
+	<!-- Sidebar -->
+	<nav class="navbar-default navbar-static-side" role="navigation">
+		<div class="sidebar-collapse">
+			<ul class="nav metismenu" id="side-menu">
+				{% include './inc/sidebar_header.html.twig' %}
+
+				
+				<li class="active">
+					<a href="#">
+						<i class="fa fa fa-list"></i>
+						<span class="nav-label">
+							parametrage
+						</span>
+					</a>
+
+					<ul class="nav nav-second-level collapse">
+
+						{% for key , param in app.session.get('moduleParametrage').parametrages %}
+
+							<li class="{% if param.route in current_path %} active {% endif %}">
+								<a href="{{ path(param.route) }} " {% if param.prefix in app.request.getPathInfo %} class=" link_ac " {% endif %}>
+									<i class="fa {{param.icon}}"></i>
+									<span class="nav-label">{{param.titre}}</span>
+								</a>
+							</li>
+						{% endfor %}
+
+					</ul>
+				</li>
+
+
+			</ul>
+		</div>
+	</nav>

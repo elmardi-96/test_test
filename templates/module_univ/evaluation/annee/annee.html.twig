@@ -1,0 +1,171 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Moyenne Année | Evaluation | UNIV
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('univ_annee_moyenne') }}
+{% endblock %}
+
+
+{% block body %}
+
+
+
+    <div id="right-sidebar" class="actions animated"></div>
+
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-6">
+            {% include './module_univ/evaluation/annee/inc/workflow_breadcumb.html.twig' %}
+        </div>
+
+        <div class="col-lg-6">
+            <div class="title-action">                                                                                                                                                                              
+                {% if  canSubmit == promotion.controlesemestres|length  and  promotion.controlesemestres|length > 0  and not workflow_has_marked_place(promotion, 'creer') and not workflow_has_marked_place(promotion, 'cloturer') %}
+                    <button class="btn btn-white btn-xs btn-lg _save_annee my-button" data-etudiants='{{ etudiants|json_encode }}' data-id="{{promotion.id}}"> <i class="fa fa-save"></i>
+                        Enregistrer
+                    </button>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {% include './module_univ/evaluation/annee/inc/workflow.html.twig' %}
+        </div>
+    </div>
+
+    <div class="row pt-add-200">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content" style="padding-top: 4px ;">
+
+                    <div class="card-ribbon card-ribbon-annee">
+                        <span>
+                            <div class="style-position">Année</div>
+                        </span>
+                    </div>
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12 padding-style">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {% include './module_univ/evaluation/annee/inc/navigation.html.twig' %}
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12 scroll_content">
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show affi" id="tab-1">
+                                                <div class="table-responsive">
+                                                    {% if  canSubmit != promotion.controleSemestres|length  %}
+                                                        <div class="row">
+                                                            <div class="alert alert-warning inform" role="alert">
+
+                                                                {% for err in errors_messages %}
+                                                                    {{ err|raw }}
+                                                                {% endfor %}
+
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+
+
+
+                                                    {#
+                                                        <button type="button" class="btn btn-primary"  data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                                                            Popover on left
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary"  data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                                                            Popover on top
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary"  data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                                                            Popover on bottom
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                                                            Popover on right
+                                                        </button>#}
+                                               
+                                                    <table class="table  display table-bordered table-hover dataTables-example table-evaluation" id="datatable-show-annee" data-controle-annee="{{ promotion.id }}" data-moycalculer="1">
+                                                        <thead>
+                                                            <tr>
+                                                                <th rowspan="2">#</th>
+                                                                <th rowspan="2">CODE</th>
+                                                                <th rowspan="2">NOM</th>
+                                                                <th rowspan="2">PRENOM</th>
+
+                                                                {% for controleSemestre in promotion.controleSemestres  %}
+
+
+                                                                    {% if workflow_has_marked_place(controleSemestre, 'cloturer') %}
+                                                                        <th rowspan="2">{{ controleSemestre.semestre.designation }}
+                                                                            <br/>Coef :{{ controleSemestre.coefficient }} 
+                                                                            <br/>Coef.Ass :{{ controleSemestre.coefficientAss }} 
+                                                                        </th>
+                                                                        {% for controleModules in controleSemestre.controleModules %}
+                                                                            {% if workflow_has_marked_place(controleModules, 'cloturer') %}
+                                                                                <th rowspan="2">{{ controleModules.module.designation }}
+                                                                                    <br/>Type :{{ controleModules.type }} 
+                                                                                    <br/>Coef :{{ controleModules.coefficient }} 
+                                                                                </th>
+                                                                            {% endif %}
+                                                                        {% endfor %}   
+
+                                                                    {% endif %}
+                                                                {% endfor %}
+
+
+                                                                <th rowspan="2">S.S2</th>
+                                                                <th rowspan="2">S.Def</th>
+                                                                <th rowspan="2">S.Aff</th>
+
+                                                                <th colspan="2" width="3%">MOYENNE
+                                                                    <br/>
+                                                                    ENREGISTRE</th>
+                                                                <th colspan="2" width="3%">MOYENNE
+                                                                    <br/>
+                                                                    CALCULER
+                                                                </th>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th>MOYENNE</th>
+                                                                <th>MOYENNE.SEC</th>
+                                                                <th>MOYENNE</th>
+                                                                <th>MOYENNE.SEC</th>
+                                                            </tr>
+
+
+                                                        </thead>
+
+
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{ render(controller('App\\Controller\\moduleUniv\\evaluation\\EvaluationAnneeController:ChoixPromotion',{ 'id': promotion ,'type':'annee','active':promotion.id}))}}
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {#{ parent() }#}
+    {{ encore_entry_script_tags('univ_annee_moyenne') }}
+{% endblock %}

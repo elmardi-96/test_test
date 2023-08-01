@@ -1,0 +1,47 @@
+<div id="page-wrapper" class="gray-bg">
+    <div class="row">
+
+
+
+
+
+        <nav class="navbar navbar-fixed-top" role="navigation">
+
+
+            <div class="navbar-header" style="margin-top: 0px;margin-bottom: 4px;">
+                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <ul class="navbar-top-links navbar-top-dossier lp">
+                    {% if app.user.menuPosition is defined and app.user.menuPosition ==1  %} 
+                        {% if app.session.get('dossiers')[app.session.get('dossierCourant').prefix].modules  is defined  %}
+                            {% for key , module in  app.session.get('dossiers')[app.session.get('dossierCourant').prefix].modules|sort((a, b) => a.ord <=> b.ord) %}
+                                {% set active = '' %}
+
+                                {% if module.solution_prefix =='_sys_ugouv' %}
+                                    <li class="dropdown">
+                                        <a aria-expanded="false" role="button" href="#" class="hNav dropdown-toggle" data-toggle="dropdown">
+                                            <i class="fa {{module.icon}}"></i> {{ module.abreviation|capitalize }}</a>
+                                            {% if module.sousModules is defined  %}
+                                            <ul role="menu" class="dropdown-menu">
+                                                {%  for key , sousModule in module.sousModules  %}
+                                                    <li>
+                                                        <a class="" href="{% if sousModule.route is not null %} {{ path(sousModule.route) }} {% endif %}"><i class="fa {{sousModule.icon}}"></i> {{ sousModule.titre|capitalize }}</a>
+                                                    </li>
+                                                {% endfor %}
+
+                                            </ul>
+                                        {% endif %}
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {%endif%}
+                </ul>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right imp-tail imp-tail2">
+                {% include './inc/header_app_config_logout.html.twig' %}
+            </ul>
+        </nav>
+    </div>

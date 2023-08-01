@@ -1,0 +1,16 @@
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+    
+    <li> <a class="nav-link {% if "module_univ_admission_preadmission_avecConcours"  in current_path  %} active {%endif%}" href="{{ path('module_univ_admission_preadmission_avecConcours' )}}" ><i class="fa fa-bar-chart-o"></i> Avec concours</a></li>
+    
+    <li><a class="nav-link {% if "module_univ_admission_preadmission_sansconcours"  in current_path  %} active {%endif%}" href="{{ path('module_univ_admission_preadmission_sansconcours' )}}" ><i class="fa fa-bar-chart-o"></i> Sans concours </a></li>
+  
+</ul>
+    

@@ -1,0 +1,26 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Modifier | General operation
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+
+	<div class="edit">
+
+
+		{{ include('./tresorerie/tr_general_operation/_form.html.twig',{'button_label': 'Enregistrer', 'page_actuel':'edit'}) }}
+
+
+	
+
+
+	
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('general_operation') }}
+{% endblock %}

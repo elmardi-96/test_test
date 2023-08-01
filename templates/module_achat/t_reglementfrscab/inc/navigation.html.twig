@@ -1,0 +1,39 @@
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+    {% if t_reglementfrs.id %}
+    {% for operation in operations|sort((a, b) => a.ordr <=> b.ordr)%}
+	
+    {% if operation.horizontale  %}
+    {% if operation.route is not null  %}
+        <li>
+           
+           
+            <a class="nav-link {% if  operation.route   in current_path  %} active {%endif%}" href="{{ path(operation.route , {id:t_reglementfrs.id}) }}">
+                <i class="fa {{ operation.icon }}"></i>
+                {{ operation.titre|capitalize }}   </a>
+        </li>
+        
+     
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+       {% else %}
+       <li> <a class="nav-link active"  >Informations</a></li>  
+   {% endif %}
+
+       
+     
+    
+   
+  
+  
+   
+</ul>

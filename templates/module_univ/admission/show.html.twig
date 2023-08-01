@@ -1,0 +1,176 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Consulter | Admission | UNIV {% endblock %}
+{% block body %}
+    <div id="right-sidebar" class="actions animated" >
+    </div>
+
+    <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+        <div class="col-lg-4">
+            <h2 class="fo">Univ , Admission </h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="title-action">
+                <div class="title-action">
+                    {#% include './module_achat/facturefrs/inc/workflow.html.twig' %#}
+                </div>   
+            </div>
+        </div>
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+        {#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+#} 
+
+    </div>
+    <br/><br/>
+    <div class="row pt-20">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content" style="padding-top: 4px ;">
+
+                    {#{% include './module_achat/facturefrs/inc/workflow_breadcumb.html.twig' %}#}
+
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        {#<ul class="nav nav-tabs">
+                                            <li><a class="nav-link active show" href="#tab-1" data-toggle="tab">Informations</a></li>
+                                            <li><a class="nav-link" href="#tab-2" data-toggle="tab">Articles</a></li>
+
+                                            <li><a class="nav-link" href="#tab-3" data-toggle="tab">Le suivi des opérations </a></li>
+
+                                        </ul>#}
+                                        {% include './module_univ/admission/inc/navigation.html.twig' %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active show" id="tab-1">
+                                                <div class="row">
+                                                    <div class="col-md-6 b-r">
+                                                        <h3 class="m-t-none m-b">Informations </h3>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Id</label>
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{ admission.preinscription.etudiant ? admission.preinscription.etudiant.id }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Code </label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{ admission.preinscription.code }}</p>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Nom</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{ admission.preinscription.etudiant ? admission.preinscription.etudiant.nom }}</p>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Prenom</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{ admission.preinscription.etudiant ? admission.preinscription.etudiant.prenom }}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Statut</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{admission.preinscription.statut ? admission.preinscription.statut.designation }}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        
+
+
+
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h3 class="m-t-none m-b">Informations Formation </h3>
+                                                        
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Etablissement</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{ admission.preinscription.formation.etablissement.designation }}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Formation</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{ admission.preinscription.formation ? admission.preinscription.formation.designation }}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="hr-line-dashed hr-line-dashed-co"></div>
+
+                                                        <div class="form-group row ph">
+                                                            <label class="col-sm-4 required font-weight-bold font-weight-bold">Année</label>
+
+                                                            <div class="col-sm-8">
+                                                                <p class="form-control-static" >{{ admission.preinscription.annee ? admission.preinscription.annee.designation }}</p>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('univ_preinscription') }}
+{% endblock %}

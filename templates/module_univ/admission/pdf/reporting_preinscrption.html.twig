@@ -1,0 +1,856 @@
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+
+<style type="text/Css">
+    body{
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    .titre-reb{
+        width: 100%;
+        background: #1f4f7a;
+        font-size: 9px ;
+        padding:3px 10px;
+        color: #f1f1f1;
+        font-weight: bold
+    }
+    div.zone_over
+    {
+        display: block;
+        width: 40%;
+        word-wrap:break-word !important;
+    }
+    .slh tr td {
+        border-bottom: 2px solid black;
+    }
+    .mo tr td{
+        padding:4px;
+
+    }
+    .table-parours {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.table-parours th {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    width:auto;
+    font-size: 10px;
+    background: #eee;
+}
+ .table-parours td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    width: auto;
+    font-size: 10px;
+    background: white;
+}
+
+.tb1{
+    width: 100%;border : 1px solid black ;
+}
+.tb2{
+    width: 100%; text-align: left; font-size: 12px;margin-top:8px;
+}
+.tb3{
+    width: 100%; text-align: center; font-size: 11px;margin-top:8px;
+}
+.tb4{
+    width: 100%; margin-top:8px;margin-left:-4px;font-size:10px;font-weight: bold;
+}
+.th1{
+    width:20%
+}
+.th2{
+    width:60%;text-align:center;font-size:11px;border-left : 1px solid black ;border-right : 1px solid black ;padding-bottom : 10px;
+}
+.th3{
+    width:20%;font-size:11px;text-align:center
+}
+.td1{
+    width: 100% ;background : #1f4e79; color: #fff ;text-align: center;padding-top:3px;padding-bottom:3px;
+}
+.td2{
+    width: 100% ;background: #ddd; color: black ;text-align: center;padding-top:4px;padding-bottom:4px;
+}
+.td3{
+    width: 100% ;background: #ddd; color: black ;text-align: center;border-left:4px solid white;padding-top:4px;padding-bottom:4px;
+}
+.td4{
+    width: 30% ;background : #ddd;
+}
+.td5{
+    width: 27.5% ;border:1px solid gray;text-align : right
+}
+.td6{
+    width: 25% ;background : #ddd;
+}
+.td7{
+    width: 33% ;border:1px solid gray;text-align : right
+}
+.td8{
+    width: 32.2% ;border:1px solid gray;text-align : right;
+}
+.td9{
+    width: 33% ;border:1px solid gray;
+}
+.td10{
+    width: 32.2% ;border:1px solid gray;
+}
+.td11{
+    width: 25% ;background : #1f4e79;color:white;
+}
+.td12{
+    width: 33% ;border:1px solid gray;text-align : right;
+}
+.td13{
+    width: 27.5% ;border:1px solid gray;text-align:right
+}
+.td14{
+    width: 30% ;background : black;color:white;
+}
+.img{
+    margin-left: 5px; margin-top:-25px;  width: 100%; padding : 5px;
+}
+</style>
+
+
+
+
+<table class="tb1" cellspacing="0" >
+    <tr >
+        <th class="th1">
+        <img class="img" src="img/Logo_UIASS.png" alt="Logo">
+               
+        </th>
+        <th class="th2">
+            <br/>
+            UNIVERSITE INTERNATIONALE ABULCASIS DES SCIENCES DE LA SANTE <br/>
+            Situation journalière de pré-inscriptions
+            <br/>
+
+        </th>
+        <th class="th3">
+          
+            Date D'édition
+
+
+
+        </th>
+  </tr>
+
+</table>
+
+
+
+
+
+<!-- 
+<page_footer>
+    <table style="width: 100%; border: solid 1px black;">
+        <tr>
+            <td style="text-align: left;    width: 50%">html2pdf.fr</td>
+            <td style="text-align: right;    width: 50%">page [[page_cu]]/[[page_nb]]</td>
+        </tr>
+    </table>
+</page_footer>-->
+
+
+
+
+<table cellspacing="0" class="tb2" >
+    <tr>
+        <td class="td1">I-ETAT DES INSCRIPTIONS PAR ETABLISSEMENT</td> 
+    </tr>
+    <tr>
+
+    </tr>
+
+
+</table>
+
+
+
+
+
+<table cellspacing="0" class="tb3" >
+    <tr>
+        <td class="td2"> I-A- Faculté de Médecine Abulcasis</td> 
+        <td class="td3">I-B- Faculté de Médecine Dentaire Abulcasis</td> 
+    </tr>
+    <tr>
+
+    </tr>
+
+
+</table>
+
+
+<table cellspacing="4px" class="mo tb4">
+    <tr>
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers déposés : </td> 
+
+        <td class="td5">{# <?php if (isset($datefma->complet )) echo $datefma->complet; ?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers déposés : </td> 
+
+        <td class="td5">{# <?php if (isset($datefda->complet )) echo $datefda->complet; ?> #}</td>
+
+    </tr>
+
+    <tr>
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers incomplets : </td> 
+
+        <td class="td5">{# <?php if (isset($datefma->incomplet )) echo $datefma->incomplet; ?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers incomplets: </td> 
+
+        <td class="td5">{# <?php if (isset($datefda->incomplet )) echo $datefda->incomplet; ?> #}</td>
+
+
+
+
+    </tr>
+
+    <tr>
+
+
+        <td class="td4"> &nbsp;&nbsp;TOTAL ENCAISSEMENTS: </td> 
+
+        <td class="td5">{# <?php if (isset($datefma->mtreg ))    echo number_format($datefma->mtreg, 2, ',', ' ');?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;TOTAL ENCAISSEMENTS : </td> 
+
+        <td class="td5">{# <?php if (isset($datefda->mtreg )) echo number_format($datefda->mtreg, 2, ',', ' ');?> #}</td>
+
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table cellspacing="0" class="tb3" >
+    <tr>
+        <td class="td2"> I-C- Faculté de Pharmacie Abulcasis</td> 
+        <td class="td3">I-D- Faculté des Sciences de la Santé</td> 
+    </tr>
+    <tr>
+
+    </tr>
+
+
+</table>
+
+
+
+
+<table cellspacing="4px" class="mo tb4">
+      <tr>
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers déposés : </td> 
+
+        <td class="td5">{# <?php if (isset($datefpa->complet )) echo $datefpa->complet; ?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers déposés : </td> 
+
+        <td class="td5">{# <?php if (isset($datefss->complet)) echo $datefss->complet; ?> #}</td>
+
+    </tr>
+
+    <tr>
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers incomplets : </td> 
+
+        <td class="td5">{# <?php if (isset($datefpa->incomplet )) echo $datefpa->incomplet; ?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers incomplets: </td> 
+
+        <td class="td5">{# <?php if (isset($datefss->incomplet)) echo $datefss->incomplet; ?> #}</td>
+
+
+
+
+    </tr>
+
+    <tr>
+
+
+        <td class="td4"> &nbsp;&nbsp;TOTAL ENCAISSEMENTS: </td> 
+
+        <td class="td5">{# <?php if (isset($datefpa->mtreg)) echo number_format($datefpa->mtreg, 2, ',', ' ');?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;TOTAL ENCAISSEMENTS : </td> 
+
+        <td class="td5">{# <?php if (isset($datefss->mtreg)) echo number_format($datefss->mtreg, 2, ',', ' ');?> #}</td>
+
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table cellspacing="0" class="tb3" >
+    <tr>
+        <td class="td2"> I-E- Institut Sup. d’Ingénierie et Techno.</td> 
+        <td class="td3">SYNTHESE JOURNALIERE</td> 
+    </tr>
+    <tr>
+
+    </tr>
+
+
+</table>
+
+
+
+<table cellspacing="4px" class="mo tb4">
+       <tr>
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers déposés : </td> 
+
+        <td class="td5">{# <?php if (isset($dateisits->complet))  echo $dateisits->complet; ?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers déposés : </td> 
+
+        <td class="td5">{# <?php if (isset($completnbr))  echo $completnbr; ?> #}</td>
+
+    </tr>
+
+    <tr>
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers incomplets : </td> 
+
+        <td class="td5">{# <?php if (isset( $dateisits->incomplet)) echo $dateisits->incomplet; ?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;Nombre de dossiers incomplets: </td> 
+
+        <td class="td5">{# <?php if (isset($incompletnbr))  echo $incompletnbr; ?> #}</td>
+
+
+
+
+    </tr>
+
+    <tr>
+
+
+        <td class="td4"> &nbsp;&nbsp;TOTAL ENCAISSEMENTS: </td> 
+
+        <td class="td5">{# <?php if (isset($dateisits->mtreg ))  echo number_format($dateisits->mtreg, 2, ',', ' ');?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;TOTAL ENCAISSEMENTS : </td> 
+
+        <td class="td5">{# <?php if (isset($totreg ))  echo number_format($totreg, 2, ',', ' ');?> #}</td>
+
+
+</tr>
+
+</table>
+
+<table cellspacing="0" class="tb2" >
+    <tr>
+        <td class="td1">II- ETAT DES CANDIDATURES PAR ETABLISSEMENT</td> 
+    </tr>
+    <tr>
+
+    </tr>
+
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table cellspacing="0" class="tb3" >
+    <tr>
+        <td class="td2"> II- A – Faculté de Médecine Abulcasis</td> 
+        <td class="td3">II-B Faculté de Médecine Dentaire Abulcasis</td> 
+    </tr>
+    <tr>
+
+    </tr>
+
+
+</table>
+
+
+
+<table cellspacing="4px" class="mo tb4">
+    <tr>
+
+        <td class="td6"> &nbsp;&nbsp;Candidats payants : </td> 
+
+        <td class="td7">{# <?php if (isset($datefma->payant))  echo  $datefma->payant;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Candidats payants: </td> 
+
+        <td class="td8">{# <?php if (isset($datefda->payant))  echo  $datefda->payant;  ?> #}</td>
+
+    </tr>
+
+    <tr>
+
+        <td class="td6"> &nbsp;&nbsp;Candidats boursiers : </td> 
+
+        <td class="td7">{# <?php if (isset($datefma->Boursier))  echo  $datefma->Boursier;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Candidats boursiers : </td> 
+
+        <td class="td8">{# <?php if (isset($datefda->Boursier))  echo  $datefda->Boursier;  ?> #}</td>
+
+
+
+
+    </tr>
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Candidats étrangers : </td> 
+
+        <td class="td9">{# <?php if (isset($datefma->Etranger))  echo  $datefma->Etranger;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Candidats étrangers : </td> 
+
+        <td class="td10">{# <?php if (isset($datefda->Etranger))  echo  $datefda->Etranger;  ?> #}</td>
+
+
+</tr>
+
+
+
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Candidats bi-nationaux : </td> 
+
+        <td class="td9">{# <?php if (isset($datefma->nationalite))  echo  $datefma->nationalite;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Candidats bi-nationaux : </td> 
+
+        <td class="td10">{# <?php if (isset($datefda->nationalite))  echo  $datefda->nationalite;  ?>< #}</td>
+
+
+</tr>
+
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Transferts en 1ère année : </td> 
+
+        <td class="td7">{# <?php if (isset($datefma->Transfert))  echo  $datefma->Transfert;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Transferts en 1ère année : </td> 
+
+        <td class="td8">{# <?php if (isset($datefda->Transfert))  echo  $datefda->Transfert;  ?> #}</td>
+
+
+</tr>
+
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Admis sans concours : </td> 
+
+        <td class="td9">{# <?php if (isset($datefma->Admis))  echo  $datefma->Admis;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Admis sans concours : </td> 
+
+        <td class="td10">{# <?php if (isset($datefda->Admis))  echo  $datefda->Admis;  ?> #}</td>
+
+
+</tr>
+
+
+    <tr>
+
+
+        <td class="td11"> &nbsp;&nbsp;TOTAL : </td> 
+
+        <td class="td12"{# ><?php if (isset($datefma->Admis) && isset($datefma->payant) && isset($datefma->Boursier) && isset($datefma->Etranger) && isset($datefma->nationalite) && isset($datefma->Transfert))   echo  $datefma->Admis+$datefma->payant + $datefma->Boursier + $datefma->Etranger + $datefma->nationalite + $datefma->Transfert;?> #}</td> 
+
+        <td class="td11"> &nbsp;&nbsp;TOTAL : </td> 
+
+        <td class="td8">{# <?php if (isset($datefda->Admis) && isset($datefda->payant) && isset($datefda->Boursier) && isset($datefda->Etranger) && isset($datefda->nationalite) && isset($datefda->Transfert))  echo  $datefda->Admis+$datefda->payant + $datefda->Boursier + $datefda->Etranger + $datefda->nationalite + $datefda->Transfert;?> #}</td>
+
+
+</tr>
+
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table cellspacing="0" class="tb3" >
+    <tr>
+        <td class="td2"> II- C – Faculté de Pharmacie Abulcasis</td> 
+        <td class="td3">II-D Faculté des Sciences de la Santé</td> 
+    </tr>
+    <tr>
+
+    </tr>
+
+
+</table>
+
+
+
+<table cellspacing="4px" class="mo tb4">
+    <tr>
+
+        <td class="td6"> &nbsp;&nbsp;Candidats payants : </td> 
+
+        <td class="td12">{# <?php if (isset($datefpa->payant))  echo  $datefpa->payant;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Candidats payants: </td> 
+
+        <td class="td8">{# <?php if (isset( $datefss->payant))  echo  $datefss->payant;  ?> #}</td>
+
+    </tr>
+
+    <tr>
+
+        <td class="td6"> &nbsp;&nbsp;Candidats boursiers : </td> 
+
+        <td class="td9">{# <?php if (isset($datefpa->Boursier))  echo  $datefpa->Boursier;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Candidats boursiers : </td> 
+
+        <td class="td10">{# <?php if (isset($datefss->Boursier))  echo  $datefss->Boursier;  ?> #}</td>
+
+
+
+
+    </tr>
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Candidats étrangers : </td> 
+
+        <td class="td9">{# <?php if (isset($datefpa->Etranger))  echo  $datefpa->Etranger;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Candidats étrangers : </td> 
+
+        <td class="td10">{# <?php if (isset($datefss->Etranger))  echo  $datefss->Etranger;  ?> #}</td>
+
+
+</tr>
+
+
+
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Candidats bi-nationaux : </td> 
+
+        <td class="td9">{# <?php if (isset($datefpa->nationalite))  echo  $datefpa->nationalite;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Candidats bi-nationaux : </td> 
+
+        <td class="td10">{# <?php if (isset($datefss->nationalite))  echo  $datefss->nationalite;  ?> #}</td>
+
+
+</tr>
+
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Transferts en 1ère année : </td> 
+
+        <td class="td7">{# <?php if (isset($datefpa->Transfert))  echo  $datefpa->Transfert;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Transferts en 1ère année : </td> 
+
+        <td class="td8">{# <?php if (isset($datefss->Transfert))  echo  $datefss->Transfert;  ?> #}</td>
+
+
+</tr>
+
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Admis sans concours : </td> 
+
+        <td class="td9">{# <?php if (isset($datefpa->Admis))  echo  $datefpa->Admis;  ?> #}</td> 
+
+        <td class="td6"> &nbsp;&nbsp;Admis sans concours : </td> 
+
+        <td class="td10">{# <?php if (isset($datefss->Admis))  echo  $datefss->Admis;  ?> #}</td>
+
+
+</tr>
+
+
+    <tr>
+
+
+        <td class="td11"> &nbsp;&nbsp;TOTAL : </td> 
+
+        <td class="td12">{# <?php if (isset($datefpa->Admis) && isset($datefpa->payant) && isset($datefpa->Boursier) && isset($datefpa->Etranger) && isset($datefpa->nationalite) && isset($datefpa->Transfert))   echo  $datefpa->Admis+$datefpa->payant + $datefpa->Boursier + $datefpa->Etranger + $datefpa->nationalite + $datefpa->Transfert;?> #}</td> 
+
+        <td class="td11"> &nbsp;&nbsp;TOTAL : </td> 
+
+        <td class="td8">{# <?php if (isset($datefss->Admis) && isset($datefss->payant) && isset($datefss->Boursier) && isset($datefss->Etranger) && isset($datefss->nationalite) && isset($datefss->Transfert))   echo  $datefss->Admis+$datefss->payant + $datefss->Boursier + $datefss->Etranger + $datefss->nationalite + $datefss->Transfert;?> #}</td>
+
+
+</tr>
+
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table cellspacing="0" class="tb3" >
+    <tr>
+        <td class="td2">II- E- Institut Sup. d’Ingénierie et Techno.</td> 
+        <td class="td3">SYNTHESE JOURNALIERE</td> 
+    </tr>
+    <tr>
+
+    </tr>
+
+
+</table>
+
+
+
+<table cellspacing="4px" class="mo tb4">
+    <tr>
+
+        <td class="td6"> &nbsp;&nbsp;Candidats payants : </td> 
+
+        <td class="td7">{# <?php if (isset( $dateisits->payant))  echo  $dateisits->payant;  ?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;Faculté de Médecine Abulcasis : </td> 
+
+        <td class="td5">{# <?php  if (isset($datefma->Admis) && isset($datefma->payant) && isset($datefma->Boursier) && isset($datefma->Etranger) && isset($datefma->nationalite) && isset($datefma->Transfert)) echo  $datefma->Admis+$datefma->payant + $datefma->Boursier + $datefma->Etranger + $datefma->nationalite + $datefma->Transfert;  ?> #}</td>
+
+    </tr>
+
+    <tr>
+
+        <td class="td6"> &nbsp;&nbsp;Candidats boursiers : </td> 
+
+        <td class="td12">{# <?php if (isset($dateisits->Boursier ))  echo  $dateisits->Boursier;  ?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;Faculté de Médecine Dentaire A : </td> 
+
+        <td class="td5">{# <?php if (isset($datefda->Admis) && isset($datefda->payant) && isset($datefda->Boursier) && isset($datefda->Etranger) && isset($datefda->nationalite) && isset($datefda->Transfert))  echo  $datefda->Admis+$datefda->payant + $datefda->Boursier + $datefda->Etranger + $datefda->nationalite + $datefda->Transfert;  ?> #}</td>
+
+
+
+
+    </tr>
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Candidats étrangers : </td> 
+
+        <td class="td9">{# <?php if (isset( $dateisits->Etranger))  echo  $dateisits->Etranger;  ?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;Faculté de Pharmacie Abulcasis : </td> 
+
+        <td class="td13">{# <?php  if (isset($datefpa->Admis) && isset($datefpa->payant) && isset($datefpa->Boursier) && isset($datefpa->Etranger) && isset($datefpa->nationalite) && isset($datefpa->Transfert))   echo  $datefpa->Admis+$datefpa->payant + $datefpa->Boursier + $datefpa->Etranger + $datefpa->nationalite + $datefpa->Transfert;  ?> #}</td>
+
+
+</tr>
+
+
+
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Candidats bi-nationaux : </td> 
+
+        <td class="td9">{# <?php if (isset($dateisits->nationalite ))  echo  $dateisits->nationalite;  ?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;Faculté des Sciences de la Santé : </td> 
+
+        <td class="td13">{# <?php  if (isset($datefss->Admis) && isset($datefss->payant) && isset($datefss->Boursier) && isset($datefss->Etranger) && isset($datefss->nationalite) && isset($datefss->Transfert))  echo  $datefss->Admis+$datefss->payant + $datefss->Boursier + $datefss->Etranger + $datefss->nationalite + $datefss->Transfert;  ?> #}</td>
+
+
+</tr>
+
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Transferts en 1ère année : </td> 
+
+        <td class="td9">{# <?php if (isset($dateisits->Transfert ))  echo  $dateisits->Transfert;  ?> #}</td> 
+
+        <td class="td4"> &nbsp;&nbsp;Institut Sup D’ingénierie et Tech. : </td> 
+
+        <td class="td13">{# <?php if (isset($dateisits->Admis) && isset($dateisits->payant) && isset($dateisits->Boursier) && isset($dateisits->Etranger) && isset($dateisits->nationalite) && isset($dateisits->Transfert))   echo  $dateisits->Admis+$dateisits->payant + $dateisits->Boursier + $dateisits->Etranger + $dateisits->nationalite + $dateisits->Transfert;  ?> #}</td>
+
+
+</tr>
+
+
+
+
+    <tr>
+
+
+        <td class="td6"> &nbsp;&nbsp;Admis sans concours </td> 
+
+        <td class="td9">{# <?php if (isset($dateisits->Admis ))  echo  $dateisits->Admis;  ?> #}</td> 
+
+        <td class="td14"> &nbsp;&nbsp;TOTAL : </td> 
+
+        <td class="td5">{# <?php if (isset($total ))  echo  $total;?> #}</td>
+
+
+</tr>
+
+    <tr>
+
+
+        <td class="td11"> &nbsp;&nbsp;TOTAL : </td> 
+
+        <td class="td12">{# <?php if (isset($dateisits->Admis) && isset($dateisits->payant) && isset($dateisits->Boursier) && isset($dateisits->Etranger) && isset($dateisits->nationalite) && isset($dateisits->Transfert))    echo  $dateisits->Admis+$dateisits->payant + $dateisits->Boursier + $dateisits->Etranger + $dateisits->nationalite + $dateisits->Transfer;?> #}</td> 
+
+
+
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<page_footer>
+
+</page_footer>

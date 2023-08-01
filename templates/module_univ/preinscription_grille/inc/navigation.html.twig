@@ -1,0 +1,23 @@
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+    
+ 
+    <li>
+        <a class="nav-link {% if "univ_t_preinscription_grille_show"  in current_path  %} active {%endif%}" href="{{ path('univ_t_preinscription_grille_show' , {id:univ_t_preinscription_grille.id})}}">
+            <i class="fa fa-info-circle"></i>
+            Information</a>
+    </li>
+    <li>
+        <a class="nav-link {% if "univ_t_preinscription_grille_edit"  in current_path  %} active {%endif%}" href="{{ path('univ_t_preinscription_grille_edit' , {id:univ_t_preinscription_grille.id})}}">
+            <i class="fa fa-pencil"></i>
+            modifier (grille)</a>
+    </li
+    
+</ul>

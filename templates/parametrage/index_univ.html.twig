@@ -1,0 +1,86 @@
+{% extends 'base_univ.html.twig' %}
+
+{% block title %}Paramètrage index{% endblock %}
+
+{% block body %}
+{#    <div id="right-sidebar" class="actions animated" >
+
+    </div>
+   <div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+
+
+        <div class="col-lg-6">
+            <h2 class="fo">Paramètrage</h2>
+        </div>
+
+        <div class="border-b"></div>
+        <div class="col-lg-12">
+            {{ wo_render_breadcrumbs() }}
+        </div>
+
+
+    </div>
+    <br/><br/>
+
+    <div class="row border-bottom white-bg dashboard-header mt-20">
+            <div class="col-lg-12">
+
+                <div class="ibox ">
+                    <div class="ibox-content"> 
+                        <div class="table-responsive">
+                            <table class="table display table-striped table-bordered table-hover" id="grid-parametres" style="width: 100%" >
+                                <thead>
+                                    <tr>
+
+                                        <th></th> 
+                                        <th>Table </th>
+                                        <th>Description </th>
+                                        <th>Lien</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set i = 0 %}
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+
+                                        <td><a class="cd_op" href="{{path('parametrage_univ')}}">Univ</a></td>
+
+                                        <td>les tables des universites</td>
+                                        <td>Accèder aux tables de Paramètrage d'univ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% set i = i + 1 %} {{ i }}</td>
+
+                                        <td><a class="cd_op" href="{{path('parametrage_ugouv')}}">Ugouv</a></td>
+                                        <td>les tables d'Ugouv</td>
+                                        <td>Accèder aux tables de Paramètrage des ventes et des achats d'Ugouv</td>
+                                    </tr>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+
+                                        <th></th> 
+                                        <th>Table </th>
+                                        <th>Description </th>
+                                        <th>Lien</th>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    </div>#}
+
+{% include './univ/contentIndexModule.html.twig' with {'module': app.session.get('dossiers')[app.session.get('dossierCourant').prefix].modules['_module_parametrage_univ']} %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}  

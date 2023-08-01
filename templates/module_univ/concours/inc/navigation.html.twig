@@ -1,0 +1,12 @@
+{% set current_path = app.request.get('_route') %}
+<ul class="nav nav-tabs">                                                                                          
+    <li> <a class="nav-link active"><i class="fa fa-users"></i>Informations</a></li>
+        {#    <li> <a class="nav-link {% if "module_univ_concours_ac_etudiants_concours"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_ac_etudiants_concours' , {id:concours.id})}}" > <i class="fa fa-calculator"></i> Note & classement Concours </a></li>
+            <li> <a class="nav-link {% if "module_univ_concours_ac_etudiants_admissible"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_ac_etudiants_admissible' , {id:concours.id})}}" ><i class="fa fa fa-check-square"></i>Candidats admissibles</a></li>#}
+
+    
+   {# <li> <a class="nav-link {% if "module_univ_concours_p_concourscab_matiere"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_p_concourscab_matiere' , {id:p_concourscab.id})}}" ><i class="fa fa fa-check-square"></i>Matières</a></li>
+    <li> <a class="nav-link {% if "module_univ_concours_p_concourscab_matiere"  in current_path  %} active {%endif%}" href="{{ path('module_univ_concours_p_concourscab_matiere' , {id:p_concourscab.id})}}" ><i class="fa fa fa-check-square"></i>Formations</a></li>
+#}
+</ul>
+

@@ -1,0 +1,38 @@
+{% if demande is defined and demande is not empty and demande.id is not empty and operations['_workflow'] is  defined  %}
+
+	<div class="wrf-positions">
+		{% for transition in workflow_transitions(demande) %}
+			{#{{ dump(workflow_marked_places(commande)) }}#}
+			{% set url = "" %}
+			{% if workflow_metadata(demande, 'function', transition) %}
+				{%  set  url= path(workflow_metadata(demande, 'function', transition), {id: demande.id}) %}
+			{% endif %}
+		
+
+
+			<a class="{{ workflow_metadata(demande, 'function', transition) }} btn-wrf btn btn-xs {{ workflow_metadata(demande, 'class', transition) }} btn-outline" data-id="{{ demande.id }}" data-title="{{ workflow_metadata(demande, 'title', transition) }}" data-transition="{{ transition.name }}">
+				<i class="fa {{ workflow_metadata(demande, 'icon', transition) }}"></i>
+				&nbsp;{{ workflow_metadata(demande, 'title', transition) }}
+			</a>
+
+		{% endfor %}
+
+
+		{% if workflow_has_marked_place(demande, "creer") or  workflow_has_marked_place(demande, "encours") or workflow_has_marked_place(demande, "archiver") or  workflow_has_marked_place(demande, "annuler") %}
+
+			{% for key ,  operation in operations  %}
+				{%  if  operation.prefix == '_delete_demmande' %}
+					<a id="{{operation.prefix}}" data-id="{{demande.id}}" data-token="{{ csrf_token('delete' ~ demande.id) }}" class='btn-wrf btn btn-xs btn-danger btn-outline  {{operation.classCs}}'>
+						<i class="fa {{ operation.icon }}"></i>
+						{{ operation.titre|capitalize }}</a>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		<div id="test" data-demande-id="{{ demande.id|json_encode }}"></div>
+	</div>
+
+
+{% endif %}
+
+
+{{ wo_render_breadcrumbs() }}

@@ -1,0 +1,105 @@
+{% if exis is not empty %}
+<div class="card">
+	<h4 class="card-header text-center font-weight-bold text-uppercase py-4">Tableau des articles existe</h4>
+	<div class="card-body">
+		<div id="table" class="table-editable">
+			<div
+				class='table-responsive'>
+				<!--Table-->
+
+				<table id="kt_table_1" class="table table-bordered table-responsive-md table-striped text-cente kt_table_1" width="100%">
+					<thead>
+						<tr>
+							<th>Code</th>
+							<th>Titre</th>
+							<th>prix achat</th>
+                            <th>Prix Vente</th>
+                            
+						</tr>
+					</thead>
+					<tbody>
+						{% for detail  in  exis %}
+							<tr>
+
+								<td>
+									<a class="cd_op" target="_blank">{{ detail.code }}</a>
+								</td>
+								<td>
+									{{ detail.titre }}
+								</td>
+                                <td>
+									{{ detail.prixAchat }}
+								</td>
+                                <td>
+									{{ detail.prixVente }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+
+					<tfoot>
+						<tr>
+							<th>Code</th>
+							<th>Titre</th>
+							<th>prix achat</th>
+                            <th>Prix Vente</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% if ne is not empty %}
+<div class="card">
+	<h4 class="card-header text-center font-weight-bold text-uppercase py-4">Tableau des nouveau articles</h4>
+	<div class="card-body">
+		<div id="table" class="table-editable">
+			<div
+				class='table-responsive'>
+				<!--Table-->
+                
+				<table id="kt_table_1" class="table table-bordered table-responsive-md table-striped text-cente kt_table_1" width="100%">
+					<thead>
+						<tr>
+                            <th>Code</th>
+							<th>Titre</th>
+							<th>prix achat</th>
+                            <th>Prix Vente</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for detail  in  ne %}
+							<tr>
+
+								<td>
+									<a  class="cd_op" target="_blank">{{ detail.code }}</a>
+								</td>
+								<td>
+									{{ detail.titre }}
+								</td>
+                                <td>
+									{{ detail.prixAchat }}
+								</td>
+                                <td>
+									{{ detail.prixVente }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+
+					<tfoot>
+						<tr>
+							<th>Code</th>
+							<th>Titre</th>
+							<th>prix achat</th>
+                            <th>Prix Vente</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}

@@ -1,0 +1,14 @@
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+    
+    <li> <a class="nav-link {% if "p_dossier_index"  in current_path  %} active {%endif%}" href="{{ path('p_dossier_index')}}" ><i class="fa fa-info-circle"></i>Information</a></li>
+    <li> <a class="nav-link {% if "p_dossier_achat_affecter"  in current_path  %} active {%endif%}" href="{{ path('p_dossier_achat_affecter' )}}" ><i class="fa fa-file-text"></i>Affectation</a></li>
+    
+</ul>

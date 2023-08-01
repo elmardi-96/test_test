@@ -1,0 +1,150 @@
+{% extends 'base_univ.html.twig' %}
+{% block title %}Planification | Univ
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('univ_planning') }}
+{% endblock %}
+{% block body %}
+	<div id="right-sidebar" class="actions animated">
+
+		<div class="sidebar-container">
+
+			<div class="ibox-tools">
+				<a class="close-link close-me" href="">
+					<i class="fa fa-times"></i>
+				</a>
+			</div>
+
+			<div class="tab-content">
+
+
+				<div id="tab-1" class="tab-pane active">
+
+					<div class="sidebar-title">
+						<h3>
+							<i class="fa fa-info-circle"></i>
+							Planification
+						</h3>
+						<small>
+							<i class="fa fa-tim"></i>
+						</small>
+					</div>
+
+					<div class="right-sidebar-content">
+
+
+						<div class="ibox">
+							<div class="ibox-content">
+
+								<h3>La liste des semaines
+								</h3>
+								<form novalidate="novalidate" name='UnivPlEmptime' class="form_dupliquer">
+									<input type="hidden" id='_id' value="" name="_id" />
+									<div class="form-group">
+
+										<label class:'col-sm-4'>Duplication de semaine (*) :</label>
+										<select class="form-control sem_dupl select2" name="dupliquer[]" multiple="multiple">
+											
+										</select>
+									</div>
+									<div class="form-group"></div>
+
+									<br/>
+
+									<button type="submit" class="btn btn-white btn-block btn-xs my-button">
+										<i class="fa fa-save"></i>
+										Enregistrer</button>
+								</form>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+		<div class="col-lg-4">
+			<h2 class="fo">Univ , Planification
+			</h2>
+		</div>
+		<div class="col-lg-8">
+			<div class="title-action">
+				<button class="btn btn-white btn-xs btn-lg dupliquer"><i class="fa fa-clone"></i> Dupliquer</button>
+				<button class="btn btn-white btn-xs btn-lg refresh"><i class="fa fa-refresh"></i> Rafraîchir calendrier </button>
+			</div>
+		</div>
+		<div class="border-b"></div>
+		<div class="col-lg-12">
+			{{ wo_render_breadcrumbs() }}
+		</div>
+		{#{{ render(controller('App\\Controller\\moduleAchat\\CommandefrsController:showbreadcumb',{ 'commande': commande.id})) }}
+										                                                                                                                                                                                                        #}
+
+	</div>
+	<br/><br/>
+
+
+	<div class="row pt-20">
+		<div class="col-md-12">
+			<div class="panel-container">
+				<div class="panel-left">
+					<div class="ibox">
+						<div class="ibox-content full-height-scroll ">
+							<div class="row ">
+								<div class="col-md-12">
+									<div class="tab-content">
+
+										<h3 class="m-t-none m-b-5">Informations formation
+										</h3>
+										<div class="hr-line-dashed"></div>
+										<div id='external-events'>
+											<div id="using_json"></div>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="splitter"></div>
+				<div class="panel-right">
+					<div class="ibox">
+						<div class="ibox-content full-height-scroll ">
+							<div class="row ">
+								<div class="col-md-12">
+									<div class="tab-content">
+
+
+										<h3 class="m-t-none m-b-5">Calendrier séance</h3>
+										<div class="col-md-12">
+										
+											
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{#{ render(controller('App\\Controller\\moduleAchat\\MaFacturefrscabController:showhistorique',{ 'facture': facture.id})) }#}
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('univ_honoraire') }}
+{% endblock %}

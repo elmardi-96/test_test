@@ -1,0 +1,19 @@
+{% extends 'base_univ.html.twig' %}
+
+{% block title %}Modifier Cours | Planning & programmation | UNIV{% endblock %}
+
+{% block body %}
+<div id="right-sidebar" class="actions animated" >
+
+
+    </div>
+     <div class="edit">
+    {{ include('./module_univ/cours/_form.html.twig',{'button_label': 'Modifier'}) }}
+    </div>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('univ_planning') }}
+{% endblock %}

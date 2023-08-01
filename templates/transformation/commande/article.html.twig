@@ -1,0 +1,34 @@
+<div class="row">
+	<div class="col-md-12">
+		
+		<table class="table table-striped table-bordered table-hover w-m dataTable tab-search" id="tab-sear">
+			<thead>
+				<tr>
+					<th class="code">Code
+					</th>
+					<th class="titre">Titre
+					</th>
+					<th class="description">Description
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for detail  in  article %}
+					<tr class="tr" id="{{ detail.id }}" text="{{detail.titre}}">
+						<td>
+							<a href="#" class="cd_op">{{ detail.code }}</a>
+						</td>
+						<td>
+							{{ detail.titre }}
+						</td>
+						<td>
+							{{ detail.description }}
+						</td>
+					</tr>
+				{% endfor %}
+				{# {% endif %} #}
+			</tbody>
+		</table>
+		<!--<button type="button" class="btn btn-w-m btn-primary ntm">Rechercher</button>-->
+	</div>
+</div>

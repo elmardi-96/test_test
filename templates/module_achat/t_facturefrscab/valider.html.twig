@@ -1,0 +1,48 @@
+<div class="sidebar-container">
+
+    <div class="ibox-tools">
+        <a class="close-link close-me" href="">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="tab-content">
+        <div id="tab-1" class="tab-pane active">
+            <div class="right-sidebar-content">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label for="code">Code </label>
+                                            <input class="form-control" id="code_tr_fac" name="code_tr" type="text" >
+                                        </div>
+                                    </div>
+
+                                    <br/><br/>
+
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">CODE</th>
+                                                <th scope="col"></th>
+                                
+                                            </tr>
+                                        </thead>
+                                        <tbody class="transactionbody">
+                                            
+                                        </tbody>
+                                    </table>
+
+                                    <button type="button" form="formBordereaux" id="EnregistrerCodeBRD" class="btn btn-white btn-block btn-xs my-button2 mt-4 w-50" >
+                                        <i class="fa fa-save"></i>
+                                        &nbsp;{{ button_label|default('Enregistrer') }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

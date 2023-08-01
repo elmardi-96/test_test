@@ -1,0 +1,238 @@
+{% extends 'base_ugouv.html.twig' %}
+
+{% block title %}Informations | Paie | Ressource Humaines
+{% endblock %}
+
+
+{% block body %}
+	<div class="employe">
+		{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , "autocomplete":"off", 'class':'form'}}) }}
+		<div id="right-sidebar" class="actions animated"></div>
+		<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+			<div class="col-lg-6">
+				{% include './module_ressource_humaine/grs_paie/inc/workflow_breadcumb.html.twig' %}
+			</div>
+			<div class="col-lg-6">
+				<div class="title-action">
+					{% if   workflow_has_marked_place(paie, 'generer') or workflow_has_marked_place(paie, 'creer')%}
+					
+						{%else%}
+						<button class="btn btn-white btn-xs btn-lg my-button" data-style="expand-left" type="submit">
+							<i class="fa fa-save"></i>
+							{{ button_label|default('Enregistrer') }}
+						</button>
+
+
+
+
+
+						
+						{%endif%}
+
+					</div>
+				</div>
+				<div class="border-b"></div>
+				<div class="col-lg-12">
+					{% include './module_ressource_humaine/grs_paie/inc/workflow.html.twig' %}
+				</div>
+			</div>
+			<br/><br/>
+
+
+			<div class="row pt-20">
+				<div class="col-lg-12 ">
+					<div class="ibox">
+
+						<div class="ibox-content">
+
+							<div class="message-success"></div>
+
+
+							<div class="row m-t-sm">
+								<div class="col-lg-12">
+									<div class="panel blank-panel">
+										<div class="panel-heading">
+											<div class="panel-options">
+												{% include './module_ressource_humaine/grs_paie/inc/navigation.html.twig' %}
+
+											</div>
+										</div>
+
+										<div class="panel-body">
+											<div class="col-md-12">
+												<div class="tab-content">
+
+													{% if   workflow_has_marked_place(paie, 'generer') or workflow_has_marked_place(paie, 'creer')%}
+
+
+														<div class="forum-item animated bounce">
+															<div class="row">
+																<div class="col-md-9">
+																	<div class="forum-icon">
+																		<i class="fa fa-warning"></i>
+																	</div>
+																	<a class="forum-item-title">Important</a>
+																	<div class="forum-sub-title">
+																		Vous ne pouvez pas modifier une paie  avant la validation ou aprés la validation ,
+																		<br/>veuillez consulter ce lien pour plus d'informations sur cette paie
+																		<a href="{{ path('grs_paie_show' , {id:paie.id})}}">{{ paie.code }}</a>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+
+													{% else  %}
+														<div class="row"></div>
+
+
+														<div class="row">
+															<div class="col-md-6 b-r">
+																<div class="col-md-12">
+																	<h3 class="m-t-none m-b">Informations d'Employé
+																	</h3>
+																</div>
+
+																<div class="hr-line-dashed paddi"></div>
+																<div class="col-md-12">
+
+
+																	<div class="form-group row">
+																		{{ form_label(form.employe ,'employe (*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																		<div class="col-sm-4">
+																			{{ form_widget(form.employe,{'attr':{'class':'form-control form-control-sm employe select2','placeholder': 'Mois'}}) }}
+																			<span class="form-error-message">
+																				{{ form_errors(form.employe) }}
+																			</span>
+																		</div>
+																	</div>
+																	<div class="hr-line-dashed"></div>
+
+																	<div class="form-group row">
+																		{{ form_label(form.montant ,'montant (*) :', {'label_attr':{'class':'col-sm-4'}}) }}
+																		<div class="col-sm-4">
+																			{{ form_widget(form.montant,{'attr':{'class':'form-control form-control-sm montant','placeholder': 'montant'}}) }}
+																			<span class="form-error-message">
+																				{{ form_errors(form.montant) }}
+																			</span>
+																		</div>
+																	</div>
+
+
+																	<div class="hr-line-dashed"></div>
+
+																	<div class="form-group row">
+																		{{ form_label(form.dateDebut ,'date Debut :', {'label_attr':{'class':'col-sm-4'}}) }}
+																		<div class="col-sm-4">
+																			{{ form_widget(form.dateDebut) }}
+																			<span class="form-error-message">
+																				{{ form_errors(form.dateDebut) }}
+																			</span>
+																		</div>
+																	</div>
+																	<div class="hr-line-dashed"></div>
+
+																	<div class="form-group row">
+																		{{ form_label(form.dateFin ,'date Fin :', {'label_attr':{'class':'col-sm-4'}}) }}
+																		<div class="col-sm-4">
+																			{{ form_widget(form.dateFin) }}
+																			<span class="form-error-message">
+																				{{ form_errors(form.dateFin) }}
+																			</span>
+																		</div>
+																	</div>
+																	<div class="hr-line-dashed"></div>
+
+
+																	<div class="form-group row">
+																		{{ form_label(form.description ,'description :', {'label_attr':{'class':'col-sm-4'}}) }}
+																		<div class="col-sm-8">
+																			{{ form_widget(form.description,{'attr':{'class':'form-control form-control-sm','placeholder': 'description'}}) }}
+																			<span class="form-error-message">
+																				{{ form_errors(form.description) }}
+																			</span>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+															<div class="col-md-6 b-r">
+																
+																	<h3 class="m-t-none m-b">
+																		Importer la liste des  employés
+																	</h3>
+
+																	<a style="align :right;" id="_add_employers" class="btn btn-white btn-xs btn-lg my-button1">
+																		<i class="fa fa-upload"></i>
+																		Importer employés
+																	</a>
+																	<br/><br/>
+
+
+																
+
+																<h3 class="m-t-none m-b">
+																	Liste des employés/salariés
+																</h3>
+
+																<div class="hr-line-dashed paddi"></div>
+																<table class="t-m table table-striped table-bordered table-hover w-m dataTables-example dataTable" id="datatable-show2">
+																	<thead>
+																		<tr>
+																			<th style="width:5%">Code</th>
+																			<th style="width:10%">Employé</th>
+																			<th style="width:35%">
+																				Description
+																			</th>
+
+																			<th style="width:10%">Date Début
+																			</th>
+																			<th style="width:10%">Date Fin
+																			</th>
+																			<th style="width:20%">Montant</th>
+																			<th style="width:10%">Sup
+																			</th>
+
+																		</tr>
+																	</thead>
+																	<tbody></tbody>
+																	<tfoot>
+																		<tr>
+
+																			<th colspan="6" style="text-align:right">Total :
+																				{{ paie.getdetailMontant|number_format(2, '.', ',') }}</th>
+																		</tr>
+																	</tfoot>
+																</table>
+
+															</div>
+
+														</div>
+													</div>
+												{% endif %}
+											</div>
+
+
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			{% if paie is defined %}
+				<input type="hidden" name="_id" id="_id" value="{{ paie.id }}"/>
+			{% endif %}
+			<br><br>
+		</div>
+		{{ form_end(form,{'render_rest': false}) }}
+	{% endblock %}
+	{% block javascripts %}
+		{{ parent() }}
+		{{ encore_entry_script_tags('grs_paie') }}
+	{% endblock %}

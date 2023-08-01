@@ -1,0 +1,33 @@
+<table class="head">
+	<tr>
+		<td style="width:72%;"></td>
+		<td style="width:28%;padding-top:53px">{{UvLivraisoncab.code}}</td>
+	</tr>
+</table>
+<table class="head_date">
+	<tr style='width:50%;'>
+		<td style="width:71%"></td>
+		<td style="width:29%;padding-top:7px;padding-right: 35px;position:relative;left:7px;">{{ UvLivraisoncab.datelivraison ? UvLivraisoncab.datelivraison|date("d/m/Y") : "now"|date("m/d/Y") }}
+		</td>
+	</tr>
+</table>
+<table class="head_date" style="position:absolute;top:139px;">
+	<tr style='width:50%;'>
+		<td style="width:68%"></td>
+		<td style="width:32%;padding-right: 25px;position:relative;left:5px;padding-top:13px;">{{ UvLivraisoncab.client ? UvLivraisoncab.client.code : null  }}</td>
+	</tr>
+</table>
+<table class="head_date" style="position:absolute;top:158px;">
+	<tr style='width:50%;'>
+		<td style="width:74%"></td>
+		<td style="width:26%;padding-right: 25px;position:relative;left:5px;padding-top:13px;">{{ UvLivraisoncab.client ? UvLivraisoncab.client.societe : null  }}</td>
+	</tr>
+</table>
+<table class="head_date" style="position:absolute;top:202px;">
+	<tr style='width:50%;'>
+		<td style="width:69%"></td>
+		<td style="width:31%;padding-right: 25px;position:relative;left:5px;padding-top:13px;">{{ UvLivraisoncab.client ? UvLivraisoncab.client.adresse : "-------"  }}
+			-------</td>
+	</tr>
+</table>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><div class='titreFacture'>BON DE LIVRAISON</div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

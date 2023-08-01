@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>
+            {% block title %}Choix Dossier{% endblock %}
+        </title>
+<link rel="shortcut icon" href="{{asset('/img/icon.png')}}" />
+        {% block stylesheets %}
+            {# 'app' must match the first argument to addEntry() in webpack.config.js #}
+            {{ encore_entry_link_tags('app') }}
+
+            <!-- Renders a link tag (if your module requires any CSS)
+                 <link rel="stylesheet" href="/build/app.css"> -->
+        {% endblock %}
+
+
+    </head>
+<body class="top-navigation">
+
+        <div id="wrapper">
+            <div id="page-wrapper" class="gray-bg">
+                <div class="row border-bottom white-bg">
+                    <nav class="navbar navbar-expand-lg navbar-static-top" role="navigation">
+
+
+
+
+
+
+
+
+                        <a href="#" class="navbar-brand">U3S-ERP</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fa fa-reorder"></i>
+                        </button>
+
+                        <div class="navbar-collapse collapse" id="navbar">
+                            <ul class="nav navbar-nav mr-auto">
+                                <li class="active">
+                                    <a aria-expanded="false" role="button" href="{{ path('config_index') }}"> Paramètrage généraux</a>
+                                </li>
+                                {#<li class="dropdown">
+                                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item</a>
+                                    <ul role="menu" class="dropdown-menu">
+                                        <li><a href="">Menu item</a></li>
+                                        <li><a href="">Menu item</a></li>
+                                        <li><a href="">Menu item</a></li>
+                                        <li><a href="">Menu item</a></li>
+                                    </ul>
+                                </li>#}
+
+
+                            </ul>
+                            <ul class="nav navbar-top-links navbar-right">
+                                <li>
+                                    <a href="{{path('logout')}}">
+                                        <i class="fa fa-sign-out"></i> Déconnexion
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+{#/*****************************end navbar*************************************/#}
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <input id="search_keywords" type="text" class="form-control search_keywords" placeholder="chercher dossier" style="padding:6px"><br/>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            La liste des dossiers
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row layout module" id="" data-route ="{{module}}">
+                                {{ include('./home/refresh.html.twig', {allDossier: dossier}) }}
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+</div>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+
+            <!-- Renders app.js & a webpack runtime.js file
+                <script src="/build/runtime.js"></script>
+                <script src="/build/app.js"></script> -->
+
+        {% endblock %}
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

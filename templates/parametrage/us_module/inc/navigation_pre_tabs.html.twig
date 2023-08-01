@@ -1,0 +1,14 @@
+{% set current_path = app.request.get('_route') %}
+{#{{ dump(current_path) }}#}
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+    
+    <li> <a class="nav-link {% if "us_module_edit"  in current_path  %} active {%endif%}" href="{{ path('us_module_edit', { 'id': us_module.id } )}}" ><i class="fa fa-pencil"></i>Modifier</a></li>
+    <li> <a class="nav-link {% if "us_module_affecter"  in current_path  %} active {%endif%}" href="{{ path('us_module_affecter', { 'id': us_module.id } )}}" ><i class="fa fa-file-text"></i>Affectation</a></li>
+
+</ul>

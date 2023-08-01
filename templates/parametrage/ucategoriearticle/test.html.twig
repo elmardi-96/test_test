@@ -1,0 +1,22 @@
+{% extends 'base_stock.html.twig' %}
+
+{% block title %}Produit nouveau | Stock
+{% endblock %}
+
+{% block body %}
+	<div id="right-sidebar" class="actions animated"></div>
+	<div class="new">
+    <a href="#" class="js-open-video">click</a>
+		<select class="form-control" multiple="multiple">
+			<option selected="selected">orange</option>
+			<option>white</option>
+			<option selected="selected">purple</option>
+		</select>
+	</div>
+{% endblock %}
+
+
+{% block javascripts %}
+	
+	{{ encore_entry_script_tags('test') }}
+{% endblock %}

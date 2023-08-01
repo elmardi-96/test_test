@@ -1,0 +1,285 @@
+{{ form_start(form ,{'attr':{'novalidate': 'novalidate' , "autocomplete":"off", 'class':'form' }})
+}}
+
+
+<div class="row wrapper  white-bg page-heading  fixed-top-navigation-button">
+    <div class="col-lg-12">
+        {% include './module_marche/marche/inc/workflow_breadcumb.html.twig' %}
+    </div>
+    <div class="border-b"></div>
+    <div class="col-lg-12">
+        {{ wo_render_breadcrumbs() }}
+    </div>
+
+
+    <div class="col-lg-12">
+        {% include './module_achat/t_achatdemandeinternecab/inc/workflow.html.twig' %}
+    </div>
+</div>
+<br />
+<div class="wrapper wrapper-content  animated fadeInRight" style="padding-left: 0;padding-right: 0">
+
+
+  
+
+
+
+            <div class="row" style="font-size:9.5px !important">
+
+                <div class="col-lg-12  no-pad-right no-pad-left">
+                    <div class="ibox "  style="margin-top: 10px;">
+
+                        <div class="ibox-content" style="margin-bottom: 0px">
+
+                            <div class="message-success"></div>
+                                <h4 class="m-t-none m-b">informations generales
+                                                                </h4>
+
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                    <div class="panel blank-panel">
+                                       {# <div class="panel-heading">
+                                            <div class="panel-options">
+                                                    {% include './module_achat/t_achatdemandeinternecab/inc/navigation.html.twig' %}
+                                            </div>
+                                        </div>#}
+
+                                            <div class="col-md-12" id="p_marche_form" style=" padding-top: 0%;">
+                                                    <div class="panel-body ">
+
+                                                <div class="tab-content ">
+                                                    <div class="tab-pane active show" id="tab1-1">
+
+                                                        <div class="row">
+                                                            <div class="col-md-5 b-r">
+
+
+                                                                        {#<div class="form-group row"> {{ form_label(form.affaire ,'Affaire :', {'label_attr':{'class':'col-sm-4' }}) }} <div class="col-sm-8 input-group"> {{ form_widget(form.affaire,{'attr':{'class':'sel2 affaire form-control form-control-sm ' }}) }} </div> </div>#}
+
+
+                                                                        {# <div class="hr-line-dashed"></div> #}
+
+                                                                        <div class="form-group row">
+                                                                             {{ form_label(form.reference ,'Reference ', {'label_attr':{'class':'col-sm-4' }})
+                                                                             }}
+                                                                             <div class="col-sm-8">
+                                                                                 {{ form_widget(form.reference,{'attr':{'class':'form-control form-control-sm reference' ,'placeholder':'reference','style': 'font-size:9.5px !important' }})
+                                                                                 }}
+                                                                             </div>
+                                                                         </div>
+
+
+                                                                        <div class="form-group row">
+                                                                             {{ form_label(form.designation ,'Designation ', {'label_attr':{'class':'col-sm-4' }})
+                                                                             }}
+                                                                             <div class="col-sm-8">
+                                                                                 {{ form_widget(form.designation,{'attr':{'class':'form-control form-control-sm designation' ,'placeholder':'Designation','style': 'font-size:9.5px !important' }})
+                                                                                 }}
+                                                                             </div>
+                                                                        </div>
+
+
+                                                                        
+                                                                        <div class="form-group row">
+                                                                             {{ form_label(form.description ,'Description ', {'label_attr':{'class':'col-sm-4' }})
+                                                                             }}
+                                                                             <div class="col-sm-8">
+                                                                                 {{ form_widget(form.description,{'attr':{'class':'form-control form-control-sm description' ,'placeholder':'Description','style': 'font-size:9.5px !important' }})
+                                                                                 }}
+                                                                             </div>
+                                                                        </div>
+
+                                                            </div>
+
+
+                                                            <div class="col-md-5">
+
+                                                                        <div class="form-group row">
+                                                                            {{ form_label(form.dateDebut ,'DATE Debut', {'label_attr':{'class':'col-sm-4' }})
+                                                                            }}
+                                                                            <div class="col-sm-6 dm-a-dropdown" >
+                                                                                {{ form_widget(form.dateDebut,{'attr':{'class':'form-control form-control-sm dateDebut','style': 'max-width:115px;font-size:9.5px !important' }})
+                                                                                }}
+                                                                            </div>
+                                                                        </div>
+
+                                                                         <div class="form-group row">
+                                                                            {{ form_label(form.dateFin ,'DATE FIN', {'label_attr':{'class':'col-sm-4' }})
+                                                                            }}
+                                                                            <div class="col-sm-6 dm-a-dropdown" >
+                                                                                {{ form_widget(form.dateFin,{'attr':{'class':'form-control form-control-sm dateFin','style': 'max-width:115px;font-size:9.5px !important' }})
+                                                                                }}
+                                                                            </div>
+                                                                        </div>
+
+                                                                         <div class="form-group row">
+                                                                                 {{ form_label(form.montant ,'Montant ', {'label_attr':{'class':'col-sm-4' }}) }}
+                                                                                 <div class="col-sm-3">
+                                                                                         {{ form_widget(form.montant,{'attr':{'class':'form-control form-control-sm montant','placeholder':'Montant' }}) }}
+                                                                                 </div>
+          
+
+
+
+
+
+                                                                     </div>
+
+
+                                                             </div>
+
+
+                                                        </div>
+
+                                                           
+
+
+                                                           
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="ibox" >
+                        <div class="ibox-content" >
+                                <h5 style="margin-bottom: 0;">Details
+                                            </h5>  <br>
+                         <div id="tab-1" class="tab-pane active">
+                                    <div class="full-height-scroll">
+                                        <div class="table-responsive">
+                                           
+                                            <table
+                                                class="m-add t-m table table-striped table-bordered table-hover  dataTables-example table-detail {% if marche.pMarcheDets|length > 0 %} remove-item-edit-add {% endif %}">
+                                                <thead style="font-size:9.5px">
+                                                    <tr>
+
+                                                        <th style="width: 3%">#
+                                                        </th>
+                                                        <th style="width: 34%;text-align:start">ARTICLE</th>
+                                                        <th style="width: 12%;text-align:start">quantité</th>
+                                                        <th style="width: 11.8%;text-align:start">Prix unitaire</th>
+                                                        <th style="width: 11.8%;text-align:start">TVA %</th>
+                                                        <th style="width: 20%;text-align:start">Observation</th>
+
+                                                        <th style="width: 3%;display: inline-flex;"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% if marche is defined %}
+
+                                                        {% for detail in marche.pMarcheDets %}
+                                                            <tr class="edit-detail {% if loop.index is odd %}pair{% else %}impair{% endif %}"
+                                                                id="{{ marche.id }}" article="{{ marche.article.id }}">>
+
+                                                                <td style="width: 3%"></td>
+                                                                
+
+
+                                                                <td style="width: 20%">
+                                                                   {{ detail.article.titre }}
+
+                                                                </td>
+
+                                                                <td style="width: 20%; display: block" >
+
+                                                                    {{ detail.qtReste  }}
+                                                                </td>
+                                                                <td style="width: 5%">
+
+                                                                    {{ detail.qt}}
+                                                                </td>
+                                                                <td style="width: 9%">
+
+
+                                                                    {{ detail.prixUnitaire }}
+                                                                </td>
+                                                                <td style="width: 9%">
+                                                                    {{ detail.tva }}
+                                                                </td>
+
+                                                                <td style="width: 9%">
+                                                                    {{ detail.observation }}
+                                                                </td>
+                                                                
+
+                                                                <td style="width: 7%;display: inline-flex;">
+
+                                                                    <form method="POST" class="detail_edit float-left">
+
+                                                                        <input type="hidden" name="_id" value="{{ detail.id }}">
+
+                                                                        <a class="btn-icon-detail btn btn-white fa fa-pencil detail_edit"
+                                                                           id="{{ detail.id }}"></a>
+                                                                    </form>
+                                                                    {#<a class="delete_element" id="{{ detail.id }}"><i class="fa fa-trash text-navy"></i></a>#}
+                                                                    {#<a class="detail_edit" id="{{ detail.id }}"><i class="fa fa-pencil text-navy"></i></a>#}
+
+                                                                    <form method="delete" class="detail_form_delete">
+                                                                        <input type="hidden" name="_id" value="{{ detail.id }}">
+                                                                        <input type="hidden" name="_token"
+                                                                               value="{{ csrf_token('delete' ~ detail.id) }}">
+
+                                                                    </form>
+                                                                    <a class="btn-icon-detail btn btn-white fa fa-trash detail_form_delete "
+                                                                       id="{{ detail.id }}" name="_token"
+                                                                       value="{{ csrf_token('delete' ~ detail.id) }}"></a>
+
+                                                                    {#<button class="btn btn-primary btn-xs">{{ button_label|default('Ajouter a la liste') }}</button>#}
+                                                                </td>
+                                                            </tr>
+                                                           
+                                                        {% endfor %}
+
+                                                    {% endif %}
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr style="display: none" class="edit-new-article">
+
+                                                        {{ include('./module_marche/marche/_form_detail.html.twig',{'button_label': 'Ajouter Article'}) }}
+
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                            {% if marche.pMarcheDets|length > 0 %}
+                                                <button
+                                                    class="new-article-btn btn btn-xs btn-white waves-effect waves-light"
+                                                    type="button">
+                                                    <i class="fa fa-plus"></i>&nbsp; NOUVEAU ARTICLE
+                                                </button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    <button class="new-article-btn btn btn-xs btn-white" type="button"><i class="fa fa-arrows"></i>&nbsp; Nouveau Article</button>
+                                </div>
+                        
+                    </div>                            
+
+
+                </div>
+
+
+                       
+                </div>
+
+
+                    
+    </div>
+
+
+        {{ form_end(form,{'render_rest': false}) }}

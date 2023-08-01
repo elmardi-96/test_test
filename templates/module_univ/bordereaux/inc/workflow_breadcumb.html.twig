@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="btn-group btn-breadcrumb btn-breadcrumb2">
+        <a href="#" class="btn btn-default"><b>Bordereaux </b> </a>
+        {% if  bordereaux is defined and bordereaux is not empty and bordereaux.id is not empty %}
+        {% set count = 0 %}
+        {% for key , place  in {  "creer":"Créer" , "encours":"En cours " , "valider":"Validé" }  %}
+            {% if count >= 0 %}
+                <a href="#" class="btn btn-default
+                   {% if workflow_has_marked_place(bordereaux, key)  %}
+                       btn-breadcrumb2-active
+                   {% endif %}
+                   ">{{ place }}</a>
+                {% set count = count + 1%}
+            {% endif %}
+            </button>
+        {% endfor %}   
+        {% endif %}
+    </div> 
+</div>
